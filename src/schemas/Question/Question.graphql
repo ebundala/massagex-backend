@@ -1,0 +1,83 @@
+type Question {
+          id: String!
+          questionNumber: Int!
+          question: String!
+          weight: Float!
+          instruction: String
+          questionType: QuestionType!
+          form: Form!
+          formId: String!
+          grade: Grade!
+          gradeId: String!
+          answers(where: AnswerWhereInput
+              orderBy: [AnswerOrderByInput!]
+              cursor: AnswerWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [AnswerScalarFieldEnum!]
+              ): [Answer!]!
+          attachments(where: AttachmentWhereInput
+              orderBy: [AttachmentOrderByInput!]
+              cursor: AttachmentWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [AttachmentScalarFieldEnum!]
+              ): [Attachment!]!
+          createdAt: DateTime!
+          updatedAt: DateTime!
+    }
+
+      type QuestionListResponse {
+        status: Boolean!
+        data: [Question!]
+        message: String!
+      }
+     
+
+      type QuestionResponse {
+        status: Boolean!
+        data: Question
+        message: String!
+      }
+      
+      type QuestionBatchResponse {
+        status: Boolean!
+        data: BatchPayload
+        message: String!
+      }
+      type AggregateQuestionResponse {
+        status: Boolean!
+        data: AggregateQuestion
+        message: String!
+      }
+      type QuestionCountResponse {
+        status: Boolean!
+        data: Int
+        message: String!
+      }
+      extend type Query {
+    findUniqueQuestion(where: QuestionWhereUniqueInput!): QuestionResponse!
+    findFirstQuestion(
+      where: QuestionWhereInput
+      orderBy: [QuestionOrderByInput!]
+      cursor: QuestionWhereUniqueInput
+      distinct: [QuestionScalarFieldEnum!]
+      skip: Int
+      take: Int
+    ): QuestionResponse!
+    findManyQuestion(
+      where: QuestionWhereInput
+      orderBy: [QuestionOrderByInput!]
+      cursor: QuestionWhereUniqueInput
+      distinct: [QuestionScalarFieldEnum!]
+      skip: Int
+      take: Int
+    ): QuestionListResponse!
+  }
+extend type Mutation {
+    createOneQuestion(data: QuestionCreateInput!): QuestionResponse!
+    updateOneQuestion(
+      where: QuestionWhereUniqueInput!
+      data: QuestionUpdateInput!
+    ): QuestionResponse!
+  }

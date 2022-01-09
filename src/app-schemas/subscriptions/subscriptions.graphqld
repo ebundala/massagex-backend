@@ -1,0 +1,7 @@
+type Subscription{    
+    locations(where: UserWhereUniqueInput!):LocationResponse!
+}
+
+extend type Mutation{
+    locationFeed(location:LatLon!):LocationResponse!
+}

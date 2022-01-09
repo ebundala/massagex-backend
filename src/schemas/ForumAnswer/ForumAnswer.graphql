@@ -1,0 +1,81 @@
+type ForumAnswer {
+          id: String!
+          author: User!
+          authorId: String!
+          forum: Forum!
+          forumId: String!
+          attachments(where: AttachmentWhereInput
+              orderBy: [AttachmentOrderByInput!]
+              cursor: AttachmentWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [AttachmentScalarFieldEnum!]
+              ): [Attachment!]!
+          comments(where: CommentWhereInput
+              orderBy: [CommentOrderByInput!]
+              cursor: CommentWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [CommentScalarFieldEnum!]
+              ): [Comment!]!
+          commentsEnabled: Boolean!
+          state: State!
+          content: String!
+          createdAt: DateTime!
+          updatedAt: DateTime!
+    }
+
+      type ForumAnswerListResponse {
+        status: Boolean!
+        data: [ForumAnswer!]
+        message: String!
+      }
+     
+
+      type ForumAnswerResponse {
+        status: Boolean!
+        data: ForumAnswer
+        message: String!
+      }
+      
+      type ForumAnswerBatchResponse {
+        status: Boolean!
+        data: BatchPayload
+        message: String!
+      }
+      type AggregateForumAnswerResponse {
+        status: Boolean!
+        data: AggregateForumAnswer
+        message: String!
+      }
+      type ForumAnswerCountResponse {
+        status: Boolean!
+        data: Int
+        message: String!
+      }
+      extend type Query {
+    findUniqueForumAnswer(where: ForumAnswerWhereUniqueInput!): ForumAnswerResponse!
+    findFirstForumAnswer(
+      where: ForumAnswerWhereInput
+      orderBy: [ForumAnswerOrderByInput!]
+      cursor: ForumAnswerWhereUniqueInput
+      distinct: [ForumAnswerScalarFieldEnum!]
+      skip: Int
+      take: Int
+    ): ForumAnswerResponse!
+    findManyForumAnswer(
+      where: ForumAnswerWhereInput
+      orderBy: [ForumAnswerOrderByInput!]
+      cursor: ForumAnswerWhereUniqueInput
+      distinct: [ForumAnswerScalarFieldEnum!]
+      skip: Int
+      take: Int
+    ): ForumAnswerListResponse!
+  }
+extend type Mutation {
+    createOneForumAnswer(data: ForumAnswerCreateInput!): ForumAnswerResponse!
+    updateOneForumAnswer(
+      where: ForumAnswerWhereUniqueInput!
+      data: ForumAnswerUpdateInput!
+    ): ForumAnswerResponse!
+  }

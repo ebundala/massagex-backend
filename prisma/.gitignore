@@ -1,0 +1,5 @@
+.env
+*.geom.sql
+schemad.prisma
+!migrations/*
+seedd.ts

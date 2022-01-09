@@ -1,0 +1,53 @@
+directive @file(path:String) on  INPUT_FIELD_DEFINITION
+
+directive @thumbnail(size:ImageSize!) on FIELD
+
+scalar Upload
+
+enum ImageSize {
+    smallest
+    small
+    medium
+    large
+    biggest
+}
+
+# extend input AttachmentCreateInput{
+#     path: String! @file(path:"../../../../public/uploads")
+# }
+# extend input AttachmentUncheckedCreateInput{
+#     path: String! @file(path:"../../../../public/uploads")
+# }
+
+# extend input AttachmentCreateManyInput{
+#     path: String! @file(path:"../../../../public/uploads")
+# }
+
+
+# extend input AttachmentCreateWithoutUsersInput{
+#     path: String! @file(path:"../../../../public/uploads")
+# }
+# extend input AttachmentUncheckedCreateWithoutUsersInput{
+#     path: String! @file(path:"..././../../public/uploads")
+# }
+# extend input AttachmentCreateWithoutOrganizationsInput{
+#     path: String! @file(path:"../../../../public/uploads")
+# }
+# extend input AttachmentUncheckedCreateWithoutOrganizationsInput {
+#     path: String! @file(path:"../../../../public/uploads")
+# }
+# extend input AttachmentCreateWithoutServicesInput{
+#     path: String! @file(path:"../../../../public/uploads")
+# }
+# extend input AttachmentUncheckedCreateWithoutServicesInput{
+#     path: String! @file(path:"../../../../public/uploads")
+# }
+# extend input AttachmentCreateWithoutOrdersInput{
+#     path: String! @file(path:"../../../../public/uploads")
+# }
+# extend input AttachmentUncheckedCreateWithoutOrdersInput{
+#     path: String! @file(path:"../../../../public/uploads")
+# }
+
+
+

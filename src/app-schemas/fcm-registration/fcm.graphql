@@ -1,0 +1,35 @@
+scalar JSONObject
+
+type Notification {
+    notificationType: NotificationType!
+    message: String
+    payload: JSONObject
+}
+
+enum NotificationType {
+     ORDER_RECIEVED
+     ORDER_CANCELLED
+     ORDER_DISPATCHED
+     ORDER_ACCEPTED
+     ORDER_PAYED
+     ORDER_DELIVERED
+     ORDER_UPDATED
+
+     ANSWER_RECIEVED
+     QUESTION_REJECTED
+     QUESTION_ACCEPTED
+
+     REVIEW_RECIEVED
+     REVIEW_UPDATED
+     
+}
+
+input RegisterDeviceInput {
+    fcm_id: String
+    device_id: String!
+    userId: String
+    type: String
+}
+extend type Mutation {
+    registerDevice(data:RegisterDeviceInput!):DeviceResponse!
+}

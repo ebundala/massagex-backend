@@ -1,0 +1,126 @@
+fragment attachment on Attachment {
+  id(action: allow)
+  path(action: allow)
+  mimetype(action: allow)
+  placement(action: allow)
+  size(action: allow)
+  encoding(action: allow)
+  createdAt(action: allow)
+  updatedAt(action: allow)
+}
+fragment organization on Organization {
+  id(action: allow)
+  name(action: allow)
+  description(action: allow)
+  logo {
+    ...attachment
+  }
+  location{
+    ...location
+  }
+}
+fragment location on Location {
+  id(action: allow)
+  name(action: allow)
+  lat(action: allow)
+  lon(action:allow)
+}
+fragment user on User {
+  id(action: allow)
+  displayName(action: allow)
+  phoneNumber(action:allow)
+  email(action:allow)
+  emailVerified(action: allow)
+  disabled(action: allow)
+  state(action: allow)
+  role(action: allow)
+  online(action:allow)
+  avator{
+    ...attachment
+  } 
+  organizations(where: { name: { equals: allow } }) {
+    ...organization
+  }
+  createdAt(action: allow)
+  updatedAt(action: allow)
+   
+}
+
+query findcategory {
+  findManyServiceCategory(
+    role: ANONYMOUS
+    action:create
+    where:{
+      state:{
+        equals:allow
+        in:allow
+        notIn:allow
+        not:{
+          equals:allow
+        }
+      }
+    }
+    orderBy:{
+      name:allow
+      createdAt:allow
+    }
+  ){
+   status(action:allow)
+   message(action: allow)
+    data{
+      id(action:allow)
+      name(action:allow)
+      image{
+        ...attachment
+      }
+      updatedAt(action:allow)
+      createdAt(action:allow)
+    }
+}
+} 
+mutation signup {
+  signup(
+    role: ANONYMOUS
+    action: create
+    credentials: {
+      email: allow
+      password: allow
+      displayName: allow
+      gender: allow
+      phoneNumber: allow
+      dateOfBirth: allow
+      avator: allow
+    }
+    organization: {
+      name: allow
+      description: allow
+      location: { create: { name: allow ,lat:allow,lon:allow} }
+      logo: { create: { path: allow } }
+    }
+  ) {
+    message(action: allow)
+    status(action: allow)
+    data {
+      ...user
+      
+    }
+  }
+}
+
+
+mutation signin{
+  signin(
+    role: ANONYMOUS
+    action: create
+    credentials: {
+    password: allow
+    email: allow
+  }){
+    message(action: allow)
+    status(action: allow)
+    data{
+      ...user      
+    }
+    token(action: allow)
+  }
+}

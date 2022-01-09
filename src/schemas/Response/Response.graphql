@@ -1,0 +1,81 @@
+type Response {
+          id: String!
+          author: User!
+          authorId: String!
+          form: Form!
+          formId: String!
+          answers(where: AnswerWhereInput
+              orderBy: [AnswerOrderByInput!]
+              cursor: AnswerWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [AnswerScalarFieldEnum!]
+              ): [Answer!]!
+          grade: Grade
+          gradeId: String
+          attachments(where: AttachmentWhereInput
+              orderBy: [AttachmentOrderByInput!]
+              cursor: AttachmentWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [AttachmentScalarFieldEnum!]
+              ): [Attachment!]!
+          state: State!
+          createdAt: DateTime!
+          updatedAt: DateTime!
+    }
+
+      type ResponseListResponse {
+        status: Boolean!
+        data: [Response!]
+        message: String!
+      }
+     
+
+      type ResponseResponse {
+        status: Boolean!
+        data: Response
+        message: String!
+      }
+      
+      type ResponseBatchResponse {
+        status: Boolean!
+        data: BatchPayload
+        message: String!
+      }
+      type AggregateResponseResponse {
+        status: Boolean!
+        data: AggregateResponse
+        message: String!
+      }
+      type ResponseCountResponse {
+        status: Boolean!
+        data: Int
+        message: String!
+      }
+      extend type Query {
+    findUniqueResponse(where: ResponseWhereUniqueInput!): ResponseResponse!
+    findFirstResponse(
+      where: ResponseWhereInput
+      orderBy: [ResponseOrderByInput!]
+      cursor: ResponseWhereUniqueInput
+      distinct: [ResponseScalarFieldEnum!]
+      skip: Int
+      take: Int
+    ): ResponseResponse!
+    findManyResponse(
+      where: ResponseWhereInput
+      orderBy: [ResponseOrderByInput!]
+      cursor: ResponseWhereUniqueInput
+      distinct: [ResponseScalarFieldEnum!]
+      skip: Int
+      take: Int
+    ): ResponseListResponse!
+  }
+extend type Mutation {
+    createOneResponse(data: ResponseCreateInput!): ResponseResponse!
+    updateOneResponse(
+      where: ResponseWhereUniqueInput!
+      data: ResponseUpdateInput!
+    ): ResponseResponse!
+  }

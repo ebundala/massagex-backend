@@ -1,0 +1,70 @@
+type Help {
+          id: String!
+          topic: String!
+          description: String
+          steps(where: HelpStepWhereInput
+              orderBy: [HelpStepOrderByInput!]
+              cursor: HelpStepWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [HelpStepScalarFieldEnum!]
+              ): [HelpStep!]!
+          state: State!
+          createdAt: DateTime!
+          updatedAt: DateTime!
+    }
+
+      type HelpListResponse {
+        status: Boolean!
+        data: [Help!]
+        message: String!
+      }
+     
+
+      type HelpResponse {
+        status: Boolean!
+        data: Help
+        message: String!
+      }
+      
+      type HelpBatchResponse {
+        status: Boolean!
+        data: BatchPayload
+        message: String!
+      }
+      type AggregateHelpResponse {
+        status: Boolean!
+        data: AggregateHelp
+        message: String!
+      }
+      type HelpCountResponse {
+        status: Boolean!
+        data: Int
+        message: String!
+      }
+      extend type Query {
+    findUniqueHelp(where: HelpWhereUniqueInput!): HelpResponse!
+    findFirstHelp(
+      where: HelpWhereInput
+      orderBy: [HelpOrderByInput!]
+      cursor: HelpWhereUniqueInput
+      distinct: [HelpScalarFieldEnum!]
+      skip: Int
+      take: Int
+    ): HelpResponse!
+    findManyHelp(
+      where: HelpWhereInput
+      orderBy: [HelpOrderByInput!]
+      cursor: HelpWhereUniqueInput
+      distinct: [HelpScalarFieldEnum!]
+      skip: Int
+      take: Int
+    ): HelpListResponse!
+  }
+extend type Mutation {
+    createOneHelp(data: HelpCreateInput!): HelpResponse!
+    updateOneHelp(
+      where: HelpWhereUniqueInput!
+      data: HelpUpdateInput!
+    ): HelpResponse!
+  }

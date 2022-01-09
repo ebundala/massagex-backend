@@ -1,0 +1,99 @@
+type Attachment {
+          id: String!
+          path: String!
+          filename: String
+          mimetype: String
+          encoding: String
+          duration: Int!
+          size: Int!
+          attachmentType: AttachmentType!
+          downloadable: Boolean!
+          placement: String!
+          createdAt: DateTime!
+          updatedAt: DateTime!
+          user(where: UserWhereInput
+              orderBy: [UserOrderByInput!]
+              cursor: UserWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [UserScalarFieldEnum!]
+              ): [User!]!
+          form: Form
+          formId: String
+          grade: Grade
+          gradeId: String
+          response: Response
+          responseId: String
+          question: Question
+          questionId: String
+          answer: Answer
+          answerId: String
+          recommendation: Recommendation
+          recommendationId: String
+          forum: Forum
+          forumId: String
+          forumAnswer: ForumAnswer
+          forumAnswerId: String
+          comment: Comment
+          commentId: String
+          formCategories(where: FormCategoryWhereInput
+              orderBy: [FormCategoryOrderByInput!]
+              cursor: FormCategoryWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [FormCategoryScalarFieldEnum!]
+              ): [FormCategory!]!
+          helpStep: HelpStep
+          helpStepId: String
+          paymentMethods(where: PaymentMethodWhereInput
+              orderBy: [PaymentMethodOrderByInput!]
+              cursor: PaymentMethodWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [PaymentMethodScalarFieldEnum!]
+              ): [PaymentMethod!]!
+          services(where: ServiceWhereInput
+              orderBy: [ServiceOrderByInput!]
+              cursor: ServiceWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [ServiceScalarFieldEnum!]
+              ): [Service!]!
+          orders(where: OrderWhereInput
+              orderBy: [OrderOrderByInput!]
+              cursor: OrderWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [OrderScalarFieldEnum!]
+              ): [Order!]!
+    }
+
+      type AttachmentListResponse {
+        status: Boolean!
+        data: [Attachment!]
+        message: String!
+      }
+     
+
+      type AttachmentResponse {
+        status: Boolean!
+        data: Attachment
+        message: String!
+      }
+      
+      type AttachmentBatchResponse {
+        status: Boolean!
+        data: BatchPayload
+        message: String!
+      }
+      type AggregateAttachmentResponse {
+        status: Boolean!
+        data: AggregateAttachment
+        message: String!
+      }
+      type AttachmentCountResponse {
+        status: Boolean!
+        data: Int
+        message: String!
+      }
+      

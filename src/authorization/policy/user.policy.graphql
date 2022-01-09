@@ -1,0 +1,654 @@
+fragment attachment on Attachment {
+  id(action: allow)
+  path(action: allow)
+  mimetype(action: allow)
+  placement(action: allow)
+  size(action: allow)
+  encoding(action: allow)
+  createdAt(action: allow)
+  updatedAt(action: allow)
+}
+fragment organization on Organization {
+  id(action: allow)
+  name(action: allow)
+  description(action: allow)
+  logo {
+    ...attachment
+  }
+}
+fragment location on Location {
+  id(action: allow)
+  name(action: allow)
+}
+fragment user on User {
+  id(action: allow)
+  displayName(action: allow)
+  #  email(action:allow)
+  emailVerified(action: allow)
+  disabled(action: allow)
+  state(action: allow)
+  role(action: allow)
+  createdAt(action: allow)
+  updatedAt(action: allow)
+}
+fragment service on Service {
+  id(action: allow)
+  name(action: allow)
+  description(action: allow)
+  price(action: allow)
+  state(action: allow)
+  image {
+    ...attachment
+  }
+}
+fragment order on Order {
+  id(action: allow)
+  state(action: allow)
+  quantity(action: allow)
+  createdAt(action: allow)
+  updatedAt(action: allow)
+  owner {
+    ...user
+    email(action: allow)
+    phoneNumber(action:allow)
+    avator {
+      ...attachment
+    }
+    location {
+      ...location
+    }
+  }
+  service {
+    ...service
+  }
+  organization {
+    ...organization
+  }
+}
+fragment rating on Rating {
+  id(action: allow)
+  value(action: allow)
+  comment(action: allow)
+  createdAt(action: allow)
+  updatedAt(action: allow)
+}
+mutation updatePersonalProfile {
+  updateOneUser(
+    role: CONSUMER
+    action: create
+    where: { id: allow }
+    data: {
+      displayName: { set: allow }
+      gender: {set:allow}
+      dateOfBirth:{set:allow}
+      avator: {
+        create: { path: allow, mimetype: allow }
+        connect: { id: allow }
+      }
+      staffOf: { disconnect: { id: allow } }
+      location: { create: { name: allow ,lat:allow,lon:allow} }
+    }
+  ) {
+    status(action: allow)
+    message(action: allow)
+    data {
+      ...user
+      email(action: allow)
+      phoneNumber(action:allow)
+      avator {
+        ...attachment
+      }
+      location {
+        ...location
+      }
+      organizations {
+        ...organization
+      }
+      staffOf {
+        ...organization
+      }
+    }
+  }
+}
+
+mutation createOrganization {
+  createOneOrganization(
+    role: CONSUMER
+    action: create
+    data: {
+      name:allow
+      description: allow
+      owner: { connect: { id: allow } }
+      offers: { connect: { id: allow } }
+      location: { create: { name: allow } }
+      logo: { create: { path: allow, placement: allow, mimetype: allow } }
+      staffs: { connect: { id: allow, email: allow } }
+    }
+  ) {
+    status(action: allow)
+    message(action: allow)
+    data {
+      ...organization
+      staffs {
+        ...user
+        email(action: allow)
+      }
+      owner {
+        ...user
+        email(action: allow)
+      }
+    }
+  }
+}
+
+mutation createOrder {
+  createOneOrder(
+    role: CONSUMER
+    action: create
+    data: {
+      service: { connect: { id: allow } }
+      organization: { connect: { id: allow } }
+      owner: { connect: { id: allow } }
+      quantity: allow
+    }
+  ) {
+    status(action: allow)
+    message(action: allow)
+    data {
+      ...order
+    }
+  }
+}
+
+mutation updateOrder {
+  updateOneOrder(
+    role: CONSUMER
+    action: create
+    where: { id: allow }
+    data: { state: { set: allow }, quantity: { set: allow } }
+  ) {
+    status(action: allow)
+    message(action: allow)
+    data {
+      ...order
+    }
+  }
+}
+
+mutation createRating {
+  createOneRating(
+    role: CONSUMER
+    action: create
+    data: {
+      value: allow
+      comment: allow
+      owner: { connect: { id: allow } }
+      organization: { connect: { id: allow } }
+    }
+  ) {
+    status(action: allow)
+    message(action: allow)
+    data {
+      ...rating
+      owner {
+        ...user
+        avator {
+          ...attachment
+        }
+        location {
+          ...location
+        }
+      }
+      organization {
+        ...organization
+      }
+    }
+  }
+}
+
+mutation updateRating {
+  updateOneRating(
+    role: CONSUMER
+    action: create
+    where: { id: allow }
+    data: { value: { set: allow }, comment: { set: allow } }
+  ) {
+    status(action: allow)
+    message(action: allow)
+    data {
+      ...rating
+      owner {
+        ...user
+        avator {
+          ...attachment
+        }
+        location {
+          ...location
+        }
+      }
+      organization {
+        ...organization
+      }
+    }
+  }
+}
+
+query findCategory {
+  findManyServiceCategory(
+    role: CONSUMER
+    action: create
+    where: {
+      state: { equals: allow, in: allow, notIn: allow, not: { equals: allow } }
+    }
+    orderBy: { name: allow, createdAt: allow }
+  ) {
+    status(action: allow)
+    message(action: allow)
+    data {
+      id(action: allow)
+      name(action: allow)
+      image{
+        ...attachment
+      }
+      updatedAt(action: allow)
+      createdAt(action: allow)
+    }
+  }
+}
+
+query findManyOrganizations {
+  findManyOrganization(
+    role: CONSUMER
+    action: create
+    where: {
+      name:{
+        mode: allow
+        equals: allow
+        startsWith: allow
+        endsWith: allow
+        contains: allow
+        
+        not: {
+         equals: allow
+        startsWith: allow
+        endsWith: allow
+        contains: allow
+        }
+      }
+      offers: { 
+        every:{id:{equals:allow,in:allow,notIn:allow}},
+        some: { name: { 
+          mode: allow
+          in: allow,
+          not:{
+          equals:allow
+          endsWith:allow
+          in:allow
+        } 
+        }, 
+        id: { 
+          in: allow,
+          not:{
+          endsWith:allow
+          equals: allow
+          in:allow
+        } 
+        }
+         }
+         }
+      location: { 
+        within: allow,
+        notWithin: allow,
+        nearByName: allow,
+        nearBy: {
+          lat:allow,
+          lon:allow
+          },
+        name: { 
+          mode: allow, 
+          contains: allow,
+          endsWith: allow
+          startsWith: allow
+          equals: allow }
+         }
+      AND: [
+        {
+        offers: { 
+        every:{id:{equals:allow,in:allow,notIn:allow}},
+        some: { name: { 
+          in: allow,
+          not:{
+          equals:allow
+          endsWith:allow
+          in:allow
+        } }}}
+        location: { 
+          within: allow,
+          notWithin: allow,
+          nearByName: allow,
+          nearBy: {lat:allow,lon:allow},
+          name: { contains: allow, equals: allow, mode: allow } }
+      }
+      ]
+    }
+    orderBy: { name: allow, createdAt: allow }
+  ) {
+    status(action: allow)
+    message(action: allow)
+    data {
+      ...organization
+      location {
+        ...location
+      }
+      services {
+        ...service
+      }
+      staffs {
+        ...user
+        avator {
+          ...attachment
+        }
+      }
+      owner {
+        ...user
+        avator {
+          ...attachment
+        }
+      }
+      ratings {
+        ...rating
+        owner {
+          ...user
+          avator {
+            ...attachment
+          }
+        }
+      }
+    }
+  }
+}
+
+query findManyService {
+  findManyService(
+    role: CONSUMER
+    action: create
+    where: {
+      category:{
+        id: {
+          equals: allow
+          in: allow
+          not:{
+            in: allow
+            equals: allow
+          }
+        }
+      }
+      organization: {
+        name: { 
+          mode: allow, 
+          equals: allow, 
+          contains: allow, 
+          startsWith: allow ,
+          endsWith: allow ,
+          in: allow ,
+          notIn: allow
+          not: {         
+          equals: allow, 
+          contains: allow, 
+          startsWith: allow ,
+          endsWith: allow ,
+          in: allow ,
+          }
+        }
+        id: { equals: allow }
+        location: {
+          name: {
+            mode: allow
+            equals: allow
+            endsWith: allow
+            in:allow
+            notIn: allow
+            not: {
+              in:allow
+              endsWith:allow
+              equals:allow
+            }
+          }
+          within:allow
+          notWithin: allow
+          nearBy:{
+            lat: allow
+            lon: allow
+          }
+          nearByName: allow
+        }
+      }
+      AND:[
+        {
+          category:{
+        id: {
+          equals: allow
+          in: allow
+          not:{
+            in: allow
+            equals: allow
+          }
+        }
+      }
+          organization: {
+        name: { equals: allow, contains: allow, mode: allow }
+        id: { equals: allow }
+        location: {
+          name: {
+            equals: allow
+            endsWith: allow
+            in:allow
+            not: {
+              in:allow
+              endsWith:allow
+              equals:allow
+            }
+          }
+          within:allow
+          notWithin: allow
+          nearBy:{
+            lat: allow
+            lon: allow
+          }
+          nearByName: allow
+        }
+        }
+        }
+      ]
+    }
+    orderBy: { name: allow, price: allow, createdAt: allow, updatedAt: allow }
+  ) {
+    status(action: allow)
+    message(action: allow)
+    data {
+      ...service
+      organization {
+        ...organization
+      }
+      category {
+        id(action: allow)
+        name(action: allow)
+        createdAt(action: allow)
+        updatedAt(action: allow)
+        image{
+          ...attachment
+        }
+      }
+    }
+  }
+}
+
+query findUniqueUser {
+  findUniqueUser(
+    role: CONSUMER
+    action: create
+    where: { id: allow, email: allow }
+  ) {
+    status(action: allow)
+    message(action: allow)
+    data {
+      ...user
+      email(action:allow)
+      phoneNumber(action:allow)
+      avator {
+        ...attachment
+      }
+      location {
+        ...location
+      }
+      organizations {
+        ...organization
+        location {
+          ...location
+        }
+      }
+      staffOf {
+        ...organization
+        location {
+          ...location
+        }
+      }
+    }
+  }
+}
+
+query findManyOrder {
+  findManyOrder(
+    role: CONSUMER
+    action: create
+    where: { owner: { id: { equals: allow } } }
+    orderBy: { createdAt: allow, updatedAt: allow,}
+  ) {
+    status(action: allow)
+    message(action: allow)
+    data {
+      ...order
+      service {
+        ...service
+      }
+      organization {
+        ...organization
+      }
+      owner {
+        ...user
+        avator {
+          ...attachment
+        }
+        location {
+          ...location
+        }
+      }
+      receipt {
+        ...attachment
+      }
+    }
+  }
+}
+
+query findUniqueService {
+  findUniqueService(role: CONSUMER,
+   action: create,
+    where: { id: allow }) {
+    status(action: allow)
+    message(action: allow)
+    data {
+      ...service
+      organization {
+        ...organization
+      }
+      category {
+        id(action: allow)
+        name(action: allow)
+        createdAt(action:allow)
+        updatedAt(action:allow)
+        image{
+          ...attachment
+        }
+      }
+    }
+  }
+}
+
+query findUniqueOrganization {
+  findUniqueOrganization(
+    role: CONSUMER, 
+    action: create, 
+    where: { id: allow }) {
+    status(action: allow)
+    message(action: allow)
+    data {
+      ...organization
+      location {
+        ...location
+      }
+      services {
+        ...service
+      }
+      staffs {
+        ...user
+        avator {
+          ...attachment
+        }
+      }
+      owner {
+        ...user
+        avator {
+          ...attachment
+        }
+      }
+      offers {
+        id(action: allow)
+        name(action: allow)
+        state(action: allow)
+        image{
+          ...attachment
+        }
+      }
+      ratings {
+        ...rating
+        owner {
+          ...user
+          avator {
+            ...attachment
+          }
+        }
+      }
+    }
+  }
+}
+
+query findUniqueOrder {
+  findUniqueOrder(role: CONSUMER, 
+  action: create, 
+  where: { id: allow })
+   {
+    status(action: allow)
+    message(action: allow)
+    data {
+      ...order
+      service {
+        ...service
+      }
+      organization {
+        ...organization
+      }
+      owner {
+        ...user
+        avator {
+          ...attachment
+        }
+        location {
+          ...location
+        }
+      }
+      receipt {
+        ...attachment
+      }
+    }
+  }
+}

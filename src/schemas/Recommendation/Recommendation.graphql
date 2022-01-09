@@ -1,0 +1,71 @@
+type Recommendation {
+          id: String!
+          content: String!
+          attachments(where: AttachmentWhereInput
+              orderBy: [AttachmentOrderByInput!]
+              cursor: AttachmentWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [AttachmentScalarFieldEnum!]
+              ): [Attachment!]!
+          grade: Grade!
+          gradeId: String!
+          type: RecommendationType!
+          createdAt: DateTime!
+          updatedAt: DateTime!
+    }
+
+      type RecommendationListResponse {
+        status: Boolean!
+        data: [Recommendation!]
+        message: String!
+      }
+     
+
+      type RecommendationResponse {
+        status: Boolean!
+        data: Recommendation
+        message: String!
+      }
+      
+      type RecommendationBatchResponse {
+        status: Boolean!
+        data: BatchPayload
+        message: String!
+      }
+      type AggregateRecommendationResponse {
+        status: Boolean!
+        data: AggregateRecommendation
+        message: String!
+      }
+      type RecommendationCountResponse {
+        status: Boolean!
+        data: Int
+        message: String!
+      }
+      extend type Query {
+    findUniqueRecommendation(where: RecommendationWhereUniqueInput!): RecommendationResponse!
+    findFirstRecommendation(
+      where: RecommendationWhereInput
+      orderBy: [RecommendationOrderByInput!]
+      cursor: RecommendationWhereUniqueInput
+      distinct: [RecommendationScalarFieldEnum!]
+      skip: Int
+      take: Int
+    ): RecommendationResponse!
+    findManyRecommendation(
+      where: RecommendationWhereInput
+      orderBy: [RecommendationOrderByInput!]
+      cursor: RecommendationWhereUniqueInput
+      distinct: [RecommendationScalarFieldEnum!]
+      skip: Int
+      take: Int
+    ): RecommendationListResponse!
+  }
+extend type Mutation {
+    createOneRecommendation(data: RecommendationCreateInput!): RecommendationResponse!
+    updateOneRecommendation(
+      where: RecommendationWhereUniqueInput!
+      data: RecommendationUpdateInput!
+    ): RecommendationResponse!
+  }

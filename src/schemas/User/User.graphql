@@ -1,0 +1,118 @@
+type User {
+          id: String!
+          email: String!
+          displayName: String!
+          phoneNumber: String
+          emailVerified: Boolean!
+          disabled: Boolean!
+          avator: Attachment
+          avatorId: String
+          role: Role!
+          state: State!
+          forms(where: FormWhereInput
+              orderBy: [FormOrderByInput!]
+              cursor: FormWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [FormScalarFieldEnum!]
+              ): [Form!]!
+          responses(where: ResponseWhereInput
+              orderBy: [ResponseOrderByInput!]
+              cursor: ResponseWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [ResponseScalarFieldEnum!]
+              ): [Response!]!
+          createdAt: DateTime!
+          updatedAt: DateTime!
+          forums(where: ForumWhereInput
+              orderBy: [ForumOrderByInput!]
+              cursor: ForumWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [ForumScalarFieldEnum!]
+              ): [Forum!]!
+          forumAnswers(where: ForumAnswerWhereInput
+              orderBy: [ForumAnswerOrderByInput!]
+              cursor: ForumAnswerWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [ForumAnswerScalarFieldEnum!]
+              ): [ForumAnswer!]!
+          comments(where: CommentWhereInput
+              orderBy: [CommentOrderByInput!]
+              cursor: CommentWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [CommentScalarFieldEnum!]
+              ): [Comment!]!
+          device: Device
+          transactions(where: TransactionWhereInput
+              orderBy: [TransactionOrderByInput!]
+              cursor: TransactionWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [TransactionScalarFieldEnum!]
+              ): [Transaction!]!
+          orders(where: OrderWhereInput
+              orderBy: [OrderOrderByInput!]
+              cursor: OrderWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [OrderScalarFieldEnum!]
+              ): [Order!]!
+    }
+
+      type UserListResponse {
+        status: Boolean!
+        data: [User!]
+        message: String!
+      }
+     
+
+      type UserResponse {
+        status: Boolean!
+        data: User
+        message: String!
+      }
+      
+      type UserBatchResponse {
+        status: Boolean!
+        data: BatchPayload
+        message: String!
+      }
+      type AggregateUserResponse {
+        status: Boolean!
+        data: AggregateUser
+        message: String!
+      }
+      type UserCountResponse {
+        status: Boolean!
+        data: Int
+        message: String!
+      }
+      extend type Query {
+    findUniqueUser(where: UserWhereUniqueInput!): UserResponse!
+    findFirstUser(
+      where: UserWhereInput
+      orderBy: [UserOrderByInput!]
+      cursor: UserWhereUniqueInput
+      distinct: [UserScalarFieldEnum!]
+      skip: Int
+      take: Int
+    ): UserResponse!
+    findManyUser(
+      where: UserWhereInput
+      orderBy: [UserOrderByInput!]
+      cursor: UserWhereUniqueInput
+      distinct: [UserScalarFieldEnum!]
+      skip: Int
+      take: Int
+    ): UserListResponse!
+  }
+extend type Mutation {
+    updateOneUser(
+      where: UserWhereUniqueInput!
+      data: UserUpdateInput!
+    ): UserResponse!
+  }

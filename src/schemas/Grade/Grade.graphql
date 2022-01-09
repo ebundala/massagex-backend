@@ -1,0 +1,96 @@
+type Grade {
+          id: String!
+          name: String!
+          description: String!
+          form: Form!
+          formId: String!
+          responses(where: ResponseWhereInput
+              orderBy: [ResponseOrderByInput!]
+              cursor: ResponseWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [ResponseScalarFieldEnum!]
+              ): [Response!]!
+          recommendations(where: RecommendationWhereInput
+              orderBy: [RecommendationOrderByInput!]
+              cursor: RecommendationWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [RecommendationScalarFieldEnum!]
+              ): [Recommendation!]!
+          questions(where: QuestionWhereInput
+              orderBy: [QuestionOrderByInput!]
+              cursor: QuestionWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [QuestionScalarFieldEnum!]
+              ): [Question!]!
+          minValue: Float!
+          maxValue: Float!
+          minInclusive: Boolean!
+          maxInclusive: Boolean!
+          attachments(where: AttachmentWhereInput
+              orderBy: [AttachmentOrderByInput!]
+              cursor: AttachmentWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [AttachmentScalarFieldEnum!]
+              ): [Attachment!]!
+          createdAt: DateTime!
+          updatedAt: DateTime!
+    }
+
+      type GradeListResponse {
+        status: Boolean!
+        data: [Grade!]
+        message: String!
+      }
+     
+
+      type GradeResponse {
+        status: Boolean!
+        data: Grade
+        message: String!
+      }
+      
+      type GradeBatchResponse {
+        status: Boolean!
+        data: BatchPayload
+        message: String!
+      }
+      type AggregateGradeResponse {
+        status: Boolean!
+        data: AggregateGrade
+        message: String!
+      }
+      type GradeCountResponse {
+        status: Boolean!
+        data: Int
+        message: String!
+      }
+      extend type Query {
+    findUniqueGrade(where: GradeWhereUniqueInput!): GradeResponse!
+    findFirstGrade(
+      where: GradeWhereInput
+      orderBy: [GradeOrderByInput!]
+      cursor: GradeWhereUniqueInput
+      distinct: [GradeScalarFieldEnum!]
+      skip: Int
+      take: Int
+    ): GradeResponse!
+    findManyGrade(
+      where: GradeWhereInput
+      orderBy: [GradeOrderByInput!]
+      cursor: GradeWhereUniqueInput
+      distinct: [GradeScalarFieldEnum!]
+      skip: Int
+      take: Int
+    ): GradeListResponse!
+  }
+extend type Mutation {
+    createOneGrade(data: GradeCreateInput!): GradeResponse!
+    updateOneGrade(
+      where: GradeWhereUniqueInput!
+      data: GradeUpdateInput!
+    ): GradeResponse!
+  }

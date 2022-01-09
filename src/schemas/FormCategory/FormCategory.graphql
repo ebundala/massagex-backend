@@ -1,0 +1,72 @@
+type FormCategory {
+          id: String!
+          name: String!
+          description: String
+          image: Attachment
+          state: State!
+          createdAt: DateTime!
+          updatedAt: DateTime!
+          attachmentId: String
+          forms(where: FormWhereInput
+              orderBy: [FormOrderByInput!]
+              cursor: FormWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [FormScalarFieldEnum!]
+              ): [Form!]!
+    }
+
+      type FormCategoryListResponse {
+        status: Boolean!
+        data: [FormCategory!]
+        message: String!
+      }
+     
+
+      type FormCategoryResponse {
+        status: Boolean!
+        data: FormCategory
+        message: String!
+      }
+      
+      type FormCategoryBatchResponse {
+        status: Boolean!
+        data: BatchPayload
+        message: String!
+      }
+      type AggregateFormCategoryResponse {
+        status: Boolean!
+        data: AggregateFormCategory
+        message: String!
+      }
+      type FormCategoryCountResponse {
+        status: Boolean!
+        data: Int
+        message: String!
+      }
+      extend type Query {
+    findUniqueFormCategory(where: FormCategoryWhereUniqueInput!): FormCategoryResponse!
+    findFirstFormCategory(
+      where: FormCategoryWhereInput
+      orderBy: [FormCategoryOrderByInput!]
+      cursor: FormCategoryWhereUniqueInput
+      distinct: [FormCategoryScalarFieldEnum!]
+      skip: Int
+      take: Int
+    ): FormCategoryResponse!
+    findManyFormCategory(
+      where: FormCategoryWhereInput
+      orderBy: [FormCategoryOrderByInput!]
+      cursor: FormCategoryWhereUniqueInput
+      distinct: [FormCategoryScalarFieldEnum!]
+      skip: Int
+      take: Int
+    ): FormCategoryListResponse!
+  }
+extend type Mutation {
+    createOneFormCategory(data: FormCategoryCreateInput!): FormCategoryResponse!
+    updateOneFormCategory(
+      where: FormCategoryWhereUniqueInput!
+      data: FormCategoryUpdateInput!
+    ): FormCategoryResponse!
+  }

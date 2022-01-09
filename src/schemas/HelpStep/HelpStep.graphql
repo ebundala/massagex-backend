@@ -1,0 +1,73 @@
+type HelpStep {
+          id: String!
+          stepNumber: Int!
+          title: String!
+          description: String
+          state: State!
+          attachments(where: AttachmentWhereInput
+              orderBy: [AttachmentOrderByInput!]
+              cursor: AttachmentWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [AttachmentScalarFieldEnum!]
+              ): [Attachment!]!
+          help: Help!
+          helpId: String!
+          createdAt: DateTime!
+          updatedAt: DateTime!
+    }
+
+      type HelpStepListResponse {
+        status: Boolean!
+        data: [HelpStep!]
+        message: String!
+      }
+     
+
+      type HelpStepResponse {
+        status: Boolean!
+        data: HelpStep
+        message: String!
+      }
+      
+      type HelpStepBatchResponse {
+        status: Boolean!
+        data: BatchPayload
+        message: String!
+      }
+      type AggregateHelpStepResponse {
+        status: Boolean!
+        data: AggregateHelpStep
+        message: String!
+      }
+      type HelpStepCountResponse {
+        status: Boolean!
+        data: Int
+        message: String!
+      }
+      extend type Query {
+    findUniqueHelpStep(where: HelpStepWhereUniqueInput!): HelpStepResponse!
+    findFirstHelpStep(
+      where: HelpStepWhereInput
+      orderBy: [HelpStepOrderByInput!]
+      cursor: HelpStepWhereUniqueInput
+      distinct: [HelpStepScalarFieldEnum!]
+      skip: Int
+      take: Int
+    ): HelpStepResponse!
+    findManyHelpStep(
+      where: HelpStepWhereInput
+      orderBy: [HelpStepOrderByInput!]
+      cursor: HelpStepWhereUniqueInput
+      distinct: [HelpStepScalarFieldEnum!]
+      skip: Int
+      take: Int
+    ): HelpStepListResponse!
+  }
+extend type Mutation {
+    createOneHelpStep(data: HelpStepCreateInput!): HelpStepResponse!
+    updateOneHelpStep(
+      where: HelpStepWhereUniqueInput!
+      data: HelpStepUpdateInput!
+    ): HelpStepResponse!
+  }

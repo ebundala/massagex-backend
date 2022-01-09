@@ -1,0 +1,85 @@
+type Comment {
+          id: String!
+          author: User!
+          authorId: String!
+          attachments(where: AttachmentWhereInput
+              orderBy: [AttachmentOrderByInput!]
+              cursor: AttachmentWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [AttachmentScalarFieldEnum!]
+              ): [Attachment!]!
+          comments(where: CommentWhereInput
+              orderBy: [CommentOrderByInput!]
+              cursor: CommentWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [CommentScalarFieldEnum!]
+              ): [Comment!]!
+          commentsEnabled: Boolean!
+          content: String!
+          state: State!
+          createdAt: DateTime!
+          updatedAt: DateTime!
+          forum: Forum
+          forumId: String
+          forumAnswer: ForumAnswer
+          forumAnswerId: String
+          comment: Comment
+          commentId: String
+    }
+
+      type CommentListResponse {
+        status: Boolean!
+        data: [Comment!]
+        message: String!
+      }
+     
+
+      type CommentResponse {
+        status: Boolean!
+        data: Comment
+        message: String!
+      }
+      
+      type CommentBatchResponse {
+        status: Boolean!
+        data: BatchPayload
+        message: String!
+      }
+      type AggregateCommentResponse {
+        status: Boolean!
+        data: AggregateComment
+        message: String!
+      }
+      type CommentCountResponse {
+        status: Boolean!
+        data: Int
+        message: String!
+      }
+      extend type Query {
+    findUniqueComment(where: CommentWhereUniqueInput!): CommentResponse!
+    findFirstComment(
+      where: CommentWhereInput
+      orderBy: [CommentOrderByInput!]
+      cursor: CommentWhereUniqueInput
+      distinct: [CommentScalarFieldEnum!]
+      skip: Int
+      take: Int
+    ): CommentResponse!
+    findManyComment(
+      where: CommentWhereInput
+      orderBy: [CommentOrderByInput!]
+      cursor: CommentWhereUniqueInput
+      distinct: [CommentScalarFieldEnum!]
+      skip: Int
+      take: Int
+    ): CommentListResponse!
+  }
+extend type Mutation {
+    createOneComment(data: CommentCreateInput!): CommentResponse!
+    updateOneComment(
+      where: CommentWhereUniqueInput!
+      data: CommentUpdateInput!
+    ): CommentResponse!
+  }
