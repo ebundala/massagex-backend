@@ -125,7 +125,1202 @@ enum ImageSize {
   small
   medium
   large
-  biggest
+  largest
+}
+
+input AttachmentCreateInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  user: UserCreateNestedManyWithoutAvatorInput
+  form: FormCreateNestedOneWithoutAttachmentsInput
+  grade: GradeCreateNestedOneWithoutAttachmentsInput
+  response: ResponseCreateNestedOneWithoutAttachmentsInput
+  question: QuestionCreateNestedOneWithoutAttachmentsInput
+  answer: AnswerCreateNestedOneWithoutAttachmentsInput
+  recommendation: RecommendationCreateNestedOneWithoutAttachmentsInput
+  forum: ForumCreateNestedOneWithoutAttachmentsInput
+  forumAnswer: ForumAnswerCreateNestedOneWithoutAttachmentsInput
+  comment: CommentCreateNestedOneWithoutAttachmentsInput
+  formCategories: FormCategoryCreateNestedManyWithoutImageInput
+  helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
+  paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
+  services: ServiceCreateNestedManyWithoutImageInput
+  orders: OrderCreateNestedManyWithoutReceiptInput
+}
+
+input AttachmentCreateManyInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  formId: PERMISSION
+  gradeId: PERMISSION
+  responseId: PERMISSION
+  questionId: PERMISSION
+  answerId: PERMISSION
+  recommendationId: PERMISSION
+  forumId: PERMISSION
+  forumAnswerId: PERMISSION
+  commentId: PERMISSION
+  helpStepId: PERMISSION
+}
+
+input AttachmentCreateWithoutUserInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  form: FormCreateNestedOneWithoutAttachmentsInput
+  grade: GradeCreateNestedOneWithoutAttachmentsInput
+  response: ResponseCreateNestedOneWithoutAttachmentsInput
+  question: QuestionCreateNestedOneWithoutAttachmentsInput
+  answer: AnswerCreateNestedOneWithoutAttachmentsInput
+  recommendation: RecommendationCreateNestedOneWithoutAttachmentsInput
+  forum: ForumCreateNestedOneWithoutAttachmentsInput
+  forumAnswer: ForumAnswerCreateNestedOneWithoutAttachmentsInput
+  comment: CommentCreateNestedOneWithoutAttachmentsInput
+  formCategories: FormCategoryCreateNestedManyWithoutImageInput
+  helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
+  paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
+  services: ServiceCreateNestedManyWithoutImageInput
+  orders: OrderCreateNestedManyWithoutReceiptInput
+}
+
+input AttachmentCreateWithoutFormCategoriesInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  user: UserCreateNestedManyWithoutAvatorInput
+  form: FormCreateNestedOneWithoutAttachmentsInput
+  grade: GradeCreateNestedOneWithoutAttachmentsInput
+  response: ResponseCreateNestedOneWithoutAttachmentsInput
+  question: QuestionCreateNestedOneWithoutAttachmentsInput
+  answer: AnswerCreateNestedOneWithoutAttachmentsInput
+  recommendation: RecommendationCreateNestedOneWithoutAttachmentsInput
+  forum: ForumCreateNestedOneWithoutAttachmentsInput
+  forumAnswer: ForumAnswerCreateNestedOneWithoutAttachmentsInput
+  comment: CommentCreateNestedOneWithoutAttachmentsInput
+  helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
+  paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
+  services: ServiceCreateNestedManyWithoutImageInput
+  orders: OrderCreateNestedManyWithoutReceiptInput
+}
+
+input AttachmentCreateWithoutFormInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  user: UserCreateNestedManyWithoutAvatorInput
+  grade: GradeCreateNestedOneWithoutAttachmentsInput
+  response: ResponseCreateNestedOneWithoutAttachmentsInput
+  question: QuestionCreateNestedOneWithoutAttachmentsInput
+  answer: AnswerCreateNestedOneWithoutAttachmentsInput
+  recommendation: RecommendationCreateNestedOneWithoutAttachmentsInput
+  forum: ForumCreateNestedOneWithoutAttachmentsInput
+  forumAnswer: ForumAnswerCreateNestedOneWithoutAttachmentsInput
+  comment: CommentCreateNestedOneWithoutAttachmentsInput
+  formCategories: FormCategoryCreateNestedManyWithoutImageInput
+  helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
+  paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
+  services: ServiceCreateNestedManyWithoutImageInput
+  orders: OrderCreateNestedManyWithoutReceiptInput
+}
+
+input AttachmentCreateWithoutGradeInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  user: UserCreateNestedManyWithoutAvatorInput
+  form: FormCreateNestedOneWithoutAttachmentsInput
+  response: ResponseCreateNestedOneWithoutAttachmentsInput
+  question: QuestionCreateNestedOneWithoutAttachmentsInput
+  answer: AnswerCreateNestedOneWithoutAttachmentsInput
+  recommendation: RecommendationCreateNestedOneWithoutAttachmentsInput
+  forum: ForumCreateNestedOneWithoutAttachmentsInput
+  forumAnswer: ForumAnswerCreateNestedOneWithoutAttachmentsInput
+  comment: CommentCreateNestedOneWithoutAttachmentsInput
+  formCategories: FormCategoryCreateNestedManyWithoutImageInput
+  helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
+  paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
+  services: ServiceCreateNestedManyWithoutImageInput
+  orders: OrderCreateNestedManyWithoutReceiptInput
+}
+
+input AttachmentCreateWithoutResponseInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  user: UserCreateNestedManyWithoutAvatorInput
+  form: FormCreateNestedOneWithoutAttachmentsInput
+  grade: GradeCreateNestedOneWithoutAttachmentsInput
+  question: QuestionCreateNestedOneWithoutAttachmentsInput
+  answer: AnswerCreateNestedOneWithoutAttachmentsInput
+  recommendation: RecommendationCreateNestedOneWithoutAttachmentsInput
+  forum: ForumCreateNestedOneWithoutAttachmentsInput
+  forumAnswer: ForumAnswerCreateNestedOneWithoutAttachmentsInput
+  comment: CommentCreateNestedOneWithoutAttachmentsInput
+  formCategories: FormCategoryCreateNestedManyWithoutImageInput
+  helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
+  paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
+  services: ServiceCreateNestedManyWithoutImageInput
+  orders: OrderCreateNestedManyWithoutReceiptInput
+}
+
+input AttachmentCreateWithoutQuestionInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  user: UserCreateNestedManyWithoutAvatorInput
+  form: FormCreateNestedOneWithoutAttachmentsInput
+  grade: GradeCreateNestedOneWithoutAttachmentsInput
+  response: ResponseCreateNestedOneWithoutAttachmentsInput
+  answer: AnswerCreateNestedOneWithoutAttachmentsInput
+  recommendation: RecommendationCreateNestedOneWithoutAttachmentsInput
+  forum: ForumCreateNestedOneWithoutAttachmentsInput
+  forumAnswer: ForumAnswerCreateNestedOneWithoutAttachmentsInput
+  comment: CommentCreateNestedOneWithoutAttachmentsInput
+  formCategories: FormCategoryCreateNestedManyWithoutImageInput
+  helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
+  paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
+  services: ServiceCreateNestedManyWithoutImageInput
+  orders: OrderCreateNestedManyWithoutReceiptInput
+}
+
+input AttachmentCreateWithoutAnswerInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  user: UserCreateNestedManyWithoutAvatorInput
+  form: FormCreateNestedOneWithoutAttachmentsInput
+  grade: GradeCreateNestedOneWithoutAttachmentsInput
+  response: ResponseCreateNestedOneWithoutAttachmentsInput
+  question: QuestionCreateNestedOneWithoutAttachmentsInput
+  recommendation: RecommendationCreateNestedOneWithoutAttachmentsInput
+  forum: ForumCreateNestedOneWithoutAttachmentsInput
+  forumAnswer: ForumAnswerCreateNestedOneWithoutAttachmentsInput
+  comment: CommentCreateNestedOneWithoutAttachmentsInput
+  formCategories: FormCategoryCreateNestedManyWithoutImageInput
+  helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
+  paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
+  services: ServiceCreateNestedManyWithoutImageInput
+  orders: OrderCreateNestedManyWithoutReceiptInput
+}
+
+input AttachmentCreateWithoutRecommendationInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  user: UserCreateNestedManyWithoutAvatorInput
+  form: FormCreateNestedOneWithoutAttachmentsInput
+  grade: GradeCreateNestedOneWithoutAttachmentsInput
+  response: ResponseCreateNestedOneWithoutAttachmentsInput
+  question: QuestionCreateNestedOneWithoutAttachmentsInput
+  answer: AnswerCreateNestedOneWithoutAttachmentsInput
+  forum: ForumCreateNestedOneWithoutAttachmentsInput
+  forumAnswer: ForumAnswerCreateNestedOneWithoutAttachmentsInput
+  comment: CommentCreateNestedOneWithoutAttachmentsInput
+  formCategories: FormCategoryCreateNestedManyWithoutImageInput
+  helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
+  paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
+  services: ServiceCreateNestedManyWithoutImageInput
+  orders: OrderCreateNestedManyWithoutReceiptInput
+}
+
+input AttachmentCreateWithoutForumInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  user: UserCreateNestedManyWithoutAvatorInput
+  form: FormCreateNestedOneWithoutAttachmentsInput
+  grade: GradeCreateNestedOneWithoutAttachmentsInput
+  response: ResponseCreateNestedOneWithoutAttachmentsInput
+  question: QuestionCreateNestedOneWithoutAttachmentsInput
+  answer: AnswerCreateNestedOneWithoutAttachmentsInput
+  recommendation: RecommendationCreateNestedOneWithoutAttachmentsInput
+  forumAnswer: ForumAnswerCreateNestedOneWithoutAttachmentsInput
+  comment: CommentCreateNestedOneWithoutAttachmentsInput
+  formCategories: FormCategoryCreateNestedManyWithoutImageInput
+  helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
+  paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
+  services: ServiceCreateNestedManyWithoutImageInput
+  orders: OrderCreateNestedManyWithoutReceiptInput
+}
+
+input AttachmentCreateWithoutForumAnswerInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  user: UserCreateNestedManyWithoutAvatorInput
+  form: FormCreateNestedOneWithoutAttachmentsInput
+  grade: GradeCreateNestedOneWithoutAttachmentsInput
+  response: ResponseCreateNestedOneWithoutAttachmentsInput
+  question: QuestionCreateNestedOneWithoutAttachmentsInput
+  answer: AnswerCreateNestedOneWithoutAttachmentsInput
+  recommendation: RecommendationCreateNestedOneWithoutAttachmentsInput
+  forum: ForumCreateNestedOneWithoutAttachmentsInput
+  comment: CommentCreateNestedOneWithoutAttachmentsInput
+  formCategories: FormCategoryCreateNestedManyWithoutImageInput
+  helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
+  paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
+  services: ServiceCreateNestedManyWithoutImageInput
+  orders: OrderCreateNestedManyWithoutReceiptInput
+}
+
+input AttachmentCreateWithoutCommentInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  user: UserCreateNestedManyWithoutAvatorInput
+  form: FormCreateNestedOneWithoutAttachmentsInput
+  grade: GradeCreateNestedOneWithoutAttachmentsInput
+  response: ResponseCreateNestedOneWithoutAttachmentsInput
+  question: QuestionCreateNestedOneWithoutAttachmentsInput
+  answer: AnswerCreateNestedOneWithoutAttachmentsInput
+  recommendation: RecommendationCreateNestedOneWithoutAttachmentsInput
+  forum: ForumCreateNestedOneWithoutAttachmentsInput
+  forumAnswer: ForumAnswerCreateNestedOneWithoutAttachmentsInput
+  formCategories: FormCategoryCreateNestedManyWithoutImageInput
+  helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
+  paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
+  services: ServiceCreateNestedManyWithoutImageInput
+  orders: OrderCreateNestedManyWithoutReceiptInput
+}
+
+input AttachmentCreateWithoutHelpStepInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  user: UserCreateNestedManyWithoutAvatorInput
+  form: FormCreateNestedOneWithoutAttachmentsInput
+  grade: GradeCreateNestedOneWithoutAttachmentsInput
+  response: ResponseCreateNestedOneWithoutAttachmentsInput
+  question: QuestionCreateNestedOneWithoutAttachmentsInput
+  answer: AnswerCreateNestedOneWithoutAttachmentsInput
+  recommendation: RecommendationCreateNestedOneWithoutAttachmentsInput
+  forum: ForumCreateNestedOneWithoutAttachmentsInput
+  forumAnswer: ForumAnswerCreateNestedOneWithoutAttachmentsInput
+  comment: CommentCreateNestedOneWithoutAttachmentsInput
+  formCategories: FormCategoryCreateNestedManyWithoutImageInput
+  paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
+  services: ServiceCreateNestedManyWithoutImageInput
+  orders: OrderCreateNestedManyWithoutReceiptInput
+}
+
+input AttachmentCreateWithoutServicesInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  user: UserCreateNestedManyWithoutAvatorInput
+  form: FormCreateNestedOneWithoutAttachmentsInput
+  grade: GradeCreateNestedOneWithoutAttachmentsInput
+  response: ResponseCreateNestedOneWithoutAttachmentsInput
+  question: QuestionCreateNestedOneWithoutAttachmentsInput
+  answer: AnswerCreateNestedOneWithoutAttachmentsInput
+  recommendation: RecommendationCreateNestedOneWithoutAttachmentsInput
+  forum: ForumCreateNestedOneWithoutAttachmentsInput
+  forumAnswer: ForumAnswerCreateNestedOneWithoutAttachmentsInput
+  comment: CommentCreateNestedOneWithoutAttachmentsInput
+  formCategories: FormCategoryCreateNestedManyWithoutImageInput
+  helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
+  paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
+  orders: OrderCreateNestedManyWithoutReceiptInput
+}
+
+input AttachmentCreateWithoutOrdersInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  user: UserCreateNestedManyWithoutAvatorInput
+  form: FormCreateNestedOneWithoutAttachmentsInput
+  grade: GradeCreateNestedOneWithoutAttachmentsInput
+  response: ResponseCreateNestedOneWithoutAttachmentsInput
+  question: QuestionCreateNestedOneWithoutAttachmentsInput
+  answer: AnswerCreateNestedOneWithoutAttachmentsInput
+  recommendation: RecommendationCreateNestedOneWithoutAttachmentsInput
+  forum: ForumCreateNestedOneWithoutAttachmentsInput
+  forumAnswer: ForumAnswerCreateNestedOneWithoutAttachmentsInput
+  comment: CommentCreateNestedOneWithoutAttachmentsInput
+  formCategories: FormCategoryCreateNestedManyWithoutImageInput
+  helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
+  paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
+  services: ServiceCreateNestedManyWithoutImageInput
+}
+
+input AttachmentCreateWithoutPaymentMethodsInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  user: UserCreateNestedManyWithoutAvatorInput
+  form: FormCreateNestedOneWithoutAttachmentsInput
+  grade: GradeCreateNestedOneWithoutAttachmentsInput
+  response: ResponseCreateNestedOneWithoutAttachmentsInput
+  question: QuestionCreateNestedOneWithoutAttachmentsInput
+  answer: AnswerCreateNestedOneWithoutAttachmentsInput
+  recommendation: RecommendationCreateNestedOneWithoutAttachmentsInput
+  forum: ForumCreateNestedOneWithoutAttachmentsInput
+  forumAnswer: ForumAnswerCreateNestedOneWithoutAttachmentsInput
+  comment: CommentCreateNestedOneWithoutAttachmentsInput
+  formCategories: FormCategoryCreateNestedManyWithoutImageInput
+  helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
+  services: ServiceCreateNestedManyWithoutImageInput
+  orders: OrderCreateNestedManyWithoutReceiptInput
+}
+
+input AttachmentCreateManyFormInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  gradeId: PERMISSION
+  responseId: PERMISSION
+  questionId: PERMISSION
+  answerId: PERMISSION
+  recommendationId: PERMISSION
+  forumId: PERMISSION
+  forumAnswerId: PERMISSION
+  commentId: PERMISSION
+  helpStepId: PERMISSION
+}
+
+input AttachmentCreateManyGradeInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  formId: PERMISSION
+  responseId: PERMISSION
+  questionId: PERMISSION
+  answerId: PERMISSION
+  recommendationId: PERMISSION
+  forumId: PERMISSION
+  forumAnswerId: PERMISSION
+  commentId: PERMISSION
+  helpStepId: PERMISSION
+}
+
+input AttachmentCreateManyResponseInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  formId: PERMISSION
+  gradeId: PERMISSION
+  questionId: PERMISSION
+  answerId: PERMISSION
+  recommendationId: PERMISSION
+  forumId: PERMISSION
+  forumAnswerId: PERMISSION
+  commentId: PERMISSION
+  helpStepId: PERMISSION
+}
+
+input AttachmentCreateManyQuestionInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  formId: PERMISSION
+  gradeId: PERMISSION
+  responseId: PERMISSION
+  answerId: PERMISSION
+  recommendationId: PERMISSION
+  forumId: PERMISSION
+  forumAnswerId: PERMISSION
+  commentId: PERMISSION
+  helpStepId: PERMISSION
+}
+
+input AttachmentCreateManyAnswerInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  formId: PERMISSION
+  gradeId: PERMISSION
+  responseId: PERMISSION
+  questionId: PERMISSION
+  recommendationId: PERMISSION
+  forumId: PERMISSION
+  forumAnswerId: PERMISSION
+  commentId: PERMISSION
+  helpStepId: PERMISSION
+}
+
+input AttachmentCreateManyRecommendationInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  formId: PERMISSION
+  gradeId: PERMISSION
+  responseId: PERMISSION
+  questionId: PERMISSION
+  answerId: PERMISSION
+  forumId: PERMISSION
+  forumAnswerId: PERMISSION
+  commentId: PERMISSION
+  helpStepId: PERMISSION
+}
+
+input AttachmentCreateManyForumInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  formId: PERMISSION
+  gradeId: PERMISSION
+  responseId: PERMISSION
+  questionId: PERMISSION
+  answerId: PERMISSION
+  recommendationId: PERMISSION
+  forumAnswerId: PERMISSION
+  commentId: PERMISSION
+  helpStepId: PERMISSION
+}
+
+input AttachmentCreateManyForumAnswerInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  formId: PERMISSION
+  gradeId: PERMISSION
+  responseId: PERMISSION
+  questionId: PERMISSION
+  answerId: PERMISSION
+  recommendationId: PERMISSION
+  forumId: PERMISSION
+  commentId: PERMISSION
+  helpStepId: PERMISSION
+}
+
+input AttachmentCreateManyCommentInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  formId: PERMISSION
+  gradeId: PERMISSION
+  responseId: PERMISSION
+  questionId: PERMISSION
+  answerId: PERMISSION
+  recommendationId: PERMISSION
+  forumId: PERMISSION
+  forumAnswerId: PERMISSION
+  helpStepId: PERMISSION
+}
+
+input AttachmentCreateManyHelpStepInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  formId: PERMISSION
+  gradeId: PERMISSION
+  responseId: PERMISSION
+  questionId: PERMISSION
+  answerId: PERMISSION
+  recommendationId: PERMISSION
+  forumId: PERMISSION
+  forumAnswerId: PERMISSION
+  commentId: PERMISSION
+}
+
+input AttachmentUncheckedCreateInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  formId: PERMISSION
+  gradeId: PERMISSION
+  responseId: PERMISSION
+  questionId: PERMISSION
+  answerId: PERMISSION
+  recommendationId: PERMISSION
+  forumId: PERMISSION
+  forumAnswerId: PERMISSION
+  commentId: PERMISSION
+  helpStepId: PERMISSION
+  user: UserUncheckedCreateNestedManyWithoutAvatorInput
+  formCategories: FormCategoryUncheckedCreateNestedManyWithoutImageInput
+  paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
+  services: ServiceUncheckedCreateNestedManyWithoutImageInput
+  orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
+}
+
+input AttachmentUncheckedCreateWithoutUserInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  formId: PERMISSION
+  gradeId: PERMISSION
+  responseId: PERMISSION
+  questionId: PERMISSION
+  answerId: PERMISSION
+  recommendationId: PERMISSION
+  forumId: PERMISSION
+  forumAnswerId: PERMISSION
+  commentId: PERMISSION
+  helpStepId: PERMISSION
+  formCategories: FormCategoryUncheckedCreateNestedManyWithoutImageInput
+  paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
+  services: ServiceUncheckedCreateNestedManyWithoutImageInput
+  orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
+}
+
+input AttachmentUncheckedCreateWithoutFormCategoriesInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  formId: PERMISSION
+  gradeId: PERMISSION
+  responseId: PERMISSION
+  questionId: PERMISSION
+  answerId: PERMISSION
+  recommendationId: PERMISSION
+  forumId: PERMISSION
+  forumAnswerId: PERMISSION
+  commentId: PERMISSION
+  helpStepId: PERMISSION
+  user: UserUncheckedCreateNestedManyWithoutAvatorInput
+  paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
+  services: ServiceUncheckedCreateNestedManyWithoutImageInput
+  orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
+}
+
+input AttachmentUncheckedCreateWithoutFormInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  gradeId: PERMISSION
+  responseId: PERMISSION
+  questionId: PERMISSION
+  answerId: PERMISSION
+  recommendationId: PERMISSION
+  forumId: PERMISSION
+  forumAnswerId: PERMISSION
+  commentId: PERMISSION
+  helpStepId: PERMISSION
+  user: UserUncheckedCreateNestedManyWithoutAvatorInput
+  formCategories: FormCategoryUncheckedCreateNestedManyWithoutImageInput
+  paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
+  services: ServiceUncheckedCreateNestedManyWithoutImageInput
+  orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
+}
+
+input AttachmentUncheckedCreateWithoutGradeInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  formId: PERMISSION
+  responseId: PERMISSION
+  questionId: PERMISSION
+  answerId: PERMISSION
+  recommendationId: PERMISSION
+  forumId: PERMISSION
+  forumAnswerId: PERMISSION
+  commentId: PERMISSION
+  helpStepId: PERMISSION
+  user: UserUncheckedCreateNestedManyWithoutAvatorInput
+  formCategories: FormCategoryUncheckedCreateNestedManyWithoutImageInput
+  paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
+  services: ServiceUncheckedCreateNestedManyWithoutImageInput
+  orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
+}
+
+input AttachmentUncheckedCreateWithoutResponseInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  formId: PERMISSION
+  gradeId: PERMISSION
+  questionId: PERMISSION
+  answerId: PERMISSION
+  recommendationId: PERMISSION
+  forumId: PERMISSION
+  forumAnswerId: PERMISSION
+  commentId: PERMISSION
+  helpStepId: PERMISSION
+  user: UserUncheckedCreateNestedManyWithoutAvatorInput
+  formCategories: FormCategoryUncheckedCreateNestedManyWithoutImageInput
+  paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
+  services: ServiceUncheckedCreateNestedManyWithoutImageInput
+  orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
+}
+
+input AttachmentUncheckedCreateWithoutQuestionInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  formId: PERMISSION
+  gradeId: PERMISSION
+  responseId: PERMISSION
+  answerId: PERMISSION
+  recommendationId: PERMISSION
+  forumId: PERMISSION
+  forumAnswerId: PERMISSION
+  commentId: PERMISSION
+  helpStepId: PERMISSION
+  user: UserUncheckedCreateNestedManyWithoutAvatorInput
+  formCategories: FormCategoryUncheckedCreateNestedManyWithoutImageInput
+  paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
+  services: ServiceUncheckedCreateNestedManyWithoutImageInput
+  orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
+}
+
+input AttachmentUncheckedCreateWithoutAnswerInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  formId: PERMISSION
+  gradeId: PERMISSION
+  responseId: PERMISSION
+  questionId: PERMISSION
+  recommendationId: PERMISSION
+  forumId: PERMISSION
+  forumAnswerId: PERMISSION
+  commentId: PERMISSION
+  helpStepId: PERMISSION
+  user: UserUncheckedCreateNestedManyWithoutAvatorInput
+  formCategories: FormCategoryUncheckedCreateNestedManyWithoutImageInput
+  paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
+  services: ServiceUncheckedCreateNestedManyWithoutImageInput
+  orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
+}
+
+input AttachmentUncheckedCreateWithoutRecommendationInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  formId: PERMISSION
+  gradeId: PERMISSION
+  responseId: PERMISSION
+  questionId: PERMISSION
+  answerId: PERMISSION
+  forumId: PERMISSION
+  forumAnswerId: PERMISSION
+  commentId: PERMISSION
+  helpStepId: PERMISSION
+  user: UserUncheckedCreateNestedManyWithoutAvatorInput
+  formCategories: FormCategoryUncheckedCreateNestedManyWithoutImageInput
+  paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
+  services: ServiceUncheckedCreateNestedManyWithoutImageInput
+  orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
+}
+
+input AttachmentUncheckedCreateWithoutForumInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  formId: PERMISSION
+  gradeId: PERMISSION
+  responseId: PERMISSION
+  questionId: PERMISSION
+  answerId: PERMISSION
+  recommendationId: PERMISSION
+  forumAnswerId: PERMISSION
+  commentId: PERMISSION
+  helpStepId: PERMISSION
+  user: UserUncheckedCreateNestedManyWithoutAvatorInput
+  formCategories: FormCategoryUncheckedCreateNestedManyWithoutImageInput
+  paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
+  services: ServiceUncheckedCreateNestedManyWithoutImageInput
+  orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
+}
+
+input AttachmentUncheckedCreateWithoutForumAnswerInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  formId: PERMISSION
+  gradeId: PERMISSION
+  responseId: PERMISSION
+  questionId: PERMISSION
+  answerId: PERMISSION
+  recommendationId: PERMISSION
+  forumId: PERMISSION
+  commentId: PERMISSION
+  helpStepId: PERMISSION
+  user: UserUncheckedCreateNestedManyWithoutAvatorInput
+  formCategories: FormCategoryUncheckedCreateNestedManyWithoutImageInput
+  paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
+  services: ServiceUncheckedCreateNestedManyWithoutImageInput
+  orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
+}
+
+input AttachmentUncheckedCreateWithoutCommentInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  formId: PERMISSION
+  gradeId: PERMISSION
+  responseId: PERMISSION
+  questionId: PERMISSION
+  answerId: PERMISSION
+  recommendationId: PERMISSION
+  forumId: PERMISSION
+  forumAnswerId: PERMISSION
+  helpStepId: PERMISSION
+  user: UserUncheckedCreateNestedManyWithoutAvatorInput
+  formCategories: FormCategoryUncheckedCreateNestedManyWithoutImageInput
+  paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
+  services: ServiceUncheckedCreateNestedManyWithoutImageInput
+  orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
+}
+
+input AttachmentUncheckedCreateWithoutHelpStepInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  formId: PERMISSION
+  gradeId: PERMISSION
+  responseId: PERMISSION
+  questionId: PERMISSION
+  answerId: PERMISSION
+  recommendationId: PERMISSION
+  forumId: PERMISSION
+  forumAnswerId: PERMISSION
+  commentId: PERMISSION
+  user: UserUncheckedCreateNestedManyWithoutAvatorInput
+  formCategories: FormCategoryUncheckedCreateNestedManyWithoutImageInput
+  paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
+  services: ServiceUncheckedCreateNestedManyWithoutImageInput
+  orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
+}
+
+input AttachmentUncheckedCreateWithoutServicesInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  formId: PERMISSION
+  gradeId: PERMISSION
+  responseId: PERMISSION
+  questionId: PERMISSION
+  answerId: PERMISSION
+  recommendationId: PERMISSION
+  forumId: PERMISSION
+  forumAnswerId: PERMISSION
+  commentId: PERMISSION
+  helpStepId: PERMISSION
+  user: UserUncheckedCreateNestedManyWithoutAvatorInput
+  formCategories: FormCategoryUncheckedCreateNestedManyWithoutImageInput
+  paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
+  orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
+}
+
+input AttachmentUncheckedCreateWithoutOrdersInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  formId: PERMISSION
+  gradeId: PERMISSION
+  responseId: PERMISSION
+  questionId: PERMISSION
+  answerId: PERMISSION
+  recommendationId: PERMISSION
+  forumId: PERMISSION
+  forumAnswerId: PERMISSION
+  commentId: PERMISSION
+  helpStepId: PERMISSION
+  user: UserUncheckedCreateNestedManyWithoutAvatorInput
+  formCategories: FormCategoryUncheckedCreateNestedManyWithoutImageInput
+  paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
+  services: ServiceUncheckedCreateNestedManyWithoutImageInput
+}
+
+input AttachmentUncheckedCreateWithoutPaymentMethodsInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  formId: PERMISSION
+  gradeId: PERMISSION
+  responseId: PERMISSION
+  questionId: PERMISSION
+  answerId: PERMISSION
+  recommendationId: PERMISSION
+  forumId: PERMISSION
+  forumAnswerId: PERMISSION
+  commentId: PERMISSION
+  helpStepId: PERMISSION
+  user: UserUncheckedCreateNestedManyWithoutAvatorInput
+  formCategories: FormCategoryUncheckedCreateNestedManyWithoutImageInput
+  services: ServiceUncheckedCreateNestedManyWithoutImageInput
+  orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
 }
 
 """The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf)."""
@@ -1926,8 +3121,8 @@ input GradeWhereInput {
   responses: ResponseListRelationFilter
   recommendations: RecommendationListRelationFilter
   questions: QuestionListRelationFilter
-  minValue: FloatFilter
-  maxValue: FloatFilter
+  minValue: FloatNullableFilter
+  maxValue: FloatNullableFilter
   minInclusive: BoolFilter
   maxInclusive: BoolFilter
   attachments: AttachmentListRelationFilter
@@ -1960,8 +3155,8 @@ input GradeScalarWhereWithAggregatesInput {
   name: StringWithAggregatesFilter
   description: StringWithAggregatesFilter
   formId: StringWithAggregatesFilter
-  minValue: FloatWithAggregatesFilter
-  maxValue: FloatWithAggregatesFilter
+  minValue: FloatNullableWithAggregatesFilter
+  maxValue: FloatNullableWithAggregatesFilter
   minInclusive: BoolWithAggregatesFilter
   maxInclusive: BoolWithAggregatesFilter
   createdAt: DateTimeWithAggregatesFilter
@@ -2024,7 +3219,7 @@ input QuestionWhereInput {
   instruction: StringNullableFilter
   questionType: EnumQuestionTypeFilter
   form: FormWhereInput
-  formId: StringFilter
+  formId: StringNullableFilter
   grade: GradeWhereInput
   gradeId: StringFilter
   answers: AnswerListRelationFilter
@@ -2060,7 +3255,7 @@ input QuestionScalarWhereWithAggregatesInput {
   weight: FloatWithAggregatesFilter
   instruction: StringNullableWithAggregatesFilter
   questionType: EnumQuestionTypeWithAggregatesFilter
-  formId: StringWithAggregatesFilter
+  formId: StringNullableWithAggregatesFilter
   gradeId: StringWithAggregatesFilter
   createdAt: DateTimeWithAggregatesFilter
   updatedAt: DateTimeWithAggregatesFilter
@@ -2996,66 +4191,6 @@ input DeviceUncheckedUpdateManyInput {
   userId: NullableStringFieldUpdateOperationsInput
 }
 
-input AttachmentCreateInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  user: UserCreateNestedManyWithoutAvatorInput
-  form: FormCreateNestedOneWithoutAttachmentsInput
-  grade: GradeCreateNestedOneWithoutAttachmentsInput
-  response: ResponseCreateNestedOneWithoutAttachmentsInput
-  question: QuestionCreateNestedOneWithoutAttachmentsInput
-  answer: AnswerCreateNestedOneWithoutAttachmentsInput
-  recommendation: RecommendationCreateNestedOneWithoutAttachmentsInput
-  forum: ForumCreateNestedOneWithoutAttachmentsInput
-  forumAnswer: ForumAnswerCreateNestedOneWithoutAttachmentsInput
-  comment: CommentCreateNestedOneWithoutAttachmentsInput
-  formCategories: FormCategoryCreateNestedManyWithoutImageInput
-  helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
-  paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
-  services: ServiceCreateNestedManyWithoutImageInput
-  orders: OrderCreateNestedManyWithoutReceiptInput
-}
-
-input AttachmentUncheckedCreateInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  formId: PERMISSION
-  gradeId: PERMISSION
-  responseId: PERMISSION
-  questionId: PERMISSION
-  answerId: PERMISSION
-  recommendationId: PERMISSION
-  forumId: PERMISSION
-  forumAnswerId: PERMISSION
-  commentId: PERMISSION
-  helpStepId: PERMISSION
-  user: UserUncheckedCreateNestedManyWithoutAvatorInput
-  formCategories: FormCategoryUncheckedCreateNestedManyWithoutImageInput
-  paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
-  services: ServiceUncheckedCreateNestedManyWithoutImageInput
-  orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
-}
-
 input AttachmentUpdateInput {
   id: StringFieldUpdateOperationsInput
   path: StringFieldUpdateOperationsInput
@@ -3114,31 +4249,6 @@ input AttachmentUncheckedUpdateInput {
   paymentMethods: PaymentMethodUncheckedUpdateManyWithoutLogoInput
   services: ServiceUncheckedUpdateManyWithoutImageInput
   orders: OrderUncheckedUpdateManyWithoutReceiptInput
-}
-
-input AttachmentCreateManyInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  formId: PERMISSION
-  gradeId: PERMISSION
-  responseId: PERMISSION
-  questionId: PERMISSION
-  answerId: PERMISSION
-  recommendationId: PERMISSION
-  forumId: PERMISSION
-  forumAnswerId: PERMISSION
-  commentId: PERMISSION
-  helpStepId: PERMISSION
 }
 
 input AttachmentUpdateManyMutationInput {
@@ -3383,8 +4493,8 @@ input GradeUpdateInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
-  minValue: FloatFieldUpdateOperationsInput
-  maxValue: FloatFieldUpdateOperationsInput
+  minValue: NullableFloatFieldUpdateOperationsInput
+  maxValue: NullableFloatFieldUpdateOperationsInput
   minInclusive: BoolFieldUpdateOperationsInput
   maxInclusive: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -3401,8 +4511,8 @@ input GradeUncheckedUpdateInput {
   name: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
   formId: StringFieldUpdateOperationsInput
-  minValue: FloatFieldUpdateOperationsInput
-  maxValue: FloatFieldUpdateOperationsInput
+  minValue: NullableFloatFieldUpdateOperationsInput
+  maxValue: NullableFloatFieldUpdateOperationsInput
   minInclusive: BoolFieldUpdateOperationsInput
   maxInclusive: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -3430,8 +4540,8 @@ input GradeUpdateManyMutationInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
-  minValue: FloatFieldUpdateOperationsInput
-  maxValue: FloatFieldUpdateOperationsInput
+  minValue: NullableFloatFieldUpdateOperationsInput
+  maxValue: NullableFloatFieldUpdateOperationsInput
   minInclusive: BoolFieldUpdateOperationsInput
   maxInclusive: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -3443,8 +4553,8 @@ input GradeUncheckedUpdateManyInput {
   name: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
   formId: StringFieldUpdateOperationsInput
-  minValue: FloatFieldUpdateOperationsInput
-  maxValue: FloatFieldUpdateOperationsInput
+  minValue: NullableFloatFieldUpdateOperationsInput
+  maxValue: NullableFloatFieldUpdateOperationsInput
   minInclusive: BoolFieldUpdateOperationsInput
   maxInclusive: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -3535,7 +4645,7 @@ input QuestionCreateInput {
   questionType: PERMISSION
   createdAt: PERMISSION
   updatedAt: PERMISSION
-  form: FormCreateNestedOneWithoutQuestionsInput!
+  form: FormCreateNestedOneWithoutQuestionsInput
   grade: GradeCreateNestedOneWithoutQuestionsInput!
   answers: AnswerCreateNestedManyWithoutQuestionInput
   attachments: AttachmentCreateNestedManyWithoutQuestionInput
@@ -3565,7 +4675,7 @@ input QuestionUpdateInput {
   questionType: EnumQuestionTypeFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  form: FormUpdateOneRequiredWithoutQuestionsInput
+  form: FormUpdateOneWithoutQuestionsInput
   grade: GradeUpdateOneRequiredWithoutQuestionsInput
   answers: AnswerUpdateManyWithoutQuestionInput
   attachments: AttachmentUpdateManyWithoutQuestionInput
@@ -3578,7 +4688,7 @@ input QuestionUncheckedUpdateInput {
   weight: FloatFieldUpdateOperationsInput
   instruction: NullableStringFieldUpdateOperationsInput
   questionType: EnumQuestionTypeFieldUpdateOperationsInput
-  formId: StringFieldUpdateOperationsInput
+  formId: NullableStringFieldUpdateOperationsInput
   gradeId: StringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -3617,7 +4727,7 @@ input QuestionUncheckedUpdateManyInput {
   weight: FloatFieldUpdateOperationsInput
   instruction: NullableStringFieldUpdateOperationsInput
   questionType: EnumQuestionTypeFieldUpdateOperationsInput
-  formId: StringFieldUpdateOperationsInput
+  formId: NullableStringFieldUpdateOperationsInput
   gradeId: StringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -5350,6 +6460,44 @@ input RecommendationListRelationFilter {
   none: RecommendationWhereInput
 }
 
+input FloatNullableFilter {
+  equals: PERMISSION
+  in: PERMISSION
+  notIn: PERMISSION
+  lt: PERMISSION
+  lte: PERMISSION
+  gt: PERMISSION
+  gte: PERMISSION
+  not: NestedFloatNullableFilter
+}
+
+input FloatNullableWithAggregatesFilter {
+  equals: PERMISSION
+  in: PERMISSION
+  notIn: PERMISSION
+  lt: PERMISSION
+  lte: PERMISSION
+  gt: PERMISSION
+  gte: PERMISSION
+  not: NestedFloatNullableWithAggregatesFilter
+  _count: NestedIntNullableFilter
+  count: NestedIntNullableFilter
+  _avg: NestedFloatNullableFilter
+  avg: NestedFloatNullableFilter
+  _sum: NestedFloatNullableFilter
+  sum: NestedFloatNullableFilter
+  _min: NestedFloatNullableFilter
+  min: NestedFloatNullableFilter
+  _max: NestedFloatNullableFilter
+  max: NestedFloatNullableFilter
+}
+
+input AnswerListRelationFilter {
+  every: AnswerWhereInput
+  some: AnswerWhereInput
+  none: AnswerWhereInput
+}
+
 input FloatFilter {
   equals: PERMISSION
   in: PERMISSION
@@ -5359,6 +6507,13 @@ input FloatFilter {
   gt: PERMISSION
   gte: PERMISSION
   not: NestedFloatFilter
+}
+
+input EnumQuestionTypeFilter {
+  equals: PERMISSION
+  in: PERMISSION
+  notIn: PERMISSION
+  not: NestedEnumQuestionTypeFilter
 }
 
 input FloatWithAggregatesFilter {
@@ -5380,19 +6535,6 @@ input FloatWithAggregatesFilter {
   min: NestedFloatFilter
   _max: NestedFloatFilter
   max: NestedFloatFilter
-}
-
-input AnswerListRelationFilter {
-  every: AnswerWhereInput
-  some: AnswerWhereInput
-  none: AnswerWhereInput
-}
-
-input EnumQuestionTypeFilter {
-  equals: PERMISSION
-  in: PERMISSION
-  notIn: PERMISSION
-  not: NestedEnumQuestionTypeFilter
 }
 
 input EnumQuestionTypeWithAggregatesFilter {
@@ -6632,7 +7774,7 @@ input AttachmentUncheckedCreateNestedManyWithoutGradeInput {
   connect: [AttachmentWhereUniqueInput!]
 }
 
-input FloatFieldUpdateOperationsInput {
+input NullableFloatFieldUpdateOperationsInput {
   set: PERMISSION
   increment: PERMISSION
   decrement: PERMISSION
@@ -6928,15 +8070,25 @@ input AttachmentUncheckedCreateNestedManyWithoutQuestionInput {
   connect: [AttachmentWhereUniqueInput!]
 }
 
+input FloatFieldUpdateOperationsInput {
+  set: PERMISSION
+  increment: PERMISSION
+  decrement: PERMISSION
+  multiply: PERMISSION
+  divide: PERMISSION
+}
+
 input EnumQuestionTypeFieldUpdateOperationsInput {
   set: PERMISSION
 }
 
-input FormUpdateOneRequiredWithoutQuestionsInput {
+input FormUpdateOneWithoutQuestionsInput {
   create: FormUncheckedCreateWithoutQuestionsInput
   connectOrCreate: FormCreateOrConnectWithoutQuestionsInput
   upsert: FormUpsertWithoutQuestionsInput
   connect: FormWhereUniqueInput
+  disconnect: PERMISSION
+  delete: PERMISSION
   update: FormUncheckedUpdateWithoutQuestionsInput
 }
 
@@ -8256,6 +9408,45 @@ input NestedEnumAttachmentTypeWithAggregatesFilter {
   max: NestedEnumAttachmentTypeFilter
 }
 
+input NestedFloatNullableFilter {
+  equals: PERMISSION
+  in: PERMISSION
+  notIn: PERMISSION
+  lt: PERMISSION
+  lte: PERMISSION
+  gt: PERMISSION
+  gte: PERMISSION
+  not: NestedFloatNullableFilter
+}
+
+input NestedFloatNullableWithAggregatesFilter {
+  equals: PERMISSION
+  in: PERMISSION
+  notIn: PERMISSION
+  lt: PERMISSION
+  lte: PERMISSION
+  gt: PERMISSION
+  gte: PERMISSION
+  not: NestedFloatNullableWithAggregatesFilter
+  _count: NestedIntNullableFilter
+  count: NestedIntNullableFilter
+  _avg: NestedFloatNullableFilter
+  avg: NestedFloatNullableFilter
+  _sum: NestedFloatNullableFilter
+  sum: NestedFloatNullableFilter
+  _min: NestedFloatNullableFilter
+  min: NestedFloatNullableFilter
+  _max: NestedFloatNullableFilter
+  max: NestedFloatNullableFilter
+}
+
+input NestedEnumQuestionTypeFilter {
+  equals: PERMISSION
+  in: PERMISSION
+  notIn: PERMISSION
+  not: NestedEnumQuestionTypeFilter
+}
+
 input NestedFloatWithAggregatesFilter {
   equals: PERMISSION
   in: PERMISSION
@@ -8275,13 +9466,6 @@ input NestedFloatWithAggregatesFilter {
   min: NestedFloatFilter
   _max: NestedFloatFilter
   max: NestedFloatFilter
-}
-
-input NestedEnumQuestionTypeFilter {
-  equals: PERMISSION
-  in: PERMISSION
-  notIn: PERMISSION
-  not: NestedEnumQuestionTypeFilter
 }
 
 input NestedEnumQuestionTypeWithAggregatesFilter {
@@ -8391,64 +9575,6 @@ input NestedEnumSelcomPaymentStatusWithAggregatesFilter {
   min: NestedEnumSelcomPaymentStatusFilter
   _max: NestedEnumSelcomPaymentStatusFilter
   max: NestedEnumSelcomPaymentStatusFilter
-}
-
-input AttachmentCreateWithoutUserInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  form: FormCreateNestedOneWithoutAttachmentsInput
-  grade: GradeCreateNestedOneWithoutAttachmentsInput
-  response: ResponseCreateNestedOneWithoutAttachmentsInput
-  question: QuestionCreateNestedOneWithoutAttachmentsInput
-  answer: AnswerCreateNestedOneWithoutAttachmentsInput
-  recommendation: RecommendationCreateNestedOneWithoutAttachmentsInput
-  forum: ForumCreateNestedOneWithoutAttachmentsInput
-  forumAnswer: ForumAnswerCreateNestedOneWithoutAttachmentsInput
-  comment: CommentCreateNestedOneWithoutAttachmentsInput
-  formCategories: FormCategoryCreateNestedManyWithoutImageInput
-  helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
-  paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
-  services: ServiceCreateNestedManyWithoutImageInput
-  orders: OrderCreateNestedManyWithoutReceiptInput
-}
-
-input AttachmentUncheckedCreateWithoutUserInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  formId: PERMISSION
-  gradeId: PERMISSION
-  responseId: PERMISSION
-  questionId: PERMISSION
-  answerId: PERMISSION
-  recommendationId: PERMISSION
-  forumId: PERMISSION
-  forumAnswerId: PERMISSION
-  commentId: PERMISSION
-  helpStepId: PERMISSION
-  formCategories: FormCategoryUncheckedCreateNestedManyWithoutImageInput
-  paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
-  services: ServiceUncheckedCreateNestedManyWithoutImageInput
-  orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
 }
 
 input AttachmentCreateOrConnectWithoutUserInput {
@@ -9268,7 +10394,7 @@ input QuestionCreateWithoutAttachmentsInput {
   questionType: PERMISSION
   createdAt: PERMISSION
   updatedAt: PERMISSION
-  form: FormCreateNestedOneWithoutQuestionsInput!
+  form: FormCreateNestedOneWithoutQuestionsInput
   grade: GradeCreateNestedOneWithoutQuestionsInput!
   answers: AnswerCreateNestedManyWithoutQuestionInput
 }
@@ -9665,8 +10791,8 @@ input GradeUpdateWithoutAttachmentsInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
-  minValue: FloatFieldUpdateOperationsInput
-  maxValue: FloatFieldUpdateOperationsInput
+  minValue: NullableFloatFieldUpdateOperationsInput
+  maxValue: NullableFloatFieldUpdateOperationsInput
   minInclusive: BoolFieldUpdateOperationsInput
   maxInclusive: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -9682,8 +10808,8 @@ input GradeUncheckedUpdateWithoutAttachmentsInput {
   name: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
   formId: StringFieldUpdateOperationsInput
-  minValue: FloatFieldUpdateOperationsInput
-  maxValue: FloatFieldUpdateOperationsInput
+  minValue: NullableFloatFieldUpdateOperationsInput
+  maxValue: NullableFloatFieldUpdateOperationsInput
   minInclusive: BoolFieldUpdateOperationsInput
   maxInclusive: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -9734,7 +10860,7 @@ input QuestionUpdateWithoutAttachmentsInput {
   questionType: EnumQuestionTypeFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  form: FormUpdateOneRequiredWithoutQuestionsInput
+  form: FormUpdateOneWithoutQuestionsInput
   grade: GradeUpdateOneRequiredWithoutQuestionsInput
   answers: AnswerUpdateManyWithoutQuestionInput
 }
@@ -9746,7 +10872,7 @@ input QuestionUncheckedUpdateWithoutAttachmentsInput {
   weight: FloatFieldUpdateOperationsInput
   instruction: NullableStringFieldUpdateOperationsInput
   questionType: EnumQuestionTypeFieldUpdateOperationsInput
-  formId: StringFieldUpdateOperationsInput
+  formId: NullableStringFieldUpdateOperationsInput
   gradeId: StringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -10025,64 +11151,6 @@ input OrderUpdateWithWhereUniqueWithoutReceiptInput {
 input OrderUpdateManyWithWhereWithoutReceiptInput {
   where: OrderScalarWhereInput!
   data: OrderUncheckedUpdateManyWithoutOrdersInput!
-}
-
-input AttachmentCreateWithoutFormCategoriesInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  user: UserCreateNestedManyWithoutAvatorInput
-  form: FormCreateNestedOneWithoutAttachmentsInput
-  grade: GradeCreateNestedOneWithoutAttachmentsInput
-  response: ResponseCreateNestedOneWithoutAttachmentsInput
-  question: QuestionCreateNestedOneWithoutAttachmentsInput
-  answer: AnswerCreateNestedOneWithoutAttachmentsInput
-  recommendation: RecommendationCreateNestedOneWithoutAttachmentsInput
-  forum: ForumCreateNestedOneWithoutAttachmentsInput
-  forumAnswer: ForumAnswerCreateNestedOneWithoutAttachmentsInput
-  comment: CommentCreateNestedOneWithoutAttachmentsInput
-  helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
-  paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
-  services: ServiceCreateNestedManyWithoutImageInput
-  orders: OrderCreateNestedManyWithoutReceiptInput
-}
-
-input AttachmentUncheckedCreateWithoutFormCategoriesInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  formId: PERMISSION
-  gradeId: PERMISSION
-  responseId: PERMISSION
-  questionId: PERMISSION
-  answerId: PERMISSION
-  recommendationId: PERMISSION
-  forumId: PERMISSION
-  forumAnswerId: PERMISSION
-  commentId: PERMISSION
-  helpStepId: PERMISSION
-  user: UserUncheckedCreateNestedManyWithoutAvatorInput
-  paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
-  services: ServiceUncheckedCreateNestedManyWithoutImageInput
-  orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
 }
 
 input AttachmentCreateOrConnectWithoutFormCategoriesInput {
@@ -10391,64 +11459,6 @@ input ResponseCreateManyFormInputEnvelope {
   skipDuplicates: PERMISSION
 }
 
-input AttachmentCreateWithoutFormInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  user: UserCreateNestedManyWithoutAvatorInput
-  grade: GradeCreateNestedOneWithoutAttachmentsInput
-  response: ResponseCreateNestedOneWithoutAttachmentsInput
-  question: QuestionCreateNestedOneWithoutAttachmentsInput
-  answer: AnswerCreateNestedOneWithoutAttachmentsInput
-  recommendation: RecommendationCreateNestedOneWithoutAttachmentsInput
-  forum: ForumCreateNestedOneWithoutAttachmentsInput
-  forumAnswer: ForumAnswerCreateNestedOneWithoutAttachmentsInput
-  comment: CommentCreateNestedOneWithoutAttachmentsInput
-  formCategories: FormCategoryCreateNestedManyWithoutImageInput
-  helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
-  paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
-  services: ServiceCreateNestedManyWithoutImageInput
-  orders: OrderCreateNestedManyWithoutReceiptInput
-}
-
-input AttachmentUncheckedCreateWithoutFormInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  gradeId: PERMISSION
-  responseId: PERMISSION
-  questionId: PERMISSION
-  answerId: PERMISSION
-  recommendationId: PERMISSION
-  forumId: PERMISSION
-  forumAnswerId: PERMISSION
-  commentId: PERMISSION
-  helpStepId: PERMISSION
-  user: UserUncheckedCreateNestedManyWithoutAvatorInput
-  formCategories: FormCategoryUncheckedCreateNestedManyWithoutImageInput
-  paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
-  services: ServiceUncheckedCreateNestedManyWithoutImageInput
-  orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
-}
-
 input AttachmentCreateOrConnectWithoutFormInput {
   where: AttachmentWhereUniqueInput!
   create: AttachmentUncheckedCreateWithoutFormInput!
@@ -10557,7 +11567,7 @@ input QuestionScalarWhereInput {
   weight: FloatFilter
   instruction: StringNullableFilter
   questionType: EnumQuestionTypeFilter
-  formId: StringFilter
+  formId: StringNullableFilter
   gradeId: StringFilter
   createdAt: DateTimeFilter
   updatedAt: DateTimeFilter
@@ -10587,8 +11597,8 @@ input GradeScalarWhereInput {
   name: StringFilter
   description: StringFilter
   formId: StringFilter
-  minValue: FloatFilter
-  maxValue: FloatFilter
+  minValue: FloatNullableFilter
+  maxValue: FloatNullableFilter
   minInclusive: BoolFilter
   maxInclusive: BoolFilter
   createdAt: DateTimeFilter
@@ -10757,7 +11767,7 @@ input QuestionCreateWithoutGradeInput {
   questionType: PERMISSION
   createdAt: PERMISSION
   updatedAt: PERMISSION
-  form: FormCreateNestedOneWithoutQuestionsInput!
+  form: FormCreateNestedOneWithoutQuestionsInput
   answers: AnswerCreateNestedManyWithoutQuestionInput
   attachments: AttachmentCreateNestedManyWithoutQuestionInput
 }
@@ -10784,64 +11794,6 @@ input QuestionCreateOrConnectWithoutGradeInput {
 input QuestionCreateManyGradeInputEnvelope {
   data: [QuestionCreateManyGradeInput!]!
   skipDuplicates: PERMISSION
-}
-
-input AttachmentCreateWithoutGradeInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  user: UserCreateNestedManyWithoutAvatorInput
-  form: FormCreateNestedOneWithoutAttachmentsInput
-  response: ResponseCreateNestedOneWithoutAttachmentsInput
-  question: QuestionCreateNestedOneWithoutAttachmentsInput
-  answer: AnswerCreateNestedOneWithoutAttachmentsInput
-  recommendation: RecommendationCreateNestedOneWithoutAttachmentsInput
-  forum: ForumCreateNestedOneWithoutAttachmentsInput
-  forumAnswer: ForumAnswerCreateNestedOneWithoutAttachmentsInput
-  comment: CommentCreateNestedOneWithoutAttachmentsInput
-  formCategories: FormCategoryCreateNestedManyWithoutImageInput
-  helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
-  paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
-  services: ServiceCreateNestedManyWithoutImageInput
-  orders: OrderCreateNestedManyWithoutReceiptInput
-}
-
-input AttachmentUncheckedCreateWithoutGradeInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  formId: PERMISSION
-  responseId: PERMISSION
-  questionId: PERMISSION
-  answerId: PERMISSION
-  recommendationId: PERMISSION
-  forumId: PERMISSION
-  forumAnswerId: PERMISSION
-  commentId: PERMISSION
-  helpStepId: PERMISSION
-  user: UserUncheckedCreateNestedManyWithoutAvatorInput
-  formCategories: FormCategoryUncheckedCreateNestedManyWithoutImageInput
-  paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
-  services: ServiceUncheckedCreateNestedManyWithoutImageInput
-  orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
 }
 
 input AttachmentCreateOrConnectWithoutGradeInput {
@@ -11110,64 +12062,6 @@ input GradeCreateOrConnectWithoutResponsesInput {
   create: GradeUncheckedCreateWithoutResponsesInput!
 }
 
-input AttachmentCreateWithoutResponseInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  user: UserCreateNestedManyWithoutAvatorInput
-  form: FormCreateNestedOneWithoutAttachmentsInput
-  grade: GradeCreateNestedOneWithoutAttachmentsInput
-  question: QuestionCreateNestedOneWithoutAttachmentsInput
-  answer: AnswerCreateNestedOneWithoutAttachmentsInput
-  recommendation: RecommendationCreateNestedOneWithoutAttachmentsInput
-  forum: ForumCreateNestedOneWithoutAttachmentsInput
-  forumAnswer: ForumAnswerCreateNestedOneWithoutAttachmentsInput
-  comment: CommentCreateNestedOneWithoutAttachmentsInput
-  formCategories: FormCategoryCreateNestedManyWithoutImageInput
-  helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
-  paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
-  services: ServiceCreateNestedManyWithoutImageInput
-  orders: OrderCreateNestedManyWithoutReceiptInput
-}
-
-input AttachmentUncheckedCreateWithoutResponseInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  formId: PERMISSION
-  gradeId: PERMISSION
-  questionId: PERMISSION
-  answerId: PERMISSION
-  recommendationId: PERMISSION
-  forumId: PERMISSION
-  forumAnswerId: PERMISSION
-  commentId: PERMISSION
-  helpStepId: PERMISSION
-  user: UserUncheckedCreateNestedManyWithoutAvatorInput
-  formCategories: FormCategoryUncheckedCreateNestedManyWithoutImageInput
-  paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
-  services: ServiceUncheckedCreateNestedManyWithoutImageInput
-  orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
-}
-
 input AttachmentCreateOrConnectWithoutResponseInput {
   where: AttachmentWhereUniqueInput!
   create: AttachmentUncheckedCreateWithoutResponseInput!
@@ -11296,8 +12190,8 @@ input GradeUpdateWithoutResponsesInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
-  minValue: FloatFieldUpdateOperationsInput
-  maxValue: FloatFieldUpdateOperationsInput
+  minValue: NullableFloatFieldUpdateOperationsInput
+  maxValue: NullableFloatFieldUpdateOperationsInput
   minInclusive: BoolFieldUpdateOperationsInput
   maxInclusive: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -11313,8 +12207,8 @@ input GradeUncheckedUpdateWithoutResponsesInput {
   name: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
   formId: StringFieldUpdateOperationsInput
-  minValue: FloatFieldUpdateOperationsInput
-  maxValue: FloatFieldUpdateOperationsInput
+  minValue: NullableFloatFieldUpdateOperationsInput
+  maxValue: NullableFloatFieldUpdateOperationsInput
   minInclusive: BoolFieldUpdateOperationsInput
   maxInclusive: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -11440,64 +12334,6 @@ input AnswerCreateManyQuestionInputEnvelope {
   skipDuplicates: PERMISSION
 }
 
-input AttachmentCreateWithoutQuestionInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  user: UserCreateNestedManyWithoutAvatorInput
-  form: FormCreateNestedOneWithoutAttachmentsInput
-  grade: GradeCreateNestedOneWithoutAttachmentsInput
-  response: ResponseCreateNestedOneWithoutAttachmentsInput
-  answer: AnswerCreateNestedOneWithoutAttachmentsInput
-  recommendation: RecommendationCreateNestedOneWithoutAttachmentsInput
-  forum: ForumCreateNestedOneWithoutAttachmentsInput
-  forumAnswer: ForumAnswerCreateNestedOneWithoutAttachmentsInput
-  comment: CommentCreateNestedOneWithoutAttachmentsInput
-  formCategories: FormCategoryCreateNestedManyWithoutImageInput
-  helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
-  paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
-  services: ServiceCreateNestedManyWithoutImageInput
-  orders: OrderCreateNestedManyWithoutReceiptInput
-}
-
-input AttachmentUncheckedCreateWithoutQuestionInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  formId: PERMISSION
-  gradeId: PERMISSION
-  responseId: PERMISSION
-  answerId: PERMISSION
-  recommendationId: PERMISSION
-  forumId: PERMISSION
-  forumAnswerId: PERMISSION
-  commentId: PERMISSION
-  helpStepId: PERMISSION
-  user: UserUncheckedCreateNestedManyWithoutAvatorInput
-  formCategories: FormCategoryUncheckedCreateNestedManyWithoutImageInput
-  paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
-  services: ServiceUncheckedCreateNestedManyWithoutImageInput
-  orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
-}
-
 input AttachmentCreateOrConnectWithoutQuestionInput {
   where: AttachmentWhereUniqueInput!
   create: AttachmentUncheckedCreateWithoutQuestionInput!
@@ -11550,8 +12386,8 @@ input GradeUpdateWithoutQuestionsInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
-  minValue: FloatFieldUpdateOperationsInput
-  maxValue: FloatFieldUpdateOperationsInput
+  minValue: NullableFloatFieldUpdateOperationsInput
+  maxValue: NullableFloatFieldUpdateOperationsInput
   minInclusive: BoolFieldUpdateOperationsInput
   maxInclusive: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -11567,8 +12403,8 @@ input GradeUncheckedUpdateWithoutQuestionsInput {
   name: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
   formId: StringFieldUpdateOperationsInput
-  minValue: FloatFieldUpdateOperationsInput
-  maxValue: FloatFieldUpdateOperationsInput
+  minValue: NullableFloatFieldUpdateOperationsInput
+  maxValue: NullableFloatFieldUpdateOperationsInput
   minInclusive: BoolFieldUpdateOperationsInput
   maxInclusive: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -11646,7 +12482,7 @@ input QuestionCreateWithoutAnswersInput {
   questionType: PERMISSION
   createdAt: PERMISSION
   updatedAt: PERMISSION
-  form: FormCreateNestedOneWithoutQuestionsInput!
+  form: FormCreateNestedOneWithoutQuestionsInput
   grade: GradeCreateNestedOneWithoutQuestionsInput!
   attachments: AttachmentCreateNestedManyWithoutQuestionInput
 }
@@ -11668,64 +12504,6 @@ input QuestionUncheckedCreateWithoutAnswersInput {
 input QuestionCreateOrConnectWithoutAnswersInput {
   where: QuestionWhereUniqueInput!
   create: QuestionUncheckedCreateWithoutAnswersInput!
-}
-
-input AttachmentCreateWithoutAnswerInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  user: UserCreateNestedManyWithoutAvatorInput
-  form: FormCreateNestedOneWithoutAttachmentsInput
-  grade: GradeCreateNestedOneWithoutAttachmentsInput
-  response: ResponseCreateNestedOneWithoutAttachmentsInput
-  question: QuestionCreateNestedOneWithoutAttachmentsInput
-  recommendation: RecommendationCreateNestedOneWithoutAttachmentsInput
-  forum: ForumCreateNestedOneWithoutAttachmentsInput
-  forumAnswer: ForumAnswerCreateNestedOneWithoutAttachmentsInput
-  comment: CommentCreateNestedOneWithoutAttachmentsInput
-  formCategories: FormCategoryCreateNestedManyWithoutImageInput
-  helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
-  paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
-  services: ServiceCreateNestedManyWithoutImageInput
-  orders: OrderCreateNestedManyWithoutReceiptInput
-}
-
-input AttachmentUncheckedCreateWithoutAnswerInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  formId: PERMISSION
-  gradeId: PERMISSION
-  responseId: PERMISSION
-  questionId: PERMISSION
-  recommendationId: PERMISSION
-  forumId: PERMISSION
-  forumAnswerId: PERMISSION
-  commentId: PERMISSION
-  helpStepId: PERMISSION
-  user: UserUncheckedCreateNestedManyWithoutAvatorInput
-  formCategories: FormCategoryUncheckedCreateNestedManyWithoutImageInput
-  paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
-  services: ServiceUncheckedCreateNestedManyWithoutImageInput
-  orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
 }
 
 input AttachmentCreateOrConnectWithoutAnswerInput {
@@ -11779,7 +12557,7 @@ input QuestionUpdateWithoutAnswersInput {
   questionType: EnumQuestionTypeFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  form: FormUpdateOneRequiredWithoutQuestionsInput
+  form: FormUpdateOneWithoutQuestionsInput
   grade: GradeUpdateOneRequiredWithoutQuestionsInput
   attachments: AttachmentUpdateManyWithoutQuestionInput
 }
@@ -11791,7 +12569,7 @@ input QuestionUncheckedUpdateWithoutAnswersInput {
   weight: FloatFieldUpdateOperationsInput
   instruction: NullableStringFieldUpdateOperationsInput
   questionType: EnumQuestionTypeFieldUpdateOperationsInput
-  formId: StringFieldUpdateOperationsInput
+  formId: NullableStringFieldUpdateOperationsInput
   gradeId: StringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -11812,64 +12590,6 @@ input AttachmentUpdateWithWhereUniqueWithoutAnswerInput {
 input AttachmentUpdateManyWithWhereWithoutAnswerInput {
   where: AttachmentScalarWhereInput!
   data: AttachmentUncheckedUpdateManyWithoutAttachmentsInput!
-}
-
-input AttachmentCreateWithoutRecommendationInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  user: UserCreateNestedManyWithoutAvatorInput
-  form: FormCreateNestedOneWithoutAttachmentsInput
-  grade: GradeCreateNestedOneWithoutAttachmentsInput
-  response: ResponseCreateNestedOneWithoutAttachmentsInput
-  question: QuestionCreateNestedOneWithoutAttachmentsInput
-  answer: AnswerCreateNestedOneWithoutAttachmentsInput
-  forum: ForumCreateNestedOneWithoutAttachmentsInput
-  forumAnswer: ForumAnswerCreateNestedOneWithoutAttachmentsInput
-  comment: CommentCreateNestedOneWithoutAttachmentsInput
-  formCategories: FormCategoryCreateNestedManyWithoutImageInput
-  helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
-  paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
-  services: ServiceCreateNestedManyWithoutImageInput
-  orders: OrderCreateNestedManyWithoutReceiptInput
-}
-
-input AttachmentUncheckedCreateWithoutRecommendationInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  formId: PERMISSION
-  gradeId: PERMISSION
-  responseId: PERMISSION
-  questionId: PERMISSION
-  answerId: PERMISSION
-  forumId: PERMISSION
-  forumAnswerId: PERMISSION
-  commentId: PERMISSION
-  helpStepId: PERMISSION
-  user: UserUncheckedCreateNestedManyWithoutAvatorInput
-  formCategories: FormCategoryUncheckedCreateNestedManyWithoutImageInput
-  paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
-  services: ServiceUncheckedCreateNestedManyWithoutImageInput
-  orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
 }
 
 input AttachmentCreateOrConnectWithoutRecommendationInput {
@@ -11944,8 +12664,8 @@ input GradeUpdateWithoutRecommendationsInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
-  minValue: FloatFieldUpdateOperationsInput
-  maxValue: FloatFieldUpdateOperationsInput
+  minValue: NullableFloatFieldUpdateOperationsInput
+  maxValue: NullableFloatFieldUpdateOperationsInput
   minInclusive: BoolFieldUpdateOperationsInput
   maxInclusive: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -11961,8 +12681,8 @@ input GradeUncheckedUpdateWithoutRecommendationsInput {
   name: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
   formId: StringFieldUpdateOperationsInput
-  minValue: FloatFieldUpdateOperationsInput
-  maxValue: FloatFieldUpdateOperationsInput
+  minValue: NullableFloatFieldUpdateOperationsInput
+  maxValue: NullableFloatFieldUpdateOperationsInput
   minInclusive: BoolFieldUpdateOperationsInput
   maxInclusive: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -12089,64 +12809,6 @@ input CommentCreateOrConnectWithoutForumInput {
 input CommentCreateManyForumInputEnvelope {
   data: [CommentCreateManyForumInput!]!
   skipDuplicates: PERMISSION
-}
-
-input AttachmentCreateWithoutForumInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  user: UserCreateNestedManyWithoutAvatorInput
-  form: FormCreateNestedOneWithoutAttachmentsInput
-  grade: GradeCreateNestedOneWithoutAttachmentsInput
-  response: ResponseCreateNestedOneWithoutAttachmentsInput
-  question: QuestionCreateNestedOneWithoutAttachmentsInput
-  answer: AnswerCreateNestedOneWithoutAttachmentsInput
-  recommendation: RecommendationCreateNestedOneWithoutAttachmentsInput
-  forumAnswer: ForumAnswerCreateNestedOneWithoutAttachmentsInput
-  comment: CommentCreateNestedOneWithoutAttachmentsInput
-  formCategories: FormCategoryCreateNestedManyWithoutImageInput
-  helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
-  paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
-  services: ServiceCreateNestedManyWithoutImageInput
-  orders: OrderCreateNestedManyWithoutReceiptInput
-}
-
-input AttachmentUncheckedCreateWithoutForumInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  formId: PERMISSION
-  gradeId: PERMISSION
-  responseId: PERMISSION
-  questionId: PERMISSION
-  answerId: PERMISSION
-  recommendationId: PERMISSION
-  forumAnswerId: PERMISSION
-  commentId: PERMISSION
-  helpStepId: PERMISSION
-  user: UserUncheckedCreateNestedManyWithoutAvatorInput
-  formCategories: FormCategoryUncheckedCreateNestedManyWithoutImageInput
-  paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
-  services: ServiceUncheckedCreateNestedManyWithoutImageInput
-  orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
 }
 
 input AttachmentCreateOrConnectWithoutForumInput {
@@ -12330,64 +12992,6 @@ input ForumUncheckedCreateWithoutForumAnswersInput {
 input ForumCreateOrConnectWithoutForumAnswersInput {
   where: ForumWhereUniqueInput!
   create: ForumUncheckedCreateWithoutForumAnswersInput!
-}
-
-input AttachmentCreateWithoutForumAnswerInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  user: UserCreateNestedManyWithoutAvatorInput
-  form: FormCreateNestedOneWithoutAttachmentsInput
-  grade: GradeCreateNestedOneWithoutAttachmentsInput
-  response: ResponseCreateNestedOneWithoutAttachmentsInput
-  question: QuestionCreateNestedOneWithoutAttachmentsInput
-  answer: AnswerCreateNestedOneWithoutAttachmentsInput
-  recommendation: RecommendationCreateNestedOneWithoutAttachmentsInput
-  forum: ForumCreateNestedOneWithoutAttachmentsInput
-  comment: CommentCreateNestedOneWithoutAttachmentsInput
-  formCategories: FormCategoryCreateNestedManyWithoutImageInput
-  helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
-  paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
-  services: ServiceCreateNestedManyWithoutImageInput
-  orders: OrderCreateNestedManyWithoutReceiptInput
-}
-
-input AttachmentUncheckedCreateWithoutForumAnswerInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  formId: PERMISSION
-  gradeId: PERMISSION
-  responseId: PERMISSION
-  questionId: PERMISSION
-  answerId: PERMISSION
-  recommendationId: PERMISSION
-  forumId: PERMISSION
-  commentId: PERMISSION
-  helpStepId: PERMISSION
-  user: UserUncheckedCreateNestedManyWithoutAvatorInput
-  formCategories: FormCategoryUncheckedCreateNestedManyWithoutImageInput
-  paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
-  services: ServiceUncheckedCreateNestedManyWithoutImageInput
-  orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
 }
 
 input AttachmentCreateOrConnectWithoutForumAnswerInput {
@@ -12593,64 +13197,6 @@ input UserUncheckedCreateWithoutCommentsInput {
 input UserCreateOrConnectWithoutCommentsInput {
   where: UserWhereUniqueInput!
   create: UserUncheckedCreateWithoutCommentsInput!
-}
-
-input AttachmentCreateWithoutCommentInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  user: UserCreateNestedManyWithoutAvatorInput
-  form: FormCreateNestedOneWithoutAttachmentsInput
-  grade: GradeCreateNestedOneWithoutAttachmentsInput
-  response: ResponseCreateNestedOneWithoutAttachmentsInput
-  question: QuestionCreateNestedOneWithoutAttachmentsInput
-  answer: AnswerCreateNestedOneWithoutAttachmentsInput
-  recommendation: RecommendationCreateNestedOneWithoutAttachmentsInput
-  forum: ForumCreateNestedOneWithoutAttachmentsInput
-  forumAnswer: ForumAnswerCreateNestedOneWithoutAttachmentsInput
-  formCategories: FormCategoryCreateNestedManyWithoutImageInput
-  helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
-  paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
-  services: ServiceCreateNestedManyWithoutImageInput
-  orders: OrderCreateNestedManyWithoutReceiptInput
-}
-
-input AttachmentUncheckedCreateWithoutCommentInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  formId: PERMISSION
-  gradeId: PERMISSION
-  responseId: PERMISSION
-  questionId: PERMISSION
-  answerId: PERMISSION
-  recommendationId: PERMISSION
-  forumId: PERMISSION
-  forumAnswerId: PERMISSION
-  helpStepId: PERMISSION
-  user: UserUncheckedCreateNestedManyWithoutAvatorInput
-  formCategories: FormCategoryUncheckedCreateNestedManyWithoutImageInput
-  paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
-  services: ServiceUncheckedCreateNestedManyWithoutImageInput
-  orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
 }
 
 input AttachmentCreateOrConnectWithoutCommentInput {
@@ -13028,64 +13574,6 @@ input HelpStepScalarWhereInput {
   updatedAt: DateTimeFilter
 }
 
-input AttachmentCreateWithoutHelpStepInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  user: UserCreateNestedManyWithoutAvatorInput
-  form: FormCreateNestedOneWithoutAttachmentsInput
-  grade: GradeCreateNestedOneWithoutAttachmentsInput
-  response: ResponseCreateNestedOneWithoutAttachmentsInput
-  question: QuestionCreateNestedOneWithoutAttachmentsInput
-  answer: AnswerCreateNestedOneWithoutAttachmentsInput
-  recommendation: RecommendationCreateNestedOneWithoutAttachmentsInput
-  forum: ForumCreateNestedOneWithoutAttachmentsInput
-  forumAnswer: ForumAnswerCreateNestedOneWithoutAttachmentsInput
-  comment: CommentCreateNestedOneWithoutAttachmentsInput
-  formCategories: FormCategoryCreateNestedManyWithoutImageInput
-  paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
-  services: ServiceCreateNestedManyWithoutImageInput
-  orders: OrderCreateNestedManyWithoutReceiptInput
-}
-
-input AttachmentUncheckedCreateWithoutHelpStepInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  formId: PERMISSION
-  gradeId: PERMISSION
-  responseId: PERMISSION
-  questionId: PERMISSION
-  answerId: PERMISSION
-  recommendationId: PERMISSION
-  forumId: PERMISSION
-  forumAnswerId: PERMISSION
-  commentId: PERMISSION
-  user: UserUncheckedCreateNestedManyWithoutAvatorInput
-  formCategories: FormCategoryUncheckedCreateNestedManyWithoutImageInput
-  paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
-  services: ServiceUncheckedCreateNestedManyWithoutImageInput
-  orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
-}
-
 input AttachmentCreateOrConnectWithoutHelpStepInput {
   where: AttachmentWhereUniqueInput!
   create: AttachmentUncheckedCreateWithoutHelpStepInput!
@@ -13156,64 +13644,6 @@ input HelpUncheckedUpdateWithoutStepsInput {
   state: EnumStateFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-}
-
-input AttachmentCreateWithoutServicesInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  user: UserCreateNestedManyWithoutAvatorInput
-  form: FormCreateNestedOneWithoutAttachmentsInput
-  grade: GradeCreateNestedOneWithoutAttachmentsInput
-  response: ResponseCreateNestedOneWithoutAttachmentsInput
-  question: QuestionCreateNestedOneWithoutAttachmentsInput
-  answer: AnswerCreateNestedOneWithoutAttachmentsInput
-  recommendation: RecommendationCreateNestedOneWithoutAttachmentsInput
-  forum: ForumCreateNestedOneWithoutAttachmentsInput
-  forumAnswer: ForumAnswerCreateNestedOneWithoutAttachmentsInput
-  comment: CommentCreateNestedOneWithoutAttachmentsInput
-  formCategories: FormCategoryCreateNestedManyWithoutImageInput
-  helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
-  paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
-  orders: OrderCreateNestedManyWithoutReceiptInput
-}
-
-input AttachmentUncheckedCreateWithoutServicesInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  formId: PERMISSION
-  gradeId: PERMISSION
-  responseId: PERMISSION
-  questionId: PERMISSION
-  answerId: PERMISSION
-  recommendationId: PERMISSION
-  forumId: PERMISSION
-  forumAnswerId: PERMISSION
-  commentId: PERMISSION
-  helpStepId: PERMISSION
-  user: UserUncheckedCreateNestedManyWithoutAvatorInput
-  formCategories: FormCategoryUncheckedCreateNestedManyWithoutImageInput
-  paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
-  orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
 }
 
 input AttachmentCreateOrConnectWithoutServicesInput {
@@ -13379,64 +13809,6 @@ input UserUncheckedCreateWithoutOrdersInput {
 input UserCreateOrConnectWithoutOrdersInput {
   where: UserWhereUniqueInput!
   create: UserUncheckedCreateWithoutOrdersInput!
-}
-
-input AttachmentCreateWithoutOrdersInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  user: UserCreateNestedManyWithoutAvatorInput
-  form: FormCreateNestedOneWithoutAttachmentsInput
-  grade: GradeCreateNestedOneWithoutAttachmentsInput
-  response: ResponseCreateNestedOneWithoutAttachmentsInput
-  question: QuestionCreateNestedOneWithoutAttachmentsInput
-  answer: AnswerCreateNestedOneWithoutAttachmentsInput
-  recommendation: RecommendationCreateNestedOneWithoutAttachmentsInput
-  forum: ForumCreateNestedOneWithoutAttachmentsInput
-  forumAnswer: ForumAnswerCreateNestedOneWithoutAttachmentsInput
-  comment: CommentCreateNestedOneWithoutAttachmentsInput
-  formCategories: FormCategoryCreateNestedManyWithoutImageInput
-  helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
-  paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
-  services: ServiceCreateNestedManyWithoutImageInput
-}
-
-input AttachmentUncheckedCreateWithoutOrdersInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  formId: PERMISSION
-  gradeId: PERMISSION
-  responseId: PERMISSION
-  questionId: PERMISSION
-  answerId: PERMISSION
-  recommendationId: PERMISSION
-  forumId: PERMISSION
-  forumAnswerId: PERMISSION
-  commentId: PERMISSION
-  helpStepId: PERMISSION
-  user: UserUncheckedCreateNestedManyWithoutAvatorInput
-  formCategories: FormCategoryUncheckedCreateNestedManyWithoutImageInput
-  paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
-  services: ServiceUncheckedCreateNestedManyWithoutImageInput
 }
 
 input AttachmentCreateOrConnectWithoutOrdersInput {
@@ -13662,64 +14034,6 @@ input TransactionUpdateWithWhereUniqueWithoutOrderInput {
 input TransactionUpdateManyWithWhereWithoutOrderInput {
   where: TransactionScalarWhereInput!
   data: TransactionUncheckedUpdateManyWithoutTransactionsInput!
-}
-
-input AttachmentCreateWithoutPaymentMethodsInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  user: UserCreateNestedManyWithoutAvatorInput
-  form: FormCreateNestedOneWithoutAttachmentsInput
-  grade: GradeCreateNestedOneWithoutAttachmentsInput
-  response: ResponseCreateNestedOneWithoutAttachmentsInput
-  question: QuestionCreateNestedOneWithoutAttachmentsInput
-  answer: AnswerCreateNestedOneWithoutAttachmentsInput
-  recommendation: RecommendationCreateNestedOneWithoutAttachmentsInput
-  forum: ForumCreateNestedOneWithoutAttachmentsInput
-  forumAnswer: ForumAnswerCreateNestedOneWithoutAttachmentsInput
-  comment: CommentCreateNestedOneWithoutAttachmentsInput
-  formCategories: FormCategoryCreateNestedManyWithoutImageInput
-  helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
-  services: ServiceCreateNestedManyWithoutImageInput
-  orders: OrderCreateNestedManyWithoutReceiptInput
-}
-
-input AttachmentUncheckedCreateWithoutPaymentMethodsInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  formId: PERMISSION
-  gradeId: PERMISSION
-  responseId: PERMISSION
-  questionId: PERMISSION
-  answerId: PERMISSION
-  recommendationId: PERMISSION
-  forumId: PERMISSION
-  forumAnswerId: PERMISSION
-  commentId: PERMISSION
-  helpStepId: PERMISSION
-  user: UserUncheckedCreateNestedManyWithoutAvatorInput
-  formCategories: FormCategoryUncheckedCreateNestedManyWithoutImageInput
-  services: ServiceUncheckedCreateNestedManyWithoutImageInput
-  orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
 }
 
 input AttachmentCreateOrConnectWithoutPaymentMethodsInput {
@@ -15100,30 +15414,6 @@ input ResponseCreateManyFormInput {
   updatedAt: PERMISSION
 }
 
-input AttachmentCreateManyFormInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  gradeId: PERMISSION
-  responseId: PERMISSION
-  questionId: PERMISSION
-  answerId: PERMISSION
-  recommendationId: PERMISSION
-  forumId: PERMISSION
-  forumAnswerId: PERMISSION
-  commentId: PERMISSION
-  helpStepId: PERMISSION
-}
-
 input QuestionUpdateWithoutFormInput {
   id: StringFieldUpdateOperationsInput
   questionNumber: IntFieldUpdateOperationsInput
@@ -15168,8 +15458,8 @@ input GradeUpdateWithoutFormInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
-  minValue: FloatFieldUpdateOperationsInput
-  maxValue: FloatFieldUpdateOperationsInput
+  minValue: NullableFloatFieldUpdateOperationsInput
+  maxValue: NullableFloatFieldUpdateOperationsInput
   minInclusive: BoolFieldUpdateOperationsInput
   maxInclusive: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -15184,8 +15474,8 @@ input GradeUncheckedUpdateWithoutFormInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
-  minValue: FloatFieldUpdateOperationsInput
-  maxValue: FloatFieldUpdateOperationsInput
+  minValue: NullableFloatFieldUpdateOperationsInput
+  maxValue: NullableFloatFieldUpdateOperationsInput
   minInclusive: BoolFieldUpdateOperationsInput
   maxInclusive: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -15200,8 +15490,8 @@ input GradeUncheckedUpdateManyWithoutGradesInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
-  minValue: FloatFieldUpdateOperationsInput
-  maxValue: FloatFieldUpdateOperationsInput
+  minValue: NullableFloatFieldUpdateOperationsInput
+  maxValue: NullableFloatFieldUpdateOperationsInput
   minInclusive: BoolFieldUpdateOperationsInput
   maxInclusive: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -15341,30 +15631,6 @@ input QuestionCreateManyGradeInput {
   updatedAt: PERMISSION
 }
 
-input AttachmentCreateManyGradeInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  formId: PERMISSION
-  responseId: PERMISSION
-  questionId: PERMISSION
-  answerId: PERMISSION
-  recommendationId: PERMISSION
-  forumId: PERMISSION
-  forumAnswerId: PERMISSION
-  commentId: PERMISSION
-  helpStepId: PERMISSION
-}
-
 input ResponseUpdateWithoutGradeInput {
   id: StringFieldUpdateOperationsInput
   state: EnumStateFieldUpdateOperationsInput
@@ -15422,7 +15688,7 @@ input QuestionUpdateWithoutGradeInput {
   questionType: EnumQuestionTypeFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  form: FormUpdateOneRequiredWithoutQuestionsInput
+  form: FormUpdateOneWithoutQuestionsInput
   answers: AnswerUpdateManyWithoutQuestionInput
   attachments: AttachmentUpdateManyWithoutQuestionInput
 }
@@ -15434,7 +15700,7 @@ input QuestionUncheckedUpdateWithoutGradeInput {
   weight: FloatFieldUpdateOperationsInput
   instruction: NullableStringFieldUpdateOperationsInput
   questionType: EnumQuestionTypeFieldUpdateOperationsInput
-  formId: StringFieldUpdateOperationsInput
+  formId: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   answers: AnswerUncheckedUpdateManyWithoutQuestionInput
@@ -15506,30 +15772,6 @@ input AnswerCreateManyResponseInput {
   textValue: PERMISSION
   createdAt: PERMISSION
   updatedAt: PERMISSION
-}
-
-input AttachmentCreateManyResponseInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  formId: PERMISSION
-  gradeId: PERMISSION
-  questionId: PERMISSION
-  answerId: PERMISSION
-  recommendationId: PERMISSION
-  forumId: PERMISSION
-  forumAnswerId: PERMISSION
-  commentId: PERMISSION
-  helpStepId: PERMISSION
 }
 
 input AnswerUpdateWithoutResponseInput {
@@ -15628,30 +15870,6 @@ input AnswerCreateManyQuestionInput {
   updatedAt: PERMISSION
 }
 
-input AttachmentCreateManyQuestionInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  formId: PERMISSION
-  gradeId: PERMISSION
-  responseId: PERMISSION
-  answerId: PERMISSION
-  recommendationId: PERMISSION
-  forumId: PERMISSION
-  forumAnswerId: PERMISSION
-  commentId: PERMISSION
-  helpStepId: PERMISSION
-}
-
 input AnswerUpdateWithoutQuestionInput {
   id: StringFieldUpdateOperationsInput
   booleanValue: NullableBoolFieldUpdateOperationsInput
@@ -15730,30 +15948,6 @@ input AttachmentUncheckedUpdateWithoutQuestionInput {
   orders: OrderUncheckedUpdateManyWithoutReceiptInput
 }
 
-input AttachmentCreateManyAnswerInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  formId: PERMISSION
-  gradeId: PERMISSION
-  responseId: PERMISSION
-  questionId: PERMISSION
-  recommendationId: PERMISSION
-  forumId: PERMISSION
-  forumAnswerId: PERMISSION
-  commentId: PERMISSION
-  helpStepId: PERMISSION
-}
-
 input AttachmentUpdateWithoutAnswerInput {
   id: StringFieldUpdateOperationsInput
   path: StringFieldUpdateOperationsInput
@@ -15810,30 +16004,6 @@ input AttachmentUncheckedUpdateWithoutAnswerInput {
   paymentMethods: PaymentMethodUncheckedUpdateManyWithoutLogoInput
   services: ServiceUncheckedUpdateManyWithoutImageInput
   orders: OrderUncheckedUpdateManyWithoutReceiptInput
-}
-
-input AttachmentCreateManyRecommendationInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  formId: PERMISSION
-  gradeId: PERMISSION
-  responseId: PERMISSION
-  questionId: PERMISSION
-  answerId: PERMISSION
-  forumId: PERMISSION
-  forumAnswerId: PERMISSION
-  commentId: PERMISSION
-  helpStepId: PERMISSION
 }
 
 input AttachmentUpdateWithoutRecommendationInput {
@@ -15914,30 +16084,6 @@ input CommentCreateManyForumInput {
   updatedAt: PERMISSION
   forumAnswerId: PERMISSION
   commentId: PERMISSION
-}
-
-input AttachmentCreateManyForumInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  formId: PERMISSION
-  gradeId: PERMISSION
-  responseId: PERMISSION
-  questionId: PERMISSION
-  answerId: PERMISSION
-  recommendationId: PERMISSION
-  forumAnswerId: PERMISSION
-  commentId: PERMISSION
-  helpStepId: PERMISSION
 }
 
 input ForumAnswerUpdateWithoutForumInput {
@@ -16050,30 +16196,6 @@ input AttachmentUncheckedUpdateWithoutForumInput {
   orders: OrderUncheckedUpdateManyWithoutReceiptInput
 }
 
-input AttachmentCreateManyForumAnswerInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  formId: PERMISSION
-  gradeId: PERMISSION
-  responseId: PERMISSION
-  questionId: PERMISSION
-  answerId: PERMISSION
-  recommendationId: PERMISSION
-  forumId: PERMISSION
-  commentId: PERMISSION
-  helpStepId: PERMISSION
-}
-
 input CommentCreateManyForumAnswerInput {
   id: PERMISSION
   authorId: PERMISSION
@@ -16170,30 +16292,6 @@ input CommentUncheckedUpdateWithoutForumAnswerInput {
   commentId: NullableStringFieldUpdateOperationsInput
   attachments: AttachmentUncheckedUpdateManyWithoutCommentInput
   comments: CommentUncheckedUpdateManyWithoutCommentInput
-}
-
-input AttachmentCreateManyCommentInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  formId: PERMISSION
-  gradeId: PERMISSION
-  responseId: PERMISSION
-  questionId: PERMISSION
-  answerId: PERMISSION
-  recommendationId: PERMISSION
-  forumId: PERMISSION
-  forumAnswerId: PERMISSION
-  helpStepId: PERMISSION
 }
 
 input CommentCreateManyCommentInput {
@@ -16334,30 +16432,6 @@ input HelpStepUncheckedUpdateManyWithoutStepsInput {
   state: EnumStateFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-}
-
-input AttachmentCreateManyHelpStepInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  formId: PERMISSION
-  gradeId: PERMISSION
-  responseId: PERMISSION
-  questionId: PERMISSION
-  answerId: PERMISSION
-  recommendationId: PERMISSION
-  forumId: PERMISSION
-  forumAnswerId: PERMISSION
-  commentId: PERMISSION
 }
 
 input AttachmentUpdateWithoutHelpStepInput {

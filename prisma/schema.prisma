@@ -119,8 +119,8 @@ model Grade {
   responses       Response[]
   recommendations Recommendation[]
   questions       Question[]
-  minValue        Float
-  maxValue        Float
+  minValue        Float?
+  maxValue        Float?
   minInclusive    Boolean          @default(false)
   maxInclusive    Boolean          @default(false)
   attachments     Attachment[]
@@ -150,8 +150,8 @@ model Question {
   weight         Float        @default(0.0)
   instruction    String?
   questionType   QuestionType @default(BOOLEAN)
-  form           Form         @relation(fields: [formId], references: [id])
-  formId         String
+  form           Form?         @relation(fields: [formId], references: [id])
+  formId         String?
   grade          Grade        @relation(fields: [gradeId], references: [id])
   gradeId        String
   answers        Answer[]

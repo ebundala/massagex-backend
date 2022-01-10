@@ -142,7 +142,7 @@ const RequestLogger: GraphQLRequestListener<TenantContext> = {
            JSONObject:JSONObjectResolver,
            ...fieldResolverExplorer.exploreResolvers()           
          },
-          //  plugins: [   
+          //  plugins: [/   
           //   {
           //     requestDidStart:(
           //       ctx: GraphQLRequestContext<TenantContext>,
@@ -155,17 +155,19 @@ const RequestLogger: GraphQLRequestListener<TenantContext> = {
           // resolverValidationOptions:{
           //   requireResolversForArgs:true
           // },
-          // directiveResolvers:{
-          //   thumbnail:{
+          //  directiveResolvers:{
+          //   thumbnail: {
           //     __resolveType: (args) => {
-          //       debugger
+          //                       debugger
           //     },
           //     resolve: (args) => {
+          //       console.log(args)
           //       debugger
           //     },
           //   }
+          
 
-          // },
+          //  },
           
           context: async (data): Promise<TenantContext> => {
             debugger
@@ -175,7 +177,7 @@ const RequestLogger: GraphQLRequestListener<TenantContext> = {
               logger.debug(await redisCache.get(`last-seen-${auth.uid}`),"Presence");
               await redisCache.set(`last-seen-${auth.uid}`,(new Date()).toISOString(),"EX",60*60*24*7);
              }
-            //TODO: remove this after test/dev
+            //TODO: remove this after test/dev            
             enforcer.enableEnforce(false);
             const ctx: TenantContext = {
               tenantId: auth?.uid,

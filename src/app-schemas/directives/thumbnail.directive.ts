@@ -22,8 +22,11 @@ export const ThumbnailDirective =(
     //   return result;
     // };
     return next().then((url) => {
+      debugger
+      const size=args['size'];
+      console.log(url,size)
       if (typeof(url) === 'string') {
-        const size=args['size'];
+        
         return `${url}.thumbnail-${size}.webp`;
       }
       return url;

@@ -9,45 +9,188 @@ enum ImageSize {
     small
     medium
     large
-    biggest
+    largest
 }
 
-# extend input AttachmentCreateInput{
-#     path: String! @file(path:"../../../../public/uploads")
-# }
-# extend input AttachmentUncheckedCreateInput{
-#     path: String! @file(path:"../../../../public/uploads")
-# }
-
-# extend input AttachmentCreateManyInput{
-#     path: String! @file(path:"../../../../public/uploads")
-# }
+extend input AttachmentCreateInput{
+    path: String! @file(path:"../../../../public/uploads")
+}
 
 
-# extend input AttachmentCreateWithoutUsersInput{
-#     path: String! @file(path:"../../../../public/uploads")
-# }
-# extend input AttachmentUncheckedCreateWithoutUsersInput{
-#     path: String! @file(path:"..././../../public/uploads")
-# }
-# extend input AttachmentCreateWithoutOrganizationsInput{
-#     path: String! @file(path:"../../../../public/uploads")
-# }
-# extend input AttachmentUncheckedCreateWithoutOrganizationsInput {
-#     path: String! @file(path:"../../../../public/uploads")
-# }
-# extend input AttachmentCreateWithoutServicesInput{
-#     path: String! @file(path:"../../../../public/uploads")
-# }
-# extend input AttachmentUncheckedCreateWithoutServicesInput{
-#     path: String! @file(path:"../../../../public/uploads")
-# }
-# extend input AttachmentCreateWithoutOrdersInput{
-#     path: String! @file(path:"../../../../public/uploads")
-# }
-# extend input AttachmentUncheckedCreateWithoutOrdersInput{
-#     path: String! @file(path:"../../../../public/uploads")
-# }
+extend input AttachmentCreateManyInput{
+    path: String! @file(path:"../../../../public/uploads")
+}
+
+
+# create without inputs
+extend input AttachmentCreateWithoutUserInput{
+    path: String! @file(path:"../../../../public/uploads")
+}
+
+extend input AttachmentCreateWithoutFormCategoriesInput{
+    path: String! @file(path:"../../../../public/uploads")
+}
+
+extend input AttachmentCreateWithoutFormInput{
+    path: String! @file(path:"../../../../public/uploads")
+}
+
+extend input AttachmentCreateWithoutGradeInput{
+    path: String! @file(path:"../../../../public/uploads")
+}
+
+extend input AttachmentCreateWithoutResponseInput{
+    path: String! @file(path:"../../../../public/uploads")
+}
+
+extend input AttachmentCreateWithoutQuestionInput{
+    path: String! @file(path:"../../../../public/uploads")
+}
+
+extend input AttachmentCreateWithoutAnswerInput{
+    path: String! @file(path:"../../../../public/uploads")
+}
+
+extend input AttachmentCreateWithoutRecommendationInput{
+    path: String! @file(path:"../../../../public/uploads")
+}
+
+extend input AttachmentCreateWithoutForumInput{
+    path: String! @file(path:"../../../../public/uploads")
+}
+
+extend input AttachmentCreateWithoutForumAnswerInput{
+    path: String! @file(path:"../../../../public/uploads")
+}
+
+extend input AttachmentCreateWithoutCommentInput{
+    path: String! @file(path:"../../../../public/uploads")
+}
+
+extend input AttachmentCreateWithoutHelpStepInput{
+    path: String! @file(path:"../../../../public/uploads")
+}
+
+extend input AttachmentCreateWithoutServicesInput{
+    path: String! @file(path:"../../../../public/uploads")
+}
+
+
+
+extend input AttachmentCreateWithoutOrdersInput{
+    path: String! @file(path:"..././../../public/uploads")
+}
+
+extend input AttachmentCreateWithoutPaymentMethodsInput{
+    path: String! @file(path:"../../../../public/uploads")
+}
+
+# create many inputs
+extend input AttachmentCreateManyFormInput{
+    path: String! @file(path:"../../../../public/uploads")
+}
+
+extend input AttachmentCreateManyGradeInput{
+    path: String! @file(path:"../../../../public/uploads")
+}
+
+extend input AttachmentCreateManyResponseInput{
+    path: String! @file(path:"../../../../public/uploads")
+}
+
+extend input AttachmentCreateManyQuestionInput{
+    path: String! @file(path:"../../../../public/uploads")
+}
+
+extend input AttachmentCreateManyAnswerInput{
+    path: String! @file(path:"../../../../public/uploads")
+}
+
+extend input AttachmentCreateManyRecommendationInput{
+    path: String! @file(path:"../../../../public/uploads")
+}
+
+extend input AttachmentCreateManyForumInput{
+    path: String! @file(path:"../../../../public/uploads")
+}
+
+extend input AttachmentCreateManyForumAnswerInput{
+    path: String! @file(path:"../../../../public/uploads")
+}
+
+extend input AttachmentCreateManyCommentInput{
+    path: String! @file(path:"../../../../public/uploads")
+}
+
+extend input AttachmentCreateManyHelpStepInput{
+    path: String! @file(path:"../../../../public/uploads")
+}
+
+
+
+# unchecked inputs
+extend input AttachmentUncheckedCreateInput{
+    path: String! @file(path:"../../../../public/uploads")
+}
+
+extend input AttachmentUncheckedCreateWithoutUserInput{
+    path: String! @file(path:"../../../../public/uploads")
+}
+extend input AttachmentUncheckedCreateWithoutFormCategoriesInput{
+    path: String! @file(path:"../../../../public/uploads")
+}
+
+
+extend input AttachmentUncheckedCreateWithoutFormInput{
+    path: String! @file(path:"../../../../public/uploads")
+}
+
+extend input AttachmentUncheckedCreateWithoutGradeInput {
+    path: String! @file(path:"../../../../public/uploads")
+}
+extend input AttachmentUncheckedCreateWithoutResponseInput{
+    path: String! @file(path:"../../../../public/uploads")
+}
+
+extend input AttachmentUncheckedCreateWithoutQuestionInput{
+    path: String! @file(path:"../../../../public/uploads")
+}
+extend input AttachmentUncheckedCreateWithoutAnswerInput{
+    path: String! @file(path:"../../../../public/uploads")
+}
+extend input AttachmentUncheckedCreateWithoutRecommendationInput{
+    path: String! @file(path:"../../../../public/uploads")
+}
+
+extend input AttachmentUncheckedCreateWithoutForumInput{
+    path: String! @file(path:"../../../../public/uploads")
+}
+
+
+extend input AttachmentUncheckedCreateWithoutForumAnswerInput{
+    path: String! @file(path:"../../../../public/uploads")
+}
+extend input AttachmentUncheckedCreateWithoutCommentInput{
+    path: String! @file(path:"../../../../public/uploads")
+}
+
+extend input AttachmentUncheckedCreateWithoutHelpStepInput{
+    path: String! @file(path:"../../../../public/uploads")
+}
+
+extend input AttachmentUncheckedCreateWithoutServicesInput{
+    path: String! @file(path:"../../../../public/uploads")
+}
+
+extend input AttachmentUncheckedCreateWithoutOrdersInput{
+    path: String! @file(path:"../../../../public/uploads")
+}
+extend input AttachmentUncheckedCreateWithoutPaymentMethodsInput{
+    path: String! @file(path:"../../../../public/uploads")
+}
+
+
+
 
 
 

@@ -659,8 +659,8 @@ input GradeWhereInput {
   responses: ResponseListRelationFilter
   recommendations: RecommendationListRelationFilter
   questions: QuestionListRelationFilter
-  minValue: FloatFilter
-  maxValue: FloatFilter
+  minValue: FloatNullableFilter
+  maxValue: FloatNullableFilter
   minInclusive: BoolFilter
   maxInclusive: BoolFilter
   attachments: AttachmentListRelationFilter
@@ -693,8 +693,8 @@ input GradeScalarWhereWithAggregatesInput {
   name: StringWithAggregatesFilter
   description: StringWithAggregatesFilter
   formId: StringWithAggregatesFilter
-  minValue: FloatWithAggregatesFilter
-  maxValue: FloatWithAggregatesFilter
+  minValue: FloatNullableWithAggregatesFilter
+  maxValue: FloatNullableWithAggregatesFilter
   minInclusive: BoolWithAggregatesFilter
   maxInclusive: BoolWithAggregatesFilter
   createdAt: DateTimeWithAggregatesFilter
@@ -757,7 +757,7 @@ input QuestionWhereInput {
   instruction: StringNullableFilter
   questionType: EnumQuestionTypeFilter
   form: FormWhereInput
-  formId: StringFilter
+  formId: StringNullableFilter
   grade: GradeWhereInput
   gradeId: StringFilter
   answers: AnswerListRelationFilter
@@ -793,7 +793,7 @@ input QuestionScalarWhereWithAggregatesInput {
   weight: FloatWithAggregatesFilter
   instruction: StringNullableWithAggregatesFilter
   questionType: EnumQuestionTypeWithAggregatesFilter
-  formId: StringWithAggregatesFilter
+  formId: StringNullableWithAggregatesFilter
   gradeId: StringWithAggregatesFilter
   createdAt: DateTimeWithAggregatesFilter
   updatedAt: DateTimeWithAggregatesFilter
@@ -2082,8 +2082,8 @@ input GradeCreateInput {
   id: String
   name: String!
   description: String!
-  minValue: Float!
-  maxValue: Float!
+  minValue: Float
+  maxValue: Float
   minInclusive: Boolean
   maxInclusive: Boolean
   createdAt: DateTime
@@ -2100,8 +2100,8 @@ input GradeUncheckedCreateInput {
   name: String!
   description: String!
   formId: String!
-  minValue: Float!
-  maxValue: Float!
+  minValue: Float
+  maxValue: Float
   minInclusive: Boolean
   maxInclusive: Boolean
   createdAt: DateTime
@@ -2116,8 +2116,8 @@ input GradeUpdateInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
-  minValue: FloatFieldUpdateOperationsInput
-  maxValue: FloatFieldUpdateOperationsInput
+  minValue: NullableFloatFieldUpdateOperationsInput
+  maxValue: NullableFloatFieldUpdateOperationsInput
   minInclusive: BoolFieldUpdateOperationsInput
   maxInclusive: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -2134,8 +2134,8 @@ input GradeUncheckedUpdateInput {
   name: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
   formId: StringFieldUpdateOperationsInput
-  minValue: FloatFieldUpdateOperationsInput
-  maxValue: FloatFieldUpdateOperationsInput
+  minValue: NullableFloatFieldUpdateOperationsInput
+  maxValue: NullableFloatFieldUpdateOperationsInput
   minInclusive: BoolFieldUpdateOperationsInput
   maxInclusive: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -2151,8 +2151,8 @@ input GradeCreateManyInput {
   name: String!
   description: String!
   formId: String!
-  minValue: Float!
-  maxValue: Float!
+  minValue: Float
+  maxValue: Float
   minInclusive: Boolean
   maxInclusive: Boolean
   createdAt: DateTime
@@ -2163,8 +2163,8 @@ input GradeUpdateManyMutationInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
-  minValue: FloatFieldUpdateOperationsInput
-  maxValue: FloatFieldUpdateOperationsInput
+  minValue: NullableFloatFieldUpdateOperationsInput
+  maxValue: NullableFloatFieldUpdateOperationsInput
   minInclusive: BoolFieldUpdateOperationsInput
   maxInclusive: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -2176,8 +2176,8 @@ input GradeUncheckedUpdateManyInput {
   name: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
   formId: StringFieldUpdateOperationsInput
-  minValue: FloatFieldUpdateOperationsInput
-  maxValue: FloatFieldUpdateOperationsInput
+  minValue: NullableFloatFieldUpdateOperationsInput
+  maxValue: NullableFloatFieldUpdateOperationsInput
   minInclusive: BoolFieldUpdateOperationsInput
   maxInclusive: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -2268,7 +2268,7 @@ input QuestionCreateInput {
   questionType: QuestionType
   createdAt: DateTime
   updatedAt: DateTime
-  form: FormCreateNestedOneWithoutQuestionsInput!
+  form: FormCreateNestedOneWithoutQuestionsInput
   grade: GradeCreateNestedOneWithoutQuestionsInput!
   answers: AnswerCreateNestedManyWithoutQuestionInput
   attachments: AttachmentCreateNestedManyWithoutQuestionInput
@@ -2281,7 +2281,7 @@ input QuestionUncheckedCreateInput {
   weight: Float
   instruction: String
   questionType: QuestionType
-  formId: String!
+  formId: String
   gradeId: String!
   createdAt: DateTime
   updatedAt: DateTime
@@ -2298,7 +2298,7 @@ input QuestionUpdateInput {
   questionType: EnumQuestionTypeFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  form: FormUpdateOneRequiredWithoutQuestionsInput
+  form: FormUpdateOneWithoutQuestionsInput
   grade: GradeUpdateOneRequiredWithoutQuestionsInput
   answers: AnswerUpdateManyWithoutQuestionInput
   attachments: AttachmentUpdateManyWithoutQuestionInput
@@ -2311,7 +2311,7 @@ input QuestionUncheckedUpdateInput {
   weight: FloatFieldUpdateOperationsInput
   instruction: NullableStringFieldUpdateOperationsInput
   questionType: EnumQuestionTypeFieldUpdateOperationsInput
-  formId: StringFieldUpdateOperationsInput
+  formId: NullableStringFieldUpdateOperationsInput
   gradeId: StringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -2326,7 +2326,7 @@ input QuestionCreateManyInput {
   weight: Float
   instruction: String
   questionType: QuestionType
-  formId: String!
+  formId: String
   gradeId: String!
   createdAt: DateTime
   updatedAt: DateTime
@@ -2350,7 +2350,7 @@ input QuestionUncheckedUpdateManyInput {
   weight: FloatFieldUpdateOperationsInput
   instruction: NullableStringFieldUpdateOperationsInput
   questionType: EnumQuestionTypeFieldUpdateOperationsInput
-  formId: StringFieldUpdateOperationsInput
+  formId: NullableStringFieldUpdateOperationsInput
   gradeId: StringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -4083,6 +4083,44 @@ input RecommendationListRelationFilter {
   none: RecommendationWhereInput
 }
 
+input FloatNullableFilter {
+  equals: Float
+  in: [Float!]
+  notIn: [Float!]
+  lt: Float
+  lte: Float
+  gt: Float
+  gte: Float
+  not: NestedFloatNullableFilter
+}
+
+input FloatNullableWithAggregatesFilter {
+  equals: Float
+  in: [Float!]
+  notIn: [Float!]
+  lt: Float
+  lte: Float
+  gt: Float
+  gte: Float
+  not: NestedFloatNullableWithAggregatesFilter
+  _count: NestedIntNullableFilter
+  count: NestedIntNullableFilter
+  _avg: NestedFloatNullableFilter
+  avg: NestedFloatNullableFilter
+  _sum: NestedFloatNullableFilter
+  sum: NestedFloatNullableFilter
+  _min: NestedFloatNullableFilter
+  min: NestedFloatNullableFilter
+  _max: NestedFloatNullableFilter
+  max: NestedFloatNullableFilter
+}
+
+input AnswerListRelationFilter {
+  every: AnswerWhereInput
+  some: AnswerWhereInput
+  none: AnswerWhereInput
+}
+
 input FloatFilter {
   equals: Float
   in: [Float!]
@@ -4092,6 +4130,13 @@ input FloatFilter {
   gt: Float
   gte: Float
   not: NestedFloatFilter
+}
+
+input EnumQuestionTypeFilter {
+  equals: QuestionType
+  in: [QuestionType!]
+  notIn: [QuestionType!]
+  not: NestedEnumQuestionTypeFilter
 }
 
 input FloatWithAggregatesFilter {
@@ -4113,19 +4158,6 @@ input FloatWithAggregatesFilter {
   min: NestedFloatFilter
   _max: NestedFloatFilter
   max: NestedFloatFilter
-}
-
-input AnswerListRelationFilter {
-  every: AnswerWhereInput
-  some: AnswerWhereInput
-  none: AnswerWhereInput
-}
-
-input EnumQuestionTypeFilter {
-  equals: QuestionType
-  in: [QuestionType!]
-  notIn: [QuestionType!]
-  not: NestedEnumQuestionTypeFilter
 }
 
 input EnumQuestionTypeWithAggregatesFilter {
@@ -5365,7 +5397,7 @@ input AttachmentUncheckedCreateNestedManyWithoutGradeInput {
   connect: [AttachmentWhereUniqueInput!]
 }
 
-input FloatFieldUpdateOperationsInput {
+input NullableFloatFieldUpdateOperationsInput {
   set: Float
   increment: Float
   decrement: Float
@@ -5661,15 +5693,25 @@ input AttachmentUncheckedCreateNestedManyWithoutQuestionInput {
   connect: [AttachmentWhereUniqueInput!]
 }
 
+input FloatFieldUpdateOperationsInput {
+  set: Float
+  increment: Float
+  decrement: Float
+  multiply: Float
+  divide: Float
+}
+
 input EnumQuestionTypeFieldUpdateOperationsInput {
   set: QuestionType
 }
 
-input FormUpdateOneRequiredWithoutQuestionsInput {
+input FormUpdateOneWithoutQuestionsInput {
   create: FormUncheckedCreateWithoutQuestionsInput
   connectOrCreate: FormCreateOrConnectWithoutQuestionsInput
   upsert: FormUpsertWithoutQuestionsInput
   connect: FormWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
   update: FormUncheckedUpdateWithoutQuestionsInput
 }
 
@@ -6989,6 +7031,45 @@ input NestedEnumAttachmentTypeWithAggregatesFilter {
   max: NestedEnumAttachmentTypeFilter
 }
 
+input NestedFloatNullableFilter {
+  equals: Float
+  in: [Float!]
+  notIn: [Float!]
+  lt: Float
+  lte: Float
+  gt: Float
+  gte: Float
+  not: NestedFloatNullableFilter
+}
+
+input NestedFloatNullableWithAggregatesFilter {
+  equals: Float
+  in: [Float!]
+  notIn: [Float!]
+  lt: Float
+  lte: Float
+  gt: Float
+  gte: Float
+  not: NestedFloatNullableWithAggregatesFilter
+  _count: NestedIntNullableFilter
+  count: NestedIntNullableFilter
+  _avg: NestedFloatNullableFilter
+  avg: NestedFloatNullableFilter
+  _sum: NestedFloatNullableFilter
+  sum: NestedFloatNullableFilter
+  _min: NestedFloatNullableFilter
+  min: NestedFloatNullableFilter
+  _max: NestedFloatNullableFilter
+  max: NestedFloatNullableFilter
+}
+
+input NestedEnumQuestionTypeFilter {
+  equals: QuestionType
+  in: [QuestionType!]
+  notIn: [QuestionType!]
+  not: NestedEnumQuestionTypeFilter
+}
+
 input NestedFloatWithAggregatesFilter {
   equals: Float
   in: [Float!]
@@ -7008,13 +7089,6 @@ input NestedFloatWithAggregatesFilter {
   min: NestedFloatFilter
   _max: NestedFloatFilter
   max: NestedFloatFilter
-}
-
-input NestedEnumQuestionTypeFilter {
-  equals: QuestionType
-  in: [QuestionType!]
-  notIn: [QuestionType!]
-  not: NestedEnumQuestionTypeFilter
 }
 
 input NestedEnumQuestionTypeWithAggregatesFilter {
@@ -7932,8 +8006,8 @@ input GradeCreateWithoutAttachmentsInput {
   id: String
   name: String!
   description: String!
-  minValue: Float!
-  maxValue: Float!
+  minValue: Float
+  maxValue: Float
   minInclusive: Boolean
   maxInclusive: Boolean
   createdAt: DateTime
@@ -7949,8 +8023,8 @@ input GradeUncheckedCreateWithoutAttachmentsInput {
   name: String!
   description: String!
   formId: String!
-  minValue: Float!
-  maxValue: Float!
+  minValue: Float
+  maxValue: Float
   minInclusive: Boolean
   maxInclusive: Boolean
   createdAt: DateTime
@@ -8001,7 +8075,7 @@ input QuestionCreateWithoutAttachmentsInput {
   questionType: QuestionType
   createdAt: DateTime
   updatedAt: DateTime
-  form: FormCreateNestedOneWithoutQuestionsInput!
+  form: FormCreateNestedOneWithoutQuestionsInput
   grade: GradeCreateNestedOneWithoutQuestionsInput!
   answers: AnswerCreateNestedManyWithoutQuestionInput
 }
@@ -8013,7 +8087,7 @@ input QuestionUncheckedCreateWithoutAttachmentsInput {
   weight: Float
   instruction: String
   questionType: QuestionType
-  formId: String!
+  formId: String
   gradeId: String!
   createdAt: DateTime
   updatedAt: DateTime
@@ -8398,8 +8472,8 @@ input GradeUpdateWithoutAttachmentsInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
-  minValue: FloatFieldUpdateOperationsInput
-  maxValue: FloatFieldUpdateOperationsInput
+  minValue: NullableFloatFieldUpdateOperationsInput
+  maxValue: NullableFloatFieldUpdateOperationsInput
   minInclusive: BoolFieldUpdateOperationsInput
   maxInclusive: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -8415,8 +8489,8 @@ input GradeUncheckedUpdateWithoutAttachmentsInput {
   name: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
   formId: StringFieldUpdateOperationsInput
-  minValue: FloatFieldUpdateOperationsInput
-  maxValue: FloatFieldUpdateOperationsInput
+  minValue: NullableFloatFieldUpdateOperationsInput
+  maxValue: NullableFloatFieldUpdateOperationsInput
   minInclusive: BoolFieldUpdateOperationsInput
   maxInclusive: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -8467,7 +8541,7 @@ input QuestionUpdateWithoutAttachmentsInput {
   questionType: EnumQuestionTypeFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  form: FormUpdateOneRequiredWithoutQuestionsInput
+  form: FormUpdateOneWithoutQuestionsInput
   grade: GradeUpdateOneRequiredWithoutQuestionsInput
   answers: AnswerUpdateManyWithoutQuestionInput
 }
@@ -8479,7 +8553,7 @@ input QuestionUncheckedUpdateWithoutAttachmentsInput {
   weight: FloatFieldUpdateOperationsInput
   instruction: NullableStringFieldUpdateOperationsInput
   questionType: EnumQuestionTypeFieldUpdateOperationsInput
-  formId: StringFieldUpdateOperationsInput
+  formId: NullableStringFieldUpdateOperationsInput
   gradeId: StringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -9054,8 +9128,8 @@ input GradeCreateWithoutFormInput {
   id: String
   name: String!
   description: String!
-  minValue: Float!
-  maxValue: Float!
+  minValue: Float
+  maxValue: Float
   minInclusive: Boolean
   maxInclusive: Boolean
   createdAt: DateTime
@@ -9070,8 +9144,8 @@ input GradeUncheckedCreateWithoutFormInput {
   id: String
   name: String!
   description: String!
-  minValue: Float!
-  maxValue: Float!
+  minValue: Float
+  maxValue: Float
   minInclusive: Boolean
   maxInclusive: Boolean
   createdAt: DateTime
@@ -9290,7 +9364,7 @@ input QuestionScalarWhereInput {
   weight: FloatFilter
   instruction: StringNullableFilter
   questionType: EnumQuestionTypeFilter
-  formId: StringFilter
+  formId: StringNullableFilter
   gradeId: StringFilter
   createdAt: DateTimeFilter
   updatedAt: DateTimeFilter
@@ -9320,8 +9394,8 @@ input GradeScalarWhereInput {
   name: StringFilter
   description: StringFilter
   formId: StringFilter
-  minValue: FloatFilter
-  maxValue: FloatFilter
+  minValue: FloatNullableFilter
+  maxValue: FloatNullableFilter
   minInclusive: BoolFilter
   maxInclusive: BoolFilter
   createdAt: DateTimeFilter
@@ -9490,7 +9564,7 @@ input QuestionCreateWithoutGradeInput {
   questionType: QuestionType
   createdAt: DateTime
   updatedAt: DateTime
-  form: FormCreateNestedOneWithoutQuestionsInput!
+  form: FormCreateNestedOneWithoutQuestionsInput
   answers: AnswerCreateNestedManyWithoutQuestionInput
   attachments: AttachmentCreateNestedManyWithoutQuestionInput
 }
@@ -9502,7 +9576,7 @@ input QuestionUncheckedCreateWithoutGradeInput {
   weight: Float
   instruction: String
   questionType: QuestionType
-  formId: String!
+  formId: String
   createdAt: DateTime
   updatedAt: DateTime
   answers: AnswerUncheckedCreateNestedManyWithoutQuestionInput
@@ -9810,8 +9884,8 @@ input GradeCreateWithoutResponsesInput {
   id: String
   name: String!
   description: String!
-  minValue: Float!
-  maxValue: Float!
+  minValue: Float
+  maxValue: Float
   minInclusive: Boolean
   maxInclusive: Boolean
   createdAt: DateTime
@@ -9827,8 +9901,8 @@ input GradeUncheckedCreateWithoutResponsesInput {
   name: String!
   description: String!
   formId: String!
-  minValue: Float!
-  maxValue: Float!
+  minValue: Float
+  maxValue: Float
   minInclusive: Boolean
   maxInclusive: Boolean
   createdAt: DateTime
@@ -10029,8 +10103,8 @@ input GradeUpdateWithoutResponsesInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
-  minValue: FloatFieldUpdateOperationsInput
-  maxValue: FloatFieldUpdateOperationsInput
+  minValue: NullableFloatFieldUpdateOperationsInput
+  maxValue: NullableFloatFieldUpdateOperationsInput
   minInclusive: BoolFieldUpdateOperationsInput
   maxInclusive: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -10046,8 +10120,8 @@ input GradeUncheckedUpdateWithoutResponsesInput {
   name: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
   formId: StringFieldUpdateOperationsInput
-  minValue: FloatFieldUpdateOperationsInput
-  maxValue: FloatFieldUpdateOperationsInput
+  minValue: NullableFloatFieldUpdateOperationsInput
+  maxValue: NullableFloatFieldUpdateOperationsInput
   minInclusive: BoolFieldUpdateOperationsInput
   maxInclusive: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -10110,8 +10184,8 @@ input GradeCreateWithoutQuestionsInput {
   id: String
   name: String!
   description: String!
-  minValue: Float!
-  maxValue: Float!
+  minValue: Float
+  maxValue: Float
   minInclusive: Boolean
   maxInclusive: Boolean
   createdAt: DateTime
@@ -10127,8 +10201,8 @@ input GradeUncheckedCreateWithoutQuestionsInput {
   name: String!
   description: String!
   formId: String!
-  minValue: Float!
-  maxValue: Float!
+  minValue: Float
+  maxValue: Float
   minInclusive: Boolean
   maxInclusive: Boolean
   createdAt: DateTime
@@ -10283,8 +10357,8 @@ input GradeUpdateWithoutQuestionsInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
-  minValue: FloatFieldUpdateOperationsInput
-  maxValue: FloatFieldUpdateOperationsInput
+  minValue: NullableFloatFieldUpdateOperationsInput
+  maxValue: NullableFloatFieldUpdateOperationsInput
   minInclusive: BoolFieldUpdateOperationsInput
   maxInclusive: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -10300,8 +10374,8 @@ input GradeUncheckedUpdateWithoutQuestionsInput {
   name: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
   formId: StringFieldUpdateOperationsInput
-  minValue: FloatFieldUpdateOperationsInput
-  maxValue: FloatFieldUpdateOperationsInput
+  minValue: NullableFloatFieldUpdateOperationsInput
+  maxValue: NullableFloatFieldUpdateOperationsInput
   minInclusive: BoolFieldUpdateOperationsInput
   maxInclusive: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -10379,7 +10453,7 @@ input QuestionCreateWithoutAnswersInput {
   questionType: QuestionType
   createdAt: DateTime
   updatedAt: DateTime
-  form: FormCreateNestedOneWithoutQuestionsInput!
+  form: FormCreateNestedOneWithoutQuestionsInput
   grade: GradeCreateNestedOneWithoutQuestionsInput!
   attachments: AttachmentCreateNestedManyWithoutQuestionInput
 }
@@ -10391,7 +10465,7 @@ input QuestionUncheckedCreateWithoutAnswersInput {
   weight: Float
   instruction: String
   questionType: QuestionType
-  formId: String!
+  formId: String
   gradeId: String!
   createdAt: DateTime
   updatedAt: DateTime
@@ -10512,7 +10586,7 @@ input QuestionUpdateWithoutAnswersInput {
   questionType: EnumQuestionTypeFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  form: FormUpdateOneRequiredWithoutQuestionsInput
+  form: FormUpdateOneWithoutQuestionsInput
   grade: GradeUpdateOneRequiredWithoutQuestionsInput
   attachments: AttachmentUpdateManyWithoutQuestionInput
 }
@@ -10524,7 +10598,7 @@ input QuestionUncheckedUpdateWithoutAnswersInput {
   weight: FloatFieldUpdateOperationsInput
   instruction: NullableStringFieldUpdateOperationsInput
   questionType: EnumQuestionTypeFieldUpdateOperationsInput
-  formId: StringFieldUpdateOperationsInput
+  formId: NullableStringFieldUpdateOperationsInput
   gradeId: StringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -10619,8 +10693,8 @@ input GradeCreateWithoutRecommendationsInput {
   id: String
   name: String!
   description: String!
-  minValue: Float!
-  maxValue: Float!
+  minValue: Float
+  maxValue: Float
   minInclusive: Boolean
   maxInclusive: Boolean
   createdAt: DateTime
@@ -10636,8 +10710,8 @@ input GradeUncheckedCreateWithoutRecommendationsInput {
   name: String!
   description: String!
   formId: String!
-  minValue: Float!
-  maxValue: Float!
+  minValue: Float
+  maxValue: Float
   minInclusive: Boolean
   maxInclusive: Boolean
   createdAt: DateTime
@@ -10677,8 +10751,8 @@ input GradeUpdateWithoutRecommendationsInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
-  minValue: FloatFieldUpdateOperationsInput
-  maxValue: FloatFieldUpdateOperationsInput
+  minValue: NullableFloatFieldUpdateOperationsInput
+  maxValue: NullableFloatFieldUpdateOperationsInput
   minInclusive: BoolFieldUpdateOperationsInput
   maxInclusive: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -10694,8 +10768,8 @@ input GradeUncheckedUpdateWithoutRecommendationsInput {
   name: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
   formId: StringFieldUpdateOperationsInput
-  minValue: FloatFieldUpdateOperationsInput
-  maxValue: FloatFieldUpdateOperationsInput
+  minValue: NullableFloatFieldUpdateOperationsInput
+  maxValue: NullableFloatFieldUpdateOperationsInput
   minInclusive: BoolFieldUpdateOperationsInput
   maxInclusive: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -13816,8 +13890,8 @@ input GradeCreateManyFormInput {
   id: String
   name: String!
   description: String!
-  minValue: Float!
-  maxValue: Float!
+  minValue: Float
+  maxValue: Float
   minInclusive: Boolean
   maxInclusive: Boolean
   createdAt: DateTime
@@ -13901,8 +13975,8 @@ input GradeUpdateWithoutFormInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
-  minValue: FloatFieldUpdateOperationsInput
-  maxValue: FloatFieldUpdateOperationsInput
+  minValue: NullableFloatFieldUpdateOperationsInput
+  maxValue: NullableFloatFieldUpdateOperationsInput
   minInclusive: BoolFieldUpdateOperationsInput
   maxInclusive: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -13917,8 +13991,8 @@ input GradeUncheckedUpdateWithoutFormInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
-  minValue: FloatFieldUpdateOperationsInput
-  maxValue: FloatFieldUpdateOperationsInput
+  minValue: NullableFloatFieldUpdateOperationsInput
+  maxValue: NullableFloatFieldUpdateOperationsInput
   minInclusive: BoolFieldUpdateOperationsInput
   maxInclusive: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -13933,8 +14007,8 @@ input GradeUncheckedUpdateManyWithoutGradesInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
-  minValue: FloatFieldUpdateOperationsInput
-  maxValue: FloatFieldUpdateOperationsInput
+  minValue: NullableFloatFieldUpdateOperationsInput
+  maxValue: NullableFloatFieldUpdateOperationsInput
   minInclusive: BoolFieldUpdateOperationsInput
   maxInclusive: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -14069,7 +14143,7 @@ input QuestionCreateManyGradeInput {
   weight: Float
   instruction: String
   questionType: QuestionType
-  formId: String!
+  formId: String
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -14155,7 +14229,7 @@ input QuestionUpdateWithoutGradeInput {
   questionType: EnumQuestionTypeFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  form: FormUpdateOneRequiredWithoutQuestionsInput
+  form: FormUpdateOneWithoutQuestionsInput
   answers: AnswerUpdateManyWithoutQuestionInput
   attachments: AttachmentUpdateManyWithoutQuestionInput
 }
@@ -14167,7 +14241,7 @@ input QuestionUncheckedUpdateWithoutGradeInput {
   weight: FloatFieldUpdateOperationsInput
   instruction: NullableStringFieldUpdateOperationsInput
   questionType: EnumQuestionTypeFieldUpdateOperationsInput
-  formId: StringFieldUpdateOperationsInput
+  formId: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   answers: AnswerUncheckedUpdateManyWithoutQuestionInput
