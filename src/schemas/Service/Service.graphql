@@ -48,14 +48,6 @@ type Service {
       }
       extend type Query {
     findUniqueService(where: ServiceWhereUniqueInput!): ServiceResponse!
-    findFirstService(
-      where: ServiceWhereInput
-      orderBy: [ServiceOrderByInput!]
-      cursor: ServiceWhereUniqueInput
-      distinct: [ServiceScalarFieldEnum!]
-      skip: Int
-      take: Int
-    ): ServiceResponse!
     findManyService(
       where: ServiceWhereInput
       orderBy: [ServiceOrderByInput!]

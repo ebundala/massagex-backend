@@ -69,14 +69,6 @@ type Form {
       }
       extend type Query {
     findUniqueForm(where: FormWhereUniqueInput!): FormResponse!
-    findFirstForm(
-      where: FormWhereInput
-      orderBy: [FormOrderByInput!]
-      cursor: FormWhereUniqueInput
-      distinct: [FormScalarFieldEnum!]
-      skip: Int
-      take: Int
-    ): FormResponse!
     findManyForm(
       where: FormWhereInput
       orderBy: [FormOrderByInput!]

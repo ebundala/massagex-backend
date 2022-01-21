@@ -53,29 +53,4 @@ type ForumAnswer {
         data: Int
         message: String!
       }
-      extend type Query {
-    findUniqueForumAnswer(where: ForumAnswerWhereUniqueInput!): ForumAnswerResponse!
-    findFirstForumAnswer(
-      where: ForumAnswerWhereInput
-      orderBy: [ForumAnswerOrderByInput!]
-      cursor: ForumAnswerWhereUniqueInput
-      distinct: [ForumAnswerScalarFieldEnum!]
-      skip: Int
-      take: Int
-    ): ForumAnswerResponse!
-    findManyForumAnswer(
-      where: ForumAnswerWhereInput
-      orderBy: [ForumAnswerOrderByInput!]
-      cursor: ForumAnswerWhereUniqueInput
-      distinct: [ForumAnswerScalarFieldEnum!]
-      skip: Int
-      take: Int
-    ): ForumAnswerListResponse!
-  }
-extend type Mutation {
-    createOneForumAnswer(data: ForumAnswerCreateInput!): ForumAnswerResponse!
-    updateOneForumAnswer(
-      where: ForumAnswerWhereUniqueInput!
-      data: ForumAnswerUpdateInput!
-    ): ForumAnswerResponse!
-  }
+      

@@ -45,29 +45,4 @@ type HelpStep {
         data: Int
         message: String!
       }
-      extend type Query {
-    findUniqueHelpStep(where: HelpStepWhereUniqueInput!): HelpStepResponse!
-    findFirstHelpStep(
-      where: HelpStepWhereInput
-      orderBy: [HelpStepOrderByInput!]
-      cursor: HelpStepWhereUniqueInput
-      distinct: [HelpStepScalarFieldEnum!]
-      skip: Int
-      take: Int
-    ): HelpStepResponse!
-    findManyHelpStep(
-      where: HelpStepWhereInput
-      orderBy: [HelpStepOrderByInput!]
-      cursor: HelpStepWhereUniqueInput
-      distinct: [HelpStepScalarFieldEnum!]
-      skip: Int
-      take: Int
-    ): HelpStepListResponse!
-  }
-extend type Mutation {
-    createOneHelpStep(data: HelpStepCreateInput!): HelpStepResponse!
-    updateOneHelpStep(
-      where: HelpStepWhereUniqueInput!
-      data: HelpStepUpdateInput!
-    ): HelpStepResponse!
-  }
+      

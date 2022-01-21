@@ -55,14 +55,6 @@ type Response {
       }
       extend type Query {
     findUniqueResponse(where: ResponseWhereUniqueInput!): ResponseResponse!
-    findFirstResponse(
-      where: ResponseWhereInput
-      orderBy: [ResponseOrderByInput!]
-      cursor: ResponseWhereUniqueInput
-      distinct: [ResponseScalarFieldEnum!]
-      skip: Int
-      take: Int
-    ): ResponseResponse!
     findManyResponse(
       where: ResponseWhereInput
       orderBy: [ResponseOrderByInput!]

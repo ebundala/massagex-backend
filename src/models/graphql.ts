@@ -169,8 +169,8 @@ export enum HelpStepScalarFieldEnum {
 }
 
 export enum ImageSize {
-    biggest = "biggest",
     large = "large",
+    largest = "largest",
     medium = "medium",
     small = "small",
     smallest = "smallest"
@@ -861,7 +861,7 @@ export class AttachmentCreateInput {
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
     orders?: Nullable<OrderCreateNestedManyWithoutReceiptInput>;
-    path: string;
+    path: Upload;
     paymentMethods?: Nullable<PaymentMethodCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
     question?: Nullable<QuestionCreateNestedOneWithoutAttachmentsInput>;
@@ -888,7 +888,7 @@ export class AttachmentCreateManyAnswerInput {
     helpStepId?: Nullable<string>;
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
-    path: string;
+    path: Upload;
     placement?: Nullable<string>;
     questionId?: Nullable<string>;
     recommendationId?: Nullable<string>;
@@ -917,7 +917,7 @@ export class AttachmentCreateManyCommentInput {
     helpStepId?: Nullable<string>;
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
-    path: string;
+    path: Upload;
     placement?: Nullable<string>;
     questionId?: Nullable<string>;
     recommendationId?: Nullable<string>;
@@ -946,7 +946,7 @@ export class AttachmentCreateManyFormInput {
     helpStepId?: Nullable<string>;
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
-    path: string;
+    path: Upload;
     placement?: Nullable<string>;
     questionId?: Nullable<string>;
     recommendationId?: Nullable<string>;
@@ -975,7 +975,7 @@ export class AttachmentCreateManyForumAnswerInput {
     helpStepId?: Nullable<string>;
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
-    path: string;
+    path: Upload;
     placement?: Nullable<string>;
     questionId?: Nullable<string>;
     recommendationId?: Nullable<string>;
@@ -1004,7 +1004,7 @@ export class AttachmentCreateManyForumInput {
     helpStepId?: Nullable<string>;
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
-    path: string;
+    path: Upload;
     placement?: Nullable<string>;
     questionId?: Nullable<string>;
     recommendationId?: Nullable<string>;
@@ -1033,7 +1033,7 @@ export class AttachmentCreateManyGradeInput {
     helpStepId?: Nullable<string>;
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
-    path: string;
+    path: Upload;
     placement?: Nullable<string>;
     questionId?: Nullable<string>;
     recommendationId?: Nullable<string>;
@@ -1062,7 +1062,7 @@ export class AttachmentCreateManyHelpStepInput {
     gradeId?: Nullable<string>;
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
-    path: string;
+    path: Upload;
     placement?: Nullable<string>;
     questionId?: Nullable<string>;
     recommendationId?: Nullable<string>;
@@ -1092,7 +1092,7 @@ export class AttachmentCreateManyInput {
     helpStepId?: Nullable<string>;
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
-    path: string;
+    path: Upload;
     placement?: Nullable<string>;
     questionId?: Nullable<string>;
     recommendationId?: Nullable<string>;
@@ -1117,7 +1117,7 @@ export class AttachmentCreateManyQuestionInput {
     helpStepId?: Nullable<string>;
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
-    path: string;
+    path: Upload;
     placement?: Nullable<string>;
     recommendationId?: Nullable<string>;
     responseId?: Nullable<string>;
@@ -1146,7 +1146,7 @@ export class AttachmentCreateManyRecommendationInput {
     helpStepId?: Nullable<string>;
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
-    path: string;
+    path: Upload;
     placement?: Nullable<string>;
     questionId?: Nullable<string>;
     responseId?: Nullable<string>;
@@ -1175,7 +1175,7 @@ export class AttachmentCreateManyResponseInput {
     helpStepId?: Nullable<string>;
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
-    path: string;
+    path: Upload;
     placement?: Nullable<string>;
     questionId?: Nullable<string>;
     recommendationId?: Nullable<string>;
@@ -1380,7 +1380,7 @@ export class AttachmentCreateWithoutAnswerInput {
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
     orders?: Nullable<OrderCreateNestedManyWithoutReceiptInput>;
-    path: string;
+    path: Upload;
     paymentMethods?: Nullable<PaymentMethodCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
     question?: Nullable<QuestionCreateNestedOneWithoutAttachmentsInput>;
@@ -1409,7 +1409,7 @@ export class AttachmentCreateWithoutCommentInput {
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
     orders?: Nullable<OrderCreateNestedManyWithoutReceiptInput>;
-    path: string;
+    path: Upload;
     paymentMethods?: Nullable<PaymentMethodCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
     question?: Nullable<QuestionCreateNestedOneWithoutAttachmentsInput>;
@@ -1438,7 +1438,7 @@ export class AttachmentCreateWithoutFormCategoriesInput {
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
     orders?: Nullable<OrderCreateNestedManyWithoutReceiptInput>;
-    path: string;
+    path: Upload;
     paymentMethods?: Nullable<PaymentMethodCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
     question?: Nullable<QuestionCreateNestedOneWithoutAttachmentsInput>;
@@ -1467,7 +1467,7 @@ export class AttachmentCreateWithoutFormInput {
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
     orders?: Nullable<OrderCreateNestedManyWithoutReceiptInput>;
-    path: string;
+    path: Upload;
     paymentMethods?: Nullable<PaymentMethodCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
     question?: Nullable<QuestionCreateNestedOneWithoutAttachmentsInput>;
@@ -1496,7 +1496,7 @@ export class AttachmentCreateWithoutForumAnswerInput {
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
     orders?: Nullable<OrderCreateNestedManyWithoutReceiptInput>;
-    path: string;
+    path: Upload;
     paymentMethods?: Nullable<PaymentMethodCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
     question?: Nullable<QuestionCreateNestedOneWithoutAttachmentsInput>;
@@ -1525,7 +1525,7 @@ export class AttachmentCreateWithoutForumInput {
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
     orders?: Nullable<OrderCreateNestedManyWithoutReceiptInput>;
-    path: string;
+    path: Upload;
     paymentMethods?: Nullable<PaymentMethodCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
     question?: Nullable<QuestionCreateNestedOneWithoutAttachmentsInput>;
@@ -1554,7 +1554,7 @@ export class AttachmentCreateWithoutGradeInput {
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
     orders?: Nullable<OrderCreateNestedManyWithoutReceiptInput>;
-    path: string;
+    path: Upload;
     paymentMethods?: Nullable<PaymentMethodCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
     question?: Nullable<QuestionCreateNestedOneWithoutAttachmentsInput>;
@@ -1583,7 +1583,7 @@ export class AttachmentCreateWithoutHelpStepInput {
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
     orders?: Nullable<OrderCreateNestedManyWithoutReceiptInput>;
-    path: string;
+    path: Upload;
     paymentMethods?: Nullable<PaymentMethodCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
     question?: Nullable<QuestionCreateNestedOneWithoutAttachmentsInput>;
@@ -1612,7 +1612,7 @@ export class AttachmentCreateWithoutOrdersInput {
     helpStep?: Nullable<HelpStepCreateNestedOneWithoutAttachmentsInput>;
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
-    path: string;
+    path: Upload;
     paymentMethods?: Nullable<PaymentMethodCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
     question?: Nullable<QuestionCreateNestedOneWithoutAttachmentsInput>;
@@ -1642,7 +1642,7 @@ export class AttachmentCreateWithoutPaymentMethodsInput {
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
     orders?: Nullable<OrderCreateNestedManyWithoutReceiptInput>;
-    path: string;
+    path: Upload;
     placement?: Nullable<string>;
     question?: Nullable<QuestionCreateNestedOneWithoutAttachmentsInput>;
     recommendation?: Nullable<RecommendationCreateNestedOneWithoutAttachmentsInput>;
@@ -1671,7 +1671,7 @@ export class AttachmentCreateWithoutQuestionInput {
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
     orders?: Nullable<OrderCreateNestedManyWithoutReceiptInput>;
-    path: string;
+    path: Upload;
     paymentMethods?: Nullable<PaymentMethodCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
     recommendation?: Nullable<RecommendationCreateNestedOneWithoutAttachmentsInput>;
@@ -1700,7 +1700,7 @@ export class AttachmentCreateWithoutRecommendationInput {
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
     orders?: Nullable<OrderCreateNestedManyWithoutReceiptInput>;
-    path: string;
+    path: Upload;
     paymentMethods?: Nullable<PaymentMethodCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
     question?: Nullable<QuestionCreateNestedOneWithoutAttachmentsInput>;
@@ -1729,7 +1729,7 @@ export class AttachmentCreateWithoutResponseInput {
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
     orders?: Nullable<OrderCreateNestedManyWithoutReceiptInput>;
-    path: string;
+    path: Upload;
     paymentMethods?: Nullable<PaymentMethodCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
     question?: Nullable<QuestionCreateNestedOneWithoutAttachmentsInput>;
@@ -1758,7 +1758,7 @@ export class AttachmentCreateWithoutServicesInput {
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
     orders?: Nullable<OrderCreateNestedManyWithoutReceiptInput>;
-    path: string;
+    path: Upload;
     paymentMethods?: Nullable<PaymentMethodCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
     question?: Nullable<QuestionCreateNestedOneWithoutAttachmentsInput>;
@@ -1787,7 +1787,7 @@ export class AttachmentCreateWithoutUserInput {
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
     orders?: Nullable<OrderCreateNestedManyWithoutReceiptInput>;
-    path: string;
+    path: Upload;
     paymentMethods?: Nullable<PaymentMethodCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
     question?: Nullable<QuestionCreateNestedOneWithoutAttachmentsInput>;
@@ -1908,7 +1908,7 @@ export class AttachmentUncheckedCreateInput {
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
     orders?: Nullable<OrderUncheckedCreateNestedManyWithoutReceiptInput>;
-    path: string;
+    path: Upload;
     paymentMethods?: Nullable<PaymentMethodUncheckedCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
     questionId?: Nullable<string>;
@@ -2007,7 +2007,7 @@ export class AttachmentUncheckedCreateWithoutAnswerInput {
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
     orders?: Nullable<OrderUncheckedCreateNestedManyWithoutReceiptInput>;
-    path: string;
+    path: Upload;
     paymentMethods?: Nullable<PaymentMethodUncheckedCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
     questionId?: Nullable<string>;
@@ -2036,7 +2036,7 @@ export class AttachmentUncheckedCreateWithoutCommentInput {
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
     orders?: Nullable<OrderUncheckedCreateNestedManyWithoutReceiptInput>;
-    path: string;
+    path: Upload;
     paymentMethods?: Nullable<PaymentMethodUncheckedCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
     questionId?: Nullable<string>;
@@ -2065,7 +2065,7 @@ export class AttachmentUncheckedCreateWithoutFormCategoriesInput {
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
     orders?: Nullable<OrderUncheckedCreateNestedManyWithoutReceiptInput>;
-    path: string;
+    path: Upload;
     paymentMethods?: Nullable<PaymentMethodUncheckedCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
     questionId?: Nullable<string>;
@@ -2094,7 +2094,7 @@ export class AttachmentUncheckedCreateWithoutFormInput {
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
     orders?: Nullable<OrderUncheckedCreateNestedManyWithoutReceiptInput>;
-    path: string;
+    path: Upload;
     paymentMethods?: Nullable<PaymentMethodUncheckedCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
     questionId?: Nullable<string>;
@@ -2123,7 +2123,7 @@ export class AttachmentUncheckedCreateWithoutForumAnswerInput {
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
     orders?: Nullable<OrderUncheckedCreateNestedManyWithoutReceiptInput>;
-    path: string;
+    path: Upload;
     paymentMethods?: Nullable<PaymentMethodUncheckedCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
     questionId?: Nullable<string>;
@@ -2152,7 +2152,7 @@ export class AttachmentUncheckedCreateWithoutForumInput {
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
     orders?: Nullable<OrderUncheckedCreateNestedManyWithoutReceiptInput>;
-    path: string;
+    path: Upload;
     paymentMethods?: Nullable<PaymentMethodUncheckedCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
     questionId?: Nullable<string>;
@@ -2181,7 +2181,7 @@ export class AttachmentUncheckedCreateWithoutGradeInput {
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
     orders?: Nullable<OrderUncheckedCreateNestedManyWithoutReceiptInput>;
-    path: string;
+    path: Upload;
     paymentMethods?: Nullable<PaymentMethodUncheckedCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
     questionId?: Nullable<string>;
@@ -2210,7 +2210,7 @@ export class AttachmentUncheckedCreateWithoutHelpStepInput {
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
     orders?: Nullable<OrderUncheckedCreateNestedManyWithoutReceiptInput>;
-    path: string;
+    path: Upload;
     paymentMethods?: Nullable<PaymentMethodUncheckedCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
     questionId?: Nullable<string>;
@@ -2239,7 +2239,7 @@ export class AttachmentUncheckedCreateWithoutOrdersInput {
     helpStepId?: Nullable<string>;
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
-    path: string;
+    path: Upload;
     paymentMethods?: Nullable<PaymentMethodUncheckedCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
     questionId?: Nullable<string>;
@@ -2269,7 +2269,7 @@ export class AttachmentUncheckedCreateWithoutPaymentMethodsInput {
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
     orders?: Nullable<OrderUncheckedCreateNestedManyWithoutReceiptInput>;
-    path: string;
+    path: Upload;
     placement?: Nullable<string>;
     questionId?: Nullable<string>;
     recommendationId?: Nullable<string>;
@@ -2298,7 +2298,7 @@ export class AttachmentUncheckedCreateWithoutQuestionInput {
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
     orders?: Nullable<OrderUncheckedCreateNestedManyWithoutReceiptInput>;
-    path: string;
+    path: Upload;
     paymentMethods?: Nullable<PaymentMethodUncheckedCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
     recommendationId?: Nullable<string>;
@@ -2327,7 +2327,7 @@ export class AttachmentUncheckedCreateWithoutRecommendationInput {
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
     orders?: Nullable<OrderUncheckedCreateNestedManyWithoutReceiptInput>;
-    path: string;
+    path: Upload;
     paymentMethods?: Nullable<PaymentMethodUncheckedCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
     questionId?: Nullable<string>;
@@ -2356,7 +2356,7 @@ export class AttachmentUncheckedCreateWithoutResponseInput {
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
     orders?: Nullable<OrderUncheckedCreateNestedManyWithoutReceiptInput>;
-    path: string;
+    path: Upload;
     paymentMethods?: Nullable<PaymentMethodUncheckedCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
     questionId?: Nullable<string>;
@@ -2385,7 +2385,7 @@ export class AttachmentUncheckedCreateWithoutServicesInput {
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
     orders?: Nullable<OrderUncheckedCreateNestedManyWithoutReceiptInput>;
-    path: string;
+    path: Upload;
     paymentMethods?: Nullable<PaymentMethodUncheckedCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
     questionId?: Nullable<string>;
@@ -2414,7 +2414,7 @@ export class AttachmentUncheckedCreateWithoutUserInput {
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
     orders?: Nullable<OrderUncheckedCreateNestedManyWithoutReceiptInput>;
-    path: string;
+    path: Upload;
     paymentMethods?: Nullable<PaymentMethodUncheckedCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
     questionId?: Nullable<string>;
@@ -5446,6 +5446,38 @@ export class FloatFilter {
     notIn?: Nullable<number[]>;
 }
 
+export class FloatNullableFilter {
+    equals?: Nullable<number>;
+    gt?: Nullable<number>;
+    gte?: Nullable<number>;
+    in?: Nullable<number[]>;
+    lt?: Nullable<number>;
+    lte?: Nullable<number>;
+    not?: Nullable<NestedFloatNullableFilter>;
+    notIn?: Nullable<number[]>;
+}
+
+export class FloatNullableWithAggregatesFilter {
+    _avg?: Nullable<NestedFloatNullableFilter>;
+    _count?: Nullable<NestedIntNullableFilter>;
+    _max?: Nullable<NestedFloatNullableFilter>;
+    _min?: Nullable<NestedFloatNullableFilter>;
+    _sum?: Nullable<NestedFloatNullableFilter>;
+    avg?: Nullable<NestedFloatNullableFilter>;
+    count?: Nullable<NestedIntNullableFilter>;
+    equals?: Nullable<number>;
+    gt?: Nullable<number>;
+    gte?: Nullable<number>;
+    in?: Nullable<number[]>;
+    lt?: Nullable<number>;
+    lte?: Nullable<number>;
+    max?: Nullable<NestedFloatNullableFilter>;
+    min?: Nullable<NestedFloatNullableFilter>;
+    not?: Nullable<NestedFloatNullableWithAggregatesFilter>;
+    notIn?: Nullable<number[]>;
+    sum?: Nullable<NestedFloatNullableFilter>;
+}
+
 export class FloatWithAggregatesFilter {
     _avg?: Nullable<NestedFloatFilter>;
     _count?: Nullable<NestedIntFilter>;
@@ -6387,14 +6419,6 @@ export class FormUpdateOneRequiredWithoutGradesInput {
     upsert?: Nullable<FormUpsertWithoutGradesInput>;
 }
 
-export class FormUpdateOneRequiredWithoutQuestionsInput {
-    connect?: Nullable<FormWhereUniqueInput>;
-    connectOrCreate?: Nullable<FormCreateOrConnectWithoutQuestionsInput>;
-    create?: Nullable<FormUncheckedCreateWithoutQuestionsInput>;
-    update?: Nullable<FormUncheckedUpdateWithoutQuestionsInput>;
-    upsert?: Nullable<FormUpsertWithoutQuestionsInput>;
-}
-
 export class FormUpdateOneRequiredWithoutResponsesInput {
     connect?: Nullable<FormWhereUniqueInput>;
     connectOrCreate?: Nullable<FormCreateOrConnectWithoutResponsesInput>;
@@ -6411,6 +6435,16 @@ export class FormUpdateOneWithoutAttachmentsInput {
     disconnect?: Nullable<boolean>;
     update?: Nullable<FormUncheckedUpdateWithoutAttachmentsInput>;
     upsert?: Nullable<FormUpsertWithoutAttachmentsInput>;
+}
+
+export class FormUpdateOneWithoutQuestionsInput {
+    connect?: Nullable<FormWhereUniqueInput>;
+    connectOrCreate?: Nullable<FormCreateOrConnectWithoutQuestionsInput>;
+    create?: Nullable<FormUncheckedCreateWithoutQuestionsInput>;
+    delete?: Nullable<boolean>;
+    disconnect?: Nullable<boolean>;
+    update?: Nullable<FormUncheckedUpdateWithoutQuestionsInput>;
+    upsert?: Nullable<FormUpsertWithoutQuestionsInput>;
 }
 
 export class FormUpdateWithWhereUniqueWithoutAuthorInput {
@@ -7667,9 +7701,9 @@ export class GradeCreateInput {
     form: FormCreateNestedOneWithoutGradesInput;
     id?: Nullable<string>;
     maxInclusive?: Nullable<boolean>;
-    maxValue: number;
+    maxValue?: Nullable<number>;
     minInclusive?: Nullable<boolean>;
-    minValue: number;
+    minValue?: Nullable<number>;
     name: string;
     questions?: Nullable<QuestionCreateNestedManyWithoutGradeInput>;
     recommendations?: Nullable<RecommendationCreateNestedManyWithoutGradeInput>;
@@ -7682,9 +7716,9 @@ export class GradeCreateManyFormInput {
     description: string;
     id?: Nullable<string>;
     maxInclusive?: Nullable<boolean>;
-    maxValue: number;
+    maxValue?: Nullable<number>;
     minInclusive?: Nullable<boolean>;
-    minValue: number;
+    minValue?: Nullable<number>;
     name: string;
     updatedAt?: Nullable<DateTime>;
 }
@@ -7700,9 +7734,9 @@ export class GradeCreateManyInput {
     formId: string;
     id?: Nullable<string>;
     maxInclusive?: Nullable<boolean>;
-    maxValue: number;
+    maxValue?: Nullable<number>;
     minInclusive?: Nullable<boolean>;
-    minValue: number;
+    minValue?: Nullable<number>;
     name: string;
     updatedAt?: Nullable<DateTime>;
 }
@@ -7769,9 +7803,9 @@ export class GradeCreateWithoutAttachmentsInput {
     form: FormCreateNestedOneWithoutGradesInput;
     id?: Nullable<string>;
     maxInclusive?: Nullable<boolean>;
-    maxValue: number;
+    maxValue?: Nullable<number>;
     minInclusive?: Nullable<boolean>;
-    minValue: number;
+    minValue?: Nullable<number>;
     name: string;
     questions?: Nullable<QuestionCreateNestedManyWithoutGradeInput>;
     recommendations?: Nullable<RecommendationCreateNestedManyWithoutGradeInput>;
@@ -7785,9 +7819,9 @@ export class GradeCreateWithoutFormInput {
     description: string;
     id?: Nullable<string>;
     maxInclusive?: Nullable<boolean>;
-    maxValue: number;
+    maxValue?: Nullable<number>;
     minInclusive?: Nullable<boolean>;
-    minValue: number;
+    minValue?: Nullable<number>;
     name: string;
     questions?: Nullable<QuestionCreateNestedManyWithoutGradeInput>;
     recommendations?: Nullable<RecommendationCreateNestedManyWithoutGradeInput>;
@@ -7802,9 +7836,9 @@ export class GradeCreateWithoutQuestionsInput {
     form: FormCreateNestedOneWithoutGradesInput;
     id?: Nullable<string>;
     maxInclusive?: Nullable<boolean>;
-    maxValue: number;
+    maxValue?: Nullable<number>;
     minInclusive?: Nullable<boolean>;
-    minValue: number;
+    minValue?: Nullable<number>;
     name: string;
     recommendations?: Nullable<RecommendationCreateNestedManyWithoutGradeInput>;
     responses?: Nullable<ResponseCreateNestedManyWithoutGradeInput>;
@@ -7818,9 +7852,9 @@ export class GradeCreateWithoutRecommendationsInput {
     form: FormCreateNestedOneWithoutGradesInput;
     id?: Nullable<string>;
     maxInclusive?: Nullable<boolean>;
-    maxValue: number;
+    maxValue?: Nullable<number>;
     minInclusive?: Nullable<boolean>;
-    minValue: number;
+    minValue?: Nullable<number>;
     name: string;
     questions?: Nullable<QuestionCreateNestedManyWithoutGradeInput>;
     responses?: Nullable<ResponseCreateNestedManyWithoutGradeInput>;
@@ -7834,9 +7868,9 @@ export class GradeCreateWithoutResponsesInput {
     form: FormCreateNestedOneWithoutGradesInput;
     id?: Nullable<string>;
     maxInclusive?: Nullable<boolean>;
-    maxValue: number;
+    maxValue?: Nullable<number>;
     minInclusive?: Nullable<boolean>;
-    minValue: number;
+    minValue?: Nullable<number>;
     name: string;
     questions?: Nullable<QuestionCreateNestedManyWithoutGradeInput>;
     recommendations?: Nullable<RecommendationCreateNestedManyWithoutGradeInput>;
@@ -7876,9 +7910,9 @@ export class GradeScalarWhereInput {
     formId?: Nullable<StringFilter>;
     id?: Nullable<StringFilter>;
     maxInclusive?: Nullable<BoolFilter>;
-    maxValue?: Nullable<FloatFilter>;
+    maxValue?: Nullable<FloatNullableFilter>;
     minInclusive?: Nullable<BoolFilter>;
-    minValue?: Nullable<FloatFilter>;
+    minValue?: Nullable<FloatNullableFilter>;
     name?: Nullable<StringFilter>;
     updatedAt?: Nullable<DateTimeFilter>;
 }
@@ -7892,9 +7926,9 @@ export class GradeScalarWhereWithAggregatesInput {
     formId?: Nullable<StringWithAggregatesFilter>;
     id?: Nullable<StringWithAggregatesFilter>;
     maxInclusive?: Nullable<BoolWithAggregatesFilter>;
-    maxValue?: Nullable<FloatWithAggregatesFilter>;
+    maxValue?: Nullable<FloatNullableWithAggregatesFilter>;
     minInclusive?: Nullable<BoolWithAggregatesFilter>;
-    minValue?: Nullable<FloatWithAggregatesFilter>;
+    minValue?: Nullable<FloatNullableWithAggregatesFilter>;
     name?: Nullable<StringWithAggregatesFilter>;
     updatedAt?: Nullable<DateTimeWithAggregatesFilter>;
 }
@@ -7906,9 +7940,9 @@ export class GradeUncheckedCreateInput {
     formId: string;
     id?: Nullable<string>;
     maxInclusive?: Nullable<boolean>;
-    maxValue: number;
+    maxValue?: Nullable<number>;
     minInclusive?: Nullable<boolean>;
-    minValue: number;
+    minValue?: Nullable<number>;
     name: string;
     questions?: Nullable<QuestionUncheckedCreateNestedManyWithoutGradeInput>;
     recommendations?: Nullable<RecommendationUncheckedCreateNestedManyWithoutGradeInput>;
@@ -7929,9 +7963,9 @@ export class GradeUncheckedCreateWithoutAttachmentsInput {
     formId: string;
     id?: Nullable<string>;
     maxInclusive?: Nullable<boolean>;
-    maxValue: number;
+    maxValue?: Nullable<number>;
     minInclusive?: Nullable<boolean>;
-    minValue: number;
+    minValue?: Nullable<number>;
     name: string;
     questions?: Nullable<QuestionUncheckedCreateNestedManyWithoutGradeInput>;
     recommendations?: Nullable<RecommendationUncheckedCreateNestedManyWithoutGradeInput>;
@@ -7945,9 +7979,9 @@ export class GradeUncheckedCreateWithoutFormInput {
     description: string;
     id?: Nullable<string>;
     maxInclusive?: Nullable<boolean>;
-    maxValue: number;
+    maxValue?: Nullable<number>;
     minInclusive?: Nullable<boolean>;
-    minValue: number;
+    minValue?: Nullable<number>;
     name: string;
     questions?: Nullable<QuestionUncheckedCreateNestedManyWithoutGradeInput>;
     recommendations?: Nullable<RecommendationUncheckedCreateNestedManyWithoutGradeInput>;
@@ -7962,9 +7996,9 @@ export class GradeUncheckedCreateWithoutQuestionsInput {
     formId: string;
     id?: Nullable<string>;
     maxInclusive?: Nullable<boolean>;
-    maxValue: number;
+    maxValue?: Nullable<number>;
     minInclusive?: Nullable<boolean>;
-    minValue: number;
+    minValue?: Nullable<number>;
     name: string;
     recommendations?: Nullable<RecommendationUncheckedCreateNestedManyWithoutGradeInput>;
     responses?: Nullable<ResponseUncheckedCreateNestedManyWithoutGradeInput>;
@@ -7978,9 +8012,9 @@ export class GradeUncheckedCreateWithoutRecommendationsInput {
     formId: string;
     id?: Nullable<string>;
     maxInclusive?: Nullable<boolean>;
-    maxValue: number;
+    maxValue?: Nullable<number>;
     minInclusive?: Nullable<boolean>;
-    minValue: number;
+    minValue?: Nullable<number>;
     name: string;
     questions?: Nullable<QuestionUncheckedCreateNestedManyWithoutGradeInput>;
     responses?: Nullable<ResponseUncheckedCreateNestedManyWithoutGradeInput>;
@@ -7994,9 +8028,9 @@ export class GradeUncheckedCreateWithoutResponsesInput {
     formId: string;
     id?: Nullable<string>;
     maxInclusive?: Nullable<boolean>;
-    maxValue: number;
+    maxValue?: Nullable<number>;
     minInclusive?: Nullable<boolean>;
-    minValue: number;
+    minValue?: Nullable<number>;
     name: string;
     questions?: Nullable<QuestionUncheckedCreateNestedManyWithoutGradeInput>;
     recommendations?: Nullable<RecommendationUncheckedCreateNestedManyWithoutGradeInput>;
@@ -8010,9 +8044,9 @@ export class GradeUncheckedUpdateInput {
     formId?: Nullable<StringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     maxInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    maxValue?: Nullable<FloatFieldUpdateOperationsInput>;
+    maxValue?: Nullable<NullableFloatFieldUpdateOperationsInput>;
     minInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    minValue?: Nullable<FloatFieldUpdateOperationsInput>;
+    minValue?: Nullable<NullableFloatFieldUpdateOperationsInput>;
     name?: Nullable<StringFieldUpdateOperationsInput>;
     questions?: Nullable<QuestionUncheckedUpdateManyWithoutGradeInput>;
     recommendations?: Nullable<RecommendationUncheckedUpdateManyWithoutGradeInput>;
@@ -8026,9 +8060,9 @@ export class GradeUncheckedUpdateManyInput {
     formId?: Nullable<StringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     maxInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    maxValue?: Nullable<FloatFieldUpdateOperationsInput>;
+    maxValue?: Nullable<NullableFloatFieldUpdateOperationsInput>;
     minInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    minValue?: Nullable<FloatFieldUpdateOperationsInput>;
+    minValue?: Nullable<NullableFloatFieldUpdateOperationsInput>;
     name?: Nullable<StringFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
@@ -8052,9 +8086,9 @@ export class GradeUncheckedUpdateManyWithoutGradesInput {
     description?: Nullable<StringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     maxInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    maxValue?: Nullable<FloatFieldUpdateOperationsInput>;
+    maxValue?: Nullable<NullableFloatFieldUpdateOperationsInput>;
     minInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    minValue?: Nullable<FloatFieldUpdateOperationsInput>;
+    minValue?: Nullable<NullableFloatFieldUpdateOperationsInput>;
     name?: Nullable<StringFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
@@ -8065,9 +8099,9 @@ export class GradeUncheckedUpdateWithoutAttachmentsInput {
     formId?: Nullable<StringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     maxInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    maxValue?: Nullable<FloatFieldUpdateOperationsInput>;
+    maxValue?: Nullable<NullableFloatFieldUpdateOperationsInput>;
     minInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    minValue?: Nullable<FloatFieldUpdateOperationsInput>;
+    minValue?: Nullable<NullableFloatFieldUpdateOperationsInput>;
     name?: Nullable<StringFieldUpdateOperationsInput>;
     questions?: Nullable<QuestionUncheckedUpdateManyWithoutGradeInput>;
     recommendations?: Nullable<RecommendationUncheckedUpdateManyWithoutGradeInput>;
@@ -8081,9 +8115,9 @@ export class GradeUncheckedUpdateWithoutFormInput {
     description?: Nullable<StringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     maxInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    maxValue?: Nullable<FloatFieldUpdateOperationsInput>;
+    maxValue?: Nullable<NullableFloatFieldUpdateOperationsInput>;
     minInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    minValue?: Nullable<FloatFieldUpdateOperationsInput>;
+    minValue?: Nullable<NullableFloatFieldUpdateOperationsInput>;
     name?: Nullable<StringFieldUpdateOperationsInput>;
     questions?: Nullable<QuestionUncheckedUpdateManyWithoutGradeInput>;
     recommendations?: Nullable<RecommendationUncheckedUpdateManyWithoutGradeInput>;
@@ -8098,9 +8132,9 @@ export class GradeUncheckedUpdateWithoutQuestionsInput {
     formId?: Nullable<StringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     maxInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    maxValue?: Nullable<FloatFieldUpdateOperationsInput>;
+    maxValue?: Nullable<NullableFloatFieldUpdateOperationsInput>;
     minInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    minValue?: Nullable<FloatFieldUpdateOperationsInput>;
+    minValue?: Nullable<NullableFloatFieldUpdateOperationsInput>;
     name?: Nullable<StringFieldUpdateOperationsInput>;
     recommendations?: Nullable<RecommendationUncheckedUpdateManyWithoutGradeInput>;
     responses?: Nullable<ResponseUncheckedUpdateManyWithoutGradeInput>;
@@ -8114,9 +8148,9 @@ export class GradeUncheckedUpdateWithoutRecommendationsInput {
     formId?: Nullable<StringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     maxInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    maxValue?: Nullable<FloatFieldUpdateOperationsInput>;
+    maxValue?: Nullable<NullableFloatFieldUpdateOperationsInput>;
     minInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    minValue?: Nullable<FloatFieldUpdateOperationsInput>;
+    minValue?: Nullable<NullableFloatFieldUpdateOperationsInput>;
     name?: Nullable<StringFieldUpdateOperationsInput>;
     questions?: Nullable<QuestionUncheckedUpdateManyWithoutGradeInput>;
     responses?: Nullable<ResponseUncheckedUpdateManyWithoutGradeInput>;
@@ -8130,9 +8164,9 @@ export class GradeUncheckedUpdateWithoutResponsesInput {
     formId?: Nullable<StringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     maxInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    maxValue?: Nullable<FloatFieldUpdateOperationsInput>;
+    maxValue?: Nullable<NullableFloatFieldUpdateOperationsInput>;
     minInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    minValue?: Nullable<FloatFieldUpdateOperationsInput>;
+    minValue?: Nullable<NullableFloatFieldUpdateOperationsInput>;
     name?: Nullable<StringFieldUpdateOperationsInput>;
     questions?: Nullable<QuestionUncheckedUpdateManyWithoutGradeInput>;
     recommendations?: Nullable<RecommendationUncheckedUpdateManyWithoutGradeInput>;
@@ -8146,9 +8180,9 @@ export class GradeUpdateInput {
     form?: Nullable<FormUpdateOneRequiredWithoutGradesInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     maxInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    maxValue?: Nullable<FloatFieldUpdateOperationsInput>;
+    maxValue?: Nullable<NullableFloatFieldUpdateOperationsInput>;
     minInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    minValue?: Nullable<FloatFieldUpdateOperationsInput>;
+    minValue?: Nullable<NullableFloatFieldUpdateOperationsInput>;
     name?: Nullable<StringFieldUpdateOperationsInput>;
     questions?: Nullable<QuestionUpdateManyWithoutGradeInput>;
     recommendations?: Nullable<RecommendationUpdateManyWithoutGradeInput>;
@@ -8161,9 +8195,9 @@ export class GradeUpdateManyMutationInput {
     description?: Nullable<StringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     maxInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    maxValue?: Nullable<FloatFieldUpdateOperationsInput>;
+    maxValue?: Nullable<NullableFloatFieldUpdateOperationsInput>;
     minInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    minValue?: Nullable<FloatFieldUpdateOperationsInput>;
+    minValue?: Nullable<NullableFloatFieldUpdateOperationsInput>;
     name?: Nullable<StringFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
@@ -8234,9 +8268,9 @@ export class GradeUpdateWithoutAttachmentsInput {
     form?: Nullable<FormUpdateOneRequiredWithoutGradesInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     maxInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    maxValue?: Nullable<FloatFieldUpdateOperationsInput>;
+    maxValue?: Nullable<NullableFloatFieldUpdateOperationsInput>;
     minInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    minValue?: Nullable<FloatFieldUpdateOperationsInput>;
+    minValue?: Nullable<NullableFloatFieldUpdateOperationsInput>;
     name?: Nullable<StringFieldUpdateOperationsInput>;
     questions?: Nullable<QuestionUpdateManyWithoutGradeInput>;
     recommendations?: Nullable<RecommendationUpdateManyWithoutGradeInput>;
@@ -8250,9 +8284,9 @@ export class GradeUpdateWithoutFormInput {
     description?: Nullable<StringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     maxInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    maxValue?: Nullable<FloatFieldUpdateOperationsInput>;
+    maxValue?: Nullable<NullableFloatFieldUpdateOperationsInput>;
     minInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    minValue?: Nullable<FloatFieldUpdateOperationsInput>;
+    minValue?: Nullable<NullableFloatFieldUpdateOperationsInput>;
     name?: Nullable<StringFieldUpdateOperationsInput>;
     questions?: Nullable<QuestionUpdateManyWithoutGradeInput>;
     recommendations?: Nullable<RecommendationUpdateManyWithoutGradeInput>;
@@ -8267,9 +8301,9 @@ export class GradeUpdateWithoutQuestionsInput {
     form?: Nullable<FormUpdateOneRequiredWithoutGradesInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     maxInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    maxValue?: Nullable<FloatFieldUpdateOperationsInput>;
+    maxValue?: Nullable<NullableFloatFieldUpdateOperationsInput>;
     minInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    minValue?: Nullable<FloatFieldUpdateOperationsInput>;
+    minValue?: Nullable<NullableFloatFieldUpdateOperationsInput>;
     name?: Nullable<StringFieldUpdateOperationsInput>;
     recommendations?: Nullable<RecommendationUpdateManyWithoutGradeInput>;
     responses?: Nullable<ResponseUpdateManyWithoutGradeInput>;
@@ -8283,9 +8317,9 @@ export class GradeUpdateWithoutRecommendationsInput {
     form?: Nullable<FormUpdateOneRequiredWithoutGradesInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     maxInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    maxValue?: Nullable<FloatFieldUpdateOperationsInput>;
+    maxValue?: Nullable<NullableFloatFieldUpdateOperationsInput>;
     minInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    minValue?: Nullable<FloatFieldUpdateOperationsInput>;
+    minValue?: Nullable<NullableFloatFieldUpdateOperationsInput>;
     name?: Nullable<StringFieldUpdateOperationsInput>;
     questions?: Nullable<QuestionUpdateManyWithoutGradeInput>;
     responses?: Nullable<ResponseUpdateManyWithoutGradeInput>;
@@ -8299,9 +8333,9 @@ export class GradeUpdateWithoutResponsesInput {
     form?: Nullable<FormUpdateOneRequiredWithoutGradesInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     maxInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    maxValue?: Nullable<FloatFieldUpdateOperationsInput>;
+    maxValue?: Nullable<NullableFloatFieldUpdateOperationsInput>;
     minInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    minValue?: Nullable<FloatFieldUpdateOperationsInput>;
+    minValue?: Nullable<NullableFloatFieldUpdateOperationsInput>;
     name?: Nullable<StringFieldUpdateOperationsInput>;
     questions?: Nullable<QuestionUpdateManyWithoutGradeInput>;
     recommendations?: Nullable<RecommendationUpdateManyWithoutGradeInput>;
@@ -8345,9 +8379,9 @@ export class GradeWhereInput {
     formId?: Nullable<StringFilter>;
     id?: Nullable<StringFilter>;
     maxInclusive?: Nullable<BoolFilter>;
-    maxValue?: Nullable<FloatFilter>;
+    maxValue?: Nullable<FloatNullableFilter>;
     minInclusive?: Nullable<BoolFilter>;
-    minValue?: Nullable<FloatFilter>;
+    minValue?: Nullable<FloatNullableFilter>;
     name?: Nullable<StringFilter>;
     questions?: Nullable<QuestionListRelationFilter>;
     recommendations?: Nullable<RecommendationListRelationFilter>;
@@ -9478,6 +9512,38 @@ export class NestedFloatFilter {
     notIn?: Nullable<number[]>;
 }
 
+export class NestedFloatNullableFilter {
+    equals?: Nullable<number>;
+    gt?: Nullable<number>;
+    gte?: Nullable<number>;
+    in?: Nullable<number[]>;
+    lt?: Nullable<number>;
+    lte?: Nullable<number>;
+    not?: Nullable<NestedFloatNullableFilter>;
+    notIn?: Nullable<number[]>;
+}
+
+export class NestedFloatNullableWithAggregatesFilter {
+    _avg?: Nullable<NestedFloatNullableFilter>;
+    _count?: Nullable<NestedIntNullableFilter>;
+    _max?: Nullable<NestedFloatNullableFilter>;
+    _min?: Nullable<NestedFloatNullableFilter>;
+    _sum?: Nullable<NestedFloatNullableFilter>;
+    avg?: Nullable<NestedFloatNullableFilter>;
+    count?: Nullable<NestedIntNullableFilter>;
+    equals?: Nullable<number>;
+    gt?: Nullable<number>;
+    gte?: Nullable<number>;
+    in?: Nullable<number[]>;
+    lt?: Nullable<number>;
+    lte?: Nullable<number>;
+    max?: Nullable<NestedFloatNullableFilter>;
+    min?: Nullable<NestedFloatNullableFilter>;
+    not?: Nullable<NestedFloatNullableWithAggregatesFilter>;
+    notIn?: Nullable<number[]>;
+    sum?: Nullable<NestedFloatNullableFilter>;
+}
+
 export class NestedFloatWithAggregatesFilter {
     _avg?: Nullable<NestedFloatFilter>;
     _count?: Nullable<NestedIntFilter>;
@@ -9612,6 +9678,14 @@ export class NestedStringWithAggregatesFilter {
 
 export class NullableBoolFieldUpdateOperationsInput {
     set?: Nullable<boolean>;
+}
+
+export class NullableFloatFieldUpdateOperationsInput {
+    decrement?: Nullable<number>;
+    divide?: Nullable<number>;
+    increment?: Nullable<number>;
+    multiply?: Nullable<number>;
+    set?: Nullable<number>;
 }
 
 export class NullableStringFieldUpdateOperationsInput {
@@ -10604,7 +10678,7 @@ export class QuestionCreateInput {
     answers?: Nullable<AnswerCreateNestedManyWithoutQuestionInput>;
     attachments?: Nullable<AttachmentCreateNestedManyWithoutQuestionInput>;
     createdAt?: Nullable<DateTime>;
-    form: FormCreateNestedOneWithoutQuestionsInput;
+    form?: Nullable<FormCreateNestedOneWithoutQuestionsInput>;
     grade: GradeCreateNestedOneWithoutQuestionsInput;
     id?: Nullable<string>;
     instruction?: Nullable<string>;
@@ -10634,7 +10708,7 @@ export class QuestionCreateManyFormInputEnvelope {
 
 export class QuestionCreateManyGradeInput {
     createdAt?: Nullable<DateTime>;
-    formId: string;
+    formId?: Nullable<string>;
     id?: Nullable<string>;
     instruction?: Nullable<string>;
     question: string;
@@ -10651,7 +10725,7 @@ export class QuestionCreateManyGradeInputEnvelope {
 
 export class QuestionCreateManyInput {
     createdAt?: Nullable<DateTime>;
-    formId: string;
+    formId?: Nullable<string>;
     gradeId: string;
     id?: Nullable<string>;
     instruction?: Nullable<string>;
@@ -10711,7 +10785,7 @@ export class QuestionCreateOrConnectWithoutGradeInput {
 export class QuestionCreateWithoutAnswersInput {
     attachments?: Nullable<AttachmentCreateNestedManyWithoutQuestionInput>;
     createdAt?: Nullable<DateTime>;
-    form: FormCreateNestedOneWithoutQuestionsInput;
+    form?: Nullable<FormCreateNestedOneWithoutQuestionsInput>;
     grade: GradeCreateNestedOneWithoutQuestionsInput;
     id?: Nullable<string>;
     instruction?: Nullable<string>;
@@ -10725,7 +10799,7 @@ export class QuestionCreateWithoutAnswersInput {
 export class QuestionCreateWithoutAttachmentsInput {
     answers?: Nullable<AnswerCreateNestedManyWithoutQuestionInput>;
     createdAt?: Nullable<DateTime>;
-    form: FormCreateNestedOneWithoutQuestionsInput;
+    form?: Nullable<FormCreateNestedOneWithoutQuestionsInput>;
     grade: GradeCreateNestedOneWithoutQuestionsInput;
     id?: Nullable<string>;
     instruction?: Nullable<string>;
@@ -10754,7 +10828,7 @@ export class QuestionCreateWithoutGradeInput {
     answers?: Nullable<AnswerCreateNestedManyWithoutQuestionInput>;
     attachments?: Nullable<AttachmentCreateNestedManyWithoutQuestionInput>;
     createdAt?: Nullable<DateTime>;
-    form: FormCreateNestedOneWithoutQuestionsInput;
+    form?: Nullable<FormCreateNestedOneWithoutQuestionsInput>;
     id?: Nullable<string>;
     instruction?: Nullable<string>;
     question: string;
@@ -10793,7 +10867,7 @@ export class QuestionScalarWhereInput {
     NOT?: Nullable<QuestionScalarWhereInput[]>;
     OR?: Nullable<QuestionScalarWhereInput[]>;
     createdAt?: Nullable<DateTimeFilter>;
-    formId?: Nullable<StringFilter>;
+    formId?: Nullable<StringNullableFilter>;
     gradeId?: Nullable<StringFilter>;
     id?: Nullable<StringFilter>;
     instruction?: Nullable<StringNullableFilter>;
@@ -10809,7 +10883,7 @@ export class QuestionScalarWhereWithAggregatesInput {
     NOT?: Nullable<QuestionScalarWhereWithAggregatesInput[]>;
     OR?: Nullable<QuestionScalarWhereWithAggregatesInput[]>;
     createdAt?: Nullable<DateTimeWithAggregatesFilter>;
-    formId?: Nullable<StringWithAggregatesFilter>;
+    formId?: Nullable<StringNullableWithAggregatesFilter>;
     gradeId?: Nullable<StringWithAggregatesFilter>;
     id?: Nullable<StringWithAggregatesFilter>;
     instruction?: Nullable<StringNullableWithAggregatesFilter>;
@@ -10824,7 +10898,7 @@ export class QuestionUncheckedCreateInput {
     answers?: Nullable<AnswerUncheckedCreateNestedManyWithoutQuestionInput>;
     attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutQuestionInput>;
     createdAt?: Nullable<DateTime>;
-    formId: string;
+    formId?: Nullable<string>;
     gradeId: string;
     id?: Nullable<string>;
     instruction?: Nullable<string>;
@@ -10852,7 +10926,7 @@ export class QuestionUncheckedCreateNestedManyWithoutGradeInput {
 export class QuestionUncheckedCreateWithoutAnswersInput {
     attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutQuestionInput>;
     createdAt?: Nullable<DateTime>;
-    formId: string;
+    formId?: Nullable<string>;
     gradeId: string;
     id?: Nullable<string>;
     instruction?: Nullable<string>;
@@ -10866,7 +10940,7 @@ export class QuestionUncheckedCreateWithoutAnswersInput {
 export class QuestionUncheckedCreateWithoutAttachmentsInput {
     answers?: Nullable<AnswerUncheckedCreateNestedManyWithoutQuestionInput>;
     createdAt?: Nullable<DateTime>;
-    formId: string;
+    formId?: Nullable<string>;
     gradeId: string;
     id?: Nullable<string>;
     instruction?: Nullable<string>;
@@ -10895,7 +10969,7 @@ export class QuestionUncheckedCreateWithoutGradeInput {
     answers?: Nullable<AnswerUncheckedCreateNestedManyWithoutQuestionInput>;
     attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutQuestionInput>;
     createdAt?: Nullable<DateTime>;
-    formId: string;
+    formId?: Nullable<string>;
     id?: Nullable<string>;
     instruction?: Nullable<string>;
     question: string;
@@ -10909,7 +10983,7 @@ export class QuestionUncheckedUpdateInput {
     answers?: Nullable<AnswerUncheckedUpdateManyWithoutQuestionInput>;
     attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutQuestionInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    formId?: Nullable<StringFieldUpdateOperationsInput>;
+    formId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     gradeId?: Nullable<StringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     instruction?: Nullable<NullableStringFieldUpdateOperationsInput>;
@@ -10922,7 +10996,7 @@ export class QuestionUncheckedUpdateInput {
 
 export class QuestionUncheckedUpdateManyInput {
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    formId?: Nullable<StringFieldUpdateOperationsInput>;
+    formId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     gradeId?: Nullable<StringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     instruction?: Nullable<NullableStringFieldUpdateOperationsInput>;
@@ -10976,7 +11050,7 @@ export class QuestionUncheckedUpdateManyWithoutQuestionsInput {
 export class QuestionUncheckedUpdateWithoutAnswersInput {
     attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutQuestionInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    formId?: Nullable<StringFieldUpdateOperationsInput>;
+    formId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     gradeId?: Nullable<StringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     instruction?: Nullable<NullableStringFieldUpdateOperationsInput>;
@@ -10990,7 +11064,7 @@ export class QuestionUncheckedUpdateWithoutAnswersInput {
 export class QuestionUncheckedUpdateWithoutAttachmentsInput {
     answers?: Nullable<AnswerUncheckedUpdateManyWithoutQuestionInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    formId?: Nullable<StringFieldUpdateOperationsInput>;
+    formId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     gradeId?: Nullable<StringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     instruction?: Nullable<NullableStringFieldUpdateOperationsInput>;
@@ -11019,7 +11093,7 @@ export class QuestionUncheckedUpdateWithoutGradeInput {
     answers?: Nullable<AnswerUncheckedUpdateManyWithoutQuestionInput>;
     attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutQuestionInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    formId?: Nullable<StringFieldUpdateOperationsInput>;
+    formId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     instruction?: Nullable<NullableStringFieldUpdateOperationsInput>;
     question?: Nullable<StringFieldUpdateOperationsInput>;
@@ -11033,7 +11107,7 @@ export class QuestionUpdateInput {
     answers?: Nullable<AnswerUpdateManyWithoutQuestionInput>;
     attachments?: Nullable<AttachmentUpdateManyWithoutQuestionInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    form?: Nullable<FormUpdateOneRequiredWithoutQuestionsInput>;
+    form?: Nullable<FormUpdateOneWithoutQuestionsInput>;
     grade?: Nullable<GradeUpdateOneRequiredWithoutQuestionsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     instruction?: Nullable<NullableStringFieldUpdateOperationsInput>;
@@ -11124,7 +11198,7 @@ export class QuestionUpdateWithWhereUniqueWithoutGradeInput {
 export class QuestionUpdateWithoutAnswersInput {
     attachments?: Nullable<AttachmentUpdateManyWithoutQuestionInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    form?: Nullable<FormUpdateOneRequiredWithoutQuestionsInput>;
+    form?: Nullable<FormUpdateOneWithoutQuestionsInput>;
     grade?: Nullable<GradeUpdateOneRequiredWithoutQuestionsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     instruction?: Nullable<NullableStringFieldUpdateOperationsInput>;
@@ -11138,7 +11212,7 @@ export class QuestionUpdateWithoutAnswersInput {
 export class QuestionUpdateWithoutAttachmentsInput {
     answers?: Nullable<AnswerUpdateManyWithoutQuestionInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    form?: Nullable<FormUpdateOneRequiredWithoutQuestionsInput>;
+    form?: Nullable<FormUpdateOneWithoutQuestionsInput>;
     grade?: Nullable<GradeUpdateOneRequiredWithoutQuestionsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     instruction?: Nullable<NullableStringFieldUpdateOperationsInput>;
@@ -11167,7 +11241,7 @@ export class QuestionUpdateWithoutGradeInput {
     answers?: Nullable<AnswerUpdateManyWithoutQuestionInput>;
     attachments?: Nullable<AttachmentUpdateManyWithoutQuestionInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    form?: Nullable<FormUpdateOneRequiredWithoutQuestionsInput>;
+    form?: Nullable<FormUpdateOneWithoutQuestionsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     instruction?: Nullable<NullableStringFieldUpdateOperationsInput>;
     question?: Nullable<StringFieldUpdateOperationsInput>;
@@ -11207,7 +11281,7 @@ export class QuestionWhereInput {
     attachments?: Nullable<AttachmentListRelationFilter>;
     createdAt?: Nullable<DateTimeFilter>;
     form?: Nullable<FormWhereInput>;
-    formId?: Nullable<StringFilter>;
+    formId?: Nullable<StringNullableFilter>;
     grade?: Nullable<GradeWhereInput>;
     gradeId?: Nullable<StringFilter>;
     id?: Nullable<StringFilter>;
@@ -16453,9 +16527,9 @@ export class Grade {
     formId: string;
     id: string;
     maxInclusive: boolean;
-    maxValue: number;
+    maxValue?: Nullable<number>;
     minInclusive: boolean;
-    minValue: number;
+    minValue?: Nullable<number>;
     name: string;
     questions: Question[];
     recommendations: Recommendation[];
@@ -16785,35 +16859,21 @@ export class MpesaPaymentResponse {
 }
 
 export abstract class IMutation {
-    abstract createOneAnswer(data: AnswerCreateInput): AnswerResponse | Promise<AnswerResponse>;
-
-    abstract createOneComment(data: CommentCreateInput): CommentResponse | Promise<CommentResponse>;
-
     abstract createOneForm(data: FormCreateInput): FormResponse | Promise<FormResponse>;
 
     abstract createOneFormCategory(data: FormCategoryCreateInput): FormCategoryResponse | Promise<FormCategoryResponse>;
 
     abstract createOneForum(data: ForumCreateInput): ForumResponse | Promise<ForumResponse>;
 
-    abstract createOneForumAnswer(data: ForumAnswerCreateInput): ForumAnswerResponse | Promise<ForumAnswerResponse>;
-
-    abstract createOneGrade(data: GradeCreateInput): GradeResponse | Promise<GradeResponse>;
-
     abstract createOneHelp(data: HelpCreateInput): HelpResponse | Promise<HelpResponse>;
 
-    abstract createOneHelpStep(data: HelpStepCreateInput): HelpStepResponse | Promise<HelpStepResponse>;
-
     abstract createOneOrder(data: OrderCreateInput): OrderResponse | Promise<OrderResponse>;
-
-    abstract createOnePaymentMethod(data: PaymentMethodCreateInput): PaymentMethodResponse | Promise<PaymentMethodResponse>;
-
-    abstract createOneQuestion(data: QuestionCreateInput): QuestionResponse | Promise<QuestionResponse>;
-
-    abstract createOneRecommendation(data: RecommendationCreateInput): RecommendationResponse | Promise<RecommendationResponse>;
 
     abstract createOneResponse(data: ResponseCreateInput): ResponseResponse | Promise<ResponseResponse>;
 
     abstract createOneService(data: ServiceCreateInput): ServiceResponse | Promise<ServiceResponse>;
+
+    abstract createOneUser(data: UserCreateInput): UserResponse | Promise<UserResponse>;
 
     abstract paybill(data?: Nullable<PaybillRequest>): PaybillResponse | Promise<PaybillResponse>;
 
@@ -16827,31 +16887,15 @@ export abstract class IMutation {
 
     abstract signup(credentials: SignupInput): AuthResult | Promise<AuthResult>;
 
-    abstract updateOneAnswer(data: AnswerUpdateInput, where: AnswerWhereUniqueInput): AnswerResponse | Promise<AnswerResponse>;
-
-    abstract updateOneComment(data: CommentUpdateInput, where: CommentWhereUniqueInput): CommentResponse | Promise<CommentResponse>;
-
     abstract updateOneForm(data: FormUpdateInput, where: FormWhereUniqueInput): FormResponse | Promise<FormResponse>;
 
     abstract updateOneFormCategory(data: FormCategoryUpdateInput, where: FormCategoryWhereUniqueInput): FormCategoryResponse | Promise<FormCategoryResponse>;
 
     abstract updateOneForum(data: ForumUpdateInput, where: ForumWhereUniqueInput): ForumResponse | Promise<ForumResponse>;
 
-    abstract updateOneForumAnswer(data: ForumAnswerUpdateInput, where: ForumAnswerWhereUniqueInput): ForumAnswerResponse | Promise<ForumAnswerResponse>;
-
-    abstract updateOneGrade(data: GradeUpdateInput, where: GradeWhereUniqueInput): GradeResponse | Promise<GradeResponse>;
-
     abstract updateOneHelp(data: HelpUpdateInput, where: HelpWhereUniqueInput): HelpResponse | Promise<HelpResponse>;
 
-    abstract updateOneHelpStep(data: HelpStepUpdateInput, where: HelpStepWhereUniqueInput): HelpStepResponse | Promise<HelpStepResponse>;
-
     abstract updateOneOrder(data: OrderUpdateInput, where: OrderWhereUniqueInput): OrderResponse | Promise<OrderResponse>;
-
-    abstract updateOnePaymentMethod(data: PaymentMethodUpdateInput, where: PaymentMethodWhereUniqueInput): PaymentMethodResponse | Promise<PaymentMethodResponse>;
-
-    abstract updateOneQuestion(data: QuestionUpdateInput, where: QuestionWhereUniqueInput): QuestionResponse | Promise<QuestionResponse>;
-
-    abstract updateOneRecommendation(data: RecommendationUpdateInput, where: RecommendationWhereUniqueInput): RecommendationResponse | Promise<RecommendationResponse>;
 
     abstract updateOneResponse(data: ResponseUpdateInput, where: ResponseWhereUniqueInput): ResponseResponse | Promise<ResponseResponse>;
 
@@ -17031,63 +17075,17 @@ export class PaymentMethodResponse {
 }
 
 export abstract class IQuery {
-    abstract findFirstAnswer(cursor?: Nullable<AnswerWhereUniqueInput>, distinct?: Nullable<AnswerScalarFieldEnum[]>, orderBy?: Nullable<AnswerOrderByInput[]>, skip?: Nullable<number>, take?: Nullable<number>, where?: Nullable<AnswerWhereInput>): AnswerResponse | Promise<AnswerResponse>;
-
-    abstract findFirstComment(cursor?: Nullable<CommentWhereUniqueInput>, distinct?: Nullable<CommentScalarFieldEnum[]>, orderBy?: Nullable<CommentOrderByInput[]>, skip?: Nullable<number>, take?: Nullable<number>, where?: Nullable<CommentWhereInput>): CommentResponse | Promise<CommentResponse>;
-
-    abstract findFirstForm(cursor?: Nullable<FormWhereUniqueInput>, distinct?: Nullable<FormScalarFieldEnum[]>, orderBy?: Nullable<FormOrderByInput[]>, skip?: Nullable<number>, take?: Nullable<number>, where?: Nullable<FormWhereInput>): FormResponse | Promise<FormResponse>;
-
-    abstract findFirstFormCategory(cursor?: Nullable<FormCategoryWhereUniqueInput>, distinct?: Nullable<FormCategoryScalarFieldEnum[]>, orderBy?: Nullable<FormCategoryOrderByInput[]>, skip?: Nullable<number>, take?: Nullable<number>, where?: Nullable<FormCategoryWhereInput>): FormCategoryResponse | Promise<FormCategoryResponse>;
-
-    abstract findFirstForum(cursor?: Nullable<ForumWhereUniqueInput>, distinct?: Nullable<ForumScalarFieldEnum[]>, orderBy?: Nullable<ForumOrderByInput[]>, skip?: Nullable<number>, take?: Nullable<number>, where?: Nullable<ForumWhereInput>): ForumResponse | Promise<ForumResponse>;
-
-    abstract findFirstForumAnswer(cursor?: Nullable<ForumAnswerWhereUniqueInput>, distinct?: Nullable<ForumAnswerScalarFieldEnum[]>, orderBy?: Nullable<ForumAnswerOrderByInput[]>, skip?: Nullable<number>, take?: Nullable<number>, where?: Nullable<ForumAnswerWhereInput>): ForumAnswerResponse | Promise<ForumAnswerResponse>;
-
-    abstract findFirstGrade(cursor?: Nullable<GradeWhereUniqueInput>, distinct?: Nullable<GradeScalarFieldEnum[]>, orderBy?: Nullable<GradeOrderByInput[]>, skip?: Nullable<number>, take?: Nullable<number>, where?: Nullable<GradeWhereInput>): GradeResponse | Promise<GradeResponse>;
-
-    abstract findFirstHelp(cursor?: Nullable<HelpWhereUniqueInput>, distinct?: Nullable<HelpScalarFieldEnum[]>, orderBy?: Nullable<HelpOrderByInput[]>, skip?: Nullable<number>, take?: Nullable<number>, where?: Nullable<HelpWhereInput>): HelpResponse | Promise<HelpResponse>;
-
-    abstract findFirstHelpStep(cursor?: Nullable<HelpStepWhereUniqueInput>, distinct?: Nullable<HelpStepScalarFieldEnum[]>, orderBy?: Nullable<HelpStepOrderByInput[]>, skip?: Nullable<number>, take?: Nullable<number>, where?: Nullable<HelpStepWhereInput>): HelpStepResponse | Promise<HelpStepResponse>;
-
-    abstract findFirstOrder(cursor?: Nullable<OrderWhereUniqueInput>, distinct?: Nullable<OrderScalarFieldEnum[]>, orderBy?: Nullable<OrderOrderByInput[]>, skip?: Nullable<number>, take?: Nullable<number>, where?: Nullable<OrderWhereInput>): OrderResponse | Promise<OrderResponse>;
-
-    abstract findFirstPaymentMethod(cursor?: Nullable<PaymentMethodWhereUniqueInput>, distinct?: Nullable<PaymentMethodScalarFieldEnum[]>, orderBy?: Nullable<PaymentMethodOrderByInput[]>, skip?: Nullable<number>, take?: Nullable<number>, where?: Nullable<PaymentMethodWhereInput>): PaymentMethodResponse | Promise<PaymentMethodResponse>;
-
-    abstract findFirstQuestion(cursor?: Nullable<QuestionWhereUniqueInput>, distinct?: Nullable<QuestionScalarFieldEnum[]>, orderBy?: Nullable<QuestionOrderByInput[]>, skip?: Nullable<number>, take?: Nullable<number>, where?: Nullable<QuestionWhereInput>): QuestionResponse | Promise<QuestionResponse>;
-
-    abstract findFirstRecommendation(cursor?: Nullable<RecommendationWhereUniqueInput>, distinct?: Nullable<RecommendationScalarFieldEnum[]>, orderBy?: Nullable<RecommendationOrderByInput[]>, skip?: Nullable<number>, take?: Nullable<number>, where?: Nullable<RecommendationWhereInput>): RecommendationResponse | Promise<RecommendationResponse>;
-
-    abstract findFirstResponse(cursor?: Nullable<ResponseWhereUniqueInput>, distinct?: Nullable<ResponseScalarFieldEnum[]>, orderBy?: Nullable<ResponseOrderByInput[]>, skip?: Nullable<number>, take?: Nullable<number>, where?: Nullable<ResponseWhereInput>): ResponseResponse | Promise<ResponseResponse>;
-
-    abstract findFirstService(cursor?: Nullable<ServiceWhereUniqueInput>, distinct?: Nullable<ServiceScalarFieldEnum[]>, orderBy?: Nullable<ServiceOrderByInput[]>, skip?: Nullable<number>, take?: Nullable<number>, where?: Nullable<ServiceWhereInput>): ServiceResponse | Promise<ServiceResponse>;
-
-    abstract findFirstUser(cursor?: Nullable<UserWhereUniqueInput>, distinct?: Nullable<UserScalarFieldEnum[]>, orderBy?: Nullable<UserOrderByInput[]>, skip?: Nullable<number>, take?: Nullable<number>, where?: Nullable<UserWhereInput>): UserResponse | Promise<UserResponse>;
-
-    abstract findManyAnswer(cursor?: Nullable<AnswerWhereUniqueInput>, distinct?: Nullable<AnswerScalarFieldEnum[]>, orderBy?: Nullable<AnswerOrderByInput[]>, skip?: Nullable<number>, take?: Nullable<number>, where?: Nullable<AnswerWhereInput>): AnswerListResponse | Promise<AnswerListResponse>;
-
-    abstract findManyComment(cursor?: Nullable<CommentWhereUniqueInput>, distinct?: Nullable<CommentScalarFieldEnum[]>, orderBy?: Nullable<CommentOrderByInput[]>, skip?: Nullable<number>, take?: Nullable<number>, where?: Nullable<CommentWhereInput>): CommentListResponse | Promise<CommentListResponse>;
-
     abstract findManyForm(cursor?: Nullable<FormWhereUniqueInput>, distinct?: Nullable<FormScalarFieldEnum[]>, orderBy?: Nullable<FormOrderByInput[]>, skip?: Nullable<number>, take?: Nullable<number>, where?: Nullable<FormWhereInput>): FormListResponse | Promise<FormListResponse>;
 
     abstract findManyFormCategory(cursor?: Nullable<FormCategoryWhereUniqueInput>, distinct?: Nullable<FormCategoryScalarFieldEnum[]>, orderBy?: Nullable<FormCategoryOrderByInput[]>, skip?: Nullable<number>, take?: Nullable<number>, where?: Nullable<FormCategoryWhereInput>): FormCategoryListResponse | Promise<FormCategoryListResponse>;
 
     abstract findManyForum(cursor?: Nullable<ForumWhereUniqueInput>, distinct?: Nullable<ForumScalarFieldEnum[]>, orderBy?: Nullable<ForumOrderByInput[]>, skip?: Nullable<number>, take?: Nullable<number>, where?: Nullable<ForumWhereInput>): ForumListResponse | Promise<ForumListResponse>;
 
-    abstract findManyForumAnswer(cursor?: Nullable<ForumAnswerWhereUniqueInput>, distinct?: Nullable<ForumAnswerScalarFieldEnum[]>, orderBy?: Nullable<ForumAnswerOrderByInput[]>, skip?: Nullable<number>, take?: Nullable<number>, where?: Nullable<ForumAnswerWhereInput>): ForumAnswerListResponse | Promise<ForumAnswerListResponse>;
-
-    abstract findManyGrade(cursor?: Nullable<GradeWhereUniqueInput>, distinct?: Nullable<GradeScalarFieldEnum[]>, orderBy?: Nullable<GradeOrderByInput[]>, skip?: Nullable<number>, take?: Nullable<number>, where?: Nullable<GradeWhereInput>): GradeListResponse | Promise<GradeListResponse>;
-
     abstract findManyHelp(cursor?: Nullable<HelpWhereUniqueInput>, distinct?: Nullable<HelpScalarFieldEnum[]>, orderBy?: Nullable<HelpOrderByInput[]>, skip?: Nullable<number>, take?: Nullable<number>, where?: Nullable<HelpWhereInput>): HelpListResponse | Promise<HelpListResponse>;
-
-    abstract findManyHelpStep(cursor?: Nullable<HelpStepWhereUniqueInput>, distinct?: Nullable<HelpStepScalarFieldEnum[]>, orderBy?: Nullable<HelpStepOrderByInput[]>, skip?: Nullable<number>, take?: Nullable<number>, where?: Nullable<HelpStepWhereInput>): HelpStepListResponse | Promise<HelpStepListResponse>;
 
     abstract findManyOrder(cursor?: Nullable<OrderWhereUniqueInput>, distinct?: Nullable<OrderScalarFieldEnum[]>, orderBy?: Nullable<OrderOrderByInput[]>, skip?: Nullable<number>, take?: Nullable<number>, where?: Nullable<OrderWhereInput>): OrderListResponse | Promise<OrderListResponse>;
 
     abstract findManyPaymentMethod(cursor?: Nullable<PaymentMethodWhereUniqueInput>, distinct?: Nullable<PaymentMethodScalarFieldEnum[]>, orderBy?: Nullable<PaymentMethodOrderByInput[]>, skip?: Nullable<number>, take?: Nullable<number>, where?: Nullable<PaymentMethodWhereInput>): PaymentMethodListResponse | Promise<PaymentMethodListResponse>;
-
-    abstract findManyQuestion(cursor?: Nullable<QuestionWhereUniqueInput>, distinct?: Nullable<QuestionScalarFieldEnum[]>, orderBy?: Nullable<QuestionOrderByInput[]>, skip?: Nullable<number>, take?: Nullable<number>, where?: Nullable<QuestionWhereInput>): QuestionListResponse | Promise<QuestionListResponse>;
-
-    abstract findManyRecommendation(cursor?: Nullable<RecommendationWhereUniqueInput>, distinct?: Nullable<RecommendationScalarFieldEnum[]>, orderBy?: Nullable<RecommendationOrderByInput[]>, skip?: Nullable<number>, take?: Nullable<number>, where?: Nullable<RecommendationWhereInput>): RecommendationListResponse | Promise<RecommendationListResponse>;
 
     abstract findManyResponse(cursor?: Nullable<ResponseWhereUniqueInput>, distinct?: Nullable<ResponseScalarFieldEnum[]>, orderBy?: Nullable<ResponseOrderByInput[]>, skip?: Nullable<number>, take?: Nullable<number>, where?: Nullable<ResponseWhereInput>): ResponseListResponse | Promise<ResponseListResponse>;
 
@@ -17095,31 +17093,17 @@ export abstract class IQuery {
 
     abstract findManyUser(cursor?: Nullable<UserWhereUniqueInput>, distinct?: Nullable<UserScalarFieldEnum[]>, orderBy?: Nullable<UserOrderByInput[]>, skip?: Nullable<number>, take?: Nullable<number>, where?: Nullable<UserWhereInput>): UserListResponse | Promise<UserListResponse>;
 
-    abstract findUniqueAnswer(where: AnswerWhereUniqueInput): AnswerResponse | Promise<AnswerResponse>;
-
-    abstract findUniqueComment(where: CommentWhereUniqueInput): CommentResponse | Promise<CommentResponse>;
-
     abstract findUniqueForm(where: FormWhereUniqueInput): FormResponse | Promise<FormResponse>;
 
     abstract findUniqueFormCategory(where: FormCategoryWhereUniqueInput): FormCategoryResponse | Promise<FormCategoryResponse>;
 
     abstract findUniqueForum(where: ForumWhereUniqueInput): ForumResponse | Promise<ForumResponse>;
 
-    abstract findUniqueForumAnswer(where: ForumAnswerWhereUniqueInput): ForumAnswerResponse | Promise<ForumAnswerResponse>;
-
-    abstract findUniqueGrade(where: GradeWhereUniqueInput): GradeResponse | Promise<GradeResponse>;
-
     abstract findUniqueHelp(where: HelpWhereUniqueInput): HelpResponse | Promise<HelpResponse>;
-
-    abstract findUniqueHelpStep(where: HelpStepWhereUniqueInput): HelpStepResponse | Promise<HelpStepResponse>;
 
     abstract findUniqueOrder(where: OrderWhereUniqueInput): OrderResponse | Promise<OrderResponse>;
 
     abstract findUniquePaymentMethod(where: PaymentMethodWhereUniqueInput): PaymentMethodResponse | Promise<PaymentMethodResponse>;
-
-    abstract findUniqueQuestion(where: QuestionWhereUniqueInput): QuestionResponse | Promise<QuestionResponse>;
-
-    abstract findUniqueRecommendation(where: RecommendationWhereUniqueInput): RecommendationResponse | Promise<RecommendationResponse>;
 
     abstract findUniqueResponse(where: ResponseWhereUniqueInput): ResponseResponse | Promise<ResponseResponse>;
 
@@ -17134,8 +17118,8 @@ export class Question {
     answers: Answer[];
     attachments: Attachment[];
     createdAt: DateTime;
-    form: Form;
-    formId: string;
+    form?: Nullable<Form>;
+    formId?: Nullable<string>;
     grade: Grade;
     gradeId: string;
     id: string;

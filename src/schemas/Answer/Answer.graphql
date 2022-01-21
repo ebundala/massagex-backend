@@ -45,29 +45,4 @@ type Answer {
         data: Int
         message: String!
       }
-      extend type Query {
-    findUniqueAnswer(where: AnswerWhereUniqueInput!): AnswerResponse!
-    findFirstAnswer(
-      where: AnswerWhereInput
-      orderBy: [AnswerOrderByInput!]
-      cursor: AnswerWhereUniqueInput
-      distinct: [AnswerScalarFieldEnum!]
-      skip: Int
-      take: Int
-    ): AnswerResponse!
-    findManyAnswer(
-      where: AnswerWhereInput
-      orderBy: [AnswerOrderByInput!]
-      cursor: AnswerWhereUniqueInput
-      distinct: [AnswerScalarFieldEnum!]
-      skip: Int
-      take: Int
-    ): AnswerListResponse!
-  }
-extend type Mutation {
-    createOneAnswer(data: AnswerCreateInput!): AnswerResponse!
-    updateOneAnswer(
-      where: AnswerWhereUniqueInput!
-      data: AnswerUpdateInput!
-    ): AnswerResponse!
-  }
+      

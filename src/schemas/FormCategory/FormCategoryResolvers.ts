@@ -47,21 +47,6 @@
        message:message||'unknown error'
       }))
     }
-    @Query((returns)=>FormCategoryResponse)
-    findFirstFormCategory(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info):Promise<FormCategoryResponse|any>{
-      const select = ctx.prisma.getSelection(info).valueOf('data', 'FormCategory', { select: {  } });
-      return ctx.prisma.formCategory.findFirst({...args,...select})
-      .then((data)=>({
-        status:true,
-        data,
-        message:'ok'
-      })).catch(({message})=>({
-       status:false,
-       data:[],
-       message:message||'unknown error'
-      }));
-      
-    }
     @Query((returns)=>FormCategoryListResponse)
     findManyFormCategory(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info):Promise<FormCategoryListResponse|any>{
       const select = ctx.prisma.getSelection(info).valueOf('data', 'FormCategory', { select: {  } });

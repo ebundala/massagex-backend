@@ -44,14 +44,6 @@ type Help {
       }
       extend type Query {
     findUniqueHelp(where: HelpWhereUniqueInput!): HelpResponse!
-    findFirstHelp(
-      where: HelpWhereInput
-      orderBy: [HelpOrderByInput!]
-      cursor: HelpWhereUniqueInput
-      distinct: [HelpScalarFieldEnum!]
-      skip: Int
-      take: Int
-    ): HelpResponse!
     findManyHelp(
       where: HelpWhereInput
       orderBy: [HelpOrderByInput!]

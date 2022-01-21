@@ -47,21 +47,6 @@
        message:message||'unknown error'
       }))
     }
-    @Query((returns)=>ForumResponse)
-    findFirstForum(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info):Promise<ForumResponse|any>{
-      const select = ctx.prisma.getSelection(info).valueOf('data', 'Forum', { select: {  } });
-      return ctx.prisma.forum.findFirst({...args,...select})
-      .then((data)=>({
-        status:true,
-        data,
-        message:'ok'
-      })).catch(({message})=>({
-       status:false,
-       data:[],
-       message:message||'unknown error'
-      }));
-      
-    }
     @Query((returns)=>ForumListResponse)
     findManyForum(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info):Promise<ForumListResponse|any>{
       const select = ctx.prisma.getSelection(info).valueOf('data', 'Forum', { select: {  } });

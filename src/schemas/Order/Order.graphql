@@ -50,14 +50,6 @@ type Order {
       }
       extend type Query {
     findUniqueOrder(where: OrderWhereUniqueInput!): OrderResponse!
-    findFirstOrder(
-      where: OrderWhereInput
-      orderBy: [OrderOrderByInput!]
-      cursor: OrderWhereUniqueInput
-      distinct: [OrderScalarFieldEnum!]
-      skip: Int
-      take: Int
-    ): OrderResponse!
     findManyOrder(
       where: OrderWhereInput
       orderBy: [OrderOrderByInput!]

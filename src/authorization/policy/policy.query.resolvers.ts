@@ -11,63 +11,7 @@ export class PolicyQueryResolver {
   
 @Query()
 @UseGuards(AuthorizerGuard)
-findUniqueAnswer(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Query()
-@UseGuards(AuthorizerGuard)
-findFirstAnswer(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Query()
-@UseGuards(AuthorizerGuard)
-findManyAnswer(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Query()
-@UseGuards(AuthorizerGuard)
-findUniqueComment(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Query()
-@UseGuards(AuthorizerGuard)
-findFirstComment(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Query()
-@UseGuards(AuthorizerGuard)
-findManyComment(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Query()
-@UseGuards(AuthorizerGuard)
 findUniqueForm(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Query()
-@UseGuards(AuthorizerGuard)
-findFirstForm(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
     return this.service.handle(parent, args, ctx, info);
   }
 
@@ -91,14 +35,6 @@ findUniqueFormCategory(@Parent() parent, @Args() args, @Context() ctx: TenantCon
 
 @Query()
 @UseGuards(AuthorizerGuard)
-findFirstFormCategory(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Query()
-@UseGuards(AuthorizerGuard)
 findManyFormCategory(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
     return this.service.handle(parent, args, ctx, info);
   }
@@ -115,63 +51,7 @@ findUniqueForum(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @
 
 @Query()
 @UseGuards(AuthorizerGuard)
-findFirstForum(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Query()
-@UseGuards(AuthorizerGuard)
 findManyForum(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Query()
-@UseGuards(AuthorizerGuard)
-findUniqueForumAnswer(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Query()
-@UseGuards(AuthorizerGuard)
-findFirstForumAnswer(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Query()
-@UseGuards(AuthorizerGuard)
-findManyForumAnswer(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Query()
-@UseGuards(AuthorizerGuard)
-findUniqueGrade(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Query()
-@UseGuards(AuthorizerGuard)
-findFirstGrade(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Query()
-@UseGuards(AuthorizerGuard)
-findManyGrade(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
     return this.service.handle(parent, args, ctx, info);
   }
 
@@ -187,14 +67,6 @@ findUniqueHelp(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @I
 
 @Query()
 @UseGuards(AuthorizerGuard)
-findFirstHelp(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Query()
-@UseGuards(AuthorizerGuard)
 findManyHelp(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
     return this.service.handle(parent, args, ctx, info);
   }
@@ -203,39 +75,7 @@ findManyHelp(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Inf
 
 @Query()
 @UseGuards(AuthorizerGuard)
-findUniqueHelpStep(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Query()
-@UseGuards(AuthorizerGuard)
-findFirstHelpStep(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Query()
-@UseGuards(AuthorizerGuard)
-findManyHelpStep(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Query()
-@UseGuards(AuthorizerGuard)
 findUniqueOrder(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Query()
-@UseGuards(AuthorizerGuard)
-findFirstOrder(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
     return this.service.handle(parent, args, ctx, info);
   }
 
@@ -259,14 +99,6 @@ findUniquePaymentMethod(@Parent() parent, @Args() args, @Context() ctx: TenantCo
 
 @Query()
 @UseGuards(AuthorizerGuard)
-findFirstPaymentMethod(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Query()
-@UseGuards(AuthorizerGuard)
 findManyPaymentMethod(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
     return this.service.handle(parent, args, ctx, info);
   }
@@ -275,63 +107,7 @@ findManyPaymentMethod(@Parent() parent, @Args() args, @Context() ctx: TenantCont
 
 @Query()
 @UseGuards(AuthorizerGuard)
-findUniqueQuestion(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Query()
-@UseGuards(AuthorizerGuard)
-findFirstQuestion(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Query()
-@UseGuards(AuthorizerGuard)
-findManyQuestion(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Query()
-@UseGuards(AuthorizerGuard)
-findUniqueRecommendation(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Query()
-@UseGuards(AuthorizerGuard)
-findFirstRecommendation(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Query()
-@UseGuards(AuthorizerGuard)
-findManyRecommendation(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Query()
-@UseGuards(AuthorizerGuard)
 findUniqueResponse(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Query()
-@UseGuards(AuthorizerGuard)
-findFirstResponse(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
     return this.service.handle(parent, args, ctx, info);
   }
 
@@ -355,14 +131,6 @@ findUniqueService(@Parent() parent, @Args() args, @Context() ctx: TenantContext,
 
 @Query()
 @UseGuards(AuthorizerGuard)
-findFirstService(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Query()
-@UseGuards(AuthorizerGuard)
 findManyService(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
     return this.service.handle(parent, args, ctx, info);
   }
@@ -372,14 +140,6 @@ findManyService(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @
 @Query()
 @UseGuards(AuthorizerGuard)
 findUniqueUser(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Query()
-@UseGuards(AuthorizerGuard)
-findFirstUser(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
     return this.service.handle(parent, args, ctx, info);
   }
 

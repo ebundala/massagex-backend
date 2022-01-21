@@ -47,21 +47,6 @@
        message:message||'unknown error'
       }))
     }
-    @Query((returns)=>PaymentMethodResponse)
-    findFirstPaymentMethod(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info):Promise<PaymentMethodResponse|any>{
-      const select = ctx.prisma.getSelection(info).valueOf('data', 'PaymentMethod', { select: {  } });
-      return ctx.prisma.paymentMethod.findFirst({...args,...select})
-      .then((data)=>({
-        status:true,
-        data,
-        message:'ok'
-      })).catch(({message})=>({
-       status:false,
-       data:[],
-       message:message||'unknown error'
-      }));
-      
-    }
     @Query((returns)=>PaymentMethodListResponse)
     findManyPaymentMethod(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info):Promise<PaymentMethodListResponse|any>{
       const select = ctx.prisma.getSelection(info).valueOf('data', 'PaymentMethod', { select: {  } });

@@ -30,4 +30,6 @@
       @Resolver((of)=>Transaction)
       @UseGuards(AuthorizerGuard)
       export class TransactionResolver {
+          
+         
         }

@@ -43,29 +43,4 @@ type Recommendation {
         data: Int
         message: String!
       }
-      extend type Query {
-    findUniqueRecommendation(where: RecommendationWhereUniqueInput!): RecommendationResponse!
-    findFirstRecommendation(
-      where: RecommendationWhereInput
-      orderBy: [RecommendationOrderByInput!]
-      cursor: RecommendationWhereUniqueInput
-      distinct: [RecommendationScalarFieldEnum!]
-      skip: Int
-      take: Int
-    ): RecommendationResponse!
-    findManyRecommendation(
-      where: RecommendationWhereInput
-      orderBy: [RecommendationOrderByInput!]
-      cursor: RecommendationWhereUniqueInput
-      distinct: [RecommendationScalarFieldEnum!]
-      skip: Int
-      take: Int
-    ): RecommendationListResponse!
-  }
-extend type Mutation {
-    createOneRecommendation(data: RecommendationCreateInput!): RecommendationResponse!
-    updateOneRecommendation(
-      where: RecommendationWhereUniqueInput!
-      data: RecommendationUpdateInput!
-    ): RecommendationResponse!
-  }
+      

@@ -47,21 +47,6 @@
        message:message||'unknown error'
       }))
     }
-    @Query((returns)=>OrderResponse)
-    findFirstOrder(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info):Promise<OrderResponse|any>{
-      const select = ctx.prisma.getSelection(info).valueOf('data', 'Order', { select: {  } });
-      return ctx.prisma.order.findFirst({...args,...select})
-      .then((data)=>({
-        status:true,
-        data,
-        message:'ok'
-      })).catch(({message})=>({
-       status:false,
-       data:[],
-       message:message||'unknown error'
-      }));
-      
-    }
     @Query((returns)=>OrderListResponse)
     findManyOrder(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info):Promise<OrderListResponse|any>{
       const select = ctx.prisma.getSelection(info).valueOf('data', 'Order', { select: {  } });

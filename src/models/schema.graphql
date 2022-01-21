@@ -66,36 +66,23 @@ type Mutation {
   signout: SignOutResult!
   registerDevice(data: RegisterDeviceInput!): DeviceResponse!
   paybill(data: PaybillRequest): PaybillResponse!
-  createOneAnswer(data: AnswerCreateInput!): AnswerResponse!
-  updateOneAnswer(where: AnswerWhereUniqueInput!, data: AnswerUpdateInput!): AnswerResponse!
-  createOneComment(data: CommentCreateInput!): CommentResponse!
-  updateOneComment(where: CommentWhereUniqueInput!, data: CommentUpdateInput!): CommentResponse!
   createOneForm(data: FormCreateInput!): FormResponse!
   updateOneForm(where: FormWhereUniqueInput!, data: FormUpdateInput!): FormResponse!
   createOneFormCategory(data: FormCategoryCreateInput!): FormCategoryResponse!
   updateOneFormCategory(where: FormCategoryWhereUniqueInput!, data: FormCategoryUpdateInput!): FormCategoryResponse!
   createOneForum(data: ForumCreateInput!): ForumResponse!
   updateOneForum(where: ForumWhereUniqueInput!, data: ForumUpdateInput!): ForumResponse!
-  createOneForumAnswer(data: ForumAnswerCreateInput!): ForumAnswerResponse!
-  updateOneForumAnswer(where: ForumAnswerWhereUniqueInput!, data: ForumAnswerUpdateInput!): ForumAnswerResponse!
-  createOneGrade(data: GradeCreateInput!): GradeResponse!
-  updateOneGrade(where: GradeWhereUniqueInput!, data: GradeUpdateInput!): GradeResponse!
   createOneHelp(data: HelpCreateInput!): HelpResponse!
   updateOneHelp(where: HelpWhereUniqueInput!, data: HelpUpdateInput!): HelpResponse!
-  createOneHelpStep(data: HelpStepCreateInput!): HelpStepResponse!
-  updateOneHelpStep(where: HelpStepWhereUniqueInput!, data: HelpStepUpdateInput!): HelpStepResponse!
   createOneOrder(data: OrderCreateInput!): OrderResponse!
   updateOneOrder(where: OrderWhereUniqueInput!, data: OrderUpdateInput!): OrderResponse!
   createOnePaymentMethod(data: PaymentMethodCreateInput!): PaymentMethodResponse!
   updateOnePaymentMethod(where: PaymentMethodWhereUniqueInput!, data: PaymentMethodUpdateInput!): PaymentMethodResponse!
-  createOneQuestion(data: QuestionCreateInput!): QuestionResponse!
-  updateOneQuestion(where: QuestionWhereUniqueInput!, data: QuestionUpdateInput!): QuestionResponse!
-  createOneRecommendation(data: RecommendationCreateInput!): RecommendationResponse!
-  updateOneRecommendation(where: RecommendationWhereUniqueInput!, data: RecommendationUpdateInput!): RecommendationResponse!
   createOneResponse(data: ResponseCreateInput!): ResponseResponse!
   updateOneResponse(where: ResponseWhereUniqueInput!, data: ResponseUpdateInput!): ResponseResponse!
   createOneService(data: ServiceCreateInput!): ServiceResponse!
   updateOneService(where: ServiceWhereUniqueInput!, data: ServiceUpdateInput!): ServiceResponse!
+  createOneUser(data: UserCreateInput!): UserResponse!
   updateOneUser(where: UserWhereUniqueInput!, data: UserUpdateInput!): UserResponse!
   version: String
 }
@@ -1394,58 +1381,6 @@ type AnswerCountResponse {
   message: String!
 }
 
-type Query {
-  findUniqueAnswer(where: AnswerWhereUniqueInput!): AnswerResponse!
-  findFirstAnswer(where: AnswerWhereInput, orderBy: [AnswerOrderByInput!], cursor: AnswerWhereUniqueInput, distinct: [AnswerScalarFieldEnum!], skip: Int, take: Int): AnswerResponse!
-  findManyAnswer(where: AnswerWhereInput, orderBy: [AnswerOrderByInput!], cursor: AnswerWhereUniqueInput, distinct: [AnswerScalarFieldEnum!], skip: Int, take: Int): AnswerListResponse!
-  findUniqueComment(where: CommentWhereUniqueInput!): CommentResponse!
-  findFirstComment(where: CommentWhereInput, orderBy: [CommentOrderByInput!], cursor: CommentWhereUniqueInput, distinct: [CommentScalarFieldEnum!], skip: Int, take: Int): CommentResponse!
-  findManyComment(where: CommentWhereInput, orderBy: [CommentOrderByInput!], cursor: CommentWhereUniqueInput, distinct: [CommentScalarFieldEnum!], skip: Int, take: Int): CommentListResponse!
-  findUniqueForm(where: FormWhereUniqueInput!): FormResponse!
-  findFirstForm(where: FormWhereInput, orderBy: [FormOrderByInput!], cursor: FormWhereUniqueInput, distinct: [FormScalarFieldEnum!], skip: Int, take: Int): FormResponse!
-  findManyForm(where: FormWhereInput, orderBy: [FormOrderByInput!], cursor: FormWhereUniqueInput, distinct: [FormScalarFieldEnum!], skip: Int, take: Int): FormListResponse!
-  findUniqueFormCategory(where: FormCategoryWhereUniqueInput!): FormCategoryResponse!
-  findFirstFormCategory(where: FormCategoryWhereInput, orderBy: [FormCategoryOrderByInput!], cursor: FormCategoryWhereUniqueInput, distinct: [FormCategoryScalarFieldEnum!], skip: Int, take: Int): FormCategoryResponse!
-  findManyFormCategory(where: FormCategoryWhereInput, orderBy: [FormCategoryOrderByInput!], cursor: FormCategoryWhereUniqueInput, distinct: [FormCategoryScalarFieldEnum!], skip: Int, take: Int): FormCategoryListResponse!
-  findUniqueForum(where: ForumWhereUniqueInput!): ForumResponse!
-  findFirstForum(where: ForumWhereInput, orderBy: [ForumOrderByInput!], cursor: ForumWhereUniqueInput, distinct: [ForumScalarFieldEnum!], skip: Int, take: Int): ForumResponse!
-  findManyForum(where: ForumWhereInput, orderBy: [ForumOrderByInput!], cursor: ForumWhereUniqueInput, distinct: [ForumScalarFieldEnum!], skip: Int, take: Int): ForumListResponse!
-  findUniqueForumAnswer(where: ForumAnswerWhereUniqueInput!): ForumAnswerResponse!
-  findFirstForumAnswer(where: ForumAnswerWhereInput, orderBy: [ForumAnswerOrderByInput!], cursor: ForumAnswerWhereUniqueInput, distinct: [ForumAnswerScalarFieldEnum!], skip: Int, take: Int): ForumAnswerResponse!
-  findManyForumAnswer(where: ForumAnswerWhereInput, orderBy: [ForumAnswerOrderByInput!], cursor: ForumAnswerWhereUniqueInput, distinct: [ForumAnswerScalarFieldEnum!], skip: Int, take: Int): ForumAnswerListResponse!
-  findUniqueGrade(where: GradeWhereUniqueInput!): GradeResponse!
-  findFirstGrade(where: GradeWhereInput, orderBy: [GradeOrderByInput!], cursor: GradeWhereUniqueInput, distinct: [GradeScalarFieldEnum!], skip: Int, take: Int): GradeResponse!
-  findManyGrade(where: GradeWhereInput, orderBy: [GradeOrderByInput!], cursor: GradeWhereUniqueInput, distinct: [GradeScalarFieldEnum!], skip: Int, take: Int): GradeListResponse!
-  findUniqueHelp(where: HelpWhereUniqueInput!): HelpResponse!
-  findFirstHelp(where: HelpWhereInput, orderBy: [HelpOrderByInput!], cursor: HelpWhereUniqueInput, distinct: [HelpScalarFieldEnum!], skip: Int, take: Int): HelpResponse!
-  findManyHelp(where: HelpWhereInput, orderBy: [HelpOrderByInput!], cursor: HelpWhereUniqueInput, distinct: [HelpScalarFieldEnum!], skip: Int, take: Int): HelpListResponse!
-  findUniqueHelpStep(where: HelpStepWhereUniqueInput!): HelpStepResponse!
-  findFirstHelpStep(where: HelpStepWhereInput, orderBy: [HelpStepOrderByInput!], cursor: HelpStepWhereUniqueInput, distinct: [HelpStepScalarFieldEnum!], skip: Int, take: Int): HelpStepResponse!
-  findManyHelpStep(where: HelpStepWhereInput, orderBy: [HelpStepOrderByInput!], cursor: HelpStepWhereUniqueInput, distinct: [HelpStepScalarFieldEnum!], skip: Int, take: Int): HelpStepListResponse!
-  findUniqueOrder(where: OrderWhereUniqueInput!): OrderResponse!
-  findFirstOrder(where: OrderWhereInput, orderBy: [OrderOrderByInput!], cursor: OrderWhereUniqueInput, distinct: [OrderScalarFieldEnum!], skip: Int, take: Int): OrderResponse!
-  findManyOrder(where: OrderWhereInput, orderBy: [OrderOrderByInput!], cursor: OrderWhereUniqueInput, distinct: [OrderScalarFieldEnum!], skip: Int, take: Int): OrderListResponse!
-  findUniquePaymentMethod(where: PaymentMethodWhereUniqueInput!): PaymentMethodResponse!
-  findFirstPaymentMethod(where: PaymentMethodWhereInput, orderBy: [PaymentMethodOrderByInput!], cursor: PaymentMethodWhereUniqueInput, distinct: [PaymentMethodScalarFieldEnum!], skip: Int, take: Int): PaymentMethodResponse!
-  findManyPaymentMethod(where: PaymentMethodWhereInput, orderBy: [PaymentMethodOrderByInput!], cursor: PaymentMethodWhereUniqueInput, distinct: [PaymentMethodScalarFieldEnum!], skip: Int, take: Int): PaymentMethodListResponse!
-  findUniqueQuestion(where: QuestionWhereUniqueInput!): QuestionResponse!
-  findFirstQuestion(where: QuestionWhereInput, orderBy: [QuestionOrderByInput!], cursor: QuestionWhereUniqueInput, distinct: [QuestionScalarFieldEnum!], skip: Int, take: Int): QuestionResponse!
-  findManyQuestion(where: QuestionWhereInput, orderBy: [QuestionOrderByInput!], cursor: QuestionWhereUniqueInput, distinct: [QuestionScalarFieldEnum!], skip: Int, take: Int): QuestionListResponse!
-  findUniqueRecommendation(where: RecommendationWhereUniqueInput!): RecommendationResponse!
-  findFirstRecommendation(where: RecommendationWhereInput, orderBy: [RecommendationOrderByInput!], cursor: RecommendationWhereUniqueInput, distinct: [RecommendationScalarFieldEnum!], skip: Int, take: Int): RecommendationResponse!
-  findManyRecommendation(where: RecommendationWhereInput, orderBy: [RecommendationOrderByInput!], cursor: RecommendationWhereUniqueInput, distinct: [RecommendationScalarFieldEnum!], skip: Int, take: Int): RecommendationListResponse!
-  findUniqueResponse(where: ResponseWhereUniqueInput!): ResponseResponse!
-  findFirstResponse(where: ResponseWhereInput, orderBy: [ResponseOrderByInput!], cursor: ResponseWhereUniqueInput, distinct: [ResponseScalarFieldEnum!], skip: Int, take: Int): ResponseResponse!
-  findManyResponse(where: ResponseWhereInput, orderBy: [ResponseOrderByInput!], cursor: ResponseWhereUniqueInput, distinct: [ResponseScalarFieldEnum!], skip: Int, take: Int): ResponseListResponse!
-  findUniqueService(where: ServiceWhereUniqueInput!): ServiceResponse!
-  findFirstService(where: ServiceWhereInput, orderBy: [ServiceOrderByInput!], cursor: ServiceWhereUniqueInput, distinct: [ServiceScalarFieldEnum!], skip: Int, take: Int): ServiceResponse!
-  findManyService(where: ServiceWhereInput, orderBy: [ServiceOrderByInput!], cursor: ServiceWhereUniqueInput, distinct: [ServiceScalarFieldEnum!], skip: Int, take: Int): ServiceListResponse!
-  findUniqueUser(where: UserWhereUniqueInput!): UserResponse!
-  findFirstUser(where: UserWhereInput, orderBy: [UserOrderByInput!], cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum!], skip: Int, take: Int): UserResponse!
-  findManyUser(where: UserWhereInput, orderBy: [UserOrderByInput!], cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum!], skip: Int, take: Int): UserListResponse!
-  version: String
-}
-
 type Attachment {
   id: String!
   path: String!
@@ -1691,6 +1626,28 @@ type FormCountResponse {
   status: Boolean!
   data: Int
   message: String!
+}
+
+type Query {
+  findUniqueForm(where: FormWhereUniqueInput!): FormResponse!
+  findManyForm(where: FormWhereInput, orderBy: [FormOrderByInput!], cursor: FormWhereUniqueInput, distinct: [FormScalarFieldEnum!], skip: Int, take: Int): FormListResponse!
+  findUniqueFormCategory(where: FormCategoryWhereUniqueInput!): FormCategoryResponse!
+  findManyFormCategory(where: FormCategoryWhereInput, orderBy: [FormCategoryOrderByInput!], cursor: FormCategoryWhereUniqueInput, distinct: [FormCategoryScalarFieldEnum!], skip: Int, take: Int): FormCategoryListResponse!
+  findUniqueForum(where: ForumWhereUniqueInput!): ForumResponse!
+  findManyForum(where: ForumWhereInput, orderBy: [ForumOrderByInput!], cursor: ForumWhereUniqueInput, distinct: [ForumScalarFieldEnum!], skip: Int, take: Int): ForumListResponse!
+  findUniqueHelp(where: HelpWhereUniqueInput!): HelpResponse!
+  findManyHelp(where: HelpWhereInput, orderBy: [HelpOrderByInput!], cursor: HelpWhereUniqueInput, distinct: [HelpScalarFieldEnum!], skip: Int, take: Int): HelpListResponse!
+  findUniqueOrder(where: OrderWhereUniqueInput!): OrderResponse!
+  findManyOrder(where: OrderWhereInput, orderBy: [OrderOrderByInput!], cursor: OrderWhereUniqueInput, distinct: [OrderScalarFieldEnum!], skip: Int, take: Int): OrderListResponse!
+  findUniquePaymentMethod(where: PaymentMethodWhereUniqueInput!): PaymentMethodResponse!
+  findManyPaymentMethod(where: PaymentMethodWhereInput, orderBy: [PaymentMethodOrderByInput!], cursor: PaymentMethodWhereUniqueInput, distinct: [PaymentMethodScalarFieldEnum!], skip: Int, take: Int): PaymentMethodListResponse!
+  findUniqueResponse(where: ResponseWhereUniqueInput!): ResponseResponse!
+  findManyResponse(where: ResponseWhereInput, orderBy: [ResponseOrderByInput!], cursor: ResponseWhereUniqueInput, distinct: [ResponseScalarFieldEnum!], skip: Int, take: Int): ResponseListResponse!
+  findUniqueService(where: ServiceWhereUniqueInput!): ServiceResponse!
+  findManyService(where: ServiceWhereInput, orderBy: [ServiceOrderByInput!], cursor: ServiceWhereUniqueInput, distinct: [ServiceScalarFieldEnum!], skip: Int, take: Int): ServiceListResponse!
+  findUniqueUser(where: UserWhereUniqueInput!): UserResponse!
+  findManyUser(where: UserWhereInput, orderBy: [UserOrderByInput!], cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum!], skip: Int, take: Int): UserListResponse!
+  version: String
 }
 
 type FormCategory {

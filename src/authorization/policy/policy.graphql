@@ -84,36 +84,23 @@ type Mutation {
   signout(role: Role!, parent: [Role!], action: OPERATION!): SignOutResult
   registerDevice(role: Role!, parent: [Role!], action: OPERATION!, data: RegisterDeviceInput!): DeviceResponse
   paybill(role: Role!, parent: [Role!], action: OPERATION!, data: PaybillRequest): PaybillResponse
-  createOneAnswer(role: Role!, parent: [Role!], action: OPERATION!, data: AnswerCreateInput!): AnswerResponse
-  updateOneAnswer(role: Role!, parent: [Role!], action: OPERATION!, where: AnswerWhereUniqueInput!, data: AnswerUpdateInput!): AnswerResponse
-  createOneComment(role: Role!, parent: [Role!], action: OPERATION!, data: CommentCreateInput!): CommentResponse
-  updateOneComment(role: Role!, parent: [Role!], action: OPERATION!, where: CommentWhereUniqueInput!, data: CommentUpdateInput!): CommentResponse
   createOneForm(role: Role!, parent: [Role!], action: OPERATION!, data: FormCreateInput!): FormResponse
   updateOneForm(role: Role!, parent: [Role!], action: OPERATION!, where: FormWhereUniqueInput!, data: FormUpdateInput!): FormResponse
   createOneFormCategory(role: Role!, parent: [Role!], action: OPERATION!, data: FormCategoryCreateInput!): FormCategoryResponse
   updateOneFormCategory(role: Role!, parent: [Role!], action: OPERATION!, where: FormCategoryWhereUniqueInput!, data: FormCategoryUpdateInput!): FormCategoryResponse
   createOneForum(role: Role!, parent: [Role!], action: OPERATION!, data: ForumCreateInput!): ForumResponse
   updateOneForum(role: Role!, parent: [Role!], action: OPERATION!, where: ForumWhereUniqueInput!, data: ForumUpdateInput!): ForumResponse
-  createOneForumAnswer(role: Role!, parent: [Role!], action: OPERATION!, data: ForumAnswerCreateInput!): ForumAnswerResponse
-  updateOneForumAnswer(role: Role!, parent: [Role!], action: OPERATION!, where: ForumAnswerWhereUniqueInput!, data: ForumAnswerUpdateInput!): ForumAnswerResponse
-  createOneGrade(role: Role!, parent: [Role!], action: OPERATION!, data: GradeCreateInput!): GradeResponse
-  updateOneGrade(role: Role!, parent: [Role!], action: OPERATION!, where: GradeWhereUniqueInput!, data: GradeUpdateInput!): GradeResponse
   createOneHelp(role: Role!, parent: [Role!], action: OPERATION!, data: HelpCreateInput!): HelpResponse
   updateOneHelp(role: Role!, parent: [Role!], action: OPERATION!, where: HelpWhereUniqueInput!, data: HelpUpdateInput!): HelpResponse
-  createOneHelpStep(role: Role!, parent: [Role!], action: OPERATION!, data: HelpStepCreateInput!): HelpStepResponse
-  updateOneHelpStep(role: Role!, parent: [Role!], action: OPERATION!, where: HelpStepWhereUniqueInput!, data: HelpStepUpdateInput!): HelpStepResponse
   createOneOrder(role: Role!, parent: [Role!], action: OPERATION!, data: OrderCreateInput!): OrderResponse
   updateOneOrder(role: Role!, parent: [Role!], action: OPERATION!, where: OrderWhereUniqueInput!, data: OrderUpdateInput!): OrderResponse
   createOnePaymentMethod(role: Role!, parent: [Role!], action: OPERATION!, data: PaymentMethodCreateInput!): PaymentMethodResponse
   updateOnePaymentMethod(role: Role!, parent: [Role!], action: OPERATION!, where: PaymentMethodWhereUniqueInput!, data: PaymentMethodUpdateInput!): PaymentMethodResponse
-  createOneQuestion(role: Role!, parent: [Role!], action: OPERATION!, data: QuestionCreateInput!): QuestionResponse
-  updateOneQuestion(role: Role!, parent: [Role!], action: OPERATION!, where: QuestionWhereUniqueInput!, data: QuestionUpdateInput!): QuestionResponse
-  createOneRecommendation(role: Role!, parent: [Role!], action: OPERATION!, data: RecommendationCreateInput!): RecommendationResponse
-  updateOneRecommendation(role: Role!, parent: [Role!], action: OPERATION!, where: RecommendationWhereUniqueInput!, data: RecommendationUpdateInput!): RecommendationResponse
   createOneResponse(role: Role!, parent: [Role!], action: OPERATION!, data: ResponseCreateInput!): ResponseResponse
   updateOneResponse(role: Role!, parent: [Role!], action: OPERATION!, where: ResponseWhereUniqueInput!, data: ResponseUpdateInput!): ResponseResponse
   createOneService(role: Role!, parent: [Role!], action: OPERATION!, data: ServiceCreateInput!): ServiceResponse
   updateOneService(role: Role!, parent: [Role!], action: OPERATION!, where: ServiceWhereUniqueInput!, data: ServiceUpdateInput!): ServiceResponse
+  createOneUser(role: Role!, parent: [Role!], action: OPERATION!, data: UserCreateInput!): UserResponse
   updateOneUser(role: Role!, parent: [Role!], action: OPERATION!, where: UserWhereUniqueInput!, data: UserUpdateInput!): UserResponse
   version(role: Role!, parent: [Role!], action: OPERATION!): PERMISSION
 }
@@ -1410,58 +1397,6 @@ type AnswerCountResponse {
   message(action: PERMISSION): PERMISSION
 }
 
-type Query {
-  findUniqueAnswer(role: Role!, parent: [Role!], action: OPERATION!, where: AnswerWhereUniqueInput!): AnswerResponse
-  findFirstAnswer(role: Role!, parent: [Role!], action: OPERATION!, where: AnswerWhereInput, orderBy: [AnswerOrderByInput!], cursor: AnswerWhereUniqueInput, distinct: PERMISSION, skip: PERMISSION, take: PERMISSION): AnswerResponse
-  findManyAnswer(role: Role!, parent: [Role!], action: OPERATION!, where: AnswerWhereInput, orderBy: [AnswerOrderByInput!], cursor: AnswerWhereUniqueInput, distinct: PERMISSION, skip: PERMISSION, take: PERMISSION): AnswerListResponse
-  findUniqueComment(role: Role!, parent: [Role!], action: OPERATION!, where: CommentWhereUniqueInput!): CommentResponse
-  findFirstComment(role: Role!, parent: [Role!], action: OPERATION!, where: CommentWhereInput, orderBy: [CommentOrderByInput!], cursor: CommentWhereUniqueInput, distinct: PERMISSION, skip: PERMISSION, take: PERMISSION): CommentResponse
-  findManyComment(role: Role!, parent: [Role!], action: OPERATION!, where: CommentWhereInput, orderBy: [CommentOrderByInput!], cursor: CommentWhereUniqueInput, distinct: PERMISSION, skip: PERMISSION, take: PERMISSION): CommentListResponse
-  findUniqueForm(role: Role!, parent: [Role!], action: OPERATION!, where: FormWhereUniqueInput!): FormResponse
-  findFirstForm(role: Role!, parent: [Role!], action: OPERATION!, where: FormWhereInput, orderBy: [FormOrderByInput!], cursor: FormWhereUniqueInput, distinct: PERMISSION, skip: PERMISSION, take: PERMISSION): FormResponse
-  findManyForm(role: Role!, parent: [Role!], action: OPERATION!, where: FormWhereInput, orderBy: [FormOrderByInput!], cursor: FormWhereUniqueInput, distinct: PERMISSION, skip: PERMISSION, take: PERMISSION): FormListResponse
-  findUniqueFormCategory(role: Role!, parent: [Role!], action: OPERATION!, where: FormCategoryWhereUniqueInput!): FormCategoryResponse
-  findFirstFormCategory(role: Role!, parent: [Role!], action: OPERATION!, where: FormCategoryWhereInput, orderBy: [FormCategoryOrderByInput!], cursor: FormCategoryWhereUniqueInput, distinct: PERMISSION, skip: PERMISSION, take: PERMISSION): FormCategoryResponse
-  findManyFormCategory(role: Role!, parent: [Role!], action: OPERATION!, where: FormCategoryWhereInput, orderBy: [FormCategoryOrderByInput!], cursor: FormCategoryWhereUniqueInput, distinct: PERMISSION, skip: PERMISSION, take: PERMISSION): FormCategoryListResponse
-  findUniqueForum(role: Role!, parent: [Role!], action: OPERATION!, where: ForumWhereUniqueInput!): ForumResponse
-  findFirstForum(role: Role!, parent: [Role!], action: OPERATION!, where: ForumWhereInput, orderBy: [ForumOrderByInput!], cursor: ForumWhereUniqueInput, distinct: PERMISSION, skip: PERMISSION, take: PERMISSION): ForumResponse
-  findManyForum(role: Role!, parent: [Role!], action: OPERATION!, where: ForumWhereInput, orderBy: [ForumOrderByInput!], cursor: ForumWhereUniqueInput, distinct: PERMISSION, skip: PERMISSION, take: PERMISSION): ForumListResponse
-  findUniqueForumAnswer(role: Role!, parent: [Role!], action: OPERATION!, where: ForumAnswerWhereUniqueInput!): ForumAnswerResponse
-  findFirstForumAnswer(role: Role!, parent: [Role!], action: OPERATION!, where: ForumAnswerWhereInput, orderBy: [ForumAnswerOrderByInput!], cursor: ForumAnswerWhereUniqueInput, distinct: PERMISSION, skip: PERMISSION, take: PERMISSION): ForumAnswerResponse
-  findManyForumAnswer(role: Role!, parent: [Role!], action: OPERATION!, where: ForumAnswerWhereInput, orderBy: [ForumAnswerOrderByInput!], cursor: ForumAnswerWhereUniqueInput, distinct: PERMISSION, skip: PERMISSION, take: PERMISSION): ForumAnswerListResponse
-  findUniqueGrade(role: Role!, parent: [Role!], action: OPERATION!, where: GradeWhereUniqueInput!): GradeResponse
-  findFirstGrade(role: Role!, parent: [Role!], action: OPERATION!, where: GradeWhereInput, orderBy: [GradeOrderByInput!], cursor: GradeWhereUniqueInput, distinct: PERMISSION, skip: PERMISSION, take: PERMISSION): GradeResponse
-  findManyGrade(role: Role!, parent: [Role!], action: OPERATION!, where: GradeWhereInput, orderBy: [GradeOrderByInput!], cursor: GradeWhereUniqueInput, distinct: PERMISSION, skip: PERMISSION, take: PERMISSION): GradeListResponse
-  findUniqueHelp(role: Role!, parent: [Role!], action: OPERATION!, where: HelpWhereUniqueInput!): HelpResponse
-  findFirstHelp(role: Role!, parent: [Role!], action: OPERATION!, where: HelpWhereInput, orderBy: [HelpOrderByInput!], cursor: HelpWhereUniqueInput, distinct: PERMISSION, skip: PERMISSION, take: PERMISSION): HelpResponse
-  findManyHelp(role: Role!, parent: [Role!], action: OPERATION!, where: HelpWhereInput, orderBy: [HelpOrderByInput!], cursor: HelpWhereUniqueInput, distinct: PERMISSION, skip: PERMISSION, take: PERMISSION): HelpListResponse
-  findUniqueHelpStep(role: Role!, parent: [Role!], action: OPERATION!, where: HelpStepWhereUniqueInput!): HelpStepResponse
-  findFirstHelpStep(role: Role!, parent: [Role!], action: OPERATION!, where: HelpStepWhereInput, orderBy: [HelpStepOrderByInput!], cursor: HelpStepWhereUniqueInput, distinct: PERMISSION, skip: PERMISSION, take: PERMISSION): HelpStepResponse
-  findManyHelpStep(role: Role!, parent: [Role!], action: OPERATION!, where: HelpStepWhereInput, orderBy: [HelpStepOrderByInput!], cursor: HelpStepWhereUniqueInput, distinct: PERMISSION, skip: PERMISSION, take: PERMISSION): HelpStepListResponse
-  findUniqueOrder(role: Role!, parent: [Role!], action: OPERATION!, where: OrderWhereUniqueInput!): OrderResponse
-  findFirstOrder(role: Role!, parent: [Role!], action: OPERATION!, where: OrderWhereInput, orderBy: [OrderOrderByInput!], cursor: OrderWhereUniqueInput, distinct: PERMISSION, skip: PERMISSION, take: PERMISSION): OrderResponse
-  findManyOrder(role: Role!, parent: [Role!], action: OPERATION!, where: OrderWhereInput, orderBy: [OrderOrderByInput!], cursor: OrderWhereUniqueInput, distinct: PERMISSION, skip: PERMISSION, take: PERMISSION): OrderListResponse
-  findUniquePaymentMethod(role: Role!, parent: [Role!], action: OPERATION!, where: PaymentMethodWhereUniqueInput!): PaymentMethodResponse
-  findFirstPaymentMethod(role: Role!, parent: [Role!], action: OPERATION!, where: PaymentMethodWhereInput, orderBy: [PaymentMethodOrderByInput!], cursor: PaymentMethodWhereUniqueInput, distinct: PERMISSION, skip: PERMISSION, take: PERMISSION): PaymentMethodResponse
-  findManyPaymentMethod(role: Role!, parent: [Role!], action: OPERATION!, where: PaymentMethodWhereInput, orderBy: [PaymentMethodOrderByInput!], cursor: PaymentMethodWhereUniqueInput, distinct: PERMISSION, skip: PERMISSION, take: PERMISSION): PaymentMethodListResponse
-  findUniqueQuestion(role: Role!, parent: [Role!], action: OPERATION!, where: QuestionWhereUniqueInput!): QuestionResponse
-  findFirstQuestion(role: Role!, parent: [Role!], action: OPERATION!, where: QuestionWhereInput, orderBy: [QuestionOrderByInput!], cursor: QuestionWhereUniqueInput, distinct: PERMISSION, skip: PERMISSION, take: PERMISSION): QuestionResponse
-  findManyQuestion(role: Role!, parent: [Role!], action: OPERATION!, where: QuestionWhereInput, orderBy: [QuestionOrderByInput!], cursor: QuestionWhereUniqueInput, distinct: PERMISSION, skip: PERMISSION, take: PERMISSION): QuestionListResponse
-  findUniqueRecommendation(role: Role!, parent: [Role!], action: OPERATION!, where: RecommendationWhereUniqueInput!): RecommendationResponse
-  findFirstRecommendation(role: Role!, parent: [Role!], action: OPERATION!, where: RecommendationWhereInput, orderBy: [RecommendationOrderByInput!], cursor: RecommendationWhereUniqueInput, distinct: PERMISSION, skip: PERMISSION, take: PERMISSION): RecommendationResponse
-  findManyRecommendation(role: Role!, parent: [Role!], action: OPERATION!, where: RecommendationWhereInput, orderBy: [RecommendationOrderByInput!], cursor: RecommendationWhereUniqueInput, distinct: PERMISSION, skip: PERMISSION, take: PERMISSION): RecommendationListResponse
-  findUniqueResponse(role: Role!, parent: [Role!], action: OPERATION!, where: ResponseWhereUniqueInput!): ResponseResponse
-  findFirstResponse(role: Role!, parent: [Role!], action: OPERATION!, where: ResponseWhereInput, orderBy: [ResponseOrderByInput!], cursor: ResponseWhereUniqueInput, distinct: PERMISSION, skip: PERMISSION, take: PERMISSION): ResponseResponse
-  findManyResponse(role: Role!, parent: [Role!], action: OPERATION!, where: ResponseWhereInput, orderBy: [ResponseOrderByInput!], cursor: ResponseWhereUniqueInput, distinct: PERMISSION, skip: PERMISSION, take: PERMISSION): ResponseListResponse
-  findUniqueService(role: Role!, parent: [Role!], action: OPERATION!, where: ServiceWhereUniqueInput!): ServiceResponse
-  findFirstService(role: Role!, parent: [Role!], action: OPERATION!, where: ServiceWhereInput, orderBy: [ServiceOrderByInput!], cursor: ServiceWhereUniqueInput, distinct: PERMISSION, skip: PERMISSION, take: PERMISSION): ServiceResponse
-  findManyService(role: Role!, parent: [Role!], action: OPERATION!, where: ServiceWhereInput, orderBy: [ServiceOrderByInput!], cursor: ServiceWhereUniqueInput, distinct: PERMISSION, skip: PERMISSION, take: PERMISSION): ServiceListResponse
-  findUniqueUser(role: Role!, parent: [Role!], action: OPERATION!, where: UserWhereUniqueInput!): UserResponse
-  findFirstUser(role: Role!, parent: [Role!], action: OPERATION!, where: UserWhereInput, orderBy: [UserOrderByInput!], cursor: UserWhereUniqueInput, distinct: PERMISSION, skip: PERMISSION, take: PERMISSION): UserResponse
-  findManyUser(role: Role!, parent: [Role!], action: OPERATION!, where: UserWhereInput, orderBy: [UserOrderByInput!], cursor: UserWhereUniqueInput, distinct: PERMISSION, skip: PERMISSION, take: PERMISSION): UserListResponse
-  version(role: Role!, parent: [Role!], action: OPERATION!): PERMISSION
-}
-
 type Attachment {
   id(action: PERMISSION): PERMISSION
   path(action: PERMISSION): PERMISSION
@@ -1707,6 +1642,28 @@ type FormCountResponse {
   status(action: PERMISSION): PERMISSION
   data(action: PERMISSION): PERMISSION
   message(action: PERMISSION): PERMISSION
+}
+
+type Query {
+  findUniqueForm(role: Role!, parent: [Role!], action: OPERATION!, where: FormWhereUniqueInput!): FormResponse
+  findManyForm(role: Role!, parent: [Role!], action: OPERATION!, where: FormWhereInput, orderBy: [FormOrderByInput!], cursor: FormWhereUniqueInput, distinct: PERMISSION, skip: PERMISSION, take: PERMISSION): FormListResponse
+  findUniqueFormCategory(role: Role!, parent: [Role!], action: OPERATION!, where: FormCategoryWhereUniqueInput!): FormCategoryResponse
+  findManyFormCategory(role: Role!, parent: [Role!], action: OPERATION!, where: FormCategoryWhereInput, orderBy: [FormCategoryOrderByInput!], cursor: FormCategoryWhereUniqueInput, distinct: PERMISSION, skip: PERMISSION, take: PERMISSION): FormCategoryListResponse
+  findUniqueForum(role: Role!, parent: [Role!], action: OPERATION!, where: ForumWhereUniqueInput!): ForumResponse
+  findManyForum(role: Role!, parent: [Role!], action: OPERATION!, where: ForumWhereInput, orderBy: [ForumOrderByInput!], cursor: ForumWhereUniqueInput, distinct: PERMISSION, skip: PERMISSION, take: PERMISSION): ForumListResponse
+  findUniqueHelp(role: Role!, parent: [Role!], action: OPERATION!, where: HelpWhereUniqueInput!): HelpResponse
+  findManyHelp(role: Role!, parent: [Role!], action: OPERATION!, where: HelpWhereInput, orderBy: [HelpOrderByInput!], cursor: HelpWhereUniqueInput, distinct: PERMISSION, skip: PERMISSION, take: PERMISSION): HelpListResponse
+  findUniqueOrder(role: Role!, parent: [Role!], action: OPERATION!, where: OrderWhereUniqueInput!): OrderResponse
+  findManyOrder(role: Role!, parent: [Role!], action: OPERATION!, where: OrderWhereInput, orderBy: [OrderOrderByInput!], cursor: OrderWhereUniqueInput, distinct: PERMISSION, skip: PERMISSION, take: PERMISSION): OrderListResponse
+  findUniquePaymentMethod(role: Role!, parent: [Role!], action: OPERATION!, where: PaymentMethodWhereUniqueInput!): PaymentMethodResponse
+  findManyPaymentMethod(role: Role!, parent: [Role!], action: OPERATION!, where: PaymentMethodWhereInput, orderBy: [PaymentMethodOrderByInput!], cursor: PaymentMethodWhereUniqueInput, distinct: PERMISSION, skip: PERMISSION, take: PERMISSION): PaymentMethodListResponse
+  findUniqueResponse(role: Role!, parent: [Role!], action: OPERATION!, where: ResponseWhereUniqueInput!): ResponseResponse
+  findManyResponse(role: Role!, parent: [Role!], action: OPERATION!, where: ResponseWhereInput, orderBy: [ResponseOrderByInput!], cursor: ResponseWhereUniqueInput, distinct: PERMISSION, skip: PERMISSION, take: PERMISSION): ResponseListResponse
+  findUniqueService(role: Role!, parent: [Role!], action: OPERATION!, where: ServiceWhereUniqueInput!): ServiceResponse
+  findManyService(role: Role!, parent: [Role!], action: OPERATION!, where: ServiceWhereInput, orderBy: [ServiceOrderByInput!], cursor: ServiceWhereUniqueInput, distinct: PERMISSION, skip: PERMISSION, take: PERMISSION): ServiceListResponse
+  findUniqueUser(role: Role!, parent: [Role!], action: OPERATION!, where: UserWhereUniqueInput!): UserResponse
+  findManyUser(role: Role!, parent: [Role!], action: OPERATION!, where: UserWhereInput, orderBy: [UserOrderByInput!], cursor: UserWhereUniqueInput, distinct: PERMISSION, skip: PERMISSION, take: PERMISSION): UserListResponse
+  version(role: Role!, parent: [Role!], action: OPERATION!): PERMISSION
 }
 
 type FormCategory {

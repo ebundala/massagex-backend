@@ -47,21 +47,6 @@
        message:message||'unknown error'
       }))
     }
-    @Query((returns)=>ResponseResponse)
-    findFirstResponse(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info):Promise<ResponseResponse|any>{
-      const select = ctx.prisma.getSelection(info).valueOf('data', 'Response', { select: {  } });
-      return ctx.prisma.response.findFirst({...args,...select})
-      .then((data)=>({
-        status:true,
-        data,
-        message:'ok'
-      })).catch(({message})=>({
-       status:false,
-       data:[],
-       message:message||'unknown error'
-      }));
-      
-    }
     @Query((returns)=>ResponseListResponse)
     findManyResponse(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info):Promise<ResponseListResponse|any>{
       const select = ctx.prisma.getSelection(info).valueOf('data', 'Response', { select: {  } });

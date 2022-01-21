@@ -47,21 +47,6 @@
        message:message||'unknown error'
       }))
     }
-    @Query((returns)=>ServiceResponse)
-    findFirstService(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info):Promise<ServiceResponse|any>{
-      const select = ctx.prisma.getSelection(info).valueOf('data', 'Service', { select: {  } });
-      return ctx.prisma.service.findFirst({...args,...select})
-      .then((data)=>({
-        status:true,
-        data,
-        message:'ok'
-      })).catch(({message})=>({
-       status:false,
-       data:[],
-       message:message||'unknown error'
-      }));
-      
-    }
     @Query((returns)=>ServiceListResponse)
     findManyService(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info):Promise<ServiceListResponse|any>{
       const select = ctx.prisma.getSelection(info).valueOf('data', 'Service', { select: {  } });

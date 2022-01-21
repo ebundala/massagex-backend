@@ -57,29 +57,4 @@ type Comment {
         data: Int
         message: String!
       }
-      extend type Query {
-    findUniqueComment(where: CommentWhereUniqueInput!): CommentResponse!
-    findFirstComment(
-      where: CommentWhereInput
-      orderBy: [CommentOrderByInput!]
-      cursor: CommentWhereUniqueInput
-      distinct: [CommentScalarFieldEnum!]
-      skip: Int
-      take: Int
-    ): CommentResponse!
-    findManyComment(
-      where: CommentWhereInput
-      orderBy: [CommentOrderByInput!]
-      cursor: CommentWhereUniqueInput
-      distinct: [CommentScalarFieldEnum!]
-      skip: Int
-      take: Int
-    ): CommentListResponse!
-  }
-extend type Mutation {
-    createOneComment(data: CommentCreateInput!): CommentResponse!
-    updateOneComment(
-      where: CommentWhereUniqueInput!
-      data: CommentUpdateInput!
-    ): CommentResponse!
-  }
+      

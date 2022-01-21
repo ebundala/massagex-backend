@@ -53,7 +53,8 @@ export class AuthService {
       message: "User account not found"
     };
     const link = await this.firebaseApp.admin.auth().generatePasswordResetLink(email);
-    await this.mail.sendPasswordResetLink(user, link).catch((e) => { this.logger.debug(e) });
+   // await this.mail.sendPasswordResetLink(user, link).catch((e) => { this.logger.debug(e) });
+   //Todo send email
     return {
       message: 'Password resset instructions sent',
       status: false,

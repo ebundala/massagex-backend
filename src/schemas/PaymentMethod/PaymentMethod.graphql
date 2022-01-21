@@ -47,14 +47,6 @@ type PaymentMethod {
       }
       extend type Query {
     findUniquePaymentMethod(where: PaymentMethodWhereUniqueInput!): PaymentMethodResponse!
-    findFirstPaymentMethod(
-      where: PaymentMethodWhereInput
-      orderBy: [PaymentMethodOrderByInput!]
-      cursor: PaymentMethodWhereUniqueInput
-      distinct: [PaymentMethodScalarFieldEnum!]
-      skip: Int
-      take: Int
-    ): PaymentMethodResponse!
     findManyPaymentMethod(
       where: PaymentMethodWhereInput
       orderBy: [PaymentMethodOrderByInput!]

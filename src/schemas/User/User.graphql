@@ -93,14 +93,6 @@ type User {
       }
       extend type Query {
     findUniqueUser(where: UserWhereUniqueInput!): UserResponse!
-    findFirstUser(
-      where: UserWhereInput
-      orderBy: [UserOrderByInput!]
-      cursor: UserWhereUniqueInput
-      distinct: [UserScalarFieldEnum!]
-      skip: Int
-      take: Int
-    ): UserResponse!
     findManyUser(
       where: UserWhereInput
       orderBy: [UserOrderByInput!]
@@ -111,6 +103,7 @@ type User {
     ): UserListResponse!
   }
 extend type Mutation {
+    createOneUser(data: UserCreateInput!): UserResponse!
     updateOneUser(
       where: UserWhereUniqueInput!
       data: UserUpdateInput!

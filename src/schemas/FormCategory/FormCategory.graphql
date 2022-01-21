@@ -46,14 +46,6 @@ type FormCategory {
       }
       extend type Query {
     findUniqueFormCategory(where: FormCategoryWhereUniqueInput!): FormCategoryResponse!
-    findFirstFormCategory(
-      where: FormCategoryWhereInput
-      orderBy: [FormCategoryOrderByInput!]
-      cursor: FormCategoryWhereUniqueInput
-      distinct: [FormCategoryScalarFieldEnum!]
-      skip: Int
-      take: Int
-    ): FormCategoryResponse!
     findManyFormCategory(
       where: FormCategoryWhereInput
       orderBy: [FormCategoryOrderByInput!]

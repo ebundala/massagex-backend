@@ -61,14 +61,6 @@ type Forum {
       }
       extend type Query {
     findUniqueForum(where: ForumWhereUniqueInput!): ForumResponse!
-    findFirstForum(
-      where: ForumWhereInput
-      orderBy: [ForumOrderByInput!]
-      cursor: ForumWhereUniqueInput
-      distinct: [ForumScalarFieldEnum!]
-      skip: Int
-      take: Int
-    ): ForumResponse!
     findManyForum(
       where: ForumWhereInput
       orderBy: [ForumOrderByInput!]

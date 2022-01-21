@@ -13,21 +13,56 @@ const options: SdlGeneratorServiceOptions = {
 
     // excludeFields: ['Id'],
     excludeQueriesAndMutationsByModel: {
-      'User': ['createOne', 'deleteMany'],
+      // 'User': ['upsertOne', 'deleteMany'],
       // 'Invite':['findFirst','upsertOne'],
-      // 'PaymentMethod':['findFirst','upsertOne'],
+      'PaymentMethod':['findFirst','upsertOne'],
       // 'SelcomDisbursement':['findFirst','upsertOne'],
       // 'SelcomPayment':['findFirst','upsertOne',],
       // 'SelcomPayment':['findFirst','upsertOne'],
       // 'SelcomPayment':['findFirst','upsertOne'],
     },
     excludeQueriesAndMutations: [
-      'upsertOne', 'aggregate', 'deleteMany', 'updateMany', 'findCount','deleteOne'
+      'upsertOne', 'aggregate', 'deleteMany', 'updateMany', 'findCount','deleteOne','findFirst'
     ],
     
     excludeModels: [
       {
         name: 'CasbinRule',
+        queries: true,
+        mutations: true,
+      },
+      {
+        name: 'Answer',
+        queries: true,
+        mutations: true,
+      },
+      {
+        name: 'Recommendation',
+        queries: true,
+        mutations: true,
+      },
+      {
+        name: 'Question',
+        queries: true,
+        mutations: true,
+      },
+      {
+        name: 'Comment',
+        queries: true,
+        mutations: true,
+      },
+      {
+        name: 'HelpStep',
+        queries: true,
+        mutations: true,
+      },
+      {
+        name: 'ForumAnswer',
+        queries: true,
+        mutations: true,
+      },
+      {
+        name: 'Grade',
         queries: true,
         mutations: true,
       },
@@ -66,6 +101,11 @@ const options: SdlGeneratorServiceOptions = {
         queries: true,
         mutations: true,
       },
+      // {
+      //   name: 'PaymentMethod',
+      //   queries: false,
+      //   mutations: true,
+      // },
       {
         name: 'Device',
         queries: true,

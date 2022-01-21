@@ -68,29 +68,4 @@ type Grade {
         data: Int
         message: String!
       }
-      extend type Query {
-    findUniqueGrade(where: GradeWhereUniqueInput!): GradeResponse!
-    findFirstGrade(
-      where: GradeWhereInput
-      orderBy: [GradeOrderByInput!]
-      cursor: GradeWhereUniqueInput
-      distinct: [GradeScalarFieldEnum!]
-      skip: Int
-      take: Int
-    ): GradeResponse!
-    findManyGrade(
-      where: GradeWhereInput
-      orderBy: [GradeOrderByInput!]
-      cursor: GradeWhereUniqueInput
-      distinct: [GradeScalarFieldEnum!]
-      skip: Int
-      take: Int
-    ): GradeListResponse!
-  }
-extend type Mutation {
-    createOneGrade(data: GradeCreateInput!): GradeResponse!
-    updateOneGrade(
-      where: GradeWhereUniqueInput!
-      data: GradeUpdateInput!
-    ): GradeResponse!
-  }
+      

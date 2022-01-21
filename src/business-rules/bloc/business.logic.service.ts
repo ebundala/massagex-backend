@@ -2,7 +2,7 @@ import { AppLogger } from "@mechsoft/app-logger";
 import { Bloc, BlocAttach, BlocFieldResolver, BlocValidate, BusinessRequest } from "@mechsoft/business-rules-manager";
 import { TenantContext } from "@mechsoft/common";
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
-import { Prisma, State } from "@prisma/client";
+import {State,Prisma } from "@prisma/client";
 import * as DataLoader from "dataloader";
 import { User } from "src/models/graphql";
 import { RedisCache } from "src/pubsub/redis.service";
@@ -658,10 +658,111 @@ export class BusinessLogicService {
     return dataloader.load(`last-seen-${parent.id}`);
   }
 
+  async createAttachments(attachments,context:TenantContext){
+    const uploads=[];
+     for(let i=0;i<attachments.create.length;i++) {
+        const item =attachments.create[i];
+        uploads.push(uploadFile((item as any).path));
+     }
+    const files = (await ( Promise.all(uploads))).map((file)=>{
+      return context.prisma.attachment.create({ data: file });
+    });
+    
+    const files2 = await Promise.all(files)
+    console.log(files,files2);
+    return files2;
+  }
   
-  
+  @BlocAttach('createOneForum.input.data.attachments.create.path')
+  @BlocAttach('createOneForm.input.data.attachments.create.path')
+  @BlocAttach('createOneResponse.input.data.attachments.create.path')
+  @BlocAttach('createOneForumAnswer.input.data.attachments.create.path')
+  @BlocAttach('createOneComment.input.data.attachments.create.path')
+  @BlocAttach('updateOneForm.input.data.attachments.create.path')
+  async uploadAttachment(v: BusinessRequest, next) {
+    const { args, context } = v;
+    const { data, ...rest } = args;
+    const { attachments } = data
+    debugger
+    const files2 = await this.createAttachments(attachments,context);
+    v.args.data.attachments = { connect: files2.map((e)=>({id:e.id}))};
+    return next(v)
+  }
 
+  @BlocAttach('createOneForm.input.data.grades.attachments.create.path')
 
+  async uploadGradesAttachment(v:BusinessRequest,next){
+    debugger
+   return next(v)
+  }
+
+  @BlocAttach('createOneForm.input.data.grades.create.questions.create.attachments.create.path')
+  @BlocAttach('updateOneForm.input.data.grades.create.questions.create.attachments.create.path')
+  async uploadQuestionsAttachment(v:BusinessRequest,next){
+    const { args, context } = v;
+    const { data, ...rest } = args;
+    const { grades } = data;
+    const operations = [];
+    debugger
+    for(let i=0;i<grades?.create?.length;i++){
+          const grade = grades.create[i];
+          const {questions} = grade;
+          for(let j=0;j<questions?.create?.length;j++){
+            const question = questions.create[j];
+            const {attachments} = question;
+            const op = ()=>{
+              return new Promise(async(resolve,reject)=>{
+                if(attachments.create){
+            const files = await this.createAttachments(attachments,context);
+            const filesIds = files.map((v)=>({id:v.id}))
+            v.args.data.grades.create[i].questions.create[j].attachments = {connect:filesIds}
+                }
+            return resolve(v);
+          });
+          }
+            operations.push(op());
+          }
+          
+    }
+   const vv = await Promise.all(operations);
+    debugger
+    return next(v)
+  }
+  @BlocAttach('createOneForm.input.data.grades.create.recommendations.create.attachments.create.path')
+  @BlocAttach('updateOneForm.input.data.grades.create.recommendations.create.attachments.create.path')
+  async uploadRecommendationsAttachment(v:BusinessRequest,next){
+    const { args, context } = v;
+    const { data, ...rest } = args;
+    const { grades } = data;
+    const operations = []
+    debugger
+    for(let i=0;i<grades?.create?.length;i++){
+          const grade = grades.create[i];
+          const {recommendations} = grade;
+          for(let j=0;j<recommendations?.create?.length;j++){
+            const recommendation = recommendations.create[j];
+            const {attachments} = recommendation;
+            const op = ()=>{
+              return new Promise(async(resolve,reject)=>{
+                debugger
+                if(attachments?.create){
+            const files = await this.createAttachments(attachments,context);
+            const filesIds = files.map((v)=>({id:v.id}))
+            v.args.data.grades.create[i].recommendations.create[j].attachments = {connect:filesIds}
+                }
+            return resolve(v);
+          });
+          }
+            operations.push(op());
+          }
+          
+    }
+    
+   const vv = await Promise.all(operations);
+    debugger
+   return next(v)
+  }
+ 
 }
 
 

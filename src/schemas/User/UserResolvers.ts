@@ -47,21 +47,6 @@
        message:message||'unknown error'
       }))
     }
-    @Query((returns)=>UserResponse)
-    findFirstUser(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info):Promise<UserResponse|any>{
-      const select = ctx.prisma.getSelection(info).valueOf('data', 'User', { select: {  } });
-      return ctx.prisma.user.findFirst({...args,...select})
-      .then((data)=>({
-        status:true,
-        data,
-        message:'ok'
-      })).catch(({message})=>({
-       status:false,
-       data:[],
-       message:message||'unknown error'
-      }));
-      
-    }
     @Query((returns)=>UserListResponse)
     findManyUser(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info):Promise<UserListResponse|any>{
       const select = ctx.prisma.getSelection(info).valueOf('data', 'User', { select: {  } });
@@ -76,6 +61,20 @@
        message:message||'unknown error'
       }));
       
+    }
+    @Mutation((returns)=>UserResponse)
+    createOneUser(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info):Promise<UserResponse|any>{
+      const select = ctx.prisma.getSelection(info).valueOf('data', 'User', { select: {  } });
+      return ctx.prisma.user.create({...args,...select})
+      .then((data)=>({
+        status:true,
+        data,
+        message:'ok'
+      })).catch(({message})=>({
+       status:false,
+       data:null,
+       message:message||'unknown error'
+      }))
     }
     @Mutation((returns)=>UserResponse)
     updateOneUser(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info):Promise<UserResponse|any>{

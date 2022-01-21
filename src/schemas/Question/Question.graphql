@@ -55,29 +55,4 @@ type Question {
         data: Int
         message: String!
       }
-      extend type Query {
-    findUniqueQuestion(where: QuestionWhereUniqueInput!): QuestionResponse!
-    findFirstQuestion(
-      where: QuestionWhereInput
-      orderBy: [QuestionOrderByInput!]
-      cursor: QuestionWhereUniqueInput
-      distinct: [QuestionScalarFieldEnum!]
-      skip: Int
-      take: Int
-    ): QuestionResponse!
-    findManyQuestion(
-      where: QuestionWhereInput
-      orderBy: [QuestionOrderByInput!]
-      cursor: QuestionWhereUniqueInput
-      distinct: [QuestionScalarFieldEnum!]
-      skip: Int
-      take: Int
-    ): QuestionListResponse!
-  }
-extend type Mutation {
-    createOneQuestion(data: QuestionCreateInput!): QuestionResponse!
-    updateOneQuestion(
-      where: QuestionWhereUniqueInput!
-      data: QuestionUpdateInput!
-    ): QuestionResponse!
-  }
+      
