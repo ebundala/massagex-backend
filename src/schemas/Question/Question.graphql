@@ -5,8 +5,6 @@ type Question {
           weight: Float!
           instruction: String
           questionType: QuestionType!
-          form: Form
-          formId: String
           grade: Grade!
           gradeId: String!
           answers(where: AnswerWhereInput

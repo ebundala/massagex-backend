@@ -1,5 +1,5 @@
 type Device {
-          device_id: String!
+          id: String!
           fcm_id: String
           type: String!
           user: User

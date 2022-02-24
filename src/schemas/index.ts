@@ -1,7 +1,7 @@
 import {UserModule} from './User/UserModule';
 import {DeviceModule} from './Device/DeviceModule';
 import {AttachmentModule} from './Attachment/AttachmentModule';
-import {FormCategoryModule} from './FormCategory/FormCategoryModule';
+import {TagModule} from './Tag/TagModule';
 import {FormModule} from './Form/FormModule';
 import {GradeModule} from './Grade/GradeModule';
 import {ResponseModule} from './Response/ResponseModule';
@@ -24,7 +24,7 @@ import {SelcomPaymentModule} from './SelcomPayment/SelcomPaymentModule';
     export default [UserModule,
 DeviceModule,
 AttachmentModule,
-FormCategoryModule,
+TagModule,
 FormModule,
 GradeModule,
 ResponseModule,

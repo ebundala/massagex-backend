@@ -1,4 +1,4 @@
-type FormCategory {
+type Tag {
           id: String!
           name: String!
           description: String
@@ -14,51 +14,58 @@ type FormCategory {
               skip: Int
               distinct: [FormScalarFieldEnum!]
               ): [Form!]!
+          forums(where: ForumWhereInput
+              orderBy: [ForumOrderByInput!]
+              cursor: ForumWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [ForumScalarFieldEnum!]
+              ): [Forum!]!
     }
 
-      type FormCategoryListResponse {
+      type TagListResponse {
         status: Boolean!
-        data: [FormCategory!]
+        data: [Tag!]
         message: String!
       }
      
 
-      type FormCategoryResponse {
+      type TagResponse {
         status: Boolean!
-        data: FormCategory
+        data: Tag
         message: String!
       }
       
-      type FormCategoryBatchResponse {
+      type TagBatchResponse {
         status: Boolean!
         data: BatchPayload
         message: String!
       }
-      type AggregateFormCategoryResponse {
+      type AggregateTagResponse {
         status: Boolean!
-        data: AggregateFormCategory
+        data: AggregateTag
         message: String!
       }
-      type FormCategoryCountResponse {
+      type TagCountResponse {
         status: Boolean!
         data: Int
         message: String!
       }
       extend type Query {
-    findUniqueFormCategory(where: FormCategoryWhereUniqueInput!): FormCategoryResponse!
-    findManyFormCategory(
-      where: FormCategoryWhereInput
-      orderBy: [FormCategoryOrderByInput!]
-      cursor: FormCategoryWhereUniqueInput
-      distinct: [FormCategoryScalarFieldEnum!]
+    findUniqueTag(where: TagWhereUniqueInput!): TagResponse!
+    findManyTag(
+      where: TagWhereInput
+      orderBy: [TagOrderByInput!]
+      cursor: TagWhereUniqueInput
+      distinct: [TagScalarFieldEnum!]
       skip: Int
       take: Int
-    ): FormCategoryListResponse!
+    ): TagListResponse!
   }
 extend type Mutation {
-    createOneFormCategory(data: FormCategoryCreateInput!): FormCategoryResponse!
-    updateOneFormCategory(
-      where: FormCategoryWhereUniqueInput!
-      data: FormCategoryUpdateInput!
-    ): FormCategoryResponse!
+    createOneTag(data: TagCreateInput!): TagResponse!
+    updateOneTag(
+      where: TagWhereUniqueInput!
+      data: TagUpdateInput!
+    ): TagResponse!
   }

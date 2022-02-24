@@ -29,16 +29,16 @@ model User {
   forumAnswers  ForumAnswer[]
   comments      Comment[]
   device        Device?
-  transactions   Transaction[]
-  orders         Order[]
+  transactions  Transaction[]
+  orders        Order[]
 }
 
 model Device {
-  device_id String  @id
-  fcm_id    String?
-  type      String  @default("ANDROID")
-  user      User?   @relation(fields: [userId], references: [id])
-  userId    String?
+  id     String  @id
+  fcm_id String?
+  type   String  @default("ANDROID")
+  user   User?   @relation(fields: [userId], references: [id])
+  userId String?
 }
 
 model Attachment {
@@ -73,15 +73,15 @@ model Attachment {
   forumAnswerId    String?
   comment          Comment?        @relation(fields: [commentId], references: [id])
   commentId        String?
-  formCategories     FormCategory[]
+  tags             Tag[]
   helpStep         HelpStep?       @relation(fields: [helpStepId], references: [id])
   helpStepId       String?
-  paymentMethods    PaymentMethod[]
-  services          Service[]
-  orders            Order[]
+  paymentMethods   PaymentMethod[]
+  services         Service[]
+  orders           Order[]
 }
 
-model FormCategory {
+model Tag {
   id           String      @id @default(cuid())
   name         String
   description  String?
@@ -90,37 +90,38 @@ model FormCategory {
   createdAt    DateTime    @default(now())
   updatedAt    DateTime    @updatedAt
   attachmentId String?
-  forms         Form[]
+  forms        Form[]
+  forums        Forum[]    
+  
 }
 
 model Form {
-  id             String        @id @default(cuid())
-  title          String
-  description    String?
-  state          State         @default(PENDING)
-  author         User          @relation(fields: [authorId], references: [id])
-  authorId       String
-  category       FormCategory? @relation(fields: [formCategoryId], references: [id])
-  questions      Question[]
-  grades         Grade[]
-  responses      Response[]
-  attachments    Attachment[]
-  createdAt      DateTime      @default(now())
-  updatedAt      DateTime      @updatedAt
-  formCategoryId String?
+  id          String       @id @default(cuid())
+  title       String
+  description String?
+  state       State        @default(PENDING)
+  author      User         @relation(fields: [authorId], references: [id])
+  authorId    String
+  tags        Tag[]
+  grades      Grade[]
+  responses   Response[]
+  attachments Attachment[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  tagId       String?
 }
 
 model Grade {
   id              String           @id @default(cuid())
   name            String
   description     String
-  form            Form             @relation(fields: [formId], references: [id])
-  formId          String
+  form            Form?            @relation(fields: [formId], references: [id])
+  formId          String?
   responses       Response[]
   recommendations Recommendation[]
   questions       Question[]
-  minValue        Float?
-  maxValue        Float?
+  minValue        Int?
+  maxValue        Int?
   minInclusive    Boolean          @default(false)
   maxInclusive    Boolean          @default(false)
   attachments     Attachment[]
@@ -130,13 +131,13 @@ model Grade {
 
 model Response {
   id          String       @id @default(cuid())
-  author      User         @relation(fields: [authorId], references: [id])
-  authorId    String
+  author      User?        @relation(fields: [authorId], references: [id])
+  authorId    String?
   form        Form         @relation(fields: [formId], references: [id])
   formId      String
   answers     Answer[]
-  grade       Grade?       @relation(fields: [gradeId], references: [id])
-  gradeId     String?
+  grade       Grade        @relation(fields: [gradeId], references: [id])
+  gradeId     String
   attachments Attachment[]
   state       State        @default(PENDING)
   createdAt   DateTime     @default(now())
@@ -150,8 +151,6 @@ model Question {
   weight         Float        @default(0.0)
   instruction    String?
   questionType   QuestionType @default(BOOLEAN)
-  form           Form?         @relation(fields: [formId], references: [id])
-  formId         String?
   grade          Grade        @relation(fields: [gradeId], references: [id])
   gradeId        String
   answers        Answer[]
@@ -182,8 +181,8 @@ model Recommendation {
   id          String             @id @default(cuid())
   content     String
   attachments Attachment[]
-  grade       Grade              @relation(fields: [gradeId], references: [id])
-  gradeId     String
+  grade       Grade?             @relation(fields: [gradeId], references: [id])
+  gradeId     String?
   type        RecommendationType @default(INORGANIC)
   createdAt   DateTime           @default(now())
   updatedAt   DateTime           @updatedAt
@@ -219,6 +218,10 @@ enum AttachmentType {
 }
 
 // forum part
+enum ForumType {
+  NORMAL
+  FAQ
+}
 
 model Forum {
   id              String        @id @default(cuid())
@@ -227,6 +230,8 @@ model Forum {
   author          User          @relation(fields: [authorId], references: [id])
   authorId        String
   state           State         @default(PENDING)
+  type            ForumType     @default(NORMAL)
+  tags            Tag[]
   forumAnswers    ForumAnswer[]
   comments        Comment[]
   commentsEnabled Boolean       @default(false)

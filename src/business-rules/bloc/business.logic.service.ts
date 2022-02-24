@@ -156,7 +156,7 @@ export class BusinessLogicService {
   } */
 
   @BlocAttach('signup.input.credentials.avator')
-  async avator(v: BusinessRequest, next) {
+  async avator(v: BusinessRequest, next: (arg0: BusinessRequest<any>) => any) {
     const { args, context } = v;
     const { credentials, ...rest } = args;
     const { avator } = credentials
@@ -183,7 +183,7 @@ export class BusinessLogicService {
 
   @BlocAttach('updateOneService.input.data.image.create.path')
   @BlocAttach('createOneService.input.data.image.create.path')
-  async serviceImage(v: BusinessRequest, next) {
+  async serviceImage(v: BusinessRequest, next: (arg0: BusinessRequest<any>) => any) {
     
     const { args, context } = v;
     const { data, ...rest } = args;
@@ -198,7 +198,7 @@ export class BusinessLogicService {
   }
 
   @BlocAttach('updateOneUser.input.data.avator.create.path')
-  async updateAvator(v: BusinessRequest, next) {
+  async updateAvator(v: BusinessRequest, next: (arg0: BusinessRequest<any>) => any) {
     
     const { args, context } = v;
     const { data, ...rest } = args;
@@ -299,7 +299,7 @@ export class BusinessLogicService {
   @BlocAttach('updateOneOrder.input.data.receipt.create.path')
   //TODO investigate further not needed maybe for create scenario
   @BlocAttach('createOneOrder.input.data.receipt.create.path')
-  async orderReceipt(v: BusinessRequest, next) {
+  async orderReceipt(v: BusinessRequest, next: (arg0: BusinessRequest<any>) => any) {
     
     const { args, context } = v;
     const { data, ...rest } = args;
@@ -648,19 +648,19 @@ export class BusinessLogicService {
 //   }
 
   @BlocFieldResolver("User","lastSeen",function(this:BusinessLogicService,...args){
-    return new DataLoader((async function (keys){      
+    return new DataLoader((async function (keys: any){      
       const lastseen= await this.redisCache.mget(keys);
       return lastseen;
     }).bind(this))
   })
-  async lastSeen(parent:User,args, ctx:TenantContext,info:any,
+  async lastSeen(parent:User,args: any, ctx:TenantContext,info:any,
    dataloader:DataLoader<string,string>) {
     return dataloader.load(`last-seen-${parent.id}`);
   }
 
-  async createAttachments(attachments,context:TenantContext){
+  async createAttachments(attachments: { create: string | any[]; },context:TenantContext){
     const uploads=[];
-     for(let i=0;i<attachments.create.length;i++) {
+     for(let i=0;i<attachments?.create?.length;i++) {
         const item =attachments.create[i];
         uploads.push(uploadFile((item as any).path));
      }
@@ -679,26 +679,33 @@ export class BusinessLogicService {
   @BlocAttach('createOneForumAnswer.input.data.attachments.create.path')
   @BlocAttach('createOneComment.input.data.attachments.create.path')
   @BlocAttach('updateOneForm.input.data.attachments.create.path')
-  async uploadAttachment(v: BusinessRequest, next) {
+  async uploadAttachment(v: BusinessRequest, next: (arg0: BusinessRequest<any>) => any) {
     const { args, context } = v;
+    if(context["uploadAttachment"]==true){
+      return next(v);
+    }
     const { data, ...rest } = args;
-    const { attachments } = data
+    const { attachments } = data;
+    const {create,...opts}=attachments;
+
     debugger
     const files2 = await this.createAttachments(attachments,context);
-    v.args.data.attachments = { connect: files2.map((e)=>({id:e.id}))};
+    
+    v.args.data.attachments = { ...opts,connect: files2.map((e)=>({id:e.id}))};
+    v.context["uploadAttachment"]=true;
+    
     return next(v)
   }
 
   @BlocAttach('createOneForm.input.data.grades.attachments.create.path')
-
-  async uploadGradesAttachment(v:BusinessRequest,next){
+  async uploadGradesAttachment(v:BusinessRequest,next: (arg0: BusinessRequest<any>) => any){
     debugger
    return next(v)
   }
 
   @BlocAttach('createOneForm.input.data.grades.create.questions.create.attachments.create.path')
   @BlocAttach('updateOneForm.input.data.grades.create.questions.create.attachments.create.path')
-  async uploadQuestionsAttachment(v:BusinessRequest,next){
+  async uploadQuestionsAttachment(v:BusinessRequest,next: (arg0: BusinessRequest<any>) => any){
     const { args, context } = v;
     const { data, ...rest } = args;
     const { grades } = data;
@@ -730,7 +737,7 @@ export class BusinessLogicService {
   }
   @BlocAttach('createOneForm.input.data.grades.create.recommendations.create.attachments.create.path')
   @BlocAttach('updateOneForm.input.data.grades.create.recommendations.create.attachments.create.path')
-  async uploadRecommendationsAttachment(v:BusinessRequest,next){
+  async uploadRecommendationsAttachment(v:BusinessRequest,next: (arg0: BusinessRequest<any>) => any){
     const { args, context } = v;
     const { data, ...rest } = args;
     const { grades } = data;

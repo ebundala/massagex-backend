@@ -5,6 +5,14 @@ type Forum {
           author: User!
           authorId: String!
           state: State!
+          type: ForumType!
+          tags(where: TagWhereInput
+              orderBy: [TagOrderByInput!]
+              cursor: TagWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [TagScalarFieldEnum!]
+              ): [Tag!]!
           forumAnswers(where: ForumAnswerWhereInput
               orderBy: [ForumAnswerOrderByInput!]
               cursor: ForumAnswerWhereUniqueInput

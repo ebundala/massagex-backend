@@ -5,14 +5,13 @@ type Form {
           state: State!
           author: User!
           authorId: String!
-          category: FormCategory
-          questions(where: QuestionWhereInput
-              orderBy: [QuestionOrderByInput!]
-              cursor: QuestionWhereUniqueInput
+          tags(where: TagWhereInput
+              orderBy: [TagOrderByInput!]
+              cursor: TagWhereUniqueInput
               take: Int
               skip: Int
-              distinct: [QuestionScalarFieldEnum!]
-              ): [Question!]!
+              distinct: [TagScalarFieldEnum!]
+              ): [Tag!]!
           grades(where: GradeWhereInput
               orderBy: [GradeOrderByInput!]
               cursor: GradeWhereUniqueInput
@@ -36,7 +35,7 @@ type Form {
               ): [Attachment!]!
           createdAt: DateTime!
           updatedAt: DateTime!
-          formCategoryId: String
+          tagId: String
     }
 
       type FormListResponse {

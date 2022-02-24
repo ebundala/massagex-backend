@@ -27,7 +27,7 @@ extend input AttachmentCreateWithoutUserInput{
     path: String! @file(path:"../../../../public/uploads")
 }
 
-extend input AttachmentCreateWithoutFormCategoriesInput{
+extend input AttachmentCreateWithoutTagsInput{
     path: String! @file(path:"../../../../public/uploads")
 }
 
@@ -136,7 +136,7 @@ extend input AttachmentUncheckedCreateInput{
 extend input AttachmentUncheckedCreateWithoutUserInput{
     path: String! @file(path:"../../../../public/uploads")
 }
-extend input AttachmentUncheckedCreateWithoutFormCategoriesInput{
+extend input AttachmentUncheckedCreateWithoutTagsInput{
     path: String! @file(path:"../../../../public/uploads")
 }
 

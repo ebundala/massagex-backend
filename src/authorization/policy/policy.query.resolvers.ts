@@ -27,22 +27,6 @@ findManyForm(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Inf
 
 @Query()
 @UseGuards(AuthorizerGuard)
-findUniqueFormCategory(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Query()
-@UseGuards(AuthorizerGuard)
-findManyFormCategory(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Query()
-@UseGuards(AuthorizerGuard)
 findUniqueForum(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
     return this.service.handle(parent, args, ctx, info);
   }
@@ -132,6 +116,22 @@ findUniqueService(@Parent() parent, @Args() args, @Context() ctx: TenantContext,
 @Query()
 @UseGuards(AuthorizerGuard)
 findManyService(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
+    return this.service.handle(parent, args, ctx, info);
+  }
+
+
+
+@Query()
+@UseGuards(AuthorizerGuard)
+findUniqueTag(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
+    return this.service.handle(parent, args, ctx, info);
+  }
+
+
+
+@Query()
+@UseGuards(AuthorizerGuard)
+findManyTag(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
     return this.service.handle(parent, args, ctx, info);
   }
 

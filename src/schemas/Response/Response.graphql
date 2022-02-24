@@ -1,7 +1,7 @@
 type Response {
           id: String!
-          author: User!
-          authorId: String!
+          author: User
+          authorId: String
           form: Form!
           formId: String!
           answers(where: AnswerWhereInput
@@ -11,8 +11,8 @@ type Response {
               skip: Int
               distinct: [AnswerScalarFieldEnum!]
               ): [Answer!]!
-          grade: Grade
-          gradeId: String
+          grade: Grade!
+          gradeId: String!
           attachments(where: AttachmentWhereInput
               orderBy: [AttachmentOrderByInput!]
               cursor: AttachmentWhereUniqueInput

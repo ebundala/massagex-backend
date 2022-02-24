@@ -68,8 +68,6 @@ type Mutation {
   paybill(data: PaybillRequest): PaybillResponse!
   createOneForm(data: FormCreateInput!): FormResponse!
   updateOneForm(where: FormWhereUniqueInput!, data: FormUpdateInput!): FormResponse!
-  createOneFormCategory(data: FormCategoryCreateInput!): FormCategoryResponse!
-  updateOneFormCategory(where: FormCategoryWhereUniqueInput!, data: FormCategoryUpdateInput!): FormCategoryResponse!
   createOneForum(data: ForumCreateInput!): ForumResponse!
   updateOneForum(where: ForumWhereUniqueInput!, data: ForumUpdateInput!): ForumResponse!
   createOneHelp(data: HelpCreateInput!): HelpResponse!
@@ -82,6 +80,8 @@ type Mutation {
   updateOneResponse(where: ResponseWhereUniqueInput!, data: ResponseUpdateInput!): ResponseResponse!
   createOneService(data: ServiceCreateInput!): ServiceResponse!
   updateOneService(where: ServiceWhereUniqueInput!, data: ServiceUpdateInput!): ServiceResponse!
+  createOneTag(data: TagCreateInput!): TagResponse!
+  updateOneTag(where: TagWhereUniqueInput!, data: TagUpdateInput!): TagResponse!
   createOneUser(data: UserCreateInput!): UserResponse!
   updateOneUser(where: UserWhereUniqueInput!, data: UserUpdateInput!): UserResponse!
   version: String
@@ -120,7 +120,7 @@ input AttachmentCreateInput {
   forum: ForumCreateNestedOneWithoutAttachmentsInput
   forumAnswer: ForumAnswerCreateNestedOneWithoutAttachmentsInput
   comment: CommentCreateNestedOneWithoutAttachmentsInput
-  formCategories: FormCategoryCreateNestedManyWithoutImageInput
+  tags: TagCreateNestedManyWithoutImageInput
   helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
   paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
   services: ServiceCreateNestedManyWithoutImageInput
@@ -174,14 +174,14 @@ input AttachmentCreateWithoutUserInput {
   forum: ForumCreateNestedOneWithoutAttachmentsInput
   forumAnswer: ForumAnswerCreateNestedOneWithoutAttachmentsInput
   comment: CommentCreateNestedOneWithoutAttachmentsInput
-  formCategories: FormCategoryCreateNestedManyWithoutImageInput
+  tags: TagCreateNestedManyWithoutImageInput
   helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
   paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
   services: ServiceCreateNestedManyWithoutImageInput
   orders: OrderCreateNestedManyWithoutReceiptInput
 }
 
-input AttachmentCreateWithoutFormCategoriesInput {
+input AttachmentCreateWithoutTagsInput {
   path: Upload!
   id: String
   filename: String
@@ -232,7 +232,7 @@ input AttachmentCreateWithoutFormInput {
   forum: ForumCreateNestedOneWithoutAttachmentsInput
   forumAnswer: ForumAnswerCreateNestedOneWithoutAttachmentsInput
   comment: CommentCreateNestedOneWithoutAttachmentsInput
-  formCategories: FormCategoryCreateNestedManyWithoutImageInput
+  tags: TagCreateNestedManyWithoutImageInput
   helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
   paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
   services: ServiceCreateNestedManyWithoutImageInput
@@ -261,7 +261,7 @@ input AttachmentCreateWithoutGradeInput {
   forum: ForumCreateNestedOneWithoutAttachmentsInput
   forumAnswer: ForumAnswerCreateNestedOneWithoutAttachmentsInput
   comment: CommentCreateNestedOneWithoutAttachmentsInput
-  formCategories: FormCategoryCreateNestedManyWithoutImageInput
+  tags: TagCreateNestedManyWithoutImageInput
   helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
   paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
   services: ServiceCreateNestedManyWithoutImageInput
@@ -290,7 +290,7 @@ input AttachmentCreateWithoutResponseInput {
   forum: ForumCreateNestedOneWithoutAttachmentsInput
   forumAnswer: ForumAnswerCreateNestedOneWithoutAttachmentsInput
   comment: CommentCreateNestedOneWithoutAttachmentsInput
-  formCategories: FormCategoryCreateNestedManyWithoutImageInput
+  tags: TagCreateNestedManyWithoutImageInput
   helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
   paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
   services: ServiceCreateNestedManyWithoutImageInput
@@ -319,7 +319,7 @@ input AttachmentCreateWithoutQuestionInput {
   forum: ForumCreateNestedOneWithoutAttachmentsInput
   forumAnswer: ForumAnswerCreateNestedOneWithoutAttachmentsInput
   comment: CommentCreateNestedOneWithoutAttachmentsInput
-  formCategories: FormCategoryCreateNestedManyWithoutImageInput
+  tags: TagCreateNestedManyWithoutImageInput
   helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
   paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
   services: ServiceCreateNestedManyWithoutImageInput
@@ -348,7 +348,7 @@ input AttachmentCreateWithoutAnswerInput {
   forum: ForumCreateNestedOneWithoutAttachmentsInput
   forumAnswer: ForumAnswerCreateNestedOneWithoutAttachmentsInput
   comment: CommentCreateNestedOneWithoutAttachmentsInput
-  formCategories: FormCategoryCreateNestedManyWithoutImageInput
+  tags: TagCreateNestedManyWithoutImageInput
   helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
   paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
   services: ServiceCreateNestedManyWithoutImageInput
@@ -377,7 +377,7 @@ input AttachmentCreateWithoutRecommendationInput {
   forum: ForumCreateNestedOneWithoutAttachmentsInput
   forumAnswer: ForumAnswerCreateNestedOneWithoutAttachmentsInput
   comment: CommentCreateNestedOneWithoutAttachmentsInput
-  formCategories: FormCategoryCreateNestedManyWithoutImageInput
+  tags: TagCreateNestedManyWithoutImageInput
   helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
   paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
   services: ServiceCreateNestedManyWithoutImageInput
@@ -406,7 +406,7 @@ input AttachmentCreateWithoutForumInput {
   recommendation: RecommendationCreateNestedOneWithoutAttachmentsInput
   forumAnswer: ForumAnswerCreateNestedOneWithoutAttachmentsInput
   comment: CommentCreateNestedOneWithoutAttachmentsInput
-  formCategories: FormCategoryCreateNestedManyWithoutImageInput
+  tags: TagCreateNestedManyWithoutImageInput
   helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
   paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
   services: ServiceCreateNestedManyWithoutImageInput
@@ -435,7 +435,7 @@ input AttachmentCreateWithoutForumAnswerInput {
   recommendation: RecommendationCreateNestedOneWithoutAttachmentsInput
   forum: ForumCreateNestedOneWithoutAttachmentsInput
   comment: CommentCreateNestedOneWithoutAttachmentsInput
-  formCategories: FormCategoryCreateNestedManyWithoutImageInput
+  tags: TagCreateNestedManyWithoutImageInput
   helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
   paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
   services: ServiceCreateNestedManyWithoutImageInput
@@ -464,7 +464,7 @@ input AttachmentCreateWithoutCommentInput {
   recommendation: RecommendationCreateNestedOneWithoutAttachmentsInput
   forum: ForumCreateNestedOneWithoutAttachmentsInput
   forumAnswer: ForumAnswerCreateNestedOneWithoutAttachmentsInput
-  formCategories: FormCategoryCreateNestedManyWithoutImageInput
+  tags: TagCreateNestedManyWithoutImageInput
   helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
   paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
   services: ServiceCreateNestedManyWithoutImageInput
@@ -494,7 +494,7 @@ input AttachmentCreateWithoutHelpStepInput {
   forum: ForumCreateNestedOneWithoutAttachmentsInput
   forumAnswer: ForumAnswerCreateNestedOneWithoutAttachmentsInput
   comment: CommentCreateNestedOneWithoutAttachmentsInput
-  formCategories: FormCategoryCreateNestedManyWithoutImageInput
+  tags: TagCreateNestedManyWithoutImageInput
   paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
   services: ServiceCreateNestedManyWithoutImageInput
   orders: OrderCreateNestedManyWithoutReceiptInput
@@ -523,7 +523,7 @@ input AttachmentCreateWithoutServicesInput {
   forum: ForumCreateNestedOneWithoutAttachmentsInput
   forumAnswer: ForumAnswerCreateNestedOneWithoutAttachmentsInput
   comment: CommentCreateNestedOneWithoutAttachmentsInput
-  formCategories: FormCategoryCreateNestedManyWithoutImageInput
+  tags: TagCreateNestedManyWithoutImageInput
   helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
   paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
   orders: OrderCreateNestedManyWithoutReceiptInput
@@ -552,7 +552,7 @@ input AttachmentCreateWithoutOrdersInput {
   forum: ForumCreateNestedOneWithoutAttachmentsInput
   forumAnswer: ForumAnswerCreateNestedOneWithoutAttachmentsInput
   comment: CommentCreateNestedOneWithoutAttachmentsInput
-  formCategories: FormCategoryCreateNestedManyWithoutImageInput
+  tags: TagCreateNestedManyWithoutImageInput
   helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
   paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
   services: ServiceCreateNestedManyWithoutImageInput
@@ -581,7 +581,7 @@ input AttachmentCreateWithoutPaymentMethodsInput {
   forum: ForumCreateNestedOneWithoutAttachmentsInput
   forumAnswer: ForumAnswerCreateNestedOneWithoutAttachmentsInput
   comment: CommentCreateNestedOneWithoutAttachmentsInput
-  formCategories: FormCategoryCreateNestedManyWithoutImageInput
+  tags: TagCreateNestedManyWithoutImageInput
   helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
   services: ServiceCreateNestedManyWithoutImageInput
   orders: OrderCreateNestedManyWithoutReceiptInput
@@ -851,7 +851,7 @@ input AttachmentUncheckedCreateInput {
   commentId: String
   helpStepId: String
   user: UserUncheckedCreateNestedManyWithoutAvatorInput
-  formCategories: FormCategoryUncheckedCreateNestedManyWithoutImageInput
+  tags: TagUncheckedCreateNestedManyWithoutImageInput
   paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
   services: ServiceUncheckedCreateNestedManyWithoutImageInput
   orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
@@ -880,13 +880,13 @@ input AttachmentUncheckedCreateWithoutUserInput {
   forumAnswerId: String
   commentId: String
   helpStepId: String
-  formCategories: FormCategoryUncheckedCreateNestedManyWithoutImageInput
+  tags: TagUncheckedCreateNestedManyWithoutImageInput
   paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
   services: ServiceUncheckedCreateNestedManyWithoutImageInput
   orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
 }
 
-input AttachmentUncheckedCreateWithoutFormCategoriesInput {
+input AttachmentUncheckedCreateWithoutTagsInput {
   path: Upload!
   id: String
   filename: String
@@ -938,7 +938,7 @@ input AttachmentUncheckedCreateWithoutFormInput {
   commentId: String
   helpStepId: String
   user: UserUncheckedCreateNestedManyWithoutAvatorInput
-  formCategories: FormCategoryUncheckedCreateNestedManyWithoutImageInput
+  tags: TagUncheckedCreateNestedManyWithoutImageInput
   paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
   services: ServiceUncheckedCreateNestedManyWithoutImageInput
   orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
@@ -967,7 +967,7 @@ input AttachmentUncheckedCreateWithoutGradeInput {
   commentId: String
   helpStepId: String
   user: UserUncheckedCreateNestedManyWithoutAvatorInput
-  formCategories: FormCategoryUncheckedCreateNestedManyWithoutImageInput
+  tags: TagUncheckedCreateNestedManyWithoutImageInput
   paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
   services: ServiceUncheckedCreateNestedManyWithoutImageInput
   orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
@@ -996,7 +996,7 @@ input AttachmentUncheckedCreateWithoutResponseInput {
   commentId: String
   helpStepId: String
   user: UserUncheckedCreateNestedManyWithoutAvatorInput
-  formCategories: FormCategoryUncheckedCreateNestedManyWithoutImageInput
+  tags: TagUncheckedCreateNestedManyWithoutImageInput
   paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
   services: ServiceUncheckedCreateNestedManyWithoutImageInput
   orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
@@ -1025,7 +1025,7 @@ input AttachmentUncheckedCreateWithoutQuestionInput {
   commentId: String
   helpStepId: String
   user: UserUncheckedCreateNestedManyWithoutAvatorInput
-  formCategories: FormCategoryUncheckedCreateNestedManyWithoutImageInput
+  tags: TagUncheckedCreateNestedManyWithoutImageInput
   paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
   services: ServiceUncheckedCreateNestedManyWithoutImageInput
   orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
@@ -1054,7 +1054,7 @@ input AttachmentUncheckedCreateWithoutAnswerInput {
   commentId: String
   helpStepId: String
   user: UserUncheckedCreateNestedManyWithoutAvatorInput
-  formCategories: FormCategoryUncheckedCreateNestedManyWithoutImageInput
+  tags: TagUncheckedCreateNestedManyWithoutImageInput
   paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
   services: ServiceUncheckedCreateNestedManyWithoutImageInput
   orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
@@ -1083,7 +1083,7 @@ input AttachmentUncheckedCreateWithoutRecommendationInput {
   commentId: String
   helpStepId: String
   user: UserUncheckedCreateNestedManyWithoutAvatorInput
-  formCategories: FormCategoryUncheckedCreateNestedManyWithoutImageInput
+  tags: TagUncheckedCreateNestedManyWithoutImageInput
   paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
   services: ServiceUncheckedCreateNestedManyWithoutImageInput
   orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
@@ -1112,7 +1112,7 @@ input AttachmentUncheckedCreateWithoutForumInput {
   commentId: String
   helpStepId: String
   user: UserUncheckedCreateNestedManyWithoutAvatorInput
-  formCategories: FormCategoryUncheckedCreateNestedManyWithoutImageInput
+  tags: TagUncheckedCreateNestedManyWithoutImageInput
   paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
   services: ServiceUncheckedCreateNestedManyWithoutImageInput
   orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
@@ -1141,7 +1141,7 @@ input AttachmentUncheckedCreateWithoutForumAnswerInput {
   commentId: String
   helpStepId: String
   user: UserUncheckedCreateNestedManyWithoutAvatorInput
-  formCategories: FormCategoryUncheckedCreateNestedManyWithoutImageInput
+  tags: TagUncheckedCreateNestedManyWithoutImageInput
   paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
   services: ServiceUncheckedCreateNestedManyWithoutImageInput
   orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
@@ -1170,7 +1170,7 @@ input AttachmentUncheckedCreateWithoutCommentInput {
   forumAnswerId: String
   helpStepId: String
   user: UserUncheckedCreateNestedManyWithoutAvatorInput
-  formCategories: FormCategoryUncheckedCreateNestedManyWithoutImageInput
+  tags: TagUncheckedCreateNestedManyWithoutImageInput
   paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
   services: ServiceUncheckedCreateNestedManyWithoutImageInput
   orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
@@ -1199,7 +1199,7 @@ input AttachmentUncheckedCreateWithoutHelpStepInput {
   forumAnswerId: String
   commentId: String
   user: UserUncheckedCreateNestedManyWithoutAvatorInput
-  formCategories: FormCategoryUncheckedCreateNestedManyWithoutImageInput
+  tags: TagUncheckedCreateNestedManyWithoutImageInput
   paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
   services: ServiceUncheckedCreateNestedManyWithoutImageInput
   orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
@@ -1229,7 +1229,7 @@ input AttachmentUncheckedCreateWithoutServicesInput {
   commentId: String
   helpStepId: String
   user: UserUncheckedCreateNestedManyWithoutAvatorInput
-  formCategories: FormCategoryUncheckedCreateNestedManyWithoutImageInput
+  tags: TagUncheckedCreateNestedManyWithoutImageInput
   paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
   orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
 }
@@ -1258,7 +1258,7 @@ input AttachmentUncheckedCreateWithoutOrdersInput {
   commentId: String
   helpStepId: String
   user: UserUncheckedCreateNestedManyWithoutAvatorInput
-  formCategories: FormCategoryUncheckedCreateNestedManyWithoutImageInput
+  tags: TagUncheckedCreateNestedManyWithoutImageInput
   paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
   services: ServiceUncheckedCreateNestedManyWithoutImageInput
 }
@@ -1287,7 +1287,7 @@ input AttachmentUncheckedCreateWithoutPaymentMethodsInput {
   commentId: String
   helpStepId: String
   user: UserUncheckedCreateNestedManyWithoutAvatorInput
-  formCategories: FormCategoryUncheckedCreateNestedManyWithoutImageInput
+  tags: TagUncheckedCreateNestedManyWithoutImageInput
   services: ServiceUncheckedCreateNestedManyWithoutImageInput
   orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
 }
@@ -1320,7 +1320,7 @@ enum NotificationType {
 
 input RegisterDeviceInput {
   fcm_id: String
-  device_id: String!
+  id: String!
   userId: String
   type: String
 }
@@ -1413,7 +1413,7 @@ type Attachment {
   forumAnswerId: String
   comment: Comment
   commentId: String
-  formCategories(where: FormCategoryWhereInput, orderBy: [FormCategoryOrderByInput!], cursor: FormCategoryWhereUniqueInput, take: Int, skip: Int, distinct: [FormCategoryScalarFieldEnum!]): [FormCategory!]!
+  tags(where: TagWhereInput, orderBy: [TagOrderByInput!], cursor: TagWhereUniqueInput, take: Int, skip: Int, distinct: [TagScalarFieldEnum!]): [Tag!]!
   helpStep: HelpStep
   helpStepId: String
   paymentMethods(where: PaymentMethodWhereInput, orderBy: [PaymentMethodOrderByInput!], cursor: PaymentMethodWhereUniqueInput, take: Int, skip: Int, distinct: [PaymentMethodScalarFieldEnum!]): [PaymentMethod!]!
@@ -1544,7 +1544,7 @@ type CommentCountResponse {
 }
 
 type Device {
-  device_id: String!
+  id: String!
   fcm_id: String
   type: String!
   user: User
@@ -1588,14 +1588,13 @@ type Form {
   state: State!
   author: User!
   authorId: String!
-  category: FormCategory
-  questions(where: QuestionWhereInput, orderBy: [QuestionOrderByInput!], cursor: QuestionWhereUniqueInput, take: Int, skip: Int, distinct: [QuestionScalarFieldEnum!]): [Question!]!
+  tags(where: TagWhereInput, orderBy: [TagOrderByInput!], cursor: TagWhereUniqueInput, take: Int, skip: Int, distinct: [TagScalarFieldEnum!]): [Tag!]!
   grades(where: GradeWhereInput, orderBy: [GradeOrderByInput!], cursor: GradeWhereUniqueInput, take: Int, skip: Int, distinct: [GradeScalarFieldEnum!]): [Grade!]!
   responses(where: ResponseWhereInput, orderBy: [ResponseOrderByInput!], cursor: ResponseWhereUniqueInput, take: Int, skip: Int, distinct: [ResponseScalarFieldEnum!]): [Response!]!
   attachments(where: AttachmentWhereInput, orderBy: [AttachmentOrderByInput!], cursor: AttachmentWhereUniqueInput, take: Int, skip: Int, distinct: [AttachmentScalarFieldEnum!]): [Attachment!]!
   createdAt: DateTime!
   updatedAt: DateTime!
-  formCategoryId: String
+  tagId: String
 }
 
 type FormListResponse {
@@ -1631,8 +1630,6 @@ type FormCountResponse {
 type Query {
   findUniqueForm(where: FormWhereUniqueInput!): FormResponse!
   findManyForm(where: FormWhereInput, orderBy: [FormOrderByInput!], cursor: FormWhereUniqueInput, distinct: [FormScalarFieldEnum!], skip: Int, take: Int): FormListResponse!
-  findUniqueFormCategory(where: FormCategoryWhereUniqueInput!): FormCategoryResponse!
-  findManyFormCategory(where: FormCategoryWhereInput, orderBy: [FormCategoryOrderByInput!], cursor: FormCategoryWhereUniqueInput, distinct: [FormCategoryScalarFieldEnum!], skip: Int, take: Int): FormCategoryListResponse!
   findUniqueForum(where: ForumWhereUniqueInput!): ForumResponse!
   findManyForum(where: ForumWhereInput, orderBy: [ForumOrderByInput!], cursor: ForumWhereUniqueInput, distinct: [ForumScalarFieldEnum!], skip: Int, take: Int): ForumListResponse!
   findUniqueHelp(where: HelpWhereUniqueInput!): HelpResponse!
@@ -1645,51 +1642,11 @@ type Query {
   findManyResponse(where: ResponseWhereInput, orderBy: [ResponseOrderByInput!], cursor: ResponseWhereUniqueInput, distinct: [ResponseScalarFieldEnum!], skip: Int, take: Int): ResponseListResponse!
   findUniqueService(where: ServiceWhereUniqueInput!): ServiceResponse!
   findManyService(where: ServiceWhereInput, orderBy: [ServiceOrderByInput!], cursor: ServiceWhereUniqueInput, distinct: [ServiceScalarFieldEnum!], skip: Int, take: Int): ServiceListResponse!
+  findUniqueTag(where: TagWhereUniqueInput!): TagResponse!
+  findManyTag(where: TagWhereInput, orderBy: [TagOrderByInput!], cursor: TagWhereUniqueInput, distinct: [TagScalarFieldEnum!], skip: Int, take: Int): TagListResponse!
   findUniqueUser(where: UserWhereUniqueInput!): UserResponse!
   findManyUser(where: UserWhereInput, orderBy: [UserOrderByInput!], cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum!], skip: Int, take: Int): UserListResponse!
   version: String
-}
-
-type FormCategory {
-  id: String!
-  name: String!
-  description: String
-  image: Attachment
-  state: State!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  attachmentId: String
-  forms(where: FormWhereInput, orderBy: [FormOrderByInput!], cursor: FormWhereUniqueInput, take: Int, skip: Int, distinct: [FormScalarFieldEnum!]): [Form!]!
-}
-
-type FormCategoryListResponse {
-  status: Boolean!
-  data: [FormCategory!]
-  message: String!
-}
-
-type FormCategoryResponse {
-  status: Boolean!
-  data: FormCategory
-  message: String!
-}
-
-type FormCategoryBatchResponse {
-  status: Boolean!
-  data: BatchPayload
-  message: String!
-}
-
-type AggregateFormCategoryResponse {
-  status: Boolean!
-  data: AggregateFormCategory
-  message: String!
-}
-
-type FormCategoryCountResponse {
-  status: Boolean!
-  data: Int
-  message: String!
 }
 
 type Forum {
@@ -1699,6 +1656,8 @@ type Forum {
   author: User!
   authorId: String!
   state: State!
+  type: ForumType!
+  tags(where: TagWhereInput, orderBy: [TagOrderByInput!], cursor: TagWhereUniqueInput, take: Int, skip: Int, distinct: [TagScalarFieldEnum!]): [Tag!]!
   forumAnswers(where: ForumAnswerWhereInput, orderBy: [ForumAnswerOrderByInput!], cursor: ForumAnswerWhereUniqueInput, take: Int, skip: Int, distinct: [ForumAnswerScalarFieldEnum!]): [ForumAnswer!]!
   comments(where: CommentWhereInput, orderBy: [CommentOrderByInput!], cursor: CommentWhereUniqueInput, take: Int, skip: Int, distinct: [CommentScalarFieldEnum!]): [Comment!]!
   commentsEnabled: Boolean!
@@ -1786,13 +1745,13 @@ type Grade {
   id: String!
   name: String!
   description: String!
-  form: Form!
-  formId: String!
+  form: Form
+  formId: String
   responses(where: ResponseWhereInput, orderBy: [ResponseOrderByInput!], cursor: ResponseWhereUniqueInput, take: Int, skip: Int, distinct: [ResponseScalarFieldEnum!]): [Response!]!
   recommendations(where: RecommendationWhereInput, orderBy: [RecommendationOrderByInput!], cursor: RecommendationWhereUniqueInput, take: Int, skip: Int, distinct: [RecommendationScalarFieldEnum!]): [Recommendation!]!
   questions(where: QuestionWhereInput, orderBy: [QuestionOrderByInput!], cursor: QuestionWhereUniqueInput, take: Int, skip: Int, distinct: [QuestionScalarFieldEnum!]): [Question!]!
-  minValue: Float
-  maxValue: Float
+  minValue: Int
+  maxValue: Int
   minInclusive: Boolean!
   maxInclusive: Boolean!
   attachments(where: AttachmentWhereInput, orderBy: [AttachmentOrderByInput!], cursor: AttachmentWhereUniqueInput, take: Int, skip: Int, distinct: [AttachmentScalarFieldEnum!]): [Attachment!]!
@@ -2060,8 +2019,6 @@ type Question {
   weight: Float!
   instruction: String
   questionType: QuestionType!
-  form: Form
-  formId: String
   grade: Grade!
   gradeId: String!
   answers(where: AnswerWhereInput, orderBy: [AnswerOrderByInput!], cursor: AnswerWhereUniqueInput, take: Int, skip: Int, distinct: [AnswerScalarFieldEnum!]): [Answer!]!
@@ -2104,8 +2061,8 @@ type Recommendation {
   id: String!
   content: String!
   attachments(where: AttachmentWhereInput, orderBy: [AttachmentOrderByInput!], cursor: AttachmentWhereUniqueInput, take: Int, skip: Int, distinct: [AttachmentScalarFieldEnum!]): [Attachment!]!
-  grade: Grade!
-  gradeId: String!
+  grade: Grade
+  gradeId: String
   type: RecommendationType!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -2143,13 +2100,13 @@ type RecommendationCountResponse {
 
 type Response {
   id: String!
-  author: User!
-  authorId: String!
+  author: User
+  authorId: String
   form: Form!
   formId: String!
   answers(where: AnswerWhereInput, orderBy: [AnswerOrderByInput!], cursor: AnswerWhereUniqueInput, take: Int, skip: Int, distinct: [AnswerScalarFieldEnum!]): [Answer!]!
-  grade: Grade
-  gradeId: String
+  grade: Grade!
+  gradeId: String!
   attachments(where: AttachmentWhereInput, orderBy: [AttachmentOrderByInput!], cursor: AttachmentWhereUniqueInput, take: Int, skip: Int, distinct: [AttachmentScalarFieldEnum!]): [Attachment!]!
   state: State!
   createdAt: DateTime!
@@ -2324,6 +2281,49 @@ type ServiceCountResponse {
   message: String!
 }
 
+type Tag {
+  id: String!
+  name: String!
+  description: String
+  image: Attachment
+  state: State!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  attachmentId: String
+  forms(where: FormWhereInput, orderBy: [FormOrderByInput!], cursor: FormWhereUniqueInput, take: Int, skip: Int, distinct: [FormScalarFieldEnum!]): [Form!]!
+  forums(where: ForumWhereInput, orderBy: [ForumOrderByInput!], cursor: ForumWhereUniqueInput, take: Int, skip: Int, distinct: [ForumScalarFieldEnum!]): [Forum!]!
+}
+
+type TagListResponse {
+  status: Boolean!
+  data: [Tag!]
+  message: String!
+}
+
+type TagResponse {
+  status: Boolean!
+  data: Tag
+  message: String!
+}
+
+type TagBatchResponse {
+  status: Boolean!
+  data: BatchPayload
+  message: String!
+}
+
+type AggregateTagResponse {
+  status: Boolean!
+  data: AggregateTag
+  message: String!
+}
+
+type TagCountResponse {
+  status: Boolean!
+  data: Int
+  message: String!
+}
+
 type Transaction {
   id: String!
   paymentMethod: PaymentMethod!
@@ -2425,7 +2425,7 @@ enum UserScalarFieldEnum {
 }
 
 enum DeviceScalarFieldEnum {
-  device_id
+  id
   fcm_id
   type
   userId
@@ -2456,7 +2456,7 @@ enum AttachmentScalarFieldEnum {
   helpStepId
 }
 
-enum FormCategoryScalarFieldEnum {
+enum TagScalarFieldEnum {
   id
   name
   description
@@ -2474,7 +2474,7 @@ enum FormScalarFieldEnum {
   authorId
   createdAt
   updatedAt
-  formCategoryId
+  tagId
 }
 
 enum GradeScalarFieldEnum {
@@ -2507,7 +2507,6 @@ enum QuestionScalarFieldEnum {
   weight
   instruction
   questionType
-  formId
   gradeId
   createdAt
   updatedAt
@@ -2538,6 +2537,7 @@ enum ForumScalarFieldEnum {
   description
   authorId
   state
+  type
   commentsEnabled
   createdAt
   updatedAt
@@ -2744,6 +2744,11 @@ enum RecommendationType {
   INORGANIC
 }
 
+enum ForumType {
+  NORMAL
+  FAQ
+}
+
 enum SelcomUtilityCode {
   VMCASHIN
   AMCASHIN
@@ -2831,7 +2836,7 @@ input DeviceWhereInput {
   AND: [DeviceWhereInput!]
   OR: [DeviceWhereInput!]
   NOT: [DeviceWhereInput!]
-  device_id: StringFilter
+  id: StringFilter
   fcm_id: StringNullableFilter
   type: StringFilter
   user: UserWhereInput
@@ -2839,21 +2844,21 @@ input DeviceWhereInput {
 }
 
 input DeviceOrderByInput {
-  device_id: SortOrder
+  id: SortOrder
   fcm_id: SortOrder
   type: SortOrder
   userId: SortOrder
 }
 
 input DeviceWhereUniqueInput {
-  device_id: String
+  id: String
 }
 
 input DeviceScalarWhereWithAggregatesInput {
   AND: [DeviceScalarWhereWithAggregatesInput!]
   OR: [DeviceScalarWhereWithAggregatesInput!]
   NOT: [DeviceScalarWhereWithAggregatesInput!]
-  device_id: StringWithAggregatesFilter
+  id: StringWithAggregatesFilter
   fcm_id: StringNullableWithAggregatesFilter
   type: StringWithAggregatesFilter
   userId: StringNullableWithAggregatesFilter
@@ -2894,7 +2899,7 @@ input AttachmentWhereInput {
   forumAnswerId: StringNullableFilter
   comment: CommentWhereInput
   commentId: StringNullableFilter
-  formCategories: FormCategoryListRelationFilter
+  tags: TagListRelationFilter
   helpStep: HelpStepWhereInput
   helpStepId: StringNullableFilter
   paymentMethods: PaymentMethodListRelationFilter
@@ -2959,10 +2964,10 @@ input AttachmentScalarWhereWithAggregatesInput {
   helpStepId: StringNullableWithAggregatesFilter
 }
 
-input FormCategoryWhereInput {
-  AND: [FormCategoryWhereInput!]
-  OR: [FormCategoryWhereInput!]
-  NOT: [FormCategoryWhereInput!]
+input TagWhereInput {
+  AND: [TagWhereInput!]
+  OR: [TagWhereInput!]
+  NOT: [TagWhereInput!]
   id: StringFilter
   name: StringFilter
   description: StringNullableFilter
@@ -2972,9 +2977,10 @@ input FormCategoryWhereInput {
   updatedAt: DateTimeFilter
   attachmentId: StringNullableFilter
   forms: FormListRelationFilter
+  forums: ForumListRelationFilter
 }
 
-input FormCategoryOrderByInput {
+input TagOrderByInput {
   id: SortOrder
   name: SortOrder
   description: SortOrder
@@ -2984,14 +2990,14 @@ input FormCategoryOrderByInput {
   attachmentId: SortOrder
 }
 
-input FormCategoryWhereUniqueInput {
+input TagWhereUniqueInput {
   id: String
 }
 
-input FormCategoryScalarWhereWithAggregatesInput {
-  AND: [FormCategoryScalarWhereWithAggregatesInput!]
-  OR: [FormCategoryScalarWhereWithAggregatesInput!]
-  NOT: [FormCategoryScalarWhereWithAggregatesInput!]
+input TagScalarWhereWithAggregatesInput {
+  AND: [TagScalarWhereWithAggregatesInput!]
+  OR: [TagScalarWhereWithAggregatesInput!]
+  NOT: [TagScalarWhereWithAggregatesInput!]
   id: StringWithAggregatesFilter
   name: StringWithAggregatesFilter
   description: StringNullableWithAggregatesFilter
@@ -3011,14 +3017,13 @@ input FormWhereInput {
   state: EnumStateFilter
   author: UserWhereInput
   authorId: StringFilter
-  category: FormCategoryWhereInput
-  questions: QuestionListRelationFilter
+  tags: TagListRelationFilter
   grades: GradeListRelationFilter
   responses: ResponseListRelationFilter
   attachments: AttachmentListRelationFilter
   createdAt: DateTimeFilter
   updatedAt: DateTimeFilter
-  formCategoryId: StringNullableFilter
+  tagId: StringNullableFilter
 }
 
 input FormOrderByInput {
@@ -3029,7 +3034,7 @@ input FormOrderByInput {
   authorId: SortOrder
   createdAt: SortOrder
   updatedAt: SortOrder
-  formCategoryId: SortOrder
+  tagId: SortOrder
 }
 
 input FormWhereUniqueInput {
@@ -3047,7 +3052,7 @@ input FormScalarWhereWithAggregatesInput {
   authorId: StringWithAggregatesFilter
   createdAt: DateTimeWithAggregatesFilter
   updatedAt: DateTimeWithAggregatesFilter
-  formCategoryId: StringNullableWithAggregatesFilter
+  tagId: StringNullableWithAggregatesFilter
 }
 
 input GradeWhereInput {
@@ -3058,12 +3063,12 @@ input GradeWhereInput {
   name: StringFilter
   description: StringFilter
   form: FormWhereInput
-  formId: StringFilter
+  formId: StringNullableFilter
   responses: ResponseListRelationFilter
   recommendations: RecommendationListRelationFilter
   questions: QuestionListRelationFilter
-  minValue: FloatNullableFilter
-  maxValue: FloatNullableFilter
+  minValue: IntNullableFilter
+  maxValue: IntNullableFilter
   minInclusive: BoolFilter
   maxInclusive: BoolFilter
   attachments: AttachmentListRelationFilter
@@ -3095,9 +3100,9 @@ input GradeScalarWhereWithAggregatesInput {
   id: StringWithAggregatesFilter
   name: StringWithAggregatesFilter
   description: StringWithAggregatesFilter
-  formId: StringWithAggregatesFilter
-  minValue: FloatNullableWithAggregatesFilter
-  maxValue: FloatNullableWithAggregatesFilter
+  formId: StringNullableWithAggregatesFilter
+  minValue: IntNullableWithAggregatesFilter
+  maxValue: IntNullableWithAggregatesFilter
   minInclusive: BoolWithAggregatesFilter
   maxInclusive: BoolWithAggregatesFilter
   createdAt: DateTimeWithAggregatesFilter
@@ -3110,12 +3115,12 @@ input ResponseWhereInput {
   NOT: [ResponseWhereInput!]
   id: StringFilter
   author: UserWhereInput
-  authorId: StringFilter
+  authorId: StringNullableFilter
   form: FormWhereInput
   formId: StringFilter
   answers: AnswerListRelationFilter
   grade: GradeWhereInput
-  gradeId: StringNullableFilter
+  gradeId: StringFilter
   attachments: AttachmentListRelationFilter
   state: EnumStateFilter
   createdAt: DateTimeFilter
@@ -3141,9 +3146,9 @@ input ResponseScalarWhereWithAggregatesInput {
   OR: [ResponseScalarWhereWithAggregatesInput!]
   NOT: [ResponseScalarWhereWithAggregatesInput!]
   id: StringWithAggregatesFilter
-  authorId: StringWithAggregatesFilter
+  authorId: StringNullableWithAggregatesFilter
   formId: StringWithAggregatesFilter
-  gradeId: StringNullableWithAggregatesFilter
+  gradeId: StringWithAggregatesFilter
   state: EnumStateWithAggregatesFilter
   createdAt: DateTimeWithAggregatesFilter
   updatedAt: DateTimeWithAggregatesFilter
@@ -3159,8 +3164,6 @@ input QuestionWhereInput {
   weight: FloatFilter
   instruction: StringNullableFilter
   questionType: EnumQuestionTypeFilter
-  form: FormWhereInput
-  formId: StringNullableFilter
   grade: GradeWhereInput
   gradeId: StringFilter
   answers: AnswerListRelationFilter
@@ -3176,7 +3179,6 @@ input QuestionOrderByInput {
   weight: SortOrder
   instruction: SortOrder
   questionType: SortOrder
-  formId: SortOrder
   gradeId: SortOrder
   createdAt: SortOrder
   updatedAt: SortOrder
@@ -3196,7 +3198,6 @@ input QuestionScalarWhereWithAggregatesInput {
   weight: FloatWithAggregatesFilter
   instruction: StringNullableWithAggregatesFilter
   questionType: EnumQuestionTypeWithAggregatesFilter
-  formId: StringNullableWithAggregatesFilter
   gradeId: StringWithAggregatesFilter
   createdAt: DateTimeWithAggregatesFilter
   updatedAt: DateTimeWithAggregatesFilter
@@ -3253,7 +3254,7 @@ input RecommendationWhereInput {
   content: StringFilter
   attachments: AttachmentListRelationFilter
   grade: GradeWhereInput
-  gradeId: StringFilter
+  gradeId: StringNullableFilter
   type: EnumRecommendationTypeFilter
   createdAt: DateTimeFilter
   updatedAt: DateTimeFilter
@@ -3278,7 +3279,7 @@ input RecommendationScalarWhereWithAggregatesInput {
   NOT: [RecommendationScalarWhereWithAggregatesInput!]
   id: StringWithAggregatesFilter
   content: StringWithAggregatesFilter
-  gradeId: StringWithAggregatesFilter
+  gradeId: StringNullableWithAggregatesFilter
   type: EnumRecommendationTypeWithAggregatesFilter
   createdAt: DateTimeWithAggregatesFilter
   updatedAt: DateTimeWithAggregatesFilter
@@ -3294,6 +3295,8 @@ input ForumWhereInput {
   author: UserWhereInput
   authorId: StringFilter
   state: EnumStateFilter
+  type: EnumForumTypeFilter
+  tags: TagListRelationFilter
   forumAnswers: ForumAnswerListRelationFilter
   comments: CommentListRelationFilter
   commentsEnabled: BoolFilter
@@ -3308,6 +3311,7 @@ input ForumOrderByInput {
   description: SortOrder
   authorId: SortOrder
   state: SortOrder
+  type: SortOrder
   commentsEnabled: SortOrder
   createdAt: SortOrder
   updatedAt: SortOrder
@@ -3326,6 +3330,7 @@ input ForumScalarWhereWithAggregatesInput {
   description: StringWithAggregatesFilter
   authorId: StringWithAggregatesFilter
   state: EnumStateWithAggregatesFilter
+  type: EnumForumTypeWithAggregatesFilter
   commentsEnabled: BoolWithAggregatesFilter
   createdAt: DateTimeWithAggregatesFilter
   updatedAt: DateTimeWithAggregatesFilter
@@ -4085,48 +4090,48 @@ input UserUncheckedUpdateManyInput {
 }
 
 input DeviceCreateInput {
-  device_id: String!
+  id: String!
   fcm_id: String
   type: String
   user: UserCreateNestedOneWithoutDeviceInput
 }
 
 input DeviceUncheckedCreateInput {
-  device_id: String!
+  id: String!
   fcm_id: String
   type: String
   userId: String
 }
 
 input DeviceUpdateInput {
-  device_id: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
   fcm_id: NullableStringFieldUpdateOperationsInput
   type: StringFieldUpdateOperationsInput
   user: UserUpdateOneWithoutDeviceInput
 }
 
 input DeviceUncheckedUpdateInput {
-  device_id: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
   fcm_id: NullableStringFieldUpdateOperationsInput
   type: StringFieldUpdateOperationsInput
   userId: NullableStringFieldUpdateOperationsInput
 }
 
 input DeviceCreateManyInput {
-  device_id: String!
+  id: String!
   fcm_id: String
   type: String
   userId: String
 }
 
 input DeviceUpdateManyMutationInput {
-  device_id: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
   fcm_id: NullableStringFieldUpdateOperationsInput
   type: StringFieldUpdateOperationsInput
 }
 
 input DeviceUncheckedUpdateManyInput {
-  device_id: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
   fcm_id: NullableStringFieldUpdateOperationsInput
   type: StringFieldUpdateOperationsInput
   userId: NullableStringFieldUpdateOperationsInput
@@ -4155,7 +4160,7 @@ input AttachmentUpdateInput {
   forum: ForumUpdateOneWithoutAttachmentsInput
   forumAnswer: ForumAnswerUpdateOneWithoutAttachmentsInput
   comment: CommentUpdateOneWithoutAttachmentsInput
-  formCategories: FormCategoryUpdateManyWithoutImageInput
+  tags: TagUpdateManyWithoutImageInput
   helpStep: HelpStepUpdateOneWithoutAttachmentsInput
   paymentMethods: PaymentMethodUpdateManyWithoutLogoInput
   services: ServiceUpdateManyWithoutImageInput
@@ -4186,7 +4191,7 @@ input AttachmentUncheckedUpdateInput {
   commentId: NullableStringFieldUpdateOperationsInput
   helpStepId: NullableStringFieldUpdateOperationsInput
   user: UserUncheckedUpdateManyWithoutAvatorInput
-  formCategories: FormCategoryUncheckedUpdateManyWithoutImageInput
+  tags: TagUncheckedUpdateManyWithoutImageInput
   paymentMethods: PaymentMethodUncheckedUpdateManyWithoutLogoInput
   services: ServiceUncheckedUpdateManyWithoutImageInput
   orders: OrderUncheckedUpdateManyWithoutReceiptInput
@@ -4232,18 +4237,19 @@ input AttachmentUncheckedUpdateManyInput {
   helpStepId: NullableStringFieldUpdateOperationsInput
 }
 
-input FormCategoryCreateInput {
+input TagCreateInput {
   id: String
   name: String!
   description: String
   state: State
   createdAt: DateTime
   updatedAt: DateTime
-  image: AttachmentCreateNestedOneWithoutFormCategoriesInput
-  forms: FormCreateNestedManyWithoutCategoryInput
+  image: AttachmentCreateNestedOneWithoutTagsInput
+  forms: FormCreateNestedManyWithoutTagsInput
+  forums: ForumCreateNestedManyWithoutTagsInput
 }
 
-input FormCategoryUncheckedCreateInput {
+input TagUncheckedCreateInput {
   id: String
   name: String!
   description: String
@@ -4251,21 +4257,21 @@ input FormCategoryUncheckedCreateInput {
   createdAt: DateTime
   updatedAt: DateTime
   attachmentId: String
-  forms: FormUncheckedCreateNestedManyWithoutCategoryInput
 }
 
-input FormCategoryUpdateInput {
+input TagUpdateInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   description: NullableStringFieldUpdateOperationsInput
   state: EnumStateFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  image: AttachmentUpdateOneWithoutFormCategoriesInput
-  forms: FormUpdateManyWithoutCategoryInput
+  image: AttachmentUpdateOneWithoutTagsInput
+  forms: FormUpdateManyWithoutTagsInput
+  forums: ForumUpdateManyWithoutTagsInput
 }
 
-input FormCategoryUncheckedUpdateInput {
+input TagUncheckedUpdateInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   description: NullableStringFieldUpdateOperationsInput
@@ -4273,10 +4279,9 @@ input FormCategoryUncheckedUpdateInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   attachmentId: NullableStringFieldUpdateOperationsInput
-  forms: FormUncheckedUpdateManyWithoutCategoryInput
 }
 
-input FormCategoryCreateManyInput {
+input TagCreateManyInput {
   id: String
   name: String!
   description: String
@@ -4286,7 +4291,7 @@ input FormCategoryCreateManyInput {
   attachmentId: String
 }
 
-input FormCategoryUpdateManyMutationInput {
+input TagUpdateManyMutationInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   description: NullableStringFieldUpdateOperationsInput
@@ -4295,7 +4300,7 @@ input FormCategoryUpdateManyMutationInput {
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
-input FormCategoryUncheckedUpdateManyInput {
+input TagUncheckedUpdateManyInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   description: NullableStringFieldUpdateOperationsInput
@@ -4312,9 +4317,9 @@ input FormCreateInput {
   state: State
   createdAt: DateTime
   updatedAt: DateTime
+  tagId: String
   author: UserCreateNestedOneWithoutFormsInput!
-  category: FormCategoryCreateNestedOneWithoutFormsInput
-  questions: QuestionCreateNestedManyWithoutFormInput
+  tags: TagCreateNestedManyWithoutFormsInput
   grades: GradeCreateNestedManyWithoutFormInput
   responses: ResponseCreateNestedManyWithoutFormInput
   attachments: AttachmentCreateNestedManyWithoutFormInput
@@ -4328,8 +4333,7 @@ input FormUncheckedCreateInput {
   authorId: String!
   createdAt: DateTime
   updatedAt: DateTime
-  formCategoryId: String
-  questions: QuestionUncheckedCreateNestedManyWithoutFormInput
+  tagId: String
   grades: GradeUncheckedCreateNestedManyWithoutFormInput
   responses: ResponseUncheckedCreateNestedManyWithoutFormInput
   attachments: AttachmentUncheckedCreateNestedManyWithoutFormInput
@@ -4342,9 +4346,9 @@ input FormUpdateInput {
   state: EnumStateFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
+  tagId: NullableStringFieldUpdateOperationsInput
   author: UserUpdateOneRequiredWithoutFormsInput
-  category: FormCategoryUpdateOneWithoutFormsInput
-  questions: QuestionUpdateManyWithoutFormInput
+  tags: TagUpdateManyWithoutFormsInput
   grades: GradeUpdateManyWithoutFormInput
   responses: ResponseUpdateManyWithoutFormInput
   attachments: AttachmentUpdateManyWithoutFormInput
@@ -4358,8 +4362,7 @@ input FormUncheckedUpdateInput {
   authorId: StringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  formCategoryId: NullableStringFieldUpdateOperationsInput
-  questions: QuestionUncheckedUpdateManyWithoutFormInput
+  tagId: NullableStringFieldUpdateOperationsInput
   grades: GradeUncheckedUpdateManyWithoutFormInput
   responses: ResponseUncheckedUpdateManyWithoutFormInput
   attachments: AttachmentUncheckedUpdateManyWithoutFormInput
@@ -4373,7 +4376,7 @@ input FormCreateManyInput {
   authorId: String!
   createdAt: DateTime
   updatedAt: DateTime
-  formCategoryId: String
+  tagId: String
 }
 
 input FormUpdateManyMutationInput {
@@ -4383,6 +4386,7 @@ input FormUpdateManyMutationInput {
   state: EnumStateFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
+  tagId: NullableStringFieldUpdateOperationsInput
 }
 
 input FormUncheckedUpdateManyInput {
@@ -4393,20 +4397,20 @@ input FormUncheckedUpdateManyInput {
   authorId: StringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  formCategoryId: NullableStringFieldUpdateOperationsInput
+  tagId: NullableStringFieldUpdateOperationsInput
 }
 
 input GradeCreateInput {
   id: String
   name: String!
   description: String!
-  minValue: Float
-  maxValue: Float
+  minValue: Int
+  maxValue: Int
   minInclusive: Boolean
   maxInclusive: Boolean
   createdAt: DateTime
   updatedAt: DateTime
-  form: FormCreateNestedOneWithoutGradesInput!
+  form: FormCreateNestedOneWithoutGradesInput
   responses: ResponseCreateNestedManyWithoutGradeInput
   recommendations: RecommendationCreateNestedManyWithoutGradeInput
   questions: QuestionCreateNestedManyWithoutGradeInput
@@ -4417,9 +4421,9 @@ input GradeUncheckedCreateInput {
   id: String
   name: String!
   description: String!
-  formId: String!
-  minValue: Float
-  maxValue: Float
+  formId: String
+  minValue: Int
+  maxValue: Int
   minInclusive: Boolean
   maxInclusive: Boolean
   createdAt: DateTime
@@ -4434,13 +4438,13 @@ input GradeUpdateInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
-  minValue: NullableFloatFieldUpdateOperationsInput
-  maxValue: NullableFloatFieldUpdateOperationsInput
+  minValue: NullableIntFieldUpdateOperationsInput
+  maxValue: NullableIntFieldUpdateOperationsInput
   minInclusive: BoolFieldUpdateOperationsInput
   maxInclusive: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  form: FormUpdateOneRequiredWithoutGradesInput
+  form: FormUpdateOneWithoutGradesInput
   responses: ResponseUpdateManyWithoutGradeInput
   recommendations: RecommendationUpdateManyWithoutGradeInput
   questions: QuestionUpdateManyWithoutGradeInput
@@ -4451,9 +4455,9 @@ input GradeUncheckedUpdateInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
-  formId: StringFieldUpdateOperationsInput
-  minValue: NullableFloatFieldUpdateOperationsInput
-  maxValue: NullableFloatFieldUpdateOperationsInput
+  formId: NullableStringFieldUpdateOperationsInput
+  minValue: NullableIntFieldUpdateOperationsInput
+  maxValue: NullableIntFieldUpdateOperationsInput
   minInclusive: BoolFieldUpdateOperationsInput
   maxInclusive: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -4468,9 +4472,9 @@ input GradeCreateManyInput {
   id: String
   name: String!
   description: String!
-  formId: String!
-  minValue: Float
-  maxValue: Float
+  formId: String
+  minValue: Int
+  maxValue: Int
   minInclusive: Boolean
   maxInclusive: Boolean
   createdAt: DateTime
@@ -4481,8 +4485,8 @@ input GradeUpdateManyMutationInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
-  minValue: NullableFloatFieldUpdateOperationsInput
-  maxValue: NullableFloatFieldUpdateOperationsInput
+  minValue: NullableIntFieldUpdateOperationsInput
+  maxValue: NullableIntFieldUpdateOperationsInput
   minInclusive: BoolFieldUpdateOperationsInput
   maxInclusive: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -4493,9 +4497,9 @@ input GradeUncheckedUpdateManyInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
-  formId: StringFieldUpdateOperationsInput
-  minValue: NullableFloatFieldUpdateOperationsInput
-  maxValue: NullableFloatFieldUpdateOperationsInput
+  formId: NullableStringFieldUpdateOperationsInput
+  minValue: NullableIntFieldUpdateOperationsInput
+  maxValue: NullableIntFieldUpdateOperationsInput
   minInclusive: BoolFieldUpdateOperationsInput
   maxInclusive: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -4507,18 +4511,18 @@ input ResponseCreateInput {
   state: State
   createdAt: DateTime
   updatedAt: DateTime
-  author: UserCreateNestedOneWithoutResponsesInput!
+  author: UserCreateNestedOneWithoutResponsesInput
   form: FormCreateNestedOneWithoutResponsesInput!
   answers: AnswerCreateNestedManyWithoutResponseInput
-  grade: GradeCreateNestedOneWithoutResponsesInput
+  grade: GradeCreateNestedOneWithoutResponsesInput!
   attachments: AttachmentCreateNestedManyWithoutResponseInput
 }
 
 input ResponseUncheckedCreateInput {
   id: String
-  authorId: String!
+  authorId: String
   formId: String!
-  gradeId: String
+  gradeId: String!
   state: State
   createdAt: DateTime
   updatedAt: DateTime
@@ -4531,18 +4535,18 @@ input ResponseUpdateInput {
   state: EnumStateFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  author: UserUpdateOneRequiredWithoutResponsesInput
+  author: UserUpdateOneWithoutResponsesInput
   form: FormUpdateOneRequiredWithoutResponsesInput
   answers: AnswerUpdateManyWithoutResponseInput
-  grade: GradeUpdateOneWithoutResponsesInput
+  grade: GradeUpdateOneRequiredWithoutResponsesInput
   attachments: AttachmentUpdateManyWithoutResponseInput
 }
 
 input ResponseUncheckedUpdateInput {
   id: StringFieldUpdateOperationsInput
-  authorId: StringFieldUpdateOperationsInput
+  authorId: NullableStringFieldUpdateOperationsInput
   formId: StringFieldUpdateOperationsInput
-  gradeId: NullableStringFieldUpdateOperationsInput
+  gradeId: StringFieldUpdateOperationsInput
   state: EnumStateFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -4552,9 +4556,9 @@ input ResponseUncheckedUpdateInput {
 
 input ResponseCreateManyInput {
   id: String
-  authorId: String!
+  authorId: String
   formId: String!
-  gradeId: String
+  gradeId: String!
   state: State
   createdAt: DateTime
   updatedAt: DateTime
@@ -4569,9 +4573,9 @@ input ResponseUpdateManyMutationInput {
 
 input ResponseUncheckedUpdateManyInput {
   id: StringFieldUpdateOperationsInput
-  authorId: StringFieldUpdateOperationsInput
+  authorId: NullableStringFieldUpdateOperationsInput
   formId: StringFieldUpdateOperationsInput
-  gradeId: NullableStringFieldUpdateOperationsInput
+  gradeId: StringFieldUpdateOperationsInput
   state: EnumStateFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -4586,7 +4590,6 @@ input QuestionCreateInput {
   questionType: QuestionType
   createdAt: DateTime
   updatedAt: DateTime
-  form: FormCreateNestedOneWithoutQuestionsInput
   grade: GradeCreateNestedOneWithoutQuestionsInput!
   answers: AnswerCreateNestedManyWithoutQuestionInput
   attachments: AttachmentCreateNestedManyWithoutQuestionInput
@@ -4599,7 +4602,6 @@ input QuestionUncheckedCreateInput {
   weight: Float
   instruction: String
   questionType: QuestionType
-  formId: String
   gradeId: String!
   createdAt: DateTime
   updatedAt: DateTime
@@ -4616,7 +4618,6 @@ input QuestionUpdateInput {
   questionType: EnumQuestionTypeFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  form: FormUpdateOneWithoutQuestionsInput
   grade: GradeUpdateOneRequiredWithoutQuestionsInput
   answers: AnswerUpdateManyWithoutQuestionInput
   attachments: AttachmentUpdateManyWithoutQuestionInput
@@ -4629,7 +4630,6 @@ input QuestionUncheckedUpdateInput {
   weight: FloatFieldUpdateOperationsInput
   instruction: NullableStringFieldUpdateOperationsInput
   questionType: EnumQuestionTypeFieldUpdateOperationsInput
-  formId: NullableStringFieldUpdateOperationsInput
   gradeId: StringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -4644,7 +4644,6 @@ input QuestionCreateManyInput {
   weight: Float
   instruction: String
   questionType: QuestionType
-  formId: String
   gradeId: String!
   createdAt: DateTime
   updatedAt: DateTime
@@ -4668,7 +4667,6 @@ input QuestionUncheckedUpdateManyInput {
   weight: FloatFieldUpdateOperationsInput
   instruction: NullableStringFieldUpdateOperationsInput
   questionType: EnumQuestionTypeFieldUpdateOperationsInput
-  formId: NullableStringFieldUpdateOperationsInput
   gradeId: StringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -4753,13 +4751,13 @@ input RecommendationCreateInput {
   createdAt: DateTime
   updatedAt: DateTime
   attachments: AttachmentCreateNestedManyWithoutRecommendationInput
-  grade: GradeCreateNestedOneWithoutRecommendationsInput!
+  grade: GradeCreateNestedOneWithoutRecommendationsInput
 }
 
 input RecommendationUncheckedCreateInput {
   id: String
   content: String!
-  gradeId: String!
+  gradeId: String
   type: RecommendationType
   createdAt: DateTime
   updatedAt: DateTime
@@ -4773,13 +4771,13 @@ input RecommendationUpdateInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   attachments: AttachmentUpdateManyWithoutRecommendationInput
-  grade: GradeUpdateOneRequiredWithoutRecommendationsInput
+  grade: GradeUpdateOneWithoutRecommendationsInput
 }
 
 input RecommendationUncheckedUpdateInput {
   id: StringFieldUpdateOperationsInput
   content: StringFieldUpdateOperationsInput
-  gradeId: StringFieldUpdateOperationsInput
+  gradeId: NullableStringFieldUpdateOperationsInput
   type: EnumRecommendationTypeFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -4789,7 +4787,7 @@ input RecommendationUncheckedUpdateInput {
 input RecommendationCreateManyInput {
   id: String
   content: String!
-  gradeId: String!
+  gradeId: String
   type: RecommendationType
   createdAt: DateTime
   updatedAt: DateTime
@@ -4806,7 +4804,7 @@ input RecommendationUpdateManyMutationInput {
 input RecommendationUncheckedUpdateManyInput {
   id: StringFieldUpdateOperationsInput
   content: StringFieldUpdateOperationsInput
-  gradeId: StringFieldUpdateOperationsInput
+  gradeId: NullableStringFieldUpdateOperationsInput
   type: EnumRecommendationTypeFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -4817,10 +4815,12 @@ input ForumCreateInput {
   question: String!
   description: String!
   state: State
+  type: ForumType
   commentsEnabled: Boolean
   createdAt: DateTime
   updatedAt: DateTime
   author: UserCreateNestedOneWithoutForumsInput!
+  tags: TagCreateNestedManyWithoutForumsInput
   forumAnswers: ForumAnswerCreateNestedManyWithoutForumInput
   comments: CommentCreateNestedManyWithoutForumInput
   attachments: AttachmentCreateNestedManyWithoutForumInput
@@ -4832,6 +4832,7 @@ input ForumUncheckedCreateInput {
   description: String!
   authorId: String!
   state: State
+  type: ForumType
   commentsEnabled: Boolean
   createdAt: DateTime
   updatedAt: DateTime
@@ -4845,10 +4846,12 @@ input ForumUpdateInput {
   question: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
   state: EnumStateFieldUpdateOperationsInput
+  type: EnumForumTypeFieldUpdateOperationsInput
   commentsEnabled: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   author: UserUpdateOneRequiredWithoutForumsInput
+  tags: TagUpdateManyWithoutForumsInput
   forumAnswers: ForumAnswerUpdateManyWithoutForumInput
   comments: CommentUpdateManyWithoutForumInput
   attachments: AttachmentUpdateManyWithoutForumInput
@@ -4860,6 +4863,7 @@ input ForumUncheckedUpdateInput {
   description: StringFieldUpdateOperationsInput
   authorId: StringFieldUpdateOperationsInput
   state: EnumStateFieldUpdateOperationsInput
+  type: EnumForumTypeFieldUpdateOperationsInput
   commentsEnabled: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -4874,6 +4878,7 @@ input ForumCreateManyInput {
   description: String!
   authorId: String!
   state: State
+  type: ForumType
   commentsEnabled: Boolean
   createdAt: DateTime
   updatedAt: DateTime
@@ -4884,6 +4889,7 @@ input ForumUpdateManyMutationInput {
   question: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
   state: EnumStateFieldUpdateOperationsInput
+  type: EnumForumTypeFieldUpdateOperationsInput
   commentsEnabled: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -4895,6 +4901,7 @@ input ForumUncheckedUpdateManyInput {
   description: StringFieldUpdateOperationsInput
   authorId: StringFieldUpdateOperationsInput
   state: EnumStateFieldUpdateOperationsInput
+  type: EnumForumTypeFieldUpdateOperationsInput
   commentsEnabled: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -6315,10 +6322,10 @@ input CommentRelationFilter {
   isNot: CommentWhereInput
 }
 
-input FormCategoryListRelationFilter {
-  every: FormCategoryWhereInput
-  some: FormCategoryWhereInput
-  none: FormCategoryWhereInput
+input TagListRelationFilter {
+  every: TagWhereInput
+  some: TagWhereInput
+  none: TagWhereInput
 }
 
 input HelpStepRelationFilter {
@@ -6372,17 +6379,6 @@ input EnumAttachmentTypeWithAggregatesFilter {
   max: NestedEnumAttachmentTypeFilter
 }
 
-input FormCategoryRelationFilter {
-  is: FormCategoryWhereInput
-  isNot: FormCategoryWhereInput
-}
-
-input QuestionListRelationFilter {
-  every: QuestionWhereInput
-  some: QuestionWhereInput
-  none: QuestionWhereInput
-}
-
 input GradeListRelationFilter {
   every: GradeWhereInput
   some: GradeWhereInput
@@ -6401,36 +6397,42 @@ input RecommendationListRelationFilter {
   none: RecommendationWhereInput
 }
 
-input FloatNullableFilter {
-  equals: Float
-  in: [Float!]
-  notIn: [Float!]
-  lt: Float
-  lte: Float
-  gt: Float
-  gte: Float
-  not: NestedFloatNullableFilter
+input QuestionListRelationFilter {
+  every: QuestionWhereInput
+  some: QuestionWhereInput
+  none: QuestionWhereInput
 }
 
-input FloatNullableWithAggregatesFilter {
-  equals: Float
-  in: [Float!]
-  notIn: [Float!]
-  lt: Float
-  lte: Float
-  gt: Float
-  gte: Float
-  not: NestedFloatNullableWithAggregatesFilter
+input IntNullableFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntNullableFilter
+}
+
+input IntNullableWithAggregatesFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntNullableWithAggregatesFilter
   _count: NestedIntNullableFilter
   count: NestedIntNullableFilter
   _avg: NestedFloatNullableFilter
   avg: NestedFloatNullableFilter
-  _sum: NestedFloatNullableFilter
-  sum: NestedFloatNullableFilter
-  _min: NestedFloatNullableFilter
-  min: NestedFloatNullableFilter
-  _max: NestedFloatNullableFilter
-  max: NestedFloatNullableFilter
+  _sum: NestedIntNullableFilter
+  sum: NestedIntNullableFilter
+  _min: NestedIntNullableFilter
+  min: NestedIntNullableFilter
+  _max: NestedIntNullableFilter
+  max: NestedIntNullableFilter
 }
 
 input AnswerListRelationFilter {
@@ -6525,6 +6527,26 @@ input EnumRecommendationTypeWithAggregatesFilter {
   min: NestedEnumRecommendationTypeFilter
   _max: NestedEnumRecommendationTypeFilter
   max: NestedEnumRecommendationTypeFilter
+}
+
+input EnumForumTypeFilter {
+  equals: ForumType
+  in: [ForumType!]
+  notIn: [ForumType!]
+  not: NestedEnumForumTypeFilter
+}
+
+input EnumForumTypeWithAggregatesFilter {
+  equals: ForumType
+  in: [ForumType!]
+  notIn: [ForumType!]
+  not: NestedEnumForumTypeWithAggregatesFilter
+  _count: NestedIntFilter
+  count: NestedIntFilter
+  _min: NestedEnumForumTypeFilter
+  min: NestedEnumForumTypeFilter
+  _max: NestedEnumForumTypeFilter
+  max: NestedEnumForumTypeFilter
 }
 
 input HelpStepListRelationFilter {
@@ -7076,11 +7098,11 @@ input CommentCreateNestedOneWithoutAttachmentsInput {
   connect: CommentWhereUniqueInput
 }
 
-input FormCategoryCreateNestedManyWithoutImageInput {
-  create: [FormCategoryCreateWithoutImageInput!]
-  connectOrCreate: [FormCategoryCreateOrConnectWithoutImageInput!]
-  createMany: FormCategoryCreateManyImageInputEnvelope
-  connect: [FormCategoryWhereUniqueInput!]
+input TagCreateNestedManyWithoutImageInput {
+  create: [TagCreateWithoutImageInput!]
+  connectOrCreate: [TagCreateOrConnectWithoutImageInput!]
+  createMany: TagCreateManyImageInputEnvelope
+  connect: [TagWhereUniqueInput!]
 }
 
 input HelpStepCreateNestedOneWithoutAttachmentsInput {
@@ -7117,11 +7139,11 @@ input UserUncheckedCreateNestedManyWithoutAvatorInput {
   connect: [UserWhereUniqueInput!]
 }
 
-input FormCategoryUncheckedCreateNestedManyWithoutImageInput {
-  create: [FormCategoryCreateWithoutImageInput!]
-  connectOrCreate: [FormCategoryCreateOrConnectWithoutImageInput!]
-  createMany: FormCategoryCreateManyImageInputEnvelope
-  connect: [FormCategoryWhereUniqueInput!]
+input TagUncheckedCreateNestedManyWithoutImageInput {
+  create: [TagCreateWithoutImageInput!]
+  connectOrCreate: [TagCreateOrConnectWithoutImageInput!]
+  createMany: TagCreateManyImageInputEnvelope
+  connect: [TagWhereUniqueInput!]
 }
 
 input PaymentMethodUncheckedCreateNestedManyWithoutLogoInput {
@@ -7261,18 +7283,18 @@ input CommentUpdateOneWithoutAttachmentsInput {
   update: CommentUncheckedUpdateWithoutAttachmentsInput
 }
 
-input FormCategoryUpdateManyWithoutImageInput {
-  create: [FormCategoryCreateWithoutImageInput!]
-  connectOrCreate: [FormCategoryCreateOrConnectWithoutImageInput!]
-  upsert: [FormCategoryUpsertWithWhereUniqueWithoutImageInput!]
-  createMany: FormCategoryCreateManyImageInputEnvelope
-  connect: [FormCategoryWhereUniqueInput!]
-  set: [FormCategoryWhereUniqueInput!]
-  disconnect: [FormCategoryWhereUniqueInput!]
-  delete: [FormCategoryWhereUniqueInput!]
-  update: [FormCategoryUpdateWithWhereUniqueWithoutImageInput!]
-  updateMany: [FormCategoryUpdateManyWithWhereWithoutImageInput!]
-  deleteMany: [FormCategoryScalarWhereInput!]
+input TagUpdateManyWithoutImageInput {
+  create: [TagCreateWithoutImageInput!]
+  connectOrCreate: [TagCreateOrConnectWithoutImageInput!]
+  upsert: [TagUpsertWithWhereUniqueWithoutImageInput!]
+  createMany: TagCreateManyImageInputEnvelope
+  connect: [TagWhereUniqueInput!]
+  set: [TagWhereUniqueInput!]
+  disconnect: [TagWhereUniqueInput!]
+  delete: [TagWhereUniqueInput!]
+  update: [TagUpdateWithWhereUniqueWithoutImageInput!]
+  updateMany: [TagUpdateManyWithWhereWithoutImageInput!]
+  deleteMany: [TagScalarWhereInput!]
 }
 
 input HelpStepUpdateOneWithoutAttachmentsInput {
@@ -7341,18 +7363,18 @@ input UserUncheckedUpdateManyWithoutAvatorInput {
   deleteMany: [UserScalarWhereInput!]
 }
 
-input FormCategoryUncheckedUpdateManyWithoutImageInput {
-  create: [FormCategoryCreateWithoutImageInput!]
-  connectOrCreate: [FormCategoryCreateOrConnectWithoutImageInput!]
-  upsert: [FormCategoryUpsertWithWhereUniqueWithoutImageInput!]
-  createMany: FormCategoryCreateManyImageInputEnvelope
-  connect: [FormCategoryWhereUniqueInput!]
-  set: [FormCategoryWhereUniqueInput!]
-  disconnect: [FormCategoryWhereUniqueInput!]
-  delete: [FormCategoryWhereUniqueInput!]
-  update: [FormCategoryUpdateWithWhereUniqueWithoutImageInput!]
-  updateMany: [FormCategoryUpdateManyWithWhereWithoutImageInput!]
-  deleteMany: [FormCategoryScalarWhereInput!]
+input TagUncheckedUpdateManyWithoutImageInput {
+  create: [TagCreateWithoutImageInput!]
+  connectOrCreate: [TagCreateOrConnectWithoutImageInput!]
+  upsert: [TagUpsertWithWhereUniqueWithoutImageInput!]
+  createMany: TagCreateManyImageInputEnvelope
+  connect: [TagWhereUniqueInput!]
+  set: [TagWhereUniqueInput!]
+  disconnect: [TagWhereUniqueInput!]
+  delete: [TagWhereUniqueInput!]
+  update: [TagUpdateWithWhereUniqueWithoutImageInput!]
+  updateMany: [TagUpdateManyWithWhereWithoutImageInput!]
+  deleteMany: [TagScalarWhereInput!]
 }
 
 input PaymentMethodUncheckedUpdateManyWithoutLogoInput {
@@ -7397,62 +7419,58 @@ input OrderUncheckedUpdateManyWithoutReceiptInput {
   deleteMany: [OrderScalarWhereInput!]
 }
 
-input AttachmentCreateNestedOneWithoutFormCategoriesInput {
-  create: AttachmentUncheckedCreateWithoutFormCategoriesInput
-  connectOrCreate: AttachmentCreateOrConnectWithoutFormCategoriesInput
+input AttachmentCreateNestedOneWithoutTagsInput {
+  create: AttachmentUncheckedCreateWithoutTagsInput
+  connectOrCreate: AttachmentCreateOrConnectWithoutTagsInput
   connect: AttachmentWhereUniqueInput
 }
 
-input FormCreateNestedManyWithoutCategoryInput {
-  create: [FormCreateWithoutCategoryInput!]
-  connectOrCreate: [FormCreateOrConnectWithoutCategoryInput!]
-  createMany: FormCreateManyCategoryInputEnvelope
+input FormCreateNestedManyWithoutTagsInput {
+  create: [FormCreateWithoutTagsInput!]
+  connectOrCreate: [FormCreateOrConnectWithoutTagsInput!]
   connect: [FormWhereUniqueInput!]
 }
 
-input FormUncheckedCreateNestedManyWithoutCategoryInput {
-  create: [FormCreateWithoutCategoryInput!]
-  connectOrCreate: [FormCreateOrConnectWithoutCategoryInput!]
-  createMany: FormCreateManyCategoryInputEnvelope
-  connect: [FormWhereUniqueInput!]
+input ForumCreateNestedManyWithoutTagsInput {
+  create: [ForumCreateWithoutTagsInput!]
+  connectOrCreate: [ForumCreateOrConnectWithoutTagsInput!]
+  connect: [ForumWhereUniqueInput!]
 }
 
-input AttachmentUpdateOneWithoutFormCategoriesInput {
-  create: AttachmentUncheckedCreateWithoutFormCategoriesInput
-  connectOrCreate: AttachmentCreateOrConnectWithoutFormCategoriesInput
-  upsert: AttachmentUpsertWithoutFormCategoriesInput
+input AttachmentUpdateOneWithoutTagsInput {
+  create: AttachmentUncheckedCreateWithoutTagsInput
+  connectOrCreate: AttachmentCreateOrConnectWithoutTagsInput
+  upsert: AttachmentUpsertWithoutTagsInput
   connect: AttachmentWhereUniqueInput
   disconnect: Boolean
   delete: Boolean
-  update: AttachmentUncheckedUpdateWithoutFormCategoriesInput
+  update: AttachmentUncheckedUpdateWithoutTagsInput
 }
 
-input FormUpdateManyWithoutCategoryInput {
-  create: [FormCreateWithoutCategoryInput!]
-  connectOrCreate: [FormCreateOrConnectWithoutCategoryInput!]
-  upsert: [FormUpsertWithWhereUniqueWithoutCategoryInput!]
-  createMany: FormCreateManyCategoryInputEnvelope
+input FormUpdateManyWithoutTagsInput {
+  create: [FormCreateWithoutTagsInput!]
+  connectOrCreate: [FormCreateOrConnectWithoutTagsInput!]
+  upsert: [FormUpsertWithWhereUniqueWithoutTagsInput!]
   connect: [FormWhereUniqueInput!]
   set: [FormWhereUniqueInput!]
   disconnect: [FormWhereUniqueInput!]
   delete: [FormWhereUniqueInput!]
-  update: [FormUpdateWithWhereUniqueWithoutCategoryInput!]
-  updateMany: [FormUpdateManyWithWhereWithoutCategoryInput!]
+  update: [FormUpdateWithWhereUniqueWithoutTagsInput!]
+  updateMany: [FormUpdateManyWithWhereWithoutTagsInput!]
   deleteMany: [FormScalarWhereInput!]
 }
 
-input FormUncheckedUpdateManyWithoutCategoryInput {
-  create: [FormCreateWithoutCategoryInput!]
-  connectOrCreate: [FormCreateOrConnectWithoutCategoryInput!]
-  upsert: [FormUpsertWithWhereUniqueWithoutCategoryInput!]
-  createMany: FormCreateManyCategoryInputEnvelope
-  connect: [FormWhereUniqueInput!]
-  set: [FormWhereUniqueInput!]
-  disconnect: [FormWhereUniqueInput!]
-  delete: [FormWhereUniqueInput!]
-  update: [FormUpdateWithWhereUniqueWithoutCategoryInput!]
-  updateMany: [FormUpdateManyWithWhereWithoutCategoryInput!]
-  deleteMany: [FormScalarWhereInput!]
+input ForumUpdateManyWithoutTagsInput {
+  create: [ForumCreateWithoutTagsInput!]
+  connectOrCreate: [ForumCreateOrConnectWithoutTagsInput!]
+  upsert: [ForumUpsertWithWhereUniqueWithoutTagsInput!]
+  connect: [ForumWhereUniqueInput!]
+  set: [ForumWhereUniqueInput!]
+  disconnect: [ForumWhereUniqueInput!]
+  delete: [ForumWhereUniqueInput!]
+  update: [ForumUpdateWithWhereUniqueWithoutTagsInput!]
+  updateMany: [ForumUpdateManyWithWhereWithoutTagsInput!]
+  deleteMany: [ForumScalarWhereInput!]
 }
 
 input UserCreateNestedOneWithoutFormsInput {
@@ -7461,17 +7479,10 @@ input UserCreateNestedOneWithoutFormsInput {
   connect: UserWhereUniqueInput
 }
 
-input FormCategoryCreateNestedOneWithoutFormsInput {
-  create: FormCategoryUncheckedCreateWithoutFormsInput
-  connectOrCreate: FormCategoryCreateOrConnectWithoutFormsInput
-  connect: FormCategoryWhereUniqueInput
-}
-
-input QuestionCreateNestedManyWithoutFormInput {
-  create: [QuestionCreateWithoutFormInput!]
-  connectOrCreate: [QuestionCreateOrConnectWithoutFormInput!]
-  createMany: QuestionCreateManyFormInputEnvelope
-  connect: [QuestionWhereUniqueInput!]
+input TagCreateNestedManyWithoutFormsInput {
+  create: [TagCreateWithoutFormsInput!]
+  connectOrCreate: [TagCreateOrConnectWithoutFormsInput!]
+  connect: [TagWhereUniqueInput!]
 }
 
 input GradeCreateNestedManyWithoutFormInput {
@@ -7493,13 +7504,6 @@ input AttachmentCreateNestedManyWithoutFormInput {
   connectOrCreate: [AttachmentCreateOrConnectWithoutFormInput!]
   createMany: AttachmentCreateManyFormInputEnvelope
   connect: [AttachmentWhereUniqueInput!]
-}
-
-input QuestionUncheckedCreateNestedManyWithoutFormInput {
-  create: [QuestionCreateWithoutFormInput!]
-  connectOrCreate: [QuestionCreateOrConnectWithoutFormInput!]
-  createMany: QuestionCreateManyFormInputEnvelope
-  connect: [QuestionWhereUniqueInput!]
 }
 
 input GradeUncheckedCreateNestedManyWithoutFormInput {
@@ -7531,28 +7535,17 @@ input UserUpdateOneRequiredWithoutFormsInput {
   update: UserUncheckedUpdateWithoutFormsInput
 }
 
-input FormCategoryUpdateOneWithoutFormsInput {
-  create: FormCategoryUncheckedCreateWithoutFormsInput
-  connectOrCreate: FormCategoryCreateOrConnectWithoutFormsInput
-  upsert: FormCategoryUpsertWithoutFormsInput
-  connect: FormCategoryWhereUniqueInput
-  disconnect: Boolean
-  delete: Boolean
-  update: FormCategoryUncheckedUpdateWithoutFormsInput
-}
-
-input QuestionUpdateManyWithoutFormInput {
-  create: [QuestionCreateWithoutFormInput!]
-  connectOrCreate: [QuestionCreateOrConnectWithoutFormInput!]
-  upsert: [QuestionUpsertWithWhereUniqueWithoutFormInput!]
-  createMany: QuestionCreateManyFormInputEnvelope
-  connect: [QuestionWhereUniqueInput!]
-  set: [QuestionWhereUniqueInput!]
-  disconnect: [QuestionWhereUniqueInput!]
-  delete: [QuestionWhereUniqueInput!]
-  update: [QuestionUpdateWithWhereUniqueWithoutFormInput!]
-  updateMany: [QuestionUpdateManyWithWhereWithoutFormInput!]
-  deleteMany: [QuestionScalarWhereInput!]
+input TagUpdateManyWithoutFormsInput {
+  create: [TagCreateWithoutFormsInput!]
+  connectOrCreate: [TagCreateOrConnectWithoutFormsInput!]
+  upsert: [TagUpsertWithWhereUniqueWithoutFormsInput!]
+  connect: [TagWhereUniqueInput!]
+  set: [TagWhereUniqueInput!]
+  disconnect: [TagWhereUniqueInput!]
+  delete: [TagWhereUniqueInput!]
+  update: [TagUpdateWithWhereUniqueWithoutFormsInput!]
+  updateMany: [TagUpdateManyWithWhereWithoutFormsInput!]
+  deleteMany: [TagScalarWhereInput!]
 }
 
 input GradeUpdateManyWithoutFormInput {
@@ -7595,20 +7588,6 @@ input AttachmentUpdateManyWithoutFormInput {
   update: [AttachmentUpdateWithWhereUniqueWithoutFormInput!]
   updateMany: [AttachmentUpdateManyWithWhereWithoutFormInput!]
   deleteMany: [AttachmentScalarWhereInput!]
-}
-
-input QuestionUncheckedUpdateManyWithoutFormInput {
-  create: [QuestionCreateWithoutFormInput!]
-  connectOrCreate: [QuestionCreateOrConnectWithoutFormInput!]
-  upsert: [QuestionUpsertWithWhereUniqueWithoutFormInput!]
-  createMany: QuestionCreateManyFormInputEnvelope
-  connect: [QuestionWhereUniqueInput!]
-  set: [QuestionWhereUniqueInput!]
-  disconnect: [QuestionWhereUniqueInput!]
-  delete: [QuestionWhereUniqueInput!]
-  update: [QuestionUpdateWithWhereUniqueWithoutFormInput!]
-  updateMany: [QuestionUpdateManyWithWhereWithoutFormInput!]
-  deleteMany: [QuestionScalarWhereInput!]
 }
 
 input GradeUncheckedUpdateManyWithoutFormInput {
@@ -7715,19 +7694,21 @@ input AttachmentUncheckedCreateNestedManyWithoutGradeInput {
   connect: [AttachmentWhereUniqueInput!]
 }
 
-input NullableFloatFieldUpdateOperationsInput {
-  set: Float
-  increment: Float
-  decrement: Float
-  multiply: Float
-  divide: Float
+input NullableIntFieldUpdateOperationsInput {
+  set: Int
+  increment: Int
+  decrement: Int
+  multiply: Int
+  divide: Int
 }
 
-input FormUpdateOneRequiredWithoutGradesInput {
+input FormUpdateOneWithoutGradesInput {
   create: FormUncheckedCreateWithoutGradesInput
   connectOrCreate: FormCreateOrConnectWithoutGradesInput
   upsert: FormUpsertWithoutGradesInput
   connect: FormWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
   update: FormUncheckedUpdateWithoutGradesInput
 }
 
@@ -7889,11 +7870,13 @@ input AttachmentUncheckedCreateNestedManyWithoutResponseInput {
   connect: [AttachmentWhereUniqueInput!]
 }
 
-input UserUpdateOneRequiredWithoutResponsesInput {
+input UserUpdateOneWithoutResponsesInput {
   create: UserUncheckedCreateWithoutResponsesInput
   connectOrCreate: UserCreateOrConnectWithoutResponsesInput
   upsert: UserUpsertWithoutResponsesInput
   connect: UserWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
   update: UserUncheckedUpdateWithoutResponsesInput
 }
 
@@ -7919,13 +7902,11 @@ input AnswerUpdateManyWithoutResponseInput {
   deleteMany: [AnswerScalarWhereInput!]
 }
 
-input GradeUpdateOneWithoutResponsesInput {
+input GradeUpdateOneRequiredWithoutResponsesInput {
   create: GradeUncheckedCreateWithoutResponsesInput
   connectOrCreate: GradeCreateOrConnectWithoutResponsesInput
   upsert: GradeUpsertWithoutResponsesInput
   connect: GradeWhereUniqueInput
-  disconnect: Boolean
-  delete: Boolean
   update: GradeUncheckedUpdateWithoutResponsesInput
 }
 
@@ -7969,12 +7950,6 @@ input AttachmentUncheckedUpdateManyWithoutResponseInput {
   update: [AttachmentUpdateWithWhereUniqueWithoutResponseInput!]
   updateMany: [AttachmentUpdateManyWithWhereWithoutResponseInput!]
   deleteMany: [AttachmentScalarWhereInput!]
-}
-
-input FormCreateNestedOneWithoutQuestionsInput {
-  create: FormUncheckedCreateWithoutQuestionsInput
-  connectOrCreate: FormCreateOrConnectWithoutQuestionsInput
-  connect: FormWhereUniqueInput
 }
 
 input GradeCreateNestedOneWithoutQuestionsInput {
@@ -8021,16 +7996,6 @@ input FloatFieldUpdateOperationsInput {
 
 input EnumQuestionTypeFieldUpdateOperationsInput {
   set: QuestionType
-}
-
-input FormUpdateOneWithoutQuestionsInput {
-  create: FormUncheckedCreateWithoutQuestionsInput
-  connectOrCreate: FormCreateOrConnectWithoutQuestionsInput
-  upsert: FormUpsertWithoutQuestionsInput
-  connect: FormWhereUniqueInput
-  disconnect: Boolean
-  delete: Boolean
-  update: FormUncheckedUpdateWithoutQuestionsInput
 }
 
 input GradeUpdateOneRequiredWithoutQuestionsInput {
@@ -8209,11 +8174,13 @@ input AttachmentUpdateManyWithoutRecommendationInput {
   deleteMany: [AttachmentScalarWhereInput!]
 }
 
-input GradeUpdateOneRequiredWithoutRecommendationsInput {
+input GradeUpdateOneWithoutRecommendationsInput {
   create: GradeUncheckedCreateWithoutRecommendationsInput
   connectOrCreate: GradeCreateOrConnectWithoutRecommendationsInput
   upsert: GradeUpsertWithoutRecommendationsInput
   connect: GradeWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
   update: GradeUncheckedUpdateWithoutRecommendationsInput
 }
 
@@ -8235,6 +8202,12 @@ input UserCreateNestedOneWithoutForumsInput {
   create: UserUncheckedCreateWithoutForumsInput
   connectOrCreate: UserCreateOrConnectWithoutForumsInput
   connect: UserWhereUniqueInput
+}
+
+input TagCreateNestedManyWithoutForumsInput {
+  create: [TagCreateWithoutForumsInput!]
+  connectOrCreate: [TagCreateOrConnectWithoutForumsInput!]
+  connect: [TagWhereUniqueInput!]
 }
 
 input ForumAnswerCreateNestedManyWithoutForumInput {
@@ -8279,12 +8252,29 @@ input AttachmentUncheckedCreateNestedManyWithoutForumInput {
   connect: [AttachmentWhereUniqueInput!]
 }
 
+input EnumForumTypeFieldUpdateOperationsInput {
+  set: ForumType
+}
+
 input UserUpdateOneRequiredWithoutForumsInput {
   create: UserUncheckedCreateWithoutForumsInput
   connectOrCreate: UserCreateOrConnectWithoutForumsInput
   upsert: UserUpsertWithoutForumsInput
   connect: UserWhereUniqueInput
   update: UserUncheckedUpdateWithoutForumsInput
+}
+
+input TagUpdateManyWithoutForumsInput {
+  create: [TagCreateWithoutForumsInput!]
+  connectOrCreate: [TagCreateOrConnectWithoutForumsInput!]
+  upsert: [TagUpsertWithWhereUniqueWithoutForumsInput!]
+  connect: [TagWhereUniqueInput!]
+  set: [TagWhereUniqueInput!]
+  disconnect: [TagWhereUniqueInput!]
+  delete: [TagWhereUniqueInput!]
+  update: [TagUpdateWithWhereUniqueWithoutForumsInput!]
+  updateMany: [TagUpdateManyWithWhereWithoutForumsInput!]
+  deleteMany: [TagScalarWhereInput!]
 }
 
 input ForumAnswerUpdateManyWithoutForumInput {
@@ -9349,6 +9339,27 @@ input NestedEnumAttachmentTypeWithAggregatesFilter {
   max: NestedEnumAttachmentTypeFilter
 }
 
+input NestedIntNullableWithAggregatesFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntNullableWithAggregatesFilter
+  _count: NestedIntNullableFilter
+  count: NestedIntNullableFilter
+  _avg: NestedFloatNullableFilter
+  avg: NestedFloatNullableFilter
+  _sum: NestedIntNullableFilter
+  sum: NestedIntNullableFilter
+  _min: NestedIntNullableFilter
+  min: NestedIntNullableFilter
+  _max: NestedIntNullableFilter
+  max: NestedIntNullableFilter
+}
+
 input NestedFloatNullableFilter {
   equals: Float
   in: [Float!]
@@ -9358,27 +9369,6 @@ input NestedFloatNullableFilter {
   gt: Float
   gte: Float
   not: NestedFloatNullableFilter
-}
-
-input NestedFloatNullableWithAggregatesFilter {
-  equals: Float
-  in: [Float!]
-  notIn: [Float!]
-  lt: Float
-  lte: Float
-  gt: Float
-  gte: Float
-  not: NestedFloatNullableWithAggregatesFilter
-  _count: NestedIntNullableFilter
-  count: NestedIntNullableFilter
-  _avg: NestedFloatNullableFilter
-  avg: NestedFloatNullableFilter
-  _sum: NestedFloatNullableFilter
-  sum: NestedFloatNullableFilter
-  _min: NestedFloatNullableFilter
-  min: NestedFloatNullableFilter
-  _max: NestedFloatNullableFilter
-  max: NestedFloatNullableFilter
 }
 
 input NestedEnumQuestionTypeFilter {
@@ -9458,6 +9448,26 @@ input NestedEnumRecommendationTypeWithAggregatesFilter {
   max: NestedEnumRecommendationTypeFilter
 }
 
+input NestedEnumForumTypeFilter {
+  equals: ForumType
+  in: [ForumType!]
+  notIn: [ForumType!]
+  not: NestedEnumForumTypeFilter
+}
+
+input NestedEnumForumTypeWithAggregatesFilter {
+  equals: ForumType
+  in: [ForumType!]
+  notIn: [ForumType!]
+  not: NestedEnumForumTypeWithAggregatesFilter
+  _count: NestedIntFilter
+  count: NestedIntFilter
+  _min: NestedEnumForumTypeFilter
+  min: NestedEnumForumTypeFilter
+  _max: NestedEnumForumTypeFilter
+  max: NestedEnumForumTypeFilter
+}
+
 input NestedEnumSelcomUtilityCodeFilter {
   equals: SelcomUtilityCode
   in: [SelcomUtilityCode!]
@@ -9530,8 +9540,8 @@ input FormCreateWithoutAuthorInput {
   state: State
   createdAt: DateTime
   updatedAt: DateTime
-  category: FormCategoryCreateNestedOneWithoutFormsInput
-  questions: QuestionCreateNestedManyWithoutFormInput
+  tagId: String
+  tags: TagCreateNestedManyWithoutFormsInput
   grades: GradeCreateNestedManyWithoutFormInput
   responses: ResponseCreateNestedManyWithoutFormInput
   attachments: AttachmentCreateNestedManyWithoutFormInput
@@ -9544,8 +9554,7 @@ input FormUncheckedCreateWithoutAuthorInput {
   state: State
   createdAt: DateTime
   updatedAt: DateTime
-  formCategoryId: String
-  questions: QuestionUncheckedCreateNestedManyWithoutFormInput
+  tagId: String
   grades: GradeUncheckedCreateNestedManyWithoutFormInput
   responses: ResponseUncheckedCreateNestedManyWithoutFormInput
   attachments: AttachmentUncheckedCreateNestedManyWithoutFormInput
@@ -9568,14 +9577,14 @@ input ResponseCreateWithoutAuthorInput {
   updatedAt: DateTime
   form: FormCreateNestedOneWithoutResponsesInput!
   answers: AnswerCreateNestedManyWithoutResponseInput
-  grade: GradeCreateNestedOneWithoutResponsesInput
+  grade: GradeCreateNestedOneWithoutResponsesInput!
   attachments: AttachmentCreateNestedManyWithoutResponseInput
 }
 
 input ResponseUncheckedCreateWithoutAuthorInput {
   id: String
   formId: String!
-  gradeId: String
+  gradeId: String!
   state: State
   createdAt: DateTime
   updatedAt: DateTime
@@ -9598,9 +9607,11 @@ input ForumCreateWithoutAuthorInput {
   question: String!
   description: String!
   state: State
+  type: ForumType
   commentsEnabled: Boolean
   createdAt: DateTime
   updatedAt: DateTime
+  tags: TagCreateNestedManyWithoutForumsInput
   forumAnswers: ForumAnswerCreateNestedManyWithoutForumInput
   comments: CommentCreateNestedManyWithoutForumInput
   attachments: AttachmentCreateNestedManyWithoutForumInput
@@ -9611,6 +9622,7 @@ input ForumUncheckedCreateWithoutAuthorInput {
   question: String!
   description: String!
   state: State
+  type: ForumType
   commentsEnabled: Boolean
   createdAt: DateTime
   updatedAt: DateTime
@@ -9702,13 +9714,13 @@ input CommentCreateManyAuthorInputEnvelope {
 }
 
 input DeviceCreateWithoutUserInput {
-  device_id: String!
+  id: String!
   fcm_id: String
   type: String
 }
 
 input DeviceUncheckedCreateWithoutUserInput {
-  device_id: String!
+  id: String!
   fcm_id: String
   type: String
 }
@@ -9815,7 +9827,7 @@ input AttachmentUpdateWithoutUserInput {
   forum: ForumUpdateOneWithoutAttachmentsInput
   forumAnswer: ForumAnswerUpdateOneWithoutAttachmentsInput
   comment: CommentUpdateOneWithoutAttachmentsInput
-  formCategories: FormCategoryUpdateManyWithoutImageInput
+  tags: TagUpdateManyWithoutImageInput
   helpStep: HelpStepUpdateOneWithoutAttachmentsInput
   paymentMethods: PaymentMethodUpdateManyWithoutLogoInput
   services: ServiceUpdateManyWithoutImageInput
@@ -9845,7 +9857,7 @@ input AttachmentUncheckedUpdateWithoutUserInput {
   forumAnswerId: NullableStringFieldUpdateOperationsInput
   commentId: NullableStringFieldUpdateOperationsInput
   helpStepId: NullableStringFieldUpdateOperationsInput
-  formCategories: FormCategoryUncheckedUpdateManyWithoutImageInput
+  tags: TagUncheckedUpdateManyWithoutImageInput
   paymentMethods: PaymentMethodUncheckedUpdateManyWithoutLogoInput
   services: ServiceUncheckedUpdateManyWithoutImageInput
   orders: OrderUncheckedUpdateManyWithoutReceiptInput
@@ -9878,7 +9890,7 @@ input FormScalarWhereInput {
   authorId: StringFilter
   createdAt: DateTimeFilter
   updatedAt: DateTimeFilter
-  formCategoryId: StringNullableFilter
+  tagId: StringNullableFilter
 }
 
 input ResponseUpsertWithWhereUniqueWithoutAuthorInput {
@@ -9902,9 +9914,9 @@ input ResponseScalarWhereInput {
   OR: [ResponseScalarWhereInput!]
   NOT: [ResponseScalarWhereInput!]
   id: StringFilter
-  authorId: StringFilter
+  authorId: StringNullableFilter
   formId: StringFilter
-  gradeId: StringNullableFilter
+  gradeId: StringFilter
   state: EnumStateFilter
   createdAt: DateTimeFilter
   updatedAt: DateTimeFilter
@@ -9935,6 +9947,7 @@ input ForumScalarWhereInput {
   description: StringFilter
   authorId: StringFilter
   state: EnumStateFilter
+  type: EnumForumTypeFilter
   commentsEnabled: BoolFilter
   createdAt: DateTimeFilter
   updatedAt: DateTimeFilter
@@ -10008,13 +10021,13 @@ input DeviceUpsertWithoutUserInput {
 }
 
 input DeviceUpdateWithoutUserInput {
-  device_id: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
   fcm_id: NullableStringFieldUpdateOperationsInput
   type: StringFieldUpdateOperationsInput
 }
 
 input DeviceUncheckedUpdateWithoutUserInput {
-  device_id: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
   fcm_id: NullableStringFieldUpdateOperationsInput
   type: StringFieldUpdateOperationsInput
 }
@@ -10236,9 +10249,9 @@ input FormCreateWithoutAttachmentsInput {
   state: State
   createdAt: DateTime
   updatedAt: DateTime
+  tagId: String
   author: UserCreateNestedOneWithoutFormsInput!
-  category: FormCategoryCreateNestedOneWithoutFormsInput
-  questions: QuestionCreateNestedManyWithoutFormInput
+  tags: TagCreateNestedManyWithoutFormsInput
   grades: GradeCreateNestedManyWithoutFormInput
   responses: ResponseCreateNestedManyWithoutFormInput
 }
@@ -10251,8 +10264,7 @@ input FormUncheckedCreateWithoutAttachmentsInput {
   authorId: String!
   createdAt: DateTime
   updatedAt: DateTime
-  formCategoryId: String
-  questions: QuestionUncheckedCreateNestedManyWithoutFormInput
+  tagId: String
   grades: GradeUncheckedCreateNestedManyWithoutFormInput
   responses: ResponseUncheckedCreateNestedManyWithoutFormInput
 }
@@ -10266,13 +10278,13 @@ input GradeCreateWithoutAttachmentsInput {
   id: String
   name: String!
   description: String!
-  minValue: Float
-  maxValue: Float
+  minValue: Int
+  maxValue: Int
   minInclusive: Boolean
   maxInclusive: Boolean
   createdAt: DateTime
   updatedAt: DateTime
-  form: FormCreateNestedOneWithoutGradesInput!
+  form: FormCreateNestedOneWithoutGradesInput
   responses: ResponseCreateNestedManyWithoutGradeInput
   recommendations: RecommendationCreateNestedManyWithoutGradeInput
   questions: QuestionCreateNestedManyWithoutGradeInput
@@ -10282,9 +10294,9 @@ input GradeUncheckedCreateWithoutAttachmentsInput {
   id: String
   name: String!
   description: String!
-  formId: String!
-  minValue: Float
-  maxValue: Float
+  formId: String
+  minValue: Int
+  maxValue: Int
   minInclusive: Boolean
   maxInclusive: Boolean
   createdAt: DateTime
@@ -10304,17 +10316,17 @@ input ResponseCreateWithoutAttachmentsInput {
   state: State
   createdAt: DateTime
   updatedAt: DateTime
-  author: UserCreateNestedOneWithoutResponsesInput!
+  author: UserCreateNestedOneWithoutResponsesInput
   form: FormCreateNestedOneWithoutResponsesInput!
   answers: AnswerCreateNestedManyWithoutResponseInput
-  grade: GradeCreateNestedOneWithoutResponsesInput
+  grade: GradeCreateNestedOneWithoutResponsesInput!
 }
 
 input ResponseUncheckedCreateWithoutAttachmentsInput {
   id: String
-  authorId: String!
+  authorId: String
   formId: String!
-  gradeId: String
+  gradeId: String!
   state: State
   createdAt: DateTime
   updatedAt: DateTime
@@ -10335,7 +10347,6 @@ input QuestionCreateWithoutAttachmentsInput {
   questionType: QuestionType
   createdAt: DateTime
   updatedAt: DateTime
-  form: FormCreateNestedOneWithoutQuestionsInput
   grade: GradeCreateNestedOneWithoutQuestionsInput!
   answers: AnswerCreateNestedManyWithoutQuestionInput
 }
@@ -10347,7 +10358,6 @@ input QuestionUncheckedCreateWithoutAttachmentsInput {
   weight: Float
   instruction: String
   questionType: QuestionType
-  formId: String
   gradeId: String!
   createdAt: DateTime
   updatedAt: DateTime
@@ -10390,13 +10400,13 @@ input RecommendationCreateWithoutAttachmentsInput {
   type: RecommendationType
   createdAt: DateTime
   updatedAt: DateTime
-  grade: GradeCreateNestedOneWithoutRecommendationsInput!
+  grade: GradeCreateNestedOneWithoutRecommendationsInput
 }
 
 input RecommendationUncheckedCreateWithoutAttachmentsInput {
   id: String
   content: String!
-  gradeId: String!
+  gradeId: String
   type: RecommendationType
   createdAt: DateTime
   updatedAt: DateTime
@@ -10412,10 +10422,12 @@ input ForumCreateWithoutAttachmentsInput {
   question: String!
   description: String!
   state: State
+  type: ForumType
   commentsEnabled: Boolean
   createdAt: DateTime
   updatedAt: DateTime
   author: UserCreateNestedOneWithoutForumsInput!
+  tags: TagCreateNestedManyWithoutForumsInput
   forumAnswers: ForumAnswerCreateNestedManyWithoutForumInput
   comments: CommentCreateNestedManyWithoutForumInput
 }
@@ -10426,6 +10438,7 @@ input ForumUncheckedCreateWithoutAttachmentsInput {
   description: String!
   authorId: String!
   state: State
+  type: ForumType
   commentsEnabled: Boolean
   createdAt: DateTime
   updatedAt: DateTime
@@ -10500,33 +10513,33 @@ input CommentCreateOrConnectWithoutAttachmentsInput {
   create: CommentUncheckedCreateWithoutAttachmentsInput!
 }
 
-input FormCategoryCreateWithoutImageInput {
+input TagCreateWithoutImageInput {
   id: String
   name: String!
   description: String
   state: State
   createdAt: DateTime
   updatedAt: DateTime
-  forms: FormCreateNestedManyWithoutCategoryInput
+  forms: FormCreateNestedManyWithoutTagsInput
+  forums: ForumCreateNestedManyWithoutTagsInput
 }
 
-input FormCategoryUncheckedCreateWithoutImageInput {
+input TagUncheckedCreateWithoutImageInput {
   id: String
   name: String!
   description: String
   state: State
   createdAt: DateTime
   updatedAt: DateTime
-  forms: FormUncheckedCreateNestedManyWithoutCategoryInput
 }
 
-input FormCategoryCreateOrConnectWithoutImageInput {
-  where: FormCategoryWhereUniqueInput!
-  create: FormCategoryUncheckedCreateWithoutImageInput!
+input TagCreateOrConnectWithoutImageInput {
+  where: TagWhereUniqueInput!
+  create: TagUncheckedCreateWithoutImageInput!
 }
 
-input FormCategoryCreateManyImageInputEnvelope {
-  data: [FormCategoryCreateManyImageInput!]!
+input TagCreateManyImageInputEnvelope {
+  data: [TagCreateManyImageInput!]!
   skipDuplicates: Boolean
 }
 
@@ -10702,9 +10715,9 @@ input FormUpdateWithoutAttachmentsInput {
   state: EnumStateFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
+  tagId: NullableStringFieldUpdateOperationsInput
   author: UserUpdateOneRequiredWithoutFormsInput
-  category: FormCategoryUpdateOneWithoutFormsInput
-  questions: QuestionUpdateManyWithoutFormInput
+  tags: TagUpdateManyWithoutFormsInput
   grades: GradeUpdateManyWithoutFormInput
   responses: ResponseUpdateManyWithoutFormInput
 }
@@ -10717,8 +10730,7 @@ input FormUncheckedUpdateWithoutAttachmentsInput {
   authorId: StringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  formCategoryId: NullableStringFieldUpdateOperationsInput
-  questions: QuestionUncheckedUpdateManyWithoutFormInput
+  tagId: NullableStringFieldUpdateOperationsInput
   grades: GradeUncheckedUpdateManyWithoutFormInput
   responses: ResponseUncheckedUpdateManyWithoutFormInput
 }
@@ -10732,13 +10744,13 @@ input GradeUpdateWithoutAttachmentsInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
-  minValue: NullableFloatFieldUpdateOperationsInput
-  maxValue: NullableFloatFieldUpdateOperationsInput
+  minValue: NullableIntFieldUpdateOperationsInput
+  maxValue: NullableIntFieldUpdateOperationsInput
   minInclusive: BoolFieldUpdateOperationsInput
   maxInclusive: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  form: FormUpdateOneRequiredWithoutGradesInput
+  form: FormUpdateOneWithoutGradesInput
   responses: ResponseUpdateManyWithoutGradeInput
   recommendations: RecommendationUpdateManyWithoutGradeInput
   questions: QuestionUpdateManyWithoutGradeInput
@@ -10748,9 +10760,9 @@ input GradeUncheckedUpdateWithoutAttachmentsInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
-  formId: StringFieldUpdateOperationsInput
-  minValue: NullableFloatFieldUpdateOperationsInput
-  maxValue: NullableFloatFieldUpdateOperationsInput
+  formId: NullableStringFieldUpdateOperationsInput
+  minValue: NullableIntFieldUpdateOperationsInput
+  maxValue: NullableIntFieldUpdateOperationsInput
   minInclusive: BoolFieldUpdateOperationsInput
   maxInclusive: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -10770,17 +10782,17 @@ input ResponseUpdateWithoutAttachmentsInput {
   state: EnumStateFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  author: UserUpdateOneRequiredWithoutResponsesInput
+  author: UserUpdateOneWithoutResponsesInput
   form: FormUpdateOneRequiredWithoutResponsesInput
   answers: AnswerUpdateManyWithoutResponseInput
-  grade: GradeUpdateOneWithoutResponsesInput
+  grade: GradeUpdateOneRequiredWithoutResponsesInput
 }
 
 input ResponseUncheckedUpdateWithoutAttachmentsInput {
   id: StringFieldUpdateOperationsInput
-  authorId: StringFieldUpdateOperationsInput
+  authorId: NullableStringFieldUpdateOperationsInput
   formId: StringFieldUpdateOperationsInput
-  gradeId: NullableStringFieldUpdateOperationsInput
+  gradeId: StringFieldUpdateOperationsInput
   state: EnumStateFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -10801,7 +10813,6 @@ input QuestionUpdateWithoutAttachmentsInput {
   questionType: EnumQuestionTypeFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  form: FormUpdateOneWithoutQuestionsInput
   grade: GradeUpdateOneRequiredWithoutQuestionsInput
   answers: AnswerUpdateManyWithoutQuestionInput
 }
@@ -10813,7 +10824,6 @@ input QuestionUncheckedUpdateWithoutAttachmentsInput {
   weight: FloatFieldUpdateOperationsInput
   instruction: NullableStringFieldUpdateOperationsInput
   questionType: EnumQuestionTypeFieldUpdateOperationsInput
-  formId: NullableStringFieldUpdateOperationsInput
   gradeId: StringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -10856,13 +10866,13 @@ input RecommendationUpdateWithoutAttachmentsInput {
   type: EnumRecommendationTypeFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  grade: GradeUpdateOneRequiredWithoutRecommendationsInput
+  grade: GradeUpdateOneWithoutRecommendationsInput
 }
 
 input RecommendationUncheckedUpdateWithoutAttachmentsInput {
   id: StringFieldUpdateOperationsInput
   content: StringFieldUpdateOperationsInput
-  gradeId: StringFieldUpdateOperationsInput
+  gradeId: NullableStringFieldUpdateOperationsInput
   type: EnumRecommendationTypeFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -10878,10 +10888,12 @@ input ForumUpdateWithoutAttachmentsInput {
   question: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
   state: EnumStateFieldUpdateOperationsInput
+  type: EnumForumTypeFieldUpdateOperationsInput
   commentsEnabled: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   author: UserUpdateOneRequiredWithoutForumsInput
+  tags: TagUpdateManyWithoutForumsInput
   forumAnswers: ForumAnswerUpdateManyWithoutForumInput
   comments: CommentUpdateManyWithoutForumInput
 }
@@ -10892,6 +10904,7 @@ input ForumUncheckedUpdateWithoutAttachmentsInput {
   description: StringFieldUpdateOperationsInput
   authorId: StringFieldUpdateOperationsInput
   state: EnumStateFieldUpdateOperationsInput
+  type: EnumForumTypeFieldUpdateOperationsInput
   commentsEnabled: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -10961,26 +10974,26 @@ input CommentUncheckedUpdateWithoutAttachmentsInput {
   comments: CommentUncheckedUpdateManyWithoutCommentInput
 }
 
-input FormCategoryUpsertWithWhereUniqueWithoutImageInput {
-  where: FormCategoryWhereUniqueInput!
-  update: FormCategoryUncheckedUpdateWithoutImageInput!
-  create: FormCategoryUncheckedCreateWithoutImageInput!
+input TagUpsertWithWhereUniqueWithoutImageInput {
+  where: TagWhereUniqueInput!
+  update: TagUncheckedUpdateWithoutImageInput!
+  create: TagUncheckedCreateWithoutImageInput!
 }
 
-input FormCategoryUpdateWithWhereUniqueWithoutImageInput {
-  where: FormCategoryWhereUniqueInput!
-  data: FormCategoryUncheckedUpdateWithoutImageInput!
+input TagUpdateWithWhereUniqueWithoutImageInput {
+  where: TagWhereUniqueInput!
+  data: TagUncheckedUpdateWithoutImageInput!
 }
 
-input FormCategoryUpdateManyWithWhereWithoutImageInput {
-  where: FormCategoryScalarWhereInput!
-  data: FormCategoryUncheckedUpdateManyWithoutFormCategoriesInput!
+input TagUpdateManyWithWhereWithoutImageInput {
+  where: TagScalarWhereInput!
+  data: TagUncheckedUpdateManyWithoutTagsInput!
 }
 
-input FormCategoryScalarWhereInput {
-  AND: [FormCategoryScalarWhereInput!]
-  OR: [FormCategoryScalarWhereInput!]
-  NOT: [FormCategoryScalarWhereInput!]
+input TagScalarWhereInput {
+  AND: [TagScalarWhereInput!]
+  OR: [TagScalarWhereInput!]
+  NOT: [TagScalarWhereInput!]
   id: StringFilter
   name: StringFilter
   description: StringNullableFilter
@@ -11094,26 +11107,26 @@ input OrderUpdateManyWithWhereWithoutReceiptInput {
   data: OrderUncheckedUpdateManyWithoutOrdersInput!
 }
 
-input AttachmentCreateOrConnectWithoutFormCategoriesInput {
+input AttachmentCreateOrConnectWithoutTagsInput {
   where: AttachmentWhereUniqueInput!
-  create: AttachmentUncheckedCreateWithoutFormCategoriesInput!
+  create: AttachmentUncheckedCreateWithoutTagsInput!
 }
 
-input FormCreateWithoutCategoryInput {
+input FormCreateWithoutTagsInput {
   id: String
   title: String!
   description: String
   state: State
   createdAt: DateTime
   updatedAt: DateTime
+  tagId: String
   author: UserCreateNestedOneWithoutFormsInput!
-  questions: QuestionCreateNestedManyWithoutFormInput
   grades: GradeCreateNestedManyWithoutFormInput
   responses: ResponseCreateNestedManyWithoutFormInput
   attachments: AttachmentCreateNestedManyWithoutFormInput
 }
 
-input FormUncheckedCreateWithoutCategoryInput {
+input FormUncheckedCreateWithoutTagsInput {
   id: String
   title: String!
   description: String
@@ -11121,28 +11134,58 @@ input FormUncheckedCreateWithoutCategoryInput {
   authorId: String!
   createdAt: DateTime
   updatedAt: DateTime
-  questions: QuestionUncheckedCreateNestedManyWithoutFormInput
+  tagId: String
   grades: GradeUncheckedCreateNestedManyWithoutFormInput
   responses: ResponseUncheckedCreateNestedManyWithoutFormInput
   attachments: AttachmentUncheckedCreateNestedManyWithoutFormInput
 }
 
-input FormCreateOrConnectWithoutCategoryInput {
+input FormCreateOrConnectWithoutTagsInput {
   where: FormWhereUniqueInput!
-  create: FormUncheckedCreateWithoutCategoryInput!
+  create: FormUncheckedCreateWithoutTagsInput!
 }
 
-input FormCreateManyCategoryInputEnvelope {
-  data: [FormCreateManyCategoryInput!]!
-  skipDuplicates: Boolean
+input ForumCreateWithoutTagsInput {
+  id: String
+  question: String!
+  description: String!
+  state: State
+  type: ForumType
+  commentsEnabled: Boolean
+  createdAt: DateTime
+  updatedAt: DateTime
+  author: UserCreateNestedOneWithoutForumsInput!
+  forumAnswers: ForumAnswerCreateNestedManyWithoutForumInput
+  comments: CommentCreateNestedManyWithoutForumInput
+  attachments: AttachmentCreateNestedManyWithoutForumInput
 }
 
-input AttachmentUpsertWithoutFormCategoriesInput {
-  update: AttachmentUncheckedUpdateWithoutFormCategoriesInput!
-  create: AttachmentUncheckedCreateWithoutFormCategoriesInput!
+input ForumUncheckedCreateWithoutTagsInput {
+  id: String
+  question: String!
+  description: String!
+  authorId: String!
+  state: State
+  type: ForumType
+  commentsEnabled: Boolean
+  createdAt: DateTime
+  updatedAt: DateTime
+  forumAnswers: ForumAnswerUncheckedCreateNestedManyWithoutForumInput
+  comments: CommentUncheckedCreateNestedManyWithoutForumInput
+  attachments: AttachmentUncheckedCreateNestedManyWithoutForumInput
 }
 
-input AttachmentUpdateWithoutFormCategoriesInput {
+input ForumCreateOrConnectWithoutTagsInput {
+  where: ForumWhereUniqueInput!
+  create: ForumUncheckedCreateWithoutTagsInput!
+}
+
+input AttachmentUpsertWithoutTagsInput {
+  update: AttachmentUncheckedUpdateWithoutTagsInput!
+  create: AttachmentUncheckedCreateWithoutTagsInput!
+}
+
+input AttachmentUpdateWithoutTagsInput {
   id: StringFieldUpdateOperationsInput
   path: StringFieldUpdateOperationsInput
   filename: NullableStringFieldUpdateOperationsInput
@@ -11171,7 +11214,7 @@ input AttachmentUpdateWithoutFormCategoriesInput {
   orders: OrderUpdateManyWithoutReceiptInput
 }
 
-input AttachmentUncheckedUpdateWithoutFormCategoriesInput {
+input AttachmentUncheckedUpdateWithoutTagsInput {
   id: StringFieldUpdateOperationsInput
   path: StringFieldUpdateOperationsInput
   filename: NullableStringFieldUpdateOperationsInput
@@ -11200,20 +11243,36 @@ input AttachmentUncheckedUpdateWithoutFormCategoriesInput {
   orders: OrderUncheckedUpdateManyWithoutReceiptInput
 }
 
-input FormUpsertWithWhereUniqueWithoutCategoryInput {
+input FormUpsertWithWhereUniqueWithoutTagsInput {
   where: FormWhereUniqueInput!
-  update: FormUncheckedUpdateWithoutCategoryInput!
-  create: FormUncheckedCreateWithoutCategoryInput!
+  update: FormUncheckedUpdateWithoutTagsInput!
+  create: FormUncheckedCreateWithoutTagsInput!
 }
 
-input FormUpdateWithWhereUniqueWithoutCategoryInput {
+input FormUpdateWithWhereUniqueWithoutTagsInput {
   where: FormWhereUniqueInput!
-  data: FormUncheckedUpdateWithoutCategoryInput!
+  data: FormUncheckedUpdateWithoutTagsInput!
 }
 
-input FormUpdateManyWithWhereWithoutCategoryInput {
+input FormUpdateManyWithWhereWithoutTagsInput {
   where: FormScalarWhereInput!
   data: FormUncheckedUpdateManyWithoutFormsInput!
+}
+
+input ForumUpsertWithWhereUniqueWithoutTagsInput {
+  where: ForumWhereUniqueInput!
+  update: ForumUncheckedUpdateWithoutTagsInput!
+  create: ForumUncheckedCreateWithoutTagsInput!
+}
+
+input ForumUpdateWithWhereUniqueWithoutTagsInput {
+  where: ForumWhereUniqueInput!
+  data: ForumUncheckedUpdateWithoutTagsInput!
+}
+
+input ForumUpdateManyWithWhereWithoutTagsInput {
+  where: ForumScalarWhereInput!
+  data: ForumUncheckedUpdateManyWithoutForumsInput!
 }
 
 input UserCreateWithoutFormsInput {
@@ -11263,17 +11322,18 @@ input UserCreateOrConnectWithoutFormsInput {
   create: UserUncheckedCreateWithoutFormsInput!
 }
 
-input FormCategoryCreateWithoutFormsInput {
+input TagCreateWithoutFormsInput {
   id: String
   name: String!
   description: String
   state: State
   createdAt: DateTime
   updatedAt: DateTime
-  image: AttachmentCreateNestedOneWithoutFormCategoriesInput
+  image: AttachmentCreateNestedOneWithoutTagsInput
+  forums: ForumCreateNestedManyWithoutTagsInput
 }
 
-input FormCategoryUncheckedCreateWithoutFormsInput {
+input TagUncheckedCreateWithoutFormsInput {
   id: String
   name: String!
   description: String
@@ -11283,55 +11343,17 @@ input FormCategoryUncheckedCreateWithoutFormsInput {
   attachmentId: String
 }
 
-input FormCategoryCreateOrConnectWithoutFormsInput {
-  where: FormCategoryWhereUniqueInput!
-  create: FormCategoryUncheckedCreateWithoutFormsInput!
-}
-
-input QuestionCreateWithoutFormInput {
-  id: String
-  questionNumber: Int!
-  question: String!
-  weight: Float
-  instruction: String
-  questionType: QuestionType
-  createdAt: DateTime
-  updatedAt: DateTime
-  grade: GradeCreateNestedOneWithoutQuestionsInput!
-  answers: AnswerCreateNestedManyWithoutQuestionInput
-  attachments: AttachmentCreateNestedManyWithoutQuestionInput
-}
-
-input QuestionUncheckedCreateWithoutFormInput {
-  id: String
-  questionNumber: Int!
-  question: String!
-  weight: Float
-  instruction: String
-  questionType: QuestionType
-  gradeId: String!
-  createdAt: DateTime
-  updatedAt: DateTime
-  answers: AnswerUncheckedCreateNestedManyWithoutQuestionInput
-  attachments: AttachmentUncheckedCreateNestedManyWithoutQuestionInput
-}
-
-input QuestionCreateOrConnectWithoutFormInput {
-  where: QuestionWhereUniqueInput!
-  create: QuestionUncheckedCreateWithoutFormInput!
-}
-
-input QuestionCreateManyFormInputEnvelope {
-  data: [QuestionCreateManyFormInput!]!
-  skipDuplicates: Boolean
+input TagCreateOrConnectWithoutFormsInput {
+  where: TagWhereUniqueInput!
+  create: TagUncheckedCreateWithoutFormsInput!
 }
 
 input GradeCreateWithoutFormInput {
   id: String
   name: String!
   description: String!
-  minValue: Float
-  maxValue: Float
+  minValue: Int
+  maxValue: Int
   minInclusive: Boolean
   maxInclusive: Boolean
   createdAt: DateTime
@@ -11346,8 +11368,8 @@ input GradeUncheckedCreateWithoutFormInput {
   id: String
   name: String!
   description: String!
-  minValue: Float
-  maxValue: Float
+  minValue: Int
+  maxValue: Int
   minInclusive: Boolean
   maxInclusive: Boolean
   createdAt: DateTime
@@ -11373,16 +11395,16 @@ input ResponseCreateWithoutFormInput {
   state: State
   createdAt: DateTime
   updatedAt: DateTime
-  author: UserCreateNestedOneWithoutResponsesInput!
+  author: UserCreateNestedOneWithoutResponsesInput
   answers: AnswerCreateNestedManyWithoutResponseInput
-  grade: GradeCreateNestedOneWithoutResponsesInput
+  grade: GradeCreateNestedOneWithoutResponsesInput!
   attachments: AttachmentCreateNestedManyWithoutResponseInput
 }
 
 input ResponseUncheckedCreateWithoutFormInput {
   id: String
-  authorId: String!
-  gradeId: String
+  authorId: String
+  gradeId: String!
   state: State
   createdAt: DateTime
   updatedAt: DateTime
@@ -11457,61 +11479,20 @@ input UserUncheckedUpdateWithoutFormsInput {
   orders: OrderUncheckedUpdateManyWithoutOwnerInput
 }
 
-input FormCategoryUpsertWithoutFormsInput {
-  update: FormCategoryUncheckedUpdateWithoutFormsInput!
-  create: FormCategoryUncheckedCreateWithoutFormsInput!
+input TagUpsertWithWhereUniqueWithoutFormsInput {
+  where: TagWhereUniqueInput!
+  update: TagUncheckedUpdateWithoutFormsInput!
+  create: TagUncheckedCreateWithoutFormsInput!
 }
 
-input FormCategoryUpdateWithoutFormsInput {
-  id: StringFieldUpdateOperationsInput
-  name: StringFieldUpdateOperationsInput
-  description: NullableStringFieldUpdateOperationsInput
-  state: EnumStateFieldUpdateOperationsInput
-  createdAt: DateTimeFieldUpdateOperationsInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-  image: AttachmentUpdateOneWithoutFormCategoriesInput
+input TagUpdateWithWhereUniqueWithoutFormsInput {
+  where: TagWhereUniqueInput!
+  data: TagUncheckedUpdateWithoutFormsInput!
 }
 
-input FormCategoryUncheckedUpdateWithoutFormsInput {
-  id: StringFieldUpdateOperationsInput
-  name: StringFieldUpdateOperationsInput
-  description: NullableStringFieldUpdateOperationsInput
-  state: EnumStateFieldUpdateOperationsInput
-  createdAt: DateTimeFieldUpdateOperationsInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-  attachmentId: NullableStringFieldUpdateOperationsInput
-}
-
-input QuestionUpsertWithWhereUniqueWithoutFormInput {
-  where: QuestionWhereUniqueInput!
-  update: QuestionUncheckedUpdateWithoutFormInput!
-  create: QuestionUncheckedCreateWithoutFormInput!
-}
-
-input QuestionUpdateWithWhereUniqueWithoutFormInput {
-  where: QuestionWhereUniqueInput!
-  data: QuestionUncheckedUpdateWithoutFormInput!
-}
-
-input QuestionUpdateManyWithWhereWithoutFormInput {
-  where: QuestionScalarWhereInput!
-  data: QuestionUncheckedUpdateManyWithoutQuestionsInput!
-}
-
-input QuestionScalarWhereInput {
-  AND: [QuestionScalarWhereInput!]
-  OR: [QuestionScalarWhereInput!]
-  NOT: [QuestionScalarWhereInput!]
-  id: StringFilter
-  questionNumber: IntFilter
-  question: StringFilter
-  weight: FloatFilter
-  instruction: StringNullableFilter
-  questionType: EnumQuestionTypeFilter
-  formId: StringNullableFilter
-  gradeId: StringFilter
-  createdAt: DateTimeFilter
-  updatedAt: DateTimeFilter
+input TagUpdateManyWithWhereWithoutFormsInput {
+  where: TagScalarWhereInput!
+  data: TagUncheckedUpdateManyWithoutTagsInput!
 }
 
 input GradeUpsertWithWhereUniqueWithoutFormInput {
@@ -11537,9 +11518,9 @@ input GradeScalarWhereInput {
   id: StringFilter
   name: StringFilter
   description: StringFilter
-  formId: StringFilter
-  minValue: FloatNullableFilter
-  maxValue: FloatNullableFilter
+  formId: StringNullableFilter
+  minValue: IntNullableFilter
+  maxValue: IntNullableFilter
   minInclusive: BoolFilter
   maxInclusive: BoolFilter
   createdAt: DateTimeFilter
@@ -11613,9 +11594,9 @@ input FormCreateWithoutGradesInput {
   state: State
   createdAt: DateTime
   updatedAt: DateTime
+  tagId: String
   author: UserCreateNestedOneWithoutFormsInput!
-  category: FormCategoryCreateNestedOneWithoutFormsInput
-  questions: QuestionCreateNestedManyWithoutFormInput
+  tags: TagCreateNestedManyWithoutFormsInput
   responses: ResponseCreateNestedManyWithoutFormInput
   attachments: AttachmentCreateNestedManyWithoutFormInput
 }
@@ -11628,8 +11609,7 @@ input FormUncheckedCreateWithoutGradesInput {
   authorId: String!
   createdAt: DateTime
   updatedAt: DateTime
-  formCategoryId: String
-  questions: QuestionUncheckedCreateNestedManyWithoutFormInput
+  tagId: String
   responses: ResponseUncheckedCreateNestedManyWithoutFormInput
   attachments: AttachmentUncheckedCreateNestedManyWithoutFormInput
 }
@@ -11644,7 +11624,7 @@ input ResponseCreateWithoutGradeInput {
   state: State
   createdAt: DateTime
   updatedAt: DateTime
-  author: UserCreateNestedOneWithoutResponsesInput!
+  author: UserCreateNestedOneWithoutResponsesInput
   form: FormCreateNestedOneWithoutResponsesInput!
   answers: AnswerCreateNestedManyWithoutResponseInput
   attachments: AttachmentCreateNestedManyWithoutResponseInput
@@ -11652,7 +11632,7 @@ input ResponseCreateWithoutGradeInput {
 
 input ResponseUncheckedCreateWithoutGradeInput {
   id: String
-  authorId: String!
+  authorId: String
   formId: String!
   state: State
   createdAt: DateTime
@@ -11708,7 +11688,6 @@ input QuestionCreateWithoutGradeInput {
   questionType: QuestionType
   createdAt: DateTime
   updatedAt: DateTime
-  form: FormCreateNestedOneWithoutQuestionsInput
   answers: AnswerCreateNestedManyWithoutQuestionInput
   attachments: AttachmentCreateNestedManyWithoutQuestionInput
 }
@@ -11720,7 +11699,6 @@ input QuestionUncheckedCreateWithoutGradeInput {
   weight: Float
   instruction: String
   questionType: QuestionType
-  formId: String
   createdAt: DateTime
   updatedAt: DateTime
   answers: AnswerUncheckedCreateNestedManyWithoutQuestionInput
@@ -11759,9 +11737,9 @@ input FormUpdateWithoutGradesInput {
   state: EnumStateFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
+  tagId: NullableStringFieldUpdateOperationsInput
   author: UserUpdateOneRequiredWithoutFormsInput
-  category: FormCategoryUpdateOneWithoutFormsInput
-  questions: QuestionUpdateManyWithoutFormInput
+  tags: TagUpdateManyWithoutFormsInput
   responses: ResponseUpdateManyWithoutFormInput
   attachments: AttachmentUpdateManyWithoutFormInput
 }
@@ -11774,8 +11752,7 @@ input FormUncheckedUpdateWithoutGradesInput {
   authorId: StringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  formCategoryId: NullableStringFieldUpdateOperationsInput
-  questions: QuestionUncheckedUpdateManyWithoutFormInput
+  tagId: NullableStringFieldUpdateOperationsInput
   responses: ResponseUncheckedUpdateManyWithoutFormInput
   attachments: AttachmentUncheckedUpdateManyWithoutFormInput
 }
@@ -11818,7 +11795,7 @@ input RecommendationScalarWhereInput {
   NOT: [RecommendationScalarWhereInput!]
   id: StringFilter
   content: StringFilter
-  gradeId: StringFilter
+  gradeId: StringNullableFilter
   type: EnumRecommendationTypeFilter
   createdAt: DateTimeFilter
   updatedAt: DateTimeFilter
@@ -11838,6 +11815,21 @@ input QuestionUpdateWithWhereUniqueWithoutGradeInput {
 input QuestionUpdateManyWithWhereWithoutGradeInput {
   where: QuestionScalarWhereInput!
   data: QuestionUncheckedUpdateManyWithoutQuestionsInput!
+}
+
+input QuestionScalarWhereInput {
+  AND: [QuestionScalarWhereInput!]
+  OR: [QuestionScalarWhereInput!]
+  NOT: [QuestionScalarWhereInput!]
+  id: StringFilter
+  questionNumber: IntFilter
+  question: StringFilter
+  weight: FloatFilter
+  instruction: StringNullableFilter
+  questionType: EnumQuestionTypeFilter
+  gradeId: StringFilter
+  createdAt: DateTimeFilter
+  updatedAt: DateTimeFilter
 }
 
 input AttachmentUpsertWithWhereUniqueWithoutGradeInput {
@@ -11910,9 +11902,9 @@ input FormCreateWithoutResponsesInput {
   state: State
   createdAt: DateTime
   updatedAt: DateTime
+  tagId: String
   author: UserCreateNestedOneWithoutFormsInput!
-  category: FormCategoryCreateNestedOneWithoutFormsInput
-  questions: QuestionCreateNestedManyWithoutFormInput
+  tags: TagCreateNestedManyWithoutFormsInput
   grades: GradeCreateNestedManyWithoutFormInput
   attachments: AttachmentCreateNestedManyWithoutFormInput
 }
@@ -11925,8 +11917,7 @@ input FormUncheckedCreateWithoutResponsesInput {
   authorId: String!
   createdAt: DateTime
   updatedAt: DateTime
-  formCategoryId: String
-  questions: QuestionUncheckedCreateNestedManyWithoutFormInput
+  tagId: String
   grades: GradeUncheckedCreateNestedManyWithoutFormInput
   attachments: AttachmentUncheckedCreateNestedManyWithoutFormInput
 }
@@ -11970,13 +11961,13 @@ input GradeCreateWithoutResponsesInput {
   id: String
   name: String!
   description: String!
-  minValue: Float
-  maxValue: Float
+  minValue: Int
+  maxValue: Int
   minInclusive: Boolean
   maxInclusive: Boolean
   createdAt: DateTime
   updatedAt: DateTime
-  form: FormCreateNestedOneWithoutGradesInput!
+  form: FormCreateNestedOneWithoutGradesInput
   recommendations: RecommendationCreateNestedManyWithoutGradeInput
   questions: QuestionCreateNestedManyWithoutGradeInput
   attachments: AttachmentCreateNestedManyWithoutGradeInput
@@ -11986,9 +11977,9 @@ input GradeUncheckedCreateWithoutResponsesInput {
   id: String
   name: String!
   description: String!
-  formId: String!
-  minValue: Float
-  maxValue: Float
+  formId: String
+  minValue: Int
+  maxValue: Int
   minInclusive: Boolean
   maxInclusive: Boolean
   createdAt: DateTime
@@ -12072,9 +12063,9 @@ input FormUpdateWithoutResponsesInput {
   state: EnumStateFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
+  tagId: NullableStringFieldUpdateOperationsInput
   author: UserUpdateOneRequiredWithoutFormsInput
-  category: FormCategoryUpdateOneWithoutFormsInput
-  questions: QuestionUpdateManyWithoutFormInput
+  tags: TagUpdateManyWithoutFormsInput
   grades: GradeUpdateManyWithoutFormInput
   attachments: AttachmentUpdateManyWithoutFormInput
 }
@@ -12087,8 +12078,7 @@ input FormUncheckedUpdateWithoutResponsesInput {
   authorId: StringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  formCategoryId: NullableStringFieldUpdateOperationsInput
-  questions: QuestionUncheckedUpdateManyWithoutFormInput
+  tagId: NullableStringFieldUpdateOperationsInput
   grades: GradeUncheckedUpdateManyWithoutFormInput
   attachments: AttachmentUncheckedUpdateManyWithoutFormInput
 }
@@ -12131,13 +12121,13 @@ input GradeUpdateWithoutResponsesInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
-  minValue: NullableFloatFieldUpdateOperationsInput
-  maxValue: NullableFloatFieldUpdateOperationsInput
+  minValue: NullableIntFieldUpdateOperationsInput
+  maxValue: NullableIntFieldUpdateOperationsInput
   minInclusive: BoolFieldUpdateOperationsInput
   maxInclusive: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  form: FormUpdateOneRequiredWithoutGradesInput
+  form: FormUpdateOneWithoutGradesInput
   recommendations: RecommendationUpdateManyWithoutGradeInput
   questions: QuestionUpdateManyWithoutGradeInput
   attachments: AttachmentUpdateManyWithoutGradeInput
@@ -12147,9 +12137,9 @@ input GradeUncheckedUpdateWithoutResponsesInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
-  formId: StringFieldUpdateOperationsInput
-  minValue: NullableFloatFieldUpdateOperationsInput
-  maxValue: NullableFloatFieldUpdateOperationsInput
+  formId: NullableStringFieldUpdateOperationsInput
+  minValue: NullableIntFieldUpdateOperationsInput
+  maxValue: NullableIntFieldUpdateOperationsInput
   minInclusive: BoolFieldUpdateOperationsInput
   maxInclusive: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -12175,50 +12165,17 @@ input AttachmentUpdateManyWithWhereWithoutResponseInput {
   data: AttachmentUncheckedUpdateManyWithoutAttachmentsInput!
 }
 
-input FormCreateWithoutQuestionsInput {
-  id: String
-  title: String!
-  description: String
-  state: State
-  createdAt: DateTime
-  updatedAt: DateTime
-  author: UserCreateNestedOneWithoutFormsInput!
-  category: FormCategoryCreateNestedOneWithoutFormsInput
-  grades: GradeCreateNestedManyWithoutFormInput
-  responses: ResponseCreateNestedManyWithoutFormInput
-  attachments: AttachmentCreateNestedManyWithoutFormInput
-}
-
-input FormUncheckedCreateWithoutQuestionsInput {
-  id: String
-  title: String!
-  description: String
-  state: State
-  authorId: String!
-  createdAt: DateTime
-  updatedAt: DateTime
-  formCategoryId: String
-  grades: GradeUncheckedCreateNestedManyWithoutFormInput
-  responses: ResponseUncheckedCreateNestedManyWithoutFormInput
-  attachments: AttachmentUncheckedCreateNestedManyWithoutFormInput
-}
-
-input FormCreateOrConnectWithoutQuestionsInput {
-  where: FormWhereUniqueInput!
-  create: FormUncheckedCreateWithoutQuestionsInput!
-}
-
 input GradeCreateWithoutQuestionsInput {
   id: String
   name: String!
   description: String!
-  minValue: Float
-  maxValue: Float
+  minValue: Int
+  maxValue: Int
   minInclusive: Boolean
   maxInclusive: Boolean
   createdAt: DateTime
   updatedAt: DateTime
-  form: FormCreateNestedOneWithoutGradesInput!
+  form: FormCreateNestedOneWithoutGradesInput
   responses: ResponseCreateNestedManyWithoutGradeInput
   recommendations: RecommendationCreateNestedManyWithoutGradeInput
   attachments: AttachmentCreateNestedManyWithoutGradeInput
@@ -12228,9 +12185,9 @@ input GradeUncheckedCreateWithoutQuestionsInput {
   id: String
   name: String!
   description: String!
-  formId: String!
-  minValue: Float
-  maxValue: Float
+  formId: String
+  minValue: Int
+  maxValue: Int
   minInclusive: Boolean
   maxInclusive: Boolean
   createdAt: DateTime
@@ -12285,39 +12242,6 @@ input AttachmentCreateManyQuestionInputEnvelope {
   skipDuplicates: Boolean
 }
 
-input FormUpsertWithoutQuestionsInput {
-  update: FormUncheckedUpdateWithoutQuestionsInput!
-  create: FormUncheckedCreateWithoutQuestionsInput!
-}
-
-input FormUpdateWithoutQuestionsInput {
-  id: StringFieldUpdateOperationsInput
-  title: StringFieldUpdateOperationsInput
-  description: NullableStringFieldUpdateOperationsInput
-  state: EnumStateFieldUpdateOperationsInput
-  createdAt: DateTimeFieldUpdateOperationsInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-  author: UserUpdateOneRequiredWithoutFormsInput
-  category: FormCategoryUpdateOneWithoutFormsInput
-  grades: GradeUpdateManyWithoutFormInput
-  responses: ResponseUpdateManyWithoutFormInput
-  attachments: AttachmentUpdateManyWithoutFormInput
-}
-
-input FormUncheckedUpdateWithoutQuestionsInput {
-  id: StringFieldUpdateOperationsInput
-  title: StringFieldUpdateOperationsInput
-  description: NullableStringFieldUpdateOperationsInput
-  state: EnumStateFieldUpdateOperationsInput
-  authorId: StringFieldUpdateOperationsInput
-  createdAt: DateTimeFieldUpdateOperationsInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-  formCategoryId: NullableStringFieldUpdateOperationsInput
-  grades: GradeUncheckedUpdateManyWithoutFormInput
-  responses: ResponseUncheckedUpdateManyWithoutFormInput
-  attachments: AttachmentUncheckedUpdateManyWithoutFormInput
-}
-
 input GradeUpsertWithoutQuestionsInput {
   update: GradeUncheckedUpdateWithoutQuestionsInput!
   create: GradeUncheckedCreateWithoutQuestionsInput!
@@ -12327,13 +12251,13 @@ input GradeUpdateWithoutQuestionsInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
-  minValue: NullableFloatFieldUpdateOperationsInput
-  maxValue: NullableFloatFieldUpdateOperationsInput
+  minValue: NullableIntFieldUpdateOperationsInput
+  maxValue: NullableIntFieldUpdateOperationsInput
   minInclusive: BoolFieldUpdateOperationsInput
   maxInclusive: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  form: FormUpdateOneRequiredWithoutGradesInput
+  form: FormUpdateOneWithoutGradesInput
   responses: ResponseUpdateManyWithoutGradeInput
   recommendations: RecommendationUpdateManyWithoutGradeInput
   attachments: AttachmentUpdateManyWithoutGradeInput
@@ -12343,9 +12267,9 @@ input GradeUncheckedUpdateWithoutQuestionsInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
-  formId: StringFieldUpdateOperationsInput
-  minValue: NullableFloatFieldUpdateOperationsInput
-  maxValue: NullableFloatFieldUpdateOperationsInput
+  formId: NullableStringFieldUpdateOperationsInput
+  minValue: NullableIntFieldUpdateOperationsInput
+  maxValue: NullableIntFieldUpdateOperationsInput
   minInclusive: BoolFieldUpdateOperationsInput
   maxInclusive: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -12392,17 +12316,17 @@ input ResponseCreateWithoutAnswersInput {
   state: State
   createdAt: DateTime
   updatedAt: DateTime
-  author: UserCreateNestedOneWithoutResponsesInput!
+  author: UserCreateNestedOneWithoutResponsesInput
   form: FormCreateNestedOneWithoutResponsesInput!
-  grade: GradeCreateNestedOneWithoutResponsesInput
+  grade: GradeCreateNestedOneWithoutResponsesInput!
   attachments: AttachmentCreateNestedManyWithoutResponseInput
 }
 
 input ResponseUncheckedCreateWithoutAnswersInput {
   id: String
-  authorId: String!
+  authorId: String
   formId: String!
-  gradeId: String
+  gradeId: String!
   state: State
   createdAt: DateTime
   updatedAt: DateTime
@@ -12423,7 +12347,6 @@ input QuestionCreateWithoutAnswersInput {
   questionType: QuestionType
   createdAt: DateTime
   updatedAt: DateTime
-  form: FormCreateNestedOneWithoutQuestionsInput
   grade: GradeCreateNestedOneWithoutQuestionsInput!
   attachments: AttachmentCreateNestedManyWithoutQuestionInput
 }
@@ -12435,7 +12358,6 @@ input QuestionUncheckedCreateWithoutAnswersInput {
   weight: Float
   instruction: String
   questionType: QuestionType
-  formId: String
   gradeId: String!
   createdAt: DateTime
   updatedAt: DateTime
@@ -12467,17 +12389,17 @@ input ResponseUpdateWithoutAnswersInput {
   state: EnumStateFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  author: UserUpdateOneRequiredWithoutResponsesInput
+  author: UserUpdateOneWithoutResponsesInput
   form: FormUpdateOneRequiredWithoutResponsesInput
-  grade: GradeUpdateOneWithoutResponsesInput
+  grade: GradeUpdateOneRequiredWithoutResponsesInput
   attachments: AttachmentUpdateManyWithoutResponseInput
 }
 
 input ResponseUncheckedUpdateWithoutAnswersInput {
   id: StringFieldUpdateOperationsInput
-  authorId: StringFieldUpdateOperationsInput
+  authorId: NullableStringFieldUpdateOperationsInput
   formId: StringFieldUpdateOperationsInput
-  gradeId: NullableStringFieldUpdateOperationsInput
+  gradeId: StringFieldUpdateOperationsInput
   state: EnumStateFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -12498,7 +12420,6 @@ input QuestionUpdateWithoutAnswersInput {
   questionType: EnumQuestionTypeFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  form: FormUpdateOneWithoutQuestionsInput
   grade: GradeUpdateOneRequiredWithoutQuestionsInput
   attachments: AttachmentUpdateManyWithoutQuestionInput
 }
@@ -12510,7 +12431,6 @@ input QuestionUncheckedUpdateWithoutAnswersInput {
   weight: FloatFieldUpdateOperationsInput
   instruction: NullableStringFieldUpdateOperationsInput
   questionType: EnumQuestionTypeFieldUpdateOperationsInput
-  formId: NullableStringFieldUpdateOperationsInput
   gradeId: StringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -12547,13 +12467,13 @@ input GradeCreateWithoutRecommendationsInput {
   id: String
   name: String!
   description: String!
-  minValue: Float
-  maxValue: Float
+  minValue: Int
+  maxValue: Int
   minInclusive: Boolean
   maxInclusive: Boolean
   createdAt: DateTime
   updatedAt: DateTime
-  form: FormCreateNestedOneWithoutGradesInput!
+  form: FormCreateNestedOneWithoutGradesInput
   responses: ResponseCreateNestedManyWithoutGradeInput
   questions: QuestionCreateNestedManyWithoutGradeInput
   attachments: AttachmentCreateNestedManyWithoutGradeInput
@@ -12563,9 +12483,9 @@ input GradeUncheckedCreateWithoutRecommendationsInput {
   id: String
   name: String!
   description: String!
-  formId: String!
-  minValue: Float
-  maxValue: Float
+  formId: String
+  minValue: Int
+  maxValue: Int
   minInclusive: Boolean
   maxInclusive: Boolean
   createdAt: DateTime
@@ -12605,13 +12525,13 @@ input GradeUpdateWithoutRecommendationsInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
-  minValue: NullableFloatFieldUpdateOperationsInput
-  maxValue: NullableFloatFieldUpdateOperationsInput
+  minValue: NullableIntFieldUpdateOperationsInput
+  maxValue: NullableIntFieldUpdateOperationsInput
   minInclusive: BoolFieldUpdateOperationsInput
   maxInclusive: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  form: FormUpdateOneRequiredWithoutGradesInput
+  form: FormUpdateOneWithoutGradesInput
   responses: ResponseUpdateManyWithoutGradeInput
   questions: QuestionUpdateManyWithoutGradeInput
   attachments: AttachmentUpdateManyWithoutGradeInput
@@ -12621,9 +12541,9 @@ input GradeUncheckedUpdateWithoutRecommendationsInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
-  formId: StringFieldUpdateOperationsInput
-  minValue: NullableFloatFieldUpdateOperationsInput
-  maxValue: NullableFloatFieldUpdateOperationsInput
+  formId: NullableStringFieldUpdateOperationsInput
+  minValue: NullableIntFieldUpdateOperationsInput
+  maxValue: NullableIntFieldUpdateOperationsInput
   minInclusive: BoolFieldUpdateOperationsInput
   maxInclusive: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -12678,6 +12598,32 @@ input UserUncheckedCreateWithoutForumsInput {
 input UserCreateOrConnectWithoutForumsInput {
   where: UserWhereUniqueInput!
   create: UserUncheckedCreateWithoutForumsInput!
+}
+
+input TagCreateWithoutForumsInput {
+  id: String
+  name: String!
+  description: String
+  state: State
+  createdAt: DateTime
+  updatedAt: DateTime
+  image: AttachmentCreateNestedOneWithoutTagsInput
+  forms: FormCreateNestedManyWithoutTagsInput
+}
+
+input TagUncheckedCreateWithoutForumsInput {
+  id: String
+  name: String!
+  description: String
+  state: State
+  createdAt: DateTime
+  updatedAt: DateTime
+  attachmentId: String
+}
+
+input TagCreateOrConnectWithoutForumsInput {
+  where: TagWhereUniqueInput!
+  create: TagUncheckedCreateWithoutForumsInput!
 }
 
 input ForumAnswerCreateWithoutForumInput {
@@ -12809,6 +12755,22 @@ input UserUncheckedUpdateWithoutForumsInput {
   orders: OrderUncheckedUpdateManyWithoutOwnerInput
 }
 
+input TagUpsertWithWhereUniqueWithoutForumsInput {
+  where: TagWhereUniqueInput!
+  update: TagUncheckedUpdateWithoutForumsInput!
+  create: TagUncheckedCreateWithoutForumsInput!
+}
+
+input TagUpdateWithWhereUniqueWithoutForumsInput {
+  where: TagWhereUniqueInput!
+  data: TagUncheckedUpdateWithoutForumsInput!
+}
+
+input TagUpdateManyWithWhereWithoutForumsInput {
+  where: TagScalarWhereInput!
+  data: TagUncheckedUpdateManyWithoutTagsInput!
+}
+
 input ForumAnswerUpsertWithWhereUniqueWithoutForumInput {
   where: ForumAnswerWhereUniqueInput!
   update: ForumAnswerUncheckedUpdateWithoutForumInput!
@@ -12909,10 +12871,12 @@ input ForumCreateWithoutForumAnswersInput {
   question: String!
   description: String!
   state: State
+  type: ForumType
   commentsEnabled: Boolean
   createdAt: DateTime
   updatedAt: DateTime
   author: UserCreateNestedOneWithoutForumsInput!
+  tags: TagCreateNestedManyWithoutForumsInput
   comments: CommentCreateNestedManyWithoutForumInput
   attachments: AttachmentCreateNestedManyWithoutForumInput
 }
@@ -12923,6 +12887,7 @@ input ForumUncheckedCreateWithoutForumAnswersInput {
   description: String!
   authorId: String!
   state: State
+  type: ForumType
   commentsEnabled: Boolean
   createdAt: DateTime
   updatedAt: DateTime
@@ -13040,10 +13005,12 @@ input ForumUpdateWithoutForumAnswersInput {
   question: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
   state: EnumStateFieldUpdateOperationsInput
+  type: EnumForumTypeFieldUpdateOperationsInput
   commentsEnabled: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   author: UserUpdateOneRequiredWithoutForumsInput
+  tags: TagUpdateManyWithoutForumsInput
   comments: CommentUpdateManyWithoutForumInput
   attachments: AttachmentUpdateManyWithoutForumInput
 }
@@ -13054,6 +13021,7 @@ input ForumUncheckedUpdateWithoutForumAnswersInput {
   description: StringFieldUpdateOperationsInput
   authorId: StringFieldUpdateOperationsInput
   state: EnumStateFieldUpdateOperationsInput
+  type: EnumForumTypeFieldUpdateOperationsInput
   commentsEnabled: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -13193,10 +13161,12 @@ input ForumCreateWithoutCommentsInput {
   question: String!
   description: String!
   state: State
+  type: ForumType
   commentsEnabled: Boolean
   createdAt: DateTime
   updatedAt: DateTime
   author: UserCreateNestedOneWithoutForumsInput!
+  tags: TagCreateNestedManyWithoutForumsInput
   forumAnswers: ForumAnswerCreateNestedManyWithoutForumInput
   attachments: AttachmentCreateNestedManyWithoutForumInput
 }
@@ -13207,6 +13177,7 @@ input ForumUncheckedCreateWithoutCommentsInput {
   description: String!
   authorId: String!
   state: State
+  type: ForumType
   commentsEnabled: Boolean
   createdAt: DateTime
   updatedAt: DateTime
@@ -13370,10 +13341,12 @@ input ForumUpdateWithoutCommentsInput {
   question: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
   state: EnumStateFieldUpdateOperationsInput
+  type: EnumForumTypeFieldUpdateOperationsInput
   commentsEnabled: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   author: UserUpdateOneRequiredWithoutForumsInput
+  tags: TagUpdateManyWithoutForumsInput
   forumAnswers: ForumAnswerUpdateManyWithoutForumInput
   attachments: AttachmentUpdateManyWithoutForumInput
 }
@@ -13384,6 +13357,7 @@ input ForumUncheckedUpdateWithoutCommentsInput {
   description: StringFieldUpdateOperationsInput
   authorId: StringFieldUpdateOperationsInput
   state: EnumStateFieldUpdateOperationsInput
+  type: EnumForumTypeFieldUpdateOperationsInput
   commentsEnabled: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -13654,7 +13628,7 @@ input AttachmentUpdateWithoutServicesInput {
   forum: ForumUpdateOneWithoutAttachmentsInput
   forumAnswer: ForumAnswerUpdateOneWithoutAttachmentsInput
   comment: CommentUpdateOneWithoutAttachmentsInput
-  formCategories: FormCategoryUpdateManyWithoutImageInput
+  tags: TagUpdateManyWithoutImageInput
   helpStep: HelpStepUpdateOneWithoutAttachmentsInput
   paymentMethods: PaymentMethodUpdateManyWithoutLogoInput
   orders: OrderUpdateManyWithoutReceiptInput
@@ -13684,7 +13658,7 @@ input AttachmentUncheckedUpdateWithoutServicesInput {
   commentId: NullableStringFieldUpdateOperationsInput
   helpStepId: NullableStringFieldUpdateOperationsInput
   user: UserUncheckedUpdateManyWithoutAvatorInput
-  formCategories: FormCategoryUncheckedUpdateManyWithoutImageInput
+  tags: TagUncheckedUpdateManyWithoutImageInput
   paymentMethods: PaymentMethodUncheckedUpdateManyWithoutLogoInput
   orders: OrderUncheckedUpdateManyWithoutReceiptInput
 }
@@ -13897,7 +13871,7 @@ input AttachmentUpdateWithoutOrdersInput {
   forum: ForumUpdateOneWithoutAttachmentsInput
   forumAnswer: ForumAnswerUpdateOneWithoutAttachmentsInput
   comment: CommentUpdateOneWithoutAttachmentsInput
-  formCategories: FormCategoryUpdateManyWithoutImageInput
+  tags: TagUpdateManyWithoutImageInput
   helpStep: HelpStepUpdateOneWithoutAttachmentsInput
   paymentMethods: PaymentMethodUpdateManyWithoutLogoInput
   services: ServiceUpdateManyWithoutImageInput
@@ -13927,7 +13901,7 @@ input AttachmentUncheckedUpdateWithoutOrdersInput {
   commentId: NullableStringFieldUpdateOperationsInput
   helpStepId: NullableStringFieldUpdateOperationsInput
   user: UserUncheckedUpdateManyWithoutAvatorInput
-  formCategories: FormCategoryUncheckedUpdateManyWithoutImageInput
+  tags: TagUncheckedUpdateManyWithoutImageInput
   paymentMethods: PaymentMethodUncheckedUpdateManyWithoutLogoInput
   services: ServiceUncheckedUpdateManyWithoutImageInput
 }
@@ -14046,7 +14020,7 @@ input AttachmentUpdateWithoutPaymentMethodsInput {
   forum: ForumUpdateOneWithoutAttachmentsInput
   forumAnswer: ForumAnswerUpdateOneWithoutAttachmentsInput
   comment: CommentUpdateOneWithoutAttachmentsInput
-  formCategories: FormCategoryUpdateManyWithoutImageInput
+  tags: TagUpdateManyWithoutImageInput
   helpStep: HelpStepUpdateOneWithoutAttachmentsInput
   services: ServiceUpdateManyWithoutImageInput
   orders: OrderUpdateManyWithoutReceiptInput
@@ -14076,7 +14050,7 @@ input AttachmentUncheckedUpdateWithoutPaymentMethodsInput {
   commentId: NullableStringFieldUpdateOperationsInput
   helpStepId: NullableStringFieldUpdateOperationsInput
   user: UserUncheckedUpdateManyWithoutAvatorInput
-  formCategories: FormCategoryUncheckedUpdateManyWithoutImageInput
+  tags: TagUncheckedUpdateManyWithoutImageInput
   services: ServiceUncheckedUpdateManyWithoutImageInput
   orders: OrderUncheckedUpdateManyWithoutReceiptInput
 }
@@ -14734,13 +14708,13 @@ input FormCreateManyAuthorInput {
   state: State
   createdAt: DateTime
   updatedAt: DateTime
-  formCategoryId: String
+  tagId: String
 }
 
 input ResponseCreateManyAuthorInput {
   id: String
   formId: String!
-  gradeId: String
+  gradeId: String!
   state: State
   createdAt: DateTime
   updatedAt: DateTime
@@ -14751,6 +14725,7 @@ input ForumCreateManyAuthorInput {
   question: String!
   description: String!
   state: State
+  type: ForumType
   commentsEnabled: Boolean
   createdAt: DateTime
   updatedAt: DateTime
@@ -14809,8 +14784,8 @@ input FormUpdateWithoutAuthorInput {
   state: EnumStateFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  category: FormCategoryUpdateOneWithoutFormsInput
-  questions: QuestionUpdateManyWithoutFormInput
+  tagId: NullableStringFieldUpdateOperationsInput
+  tags: TagUpdateManyWithoutFormsInput
   grades: GradeUpdateManyWithoutFormInput
   responses: ResponseUpdateManyWithoutFormInput
   attachments: AttachmentUpdateManyWithoutFormInput
@@ -14823,8 +14798,7 @@ input FormUncheckedUpdateWithoutAuthorInput {
   state: EnumStateFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  formCategoryId: NullableStringFieldUpdateOperationsInput
-  questions: QuestionUncheckedUpdateManyWithoutFormInput
+  tagId: NullableStringFieldUpdateOperationsInput
   grades: GradeUncheckedUpdateManyWithoutFormInput
   responses: ResponseUncheckedUpdateManyWithoutFormInput
   attachments: AttachmentUncheckedUpdateManyWithoutFormInput
@@ -14837,7 +14811,7 @@ input FormUncheckedUpdateManyWithoutFormsInput {
   state: EnumStateFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  formCategoryId: NullableStringFieldUpdateOperationsInput
+  tagId: NullableStringFieldUpdateOperationsInput
 }
 
 input ResponseUpdateWithoutAuthorInput {
@@ -14847,14 +14821,14 @@ input ResponseUpdateWithoutAuthorInput {
   updatedAt: DateTimeFieldUpdateOperationsInput
   form: FormUpdateOneRequiredWithoutResponsesInput
   answers: AnswerUpdateManyWithoutResponseInput
-  grade: GradeUpdateOneWithoutResponsesInput
+  grade: GradeUpdateOneRequiredWithoutResponsesInput
   attachments: AttachmentUpdateManyWithoutResponseInput
 }
 
 input ResponseUncheckedUpdateWithoutAuthorInput {
   id: StringFieldUpdateOperationsInput
   formId: StringFieldUpdateOperationsInput
-  gradeId: NullableStringFieldUpdateOperationsInput
+  gradeId: StringFieldUpdateOperationsInput
   state: EnumStateFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -14865,7 +14839,7 @@ input ResponseUncheckedUpdateWithoutAuthorInput {
 input ResponseUncheckedUpdateManyWithoutResponsesInput {
   id: StringFieldUpdateOperationsInput
   formId: StringFieldUpdateOperationsInput
-  gradeId: NullableStringFieldUpdateOperationsInput
+  gradeId: StringFieldUpdateOperationsInput
   state: EnumStateFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -14876,9 +14850,11 @@ input ForumUpdateWithoutAuthorInput {
   question: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
   state: EnumStateFieldUpdateOperationsInput
+  type: EnumForumTypeFieldUpdateOperationsInput
   commentsEnabled: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
+  tags: TagUpdateManyWithoutForumsInput
   forumAnswers: ForumAnswerUpdateManyWithoutForumInput
   comments: CommentUpdateManyWithoutForumInput
   attachments: AttachmentUpdateManyWithoutForumInput
@@ -14889,6 +14865,7 @@ input ForumUncheckedUpdateWithoutAuthorInput {
   question: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
   state: EnumStateFieldUpdateOperationsInput
+  type: EnumForumTypeFieldUpdateOperationsInput
   commentsEnabled: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -14902,6 +14879,7 @@ input ForumUncheckedUpdateManyWithoutForumsInput {
   question: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
   state: EnumStateFieldUpdateOperationsInput
+  type: EnumForumTypeFieldUpdateOperationsInput
   commentsEnabled: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -15068,7 +15046,7 @@ input UserCreateManyAvatorInput {
   updatedAt: DateTime
 }
 
-input FormCategoryCreateManyImageInput {
+input TagCreateManyImageInput {
   id: String
   name: String!
   description: String
@@ -15164,27 +15142,27 @@ input UserUncheckedUpdateManyWithoutUserInput {
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
-input FormCategoryUpdateWithoutImageInput {
+input TagUpdateWithoutImageInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   description: NullableStringFieldUpdateOperationsInput
   state: EnumStateFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  forms: FormUpdateManyWithoutCategoryInput
+  forms: FormUpdateManyWithoutTagsInput
+  forums: ForumUpdateManyWithoutTagsInput
 }
 
-input FormCategoryUncheckedUpdateWithoutImageInput {
+input TagUncheckedUpdateWithoutImageInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   description: NullableStringFieldUpdateOperationsInput
   state: EnumStateFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  forms: FormUncheckedUpdateManyWithoutCategoryInput
 }
 
-input FormCategoryUncheckedUpdateManyWithoutFormCategoriesInput {
+input TagUncheckedUpdateManyWithoutTagsInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   description: NullableStringFieldUpdateOperationsInput
@@ -15284,31 +15262,21 @@ input OrderUncheckedUpdateWithoutReceiptInput {
   transactions: TransactionUncheckedUpdateManyWithoutOrderInput
 }
 
-input FormCreateManyCategoryInput {
-  id: String
-  title: String!
-  description: String
-  state: State
-  authorId: String!
-  createdAt: DateTime
-  updatedAt: DateTime
-}
-
-input FormUpdateWithoutCategoryInput {
+input FormUpdateWithoutTagsInput {
   id: StringFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
   description: NullableStringFieldUpdateOperationsInput
   state: EnumStateFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
+  tagId: NullableStringFieldUpdateOperationsInput
   author: UserUpdateOneRequiredWithoutFormsInput
-  questions: QuestionUpdateManyWithoutFormInput
   grades: GradeUpdateManyWithoutFormInput
   responses: ResponseUpdateManyWithoutFormInput
   attachments: AttachmentUpdateManyWithoutFormInput
 }
 
-input FormUncheckedUpdateWithoutCategoryInput {
+input FormUncheckedUpdateWithoutTagsInput {
   id: StringFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
   description: NullableStringFieldUpdateOperationsInput
@@ -15316,30 +15284,48 @@ input FormUncheckedUpdateWithoutCategoryInput {
   authorId: StringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  questions: QuestionUncheckedUpdateManyWithoutFormInput
+  tagId: NullableStringFieldUpdateOperationsInput
   grades: GradeUncheckedUpdateManyWithoutFormInput
   responses: ResponseUncheckedUpdateManyWithoutFormInput
   attachments: AttachmentUncheckedUpdateManyWithoutFormInput
 }
 
-input QuestionCreateManyFormInput {
-  id: String
-  questionNumber: Int!
-  question: String!
-  weight: Float
-  instruction: String
-  questionType: QuestionType
-  gradeId: String!
-  createdAt: DateTime
-  updatedAt: DateTime
+input ForumUpdateWithoutTagsInput {
+  id: StringFieldUpdateOperationsInput
+  question: StringFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  state: EnumStateFieldUpdateOperationsInput
+  type: EnumForumTypeFieldUpdateOperationsInput
+  commentsEnabled: BoolFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  author: UserUpdateOneRequiredWithoutForumsInput
+  forumAnswers: ForumAnswerUpdateManyWithoutForumInput
+  comments: CommentUpdateManyWithoutForumInput
+  attachments: AttachmentUpdateManyWithoutForumInput
+}
+
+input ForumUncheckedUpdateWithoutTagsInput {
+  id: StringFieldUpdateOperationsInput
+  question: StringFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  authorId: StringFieldUpdateOperationsInput
+  state: EnumStateFieldUpdateOperationsInput
+  type: EnumForumTypeFieldUpdateOperationsInput
+  commentsEnabled: BoolFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  forumAnswers: ForumAnswerUncheckedUpdateManyWithoutForumInput
+  comments: CommentUncheckedUpdateManyWithoutForumInput
+  attachments: AttachmentUncheckedUpdateManyWithoutForumInput
 }
 
 input GradeCreateManyFormInput {
   id: String
   name: String!
   description: String!
-  minValue: Float
-  maxValue: Float
+  minValue: Int
+  maxValue: Int
   minInclusive: Boolean
   maxInclusive: Boolean
   createdAt: DateTime
@@ -15348,59 +15334,40 @@ input GradeCreateManyFormInput {
 
 input ResponseCreateManyFormInput {
   id: String
-  authorId: String!
-  gradeId: String
+  authorId: String
+  gradeId: String!
   state: State
   createdAt: DateTime
   updatedAt: DateTime
 }
 
-input QuestionUpdateWithoutFormInput {
+input TagUpdateWithoutFormsInput {
   id: StringFieldUpdateOperationsInput
-  questionNumber: IntFieldUpdateOperationsInput
-  question: StringFieldUpdateOperationsInput
-  weight: FloatFieldUpdateOperationsInput
-  instruction: NullableStringFieldUpdateOperationsInput
-  questionType: EnumQuestionTypeFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  state: EnumStateFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  grade: GradeUpdateOneRequiredWithoutQuestionsInput
-  answers: AnswerUpdateManyWithoutQuestionInput
-  attachments: AttachmentUpdateManyWithoutQuestionInput
+  image: AttachmentUpdateOneWithoutTagsInput
+  forums: ForumUpdateManyWithoutTagsInput
 }
 
-input QuestionUncheckedUpdateWithoutFormInput {
+input TagUncheckedUpdateWithoutFormsInput {
   id: StringFieldUpdateOperationsInput
-  questionNumber: IntFieldUpdateOperationsInput
-  question: StringFieldUpdateOperationsInput
-  weight: FloatFieldUpdateOperationsInput
-  instruction: NullableStringFieldUpdateOperationsInput
-  questionType: EnumQuestionTypeFieldUpdateOperationsInput
-  gradeId: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  state: EnumStateFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  answers: AnswerUncheckedUpdateManyWithoutQuestionInput
-  attachments: AttachmentUncheckedUpdateManyWithoutQuestionInput
-}
-
-input QuestionUncheckedUpdateManyWithoutQuestionsInput {
-  id: StringFieldUpdateOperationsInput
-  questionNumber: IntFieldUpdateOperationsInput
-  question: StringFieldUpdateOperationsInput
-  weight: FloatFieldUpdateOperationsInput
-  instruction: NullableStringFieldUpdateOperationsInput
-  questionType: EnumQuestionTypeFieldUpdateOperationsInput
-  gradeId: StringFieldUpdateOperationsInput
-  createdAt: DateTimeFieldUpdateOperationsInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
+  attachmentId: NullableStringFieldUpdateOperationsInput
 }
 
 input GradeUpdateWithoutFormInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
-  minValue: NullableFloatFieldUpdateOperationsInput
-  maxValue: NullableFloatFieldUpdateOperationsInput
+  minValue: NullableIntFieldUpdateOperationsInput
+  maxValue: NullableIntFieldUpdateOperationsInput
   minInclusive: BoolFieldUpdateOperationsInput
   maxInclusive: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -15415,8 +15382,8 @@ input GradeUncheckedUpdateWithoutFormInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
-  minValue: NullableFloatFieldUpdateOperationsInput
-  maxValue: NullableFloatFieldUpdateOperationsInput
+  minValue: NullableIntFieldUpdateOperationsInput
+  maxValue: NullableIntFieldUpdateOperationsInput
   minInclusive: BoolFieldUpdateOperationsInput
   maxInclusive: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -15431,8 +15398,8 @@ input GradeUncheckedUpdateManyWithoutGradesInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
-  minValue: NullableFloatFieldUpdateOperationsInput
-  maxValue: NullableFloatFieldUpdateOperationsInput
+  minValue: NullableIntFieldUpdateOperationsInput
+  maxValue: NullableIntFieldUpdateOperationsInput
   minInclusive: BoolFieldUpdateOperationsInput
   maxInclusive: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -15444,16 +15411,16 @@ input ResponseUpdateWithoutFormInput {
   state: EnumStateFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  author: UserUpdateOneRequiredWithoutResponsesInput
+  author: UserUpdateOneWithoutResponsesInput
   answers: AnswerUpdateManyWithoutResponseInput
-  grade: GradeUpdateOneWithoutResponsesInput
+  grade: GradeUpdateOneRequiredWithoutResponsesInput
   attachments: AttachmentUpdateManyWithoutResponseInput
 }
 
 input ResponseUncheckedUpdateWithoutFormInput {
   id: StringFieldUpdateOperationsInput
-  authorId: StringFieldUpdateOperationsInput
-  gradeId: NullableStringFieldUpdateOperationsInput
+  authorId: NullableStringFieldUpdateOperationsInput
+  gradeId: StringFieldUpdateOperationsInput
   state: EnumStateFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -15483,7 +15450,7 @@ input AttachmentUpdateWithoutFormInput {
   forum: ForumUpdateOneWithoutAttachmentsInput
   forumAnswer: ForumAnswerUpdateOneWithoutAttachmentsInput
   comment: CommentUpdateOneWithoutAttachmentsInput
-  formCategories: FormCategoryUpdateManyWithoutImageInput
+  tags: TagUpdateManyWithoutImageInput
   helpStep: HelpStepUpdateOneWithoutAttachmentsInput
   paymentMethods: PaymentMethodUpdateManyWithoutLogoInput
   services: ServiceUpdateManyWithoutImageInput
@@ -15513,7 +15480,7 @@ input AttachmentUncheckedUpdateWithoutFormInput {
   commentId: NullableStringFieldUpdateOperationsInput
   helpStepId: NullableStringFieldUpdateOperationsInput
   user: UserUncheckedUpdateManyWithoutAvatorInput
-  formCategories: FormCategoryUncheckedUpdateManyWithoutImageInput
+  tags: TagUncheckedUpdateManyWithoutImageInput
   paymentMethods: PaymentMethodUncheckedUpdateManyWithoutLogoInput
   services: ServiceUncheckedUpdateManyWithoutImageInput
   orders: OrderUncheckedUpdateManyWithoutReceiptInput
@@ -15545,7 +15512,7 @@ input AttachmentUncheckedUpdateManyWithoutAttachmentsInput {
 
 input ResponseCreateManyGradeInput {
   id: String
-  authorId: String!
+  authorId: String
   formId: String!
   state: State
   createdAt: DateTime
@@ -15567,7 +15534,6 @@ input QuestionCreateManyGradeInput {
   weight: Float
   instruction: String
   questionType: QuestionType
-  formId: String
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -15577,7 +15543,7 @@ input ResponseUpdateWithoutGradeInput {
   state: EnumStateFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  author: UserUpdateOneRequiredWithoutResponsesInput
+  author: UserUpdateOneWithoutResponsesInput
   form: FormUpdateOneRequiredWithoutResponsesInput
   answers: AnswerUpdateManyWithoutResponseInput
   attachments: AttachmentUpdateManyWithoutResponseInput
@@ -15585,7 +15551,7 @@ input ResponseUpdateWithoutGradeInput {
 
 input ResponseUncheckedUpdateWithoutGradeInput {
   id: StringFieldUpdateOperationsInput
-  authorId: StringFieldUpdateOperationsInput
+  authorId: NullableStringFieldUpdateOperationsInput
   formId: StringFieldUpdateOperationsInput
   state: EnumStateFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -15629,7 +15595,6 @@ input QuestionUpdateWithoutGradeInput {
   questionType: EnumQuestionTypeFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  form: FormUpdateOneWithoutQuestionsInput
   answers: AnswerUpdateManyWithoutQuestionInput
   attachments: AttachmentUpdateManyWithoutQuestionInput
 }
@@ -15641,11 +15606,21 @@ input QuestionUncheckedUpdateWithoutGradeInput {
   weight: FloatFieldUpdateOperationsInput
   instruction: NullableStringFieldUpdateOperationsInput
   questionType: EnumQuestionTypeFieldUpdateOperationsInput
-  formId: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   answers: AnswerUncheckedUpdateManyWithoutQuestionInput
   attachments: AttachmentUncheckedUpdateManyWithoutQuestionInput
+}
+
+input QuestionUncheckedUpdateManyWithoutQuestionsInput {
+  id: StringFieldUpdateOperationsInput
+  questionNumber: IntFieldUpdateOperationsInput
+  question: StringFieldUpdateOperationsInput
+  weight: FloatFieldUpdateOperationsInput
+  instruction: NullableStringFieldUpdateOperationsInput
+  questionType: EnumQuestionTypeFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
 input AttachmentUpdateWithoutGradeInput {
@@ -15670,7 +15645,7 @@ input AttachmentUpdateWithoutGradeInput {
   forum: ForumUpdateOneWithoutAttachmentsInput
   forumAnswer: ForumAnswerUpdateOneWithoutAttachmentsInput
   comment: CommentUpdateOneWithoutAttachmentsInput
-  formCategories: FormCategoryUpdateManyWithoutImageInput
+  tags: TagUpdateManyWithoutImageInput
   helpStep: HelpStepUpdateOneWithoutAttachmentsInput
   paymentMethods: PaymentMethodUpdateManyWithoutLogoInput
   services: ServiceUpdateManyWithoutImageInput
@@ -15700,7 +15675,7 @@ input AttachmentUncheckedUpdateWithoutGradeInput {
   commentId: NullableStringFieldUpdateOperationsInput
   helpStepId: NullableStringFieldUpdateOperationsInput
   user: UserUncheckedUpdateManyWithoutAvatorInput
-  formCategories: FormCategoryUncheckedUpdateManyWithoutImageInput
+  tags: TagUncheckedUpdateManyWithoutImageInput
   paymentMethods: PaymentMethodUncheckedUpdateManyWithoutLogoInput
   services: ServiceUncheckedUpdateManyWithoutImageInput
   orders: OrderUncheckedUpdateManyWithoutReceiptInput
@@ -15766,7 +15741,7 @@ input AttachmentUpdateWithoutResponseInput {
   forum: ForumUpdateOneWithoutAttachmentsInput
   forumAnswer: ForumAnswerUpdateOneWithoutAttachmentsInput
   comment: CommentUpdateOneWithoutAttachmentsInput
-  formCategories: FormCategoryUpdateManyWithoutImageInput
+  tags: TagUpdateManyWithoutImageInput
   helpStep: HelpStepUpdateOneWithoutAttachmentsInput
   paymentMethods: PaymentMethodUpdateManyWithoutLogoInput
   services: ServiceUpdateManyWithoutImageInput
@@ -15796,7 +15771,7 @@ input AttachmentUncheckedUpdateWithoutResponseInput {
   commentId: NullableStringFieldUpdateOperationsInput
   helpStepId: NullableStringFieldUpdateOperationsInput
   user: UserUncheckedUpdateManyWithoutAvatorInput
-  formCategories: FormCategoryUncheckedUpdateManyWithoutImageInput
+  tags: TagUncheckedUpdateManyWithoutImageInput
   paymentMethods: PaymentMethodUncheckedUpdateManyWithoutLogoInput
   services: ServiceUncheckedUpdateManyWithoutImageInput
   orders: OrderUncheckedUpdateManyWithoutReceiptInput
@@ -15853,7 +15828,7 @@ input AttachmentUpdateWithoutQuestionInput {
   forum: ForumUpdateOneWithoutAttachmentsInput
   forumAnswer: ForumAnswerUpdateOneWithoutAttachmentsInput
   comment: CommentUpdateOneWithoutAttachmentsInput
-  formCategories: FormCategoryUpdateManyWithoutImageInput
+  tags: TagUpdateManyWithoutImageInput
   helpStep: HelpStepUpdateOneWithoutAttachmentsInput
   paymentMethods: PaymentMethodUpdateManyWithoutLogoInput
   services: ServiceUpdateManyWithoutImageInput
@@ -15883,7 +15858,7 @@ input AttachmentUncheckedUpdateWithoutQuestionInput {
   commentId: NullableStringFieldUpdateOperationsInput
   helpStepId: NullableStringFieldUpdateOperationsInput
   user: UserUncheckedUpdateManyWithoutAvatorInput
-  formCategories: FormCategoryUncheckedUpdateManyWithoutImageInput
+  tags: TagUncheckedUpdateManyWithoutImageInput
   paymentMethods: PaymentMethodUncheckedUpdateManyWithoutLogoInput
   services: ServiceUncheckedUpdateManyWithoutImageInput
   orders: OrderUncheckedUpdateManyWithoutReceiptInput
@@ -15911,7 +15886,7 @@ input AttachmentUpdateWithoutAnswerInput {
   forum: ForumUpdateOneWithoutAttachmentsInput
   forumAnswer: ForumAnswerUpdateOneWithoutAttachmentsInput
   comment: CommentUpdateOneWithoutAttachmentsInput
-  formCategories: FormCategoryUpdateManyWithoutImageInput
+  tags: TagUpdateManyWithoutImageInput
   helpStep: HelpStepUpdateOneWithoutAttachmentsInput
   paymentMethods: PaymentMethodUpdateManyWithoutLogoInput
   services: ServiceUpdateManyWithoutImageInput
@@ -15941,7 +15916,7 @@ input AttachmentUncheckedUpdateWithoutAnswerInput {
   commentId: NullableStringFieldUpdateOperationsInput
   helpStepId: NullableStringFieldUpdateOperationsInput
   user: UserUncheckedUpdateManyWithoutAvatorInput
-  formCategories: FormCategoryUncheckedUpdateManyWithoutImageInput
+  tags: TagUncheckedUpdateManyWithoutImageInput
   paymentMethods: PaymentMethodUncheckedUpdateManyWithoutLogoInput
   services: ServiceUncheckedUpdateManyWithoutImageInput
   orders: OrderUncheckedUpdateManyWithoutReceiptInput
@@ -15969,7 +15944,7 @@ input AttachmentUpdateWithoutRecommendationInput {
   forum: ForumUpdateOneWithoutAttachmentsInput
   forumAnswer: ForumAnswerUpdateOneWithoutAttachmentsInput
   comment: CommentUpdateOneWithoutAttachmentsInput
-  formCategories: FormCategoryUpdateManyWithoutImageInput
+  tags: TagUpdateManyWithoutImageInput
   helpStep: HelpStepUpdateOneWithoutAttachmentsInput
   paymentMethods: PaymentMethodUpdateManyWithoutLogoInput
   services: ServiceUpdateManyWithoutImageInput
@@ -15999,7 +15974,7 @@ input AttachmentUncheckedUpdateWithoutRecommendationInput {
   commentId: NullableStringFieldUpdateOperationsInput
   helpStepId: NullableStringFieldUpdateOperationsInput
   user: UserUncheckedUpdateManyWithoutAvatorInput
-  formCategories: FormCategoryUncheckedUpdateManyWithoutImageInput
+  tags: TagUncheckedUpdateManyWithoutImageInput
   paymentMethods: PaymentMethodUncheckedUpdateManyWithoutLogoInput
   services: ServiceUncheckedUpdateManyWithoutImageInput
   orders: OrderUncheckedUpdateManyWithoutReceiptInput
@@ -16025,6 +16000,27 @@ input CommentCreateManyForumInput {
   updatedAt: DateTime
   forumAnswerId: String
   commentId: String
+}
+
+input TagUpdateWithoutForumsInput {
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  state: EnumStateFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  image: AttachmentUpdateOneWithoutTagsInput
+  forms: FormUpdateManyWithoutTagsInput
+}
+
+input TagUncheckedUpdateWithoutForumsInput {
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  state: EnumStateFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  attachmentId: NullableStringFieldUpdateOperationsInput
 }
 
 input ForumAnswerUpdateWithoutForumInput {
@@ -16101,7 +16097,7 @@ input AttachmentUpdateWithoutForumInput {
   recommendation: RecommendationUpdateOneWithoutAttachmentsInput
   forumAnswer: ForumAnswerUpdateOneWithoutAttachmentsInput
   comment: CommentUpdateOneWithoutAttachmentsInput
-  formCategories: FormCategoryUpdateManyWithoutImageInput
+  tags: TagUpdateManyWithoutImageInput
   helpStep: HelpStepUpdateOneWithoutAttachmentsInput
   paymentMethods: PaymentMethodUpdateManyWithoutLogoInput
   services: ServiceUpdateManyWithoutImageInput
@@ -16131,7 +16127,7 @@ input AttachmentUncheckedUpdateWithoutForumInput {
   commentId: NullableStringFieldUpdateOperationsInput
   helpStepId: NullableStringFieldUpdateOperationsInput
   user: UserUncheckedUpdateManyWithoutAvatorInput
-  formCategories: FormCategoryUncheckedUpdateManyWithoutImageInput
+  tags: TagUncheckedUpdateManyWithoutImageInput
   paymentMethods: PaymentMethodUncheckedUpdateManyWithoutLogoInput
   services: ServiceUncheckedUpdateManyWithoutImageInput
   orders: OrderUncheckedUpdateManyWithoutReceiptInput
@@ -16171,7 +16167,7 @@ input AttachmentUpdateWithoutForumAnswerInput {
   recommendation: RecommendationUpdateOneWithoutAttachmentsInput
   forum: ForumUpdateOneWithoutAttachmentsInput
   comment: CommentUpdateOneWithoutAttachmentsInput
-  formCategories: FormCategoryUpdateManyWithoutImageInput
+  tags: TagUpdateManyWithoutImageInput
   helpStep: HelpStepUpdateOneWithoutAttachmentsInput
   paymentMethods: PaymentMethodUpdateManyWithoutLogoInput
   services: ServiceUpdateManyWithoutImageInput
@@ -16201,7 +16197,7 @@ input AttachmentUncheckedUpdateWithoutForumAnswerInput {
   commentId: NullableStringFieldUpdateOperationsInput
   helpStepId: NullableStringFieldUpdateOperationsInput
   user: UserUncheckedUpdateManyWithoutAvatorInput
-  formCategories: FormCategoryUncheckedUpdateManyWithoutImageInput
+  tags: TagUncheckedUpdateManyWithoutImageInput
   paymentMethods: PaymentMethodUncheckedUpdateManyWithoutLogoInput
   services: ServiceUncheckedUpdateManyWithoutImageInput
   orders: OrderUncheckedUpdateManyWithoutReceiptInput
@@ -16269,7 +16265,7 @@ input AttachmentUpdateWithoutCommentInput {
   recommendation: RecommendationUpdateOneWithoutAttachmentsInput
   forum: ForumUpdateOneWithoutAttachmentsInput
   forumAnswer: ForumAnswerUpdateOneWithoutAttachmentsInput
-  formCategories: FormCategoryUpdateManyWithoutImageInput
+  tags: TagUpdateManyWithoutImageInput
   helpStep: HelpStepUpdateOneWithoutAttachmentsInput
   paymentMethods: PaymentMethodUpdateManyWithoutLogoInput
   services: ServiceUpdateManyWithoutImageInput
@@ -16299,7 +16295,7 @@ input AttachmentUncheckedUpdateWithoutCommentInput {
   forumAnswerId: NullableStringFieldUpdateOperationsInput
   helpStepId: NullableStringFieldUpdateOperationsInput
   user: UserUncheckedUpdateManyWithoutAvatorInput
-  formCategories: FormCategoryUncheckedUpdateManyWithoutImageInput
+  tags: TagUncheckedUpdateManyWithoutImageInput
   paymentMethods: PaymentMethodUncheckedUpdateManyWithoutLogoInput
   services: ServiceUncheckedUpdateManyWithoutImageInput
   orders: OrderUncheckedUpdateManyWithoutReceiptInput
@@ -16398,7 +16394,7 @@ input AttachmentUpdateWithoutHelpStepInput {
   forum: ForumUpdateOneWithoutAttachmentsInput
   forumAnswer: ForumAnswerUpdateOneWithoutAttachmentsInput
   comment: CommentUpdateOneWithoutAttachmentsInput
-  formCategories: FormCategoryUpdateManyWithoutImageInput
+  tags: TagUpdateManyWithoutImageInput
   paymentMethods: PaymentMethodUpdateManyWithoutLogoInput
   services: ServiceUpdateManyWithoutImageInput
   orders: OrderUpdateManyWithoutReceiptInput
@@ -16427,7 +16423,7 @@ input AttachmentUncheckedUpdateWithoutHelpStepInput {
   forumAnswerId: NullableStringFieldUpdateOperationsInput
   commentId: NullableStringFieldUpdateOperationsInput
   user: UserUncheckedUpdateManyWithoutAvatorInput
-  formCategories: FormCategoryUncheckedUpdateManyWithoutImageInput
+  tags: TagUncheckedUpdateManyWithoutImageInput
   paymentMethods: PaymentMethodUncheckedUpdateManyWithoutLogoInput
   services: ServiceUncheckedUpdateManyWithoutImageInput
   orders: OrderUncheckedUpdateManyWithoutReceiptInput
@@ -16577,13 +16573,13 @@ type AggregateAttachment {
   max: AttachmentMaxAggregateOutputType
 }
 
-type AggregateFormCategory {
-  _count: FormCategoryCountAggregateOutputType
-  count: FormCategoryCountAggregateOutputType
-  _min: FormCategoryMinAggregateOutputType
-  min: FormCategoryMinAggregateOutputType
-  _max: FormCategoryMaxAggregateOutputType
-  max: FormCategoryMaxAggregateOutputType
+type AggregateTag {
+  _count: TagCountAggregateOutputType
+  count: TagCountAggregateOutputType
+  _min: TagMinAggregateOutputType
+  min: TagMinAggregateOutputType
+  _max: TagMaxAggregateOutputType
+  max: TagMaxAggregateOutputType
 }
 
 type AggregateForm {
@@ -16833,7 +16829,7 @@ type UserMaxAggregateOutputType {
 }
 
 type DeviceCountAggregateOutputType {
-  device_id: Int!
+  id: Int!
   fcm_id: Int!
   type: Int!
   userId: Int!
@@ -16841,14 +16837,14 @@ type DeviceCountAggregateOutputType {
 }
 
 type DeviceMinAggregateOutputType {
-  device_id: String
+  id: String
   fcm_id: String
   type: String
   userId: String
 }
 
 type DeviceMaxAggregateOutputType {
-  device_id: String
+  id: String
   fcm_id: String
   type: String
   userId: String
@@ -16940,7 +16936,7 @@ type AttachmentMaxAggregateOutputType {
   helpStepId: String
 }
 
-type FormCategoryCountAggregateOutputType {
+type TagCountAggregateOutputType {
   id: Int!
   name: Int!
   description: Int!
@@ -16951,7 +16947,7 @@ type FormCategoryCountAggregateOutputType {
   _all: Int!
 }
 
-type FormCategoryMinAggregateOutputType {
+type TagMinAggregateOutputType {
   id: String
   name: String
   description: String
@@ -16961,7 +16957,7 @@ type FormCategoryMinAggregateOutputType {
   attachmentId: String
 }
 
-type FormCategoryMaxAggregateOutputType {
+type TagMaxAggregateOutputType {
   id: String
   name: String
   description: String
@@ -16979,7 +16975,7 @@ type FormCountAggregateOutputType {
   authorId: Int!
   createdAt: Int!
   updatedAt: Int!
-  formCategoryId: Int!
+  tagId: Int!
   _all: Int!
 }
 
@@ -16991,7 +16987,7 @@ type FormMinAggregateOutputType {
   authorId: String
   createdAt: DateTime
   updatedAt: DateTime
-  formCategoryId: String
+  tagId: String
 }
 
 type FormMaxAggregateOutputType {
@@ -17002,7 +16998,7 @@ type FormMaxAggregateOutputType {
   authorId: String
   createdAt: DateTime
   updatedAt: DateTime
-  formCategoryId: String
+  tagId: String
 }
 
 type GradeCountAggregateOutputType {
@@ -17025,8 +17021,8 @@ type GradeAvgAggregateOutputType {
 }
 
 type GradeSumAggregateOutputType {
-  minValue: Float
-  maxValue: Float
+  minValue: Int
+  maxValue: Int
 }
 
 type GradeMinAggregateOutputType {
@@ -17034,8 +17030,8 @@ type GradeMinAggregateOutputType {
   name: String
   description: String
   formId: String
-  minValue: Float
-  maxValue: Float
+  minValue: Int
+  maxValue: Int
   minInclusive: Boolean
   maxInclusive: Boolean
   createdAt: DateTime
@@ -17047,8 +17043,8 @@ type GradeMaxAggregateOutputType {
   name: String
   description: String
   formId: String
-  minValue: Float
-  maxValue: Float
+  minValue: Int
+  maxValue: Int
   minInclusive: Boolean
   maxInclusive: Boolean
   createdAt: DateTime
@@ -17093,7 +17089,6 @@ type QuestionCountAggregateOutputType {
   weight: Int!
   instruction: Int!
   questionType: Int!
-  formId: Int!
   gradeId: Int!
   createdAt: Int!
   updatedAt: Int!
@@ -17117,7 +17112,6 @@ type QuestionMinAggregateOutputType {
   weight: Float
   instruction: String
   questionType: QuestionType
-  formId: String
   gradeId: String
   createdAt: DateTime
   updatedAt: DateTime
@@ -17130,7 +17124,6 @@ type QuestionMaxAggregateOutputType {
   weight: Float
   instruction: String
   questionType: QuestionType
-  formId: String
   gradeId: String
   createdAt: DateTime
   updatedAt: DateTime
@@ -17201,6 +17194,7 @@ type ForumCountAggregateOutputType {
   description: Int!
   authorId: Int!
   state: Int!
+  type: Int!
   commentsEnabled: Int!
   createdAt: Int!
   updatedAt: Int!
@@ -17213,6 +17207,7 @@ type ForumMinAggregateOutputType {
   description: String
   authorId: String
   state: State
+  type: ForumType
   commentsEnabled: Boolean
   createdAt: DateTime
   updatedAt: DateTime
@@ -17224,6 +17219,7 @@ type ForumMaxAggregateOutputType {
   description: String
   authorId: String
   state: State
+  type: ForumType
   commentsEnabled: Boolean
   createdAt: DateTime
   updatedAt: DateTime

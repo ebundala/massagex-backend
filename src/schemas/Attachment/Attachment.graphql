@@ -36,13 +36,13 @@ type Attachment {
           forumAnswerId: String
           comment: Comment
           commentId: String
-          formCategories(where: FormCategoryWhereInput
-              orderBy: [FormCategoryOrderByInput!]
-              cursor: FormCategoryWhereUniqueInput
+          tags(where: TagWhereInput
+              orderBy: [TagOrderByInput!]
+              cursor: TagWhereUniqueInput
               take: Int
               skip: Int
-              distinct: [FormCategoryScalarFieldEnum!]
-              ): [FormCategory!]!
+              distinct: [TagScalarFieldEnum!]
+              ): [Tag!]!
           helpStep: HelpStep
           helpStepId: String
           paymentMethods(where: PaymentMethodWhereInput

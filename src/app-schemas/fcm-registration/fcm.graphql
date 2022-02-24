@@ -26,7 +26,7 @@ enum NotificationType {
 
 input RegisterDeviceInput {
     fcm_id: String
-    device_id: String!
+    id: String!
     userId: String
     type: String
 }

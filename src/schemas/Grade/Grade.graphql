@@ -2,8 +2,8 @@ type Grade {
           id: String!
           name: String!
           description: String!
-          form: Form!
-          formId: String!
+          form: Form
+          formId: String
           responses(where: ResponseWhereInput
               orderBy: [ResponseOrderByInput!]
               cursor: ResponseWhereUniqueInput
@@ -25,8 +25,8 @@ type Grade {
               skip: Int
               distinct: [QuestionScalarFieldEnum!]
               ): [Question!]!
-          minValue: Float
-          maxValue: Float
+          minValue: Int
+          maxValue: Int
           minInclusive: Boolean!
           maxInclusive: Boolean!
           attachments(where: AttachmentWhereInput

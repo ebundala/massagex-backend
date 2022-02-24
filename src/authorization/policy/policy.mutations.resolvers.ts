@@ -75,22 +75,6 @@ updateOneForm(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @In
 
 @Mutation()
 @UseGuards(AuthorizerGuard)
-createOneFormCategory(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Mutation()
-@UseGuards(AuthorizerGuard)
-updateOneFormCategory(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Mutation()
-@UseGuards(AuthorizerGuard)
 createOneForum(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
     return this.service.handle(parent, args, ctx, info);
   }
@@ -180,6 +164,22 @@ createOneService(@Parent() parent, @Args() args, @Context() ctx: TenantContext, 
 @Mutation()
 @UseGuards(AuthorizerGuard)
 updateOneService(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
+    return this.service.handle(parent, args, ctx, info);
+  }
+
+
+
+@Mutation()
+@UseGuards(AuthorizerGuard)
+createOneTag(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
+    return this.service.handle(parent, args, ctx, info);
+  }
+
+
+
+@Mutation()
+@UseGuards(AuthorizerGuard)
+updateOneTag(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
     return this.service.handle(parent, args, ctx, info);
   }
 

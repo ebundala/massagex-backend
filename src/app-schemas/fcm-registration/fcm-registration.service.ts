@@ -12,9 +12,9 @@ export class FcmRegistrationService {
         const select = ctx.prisma.getSelection(info).valueOf('data', 'Device', { select: {  } });
          
         let args:Prisma.DeviceUpsertArgs={
-            where:{device_id:data.device_id},
+            where:{id:data.id},
             create:{
-                device_id:data.device_id,
+                id:data.id,
                 
             },
             update:{

@@ -8,8 +8,8 @@ type Recommendation {
               skip: Int
               distinct: [AttachmentScalarFieldEnum!]
               ): [Attachment!]!
-          grade: Grade!
-          gradeId: String!
+          grade: Grade
+          gradeId: String
           type: RecommendationType!
           createdAt: DateTime!
           updatedAt: DateTime!
