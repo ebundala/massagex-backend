@@ -22,7 +22,7 @@ services:
       replicas: 1
       resources:
         limits:
-          cpus: 1
+          # cpus: 1
           memory: 1g
       restart_policy:
         condition: on-failure
@@ -66,11 +66,11 @@ services:
        MPESA_API_KEY: ${MPESA_API_KEY}
        MPESA_PUB_KEY: ${MPESA_PUB_KEY}
        MPESA_SESSION_TTL: ${MPESA_SESSION_TTL}
-    depends_on:
-       db:
-        condition: service_healthy
-       redis:
-        condition: service_healthy
+    # depends_on:
+    #    db:
+    #     condition: service_healthy
+    #    redis:
+    #     condition: service_healthy
     # ports:
     #   - ${APP_PORT}:3000
     volumes:
