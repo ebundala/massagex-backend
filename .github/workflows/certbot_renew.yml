@@ -67,7 +67,7 @@ jobs:
            ./scripts/create_file .env "${{ secrets.SERVER_ENV}}"
            ./scripts/create_file  webserver/certbot/nginx-conf/nginx.conf "${{secrets.CERT_SERVER_CONF}}"
           
-           ./scripts/stackdeploy ${{ github.repository_owner }} ${{secrets.GITHUB_TOKEN}} ${{env.REGISTRY}} certbot certbot
+           ./scripts/stackdeploy ${{ github.repository_owner }} ${{secrets.GHCR_PAT}} ${{env.REGISTRY}} certbot certbot
             
            
 
