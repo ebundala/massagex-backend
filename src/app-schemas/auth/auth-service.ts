@@ -32,9 +32,9 @@ export class AuthService {
     //this.logger.setContext(AuthService.name);
   }
  
-  async signup(credentials: SignupInput, prisma: PrismaClient, select): Promise<AuthResult> {
+  async signup(credentials: SignupInput, prisma: PrismaClient, select,context): Promise<AuthResult> {
 
-    const res = await this.signupWithEmail(credentials, prisma, select);
+    const res = await this.signupWithEmail(credentials, prisma, select,context);
     if (res && !res.status) {
       const link = await this.firebaseApp.admin.auth().generateEmailVerificationLink(credentials.email);
       await this.mail.sendWelcomeEmail(res.data, link).catch((e) => { this.logger.debug(e) });
@@ -53,7 +53,7 @@ export class AuthService {
       message: "User account not found"
     };
     const link = await this.firebaseApp.admin.auth().generatePasswordResetLink(email);
-   // await this.mail.sendPasswordResetLink(user, link).catch((e) => { this.logger.debug(e) });
+    await this.mail.sendPasswordResetLink(user, link).catch((e) => { this.logger.debug(e) });
    //Todo send email
     return {
       message: 'Password resset instructions sent',
@@ -62,10 +62,10 @@ export class AuthService {
   }
 
   async signupWithEmail(data: SignupInput,
-    prisma: PrismaClient, select,
+    prisma: PrismaClient, select,context:any
       ): Promise<AuthResult> {
     const { email, password, displayName, phoneNumber, avator, dateOfBirth } = data;
-    let user;
+    //let user;
     
     try {
       if (!isEmail(email)) {
@@ -78,25 +78,25 @@ export class AuthService {
 
 
       try {
-
-        user = await this._createUserWithEmail(
-          email,
-          password,
-          displayName,
-          phoneNumber,
-        ).catch((e) => {
-          throw new GraphQLError(e?.message ?? "Unknown error occurred")
-        });
+        
+        // user = await this.createUserWithEmail(
+        //   email,
+        //   password,
+        //   displayName,
+        //   phoneNumber,
+        // ).catch((e) => {
+        //   throw new GraphQLError(e?.message ?? "Unknown error occurred")
+        // });
         const data: Prisma.UserCreateInput = {
-        id: user.uid,
-        displayName: user.displayName,
+       // id: user.uid,
+        displayName: displayName,
           phoneNumber,
-        disabled: user.disabled,
-        email: user.email,
-        emailVerified: user.emailVerified,
+       // disabled: user.disabled,
+        email: email,
+       // emailVerified: user.emailVerified,
         //  gender: gender,
-        //  dateOfBirth: dateOfBirth,
-       // role: Role.CONSUMER,
+         // dateOfBirth: dateOfBirth,
+         // role: Role.CONSUMER,
 
         }
         if (avator) {
@@ -110,6 +110,9 @@ export class AuthService {
           
         //   data.organizations = { create: [organization] as any[] }
         // }
+        //TODO find better way to pass context args to prisma hooks
+        data["password"] = password;
+        //firebase user will be created in prisma hook
         const u2 = await prisma.user.create({
           data
         });
@@ -117,16 +120,16 @@ export class AuthService {
         return {
           status: true,
           data: u3,
-          message: "Thank you for registering\n you will receive a confimation email when your account is ready",
+          message: "Thank you for registering\n you will receive a confimation email shortly when your account is ready",
         }
       } catch (e) {
         //;
-        if (user && user.uid && !await this.cleanUpOnSignUpFailure(user.uid, prisma)) {
+        // if (user && user.uid && !await this.cleanUpOnSignUpFailure(user.uid, prisma)) {
 
-          throw new GraphQLError(`Failed to cleanup user signup errors\n ${e?.message}`)
-        } else {
+        //   throw new GraphQLError(`Failed to cleanup user signup errors\n ${e?.message}`)
+        // } else {
           throw new GraphQLError(e.message)
-        }
+       // }
 
       }
     } catch ({ message }) {
@@ -200,7 +203,7 @@ export class AuthService {
     }
   }
 
-  async _createUserWithEmail(email, password, displayName, phoneNumber?: string, photoURL?: string) {
+  async createUserWithEmail(email, password, displayName, phoneNumber?: string, photoURL?: string) {
     return this.firebaseApp.admin.auth().createUser({
       email,
       emailVerified: false,
@@ -211,7 +214,13 @@ export class AuthService {
       disabled: false,
     });
   }
-
+  async deleteFirebaseUser(uid:string){
+    return this.firebaseApp.admin.auth().deleteUser(uid)
+  }
+  async sendPasswordResetEmail(user) {
+    const link = await this.firebaseApp.admin.auth().generatePasswordResetLink(user.email);
+    await this.mail.sendPasswordResetLink(user, link).catch((e) => { this.logger.debug(e) });
+  }
   async _setUserClaims(id: string, role: string) {
     return this.firebaseApp.admin
       .auth()

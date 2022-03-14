@@ -12,7 +12,7 @@ RUN yarn install
 
 # If you are building your code for production
 # RUN npm ci --only=production
-ARG GOOGLE_APPLICATION_CREDENTIALS=firebase-adminsdk.json
+ARG GOOGLE_APPLICATION_CREDENTIALS=serviceAccount.json
 # Bundle app source
 COPY . .
 RUN yarn run prisma:generate

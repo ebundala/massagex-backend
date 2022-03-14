@@ -37,3 +37,11 @@ public
 serviceAccount.json
 
 vscode-profile-2022-02-23-18-35-07.heapsnapshot
+prisma/.env.base64
+serviceAccount.json.base64
+webserver/web-root/icons/gasicon.png
+.env.base64
+webserver/web-root/icons/foodicon.png
+webserver/web-root/icons/cleanericon.png
+webserver/web-root/icons/massageicon.png
+githubkeys

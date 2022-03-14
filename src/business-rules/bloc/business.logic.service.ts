@@ -1,12 +1,15 @@
 import { AppLogger } from "@mechsoft/app-logger";
-import { Bloc, BlocAttach, BlocFieldResolver, BlocValidate, BusinessRequest } from "@mechsoft/business-rules-manager";
+import { Bloc, BlocAttach, BlocFieldResolver, BlocValidate, BusinessRequest, PrismaAttach, PrismaHookHandler, PrismaHookRequest } from "@mechsoft/business-rules-manager";
 import { TenantContext } from "@mechsoft/common";
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import {State,Prisma } from "@prisma/client";
 import * as DataLoader from "dataloader";
-import { User } from "src/models/graphql";
+import { PhoneNumber } from "graphql-scalars/mocks";
+import { AuthService } from "src/app-schemas/auth/auth-service";
+import { User, UserCreateInput } from "src/models/graphql";
 import { RedisCache } from "src/pubsub/redis.service";
 import { uploadFile } from "src/utils/file.utils";
+//import * as uuid from 'uuid';
 import {
   canCreateOnlyOneOrganization, isUserSensitiveInfo,
   onlyConnectActiveOffers, onlyConnectOwnerSelf,
@@ -20,140 +23,79 @@ import {
   onlyOwnerOfRecordAllowed,
   uniqueEmailPerAccount
 } from '../rules.definitions';
-
+import { v4 as uuidv4 } from 'uuid';
 @Injectable()
 @Bloc()
 export class BusinessLogicService {
   constructor(
     private readonly logger: AppLogger,
-    private readonly redisCache: RedisCache
+    private readonly redisCache: RedisCache,
+    private readonly authService: AuthService
   ) {
     //this.logger.setContext(BusinessLogicService.name);
     
   }
-
-  /* @BlocAttach('findManyOrganization.input.where.location.within')
-  @BlocAttach('findManyOrganization.input.where.location.nearBy.lat')
-  @BlocAttach('findManyOrganization.input.where.location.nearBy.lon')
-  @BlocAttach('findManyOrganization.input.where.location.notWithin')
-  async organizationLocationQuery(v: BusinessRequest<TenantContext>, next) {
+ get redis(): RedisCache{
+    return this.redisCache;
+  }
+  @PrismaAttach("User","create",true)
+  async createFirebaseUser(v:PrismaHookRequest<UserCreateInput>,next: PrismaHookHandler){ 
+    debugger;
+    const {displayName,email,phoneNumber,password} = v.params.args.data;
+    this.logger.debug("create user",displayName,email,phoneNumber,password);
     
-    if (v.context['organizationLocationQuery']) {
-      //if excuted return without re excuting
-      return next(v)
+    // Create a firebase user here
+    try{
+    const user = await this.authService.createUserWithEmail(email,password??uuidv4(),displayName,phoneNumber);
+    v.params.args.data.id=user.uid;
+    delete v.params.args.data.password;
+    //Todo send email to resset password
+    // if(!password){
+    // FIXME: send email to reset password return undifined error
+    // await this.authService.sendPasswordResetEmail({email,displayName,phoneNumber,id:user.uid});
+    // }
+    this.logger.debug("created user",user);   
+    return next(v);
+    }catch(e){
+      if(v.params.args.data.id){
+        await this.authService.deleteFirebaseUser(v.params.args.data.id).catch(e=>{
+          this.logger.error("delete firebase user",e);
+        });
+        }
+      // if(e.code==="auth/email-already-exists"){
+      //   throw new HttpException("Email already exists",HttpStatus.BAD_REQUEST);
+      // }
+      // if(e.code==="auth/invalid-email"){
+      //   throw new HttpException("Invalid email",HttpStatus.BAD_REQUEST);
+      // }
+      // if(e.code==="auth/weak-password"){
+      //   throw new HttpException("Weak password",HttpStatus.BAD_REQUEST);
+      // }
+      // if(e.code==="auth/argument-error"){
+      //   throw new HttpException("Invalid password",HttpStatus.BAD_REQUEST);
+      // } 
+      // if(e.code==="auth/network-request-failed"){
+      //   throw new HttpException("Network error",HttpStatus.BAD_REQUEST);
+      // }  
+      // if(e.code==="auth/operation-not-allowed"){
+      //   throw new HttpException("Operation not allowed",HttpStatus.BAD_REQUEST);
+      // }
+      // if(e.code==="auth/phone-number-already-exists"){
+      //   throw new HttpException("Phone number already exists",HttpStatus.BAD_REQUEST);
+      // }  
+      
+      throw e;
     }
-    const { args, context } = v;
-    const { prisma, logger,auth } = context;
-    const { location, ...others } = args.where;
-    const { nearBy, within, notWithin, } = location;
-    const { skip, take } = args;
-    const { every,some } = args.where.offers ?? {}
-    let categories = [], notCategories = [];
-    if (some?.id?.equals) {
-      categories.push(some.id.equals)
-    }
-    if (some?.id?.in) {
-      categories.push(...some.id.in)
-    }
-    if (some?.id?.notEqual) {
-      notCategories.push(some.id.notEqual)
-    }
-    if (some?.id?.notIn) {
-      notCategories.push(...some.id.notIn)
-    }
-
-
-
-
-    if (every?.id?.equals) {
-      categories.push(every.id.equals)
-    }
-    if (every?.id?.in) {
-      categories.push(...every.id.in)
-    }
-    if (every?.id?.notEqual) {
-      notCategories.push(every.id.notEqual)
-    }
-    if (every?.id?.notIn) {
-      notCategories.push(...every.id.notIn)
-    }
-    
-    const gisQuery = (prisma,
-      categories: string[],
-      notCategories: string[],
-      nearBy: { lat: number, lon: number },
-      within?: number, notWithin?: number,
-      offset?: number, limit?: number) => {
-
-      //TODO handle cursor pagenation
-      return prisma.$queryRaw`SELECT 
-          id,
-          distance
-          FROM 
-        (SELECT 
-         "Organization".id as id,
-         ST_Distance(
-          ST_SetSRID(ST_MakePoint(${nearBy.lon}, ${nearBy.lat}), 4326),
-            "Location".geom) as distance
-         FROM "Organization" 
-         INNER JOIN "_OrganizationToServiceCategory"
-         ON "Organization"."id"="_OrganizationToServiceCategory"."A" 
-         INNER JOIN "Location"
-         ON "Organization"."locationId"="Location".id 
-         ${categories.length || notCategories.length ? Prisma.sql`WHERE ` : Prisma.empty}
-         ${categories.length ? Prisma.sql`"_OrganizationToServiceCategory"."B" 
-         in (${Prisma.join(categories)})` : Prisma.empty}
-         ${categories.length && notCategories.length ? Prisma.sql`AND` : Prisma.empty}
-         ${notCategories.length ? Prisma.sql`WHERE "_OrganizationToServiceCategory"."B" 
-         not in (${Prisma.join(notCategories)})` : Prisma.empty}
-        ) AS orgs
-        ${within || notWithin ? Prisma.sql`WHERE distance ${within >= 0 ? Prisma.sql` <= ${within}` : notWithin >= 0 ? Prisma.sql` >= ${notWithin}` : Prisma.empty}` : Prisma.empty}
-        ORDER BY distance ASC ${offset >= 0 ? Prisma.sql`OFFSET ${offset}` : Prisma.empty} ${limit >= 0 ? Prisma.sql`LIMIT ${limit}` : Prisma.empty}`
-    }
-
-    const orgs = await gisQuery(prisma, categories, notCategories, nearBy, within, notWithin, skip, take);
-    
-    v.context["distances"] = orgs;
-    await this.redisCache.set(`distances-${auth.uid}`,JSON.stringify(orgs),"EX",5)
-    v.args.where = { id: { in: orgs.map((o) => o.id) }, ...others };
-
-    v.context['organizationLocationQuery'] = true //mark excuted 
-    return next(v)
-
   }
 
-  @BlocAttach('signup.input.organization.location.create.lat')
-  async businessLocation(v: BusinessRequest<TenantContext>, next) {
-    const { args, context } = v;
-    const { prisma, logger } = context;
-    const { organization, ...rest } = args;
-    const { location, ...others } = organization
-    const { name, lat, lon } = location.create;
-    const loc = await prisma.location.create({
-      data: { name, lat, lon }
-    });
-    if (loc && loc.id) {
-      //create a geom here
-      const affected = await prisma.$executeRaw`UPDATE "Location" 
-          SET 
-          geom=ST_SetSRID(ST_MakePoint(${lon}, ${lat}), 4326)
-          where id=${loc.id};`;
-      if (affected) {
-        //update input to link to new location
-        const input = {
-          ...others,
-          location: {
-            connect: { id: loc.id }
-          }
-        }
-        v.args = { ...rest, organization: input }
-      } else {
-        throw new HttpException('Failed to create location', HttpStatus.BAD_REQUEST)
-      }
-    }
-    
-    return next(v)
-  } */
+  @PrismaAttach("User","delete",false)
+  async deleteFirebaseUser(v:PrismaHookRequest<UserCreateInput>,next: PrismaHookHandler){ 
+    const {id} = v.params.args.where;
+    // delete a firebase user here
+     await this.authService.deleteFirebaseUser(id);
+    this.logger.debug("delete user",id);
+    return next(v);
+  }
 
   @BlocAttach('signup.input.credentials.avator')
   async avator(v: BusinessRequest, next: (arg0: BusinessRequest<any>) => any) {
@@ -168,18 +110,6 @@ export class BusinessLogicService {
     }
     return next(v)
   }
-
-  /* @BlocAttach('signup.input.organization.logo.create.path')
-  async logo(v: BusinessRequest<TenantContext>, next) {
-    const { args, context } = v;
-    const { organization } = args;
-    const file = await uploadFile(organization.logo.create.path)
-    const logo = await context.prisma.attachment.create({ data: { ...file } })
-    if (logo && logo.id) {
-      v.args.organization.logo = { connect: { id: logo.id } }
-    }
-    return next(v)
-  } */
 
   @BlocAttach('updateOneService.input.data.image.create.path')
   @BlocAttach('createOneService.input.data.image.create.path')
@@ -196,7 +126,8 @@ export class BusinessLogicService {
     }
     return next(v)
   }
-
+  //upload user avator
+  @BlocAttach('createOneUser.input.data.avator.create.path')
   @BlocAttach('updateOneUser.input.data.avator.create.path')
   async updateAvator(v: BusinessRequest, next: (arg0: BusinessRequest<any>) => any) {
     
@@ -211,90 +142,6 @@ export class BusinessLogicService {
     }
     return next(v)
   }
-
-/*   @BlocAttach('updateOneUser.input.data.location.create.lat')
-  async createUserLocation(v: BusinessRequest, next) {
-    
-    const { args, context } = v;
-    const { prisma, logger } = context;
-    const { data, ...rest } = args;
-    const { location, ...others } = data
-    const { name, lat, lon } = location.create;
-    const loc = await prisma.location.create({
-      data: { name, lat, lon }
-    });
-    if (loc && loc.id) {
-      //create a geom here
-      const affected = await prisma.$executeRaw`UPDATE "Location" 
-            SET 
-            geom=ST_SetSRID(ST_MakePoint(${lon}, ${lat}), 4326)
-            where id=${loc.id};`;
-      if (affected) {
-        //todo update input to link to new location
-        const inputs = {
-          ...others,
-          location: {
-            connect: { id: loc.id }
-          }
-        }
-        v.args = { ...rest, data: inputs }
-      } else {
-        throw new HttpException('Failed to create location', HttpStatus.BAD_REQUEST)
-      }
-    }
-    
-    return next(v)
-  } */
-
-  /* @BlocAttach('updateOneOrganization.input.data.logo.create.path')
-  @BlocAttach('createOneOrganization.input.data.logo.create.path')
-  async organizationImage(v: BusinessRequest, next) {
-    
-    const { args, context } = v;
-    const { data, ...rest } = args;
-    const { logo } = data
-    const file = await uploadFile(logo.create.path)
-    const file2 = await context.prisma.attachment.create({ data: { ...file } })
-
-    if (file2 && file2.id) {
-      v.args.data.logo = { connect: { id: file2.id } };
-    }
-    return next(v)
-  } */
-
- /*  @BlocAttach('updateOneOrganization.input.data.location.create.lat')
-  @BlocAttach('createOneOrganization.input.data.location.create.lat')
-  async organizationLocation(v: BusinessRequest<TenantContext>, next) {
-    const { args, context } = v;
-    const { prisma, logger } = context;
-    const { data, ...rest } = args;
-    const { location, ...others } = data
-    const { name, lat, lon } = location.create;
-    const loc = await prisma.location.create({
-      data: { name, lat, lon }
-    });
-    if (loc && loc.id) {
-      //create a geom here
-      const affected = await prisma.$executeRaw`UPDATE "Location" 
-          SET 
-          geom=ST_SetSRID(ST_MakePoint(${lon}, ${lat}), 4326)
-          where id=${loc.id};`;
-      if (affected) {
-        //todo update input to link to new location
-        const inputs = {
-          ...others,
-          location: {
-            connect: { id: loc.id }
-          }
-        }
-        v.args = { ...rest, data: inputs }
-      } else {
-        throw new HttpException('Failed to create location', HttpStatus.BAD_REQUEST)
-      }
-    }
-    
-    return next(v)
-  } */
 
   @BlocAttach('updateOneOrder.input.data.receipt.create.path')
   //TODO investigate further not needed maybe for create scenario
@@ -318,39 +165,20 @@ export class BusinessLogicService {
   async oneEmailPerAccount(v: BusinessRequest<TenantContext>) {
     const { args, context } = v;
     const { credentials } = args;
-    const { prisma } = context;
+    const { prisma } = context;    
     const facts = await prisma.user.findUnique({ where: { email: credentials.email }, select: { email: true } })
     return { rules: [uniqueEmailPerAccount(credentials.email)], facts }
   }
-  /* @BlocValidate('updateOneRating')
-  async updateOneRatingBloc(v: BusinessRequest) {
-    const { args, context } = v;
-    const { where } = args;
-    const { prisma, auth } = context;
-    const rating = await
-      prisma.rating.findUnique({
-        where: { id: where.id },
-        select: {
-          owner: {
-            select: { id: true }
-          }
-        }
-      });
-
-    const ownerRule = onlyOwnerOfRecordAllowed(auth.uid)
-    return { rules: [ownerRule], facts: rating }
-  } */
-
+ 
   @BlocValidate('findUniqueUser')
   async findUniqueUserBloc(v: BusinessRequest) {
-
-    
     const { args, context } = v;
     const { where } = args;
     const { auth, select } = context;
     const facts = { ...select.data.select, ...auth };
     return { rules: [isUserSensitiveInfo(where.id)], facts }
   }
+
   @BlocValidate('updateOneUser')
   async updateOneUserBloc(v: BusinessRequest) {
     const { args, context } = v;
@@ -359,304 +187,17 @@ export class BusinessLogicService {
     return { rules: [onlyOwnerhasAccess(where.id)], facts: auth }
   }
 
-  /* @BlocValidate('createOneOrganization')
-  async createOneOrganizationBloc(v: BusinessRequest) {
-    const { args, context } = v;
-    const { data } = args;
-    const { prisma, auth } = context;
-    const user = await prisma.user.findUnique({ where: { id: auth.uid }, include: { organizations: true } })
-    const serviceCategories = await prisma.serviceCategory.findMany({
-      where: { state: State.APPROVED },
-      select: { id: true }
-    }).map((v) => v.id);
-    const facts = { ...user, ...data, 
-       }
-    return {
-      rules: [
-        onlyConnectOwnerSelf(auth.uid),
-        onlyConnectActiveOffers(serviceCategories),
-        canCreateOnlyOneOrganization()],
-      facts
-    };
-
-  } */
-
-/*   @BlocValidate('createOneOrder')
-  async createOneOrderBloc(v: BusinessRequest) {
-    const { args, context } = v;
-    const { data } = args;
-    const { prisma, auth } = context;
-    
-    const service = await prisma.service.findFirst({
-      where: {
-        id: data?.service?.connect?.id,
-        AND: {
-          state: State.APPROVED
-        }
-      },
-      select: { id: true, state: true, organization: { select: { id: true } } }
-    });
-
-    return {
-      rules: [
-        onlyConnectOwnerSelf(auth.uid),
-        onlyServiceOfferedByOrg(service?.id, service?.organization?.id)
-      ], facts: data
-    }
-  }
-
-  @BlocValidate('updateOneOrder')
-  async updateOneOrderBloc(v: BusinessRequest) {
-    const { args, context } = v;
-    const { where, data } = args;
-    const { prisma, auth } = context;
-
-    const order = await prisma.order.findUnique({
-      where: {
-        id: where?.id,
-      },
-      select: {
-        id: true,
-        state: true,
-        owner: {
-          select: {
-            id: true
-          }
-        },
-        organization: {
-          select: {
-            id: true,
-            staffs: {
-              select: { id: true }
-            },
-            owner: {
-              select: {
-                id: true
-              }
-            }
-          }
-        }
-      }
-    });
-    //TODO prevent updating quantity for approved orders
-    //TODO add a concept of service provider based on services for organization 
-    const facts = { ...auth, state: data?.state?.set };
-    return {
-      rules: [
-        onlyOwnerOrProviderOrManagerCanUpdateOrder(
-          order?.owner?.id,
-          order?.organization?.owner?.id,
-          order?.organization?.staffs?.map((v) => v.id)),
-        onlyProviderAndManagerCanProcessOrder(order?.owner?.id),
-        onlyConsumerCanCompleteOrder(order?.owner?.id)
-      ], facts
-    };
-
-  }
-
-  @BlocValidate('createOneRating')
-  async createOneRatingBloc(v: BusinessRequest) {
-    const { args, context } = v;
-    const { data } = args;
-    const { prisma, auth } = context;
-
-    const { orders, ratings } = (await
-      prisma.user.findUnique({
-        where: {
-          id: auth.uid,
-        },
-        select: {
-          id: true,
-          ratings: {
-            where: {
-              organizationId: data?.organization?.connect?.id,
-              AND: {
-                ownerId: auth.uid
-              }
-            },
-            select: {
-              id: true
-            }
-          },
-          orders: {
-            where: {
-              organization: {
-                id: data?.organization?.connect?.id
-              },
-              AND: {
-                OR: [
-                  { state: State.REJECTED },
-                  { state: State.COMPLETED }
-                ]
-              }
-
-            },
-            select: { id: true, state: true }
-          }
-        }
-      })) ?? {};
-
-    const ordersRule = onlyConsumerWithCompletedOrRejectedOrderCanRateOrganization()
-    const connectSelf = onlyConnectOwnerSelf(auth.uid);
-    const onlyOneRating = onlyOneRatingPerConsumerOrganizationPair();
-    const facts = { owner: data?.owner, orders: orders ?? [], ratings: ratings ?? [] };
-    return { rules: [connectSelf, ordersRule, onlyOneRating], facts };
-  }
-  
-  @BlocFieldResolver("Organization","minPrice",function(this:BusinessLogicService,...args:[any,any,TenantContext,any]){
-    return new DataLoader((async function (keys){
-      
-      const [parent,_,ctx,info] = args;
-      const prices = new Map();
-      (await ctx.prisma.service.groupBy({
-        by: ['organizationId'],
-        _min: {
-          price: true
-        },
-        where: {
-          organization: {
-            id: {
-              in: keys
-            }
-          }
-        }
-      })??[]).forEach(e => {
-        prices.set(e.organizationId,e._min.price)
-      });
-     return keys.map((k)=>prices.get(k)??0)
-    }).bind(this))
-  })
-  minPrice(org:Organization,args,ctx:TenantContext,info:any,dataloader:DataLoader<string,Number>){
-    return dataloader.load(org.id);
-  }
-
-  @BlocFieldResolver("Organization","compoundRating",function(this:BusinessLogicService,...args:[any,any,TenantContext,any]){
-    return new DataLoader((async function (keys){
-     
-      const [parent,_,ctx,info] = args;
-      const ratings = new Map();
-       (await ctx.prisma.rating.groupBy({
-        by: ['organizationId'],
-        _avg: {
-          value: true
-        },
-        where: {
-          organization: {
-            id: {
-              in: keys
-            }
-          }
-        }
-      })??[]).forEach(e => {
-        ratings.set(e.organizationId,e._avg.value)
-      });
-     return keys.map((k)=>ratings.get(k)??0.0)
-    }).bind(this))
-  })
-  compoundRating(org:Organization,args,ctx:TenantContext,info:any,dataloader:DataLoader<string,Number>){
-    return dataloader.load(org.id);
-  }
-
-
-  @BlocFieldResolver("Organization","workCompleted",function(this:BusinessLogicService,...args:[any,any,TenantContext,any]){
-    return new DataLoader((async function (keys){
-      
-      const [parent,_,ctx,info] = args;
-      const deals = new Map();
-      (await ctx.prisma.order.groupBy({
-        by: ['organizationId'],
-        _count: {
-          id: true
-        },
-        where: {
-          state: {
-            equals: State.COMPLETED
-          },
-          organization: {
-            id: {
-              in: keys
-            }
-          },
-  
-        }
-      })??[]).forEach(e => {
-        deals.set(e.organizationId,e._count.id)
-      });
-     return keys.map((k)=>deals.get(k)??0)
-    }).bind(this))
-  })
-  workCompleted(org:Organization,args,ctx:TenantContext,info:any,dataloader:DataLoader<string,Number>){
-    return dataloader.load(org.id);
-  }
-
-
-  @BlocFieldResolver("Organization","distance",function(this:BusinessLogicService,...args:[any,any,TenantContext,any]){
-    return new DataLoader((async function (keys){
-      
-      const [parent,_,ctx,info] = args;
-      const distances = new Map();
-      let cachedDistances= JSON.parse((await this.redisCache.get(`distances-${ctx.auth.uid}`))??"[]");
-    
-     debugger
-      if(cachedDistances?.length==0&&ctx.auth?.uid){
-        //calculate distance here
-        let location;
-        const cachedLoc = await this.redisCache.get(`location/${ctx.auth.uid}`);
-        if(cachedLoc){
-          location = JSON.parse(cachedLoc);
-        }
-        if(!location){
-        const user = await ctx.prisma.user.findUnique({where:{id:ctx.auth.uid},select:{
-          location:{
-            select:{
-              lat:true,
-              lon:true
-            }
-          }
-        }});
-        location = user?.location;
-      }
-        if(location?.lon&&location?.lat){
-        cachedDistances= await ctx.prisma.$queryRaw`
-        SELECT "Organization".id as id,
-        ST_Distance( ST_SetSRID(ST_MakePoint(${location.lon},${location.lat} ), 4326), "Location".geom) as distance
-        FROM "Organization"
-        INNER JOIN "Location" ON "Organization"."locationId"="Location".id
-        WHERE "Organization".id IN (${Prisma.join(keys)});
-        `
-        }
-      }
-      (cachedDistances??[]).forEach(e => {
-        distances.set(e.id,e.distance)
-      });
-     return keys.map((k)=>distances.get(k)??0)
-    }).bind(this))
-  })
-  distance(org:Organization,args,ctx:TenantContext,info:any,dataloader:DataLoader<string,Number>){
-    return dataloader.load(org.id);
-  } */
-
-// @BlocFieldResolver("User","location",function(this:BusinessLogicService,...args){
-//   return new DataLoader((async function (keys){      
-//     const locations= await this.redisCache.mget(keys);
-//     return locations;
-//   }).bind(this))
-// })
-//   async userLocation(user:User,args,ctx:TenantContext,info:any,dataloader:DataLoader<string,any>){
-    
-//     return dataloader.load(`location/${user.id}`);
-//   }
-
-  @BlocFieldResolver("User","lastSeen",function(this:BusinessLogicService,...args){
-    return new DataLoader((async function (keys: any){      
-      const lastseen= await this.redisCache.mget(keys);
-      return lastseen;
-    }).bind(this))
-  })
-  async lastSeen(parent:User,args: any, ctx:TenantContext,info:any,
-   dataloader:DataLoader<string,string>) {
-    return dataloader.load(`last-seen-${parent.id}`);
-  }
+  // @BlocFieldResolver("User","lastSeen",function(this:BusinessLogicService,...args){
+  //   return new DataLoader((async function (keys: any){  
+  //     debugger    
+  //     const lastseen= await this.redisCache.mget(keys);
+  //     return lastseen;
+  //   }).bind(this))
+  // })
+  // async lastSeen(parent:User,args: any, ctx:TenantContext,info:any,
+  //  dataloader:DataLoader<string,string>) {
+  //   return dataloader.load(`last-seen-${parent.id}`);
+  // }
 
   async createAttachments(attachments: { create: string | any[]; },context:TenantContext){
     const uploads=[];
@@ -669,16 +210,17 @@ export class BusinessLogicService {
     });
     
     const files2 = await Promise.all(files)
-    console.log(files,files2);
+    //console.log(files,files2);
     return files2;
   }
-  
+  //Attachments at root
   @BlocAttach('createOneForum.input.data.attachments.create.path')
   @BlocAttach('createOneForm.input.data.attachments.create.path')
   @BlocAttach('createOneResponse.input.data.attachments.create.path')
   @BlocAttach('createOneForumAnswer.input.data.attachments.create.path')
   @BlocAttach('createOneComment.input.data.attachments.create.path')
   @BlocAttach('updateOneForm.input.data.attachments.create.path')
+  @BlocAttach('updateOneForum.input.data.attachments.create.path')
   async uploadAttachment(v: BusinessRequest, next: (arg0: BusinessRequest<any>) => any) {
     const { args, context } = v;
     if(context["uploadAttachment"]==true){
@@ -697,46 +239,16 @@ export class BusinessLogicService {
     return next(v)
   }
 
-  @BlocAttach('createOneForm.input.data.grades.attachments.create.path')
-  async uploadGradesAttachment(v:BusinessRequest,next: (arg0: BusinessRequest<any>) => any){
-    debugger
-   return next(v)
-  }
+  // @BlocAttach('createOneForm.input.data.grades.attachments.create.path')
+  // async uploadGradesAttachment(v:BusinessRequest,next: (arg0: BusinessRequest<any>) => any){
+  //   debugger
+  //  return next(v)
+  // }
 
-  @BlocAttach('createOneForm.input.data.grades.create.questions.create.attachments.create.path')
-  @BlocAttach('updateOneForm.input.data.grades.create.questions.create.attachments.create.path')
-  async uploadQuestionsAttachment(v:BusinessRequest,next: (arg0: BusinessRequest<any>) => any){
-    const { args, context } = v;
-    const { data, ...rest } = args;
-    const { grades } = data;
-    const operations = [];
-    debugger
-    for(let i=0;i<grades?.create?.length;i++){
-          const grade = grades.create[i];
-          const {questions} = grade;
-          for(let j=0;j<questions?.create?.length;j++){
-            const question = questions.create[j];
-            const {attachments} = question;
-            const op = ()=>{
-              return new Promise(async(resolve,reject)=>{
-                if(attachments.create){
-            const files = await this.createAttachments(attachments,context);
-            const filesIds = files.map((v)=>({id:v.id}))
-            v.args.data.grades.create[i].questions.create[j].attachments = {connect:filesIds}
-                }
-            return resolve(v);
-          });
-          }
-            operations.push(op());
-          }
-          
-    }
-   const vv = await Promise.all(operations);
-    debugger
-    return next(v)
-  }
+ // RECOMMENDATION ATTACHMENTS
+
+// create recommendation attachment
   @BlocAttach('createOneForm.input.data.grades.create.recommendations.create.attachments.create.path')
-  @BlocAttach('updateOneForm.input.data.grades.create.recommendations.create.attachments.create.path')
   async uploadRecommendationsAttachment(v:BusinessRequest,next: (arg0: BusinessRequest<any>) => any){
     const { args, context } = v;
     const { data, ...rest } = args;
@@ -752,7 +264,7 @@ export class BusinessLogicService {
             const op = ()=>{
               return new Promise(async(resolve,reject)=>{
                 debugger
-                if(attachments?.create){
+                if(attachments?.create?.length){
             const files = await this.createAttachments(attachments,context);
             const filesIds = files.map((v)=>({id:v.id}))
             v.args.data.grades.create[i].recommendations.create[j].attachments = {connect:filesIds}
@@ -769,7 +281,423 @@ export class BusinessLogicService {
     debugger
    return next(v)
   }
- 
+  // Update recommendations pictures
+  @BlocAttach('updateOneForm.input.data.grades.update.data.recommendations.update.data.attachments.create.path')
+  async uploadUpdatedRecommmeandationAttachment(v:BusinessRequest,next: (arg0: BusinessRequest<any>) => any){
+    const { args, context } = v;
+    const { data, ...rest } = args;
+    const { grades } = data;
+    const operations = [];
+    debugger;
+    for(let i=0;i<grades?.update?.length;i++){
+      const grade = grades.update[i];
+      const {recommendations} = grade.data;
+      for(let j=0;j<recommendations?.update?.length;j++){
+        const recommendation = recommendations.update[j];
+        const {attachments} = recommendation.data;
+        const op = ()=>{
+          return new Promise(async(resolve,reject)=>{
+            debugger
+            if(attachments?.create?.length){
+        const files = await this.createAttachments(attachments,context);
+        const filesIds = files.map((v)=>({id:v.id}))
+        v.args.data.grades.update[i].data.recommendations.update[j].data.attachments.connect = filesIds;
+        v.args.data.grades.update[i].data.recommendations.update[j].data.attachments.create = [];
+
+      }
+        return resolve(v);
+      });
+      }
+        operations.push(op());
+      }
+      
+    }
+const vv = await Promise.all(operations);
+    return next(v);
+  }
+ // Update recommendations pictures when updating grades
+ @BlocAttach('updateOneForm.input.data.grades.update.data.recommendations.create.attachments.create.path')
+ async uploadUpdatedRecommmeandationAttachment2(v:BusinessRequest,next: (arg0: BusinessRequest<any>) => any){
+   const { args, context } = v;
+   const { data, ...rest } = args;
+   const { grades } = data;
+   const operations = [];
+   debugger;
+   for(let i=0;i<grades?.update?.length;i++){
+     const grade = grades.update[i];
+     const {recommendations} = grade.data;
+     for(let j=0;j<recommendations?.create?.length;j++){
+       const recommendation = recommendations.create[j];
+       const {attachments} = recommendation;
+       const op = ()=>{
+         return new Promise(async(resolve,reject)=>{
+           debugger
+           if(attachments?.create?.length){
+       const files = await this.createAttachments(attachments,context);
+       const filesIds = files.map((v)=>({id:v.id}))
+       v.args.data.grades.update[i].data.recommendations.create[j].attachments.connect = filesIds;
+       v.args.data.grades.update[i].data.recommendations.create[j].attachments.create = [];
+
+     }
+       return resolve(v);
+     });
+     }
+       operations.push(op());
+     }
+     
+   }
+const vv = await Promise.all(operations);
+   return next(v);
+ }
+ // update recommendation picture during grades creation
+ @BlocAttach('updateOneForm.input.data.grades.create.recommendations.create.attachments.create.path')
+ async uploadUpdatedRecommmeandationAttachment3(v:BusinessRequest,next: (arg0: BusinessRequest<any>) => any){
+   const { args, context } = v;
+   const { data, ...rest } = args;
+   const { grades } = data;
+   const operations = [];
+   debugger;
+   for(let i=0;i<grades?.create?.length;i++){
+     const grade = grades.create[i];
+     const {recommendations} = grade;
+     for(let j=0;j<recommendations?.create?.length;j++){
+       const recommendation = recommendations.create[j];
+       const {attachments} = recommendation;
+       const op = ()=>{
+         return new Promise(async(resolve,reject)=>{
+           debugger
+           if(attachments?.create?.length){
+       const files = await this.createAttachments(attachments,context);
+       const filesIds = files.map((v)=>({id:v.id}))
+       v.args.data.grades.create[i].recommendations.create[j].attachments.connect = filesIds;
+       v.args.data.grades.create[i].recommendations.create[j].attachments.create = [];
+
+     }
+       return resolve(v);
+     });
+     }
+       operations.push(op());
+     }
+     
+   }
+    const vv = await Promise.all(operations);
+   return next(v);
+ }
+
+ // QUESTIONS ATTACHMENTS
+
+ // create question attachment
+ @BlocAttach('createOneForm.input.data.grades.create.questions.create.attachments.create.path')
+ async uploadQuestionsAttachment(v:BusinessRequest,next: (arg0: BusinessRequest<any>) => any){
+   const { args, context } = v;
+   const { data, ...rest } = args;
+   const { grades } = data;
+   const operations = [];
+   debugger
+   for(let i=0;i<grades?.create?.length;i++){
+         const grade = grades.create[i];
+         const {questions} = grade;
+         for(let j=0;j<questions?.create?.length;j++){
+           const question = questions.create[j];
+           const {attachments} = question;
+           const op = ()=>{
+             return new Promise(async(resolve,reject)=>{
+               if(attachments.create){
+           const files = await this.createAttachments(attachments,context);
+           const filesIds = files.map((v)=>({id:v.id}))
+           v.args.data.grades.create[i].questions.create[j].attachments = {connect:filesIds}
+               }
+           return resolve(v);
+         });
+         }
+           operations.push(op());
+         }
+         
+   }
+  const vv = await Promise.all(operations);
+   debugger
+   return next(v)
+ }
+ // update question attachments
+ @BlocAttach('updateOneForm.input.data.grades.update.data.questions.update.data.attachments.create.path')
+ async uploadUpdatedQuestionsAttachment(v:BusinessRequest,next: (arg0: BusinessRequest<any>) => any){
+   const { args, context } = v;
+   const { data, ...rest } = args;
+   const { grades } = data;
+   const operations = [];
+   debugger
+   for(let i=0;i<grades?.update?.length;i++){
+         const grade = grades.update[i];
+         const {questions} = grade.data;
+         for(let j=0;j<questions?.update?.length;j++){
+           const question = questions.update[j];
+           const {attachments} = question.data;
+           const op = ()=>{
+             return new Promise(async(resolve,reject)=>{
+               if(attachments.create.length){
+           const files = await this.createAttachments(attachments,context);
+           const filesIds = files.map((v)=>({id:v.id}))
+           v.args.data.grades.update[i].data.questions.update[j].data.attachments.connect=filesIds;
+           v.args.data.grades.update[i].data.questions.update[j].data.attachments.create=[];
+         }
+           return resolve(v);
+         });
+         }
+           operations.push(op());
+         }
+         
+   }
+  const vv = await Promise.all(operations);
+   debugger
+   return next(v)
+ }
+ // upload a question attachment during creation of new question while updating grades
+ @BlocAttach('updateOneForm.input.data.grades.update.data.questions.create.attachments.create.path')
+ async uploadQuestionsAttachment2(v:BusinessRequest,next: (arg0: BusinessRequest<any>) => any){
+   const { args, context } = v;
+   const { data, ...rest } = args;
+   const { grades } = data;
+   const operations = [];
+   debugger
+   for(let i=0;i<grades?.update?.length;i++){
+         const grade = grades.update[i];
+         const {questions} = grade.data;
+         for(let j=0;j<questions?.update?.length;j++){
+           const question = questions.create[j];
+           const {attachments} = question;
+           const op = ()=>{
+             return new Promise(async(resolve,reject)=>{
+               if(attachments.create.length){
+           const files = await this.createAttachments(attachments,context);
+           const filesIds = files.map((v)=>({id:v.id}))
+           v.args.data.grades.update[i].data.questions.create[j].attachments.connect=filesIds;
+           v.args.data.grades.update[i].data.questions.create[j].attachments.create=[];
+         }
+           return resolve(v);
+         });
+         }
+           operations.push(op());
+         }
+         
+   }
+  const vv = await Promise.all(operations);
+   debugger
+   return next(v)
+ }
+ // upload a question attachment during creation of new grade while updating form
+ @BlocAttach('updateOneForm.input.data.grades.create.questions.create.attachments.create.path')
+ async uploadQuestionsAttachment3(v:BusinessRequest,next: (arg0: BusinessRequest<any>) => any){
+   const { args, context } = v;
+   const { data, ...rest } = args;
+   const { grades } = data;
+   const operations = [];
+   debugger
+   for(let i=0;i<grades?.create?.length;i++){
+         const grade = grades.create[i];
+         const {questions} = grade;
+         for(let j=0;j<questions?.create?.length;j++){
+           const question = questions.create[j];
+           const {attachments} = question;
+           const op = ()=>{
+             return new Promise(async(resolve,reject)=>{
+               if(attachments.create.length){
+           const files = await this.createAttachments(attachments,context);
+           const filesIds = files.map((v)=>({id:v.id}))
+           v.args.data.grades.create[i].questions.create[j].attachments.connect=filesIds;
+           v.args.data.grades.create[i].questions.create[j].attachments.create=[];
+         }
+           return resolve(v);
+         });
+         }
+           operations.push(op());
+         }
+         
+   }
+  const vv = await Promise.all(operations);
+   debugger
+   return next(v)
+ }
+
+//FORUM ANSWERS ATTACHMENTS
+// upload attachment during forum creation and annswer creation
+@BlocAttach('createOneForum.input.data.forumAnswers.create.attachments.create.path')
+async uploadForumAnswerAttachment(v,next){
+  const { args, context } = v;
+  const { data, ...rest } = args;
+  const { forumAnswers } = data;
+  const operations = [];
+  debugger
+  for(let i=0;i<forumAnswers?.create?.length;i++){
+        const forumAnswer = forumAnswers.create[i];
+        const {attachments} = forumAnswer;
+          const op = ()=>{
+            return new Promise(async(resolve,reject)=>{
+              if(attachments.create.length){
+          const files = await this.createAttachments(attachments,context);
+          const filesIds = files.map((v)=>({id:v.id}))
+          v.args.data.forumAnswers.create[i].attachments.connect=filesIds;
+          v.args.data.forumAnswers.create[i].attachments.create=[];
+        }
+          return resolve(v);
+        });
+      }
+        operations.push(op());    
+    }
+
+  const vv = await Promise.all(operations);
+  debugger
+  return next(v)
+}
+
+//upload files during forum update and answer creation
+@BlocAttach('updateOneForum.input.data.forumAnswers.create.attachments.create.path')
+async uploadForumAnswerAttachment2(v,next){
+  const { args, context } = v;
+  const { data, ...rest } = args;
+  const { forumAnswers } = data;
+  const operations = [];
+  debugger
+  for(let i=0;i<forumAnswers?.create?.length;i++){
+        const forumAnswer = forumAnswers.create[i];
+        const {attachments} = forumAnswer;
+          const op = ()=>{
+            return new Promise(async(resolve,reject)=>{
+              if(attachments.create.length){
+          const files = await this.createAttachments(attachments,context);
+          const filesIds = files.map((v)=>({id:v.id}))
+          v.args.data.forumAnswers.create[i].attachments.connect=filesIds;
+          v.args.data.forumAnswers.create[i].attachments.create=[];
+        }
+          return resolve(v);
+        });
+      }
+        operations.push(op());    
+    }
+
+  const vv = await Promise.all(operations);
+  debugger
+  return next(v)
+}
+
+//upload files during forum update and answer update
+@BlocAttach('updateOneForum.input.data.forumAnswers.update.data.attachments.create.path')
+async uploadForumAnswerAttachment3(v:BusinessRequest,next: (arg0: BusinessRequest<any>) => any){
+  
+  const { args, context } = v;
+  const { data, ...rest } = args;
+  const { forumAnswers } = data;
+  const operations = [];
+  debugger
+  for(let i=0;i<forumAnswers?.update?.length;i++){
+        const forumAnswer = forumAnswers.update[i];
+        const {attachments} = forumAnswer.data;
+          const op = ()=>{
+            return new Promise(async(resolve,reject)=>{
+              if(attachments.create.length){
+          const files = await this.createAttachments(attachments,context);
+          const filesIds = files.map((v)=>({id:v.id}))
+          v.args.data.forumAnswers.update[i].data.attachments.connect=filesIds;
+          v.args.data.forumAnswers.update[i].data.attachments.create=[];
+        }
+          return resolve(v);
+        });
+      }
+        operations.push(op());    
+    }
+  const vv = await Promise.all(operations);
+  debugger
+  return next(v)
+}
+
+// HELP  ATTACHMENTS
+@BlocAttach('createOneHelp.input.data.steps.create.attachments.create.path')
+async uploadHelpAttachment(v,next){
+  const { args, context } = v;
+  const { data, ...rest } = args;
+  const { steps } = data;
+  const operations = [];
+  debugger
+  for(let i=0;i<steps?.create?.length;i++){
+        const step = steps.create[i];
+        const {attachments} = step;
+          const op = ()=>{
+            return new Promise(async(resolve,reject)=>{
+              if(attachments.create.length){
+          const files = await this.createAttachments(attachments,context);
+          const filesIds = files.map((v)=>({id:v.id}))
+          v.args.data.steps.create[i].attachments.connect=filesIds;
+          v.args.data.steps.create[i].attachments.create=[];
+        }
+          return resolve(v);
+        });
+      }
+        operations.push(op());    
+    }
+
+  const vv = await Promise.all(operations);
+  debugger
+  return next(v)
+}
+
+//upload files during help update and helpstep creation
+@BlocAttach('updateOneHelp.input.data.steps.create.attachments.create.path')
+async uploadHelpAttachment2(v,next){
+  const { args, context } = v;
+  const { data, ...rest } = args;
+  const { steps } = data;
+  const operations = [];
+  debugger
+  for(let i=0;i<steps?.create?.length;i++){
+        const step = steps.create[i];
+        const {attachments} = step;
+          const op = ()=>{
+            return new Promise(async(resolve,reject)=>{
+              if(attachments.create.length){
+          const files = await this.createAttachments(attachments,context);
+          const filesIds = files.map((v)=>({id:v.id}))
+          v.args.data.steps.create[i].attachments.connect=filesIds;
+          v.args.data.steps.create[i].attachments.create=[];
+        }
+          return resolve(v);
+        });
+      }
+        operations.push(op());    
+    }
+
+  const vv = await Promise.all(operations);
+  debugger
+  return next(v)
+}
+
+//upload files during help update and helpstep update
+@BlocAttach('updateOneHelp.input.data.steps.update.data.attachments.create.path')
+async uploadHelpAttachment3(v:BusinessRequest,next: (arg0: BusinessRequest<any>) => any){
+  const { args, context } = v;
+  const { data, ...rest } = args;
+  const { steps } = data;
+  const operations = [];
+  debugger
+  for(let i=0;i<steps?.update?.length;i++){
+        const step = steps.update[i];
+        const {attachments} = step.data;
+          const op = ()=>{
+            return new Promise(async(resolve,reject)=>{
+              if(attachments.create.length){
+          const files = await this.createAttachments(attachments,context);
+          const filesIds = files.map((v)=>({id:v.id}))
+          v.args.data.steps.update[i].data.attachments.connect=filesIds;
+          v.args.data.steps.update[i].data.attachments.create=[];
+        }
+          return resolve(v);
+        });
+      }
+        operations.push(op());    
+    }
+  const vv = await Promise.all(operations);
+  debugger
+  return next(v)
+}
+
 }
 
 

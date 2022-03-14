@@ -29,7 +29,7 @@ export class AuthResolver {
   ): Promise<AuthResult> {
     
     const {select} = ctx.prisma.getSelection(info).valueOf('data', 'User', { select: {  } });
-    const result = await this.authService.signup(credentials, ctx.prisma, select);
+    const result = await this.authService.signup(credentials, ctx.prisma, select,ctx);
     //this.setAuth(result.user, ctx);
     return result;
   }
