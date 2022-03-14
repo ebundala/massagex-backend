@@ -16,8 +16,8 @@ on:
   # workflow_dispatch:
 env:
   REGISTRY: ghcr.io
-  SERVER_IMAGE_NAME: faw-backend-v2/server
-  STUDIO_IMAGE_NAME: faw-backend-v2/studio
+  SERVER_IMAGE_NAME: server
+  STUDIO_IMAGE_NAME: studio
   REPO_NAME: ${{ github.repository }}
 jobs:
   build:
