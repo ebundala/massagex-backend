@@ -335,8 +335,8 @@ console.log("seed running");
 //     return cl.close();
 // }
 
-// export default async function(){
-//     await createRoles().then(() => console.log('completed')).catch(console.error)
-
-// }
+export default async function(){
+    //await createRoles().then(() => console.log('completed')).catch(console.error)
+console.log('completed')
+}
 
