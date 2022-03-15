@@ -41,7 +41,7 @@ services:
       restart_policy:
         condition: on-failure
   app:
-    image: ghcr.io/ebundala/faw-backend-v2/server:master        
+    image: ghcr.io/ebundala/faw-backend-v2/server:master       
     environment:
      # google credentials
        GOOGLE_APPLICATION_CREDENTIALS: ${GOOGLE_APPLICATION_CREDENTIALS}

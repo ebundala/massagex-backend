@@ -12750,11 +12750,11 @@ export class ServiceWhereUniqueInput {
 
 export class SignupInput {
     avator?: Nullable<Upload>;
-    dateOfBirth: DateTime;
+    dateOfBirth?: Nullable<DateTime>;
     displayName: string;
     email: string;
     password: string;
-    phoneNumber: string;
+    phoneNumber?: Nullable<string>;
 }
 
 export class StringFieldUpdateOperationsInput {
