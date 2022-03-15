@@ -11,8 +11,8 @@ input SignupInput {
   email: String!
   password: String!
   displayName: String!
-  phoneNumber: String!
-  dateOfBirth: DateTime!
+  phoneNumber: String
+  dateOfBirth: DateTime
   avator: Upload
 }
 

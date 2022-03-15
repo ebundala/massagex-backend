@@ -90,26 +90,23 @@ export class AuthService {
         const data: Prisma.UserCreateInput = {
        // id: user.uid,
         displayName: displayName,
-          phoneNumber,
-       // disabled: user.disabled,
+        //  phoneNumber:phoneNumber?phoneNumber:undef,
+        disabled: false,
         email: email,
-       // emailVerified: user.emailVerified,
+        emailVerified: false,
         //  gender: gender,
          // dateOfBirth: dateOfBirth,
          // role: Role.CONSUMER,
 
         }
+        if(phoneNumber){
+          data.phoneNumber=phoneNumber;
+        }
         if (avator) {
           data.avator = (avator as any);
         }
 
-        // if (organization && organization.name) {
-        //   data.role = Role.MANAGER;
-        //   const logo = organization.logo
-        //   organization.logo = (logo as any);
-          
-        //   data.organizations = { create: [organization] as any[] }
-        // }
+        
         //TODO find better way to pass context args to prisma hooks
         data["password"] = password;
         //firebase user will be created in prisma hook
@@ -123,14 +120,7 @@ export class AuthService {
           message: "Thank you for registering\n you will receive a confimation email shortly when your account is ready",
         }
       } catch (e) {
-        //;
-        // if (user && user.uid && !await this.cleanUpOnSignUpFailure(user.uid, prisma)) {
-
-        //   throw new GraphQLError(`Failed to cleanup user signup errors\n ${e?.message}`)
-        // } else {
-          throw new GraphQLError(e.message)
-       // }
-
+        throw new GraphQLError(e.message);
       }
     } catch ({ message }) {
       

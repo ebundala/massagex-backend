@@ -8,9 +8,9 @@ input SignupInput {
 	email: String!
 	password: String!
 	displayName: String!
-	phoneNumber: String!
+	phoneNumber: String
 	# gender: Gender!
-	dateOfBirth: DateTime!
+	dateOfBirth: DateTime
 	avator:Upload
 }
 enum AuthMode{
