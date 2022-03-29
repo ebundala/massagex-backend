@@ -65,7 +65,7 @@ export class AuthService {
     prisma: PrismaClient, select,context:any
       ): Promise<AuthResult> {
     const { email, password, displayName, phoneNumber, avator, dateOfBirth } = data;
-    //let user;
+    
     
     try {
       if (!isEmail(email)) {
