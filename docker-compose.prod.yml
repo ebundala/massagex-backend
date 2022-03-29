@@ -22,7 +22,7 @@ services:
       replicas: 1
       resources:
         limits:
-          cpus: 1
+          # cpus: 0.3
           memory: 1g
       restart_policy:
         condition: on-failure
@@ -36,7 +36,8 @@ services:
     deploy:
       replicas: 1
       resources:
-        limits:         
+        limits:  
+          # cpus: 0.05       
           memory: 250m
       restart_policy:
         condition: on-failure
@@ -81,10 +82,10 @@ services:
 
     deploy:
       replicas: 1
-      # resources:
-      #   limits:
-      #     cpus: "1"
-      #     memory: 1g
+      resources:
+        limits:
+          # cpus:  0.5
+          memory: 1g
       restart_policy:
         condition: on-failure
   
@@ -100,7 +101,8 @@ services:
     deploy:
       replicas: 1
       resources:
-        limits:         
+        limits: 
+          # cpus: 0.05        
           memory: 250m
       restart_policy:
         condition: on-failure
@@ -123,7 +125,7 @@ services:
       replicas: 1
       resources:
        limits:
-         cpus: "1"
+        #  cpus: 0.1
          memory: 500mb
       restart_policy:
         condition: on-failure
