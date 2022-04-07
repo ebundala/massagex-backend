@@ -10,6 +10,7 @@ type Help {
               distinct: [HelpStepScalarFieldEnum!]
               ): [HelpStep!]!
           state: State!
+          audience: Role!
           createdAt: DateTime!
           updatedAt: DateTime!
     }
