@@ -1811,6 +1811,7 @@ type Help {
   description(action: PERMISSION): PERMISSION
   steps(where: HelpStepWhereInput, orderBy: [HelpStepOrderByInput!], cursor: HelpStepWhereUniqueInput, take: PERMISSION, skip: PERMISSION, distinct: PERMISSION): HelpStep
   state(action: PERMISSION): PERMISSION
+  audience(action: PERMISSION): PERMISSION
   createdAt(action: PERMISSION): PERMISSION
   updatedAt(action: PERMISSION): PERMISSION
 }
@@ -2601,6 +2602,7 @@ enum HelpScalarFieldEnum {
   topic
   description
   state
+  audience
   createdAt
   updatedAt
 }
@@ -3512,6 +3514,7 @@ input HelpWhereInput {
   description: StringNullableFilter
   steps: HelpStepListRelationFilter
   state: EnumStateFilter
+  audience: EnumRoleFilter
   createdAt: DateTimeFilter
   updatedAt: DateTimeFilter
 }
@@ -3521,6 +3524,7 @@ input HelpOrderByInput {
   topic: PERMISSION
   description: PERMISSION
   state: PERMISSION
+  audience: PERMISSION
   createdAt: PERMISSION
   updatedAt: PERMISSION
 }
@@ -3537,6 +3541,7 @@ input HelpScalarWhereWithAggregatesInput {
   topic: StringWithAggregatesFilter
   description: StringNullableWithAggregatesFilter
   state: EnumStateWithAggregatesFilter
+  audience: EnumRoleWithAggregatesFilter
   createdAt: DateTimeWithAggregatesFilter
   updatedAt: DateTimeWithAggregatesFilter
 }
@@ -5194,6 +5199,7 @@ input HelpCreateInput {
   topic: PERMISSION
   description: PERMISSION
   state: PERMISSION
+  audience: PERMISSION
   createdAt: PERMISSION
   updatedAt: PERMISSION
   steps: HelpStepCreateNestedManyWithoutHelpInput
@@ -5204,6 +5210,7 @@ input HelpUncheckedCreateInput {
   topic: PERMISSION
   description: PERMISSION
   state: PERMISSION
+  audience: PERMISSION
   createdAt: PERMISSION
   updatedAt: PERMISSION
   steps: HelpStepUncheckedCreateNestedManyWithoutHelpInput
@@ -5214,6 +5221,7 @@ input HelpUpdateInput {
   topic: StringFieldUpdateOperationsInput
   description: NullableStringFieldUpdateOperationsInput
   state: EnumStateFieldUpdateOperationsInput
+  audience: EnumRoleFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   steps: HelpStepUpdateManyWithoutHelpInput
@@ -5224,6 +5232,7 @@ input HelpUncheckedUpdateInput {
   topic: StringFieldUpdateOperationsInput
   description: NullableStringFieldUpdateOperationsInput
   state: EnumStateFieldUpdateOperationsInput
+  audience: EnumRoleFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   steps: HelpStepUncheckedUpdateManyWithoutHelpInput
@@ -5234,6 +5243,7 @@ input HelpCreateManyInput {
   topic: PERMISSION
   description: PERMISSION
   state: PERMISSION
+  audience: PERMISSION
   createdAt: PERMISSION
   updatedAt: PERMISSION
 }
@@ -5243,6 +5253,7 @@ input HelpUpdateManyMutationInput {
   topic: StringFieldUpdateOperationsInput
   description: NullableStringFieldUpdateOperationsInput
   state: EnumStateFieldUpdateOperationsInput
+  audience: EnumRoleFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
@@ -5252,6 +5263,7 @@ input HelpUncheckedUpdateManyInput {
   topic: StringFieldUpdateOperationsInput
   description: NullableStringFieldUpdateOperationsInput
   state: EnumStateFieldUpdateOperationsInput
+  audience: EnumRoleFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
@@ -13520,6 +13532,7 @@ input HelpCreateWithoutStepsInput {
   topic: PERMISSION
   description: PERMISSION
   state: PERMISSION
+  audience: PERMISSION
   createdAt: PERMISSION
   updatedAt: PERMISSION
 }
@@ -13529,6 +13542,7 @@ input HelpUncheckedCreateWithoutStepsInput {
   topic: PERMISSION
   description: PERMISSION
   state: PERMISSION
+  audience: PERMISSION
   createdAt: PERMISSION
   updatedAt: PERMISSION
 }
@@ -13564,6 +13578,7 @@ input HelpUpdateWithoutStepsInput {
   topic: StringFieldUpdateOperationsInput
   description: NullableStringFieldUpdateOperationsInput
   state: EnumStateFieldUpdateOperationsInput
+  audience: EnumRoleFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
@@ -13573,6 +13588,7 @@ input HelpUncheckedUpdateWithoutStepsInput {
   topic: StringFieldUpdateOperationsInput
   description: NullableStringFieldUpdateOperationsInput
   state: EnumStateFieldUpdateOperationsInput
+  audience: EnumRoleFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
@@ -17368,6 +17384,7 @@ type HelpCountAggregateOutputType {
   topic(action: PERMISSION): PERMISSION
   description(action: PERMISSION): PERMISSION
   state(action: PERMISSION): PERMISSION
+  audience(action: PERMISSION): PERMISSION
   createdAt(action: PERMISSION): PERMISSION
   updatedAt(action: PERMISSION): PERMISSION
   _all(action: PERMISSION): PERMISSION
@@ -17378,6 +17395,7 @@ type HelpMinAggregateOutputType {
   topic(action: PERMISSION): PERMISSION
   description(action: PERMISSION): PERMISSION
   state(action: PERMISSION): PERMISSION
+  audience(action: PERMISSION): PERMISSION
   createdAt(action: PERMISSION): PERMISSION
   updatedAt(action: PERMISSION): PERMISSION
 }
@@ -17387,6 +17405,7 @@ type HelpMaxAggregateOutputType {
   topic(action: PERMISSION): PERMISSION
   description(action: PERMISSION): PERMISSION
   state(action: PERMISSION): PERMISSION
+  audience(action: PERMISSION): PERMISSION
   createdAt(action: PERMISSION): PERMISSION
   updatedAt(action: PERMISSION): PERMISSION
 }

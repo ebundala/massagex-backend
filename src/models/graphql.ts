@@ -145,6 +145,7 @@ export enum GradeScalarFieldEnum {
 }
 
 export enum HelpScalarFieldEnum {
+    audience = "audience",
     createdAt = "createdAt",
     description = "description",
     id = "id",
@@ -8072,6 +8073,7 @@ export class GradeWhereUniqueInput {
 }
 
 export class HelpCreateInput {
+    audience?: Nullable<Role>;
     createdAt?: Nullable<DateTime>;
     description?: Nullable<string>;
     id?: Nullable<string>;
@@ -8082,6 +8084,7 @@ export class HelpCreateInput {
 }
 
 export class HelpCreateManyInput {
+    audience?: Nullable<Role>;
     createdAt?: Nullable<DateTime>;
     description?: Nullable<string>;
     id?: Nullable<string>;
@@ -8102,6 +8105,7 @@ export class HelpCreateOrConnectWithoutStepsInput {
 }
 
 export class HelpCreateWithoutStepsInput {
+    audience?: Nullable<Role>;
     createdAt?: Nullable<DateTime>;
     description?: Nullable<string>;
     id?: Nullable<string>;
@@ -8111,6 +8115,7 @@ export class HelpCreateWithoutStepsInput {
 }
 
 export class HelpOrderByInput {
+    audience?: Nullable<SortOrder>;
     createdAt?: Nullable<SortOrder>;
     description?: Nullable<SortOrder>;
     id?: Nullable<SortOrder>;
@@ -8128,6 +8133,7 @@ export class HelpScalarWhereWithAggregatesInput {
     AND?: Nullable<HelpScalarWhereWithAggregatesInput[]>;
     NOT?: Nullable<HelpScalarWhereWithAggregatesInput[]>;
     OR?: Nullable<HelpScalarWhereWithAggregatesInput[]>;
+    audience?: Nullable<EnumRoleWithAggregatesFilter>;
     createdAt?: Nullable<DateTimeWithAggregatesFilter>;
     description?: Nullable<StringNullableWithAggregatesFilter>;
     id?: Nullable<StringWithAggregatesFilter>;
@@ -8489,6 +8495,7 @@ export class HelpStepWhereUniqueInput {
 }
 
 export class HelpUncheckedCreateInput {
+    audience?: Nullable<Role>;
     createdAt?: Nullable<DateTime>;
     description?: Nullable<string>;
     id?: Nullable<string>;
@@ -8499,6 +8506,7 @@ export class HelpUncheckedCreateInput {
 }
 
 export class HelpUncheckedCreateWithoutStepsInput {
+    audience?: Nullable<Role>;
     createdAt?: Nullable<DateTime>;
     description?: Nullable<string>;
     id?: Nullable<string>;
@@ -8508,6 +8516,7 @@ export class HelpUncheckedCreateWithoutStepsInput {
 }
 
 export class HelpUncheckedUpdateInput {
+    audience?: Nullable<EnumRoleFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     description?: Nullable<NullableStringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
@@ -8518,6 +8527,7 @@ export class HelpUncheckedUpdateInput {
 }
 
 export class HelpUncheckedUpdateManyInput {
+    audience?: Nullable<EnumRoleFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     description?: Nullable<NullableStringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
@@ -8527,6 +8537,7 @@ export class HelpUncheckedUpdateManyInput {
 }
 
 export class HelpUncheckedUpdateWithoutStepsInput {
+    audience?: Nullable<EnumRoleFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     description?: Nullable<NullableStringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
@@ -8536,6 +8547,7 @@ export class HelpUncheckedUpdateWithoutStepsInput {
 }
 
 export class HelpUpdateInput {
+    audience?: Nullable<EnumRoleFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     description?: Nullable<NullableStringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
@@ -8546,6 +8558,7 @@ export class HelpUpdateInput {
 }
 
 export class HelpUpdateManyMutationInput {
+    audience?: Nullable<EnumRoleFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     description?: Nullable<NullableStringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
@@ -8563,6 +8576,7 @@ export class HelpUpdateOneRequiredWithoutStepsInput {
 }
 
 export class HelpUpdateWithoutStepsInput {
+    audience?: Nullable<EnumRoleFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     description?: Nullable<NullableStringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
@@ -8580,6 +8594,7 @@ export class HelpWhereInput {
     AND?: Nullable<HelpWhereInput[]>;
     NOT?: Nullable<HelpWhereInput[]>;
     OR?: Nullable<HelpWhereInput[]>;
+    audience?: Nullable<EnumRoleFilter>;
     createdAt?: Nullable<DateTimeFilter>;
     description?: Nullable<StringNullableFilter>;
     id?: Nullable<StringFilter>;
@@ -16545,6 +16560,7 @@ export class GradeSumAggregateOutputType {
 }
 
 export class Help {
+    audience: Role;
     createdAt: DateTime;
     description?: Nullable<string>;
     id: string;
@@ -16562,6 +16578,7 @@ export class HelpBatchResponse {
 
 export class HelpCountAggregateOutputType {
     _all: number;
+    audience: number;
     createdAt: number;
     description: number;
     id: number;
@@ -16583,6 +16600,7 @@ export class HelpListResponse {
 }
 
 export class HelpMaxAggregateOutputType {
+    audience?: Nullable<Role>;
     createdAt?: Nullable<DateTime>;
     description?: Nullable<string>;
     id?: Nullable<string>;
@@ -16592,6 +16610,7 @@ export class HelpMaxAggregateOutputType {
 }
 
 export class HelpMinAggregateOutputType {
+    audience?: Nullable<Role>;
     createdAt?: Nullable<DateTime>;
     description?: Nullable<string>;
     id?: Nullable<string>;

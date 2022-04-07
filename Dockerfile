@@ -19,7 +19,7 @@ RUN yarn run prisma:generate
 #RUN rm -rf node_modules && yarn install --frozen-lockfile
 RUN yarn run build
 #attach static files volume here
-VOLUME [ "/usr/src/app/dist/public" ] 
+VOLUME [ "/usr/src/app/public" ] 
 VOLUME [ "/usr/src/app/$GOOGLE_APPLICATION_CREDENTIALS" ]
 
 EXPOSE 3000

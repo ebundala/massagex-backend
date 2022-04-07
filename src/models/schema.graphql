@@ -1795,6 +1795,7 @@ type Help {
   description: String
   steps(where: HelpStepWhereInput, orderBy: [HelpStepOrderByInput!], cursor: HelpStepWhereUniqueInput, take: Int, skip: Int, distinct: [HelpStepScalarFieldEnum!]): [HelpStep!]!
   state: State!
+  audience: Role!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -2585,6 +2586,7 @@ enum HelpScalarFieldEnum {
   topic
   description
   state
+  audience
   createdAt
   updatedAt
 }
@@ -3496,6 +3498,7 @@ input HelpWhereInput {
   description: StringNullableFilter
   steps: HelpStepListRelationFilter
   state: EnumStateFilter
+  audience: EnumRoleFilter
   createdAt: DateTimeFilter
   updatedAt: DateTimeFilter
 }
@@ -3505,6 +3508,7 @@ input HelpOrderByInput {
   topic: SortOrder
   description: SortOrder
   state: SortOrder
+  audience: SortOrder
   createdAt: SortOrder
   updatedAt: SortOrder
 }
@@ -3521,6 +3525,7 @@ input HelpScalarWhereWithAggregatesInput {
   topic: StringWithAggregatesFilter
   description: StringNullableWithAggregatesFilter
   state: EnumStateWithAggregatesFilter
+  audience: EnumRoleWithAggregatesFilter
   createdAt: DateTimeWithAggregatesFilter
   updatedAt: DateTimeWithAggregatesFilter
 }
@@ -5178,6 +5183,7 @@ input HelpCreateInput {
   topic: String!
   description: String
   state: State
+  audience: Role
   createdAt: DateTime
   updatedAt: DateTime
   steps: HelpStepCreateNestedManyWithoutHelpInput
@@ -5188,6 +5194,7 @@ input HelpUncheckedCreateInput {
   topic: String!
   description: String
   state: State
+  audience: Role
   createdAt: DateTime
   updatedAt: DateTime
   steps: HelpStepUncheckedCreateNestedManyWithoutHelpInput
@@ -5198,6 +5205,7 @@ input HelpUpdateInput {
   topic: StringFieldUpdateOperationsInput
   description: NullableStringFieldUpdateOperationsInput
   state: EnumStateFieldUpdateOperationsInput
+  audience: EnumRoleFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   steps: HelpStepUpdateManyWithoutHelpInput
@@ -5208,6 +5216,7 @@ input HelpUncheckedUpdateInput {
   topic: StringFieldUpdateOperationsInput
   description: NullableStringFieldUpdateOperationsInput
   state: EnumStateFieldUpdateOperationsInput
+  audience: EnumRoleFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   steps: HelpStepUncheckedUpdateManyWithoutHelpInput
@@ -5218,6 +5227,7 @@ input HelpCreateManyInput {
   topic: String!
   description: String
   state: State
+  audience: Role
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -5227,6 +5237,7 @@ input HelpUpdateManyMutationInput {
   topic: StringFieldUpdateOperationsInput
   description: NullableStringFieldUpdateOperationsInput
   state: EnumStateFieldUpdateOperationsInput
+  audience: EnumRoleFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
@@ -5236,6 +5247,7 @@ input HelpUncheckedUpdateManyInput {
   topic: StringFieldUpdateOperationsInput
   description: NullableStringFieldUpdateOperationsInput
   state: EnumStateFieldUpdateOperationsInput
+  audience: EnumRoleFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
@@ -13504,6 +13516,7 @@ input HelpCreateWithoutStepsInput {
   topic: String!
   description: String
   state: State
+  audience: Role
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -13513,6 +13526,7 @@ input HelpUncheckedCreateWithoutStepsInput {
   topic: String!
   description: String
   state: State
+  audience: Role
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -13548,6 +13562,7 @@ input HelpUpdateWithoutStepsInput {
   topic: StringFieldUpdateOperationsInput
   description: NullableStringFieldUpdateOperationsInput
   state: EnumStateFieldUpdateOperationsInput
+  audience: EnumRoleFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
@@ -13557,6 +13572,7 @@ input HelpUncheckedUpdateWithoutStepsInput {
   topic: StringFieldUpdateOperationsInput
   description: NullableStringFieldUpdateOperationsInput
   state: EnumStateFieldUpdateOperationsInput
+  audience: EnumRoleFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
@@ -17352,6 +17368,7 @@ type HelpCountAggregateOutputType {
   topic: Int!
   description: Int!
   state: Int!
+  audience: Int!
   createdAt: Int!
   updatedAt: Int!
   _all: Int!
@@ -17362,6 +17379,7 @@ type HelpMinAggregateOutputType {
   topic: String
   description: String
   state: State
+  audience: Role
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -17371,6 +17389,7 @@ type HelpMaxAggregateOutputType {
   topic: String
   description: String
   state: State
+  audience: Role
   createdAt: DateTime
   updatedAt: DateTime
 }
