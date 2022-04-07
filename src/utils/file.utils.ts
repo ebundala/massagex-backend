@@ -39,11 +39,11 @@ export const writeStreamToFile = (rs: fs.ReadStream, path: string, type: Attachm
     if (type == AttachmentType.IMAGE) {
         
         const ws360=fs.createWriteStream(`${path}.thumbnail-largest.webp`);
-        const ws240=fs.createWriteStream(`${path}.thumbnail-large.webp`);
-        const ws160=fs.createWriteStream(`${path}.thumbnail-medium.webp`);
-        const ws128=fs.createWriteStream(`${path}.thumbnail-small.webp`);
+       // const ws240=fs.createWriteStream(`${path}.thumbnail-large.webp`);
+       // const ws160=fs.createWriteStream(`${path}.thumbnail-medium.webp`);
+        //const ws128=fs.createWriteStream(`${path}.thumbnail-small.webp`);
         const ws80=fs.createWriteStream(`${path}.thumbnail-smallest.webp`);
-        const wstr = [ws,ws80,ws128,ws160,ws240,ws360]
+        const wstr = [ws,ws80,/* ws128,ws160,ws240 */,ws360]
        Promise.all
        (wstr.map((w)=>{
             return new Promise((resolve,reject)=>{
@@ -65,9 +65,9 @@ export const writeStreamToFile = (rs: fs.ReadStream, path: string, type: Attachm
         })
         rs.pipe(resizer(rs, ws,size)).pipe(ws)
         rs.pipe(resizer(rs, ws360,{height:360,width:360})).pipe(ws360);
-        rs.pipe(resizer(rs, ws240,{height:240,width:240})).pipe(ws240);
-        rs.pipe(resizer(rs, ws160,{height:160,width:160})).pipe(ws160);
-        rs.pipe(resizer(rs, ws128,{height:128,width:128})).pipe(ws128);
+       // rs.pipe(resizer(rs, ws240,{height:240,width:240})).pipe(ws240);
+      //  rs.pipe(resizer(rs, ws160,{height:160,width:160})).pipe(ws160);
+       // rs.pipe(resizer(rs, ws128,{height:128,width:128})).pipe(ws128);
         rs.pipe(resizer(rs, ws80,{height:80,width:80})).pipe(ws80);
 
     } else {
@@ -159,7 +159,7 @@ export const uploadFile = async (file: Promise<FileUpload>, path: string = '../.
             if (t === AttachmentType.AUDIO) {
 
                 if (metadata && !metadata.duration || !metadata) {
-                    duration = await getAudioDurationInSeconds(p);
+                    duration = 0; // Todo find better implimentation //await getAudioDurationInSeconds(p);
                 } else if (metadata && metadata.duration) {
                     duration = metadata.duration;
                 } else {
