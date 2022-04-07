@@ -299,6 +299,7 @@ model Help {
   description String?
   steps       HelpStep[]
   state       State      @default(PENDING)
+  audience    Role       @default(USER)
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
 }

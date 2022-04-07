@@ -210,7 +210,7 @@ const RequestLogger: GraphQLRequestListener<TenantContext> = {
             }
           },
           
-          debug: true,
+          debug: false,
           uploads: true,
           installSubscriptionHandlers: true,
           playground: true,
