@@ -7,19 +7,19 @@
       import { UseGuards } from '@nestjs/common';
       import { Resolver, Mutation,Query,Info, Args, Context, Parent } from '@nestjs/graphql';
       import { 
-      ForumAnswer,
-      ForumAnswerResponse,
-      ForumAnswerBatchResponse,
-      ForumAnswerCountResponse,
-      ForumAnswerListResponse,
-      AggregateForumAnswerResponse,
-    //  ForumAnswerCreateInput,
-    //  ForumAnswerUpdateInput,
-     // ForumAnswerUpdateManyMutationInput,
-     // ForumAnswerWhereUniqueInput,
-     // ForumAnswerWhereInput,
-     // ForumAnswerOrderByInput,
-     // ForumAnswerScalarFieldEnum,
+      Location,
+      LocationResponse,
+      LocationBatchResponse,
+      LocationCountResponse,
+      LocationListResponse,
+      AggregateLocationResponse,
+    //  LocationCreateInput,
+    //  LocationUpdateInput,
+     // LocationUpdateManyMutationInput,
+     // LocationWhereUniqueInput,
+     // LocationWhereInput,
+     // LocationOrderByInput,
+     // LocationScalarFieldEnum,
      // BatchPayload,
       
     } from '../../models/graphql';
@@ -27,9 +27,9 @@
       import { TenantContext } from '@mechsoft/common';
       import {AuthorizerGuard} from '@mechsoft/enforcer';
 
-      @Resolver((of)=>ForumAnswer)
+      @Resolver((of)=>Location)
       @UseGuards(AuthorizerGuard)
-      export class ForumAnswerResolver {
+      export class LocationResolver {
           
          
         }

@@ -11,26 +11,47 @@ generator client {
 }
 
 model User {
-  id            String        @id @default(cuid())
-  email         String        @unique
-  displayName   String
-  phoneNumber   String?
-  emailVerified Boolean       @default(false)
-  disabled      Boolean       @default(true)
-  avator        Attachment?   @relation(fields: [avatorId], references: [id])
-  avatorId      String?
-  role          Role          @default(USER)
-  state         State         @default(PENDING)
-  forms         Form[]
-  responses     Response[]
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
-  forums        Forum[]
-  forumAnswers  ForumAnswer[]
-  comments      Comment[]
-  device        Device?
-  transactions  Transaction[]
-  orders        Order[]
+  id              String           @id @default(cuid())
+  email           String           @unique
+  displayName     String
+  phoneNumber     String?
+  emailVerified   Boolean          @default(false)
+  disabled        Boolean          @default(true)
+  avator          Attachment?      @relation(fields: [avatorId], references: [id])
+  avatorId        String?
+  role            Role             @default(USER)
+  state           State            @default(PENDING)
+  businessProfile BusinessProfile?
+  services        Service[]
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  device          Device?
+  orders          Order[]
+  reviews         Review[]         @relation("reviewerToReview")
+  reviewed        Review[]         @relation("revieweeToReview")
+  comments        Comment[]
+  location        Location?         @relation(fields: [locationId], references: [id])
+  locationId      String?
+}
+
+enum BusinnessMode {
+  OFFICE_MODE
+  MOBILE_MODE
+}
+
+model BusinessProfile {
+  id        String        @id @default(cuid())
+  owner     User          @relation(fields: [ownerId], references: [id])
+  ownerId   String
+  mode      BusinnessMode  @default(OFFICE_MODE)
+  cover     Attachment    @relation(fields: [coverId], references: [id])
+  coverId   String
+  about     String
+  // location   Location      @relation(fields: [locationId], references: [id])
+  // locationId String
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+
 }
 
 model Device {
@@ -42,156 +63,40 @@ model Device {
 }
 
 model Attachment {
-  id               String          @id @default(cuid())
+  id               String            @id @default(cuid())
   path             String
   filename         String?
   mimetype         String?
   encoding         String?
-  duration         Int             @default(0)
-  size             Int             @default(0)
-  attachmentType   AttachmentType  @default(IMAGE)
-  downloadable     Boolean         @default(false)
-  placement        String          @default("default")
-  createdAt        DateTime        @default(now())
-  updatedAt        DateTime        @updatedAt
+  duration         Int               @default(0)
+  size             Int               @default(0)
+  attachmentType   AttachmentType    @default(IMAGE)
+  downloadable     Boolean           @default(false)
+  placement        String            @default("default")
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
   user             User[]
-  form             Form?           @relation(fields: [formId], references: [id])
-  formId           String?
-  grade            Grade?          @relation(fields: [gradeId], references: [id])
-  gradeId          String?
-  response         Response?       @relation(fields: [responseId], references: [id])
-  responseId       String?
-  question         Question?       @relation(fields: [questionId], references: [id])
-  questionId       String?
-  answer           Answer?         @relation(fields: [answerId], references: [id])
-  answerId         String?
-  recommendation   Recommendation? @relation(fields: [recommendationId], references: [id])
-  recommendationId String?
-  forum            Forum?          @relation(fields: [forumId], references: [id])
-  forumId          String?
-  forumAnswer      ForumAnswer?    @relation(fields: [forumAnswerId], references: [id])
-  forumAnswerId    String?
-  comment          Comment?        @relation(fields: [commentId], references: [id])
+  comment          Comment?          @relation(fields: [commentId], references: [id])
   commentId        String?
-  tags             Tag[]
-  helpStep         HelpStep?       @relation(fields: [helpStepId], references: [id])
-  helpStepId       String?
   paymentMethods   PaymentMethod[]
   services         Service[]
   orders           Order[]
+  businessProfiles BusinessProfile[]
+  helpStep         HelpStep?         @relation(fields: [helpStepId], references: [id])
+  helpStepId       String?
 }
 
-model Tag {
-  id           String      @id @default(cuid())
-  name         String
-  description  String?
-  image        Attachment? @relation(fields: [attachmentId], references: [id])
-  state        State       @default(PENDING)
-  createdAt    DateTime    @default(now())
-  updatedAt    DateTime    @updatedAt
-  attachmentId String?
-  forms        Form[]
-  forums        Forum[]    
-  
-}
-
-model Form {
-  id          String       @id @default(cuid())
-  title       String
-  description String?
-  state       State        @default(PENDING)
-  author      User         @relation(fields: [authorId], references: [id])
-  authorId    String
-  tags        Tag[]
-  grades      Grade[]
-  responses   Response[]
-  attachments Attachment[]
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
-  tagId       String?
-}
-
-model Grade {
-  id              String           @id @default(cuid())
-  name            String
-  description     String
-  form            Form?            @relation(fields: [formId], references: [id])
-  formId          String?
-  responses       Response[]
-  recommendations Recommendation[]
-  questions       Question[]
-  minValue        Int?
-  maxValue        Int?
-  minInclusive    Boolean          @default(false)
-  maxInclusive    Boolean          @default(false)
-  attachments     Attachment[]
-  createdAt       DateTime         @default(now())
-  updatedAt       DateTime         @updatedAt
-}
-
-model Response {
-  id          String       @id @default(cuid())
-  author      User?        @relation(fields: [authorId], references: [id])
-  authorId    String?
-  form        Form         @relation(fields: [formId], references: [id])
-  formId      String
-  answers     Answer[]
-  grade       Grade        @relation(fields: [gradeId], references: [id])
-  gradeId     String
-  attachments Attachment[]
-  state       State        @default(PENDING)
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
-}
-
-model Question {
-  id             String       @id @default(cuid())
-  questionNumber Int
-  question       String
-  weight         Float        @default(0.0)
-  instruction    String?
-  questionType   QuestionType @default(BOOLEAN)
-  grade          Grade        @relation(fields: [gradeId], references: [id])
-  gradeId        String
-  answers        Answer[]
-  attachments    Attachment[]
-  createdAt      DateTime     @default(now())
-  updatedAt      DateTime     @updatedAt
-}
-
-model Answer {
-  id           String       @id @default(cuid())
-  response     Response     @relation(fields: [responseId], references: [id])
-  responseId   String
-  question     Question     @relation(fields: [questionId], references: [id])
-  questionId   String
-  attachments  Attachment[]
-  booleanValue Boolean?
-  textValue    String?
-  createdAt    DateTime     @default(now())
-  updatedAt    DateTime     @updatedAt
-}
-
-enum RecommendationType {
-  ORGANIC
-  INORGANIC
-}
-
-model Recommendation {
-  id          String             @id @default(cuid())
-  content     String
-  attachments Attachment[]
-  grade       Grade?             @relation(fields: [gradeId], references: [id])
-  gradeId     String?
-  type        RecommendationType @default(INORGANIC)
-  createdAt   DateTime           @default(now())
-  updatedAt   DateTime           @updatedAt
-}
-
-// use boolean and text question first for POC
-enum QuestionType {
-  BOOLEAN
-  TEXT
+model Location {
+  id        String                    @id @default(cuid())
+  name      String                    @default("unknown")
+  geom      Unsupported("geography")?
+  lat       Float
+  lon       Float
+  state     State                     @default(PENDING)
+  createdAt DateTime                  @default(now())
+  updatedAt DateTime                  @updatedAt
+  // business  BusinessProfile[]
+  users     User[]
 }
 
 enum Role {
@@ -217,48 +122,27 @@ enum AttachmentType {
   IMAGE
 }
 
-// forum part
-enum ForumType {
-  NORMAL
-  FAQ
-}
-
-model Forum {
-  id              String        @id @default(cuid())
-  question        String
-  description     String
-  author          User          @relation(fields: [authorId], references: [id])
-  authorId        String
-  state           State         @default(PENDING)
-  type            ForumType     @default(NORMAL)
-  tags            Tag[]
-  forumAnswers    ForumAnswer[]
-  comments        Comment[]
-  commentsEnabled Boolean       @default(false)
-  attachments     Attachment[]
-  createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @updatedAt
-}
-
-model ForumAnswer {
-  id              String       @id @default(cuid())
-  author          User         @relation(fields: [authorId], references: [id])
-  authorId        String
-  forum           Forum        @relation(fields: [forumId], references: [id])
-  forumId         String
-  attachments     Attachment[]
-  comments        Comment[]
-  commentsEnabled Boolean      @default(false)
-  state           State        @default(PENDING)
-  content         String
-  createdAt       DateTime     @default(now())
-  updatedAt       DateTime     @updatedAt
+// review part
+model Review {
+  id         String    @id @default(cuid())
+  author     User      @relation("reviewerToReview", fields: [authorId], references: [id])
+  authorId   String
+  reviewee   User      @relation("revieweeToReview", fields: [revieweeId], references: [id])
+  revieweeId String
+  value      Int       @default(0)
+  content    String?
+  state      State     @default(PENDING)
+  comments   Comment[]
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
 }
 
 model Comment {
   id              String       @id @default(cuid())
   author          User         @relation(fields: [authorId], references: [id])
   authorId        String
+  review          Review?      @relation(fields: [reviewId], references: [id])
+  reviewId        String
   attachments     Attachment[]
   comments        Comment[]    @relation("CommentToComment")
   commentsEnabled Boolean      @default(false)
@@ -266,10 +150,6 @@ model Comment {
   state           State        @default(PENDING)
   createdAt       DateTime     @default(now())
   updatedAt       DateTime     @updatedAt
-  forum           Forum?       @relation(fields: [forumId], references: [id])
-  forumId         String?
-  forumAnswer     ForumAnswer? @relation(fields: [forumAnswerId], references: [id])
-  forumAnswerId   String?
   comment         Comment?     @relation("CommentToComment", fields: [commentId], references: [id])
   commentId       String?
 }
@@ -324,12 +204,14 @@ model Service {
   name        String
   description String?
   price       Float
-  value       Float
+  currency    String     @default("TZS")
   state       State      @default(PENDING)
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
-  imageId     String
-  image       Attachment @relation(fields: [imageId], references: [id])
+  authorId    String
+  author      User       @relation(fields: [authorId], references: [id])
+  imageId     String?
+  image       Attachment? @relation(fields: [imageId], references: [id])
   orders      Order[]
 }
 
@@ -367,8 +249,8 @@ model Transaction {
   paymentMethod        PaymentMethod       @relation(fields: [paymentMethodId], references: [id])
   paymentMethodId      String
   type                 TransactionType
-  initiator            User                @relation(fields: [userId], references: [id])
-  userId               String
+  // initiator            User                @relation(fields: [userId], references: [id])
+  // userId               String
   order                Order               @relation(fields: [orderId], references: [id])
   orderId              String
   mpesaPayment         MpesaPayment?       @relation(fields: [mpesaPaymentId], references: [id])

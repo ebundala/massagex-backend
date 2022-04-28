@@ -10,18 +10,7 @@
 
 import { FileUpload } from 'graphql-upload';
 
-export enum AnswerScalarFieldEnum {
-    booleanValue = "booleanValue",
-    createdAt = "createdAt",
-    id = "id",
-    questionId = "questionId",
-    responseId = "responseId",
-    textValue = "textValue",
-    updatedAt = "updatedAt"
-}
-
 export enum AttachmentScalarFieldEnum {
-    answerId = "answerId",
     attachmentType = "attachmentType",
     commentId = "commentId",
     createdAt = "createdAt",
@@ -29,18 +18,11 @@ export enum AttachmentScalarFieldEnum {
     duration = "duration",
     encoding = "encoding",
     filename = "filename",
-    formId = "formId",
-    forumAnswerId = "forumAnswerId",
-    forumId = "forumId",
-    gradeId = "gradeId",
     helpStepId = "helpStepId",
     id = "id",
     mimetype = "mimetype",
     path = "path",
     placement = "placement",
-    questionId = "questionId",
-    recommendationId = "recommendationId",
-    responseId = "responseId",
     size = "size",
     updatedAt = "updatedAt"
 }
@@ -57,6 +39,21 @@ export enum AuthMode {
     EMAIL = "EMAIL",
     OAUTH = "OAUTH",
     PHONE = "PHONE"
+}
+
+export enum BusinessProfileScalarFieldEnum {
+    about = "about",
+    coverId = "coverId",
+    createdAt = "createdAt",
+    id = "id",
+    mode = "mode",
+    ownerId = "ownerId",
+    updatedAt = "updatedAt"
+}
+
+export enum BusinnessMode {
+    MOBILE_MODE = "MOBILE_MODE",
+    OFFICE_MODE = "OFFICE_MODE"
 }
 
 export enum CasbinRuleScalarFieldEnum {
@@ -78,9 +75,8 @@ export enum CommentScalarFieldEnum {
     commentsEnabled = "commentsEnabled",
     content = "content",
     createdAt = "createdAt",
-    forumAnswerId = "forumAnswerId",
-    forumId = "forumId",
     id = "id",
+    reviewId = "reviewId",
     state = "state",
     updatedAt = "updatedAt"
 }
@@ -90,58 +86,6 @@ export enum DeviceScalarFieldEnum {
     id = "id",
     type = "type",
     userId = "userId"
-}
-
-export enum FormScalarFieldEnum {
-    authorId = "authorId",
-    createdAt = "createdAt",
-    description = "description",
-    id = "id",
-    state = "state",
-    tagId = "tagId",
-    title = "title",
-    updatedAt = "updatedAt"
-}
-
-export enum ForumAnswerScalarFieldEnum {
-    authorId = "authorId",
-    commentsEnabled = "commentsEnabled",
-    content = "content",
-    createdAt = "createdAt",
-    forumId = "forumId",
-    id = "id",
-    state = "state",
-    updatedAt = "updatedAt"
-}
-
-export enum ForumScalarFieldEnum {
-    authorId = "authorId",
-    commentsEnabled = "commentsEnabled",
-    createdAt = "createdAt",
-    description = "description",
-    id = "id",
-    question = "question",
-    state = "state",
-    type = "type",
-    updatedAt = "updatedAt"
-}
-
-export enum ForumType {
-    FAQ = "FAQ",
-    NORMAL = "NORMAL"
-}
-
-export enum GradeScalarFieldEnum {
-    createdAt = "createdAt",
-    description = "description",
-    formId = "formId",
-    id = "id",
-    maxInclusive = "maxInclusive",
-    maxValue = "maxValue",
-    minInclusive = "minInclusive",
-    minValue = "minValue",
-    name = "name",
-    updatedAt = "updatedAt"
 }
 
 export enum HelpScalarFieldEnum {
@@ -173,6 +117,16 @@ export enum ImageSize {
     smallest = "smallest"
 }
 
+export enum LocationScalarFieldEnum {
+    createdAt = "createdAt",
+    id = "id",
+    lat = "lat",
+    lon = "lon",
+    name = "name",
+    state = "state",
+    updatedAt = "updatedAt"
+}
+
 export enum MpesaPaymentScalarFieldEnum {
     createdAt = "createdAt",
     id = "id",
@@ -194,7 +148,6 @@ export enum MpesaPaymentScalarFieldEnum {
 }
 
 export enum NotificationType {
-    ANSWER_RECIEVED = "ANSWER_RECIEVED",
     ORDER_ACCEPTED = "ORDER_ACCEPTED",
     ORDER_CANCELLED = "ORDER_CANCELLED",
     ORDER_DELIVERED = "ORDER_DELIVERED",
@@ -202,8 +155,6 @@ export enum NotificationType {
     ORDER_PAYED = "ORDER_PAYED",
     ORDER_RECIEVED = "ORDER_RECIEVED",
     ORDER_UPDATED = "ORDER_UPDATED",
-    QUESTION_ACCEPTED = "QUESTION_ACCEPTED",
-    QUESTION_REJECTED = "QUESTION_REJECTED",
     REVIEW_RECIEVED = "REVIEW_RECIEVED",
     REVIEW_UPDATED = "REVIEW_UPDATED"
 }
@@ -236,45 +187,15 @@ export enum QueryMode {
     insensitive = "insensitive"
 }
 
-export enum QuestionScalarFieldEnum {
-    createdAt = "createdAt",
-    gradeId = "gradeId",
-    id = "id",
-    instruction = "instruction",
-    question = "question",
-    questionNumber = "questionNumber",
-    questionType = "questionType",
-    updatedAt = "updatedAt",
-    weight = "weight"
-}
-
-export enum QuestionType {
-    BOOLEAN = "BOOLEAN",
-    TEXT = "TEXT"
-}
-
-export enum RecommendationScalarFieldEnum {
+export enum ReviewScalarFieldEnum {
+    authorId = "authorId",
     content = "content",
     createdAt = "createdAt",
-    gradeId = "gradeId",
     id = "id",
-    type = "type",
-    updatedAt = "updatedAt"
-}
-
-export enum RecommendationType {
-    INORGANIC = "INORGANIC",
-    ORGANIC = "ORGANIC"
-}
-
-export enum ResponseScalarFieldEnum {
-    authorId = "authorId",
-    createdAt = "createdAt",
-    formId = "formId",
-    gradeId = "gradeId",
-    id = "id",
+    revieweeId = "revieweeId",
     state = "state",
-    updatedAt = "updatedAt"
+    updatedAt = "updatedAt",
+    value = "value"
 }
 
 export enum Role {
@@ -333,15 +254,16 @@ export enum SelcomUtilityCode {
 }
 
 export enum ServiceScalarFieldEnum {
+    authorId = "authorId",
     createdAt = "createdAt",
+    currency = "currency",
     description = "description",
     id = "id",
     imageId = "imageId",
     name = "name",
     price = "price",
     state = "state",
-    updatedAt = "updatedAt",
-    value = "value"
+    updatedAt = "updatedAt"
 }
 
 export enum SortOrder {
@@ -358,16 +280,6 @@ export enum State {
     REVIEW = "REVIEW"
 }
 
-export enum TagScalarFieldEnum {
-    attachmentId = "attachmentId",
-    createdAt = "createdAt",
-    description = "description",
-    id = "id",
-    name = "name",
-    state = "state",
-    updatedAt = "updatedAt"
-}
-
 export enum TransactionScalarFieldEnum {
     createdAt = "createdAt",
     id = "id",
@@ -378,8 +290,7 @@ export enum TransactionScalarFieldEnum {
     selcomPaymentId = "selcomPaymentId",
     state = "state",
     type = "type",
-    updatedAt = "updatedAt",
-    userId = "userId"
+    updatedAt = "updatedAt"
 }
 
 export enum TransactionType {
@@ -395,473 +306,22 @@ export enum UserScalarFieldEnum {
     email = "email",
     emailVerified = "emailVerified",
     id = "id",
+    locationId = "locationId",
     phoneNumber = "phoneNumber",
     role = "role",
     state = "state",
     updatedAt = "updatedAt"
 }
 
-export class AnswerCreateInput {
-    attachments?: Nullable<AttachmentCreateNestedManyWithoutAnswerInput>;
-    booleanValue?: Nullable<boolean>;
-    createdAt?: Nullable<DateTime>;
-    id?: Nullable<string>;
-    question: QuestionCreateNestedOneWithoutAnswersInput;
-    response: ResponseCreateNestedOneWithoutAnswersInput;
-    textValue?: Nullable<string>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class AnswerCreateManyInput {
-    booleanValue?: Nullable<boolean>;
-    createdAt?: Nullable<DateTime>;
-    id?: Nullable<string>;
-    questionId: string;
-    responseId: string;
-    textValue?: Nullable<string>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class AnswerCreateManyQuestionInput {
-    booleanValue?: Nullable<boolean>;
-    createdAt?: Nullable<DateTime>;
-    id?: Nullable<string>;
-    responseId: string;
-    textValue?: Nullable<string>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class AnswerCreateManyQuestionInputEnvelope {
-    data: AnswerCreateManyQuestionInput[];
-    skipDuplicates?: Nullable<boolean>;
-}
-
-export class AnswerCreateManyResponseInput {
-    booleanValue?: Nullable<boolean>;
-    createdAt?: Nullable<DateTime>;
-    id?: Nullable<string>;
-    questionId: string;
-    textValue?: Nullable<string>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class AnswerCreateManyResponseInputEnvelope {
-    data: AnswerCreateManyResponseInput[];
-    skipDuplicates?: Nullable<boolean>;
-}
-
-export class AnswerCreateNestedManyWithoutQuestionInput {
-    connect?: Nullable<AnswerWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AnswerCreateOrConnectWithoutQuestionInput[]>;
-    create?: Nullable<AnswerCreateWithoutQuestionInput[]>;
-    createMany?: Nullable<AnswerCreateManyQuestionInputEnvelope>;
-}
-
-export class AnswerCreateNestedManyWithoutResponseInput {
-    connect?: Nullable<AnswerWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AnswerCreateOrConnectWithoutResponseInput[]>;
-    create?: Nullable<AnswerCreateWithoutResponseInput[]>;
-    createMany?: Nullable<AnswerCreateManyResponseInputEnvelope>;
-}
-
-export class AnswerCreateNestedOneWithoutAttachmentsInput {
-    connect?: Nullable<AnswerWhereUniqueInput>;
-    connectOrCreate?: Nullable<AnswerCreateOrConnectWithoutAttachmentsInput>;
-    create?: Nullable<AnswerUncheckedCreateWithoutAttachmentsInput>;
-}
-
-export class AnswerCreateOrConnectWithoutAttachmentsInput {
-    create: AnswerUncheckedCreateWithoutAttachmentsInput;
-    where: AnswerWhereUniqueInput;
-}
-
-export class AnswerCreateOrConnectWithoutQuestionInput {
-    create: AnswerUncheckedCreateWithoutQuestionInput;
-    where: AnswerWhereUniqueInput;
-}
-
-export class AnswerCreateOrConnectWithoutResponseInput {
-    create: AnswerUncheckedCreateWithoutResponseInput;
-    where: AnswerWhereUniqueInput;
-}
-
-export class AnswerCreateWithoutAttachmentsInput {
-    booleanValue?: Nullable<boolean>;
-    createdAt?: Nullable<DateTime>;
-    id?: Nullable<string>;
-    question: QuestionCreateNestedOneWithoutAnswersInput;
-    response: ResponseCreateNestedOneWithoutAnswersInput;
-    textValue?: Nullable<string>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class AnswerCreateWithoutQuestionInput {
-    attachments?: Nullable<AttachmentCreateNestedManyWithoutAnswerInput>;
-    booleanValue?: Nullable<boolean>;
-    createdAt?: Nullable<DateTime>;
-    id?: Nullable<string>;
-    response: ResponseCreateNestedOneWithoutAnswersInput;
-    textValue?: Nullable<string>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class AnswerCreateWithoutResponseInput {
-    attachments?: Nullable<AttachmentCreateNestedManyWithoutAnswerInput>;
-    booleanValue?: Nullable<boolean>;
-    createdAt?: Nullable<DateTime>;
-    id?: Nullable<string>;
-    question: QuestionCreateNestedOneWithoutAnswersInput;
-    textValue?: Nullable<string>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class AnswerListRelationFilter {
-    every?: Nullable<AnswerWhereInput>;
-    none?: Nullable<AnswerWhereInput>;
-    some?: Nullable<AnswerWhereInput>;
-}
-
-export class AnswerOrderByInput {
-    booleanValue?: Nullable<SortOrder>;
-    createdAt?: Nullable<SortOrder>;
-    id?: Nullable<SortOrder>;
-    questionId?: Nullable<SortOrder>;
-    responseId?: Nullable<SortOrder>;
-    textValue?: Nullable<SortOrder>;
-    updatedAt?: Nullable<SortOrder>;
-}
-
-export class AnswerRelationFilter {
-    is?: Nullable<AnswerWhereInput>;
-    isNot?: Nullable<AnswerWhereInput>;
-}
-
-export class AnswerScalarWhereInput {
-    AND?: Nullable<AnswerScalarWhereInput[]>;
-    NOT?: Nullable<AnswerScalarWhereInput[]>;
-    OR?: Nullable<AnswerScalarWhereInput[]>;
-    booleanValue?: Nullable<BoolNullableFilter>;
-    createdAt?: Nullable<DateTimeFilter>;
-    id?: Nullable<StringFilter>;
-    questionId?: Nullable<StringFilter>;
-    responseId?: Nullable<StringFilter>;
-    textValue?: Nullable<StringNullableFilter>;
-    updatedAt?: Nullable<DateTimeFilter>;
-}
-
-export class AnswerScalarWhereWithAggregatesInput {
-    AND?: Nullable<AnswerScalarWhereWithAggregatesInput[]>;
-    NOT?: Nullable<AnswerScalarWhereWithAggregatesInput[]>;
-    OR?: Nullable<AnswerScalarWhereWithAggregatesInput[]>;
-    booleanValue?: Nullable<BoolNullableWithAggregatesFilter>;
-    createdAt?: Nullable<DateTimeWithAggregatesFilter>;
-    id?: Nullable<StringWithAggregatesFilter>;
-    questionId?: Nullable<StringWithAggregatesFilter>;
-    responseId?: Nullable<StringWithAggregatesFilter>;
-    textValue?: Nullable<StringNullableWithAggregatesFilter>;
-    updatedAt?: Nullable<DateTimeWithAggregatesFilter>;
-}
-
-export class AnswerUncheckedCreateInput {
-    attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutAnswerInput>;
-    booleanValue?: Nullable<boolean>;
-    createdAt?: Nullable<DateTime>;
-    id?: Nullable<string>;
-    questionId: string;
-    responseId: string;
-    textValue?: Nullable<string>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class AnswerUncheckedCreateNestedManyWithoutQuestionInput {
-    connect?: Nullable<AnswerWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AnswerCreateOrConnectWithoutQuestionInput[]>;
-    create?: Nullable<AnswerCreateWithoutQuestionInput[]>;
-    createMany?: Nullable<AnswerCreateManyQuestionInputEnvelope>;
-}
-
-export class AnswerUncheckedCreateNestedManyWithoutResponseInput {
-    connect?: Nullable<AnswerWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AnswerCreateOrConnectWithoutResponseInput[]>;
-    create?: Nullable<AnswerCreateWithoutResponseInput[]>;
-    createMany?: Nullable<AnswerCreateManyResponseInputEnvelope>;
-}
-
-export class AnswerUncheckedCreateWithoutAttachmentsInput {
-    booleanValue?: Nullable<boolean>;
-    createdAt?: Nullable<DateTime>;
-    id?: Nullable<string>;
-    questionId: string;
-    responseId: string;
-    textValue?: Nullable<string>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class AnswerUncheckedCreateWithoutQuestionInput {
-    attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutAnswerInput>;
-    booleanValue?: Nullable<boolean>;
-    createdAt?: Nullable<DateTime>;
-    id?: Nullable<string>;
-    responseId: string;
-    textValue?: Nullable<string>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class AnswerUncheckedCreateWithoutResponseInput {
-    attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutAnswerInput>;
-    booleanValue?: Nullable<boolean>;
-    createdAt?: Nullable<DateTime>;
-    id?: Nullable<string>;
-    questionId: string;
-    textValue?: Nullable<string>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class AnswerUncheckedUpdateInput {
-    attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutAnswerInput>;
-    booleanValue?: Nullable<NullableBoolFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    questionId?: Nullable<StringFieldUpdateOperationsInput>;
-    responseId?: Nullable<StringFieldUpdateOperationsInput>;
-    textValue?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class AnswerUncheckedUpdateManyInput {
-    booleanValue?: Nullable<NullableBoolFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    questionId?: Nullable<StringFieldUpdateOperationsInput>;
-    responseId?: Nullable<StringFieldUpdateOperationsInput>;
-    textValue?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class AnswerUncheckedUpdateManyWithoutAnswersInput {
-    booleanValue?: Nullable<NullableBoolFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    questionId?: Nullable<StringFieldUpdateOperationsInput>;
-    textValue?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class AnswerUncheckedUpdateManyWithoutQuestionInput {
-    connect?: Nullable<AnswerWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AnswerCreateOrConnectWithoutQuestionInput[]>;
-    create?: Nullable<AnswerCreateWithoutQuestionInput[]>;
-    createMany?: Nullable<AnswerCreateManyQuestionInputEnvelope>;
-    delete?: Nullable<AnswerWhereUniqueInput[]>;
-    deleteMany?: Nullable<AnswerScalarWhereInput[]>;
-    disconnect?: Nullable<AnswerWhereUniqueInput[]>;
-    set?: Nullable<AnswerWhereUniqueInput[]>;
-    update?: Nullable<AnswerUpdateWithWhereUniqueWithoutQuestionInput[]>;
-    updateMany?: Nullable<AnswerUpdateManyWithWhereWithoutQuestionInput[]>;
-    upsert?: Nullable<AnswerUpsertWithWhereUniqueWithoutQuestionInput[]>;
-}
-
-export class AnswerUncheckedUpdateManyWithoutResponseInput {
-    connect?: Nullable<AnswerWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AnswerCreateOrConnectWithoutResponseInput[]>;
-    create?: Nullable<AnswerCreateWithoutResponseInput[]>;
-    createMany?: Nullable<AnswerCreateManyResponseInputEnvelope>;
-    delete?: Nullable<AnswerWhereUniqueInput[]>;
-    deleteMany?: Nullable<AnswerScalarWhereInput[]>;
-    disconnect?: Nullable<AnswerWhereUniqueInput[]>;
-    set?: Nullable<AnswerWhereUniqueInput[]>;
-    update?: Nullable<AnswerUpdateWithWhereUniqueWithoutResponseInput[]>;
-    updateMany?: Nullable<AnswerUpdateManyWithWhereWithoutResponseInput[]>;
-    upsert?: Nullable<AnswerUpsertWithWhereUniqueWithoutResponseInput[]>;
-}
-
-export class AnswerUncheckedUpdateWithoutAttachmentsInput {
-    booleanValue?: Nullable<NullableBoolFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    questionId?: Nullable<StringFieldUpdateOperationsInput>;
-    responseId?: Nullable<StringFieldUpdateOperationsInput>;
-    textValue?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class AnswerUncheckedUpdateWithoutQuestionInput {
-    attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutAnswerInput>;
-    booleanValue?: Nullable<NullableBoolFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    responseId?: Nullable<StringFieldUpdateOperationsInput>;
-    textValue?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class AnswerUncheckedUpdateWithoutResponseInput {
-    attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutAnswerInput>;
-    booleanValue?: Nullable<NullableBoolFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    questionId?: Nullable<StringFieldUpdateOperationsInput>;
-    textValue?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class AnswerUpdateInput {
-    attachments?: Nullable<AttachmentUpdateManyWithoutAnswerInput>;
-    booleanValue?: Nullable<NullableBoolFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    question?: Nullable<QuestionUpdateOneRequiredWithoutAnswersInput>;
-    response?: Nullable<ResponseUpdateOneRequiredWithoutAnswersInput>;
-    textValue?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class AnswerUpdateManyMutationInput {
-    booleanValue?: Nullable<NullableBoolFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    textValue?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class AnswerUpdateManyWithWhereWithoutQuestionInput {
-    data: AnswerUncheckedUpdateManyWithoutAnswersInput;
-    where: AnswerScalarWhereInput;
-}
-
-export class AnswerUpdateManyWithWhereWithoutResponseInput {
-    data: AnswerUncheckedUpdateManyWithoutAnswersInput;
-    where: AnswerScalarWhereInput;
-}
-
-export class AnswerUpdateManyWithoutQuestionInput {
-    connect?: Nullable<AnswerWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AnswerCreateOrConnectWithoutQuestionInput[]>;
-    create?: Nullable<AnswerCreateWithoutQuestionInput[]>;
-    createMany?: Nullable<AnswerCreateManyQuestionInputEnvelope>;
-    delete?: Nullable<AnswerWhereUniqueInput[]>;
-    deleteMany?: Nullable<AnswerScalarWhereInput[]>;
-    disconnect?: Nullable<AnswerWhereUniqueInput[]>;
-    set?: Nullable<AnswerWhereUniqueInput[]>;
-    update?: Nullable<AnswerUpdateWithWhereUniqueWithoutQuestionInput[]>;
-    updateMany?: Nullable<AnswerUpdateManyWithWhereWithoutQuestionInput[]>;
-    upsert?: Nullable<AnswerUpsertWithWhereUniqueWithoutQuestionInput[]>;
-}
-
-export class AnswerUpdateManyWithoutResponseInput {
-    connect?: Nullable<AnswerWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AnswerCreateOrConnectWithoutResponseInput[]>;
-    create?: Nullable<AnswerCreateWithoutResponseInput[]>;
-    createMany?: Nullable<AnswerCreateManyResponseInputEnvelope>;
-    delete?: Nullable<AnswerWhereUniqueInput[]>;
-    deleteMany?: Nullable<AnswerScalarWhereInput[]>;
-    disconnect?: Nullable<AnswerWhereUniqueInput[]>;
-    set?: Nullable<AnswerWhereUniqueInput[]>;
-    update?: Nullable<AnswerUpdateWithWhereUniqueWithoutResponseInput[]>;
-    updateMany?: Nullable<AnswerUpdateManyWithWhereWithoutResponseInput[]>;
-    upsert?: Nullable<AnswerUpsertWithWhereUniqueWithoutResponseInput[]>;
-}
-
-export class AnswerUpdateOneWithoutAttachmentsInput {
-    connect?: Nullable<AnswerWhereUniqueInput>;
-    connectOrCreate?: Nullable<AnswerCreateOrConnectWithoutAttachmentsInput>;
-    create?: Nullable<AnswerUncheckedCreateWithoutAttachmentsInput>;
-    delete?: Nullable<boolean>;
-    disconnect?: Nullable<boolean>;
-    update?: Nullable<AnswerUncheckedUpdateWithoutAttachmentsInput>;
-    upsert?: Nullable<AnswerUpsertWithoutAttachmentsInput>;
-}
-
-export class AnswerUpdateWithWhereUniqueWithoutQuestionInput {
-    data: AnswerUncheckedUpdateWithoutQuestionInput;
-    where: AnswerWhereUniqueInput;
-}
-
-export class AnswerUpdateWithWhereUniqueWithoutResponseInput {
-    data: AnswerUncheckedUpdateWithoutResponseInput;
-    where: AnswerWhereUniqueInput;
-}
-
-export class AnswerUpdateWithoutAttachmentsInput {
-    booleanValue?: Nullable<NullableBoolFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    question?: Nullable<QuestionUpdateOneRequiredWithoutAnswersInput>;
-    response?: Nullable<ResponseUpdateOneRequiredWithoutAnswersInput>;
-    textValue?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class AnswerUpdateWithoutQuestionInput {
-    attachments?: Nullable<AttachmentUpdateManyWithoutAnswerInput>;
-    booleanValue?: Nullable<NullableBoolFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    response?: Nullable<ResponseUpdateOneRequiredWithoutAnswersInput>;
-    textValue?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class AnswerUpdateWithoutResponseInput {
-    attachments?: Nullable<AttachmentUpdateManyWithoutAnswerInput>;
-    booleanValue?: Nullable<NullableBoolFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    question?: Nullable<QuestionUpdateOneRequiredWithoutAnswersInput>;
-    textValue?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class AnswerUpsertWithWhereUniqueWithoutQuestionInput {
-    create: AnswerUncheckedCreateWithoutQuestionInput;
-    update: AnswerUncheckedUpdateWithoutQuestionInput;
-    where: AnswerWhereUniqueInput;
-}
-
-export class AnswerUpsertWithWhereUniqueWithoutResponseInput {
-    create: AnswerUncheckedCreateWithoutResponseInput;
-    update: AnswerUncheckedUpdateWithoutResponseInput;
-    where: AnswerWhereUniqueInput;
-}
-
-export class AnswerUpsertWithoutAttachmentsInput {
-    create: AnswerUncheckedCreateWithoutAttachmentsInput;
-    update: AnswerUncheckedUpdateWithoutAttachmentsInput;
-}
-
-export class AnswerWhereInput {
-    AND?: Nullable<AnswerWhereInput[]>;
-    NOT?: Nullable<AnswerWhereInput[]>;
-    OR?: Nullable<AnswerWhereInput[]>;
-    attachments?: Nullable<AttachmentListRelationFilter>;
-    booleanValue?: Nullable<BoolNullableFilter>;
-    createdAt?: Nullable<DateTimeFilter>;
-    id?: Nullable<StringFilter>;
-    question?: Nullable<QuestionWhereInput>;
-    questionId?: Nullable<StringFilter>;
-    response?: Nullable<ResponseWhereInput>;
-    responseId?: Nullable<StringFilter>;
-    textValue?: Nullable<StringNullableFilter>;
-    updatedAt?: Nullable<DateTimeFilter>;
-}
-
-export class AnswerWhereUniqueInput {
-    id?: Nullable<string>;
-}
-
 export class AttachmentCreateInput {
-    answer?: Nullable<AnswerCreateNestedOneWithoutAttachmentsInput>;
     attachmentType?: Nullable<AttachmentType>;
+    businessProfiles?: Nullable<BusinessProfileCreateNestedManyWithoutCoverInput>;
     comment?: Nullable<CommentCreateNestedOneWithoutAttachmentsInput>;
     createdAt?: Nullable<DateTime>;
     downloadable?: Nullable<boolean>;
     duration?: Nullable<number>;
     encoding?: Nullable<string>;
     filename?: Nullable<string>;
-    form?: Nullable<FormCreateNestedOneWithoutAttachmentsInput>;
-    forum?: Nullable<ForumCreateNestedOneWithoutAttachmentsInput>;
-    forumAnswer?: Nullable<ForumAnswerCreateNestedOneWithoutAttachmentsInput>;
-    grade?: Nullable<GradeCreateNestedOneWithoutAttachmentsInput>;
     helpStep?: Nullable<HelpStepCreateNestedOneWithoutAttachmentsInput>;
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
@@ -869,65 +329,24 @@ export class AttachmentCreateInput {
     path: Upload;
     paymentMethods?: Nullable<PaymentMethodCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
-    question?: Nullable<QuestionCreateNestedOneWithoutAttachmentsInput>;
-    recommendation?: Nullable<RecommendationCreateNestedOneWithoutAttachmentsInput>;
-    response?: Nullable<ResponseCreateNestedOneWithoutAttachmentsInput>;
     services?: Nullable<ServiceCreateNestedManyWithoutImageInput>;
     size?: Nullable<number>;
-    tags?: Nullable<TagCreateNestedManyWithoutImageInput>;
     updatedAt?: Nullable<DateTime>;
     user?: Nullable<UserCreateNestedManyWithoutAvatorInput>;
 }
 
-export class AttachmentCreateManyAnswerInput {
-    attachmentType?: Nullable<AttachmentType>;
-    commentId?: Nullable<string>;
-    createdAt?: Nullable<DateTime>;
-    downloadable?: Nullable<boolean>;
-    duration?: Nullable<number>;
-    encoding?: Nullable<string>;
-    filename?: Nullable<string>;
-    formId?: Nullable<string>;
-    forumAnswerId?: Nullable<string>;
-    forumId?: Nullable<string>;
-    gradeId?: Nullable<string>;
-    helpStepId?: Nullable<string>;
-    id?: Nullable<string>;
-    mimetype?: Nullable<string>;
-    path: Upload;
-    placement?: Nullable<string>;
-    questionId?: Nullable<string>;
-    recommendationId?: Nullable<string>;
-    responseId?: Nullable<string>;
-    size?: Nullable<number>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class AttachmentCreateManyAnswerInputEnvelope {
-    data: AttachmentCreateManyAnswerInput[];
-    skipDuplicates?: Nullable<boolean>;
-}
-
 export class AttachmentCreateManyCommentInput {
-    answerId?: Nullable<string>;
     attachmentType?: Nullable<AttachmentType>;
     createdAt?: Nullable<DateTime>;
     downloadable?: Nullable<boolean>;
     duration?: Nullable<number>;
     encoding?: Nullable<string>;
     filename?: Nullable<string>;
-    formId?: Nullable<string>;
-    forumAnswerId?: Nullable<string>;
-    forumId?: Nullable<string>;
-    gradeId?: Nullable<string>;
     helpStepId?: Nullable<string>;
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
     path: Upload;
     placement?: Nullable<string>;
-    questionId?: Nullable<string>;
-    recommendationId?: Nullable<string>;
-    responseId?: Nullable<string>;
     size?: Nullable<number>;
     updatedAt?: Nullable<DateTime>;
 }
@@ -937,124 +356,7 @@ export class AttachmentCreateManyCommentInputEnvelope {
     skipDuplicates?: Nullable<boolean>;
 }
 
-export class AttachmentCreateManyFormInput {
-    answerId?: Nullable<string>;
-    attachmentType?: Nullable<AttachmentType>;
-    commentId?: Nullable<string>;
-    createdAt?: Nullable<DateTime>;
-    downloadable?: Nullable<boolean>;
-    duration?: Nullable<number>;
-    encoding?: Nullable<string>;
-    filename?: Nullable<string>;
-    forumAnswerId?: Nullable<string>;
-    forumId?: Nullable<string>;
-    gradeId?: Nullable<string>;
-    helpStepId?: Nullable<string>;
-    id?: Nullable<string>;
-    mimetype?: Nullable<string>;
-    path: Upload;
-    placement?: Nullable<string>;
-    questionId?: Nullable<string>;
-    recommendationId?: Nullable<string>;
-    responseId?: Nullable<string>;
-    size?: Nullable<number>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class AttachmentCreateManyFormInputEnvelope {
-    data: AttachmentCreateManyFormInput[];
-    skipDuplicates?: Nullable<boolean>;
-}
-
-export class AttachmentCreateManyForumAnswerInput {
-    answerId?: Nullable<string>;
-    attachmentType?: Nullable<AttachmentType>;
-    commentId?: Nullable<string>;
-    createdAt?: Nullable<DateTime>;
-    downloadable?: Nullable<boolean>;
-    duration?: Nullable<number>;
-    encoding?: Nullable<string>;
-    filename?: Nullable<string>;
-    formId?: Nullable<string>;
-    forumId?: Nullable<string>;
-    gradeId?: Nullable<string>;
-    helpStepId?: Nullable<string>;
-    id?: Nullable<string>;
-    mimetype?: Nullable<string>;
-    path: Upload;
-    placement?: Nullable<string>;
-    questionId?: Nullable<string>;
-    recommendationId?: Nullable<string>;
-    responseId?: Nullable<string>;
-    size?: Nullable<number>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class AttachmentCreateManyForumAnswerInputEnvelope {
-    data: AttachmentCreateManyForumAnswerInput[];
-    skipDuplicates?: Nullable<boolean>;
-}
-
-export class AttachmentCreateManyForumInput {
-    answerId?: Nullable<string>;
-    attachmentType?: Nullable<AttachmentType>;
-    commentId?: Nullable<string>;
-    createdAt?: Nullable<DateTime>;
-    downloadable?: Nullable<boolean>;
-    duration?: Nullable<number>;
-    encoding?: Nullable<string>;
-    filename?: Nullable<string>;
-    formId?: Nullable<string>;
-    forumAnswerId?: Nullable<string>;
-    gradeId?: Nullable<string>;
-    helpStepId?: Nullable<string>;
-    id?: Nullable<string>;
-    mimetype?: Nullable<string>;
-    path: Upload;
-    placement?: Nullable<string>;
-    questionId?: Nullable<string>;
-    recommendationId?: Nullable<string>;
-    responseId?: Nullable<string>;
-    size?: Nullable<number>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class AttachmentCreateManyForumInputEnvelope {
-    data: AttachmentCreateManyForumInput[];
-    skipDuplicates?: Nullable<boolean>;
-}
-
-export class AttachmentCreateManyGradeInput {
-    answerId?: Nullable<string>;
-    attachmentType?: Nullable<AttachmentType>;
-    commentId?: Nullable<string>;
-    createdAt?: Nullable<DateTime>;
-    downloadable?: Nullable<boolean>;
-    duration?: Nullable<number>;
-    encoding?: Nullable<string>;
-    filename?: Nullable<string>;
-    formId?: Nullable<string>;
-    forumAnswerId?: Nullable<string>;
-    forumId?: Nullable<string>;
-    helpStepId?: Nullable<string>;
-    id?: Nullable<string>;
-    mimetype?: Nullable<string>;
-    path: Upload;
-    placement?: Nullable<string>;
-    questionId?: Nullable<string>;
-    recommendationId?: Nullable<string>;
-    responseId?: Nullable<string>;
-    size?: Nullable<number>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class AttachmentCreateManyGradeInputEnvelope {
-    data: AttachmentCreateManyGradeInput[];
-    skipDuplicates?: Nullable<boolean>;
-}
-
 export class AttachmentCreateManyHelpStepInput {
-    answerId?: Nullable<string>;
     attachmentType?: Nullable<AttachmentType>;
     commentId?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
@@ -1062,17 +364,10 @@ export class AttachmentCreateManyHelpStepInput {
     duration?: Nullable<number>;
     encoding?: Nullable<string>;
     filename?: Nullable<string>;
-    formId?: Nullable<string>;
-    forumAnswerId?: Nullable<string>;
-    forumId?: Nullable<string>;
-    gradeId?: Nullable<string>;
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
     path: Upload;
     placement?: Nullable<string>;
-    questionId?: Nullable<string>;
-    recommendationId?: Nullable<string>;
-    responseId?: Nullable<string>;
     size?: Nullable<number>;
     updatedAt?: Nullable<DateTime>;
 }
@@ -1083,7 +378,6 @@ export class AttachmentCreateManyHelpStepInputEnvelope {
 }
 
 export class AttachmentCreateManyInput {
-    answerId?: Nullable<string>;
     attachmentType?: Nullable<AttachmentType>;
     commentId?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
@@ -1091,114 +385,13 @@ export class AttachmentCreateManyInput {
     duration?: Nullable<number>;
     encoding?: Nullable<string>;
     filename?: Nullable<string>;
-    formId?: Nullable<string>;
-    forumAnswerId?: Nullable<string>;
-    forumId?: Nullable<string>;
-    gradeId?: Nullable<string>;
     helpStepId?: Nullable<string>;
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
     path: Upload;
     placement?: Nullable<string>;
-    questionId?: Nullable<string>;
-    recommendationId?: Nullable<string>;
-    responseId?: Nullable<string>;
     size?: Nullable<number>;
     updatedAt?: Nullable<DateTime>;
-}
-
-export class AttachmentCreateManyQuestionInput {
-    answerId?: Nullable<string>;
-    attachmentType?: Nullable<AttachmentType>;
-    commentId?: Nullable<string>;
-    createdAt?: Nullable<DateTime>;
-    downloadable?: Nullable<boolean>;
-    duration?: Nullable<number>;
-    encoding?: Nullable<string>;
-    filename?: Nullable<string>;
-    formId?: Nullable<string>;
-    forumAnswerId?: Nullable<string>;
-    forumId?: Nullable<string>;
-    gradeId?: Nullable<string>;
-    helpStepId?: Nullable<string>;
-    id?: Nullable<string>;
-    mimetype?: Nullable<string>;
-    path: Upload;
-    placement?: Nullable<string>;
-    recommendationId?: Nullable<string>;
-    responseId?: Nullable<string>;
-    size?: Nullable<number>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class AttachmentCreateManyQuestionInputEnvelope {
-    data: AttachmentCreateManyQuestionInput[];
-    skipDuplicates?: Nullable<boolean>;
-}
-
-export class AttachmentCreateManyRecommendationInput {
-    answerId?: Nullable<string>;
-    attachmentType?: Nullable<AttachmentType>;
-    commentId?: Nullable<string>;
-    createdAt?: Nullable<DateTime>;
-    downloadable?: Nullable<boolean>;
-    duration?: Nullable<number>;
-    encoding?: Nullable<string>;
-    filename?: Nullable<string>;
-    formId?: Nullable<string>;
-    forumAnswerId?: Nullable<string>;
-    forumId?: Nullable<string>;
-    gradeId?: Nullable<string>;
-    helpStepId?: Nullable<string>;
-    id?: Nullable<string>;
-    mimetype?: Nullable<string>;
-    path: Upload;
-    placement?: Nullable<string>;
-    questionId?: Nullable<string>;
-    responseId?: Nullable<string>;
-    size?: Nullable<number>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class AttachmentCreateManyRecommendationInputEnvelope {
-    data: AttachmentCreateManyRecommendationInput[];
-    skipDuplicates?: Nullable<boolean>;
-}
-
-export class AttachmentCreateManyResponseInput {
-    answerId?: Nullable<string>;
-    attachmentType?: Nullable<AttachmentType>;
-    commentId?: Nullable<string>;
-    createdAt?: Nullable<DateTime>;
-    downloadable?: Nullable<boolean>;
-    duration?: Nullable<number>;
-    encoding?: Nullable<string>;
-    filename?: Nullable<string>;
-    formId?: Nullable<string>;
-    forumAnswerId?: Nullable<string>;
-    forumId?: Nullable<string>;
-    gradeId?: Nullable<string>;
-    helpStepId?: Nullable<string>;
-    id?: Nullable<string>;
-    mimetype?: Nullable<string>;
-    path: Upload;
-    placement?: Nullable<string>;
-    questionId?: Nullable<string>;
-    recommendationId?: Nullable<string>;
-    size?: Nullable<number>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class AttachmentCreateManyResponseInputEnvelope {
-    data: AttachmentCreateManyResponseInput[];
-    skipDuplicates?: Nullable<boolean>;
-}
-
-export class AttachmentCreateNestedManyWithoutAnswerInput {
-    connect?: Nullable<AttachmentWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AttachmentCreateOrConnectWithoutAnswerInput[]>;
-    create?: Nullable<AttachmentCreateWithoutAnswerInput[]>;
-    createMany?: Nullable<AttachmentCreateManyAnswerInputEnvelope>;
 }
 
 export class AttachmentCreateNestedManyWithoutCommentInput {
@@ -1208,34 +401,6 @@ export class AttachmentCreateNestedManyWithoutCommentInput {
     createMany?: Nullable<AttachmentCreateManyCommentInputEnvelope>;
 }
 
-export class AttachmentCreateNestedManyWithoutFormInput {
-    connect?: Nullable<AttachmentWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AttachmentCreateOrConnectWithoutFormInput[]>;
-    create?: Nullable<AttachmentCreateWithoutFormInput[]>;
-    createMany?: Nullable<AttachmentCreateManyFormInputEnvelope>;
-}
-
-export class AttachmentCreateNestedManyWithoutForumAnswerInput {
-    connect?: Nullable<AttachmentWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AttachmentCreateOrConnectWithoutForumAnswerInput[]>;
-    create?: Nullable<AttachmentCreateWithoutForumAnswerInput[]>;
-    createMany?: Nullable<AttachmentCreateManyForumAnswerInputEnvelope>;
-}
-
-export class AttachmentCreateNestedManyWithoutForumInput {
-    connect?: Nullable<AttachmentWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AttachmentCreateOrConnectWithoutForumInput[]>;
-    create?: Nullable<AttachmentCreateWithoutForumInput[]>;
-    createMany?: Nullable<AttachmentCreateManyForumInputEnvelope>;
-}
-
-export class AttachmentCreateNestedManyWithoutGradeInput {
-    connect?: Nullable<AttachmentWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AttachmentCreateOrConnectWithoutGradeInput[]>;
-    create?: Nullable<AttachmentCreateWithoutGradeInput[]>;
-    createMany?: Nullable<AttachmentCreateManyGradeInputEnvelope>;
-}
-
 export class AttachmentCreateNestedManyWithoutHelpStepInput {
     connect?: Nullable<AttachmentWhereUniqueInput[]>;
     connectOrCreate?: Nullable<AttachmentCreateOrConnectWithoutHelpStepInput[]>;
@@ -1243,25 +408,10 @@ export class AttachmentCreateNestedManyWithoutHelpStepInput {
     createMany?: Nullable<AttachmentCreateManyHelpStepInputEnvelope>;
 }
 
-export class AttachmentCreateNestedManyWithoutQuestionInput {
-    connect?: Nullable<AttachmentWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AttachmentCreateOrConnectWithoutQuestionInput[]>;
-    create?: Nullable<AttachmentCreateWithoutQuestionInput[]>;
-    createMany?: Nullable<AttachmentCreateManyQuestionInputEnvelope>;
-}
-
-export class AttachmentCreateNestedManyWithoutRecommendationInput {
-    connect?: Nullable<AttachmentWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AttachmentCreateOrConnectWithoutRecommendationInput[]>;
-    create?: Nullable<AttachmentCreateWithoutRecommendationInput[]>;
-    createMany?: Nullable<AttachmentCreateManyRecommendationInputEnvelope>;
-}
-
-export class AttachmentCreateNestedManyWithoutResponseInput {
-    connect?: Nullable<AttachmentWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AttachmentCreateOrConnectWithoutResponseInput[]>;
-    create?: Nullable<AttachmentCreateWithoutResponseInput[]>;
-    createMany?: Nullable<AttachmentCreateManyResponseInputEnvelope>;
+export class AttachmentCreateNestedOneWithoutBusinessProfilesInput {
+    connect?: Nullable<AttachmentWhereUniqueInput>;
+    connectOrCreate?: Nullable<AttachmentCreateOrConnectWithoutBusinessProfilesInput>;
+    create?: Nullable<AttachmentUncheckedCreateWithoutBusinessProfilesInput>;
 }
 
 export class AttachmentCreateNestedOneWithoutOrdersInput {
@@ -1282,45 +432,19 @@ export class AttachmentCreateNestedOneWithoutServicesInput {
     create?: Nullable<AttachmentUncheckedCreateWithoutServicesInput>;
 }
 
-export class AttachmentCreateNestedOneWithoutTagsInput {
-    connect?: Nullable<AttachmentWhereUniqueInput>;
-    connectOrCreate?: Nullable<AttachmentCreateOrConnectWithoutTagsInput>;
-    create?: Nullable<AttachmentUncheckedCreateWithoutTagsInput>;
-}
-
 export class AttachmentCreateNestedOneWithoutUserInput {
     connect?: Nullable<AttachmentWhereUniqueInput>;
     connectOrCreate?: Nullable<AttachmentCreateOrConnectWithoutUserInput>;
     create?: Nullable<AttachmentUncheckedCreateWithoutUserInput>;
 }
 
-export class AttachmentCreateOrConnectWithoutAnswerInput {
-    create: AttachmentUncheckedCreateWithoutAnswerInput;
+export class AttachmentCreateOrConnectWithoutBusinessProfilesInput {
+    create: AttachmentUncheckedCreateWithoutBusinessProfilesInput;
     where: AttachmentWhereUniqueInput;
 }
 
 export class AttachmentCreateOrConnectWithoutCommentInput {
     create: AttachmentUncheckedCreateWithoutCommentInput;
-    where: AttachmentWhereUniqueInput;
-}
-
-export class AttachmentCreateOrConnectWithoutFormInput {
-    create: AttachmentUncheckedCreateWithoutFormInput;
-    where: AttachmentWhereUniqueInput;
-}
-
-export class AttachmentCreateOrConnectWithoutForumAnswerInput {
-    create: AttachmentUncheckedCreateWithoutForumAnswerInput;
-    where: AttachmentWhereUniqueInput;
-}
-
-export class AttachmentCreateOrConnectWithoutForumInput {
-    create: AttachmentUncheckedCreateWithoutForumInput;
-    where: AttachmentWhereUniqueInput;
-}
-
-export class AttachmentCreateOrConnectWithoutGradeInput {
-    create: AttachmentUncheckedCreateWithoutGradeInput;
     where: AttachmentWhereUniqueInput;
 }
 
@@ -1339,28 +463,8 @@ export class AttachmentCreateOrConnectWithoutPaymentMethodsInput {
     where: AttachmentWhereUniqueInput;
 }
 
-export class AttachmentCreateOrConnectWithoutQuestionInput {
-    create: AttachmentUncheckedCreateWithoutQuestionInput;
-    where: AttachmentWhereUniqueInput;
-}
-
-export class AttachmentCreateOrConnectWithoutRecommendationInput {
-    create: AttachmentUncheckedCreateWithoutRecommendationInput;
-    where: AttachmentWhereUniqueInput;
-}
-
-export class AttachmentCreateOrConnectWithoutResponseInput {
-    create: AttachmentUncheckedCreateWithoutResponseInput;
-    where: AttachmentWhereUniqueInput;
-}
-
 export class AttachmentCreateOrConnectWithoutServicesInput {
     create: AttachmentUncheckedCreateWithoutServicesInput;
-    where: AttachmentWhereUniqueInput;
-}
-
-export class AttachmentCreateOrConnectWithoutTagsInput {
-    create: AttachmentUncheckedCreateWithoutTagsInput;
     where: AttachmentWhereUniqueInput;
 }
 
@@ -1369,7 +473,7 @@ export class AttachmentCreateOrConnectWithoutUserInput {
     where: AttachmentWhereUniqueInput;
 }
 
-export class AttachmentCreateWithoutAnswerInput {
+export class AttachmentCreateWithoutBusinessProfilesInput {
     attachmentType?: Nullable<AttachmentType>;
     comment?: Nullable<CommentCreateNestedOneWithoutAttachmentsInput>;
     createdAt?: Nullable<DateTime>;
@@ -1377,10 +481,6 @@ export class AttachmentCreateWithoutAnswerInput {
     duration?: Nullable<number>;
     encoding?: Nullable<string>;
     filename?: Nullable<string>;
-    form?: Nullable<FormCreateNestedOneWithoutAttachmentsInput>;
-    forum?: Nullable<ForumCreateNestedOneWithoutAttachmentsInput>;
-    forumAnswer?: Nullable<ForumAnswerCreateNestedOneWithoutAttachmentsInput>;
-    grade?: Nullable<GradeCreateNestedOneWithoutAttachmentsInput>;
     helpStep?: Nullable<HelpStepCreateNestedOneWithoutAttachmentsInput>;
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
@@ -1388,28 +488,20 @@ export class AttachmentCreateWithoutAnswerInput {
     path: Upload;
     paymentMethods?: Nullable<PaymentMethodCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
-    question?: Nullable<QuestionCreateNestedOneWithoutAttachmentsInput>;
-    recommendation?: Nullable<RecommendationCreateNestedOneWithoutAttachmentsInput>;
-    response?: Nullable<ResponseCreateNestedOneWithoutAttachmentsInput>;
     services?: Nullable<ServiceCreateNestedManyWithoutImageInput>;
     size?: Nullable<number>;
-    tags?: Nullable<TagCreateNestedManyWithoutImageInput>;
     updatedAt?: Nullable<DateTime>;
     user?: Nullable<UserCreateNestedManyWithoutAvatorInput>;
 }
 
 export class AttachmentCreateWithoutCommentInput {
-    answer?: Nullable<AnswerCreateNestedOneWithoutAttachmentsInput>;
     attachmentType?: Nullable<AttachmentType>;
+    businessProfiles?: Nullable<BusinessProfileCreateNestedManyWithoutCoverInput>;
     createdAt?: Nullable<DateTime>;
     downloadable?: Nullable<boolean>;
     duration?: Nullable<number>;
     encoding?: Nullable<string>;
     filename?: Nullable<string>;
-    form?: Nullable<FormCreateNestedOneWithoutAttachmentsInput>;
-    forum?: Nullable<ForumCreateNestedOneWithoutAttachmentsInput>;
-    forumAnswer?: Nullable<ForumAnswerCreateNestedOneWithoutAttachmentsInput>;
-    grade?: Nullable<GradeCreateNestedOneWithoutAttachmentsInput>;
     helpStep?: Nullable<HelpStepCreateNestedOneWithoutAttachmentsInput>;
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
@@ -1417,319 +509,84 @@ export class AttachmentCreateWithoutCommentInput {
     path: Upload;
     paymentMethods?: Nullable<PaymentMethodCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
-    question?: Nullable<QuestionCreateNestedOneWithoutAttachmentsInput>;
-    recommendation?: Nullable<RecommendationCreateNestedOneWithoutAttachmentsInput>;
-    response?: Nullable<ResponseCreateNestedOneWithoutAttachmentsInput>;
     services?: Nullable<ServiceCreateNestedManyWithoutImageInput>;
     size?: Nullable<number>;
-    tags?: Nullable<TagCreateNestedManyWithoutImageInput>;
-    updatedAt?: Nullable<DateTime>;
-    user?: Nullable<UserCreateNestedManyWithoutAvatorInput>;
-}
-
-export class AttachmentCreateWithoutFormInput {
-    answer?: Nullable<AnswerCreateNestedOneWithoutAttachmentsInput>;
-    attachmentType?: Nullable<AttachmentType>;
-    comment?: Nullable<CommentCreateNestedOneWithoutAttachmentsInput>;
-    createdAt?: Nullable<DateTime>;
-    downloadable?: Nullable<boolean>;
-    duration?: Nullable<number>;
-    encoding?: Nullable<string>;
-    filename?: Nullable<string>;
-    forum?: Nullable<ForumCreateNestedOneWithoutAttachmentsInput>;
-    forumAnswer?: Nullable<ForumAnswerCreateNestedOneWithoutAttachmentsInput>;
-    grade?: Nullable<GradeCreateNestedOneWithoutAttachmentsInput>;
-    helpStep?: Nullable<HelpStepCreateNestedOneWithoutAttachmentsInput>;
-    id?: Nullable<string>;
-    mimetype?: Nullable<string>;
-    orders?: Nullable<OrderCreateNestedManyWithoutReceiptInput>;
-    path: Upload;
-    paymentMethods?: Nullable<PaymentMethodCreateNestedManyWithoutLogoInput>;
-    placement?: Nullable<string>;
-    question?: Nullable<QuestionCreateNestedOneWithoutAttachmentsInput>;
-    recommendation?: Nullable<RecommendationCreateNestedOneWithoutAttachmentsInput>;
-    response?: Nullable<ResponseCreateNestedOneWithoutAttachmentsInput>;
-    services?: Nullable<ServiceCreateNestedManyWithoutImageInput>;
-    size?: Nullable<number>;
-    tags?: Nullable<TagCreateNestedManyWithoutImageInput>;
-    updatedAt?: Nullable<DateTime>;
-    user?: Nullable<UserCreateNestedManyWithoutAvatorInput>;
-}
-
-export class AttachmentCreateWithoutForumAnswerInput {
-    answer?: Nullable<AnswerCreateNestedOneWithoutAttachmentsInput>;
-    attachmentType?: Nullable<AttachmentType>;
-    comment?: Nullable<CommentCreateNestedOneWithoutAttachmentsInput>;
-    createdAt?: Nullable<DateTime>;
-    downloadable?: Nullable<boolean>;
-    duration?: Nullable<number>;
-    encoding?: Nullable<string>;
-    filename?: Nullable<string>;
-    form?: Nullable<FormCreateNestedOneWithoutAttachmentsInput>;
-    forum?: Nullable<ForumCreateNestedOneWithoutAttachmentsInput>;
-    grade?: Nullable<GradeCreateNestedOneWithoutAttachmentsInput>;
-    helpStep?: Nullable<HelpStepCreateNestedOneWithoutAttachmentsInput>;
-    id?: Nullable<string>;
-    mimetype?: Nullable<string>;
-    orders?: Nullable<OrderCreateNestedManyWithoutReceiptInput>;
-    path: Upload;
-    paymentMethods?: Nullable<PaymentMethodCreateNestedManyWithoutLogoInput>;
-    placement?: Nullable<string>;
-    question?: Nullable<QuestionCreateNestedOneWithoutAttachmentsInput>;
-    recommendation?: Nullable<RecommendationCreateNestedOneWithoutAttachmentsInput>;
-    response?: Nullable<ResponseCreateNestedOneWithoutAttachmentsInput>;
-    services?: Nullable<ServiceCreateNestedManyWithoutImageInput>;
-    size?: Nullable<number>;
-    tags?: Nullable<TagCreateNestedManyWithoutImageInput>;
-    updatedAt?: Nullable<DateTime>;
-    user?: Nullable<UserCreateNestedManyWithoutAvatorInput>;
-}
-
-export class AttachmentCreateWithoutForumInput {
-    answer?: Nullable<AnswerCreateNestedOneWithoutAttachmentsInput>;
-    attachmentType?: Nullable<AttachmentType>;
-    comment?: Nullable<CommentCreateNestedOneWithoutAttachmentsInput>;
-    createdAt?: Nullable<DateTime>;
-    downloadable?: Nullable<boolean>;
-    duration?: Nullable<number>;
-    encoding?: Nullable<string>;
-    filename?: Nullable<string>;
-    form?: Nullable<FormCreateNestedOneWithoutAttachmentsInput>;
-    forumAnswer?: Nullable<ForumAnswerCreateNestedOneWithoutAttachmentsInput>;
-    grade?: Nullable<GradeCreateNestedOneWithoutAttachmentsInput>;
-    helpStep?: Nullable<HelpStepCreateNestedOneWithoutAttachmentsInput>;
-    id?: Nullable<string>;
-    mimetype?: Nullable<string>;
-    orders?: Nullable<OrderCreateNestedManyWithoutReceiptInput>;
-    path: Upload;
-    paymentMethods?: Nullable<PaymentMethodCreateNestedManyWithoutLogoInput>;
-    placement?: Nullable<string>;
-    question?: Nullable<QuestionCreateNestedOneWithoutAttachmentsInput>;
-    recommendation?: Nullable<RecommendationCreateNestedOneWithoutAttachmentsInput>;
-    response?: Nullable<ResponseCreateNestedOneWithoutAttachmentsInput>;
-    services?: Nullable<ServiceCreateNestedManyWithoutImageInput>;
-    size?: Nullable<number>;
-    tags?: Nullable<TagCreateNestedManyWithoutImageInput>;
-    updatedAt?: Nullable<DateTime>;
-    user?: Nullable<UserCreateNestedManyWithoutAvatorInput>;
-}
-
-export class AttachmentCreateWithoutGradeInput {
-    answer?: Nullable<AnswerCreateNestedOneWithoutAttachmentsInput>;
-    attachmentType?: Nullable<AttachmentType>;
-    comment?: Nullable<CommentCreateNestedOneWithoutAttachmentsInput>;
-    createdAt?: Nullable<DateTime>;
-    downloadable?: Nullable<boolean>;
-    duration?: Nullable<number>;
-    encoding?: Nullable<string>;
-    filename?: Nullable<string>;
-    form?: Nullable<FormCreateNestedOneWithoutAttachmentsInput>;
-    forum?: Nullable<ForumCreateNestedOneWithoutAttachmentsInput>;
-    forumAnswer?: Nullable<ForumAnswerCreateNestedOneWithoutAttachmentsInput>;
-    helpStep?: Nullable<HelpStepCreateNestedOneWithoutAttachmentsInput>;
-    id?: Nullable<string>;
-    mimetype?: Nullable<string>;
-    orders?: Nullable<OrderCreateNestedManyWithoutReceiptInput>;
-    path: Upload;
-    paymentMethods?: Nullable<PaymentMethodCreateNestedManyWithoutLogoInput>;
-    placement?: Nullable<string>;
-    question?: Nullable<QuestionCreateNestedOneWithoutAttachmentsInput>;
-    recommendation?: Nullable<RecommendationCreateNestedOneWithoutAttachmentsInput>;
-    response?: Nullable<ResponseCreateNestedOneWithoutAttachmentsInput>;
-    services?: Nullable<ServiceCreateNestedManyWithoutImageInput>;
-    size?: Nullable<number>;
-    tags?: Nullable<TagCreateNestedManyWithoutImageInput>;
     updatedAt?: Nullable<DateTime>;
     user?: Nullable<UserCreateNestedManyWithoutAvatorInput>;
 }
 
 export class AttachmentCreateWithoutHelpStepInput {
-    answer?: Nullable<AnswerCreateNestedOneWithoutAttachmentsInput>;
     attachmentType?: Nullable<AttachmentType>;
+    businessProfiles?: Nullable<BusinessProfileCreateNestedManyWithoutCoverInput>;
     comment?: Nullable<CommentCreateNestedOneWithoutAttachmentsInput>;
     createdAt?: Nullable<DateTime>;
     downloadable?: Nullable<boolean>;
     duration?: Nullable<number>;
     encoding?: Nullable<string>;
     filename?: Nullable<string>;
-    form?: Nullable<FormCreateNestedOneWithoutAttachmentsInput>;
-    forum?: Nullable<ForumCreateNestedOneWithoutAttachmentsInput>;
-    forumAnswer?: Nullable<ForumAnswerCreateNestedOneWithoutAttachmentsInput>;
-    grade?: Nullable<GradeCreateNestedOneWithoutAttachmentsInput>;
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
     orders?: Nullable<OrderCreateNestedManyWithoutReceiptInput>;
     path: Upload;
     paymentMethods?: Nullable<PaymentMethodCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
-    question?: Nullable<QuestionCreateNestedOneWithoutAttachmentsInput>;
-    recommendation?: Nullable<RecommendationCreateNestedOneWithoutAttachmentsInput>;
-    response?: Nullable<ResponseCreateNestedOneWithoutAttachmentsInput>;
     services?: Nullable<ServiceCreateNestedManyWithoutImageInput>;
     size?: Nullable<number>;
-    tags?: Nullable<TagCreateNestedManyWithoutImageInput>;
     updatedAt?: Nullable<DateTime>;
     user?: Nullable<UserCreateNestedManyWithoutAvatorInput>;
 }
 
 export class AttachmentCreateWithoutOrdersInput {
-    answer?: Nullable<AnswerCreateNestedOneWithoutAttachmentsInput>;
     attachmentType?: Nullable<AttachmentType>;
+    businessProfiles?: Nullable<BusinessProfileCreateNestedManyWithoutCoverInput>;
     comment?: Nullable<CommentCreateNestedOneWithoutAttachmentsInput>;
     createdAt?: Nullable<DateTime>;
     downloadable?: Nullable<boolean>;
     duration?: Nullable<number>;
     encoding?: Nullable<string>;
     filename?: Nullable<string>;
-    form?: Nullable<FormCreateNestedOneWithoutAttachmentsInput>;
-    forum?: Nullable<ForumCreateNestedOneWithoutAttachmentsInput>;
-    forumAnswer?: Nullable<ForumAnswerCreateNestedOneWithoutAttachmentsInput>;
-    grade?: Nullable<GradeCreateNestedOneWithoutAttachmentsInput>;
     helpStep?: Nullable<HelpStepCreateNestedOneWithoutAttachmentsInput>;
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
     path: Upload;
     paymentMethods?: Nullable<PaymentMethodCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
-    question?: Nullable<QuestionCreateNestedOneWithoutAttachmentsInput>;
-    recommendation?: Nullable<RecommendationCreateNestedOneWithoutAttachmentsInput>;
-    response?: Nullable<ResponseCreateNestedOneWithoutAttachmentsInput>;
     services?: Nullable<ServiceCreateNestedManyWithoutImageInput>;
     size?: Nullable<number>;
-    tags?: Nullable<TagCreateNestedManyWithoutImageInput>;
     updatedAt?: Nullable<DateTime>;
     user?: Nullable<UserCreateNestedManyWithoutAvatorInput>;
 }
 
 export class AttachmentCreateWithoutPaymentMethodsInput {
-    answer?: Nullable<AnswerCreateNestedOneWithoutAttachmentsInput>;
     attachmentType?: Nullable<AttachmentType>;
+    businessProfiles?: Nullable<BusinessProfileCreateNestedManyWithoutCoverInput>;
     comment?: Nullable<CommentCreateNestedOneWithoutAttachmentsInput>;
     createdAt?: Nullable<DateTime>;
     downloadable?: Nullable<boolean>;
     duration?: Nullable<number>;
     encoding?: Nullable<string>;
     filename?: Nullable<string>;
-    form?: Nullable<FormCreateNestedOneWithoutAttachmentsInput>;
-    forum?: Nullable<ForumCreateNestedOneWithoutAttachmentsInput>;
-    forumAnswer?: Nullable<ForumAnswerCreateNestedOneWithoutAttachmentsInput>;
-    grade?: Nullable<GradeCreateNestedOneWithoutAttachmentsInput>;
     helpStep?: Nullable<HelpStepCreateNestedOneWithoutAttachmentsInput>;
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
     orders?: Nullable<OrderCreateNestedManyWithoutReceiptInput>;
     path: Upload;
     placement?: Nullable<string>;
-    question?: Nullable<QuestionCreateNestedOneWithoutAttachmentsInput>;
-    recommendation?: Nullable<RecommendationCreateNestedOneWithoutAttachmentsInput>;
-    response?: Nullable<ResponseCreateNestedOneWithoutAttachmentsInput>;
     services?: Nullable<ServiceCreateNestedManyWithoutImageInput>;
     size?: Nullable<number>;
-    tags?: Nullable<TagCreateNestedManyWithoutImageInput>;
-    updatedAt?: Nullable<DateTime>;
-    user?: Nullable<UserCreateNestedManyWithoutAvatorInput>;
-}
-
-export class AttachmentCreateWithoutQuestionInput {
-    answer?: Nullable<AnswerCreateNestedOneWithoutAttachmentsInput>;
-    attachmentType?: Nullable<AttachmentType>;
-    comment?: Nullable<CommentCreateNestedOneWithoutAttachmentsInput>;
-    createdAt?: Nullable<DateTime>;
-    downloadable?: Nullable<boolean>;
-    duration?: Nullable<number>;
-    encoding?: Nullable<string>;
-    filename?: Nullable<string>;
-    form?: Nullable<FormCreateNestedOneWithoutAttachmentsInput>;
-    forum?: Nullable<ForumCreateNestedOneWithoutAttachmentsInput>;
-    forumAnswer?: Nullable<ForumAnswerCreateNestedOneWithoutAttachmentsInput>;
-    grade?: Nullable<GradeCreateNestedOneWithoutAttachmentsInput>;
-    helpStep?: Nullable<HelpStepCreateNestedOneWithoutAttachmentsInput>;
-    id?: Nullable<string>;
-    mimetype?: Nullable<string>;
-    orders?: Nullable<OrderCreateNestedManyWithoutReceiptInput>;
-    path: Upload;
-    paymentMethods?: Nullable<PaymentMethodCreateNestedManyWithoutLogoInput>;
-    placement?: Nullable<string>;
-    recommendation?: Nullable<RecommendationCreateNestedOneWithoutAttachmentsInput>;
-    response?: Nullable<ResponseCreateNestedOneWithoutAttachmentsInput>;
-    services?: Nullable<ServiceCreateNestedManyWithoutImageInput>;
-    size?: Nullable<number>;
-    tags?: Nullable<TagCreateNestedManyWithoutImageInput>;
-    updatedAt?: Nullable<DateTime>;
-    user?: Nullable<UserCreateNestedManyWithoutAvatorInput>;
-}
-
-export class AttachmentCreateWithoutRecommendationInput {
-    answer?: Nullable<AnswerCreateNestedOneWithoutAttachmentsInput>;
-    attachmentType?: Nullable<AttachmentType>;
-    comment?: Nullable<CommentCreateNestedOneWithoutAttachmentsInput>;
-    createdAt?: Nullable<DateTime>;
-    downloadable?: Nullable<boolean>;
-    duration?: Nullable<number>;
-    encoding?: Nullable<string>;
-    filename?: Nullable<string>;
-    form?: Nullable<FormCreateNestedOneWithoutAttachmentsInput>;
-    forum?: Nullable<ForumCreateNestedOneWithoutAttachmentsInput>;
-    forumAnswer?: Nullable<ForumAnswerCreateNestedOneWithoutAttachmentsInput>;
-    grade?: Nullable<GradeCreateNestedOneWithoutAttachmentsInput>;
-    helpStep?: Nullable<HelpStepCreateNestedOneWithoutAttachmentsInput>;
-    id?: Nullable<string>;
-    mimetype?: Nullable<string>;
-    orders?: Nullable<OrderCreateNestedManyWithoutReceiptInput>;
-    path: Upload;
-    paymentMethods?: Nullable<PaymentMethodCreateNestedManyWithoutLogoInput>;
-    placement?: Nullable<string>;
-    question?: Nullable<QuestionCreateNestedOneWithoutAttachmentsInput>;
-    response?: Nullable<ResponseCreateNestedOneWithoutAttachmentsInput>;
-    services?: Nullable<ServiceCreateNestedManyWithoutImageInput>;
-    size?: Nullable<number>;
-    tags?: Nullable<TagCreateNestedManyWithoutImageInput>;
-    updatedAt?: Nullable<DateTime>;
-    user?: Nullable<UserCreateNestedManyWithoutAvatorInput>;
-}
-
-export class AttachmentCreateWithoutResponseInput {
-    answer?: Nullable<AnswerCreateNestedOneWithoutAttachmentsInput>;
-    attachmentType?: Nullable<AttachmentType>;
-    comment?: Nullable<CommentCreateNestedOneWithoutAttachmentsInput>;
-    createdAt?: Nullable<DateTime>;
-    downloadable?: Nullable<boolean>;
-    duration?: Nullable<number>;
-    encoding?: Nullable<string>;
-    filename?: Nullable<string>;
-    form?: Nullable<FormCreateNestedOneWithoutAttachmentsInput>;
-    forum?: Nullable<ForumCreateNestedOneWithoutAttachmentsInput>;
-    forumAnswer?: Nullable<ForumAnswerCreateNestedOneWithoutAttachmentsInput>;
-    grade?: Nullable<GradeCreateNestedOneWithoutAttachmentsInput>;
-    helpStep?: Nullable<HelpStepCreateNestedOneWithoutAttachmentsInput>;
-    id?: Nullable<string>;
-    mimetype?: Nullable<string>;
-    orders?: Nullable<OrderCreateNestedManyWithoutReceiptInput>;
-    path: Upload;
-    paymentMethods?: Nullable<PaymentMethodCreateNestedManyWithoutLogoInput>;
-    placement?: Nullable<string>;
-    question?: Nullable<QuestionCreateNestedOneWithoutAttachmentsInput>;
-    recommendation?: Nullable<RecommendationCreateNestedOneWithoutAttachmentsInput>;
-    services?: Nullable<ServiceCreateNestedManyWithoutImageInput>;
-    size?: Nullable<number>;
-    tags?: Nullable<TagCreateNestedManyWithoutImageInput>;
     updatedAt?: Nullable<DateTime>;
     user?: Nullable<UserCreateNestedManyWithoutAvatorInput>;
 }
 
 export class AttachmentCreateWithoutServicesInput {
-    answer?: Nullable<AnswerCreateNestedOneWithoutAttachmentsInput>;
     attachmentType?: Nullable<AttachmentType>;
+    businessProfiles?: Nullable<BusinessProfileCreateNestedManyWithoutCoverInput>;
     comment?: Nullable<CommentCreateNestedOneWithoutAttachmentsInput>;
     createdAt?: Nullable<DateTime>;
     downloadable?: Nullable<boolean>;
     duration?: Nullable<number>;
     encoding?: Nullable<string>;
     filename?: Nullable<string>;
-    form?: Nullable<FormCreateNestedOneWithoutAttachmentsInput>;
-    forum?: Nullable<ForumCreateNestedOneWithoutAttachmentsInput>;
-    forumAnswer?: Nullable<ForumAnswerCreateNestedOneWithoutAttachmentsInput>;
-    grade?: Nullable<GradeCreateNestedOneWithoutAttachmentsInput>;
     helpStep?: Nullable<HelpStepCreateNestedOneWithoutAttachmentsInput>;
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
@@ -1737,57 +594,20 @@ export class AttachmentCreateWithoutServicesInput {
     path: Upload;
     paymentMethods?: Nullable<PaymentMethodCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
-    question?: Nullable<QuestionCreateNestedOneWithoutAttachmentsInput>;
-    recommendation?: Nullable<RecommendationCreateNestedOneWithoutAttachmentsInput>;
-    response?: Nullable<ResponseCreateNestedOneWithoutAttachmentsInput>;
-    size?: Nullable<number>;
-    tags?: Nullable<TagCreateNestedManyWithoutImageInput>;
-    updatedAt?: Nullable<DateTime>;
-    user?: Nullable<UserCreateNestedManyWithoutAvatorInput>;
-}
-
-export class AttachmentCreateWithoutTagsInput {
-    answer?: Nullable<AnswerCreateNestedOneWithoutAttachmentsInput>;
-    attachmentType?: Nullable<AttachmentType>;
-    comment?: Nullable<CommentCreateNestedOneWithoutAttachmentsInput>;
-    createdAt?: Nullable<DateTime>;
-    downloadable?: Nullable<boolean>;
-    duration?: Nullable<number>;
-    encoding?: Nullable<string>;
-    filename?: Nullable<string>;
-    form?: Nullable<FormCreateNestedOneWithoutAttachmentsInput>;
-    forum?: Nullable<ForumCreateNestedOneWithoutAttachmentsInput>;
-    forumAnswer?: Nullable<ForumAnswerCreateNestedOneWithoutAttachmentsInput>;
-    grade?: Nullable<GradeCreateNestedOneWithoutAttachmentsInput>;
-    helpStep?: Nullable<HelpStepCreateNestedOneWithoutAttachmentsInput>;
-    id?: Nullable<string>;
-    mimetype?: Nullable<string>;
-    orders?: Nullable<OrderCreateNestedManyWithoutReceiptInput>;
-    path: Upload;
-    paymentMethods?: Nullable<PaymentMethodCreateNestedManyWithoutLogoInput>;
-    placement?: Nullable<string>;
-    question?: Nullable<QuestionCreateNestedOneWithoutAttachmentsInput>;
-    recommendation?: Nullable<RecommendationCreateNestedOneWithoutAttachmentsInput>;
-    response?: Nullable<ResponseCreateNestedOneWithoutAttachmentsInput>;
-    services?: Nullable<ServiceCreateNestedManyWithoutImageInput>;
     size?: Nullable<number>;
     updatedAt?: Nullable<DateTime>;
     user?: Nullable<UserCreateNestedManyWithoutAvatorInput>;
 }
 
 export class AttachmentCreateWithoutUserInput {
-    answer?: Nullable<AnswerCreateNestedOneWithoutAttachmentsInput>;
     attachmentType?: Nullable<AttachmentType>;
+    businessProfiles?: Nullable<BusinessProfileCreateNestedManyWithoutCoverInput>;
     comment?: Nullable<CommentCreateNestedOneWithoutAttachmentsInput>;
     createdAt?: Nullable<DateTime>;
     downloadable?: Nullable<boolean>;
     duration?: Nullable<number>;
     encoding?: Nullable<string>;
     filename?: Nullable<string>;
-    form?: Nullable<FormCreateNestedOneWithoutAttachmentsInput>;
-    forum?: Nullable<ForumCreateNestedOneWithoutAttachmentsInput>;
-    forumAnswer?: Nullable<ForumAnswerCreateNestedOneWithoutAttachmentsInput>;
-    grade?: Nullable<GradeCreateNestedOneWithoutAttachmentsInput>;
     helpStep?: Nullable<HelpStepCreateNestedOneWithoutAttachmentsInput>;
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
@@ -1795,12 +615,8 @@ export class AttachmentCreateWithoutUserInput {
     path: Upload;
     paymentMethods?: Nullable<PaymentMethodCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
-    question?: Nullable<QuestionCreateNestedOneWithoutAttachmentsInput>;
-    recommendation?: Nullable<RecommendationCreateNestedOneWithoutAttachmentsInput>;
-    response?: Nullable<ResponseCreateNestedOneWithoutAttachmentsInput>;
     services?: Nullable<ServiceCreateNestedManyWithoutImageInput>;
     size?: Nullable<number>;
-    tags?: Nullable<TagCreateNestedManyWithoutImageInput>;
     updatedAt?: Nullable<DateTime>;
 }
 
@@ -1811,7 +627,6 @@ export class AttachmentListRelationFilter {
 }
 
 export class AttachmentOrderByInput {
-    answerId?: Nullable<SortOrder>;
     attachmentType?: Nullable<SortOrder>;
     commentId?: Nullable<SortOrder>;
     createdAt?: Nullable<SortOrder>;
@@ -1819,18 +634,11 @@ export class AttachmentOrderByInput {
     duration?: Nullable<SortOrder>;
     encoding?: Nullable<SortOrder>;
     filename?: Nullable<SortOrder>;
-    formId?: Nullable<SortOrder>;
-    forumAnswerId?: Nullable<SortOrder>;
-    forumId?: Nullable<SortOrder>;
-    gradeId?: Nullable<SortOrder>;
     helpStepId?: Nullable<SortOrder>;
     id?: Nullable<SortOrder>;
     mimetype?: Nullable<SortOrder>;
     path?: Nullable<SortOrder>;
     placement?: Nullable<SortOrder>;
-    questionId?: Nullable<SortOrder>;
-    recommendationId?: Nullable<SortOrder>;
-    responseId?: Nullable<SortOrder>;
     size?: Nullable<SortOrder>;
     updatedAt?: Nullable<SortOrder>;
 }
@@ -1844,7 +652,6 @@ export class AttachmentScalarWhereInput {
     AND?: Nullable<AttachmentScalarWhereInput[]>;
     NOT?: Nullable<AttachmentScalarWhereInput[]>;
     OR?: Nullable<AttachmentScalarWhereInput[]>;
-    answerId?: Nullable<StringNullableFilter>;
     attachmentType?: Nullable<EnumAttachmentTypeFilter>;
     commentId?: Nullable<StringNullableFilter>;
     createdAt?: Nullable<DateTimeFilter>;
@@ -1852,18 +659,11 @@ export class AttachmentScalarWhereInput {
     duration?: Nullable<IntFilter>;
     encoding?: Nullable<StringNullableFilter>;
     filename?: Nullable<StringNullableFilter>;
-    formId?: Nullable<StringNullableFilter>;
-    forumAnswerId?: Nullable<StringNullableFilter>;
-    forumId?: Nullable<StringNullableFilter>;
-    gradeId?: Nullable<StringNullableFilter>;
     helpStepId?: Nullable<StringNullableFilter>;
     id?: Nullable<StringFilter>;
     mimetype?: Nullable<StringNullableFilter>;
     path?: Nullable<StringFilter>;
     placement?: Nullable<StringFilter>;
-    questionId?: Nullable<StringNullableFilter>;
-    recommendationId?: Nullable<StringNullableFilter>;
-    responseId?: Nullable<StringNullableFilter>;
     size?: Nullable<IntFilter>;
     updatedAt?: Nullable<DateTimeFilter>;
 }
@@ -1872,7 +672,6 @@ export class AttachmentScalarWhereWithAggregatesInput {
     AND?: Nullable<AttachmentScalarWhereWithAggregatesInput[]>;
     NOT?: Nullable<AttachmentScalarWhereWithAggregatesInput[]>;
     OR?: Nullable<AttachmentScalarWhereWithAggregatesInput[]>;
-    answerId?: Nullable<StringNullableWithAggregatesFilter>;
     attachmentType?: Nullable<EnumAttachmentTypeWithAggregatesFilter>;
     commentId?: Nullable<StringNullableWithAggregatesFilter>;
     createdAt?: Nullable<DateTimeWithAggregatesFilter>;
@@ -1880,35 +679,24 @@ export class AttachmentScalarWhereWithAggregatesInput {
     duration?: Nullable<IntWithAggregatesFilter>;
     encoding?: Nullable<StringNullableWithAggregatesFilter>;
     filename?: Nullable<StringNullableWithAggregatesFilter>;
-    formId?: Nullable<StringNullableWithAggregatesFilter>;
-    forumAnswerId?: Nullable<StringNullableWithAggregatesFilter>;
-    forumId?: Nullable<StringNullableWithAggregatesFilter>;
-    gradeId?: Nullable<StringNullableWithAggregatesFilter>;
     helpStepId?: Nullable<StringNullableWithAggregatesFilter>;
     id?: Nullable<StringWithAggregatesFilter>;
     mimetype?: Nullable<StringNullableWithAggregatesFilter>;
     path?: Nullable<StringWithAggregatesFilter>;
     placement?: Nullable<StringWithAggregatesFilter>;
-    questionId?: Nullable<StringNullableWithAggregatesFilter>;
-    recommendationId?: Nullable<StringNullableWithAggregatesFilter>;
-    responseId?: Nullable<StringNullableWithAggregatesFilter>;
     size?: Nullable<IntWithAggregatesFilter>;
     updatedAt?: Nullable<DateTimeWithAggregatesFilter>;
 }
 
 export class AttachmentUncheckedCreateInput {
-    answerId?: Nullable<string>;
     attachmentType?: Nullable<AttachmentType>;
+    businessProfiles?: Nullable<BusinessProfileUncheckedCreateNestedManyWithoutCoverInput>;
     commentId?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
     downloadable?: Nullable<boolean>;
     duration?: Nullable<number>;
     encoding?: Nullable<string>;
     filename?: Nullable<string>;
-    formId?: Nullable<string>;
-    forumAnswerId?: Nullable<string>;
-    forumId?: Nullable<string>;
-    gradeId?: Nullable<string>;
     helpStepId?: Nullable<string>;
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
@@ -1916,21 +704,10 @@ export class AttachmentUncheckedCreateInput {
     path: Upload;
     paymentMethods?: Nullable<PaymentMethodUncheckedCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
-    questionId?: Nullable<string>;
-    recommendationId?: Nullable<string>;
-    responseId?: Nullable<string>;
     services?: Nullable<ServiceUncheckedCreateNestedManyWithoutImageInput>;
     size?: Nullable<number>;
-    tags?: Nullable<TagUncheckedCreateNestedManyWithoutImageInput>;
     updatedAt?: Nullable<DateTime>;
     user?: Nullable<UserUncheckedCreateNestedManyWithoutAvatorInput>;
-}
-
-export class AttachmentUncheckedCreateNestedManyWithoutAnswerInput {
-    connect?: Nullable<AttachmentWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AttachmentCreateOrConnectWithoutAnswerInput[]>;
-    create?: Nullable<AttachmentCreateWithoutAnswerInput[]>;
-    createMany?: Nullable<AttachmentCreateManyAnswerInputEnvelope>;
 }
 
 export class AttachmentUncheckedCreateNestedManyWithoutCommentInput {
@@ -1940,34 +717,6 @@ export class AttachmentUncheckedCreateNestedManyWithoutCommentInput {
     createMany?: Nullable<AttachmentCreateManyCommentInputEnvelope>;
 }
 
-export class AttachmentUncheckedCreateNestedManyWithoutFormInput {
-    connect?: Nullable<AttachmentWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AttachmentCreateOrConnectWithoutFormInput[]>;
-    create?: Nullable<AttachmentCreateWithoutFormInput[]>;
-    createMany?: Nullable<AttachmentCreateManyFormInputEnvelope>;
-}
-
-export class AttachmentUncheckedCreateNestedManyWithoutForumAnswerInput {
-    connect?: Nullable<AttachmentWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AttachmentCreateOrConnectWithoutForumAnswerInput[]>;
-    create?: Nullable<AttachmentCreateWithoutForumAnswerInput[]>;
-    createMany?: Nullable<AttachmentCreateManyForumAnswerInputEnvelope>;
-}
-
-export class AttachmentUncheckedCreateNestedManyWithoutForumInput {
-    connect?: Nullable<AttachmentWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AttachmentCreateOrConnectWithoutForumInput[]>;
-    create?: Nullable<AttachmentCreateWithoutForumInput[]>;
-    createMany?: Nullable<AttachmentCreateManyForumInputEnvelope>;
-}
-
-export class AttachmentUncheckedCreateNestedManyWithoutGradeInput {
-    connect?: Nullable<AttachmentWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AttachmentCreateOrConnectWithoutGradeInput[]>;
-    create?: Nullable<AttachmentCreateWithoutGradeInput[]>;
-    createMany?: Nullable<AttachmentCreateManyGradeInputEnvelope>;
-}
-
 export class AttachmentUncheckedCreateNestedManyWithoutHelpStepInput {
     connect?: Nullable<AttachmentWhereUniqueInput[]>;
     connectOrCreate?: Nullable<AttachmentCreateOrConnectWithoutHelpStepInput[]>;
@@ -1975,28 +724,7 @@ export class AttachmentUncheckedCreateNestedManyWithoutHelpStepInput {
     createMany?: Nullable<AttachmentCreateManyHelpStepInputEnvelope>;
 }
 
-export class AttachmentUncheckedCreateNestedManyWithoutQuestionInput {
-    connect?: Nullable<AttachmentWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AttachmentCreateOrConnectWithoutQuestionInput[]>;
-    create?: Nullable<AttachmentCreateWithoutQuestionInput[]>;
-    createMany?: Nullable<AttachmentCreateManyQuestionInputEnvelope>;
-}
-
-export class AttachmentUncheckedCreateNestedManyWithoutRecommendationInput {
-    connect?: Nullable<AttachmentWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AttachmentCreateOrConnectWithoutRecommendationInput[]>;
-    create?: Nullable<AttachmentCreateWithoutRecommendationInput[]>;
-    createMany?: Nullable<AttachmentCreateManyRecommendationInputEnvelope>;
-}
-
-export class AttachmentUncheckedCreateNestedManyWithoutResponseInput {
-    connect?: Nullable<AttachmentWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AttachmentCreateOrConnectWithoutResponseInput[]>;
-    create?: Nullable<AttachmentCreateWithoutResponseInput[]>;
-    createMany?: Nullable<AttachmentCreateManyResponseInputEnvelope>;
-}
-
-export class AttachmentUncheckedCreateWithoutAnswerInput {
+export class AttachmentUncheckedCreateWithoutBusinessProfilesInput {
     attachmentType?: Nullable<AttachmentType>;
     commentId?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
@@ -2004,10 +732,6 @@ export class AttachmentUncheckedCreateWithoutAnswerInput {
     duration?: Nullable<number>;
     encoding?: Nullable<string>;
     filename?: Nullable<string>;
-    formId?: Nullable<string>;
-    forumAnswerId?: Nullable<string>;
-    forumId?: Nullable<string>;
-    gradeId?: Nullable<string>;
     helpStepId?: Nullable<string>;
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
@@ -2015,28 +739,20 @@ export class AttachmentUncheckedCreateWithoutAnswerInput {
     path: Upload;
     paymentMethods?: Nullable<PaymentMethodUncheckedCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
-    questionId?: Nullable<string>;
-    recommendationId?: Nullable<string>;
-    responseId?: Nullable<string>;
     services?: Nullable<ServiceUncheckedCreateNestedManyWithoutImageInput>;
     size?: Nullable<number>;
-    tags?: Nullable<TagUncheckedCreateNestedManyWithoutImageInput>;
     updatedAt?: Nullable<DateTime>;
     user?: Nullable<UserUncheckedCreateNestedManyWithoutAvatorInput>;
 }
 
 export class AttachmentUncheckedCreateWithoutCommentInput {
-    answerId?: Nullable<string>;
     attachmentType?: Nullable<AttachmentType>;
+    businessProfiles?: Nullable<BusinessProfileUncheckedCreateNestedManyWithoutCoverInput>;
     createdAt?: Nullable<DateTime>;
     downloadable?: Nullable<boolean>;
     duration?: Nullable<number>;
     encoding?: Nullable<string>;
     filename?: Nullable<string>;
-    formId?: Nullable<string>;
-    forumAnswerId?: Nullable<string>;
-    forumId?: Nullable<string>;
-    gradeId?: Nullable<string>;
     helpStepId?: Nullable<string>;
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
@@ -2044,319 +760,84 @@ export class AttachmentUncheckedCreateWithoutCommentInput {
     path: Upload;
     paymentMethods?: Nullable<PaymentMethodUncheckedCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
-    questionId?: Nullable<string>;
-    recommendationId?: Nullable<string>;
-    responseId?: Nullable<string>;
     services?: Nullable<ServiceUncheckedCreateNestedManyWithoutImageInput>;
     size?: Nullable<number>;
-    tags?: Nullable<TagUncheckedCreateNestedManyWithoutImageInput>;
-    updatedAt?: Nullable<DateTime>;
-    user?: Nullable<UserUncheckedCreateNestedManyWithoutAvatorInput>;
-}
-
-export class AttachmentUncheckedCreateWithoutFormInput {
-    answerId?: Nullable<string>;
-    attachmentType?: Nullable<AttachmentType>;
-    commentId?: Nullable<string>;
-    createdAt?: Nullable<DateTime>;
-    downloadable?: Nullable<boolean>;
-    duration?: Nullable<number>;
-    encoding?: Nullable<string>;
-    filename?: Nullable<string>;
-    forumAnswerId?: Nullable<string>;
-    forumId?: Nullable<string>;
-    gradeId?: Nullable<string>;
-    helpStepId?: Nullable<string>;
-    id?: Nullable<string>;
-    mimetype?: Nullable<string>;
-    orders?: Nullable<OrderUncheckedCreateNestedManyWithoutReceiptInput>;
-    path: Upload;
-    paymentMethods?: Nullable<PaymentMethodUncheckedCreateNestedManyWithoutLogoInput>;
-    placement?: Nullable<string>;
-    questionId?: Nullable<string>;
-    recommendationId?: Nullable<string>;
-    responseId?: Nullable<string>;
-    services?: Nullable<ServiceUncheckedCreateNestedManyWithoutImageInput>;
-    size?: Nullable<number>;
-    tags?: Nullable<TagUncheckedCreateNestedManyWithoutImageInput>;
-    updatedAt?: Nullable<DateTime>;
-    user?: Nullable<UserUncheckedCreateNestedManyWithoutAvatorInput>;
-}
-
-export class AttachmentUncheckedCreateWithoutForumAnswerInput {
-    answerId?: Nullable<string>;
-    attachmentType?: Nullable<AttachmentType>;
-    commentId?: Nullable<string>;
-    createdAt?: Nullable<DateTime>;
-    downloadable?: Nullable<boolean>;
-    duration?: Nullable<number>;
-    encoding?: Nullable<string>;
-    filename?: Nullable<string>;
-    formId?: Nullable<string>;
-    forumId?: Nullable<string>;
-    gradeId?: Nullable<string>;
-    helpStepId?: Nullable<string>;
-    id?: Nullable<string>;
-    mimetype?: Nullable<string>;
-    orders?: Nullable<OrderUncheckedCreateNestedManyWithoutReceiptInput>;
-    path: Upload;
-    paymentMethods?: Nullable<PaymentMethodUncheckedCreateNestedManyWithoutLogoInput>;
-    placement?: Nullable<string>;
-    questionId?: Nullable<string>;
-    recommendationId?: Nullable<string>;
-    responseId?: Nullable<string>;
-    services?: Nullable<ServiceUncheckedCreateNestedManyWithoutImageInput>;
-    size?: Nullable<number>;
-    tags?: Nullable<TagUncheckedCreateNestedManyWithoutImageInput>;
-    updatedAt?: Nullable<DateTime>;
-    user?: Nullable<UserUncheckedCreateNestedManyWithoutAvatorInput>;
-}
-
-export class AttachmentUncheckedCreateWithoutForumInput {
-    answerId?: Nullable<string>;
-    attachmentType?: Nullable<AttachmentType>;
-    commentId?: Nullable<string>;
-    createdAt?: Nullable<DateTime>;
-    downloadable?: Nullable<boolean>;
-    duration?: Nullable<number>;
-    encoding?: Nullable<string>;
-    filename?: Nullable<string>;
-    formId?: Nullable<string>;
-    forumAnswerId?: Nullable<string>;
-    gradeId?: Nullable<string>;
-    helpStepId?: Nullable<string>;
-    id?: Nullable<string>;
-    mimetype?: Nullable<string>;
-    orders?: Nullable<OrderUncheckedCreateNestedManyWithoutReceiptInput>;
-    path: Upload;
-    paymentMethods?: Nullable<PaymentMethodUncheckedCreateNestedManyWithoutLogoInput>;
-    placement?: Nullable<string>;
-    questionId?: Nullable<string>;
-    recommendationId?: Nullable<string>;
-    responseId?: Nullable<string>;
-    services?: Nullable<ServiceUncheckedCreateNestedManyWithoutImageInput>;
-    size?: Nullable<number>;
-    tags?: Nullable<TagUncheckedCreateNestedManyWithoutImageInput>;
-    updatedAt?: Nullable<DateTime>;
-    user?: Nullable<UserUncheckedCreateNestedManyWithoutAvatorInput>;
-}
-
-export class AttachmentUncheckedCreateWithoutGradeInput {
-    answerId?: Nullable<string>;
-    attachmentType?: Nullable<AttachmentType>;
-    commentId?: Nullable<string>;
-    createdAt?: Nullable<DateTime>;
-    downloadable?: Nullable<boolean>;
-    duration?: Nullable<number>;
-    encoding?: Nullable<string>;
-    filename?: Nullable<string>;
-    formId?: Nullable<string>;
-    forumAnswerId?: Nullable<string>;
-    forumId?: Nullable<string>;
-    helpStepId?: Nullable<string>;
-    id?: Nullable<string>;
-    mimetype?: Nullable<string>;
-    orders?: Nullable<OrderUncheckedCreateNestedManyWithoutReceiptInput>;
-    path: Upload;
-    paymentMethods?: Nullable<PaymentMethodUncheckedCreateNestedManyWithoutLogoInput>;
-    placement?: Nullable<string>;
-    questionId?: Nullable<string>;
-    recommendationId?: Nullable<string>;
-    responseId?: Nullable<string>;
-    services?: Nullable<ServiceUncheckedCreateNestedManyWithoutImageInput>;
-    size?: Nullable<number>;
-    tags?: Nullable<TagUncheckedCreateNestedManyWithoutImageInput>;
     updatedAt?: Nullable<DateTime>;
     user?: Nullable<UserUncheckedCreateNestedManyWithoutAvatorInput>;
 }
 
 export class AttachmentUncheckedCreateWithoutHelpStepInput {
-    answerId?: Nullable<string>;
     attachmentType?: Nullable<AttachmentType>;
+    businessProfiles?: Nullable<BusinessProfileUncheckedCreateNestedManyWithoutCoverInput>;
     commentId?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
     downloadable?: Nullable<boolean>;
     duration?: Nullable<number>;
     encoding?: Nullable<string>;
     filename?: Nullable<string>;
-    formId?: Nullable<string>;
-    forumAnswerId?: Nullable<string>;
-    forumId?: Nullable<string>;
-    gradeId?: Nullable<string>;
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
     orders?: Nullable<OrderUncheckedCreateNestedManyWithoutReceiptInput>;
     path: Upload;
     paymentMethods?: Nullable<PaymentMethodUncheckedCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
-    questionId?: Nullable<string>;
-    recommendationId?: Nullable<string>;
-    responseId?: Nullable<string>;
     services?: Nullable<ServiceUncheckedCreateNestedManyWithoutImageInput>;
     size?: Nullable<number>;
-    tags?: Nullable<TagUncheckedCreateNestedManyWithoutImageInput>;
     updatedAt?: Nullable<DateTime>;
     user?: Nullable<UserUncheckedCreateNestedManyWithoutAvatorInput>;
 }
 
 export class AttachmentUncheckedCreateWithoutOrdersInput {
-    answerId?: Nullable<string>;
     attachmentType?: Nullable<AttachmentType>;
+    businessProfiles?: Nullable<BusinessProfileUncheckedCreateNestedManyWithoutCoverInput>;
     commentId?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
     downloadable?: Nullable<boolean>;
     duration?: Nullable<number>;
     encoding?: Nullable<string>;
     filename?: Nullable<string>;
-    formId?: Nullable<string>;
-    forumAnswerId?: Nullable<string>;
-    forumId?: Nullable<string>;
-    gradeId?: Nullable<string>;
     helpStepId?: Nullable<string>;
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
     path: Upload;
     paymentMethods?: Nullable<PaymentMethodUncheckedCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
-    questionId?: Nullable<string>;
-    recommendationId?: Nullable<string>;
-    responseId?: Nullable<string>;
     services?: Nullable<ServiceUncheckedCreateNestedManyWithoutImageInput>;
     size?: Nullable<number>;
-    tags?: Nullable<TagUncheckedCreateNestedManyWithoutImageInput>;
     updatedAt?: Nullable<DateTime>;
     user?: Nullable<UserUncheckedCreateNestedManyWithoutAvatorInput>;
 }
 
 export class AttachmentUncheckedCreateWithoutPaymentMethodsInput {
-    answerId?: Nullable<string>;
     attachmentType?: Nullable<AttachmentType>;
+    businessProfiles?: Nullable<BusinessProfileUncheckedCreateNestedManyWithoutCoverInput>;
     commentId?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
     downloadable?: Nullable<boolean>;
     duration?: Nullable<number>;
     encoding?: Nullable<string>;
     filename?: Nullable<string>;
-    formId?: Nullable<string>;
-    forumAnswerId?: Nullable<string>;
-    forumId?: Nullable<string>;
-    gradeId?: Nullable<string>;
     helpStepId?: Nullable<string>;
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
     orders?: Nullable<OrderUncheckedCreateNestedManyWithoutReceiptInput>;
     path: Upload;
     placement?: Nullable<string>;
-    questionId?: Nullable<string>;
-    recommendationId?: Nullable<string>;
-    responseId?: Nullable<string>;
     services?: Nullable<ServiceUncheckedCreateNestedManyWithoutImageInput>;
     size?: Nullable<number>;
-    tags?: Nullable<TagUncheckedCreateNestedManyWithoutImageInput>;
-    updatedAt?: Nullable<DateTime>;
-    user?: Nullable<UserUncheckedCreateNestedManyWithoutAvatorInput>;
-}
-
-export class AttachmentUncheckedCreateWithoutQuestionInput {
-    answerId?: Nullable<string>;
-    attachmentType?: Nullable<AttachmentType>;
-    commentId?: Nullable<string>;
-    createdAt?: Nullable<DateTime>;
-    downloadable?: Nullable<boolean>;
-    duration?: Nullable<number>;
-    encoding?: Nullable<string>;
-    filename?: Nullable<string>;
-    formId?: Nullable<string>;
-    forumAnswerId?: Nullable<string>;
-    forumId?: Nullable<string>;
-    gradeId?: Nullable<string>;
-    helpStepId?: Nullable<string>;
-    id?: Nullable<string>;
-    mimetype?: Nullable<string>;
-    orders?: Nullable<OrderUncheckedCreateNestedManyWithoutReceiptInput>;
-    path: Upload;
-    paymentMethods?: Nullable<PaymentMethodUncheckedCreateNestedManyWithoutLogoInput>;
-    placement?: Nullable<string>;
-    recommendationId?: Nullable<string>;
-    responseId?: Nullable<string>;
-    services?: Nullable<ServiceUncheckedCreateNestedManyWithoutImageInput>;
-    size?: Nullable<number>;
-    tags?: Nullable<TagUncheckedCreateNestedManyWithoutImageInput>;
-    updatedAt?: Nullable<DateTime>;
-    user?: Nullable<UserUncheckedCreateNestedManyWithoutAvatorInput>;
-}
-
-export class AttachmentUncheckedCreateWithoutRecommendationInput {
-    answerId?: Nullable<string>;
-    attachmentType?: Nullable<AttachmentType>;
-    commentId?: Nullable<string>;
-    createdAt?: Nullable<DateTime>;
-    downloadable?: Nullable<boolean>;
-    duration?: Nullable<number>;
-    encoding?: Nullable<string>;
-    filename?: Nullable<string>;
-    formId?: Nullable<string>;
-    forumAnswerId?: Nullable<string>;
-    forumId?: Nullable<string>;
-    gradeId?: Nullable<string>;
-    helpStepId?: Nullable<string>;
-    id?: Nullable<string>;
-    mimetype?: Nullable<string>;
-    orders?: Nullable<OrderUncheckedCreateNestedManyWithoutReceiptInput>;
-    path: Upload;
-    paymentMethods?: Nullable<PaymentMethodUncheckedCreateNestedManyWithoutLogoInput>;
-    placement?: Nullable<string>;
-    questionId?: Nullable<string>;
-    responseId?: Nullable<string>;
-    services?: Nullable<ServiceUncheckedCreateNestedManyWithoutImageInput>;
-    size?: Nullable<number>;
-    tags?: Nullable<TagUncheckedCreateNestedManyWithoutImageInput>;
-    updatedAt?: Nullable<DateTime>;
-    user?: Nullable<UserUncheckedCreateNestedManyWithoutAvatorInput>;
-}
-
-export class AttachmentUncheckedCreateWithoutResponseInput {
-    answerId?: Nullable<string>;
-    attachmentType?: Nullable<AttachmentType>;
-    commentId?: Nullable<string>;
-    createdAt?: Nullable<DateTime>;
-    downloadable?: Nullable<boolean>;
-    duration?: Nullable<number>;
-    encoding?: Nullable<string>;
-    filename?: Nullable<string>;
-    formId?: Nullable<string>;
-    forumAnswerId?: Nullable<string>;
-    forumId?: Nullable<string>;
-    gradeId?: Nullable<string>;
-    helpStepId?: Nullable<string>;
-    id?: Nullable<string>;
-    mimetype?: Nullable<string>;
-    orders?: Nullable<OrderUncheckedCreateNestedManyWithoutReceiptInput>;
-    path: Upload;
-    paymentMethods?: Nullable<PaymentMethodUncheckedCreateNestedManyWithoutLogoInput>;
-    placement?: Nullable<string>;
-    questionId?: Nullable<string>;
-    recommendationId?: Nullable<string>;
-    services?: Nullable<ServiceUncheckedCreateNestedManyWithoutImageInput>;
-    size?: Nullable<number>;
-    tags?: Nullable<TagUncheckedCreateNestedManyWithoutImageInput>;
     updatedAt?: Nullable<DateTime>;
     user?: Nullable<UserUncheckedCreateNestedManyWithoutAvatorInput>;
 }
 
 export class AttachmentUncheckedCreateWithoutServicesInput {
-    answerId?: Nullable<string>;
     attachmentType?: Nullable<AttachmentType>;
+    businessProfiles?: Nullable<BusinessProfileUncheckedCreateNestedManyWithoutCoverInput>;
     commentId?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
     downloadable?: Nullable<boolean>;
     duration?: Nullable<number>;
     encoding?: Nullable<string>;
     filename?: Nullable<string>;
-    formId?: Nullable<string>;
-    forumAnswerId?: Nullable<string>;
-    forumId?: Nullable<string>;
-    gradeId?: Nullable<string>;
     helpStepId?: Nullable<string>;
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
@@ -2364,57 +845,20 @@ export class AttachmentUncheckedCreateWithoutServicesInput {
     path: Upload;
     paymentMethods?: Nullable<PaymentMethodUncheckedCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
-    questionId?: Nullable<string>;
-    recommendationId?: Nullable<string>;
-    responseId?: Nullable<string>;
-    size?: Nullable<number>;
-    tags?: Nullable<TagUncheckedCreateNestedManyWithoutImageInput>;
-    updatedAt?: Nullable<DateTime>;
-    user?: Nullable<UserUncheckedCreateNestedManyWithoutAvatorInput>;
-}
-
-export class AttachmentUncheckedCreateWithoutTagsInput {
-    answerId?: Nullable<string>;
-    attachmentType?: Nullable<AttachmentType>;
-    commentId?: Nullable<string>;
-    createdAt?: Nullable<DateTime>;
-    downloadable?: Nullable<boolean>;
-    duration?: Nullable<number>;
-    encoding?: Nullable<string>;
-    filename?: Nullable<string>;
-    formId?: Nullable<string>;
-    forumAnswerId?: Nullable<string>;
-    forumId?: Nullable<string>;
-    gradeId?: Nullable<string>;
-    helpStepId?: Nullable<string>;
-    id?: Nullable<string>;
-    mimetype?: Nullable<string>;
-    orders?: Nullable<OrderUncheckedCreateNestedManyWithoutReceiptInput>;
-    path: Upload;
-    paymentMethods?: Nullable<PaymentMethodUncheckedCreateNestedManyWithoutLogoInput>;
-    placement?: Nullable<string>;
-    questionId?: Nullable<string>;
-    recommendationId?: Nullable<string>;
-    responseId?: Nullable<string>;
-    services?: Nullable<ServiceUncheckedCreateNestedManyWithoutImageInput>;
     size?: Nullable<number>;
     updatedAt?: Nullable<DateTime>;
     user?: Nullable<UserUncheckedCreateNestedManyWithoutAvatorInput>;
 }
 
 export class AttachmentUncheckedCreateWithoutUserInput {
-    answerId?: Nullable<string>;
     attachmentType?: Nullable<AttachmentType>;
+    businessProfiles?: Nullable<BusinessProfileUncheckedCreateNestedManyWithoutCoverInput>;
     commentId?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
     downloadable?: Nullable<boolean>;
     duration?: Nullable<number>;
     encoding?: Nullable<string>;
     filename?: Nullable<string>;
-    formId?: Nullable<string>;
-    forumAnswerId?: Nullable<string>;
-    forumId?: Nullable<string>;
-    gradeId?: Nullable<string>;
     helpStepId?: Nullable<string>;
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
@@ -2422,28 +866,20 @@ export class AttachmentUncheckedCreateWithoutUserInput {
     path: Upload;
     paymentMethods?: Nullable<PaymentMethodUncheckedCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
-    questionId?: Nullable<string>;
-    recommendationId?: Nullable<string>;
-    responseId?: Nullable<string>;
     services?: Nullable<ServiceUncheckedCreateNestedManyWithoutImageInput>;
     size?: Nullable<number>;
-    tags?: Nullable<TagUncheckedCreateNestedManyWithoutImageInput>;
     updatedAt?: Nullable<DateTime>;
 }
 
 export class AttachmentUncheckedUpdateInput {
-    answerId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     attachmentType?: Nullable<EnumAttachmentTypeFieldUpdateOperationsInput>;
+    businessProfiles?: Nullable<BusinessProfileUncheckedUpdateManyWithoutCoverInput>;
     commentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     downloadable?: Nullable<BoolFieldUpdateOperationsInput>;
     duration?: Nullable<IntFieldUpdateOperationsInput>;
     encoding?: Nullable<NullableStringFieldUpdateOperationsInput>;
     filename?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    formId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    forumAnswerId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    forumId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    gradeId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     helpStepId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     mimetype?: Nullable<NullableStringFieldUpdateOperationsInput>;
@@ -2451,18 +887,13 @@ export class AttachmentUncheckedUpdateInput {
     path?: Nullable<StringFieldUpdateOperationsInput>;
     paymentMethods?: Nullable<PaymentMethodUncheckedUpdateManyWithoutLogoInput>;
     placement?: Nullable<StringFieldUpdateOperationsInput>;
-    questionId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    recommendationId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    responseId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     services?: Nullable<ServiceUncheckedUpdateManyWithoutImageInput>;
     size?: Nullable<IntFieldUpdateOperationsInput>;
-    tags?: Nullable<TagUncheckedUpdateManyWithoutImageInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     user?: Nullable<UserUncheckedUpdateManyWithoutAvatorInput>;
 }
 
 export class AttachmentUncheckedUpdateManyInput {
-    answerId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     attachmentType?: Nullable<EnumAttachmentTypeFieldUpdateOperationsInput>;
     commentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
@@ -2470,56 +901,27 @@ export class AttachmentUncheckedUpdateManyInput {
     duration?: Nullable<IntFieldUpdateOperationsInput>;
     encoding?: Nullable<NullableStringFieldUpdateOperationsInput>;
     filename?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    formId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    forumAnswerId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    forumId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    gradeId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     helpStepId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     mimetype?: Nullable<NullableStringFieldUpdateOperationsInput>;
     path?: Nullable<StringFieldUpdateOperationsInput>;
     placement?: Nullable<StringFieldUpdateOperationsInput>;
-    questionId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    recommendationId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    responseId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     size?: Nullable<IntFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
 
-export class AttachmentUncheckedUpdateManyWithoutAnswerInput {
-    connect?: Nullable<AttachmentWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AttachmentCreateOrConnectWithoutAnswerInput[]>;
-    create?: Nullable<AttachmentCreateWithoutAnswerInput[]>;
-    createMany?: Nullable<AttachmentCreateManyAnswerInputEnvelope>;
-    delete?: Nullable<AttachmentWhereUniqueInput[]>;
-    deleteMany?: Nullable<AttachmentScalarWhereInput[]>;
-    disconnect?: Nullable<AttachmentWhereUniqueInput[]>;
-    set?: Nullable<AttachmentWhereUniqueInput[]>;
-    update?: Nullable<AttachmentUpdateWithWhereUniqueWithoutAnswerInput[]>;
-    updateMany?: Nullable<AttachmentUpdateManyWithWhereWithoutAnswerInput[]>;
-    upsert?: Nullable<AttachmentUpsertWithWhereUniqueWithoutAnswerInput[]>;
-}
-
 export class AttachmentUncheckedUpdateManyWithoutAttachmentsInput {
-    answerId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     attachmentType?: Nullable<EnumAttachmentTypeFieldUpdateOperationsInput>;
-    commentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     downloadable?: Nullable<BoolFieldUpdateOperationsInput>;
     duration?: Nullable<IntFieldUpdateOperationsInput>;
     encoding?: Nullable<NullableStringFieldUpdateOperationsInput>;
     filename?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    forumAnswerId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    forumId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    gradeId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     helpStepId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     mimetype?: Nullable<NullableStringFieldUpdateOperationsInput>;
     path?: Nullable<StringFieldUpdateOperationsInput>;
     placement?: Nullable<StringFieldUpdateOperationsInput>;
-    questionId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    recommendationId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    responseId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     size?: Nullable<IntFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
@@ -2538,62 +940,6 @@ export class AttachmentUncheckedUpdateManyWithoutCommentInput {
     upsert?: Nullable<AttachmentUpsertWithWhereUniqueWithoutCommentInput[]>;
 }
 
-export class AttachmentUncheckedUpdateManyWithoutFormInput {
-    connect?: Nullable<AttachmentWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AttachmentCreateOrConnectWithoutFormInput[]>;
-    create?: Nullable<AttachmentCreateWithoutFormInput[]>;
-    createMany?: Nullable<AttachmentCreateManyFormInputEnvelope>;
-    delete?: Nullable<AttachmentWhereUniqueInput[]>;
-    deleteMany?: Nullable<AttachmentScalarWhereInput[]>;
-    disconnect?: Nullable<AttachmentWhereUniqueInput[]>;
-    set?: Nullable<AttachmentWhereUniqueInput[]>;
-    update?: Nullable<AttachmentUpdateWithWhereUniqueWithoutFormInput[]>;
-    updateMany?: Nullable<AttachmentUpdateManyWithWhereWithoutFormInput[]>;
-    upsert?: Nullable<AttachmentUpsertWithWhereUniqueWithoutFormInput[]>;
-}
-
-export class AttachmentUncheckedUpdateManyWithoutForumAnswerInput {
-    connect?: Nullable<AttachmentWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AttachmentCreateOrConnectWithoutForumAnswerInput[]>;
-    create?: Nullable<AttachmentCreateWithoutForumAnswerInput[]>;
-    createMany?: Nullable<AttachmentCreateManyForumAnswerInputEnvelope>;
-    delete?: Nullable<AttachmentWhereUniqueInput[]>;
-    deleteMany?: Nullable<AttachmentScalarWhereInput[]>;
-    disconnect?: Nullable<AttachmentWhereUniqueInput[]>;
-    set?: Nullable<AttachmentWhereUniqueInput[]>;
-    update?: Nullable<AttachmentUpdateWithWhereUniqueWithoutForumAnswerInput[]>;
-    updateMany?: Nullable<AttachmentUpdateManyWithWhereWithoutForumAnswerInput[]>;
-    upsert?: Nullable<AttachmentUpsertWithWhereUniqueWithoutForumAnswerInput[]>;
-}
-
-export class AttachmentUncheckedUpdateManyWithoutForumInput {
-    connect?: Nullable<AttachmentWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AttachmentCreateOrConnectWithoutForumInput[]>;
-    create?: Nullable<AttachmentCreateWithoutForumInput[]>;
-    createMany?: Nullable<AttachmentCreateManyForumInputEnvelope>;
-    delete?: Nullable<AttachmentWhereUniqueInput[]>;
-    deleteMany?: Nullable<AttachmentScalarWhereInput[]>;
-    disconnect?: Nullable<AttachmentWhereUniqueInput[]>;
-    set?: Nullable<AttachmentWhereUniqueInput[]>;
-    update?: Nullable<AttachmentUpdateWithWhereUniqueWithoutForumInput[]>;
-    updateMany?: Nullable<AttachmentUpdateManyWithWhereWithoutForumInput[]>;
-    upsert?: Nullable<AttachmentUpsertWithWhereUniqueWithoutForumInput[]>;
-}
-
-export class AttachmentUncheckedUpdateManyWithoutGradeInput {
-    connect?: Nullable<AttachmentWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AttachmentCreateOrConnectWithoutGradeInput[]>;
-    create?: Nullable<AttachmentCreateWithoutGradeInput[]>;
-    createMany?: Nullable<AttachmentCreateManyGradeInputEnvelope>;
-    delete?: Nullable<AttachmentWhereUniqueInput[]>;
-    deleteMany?: Nullable<AttachmentScalarWhereInput[]>;
-    disconnect?: Nullable<AttachmentWhereUniqueInput[]>;
-    set?: Nullable<AttachmentWhereUniqueInput[]>;
-    update?: Nullable<AttachmentUpdateWithWhereUniqueWithoutGradeInput[]>;
-    updateMany?: Nullable<AttachmentUpdateManyWithWhereWithoutGradeInput[]>;
-    upsert?: Nullable<AttachmentUpsertWithWhereUniqueWithoutGradeInput[]>;
-}
-
 export class AttachmentUncheckedUpdateManyWithoutHelpStepInput {
     connect?: Nullable<AttachmentWhereUniqueInput[]>;
     connectOrCreate?: Nullable<AttachmentCreateOrConnectWithoutHelpStepInput[]>;
@@ -2608,49 +954,7 @@ export class AttachmentUncheckedUpdateManyWithoutHelpStepInput {
     upsert?: Nullable<AttachmentUpsertWithWhereUniqueWithoutHelpStepInput[]>;
 }
 
-export class AttachmentUncheckedUpdateManyWithoutQuestionInput {
-    connect?: Nullable<AttachmentWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AttachmentCreateOrConnectWithoutQuestionInput[]>;
-    create?: Nullable<AttachmentCreateWithoutQuestionInput[]>;
-    createMany?: Nullable<AttachmentCreateManyQuestionInputEnvelope>;
-    delete?: Nullable<AttachmentWhereUniqueInput[]>;
-    deleteMany?: Nullable<AttachmentScalarWhereInput[]>;
-    disconnect?: Nullable<AttachmentWhereUniqueInput[]>;
-    set?: Nullable<AttachmentWhereUniqueInput[]>;
-    update?: Nullable<AttachmentUpdateWithWhereUniqueWithoutQuestionInput[]>;
-    updateMany?: Nullable<AttachmentUpdateManyWithWhereWithoutQuestionInput[]>;
-    upsert?: Nullable<AttachmentUpsertWithWhereUniqueWithoutQuestionInput[]>;
-}
-
-export class AttachmentUncheckedUpdateManyWithoutRecommendationInput {
-    connect?: Nullable<AttachmentWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AttachmentCreateOrConnectWithoutRecommendationInput[]>;
-    create?: Nullable<AttachmentCreateWithoutRecommendationInput[]>;
-    createMany?: Nullable<AttachmentCreateManyRecommendationInputEnvelope>;
-    delete?: Nullable<AttachmentWhereUniqueInput[]>;
-    deleteMany?: Nullable<AttachmentScalarWhereInput[]>;
-    disconnect?: Nullable<AttachmentWhereUniqueInput[]>;
-    set?: Nullable<AttachmentWhereUniqueInput[]>;
-    update?: Nullable<AttachmentUpdateWithWhereUniqueWithoutRecommendationInput[]>;
-    updateMany?: Nullable<AttachmentUpdateManyWithWhereWithoutRecommendationInput[]>;
-    upsert?: Nullable<AttachmentUpsertWithWhereUniqueWithoutRecommendationInput[]>;
-}
-
-export class AttachmentUncheckedUpdateManyWithoutResponseInput {
-    connect?: Nullable<AttachmentWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AttachmentCreateOrConnectWithoutResponseInput[]>;
-    create?: Nullable<AttachmentCreateWithoutResponseInput[]>;
-    createMany?: Nullable<AttachmentCreateManyResponseInputEnvelope>;
-    delete?: Nullable<AttachmentWhereUniqueInput[]>;
-    deleteMany?: Nullable<AttachmentScalarWhereInput[]>;
-    disconnect?: Nullable<AttachmentWhereUniqueInput[]>;
-    set?: Nullable<AttachmentWhereUniqueInput[]>;
-    update?: Nullable<AttachmentUpdateWithWhereUniqueWithoutResponseInput[]>;
-    updateMany?: Nullable<AttachmentUpdateManyWithWhereWithoutResponseInput[]>;
-    upsert?: Nullable<AttachmentUpsertWithWhereUniqueWithoutResponseInput[]>;
-}
-
-export class AttachmentUncheckedUpdateWithoutAnswerInput {
+export class AttachmentUncheckedUpdateWithoutBusinessProfilesInput {
     attachmentType?: Nullable<EnumAttachmentTypeFieldUpdateOperationsInput>;
     commentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
@@ -2658,10 +962,6 @@ export class AttachmentUncheckedUpdateWithoutAnswerInput {
     duration?: Nullable<IntFieldUpdateOperationsInput>;
     encoding?: Nullable<NullableStringFieldUpdateOperationsInput>;
     filename?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    formId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    forumAnswerId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    forumId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    gradeId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     helpStepId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     mimetype?: Nullable<NullableStringFieldUpdateOperationsInput>;
@@ -2669,28 +969,20 @@ export class AttachmentUncheckedUpdateWithoutAnswerInput {
     path?: Nullable<StringFieldUpdateOperationsInput>;
     paymentMethods?: Nullable<PaymentMethodUncheckedUpdateManyWithoutLogoInput>;
     placement?: Nullable<StringFieldUpdateOperationsInput>;
-    questionId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    recommendationId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    responseId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     services?: Nullable<ServiceUncheckedUpdateManyWithoutImageInput>;
     size?: Nullable<IntFieldUpdateOperationsInput>;
-    tags?: Nullable<TagUncheckedUpdateManyWithoutImageInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     user?: Nullable<UserUncheckedUpdateManyWithoutAvatorInput>;
 }
 
 export class AttachmentUncheckedUpdateWithoutCommentInput {
-    answerId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     attachmentType?: Nullable<EnumAttachmentTypeFieldUpdateOperationsInput>;
+    businessProfiles?: Nullable<BusinessProfileUncheckedUpdateManyWithoutCoverInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     downloadable?: Nullable<BoolFieldUpdateOperationsInput>;
     duration?: Nullable<IntFieldUpdateOperationsInput>;
     encoding?: Nullable<NullableStringFieldUpdateOperationsInput>;
     filename?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    formId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    forumAnswerId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    forumId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    gradeId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     helpStepId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     mimetype?: Nullable<NullableStringFieldUpdateOperationsInput>;
@@ -2698,319 +990,84 @@ export class AttachmentUncheckedUpdateWithoutCommentInput {
     path?: Nullable<StringFieldUpdateOperationsInput>;
     paymentMethods?: Nullable<PaymentMethodUncheckedUpdateManyWithoutLogoInput>;
     placement?: Nullable<StringFieldUpdateOperationsInput>;
-    questionId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    recommendationId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    responseId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     services?: Nullable<ServiceUncheckedUpdateManyWithoutImageInput>;
     size?: Nullable<IntFieldUpdateOperationsInput>;
-    tags?: Nullable<TagUncheckedUpdateManyWithoutImageInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    user?: Nullable<UserUncheckedUpdateManyWithoutAvatorInput>;
-}
-
-export class AttachmentUncheckedUpdateWithoutFormInput {
-    answerId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    attachmentType?: Nullable<EnumAttachmentTypeFieldUpdateOperationsInput>;
-    commentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    downloadable?: Nullable<BoolFieldUpdateOperationsInput>;
-    duration?: Nullable<IntFieldUpdateOperationsInput>;
-    encoding?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    filename?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    forumAnswerId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    forumId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    gradeId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    helpStepId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    mimetype?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    orders?: Nullable<OrderUncheckedUpdateManyWithoutReceiptInput>;
-    path?: Nullable<StringFieldUpdateOperationsInput>;
-    paymentMethods?: Nullable<PaymentMethodUncheckedUpdateManyWithoutLogoInput>;
-    placement?: Nullable<StringFieldUpdateOperationsInput>;
-    questionId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    recommendationId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    responseId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    services?: Nullable<ServiceUncheckedUpdateManyWithoutImageInput>;
-    size?: Nullable<IntFieldUpdateOperationsInput>;
-    tags?: Nullable<TagUncheckedUpdateManyWithoutImageInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    user?: Nullable<UserUncheckedUpdateManyWithoutAvatorInput>;
-}
-
-export class AttachmentUncheckedUpdateWithoutForumAnswerInput {
-    answerId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    attachmentType?: Nullable<EnumAttachmentTypeFieldUpdateOperationsInput>;
-    commentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    downloadable?: Nullable<BoolFieldUpdateOperationsInput>;
-    duration?: Nullable<IntFieldUpdateOperationsInput>;
-    encoding?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    filename?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    formId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    forumId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    gradeId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    helpStepId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    mimetype?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    orders?: Nullable<OrderUncheckedUpdateManyWithoutReceiptInput>;
-    path?: Nullable<StringFieldUpdateOperationsInput>;
-    paymentMethods?: Nullable<PaymentMethodUncheckedUpdateManyWithoutLogoInput>;
-    placement?: Nullable<StringFieldUpdateOperationsInput>;
-    questionId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    recommendationId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    responseId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    services?: Nullable<ServiceUncheckedUpdateManyWithoutImageInput>;
-    size?: Nullable<IntFieldUpdateOperationsInput>;
-    tags?: Nullable<TagUncheckedUpdateManyWithoutImageInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    user?: Nullable<UserUncheckedUpdateManyWithoutAvatorInput>;
-}
-
-export class AttachmentUncheckedUpdateWithoutForumInput {
-    answerId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    attachmentType?: Nullable<EnumAttachmentTypeFieldUpdateOperationsInput>;
-    commentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    downloadable?: Nullable<BoolFieldUpdateOperationsInput>;
-    duration?: Nullable<IntFieldUpdateOperationsInput>;
-    encoding?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    filename?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    formId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    forumAnswerId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    gradeId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    helpStepId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    mimetype?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    orders?: Nullable<OrderUncheckedUpdateManyWithoutReceiptInput>;
-    path?: Nullable<StringFieldUpdateOperationsInput>;
-    paymentMethods?: Nullable<PaymentMethodUncheckedUpdateManyWithoutLogoInput>;
-    placement?: Nullable<StringFieldUpdateOperationsInput>;
-    questionId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    recommendationId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    responseId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    services?: Nullable<ServiceUncheckedUpdateManyWithoutImageInput>;
-    size?: Nullable<IntFieldUpdateOperationsInput>;
-    tags?: Nullable<TagUncheckedUpdateManyWithoutImageInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    user?: Nullable<UserUncheckedUpdateManyWithoutAvatorInput>;
-}
-
-export class AttachmentUncheckedUpdateWithoutGradeInput {
-    answerId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    attachmentType?: Nullable<EnumAttachmentTypeFieldUpdateOperationsInput>;
-    commentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    downloadable?: Nullable<BoolFieldUpdateOperationsInput>;
-    duration?: Nullable<IntFieldUpdateOperationsInput>;
-    encoding?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    filename?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    formId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    forumAnswerId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    forumId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    helpStepId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    mimetype?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    orders?: Nullable<OrderUncheckedUpdateManyWithoutReceiptInput>;
-    path?: Nullable<StringFieldUpdateOperationsInput>;
-    paymentMethods?: Nullable<PaymentMethodUncheckedUpdateManyWithoutLogoInput>;
-    placement?: Nullable<StringFieldUpdateOperationsInput>;
-    questionId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    recommendationId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    responseId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    services?: Nullable<ServiceUncheckedUpdateManyWithoutImageInput>;
-    size?: Nullable<IntFieldUpdateOperationsInput>;
-    tags?: Nullable<TagUncheckedUpdateManyWithoutImageInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     user?: Nullable<UserUncheckedUpdateManyWithoutAvatorInput>;
 }
 
 export class AttachmentUncheckedUpdateWithoutHelpStepInput {
-    answerId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     attachmentType?: Nullable<EnumAttachmentTypeFieldUpdateOperationsInput>;
+    businessProfiles?: Nullable<BusinessProfileUncheckedUpdateManyWithoutCoverInput>;
     commentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     downloadable?: Nullable<BoolFieldUpdateOperationsInput>;
     duration?: Nullable<IntFieldUpdateOperationsInput>;
     encoding?: Nullable<NullableStringFieldUpdateOperationsInput>;
     filename?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    formId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    forumAnswerId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    forumId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    gradeId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     mimetype?: Nullable<NullableStringFieldUpdateOperationsInput>;
     orders?: Nullable<OrderUncheckedUpdateManyWithoutReceiptInput>;
     path?: Nullable<StringFieldUpdateOperationsInput>;
     paymentMethods?: Nullable<PaymentMethodUncheckedUpdateManyWithoutLogoInput>;
     placement?: Nullable<StringFieldUpdateOperationsInput>;
-    questionId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    recommendationId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    responseId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     services?: Nullable<ServiceUncheckedUpdateManyWithoutImageInput>;
     size?: Nullable<IntFieldUpdateOperationsInput>;
-    tags?: Nullable<TagUncheckedUpdateManyWithoutImageInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     user?: Nullable<UserUncheckedUpdateManyWithoutAvatorInput>;
 }
 
 export class AttachmentUncheckedUpdateWithoutOrdersInput {
-    answerId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     attachmentType?: Nullable<EnumAttachmentTypeFieldUpdateOperationsInput>;
+    businessProfiles?: Nullable<BusinessProfileUncheckedUpdateManyWithoutCoverInput>;
     commentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     downloadable?: Nullable<BoolFieldUpdateOperationsInput>;
     duration?: Nullable<IntFieldUpdateOperationsInput>;
     encoding?: Nullable<NullableStringFieldUpdateOperationsInput>;
     filename?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    formId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    forumAnswerId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    forumId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    gradeId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     helpStepId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     mimetype?: Nullable<NullableStringFieldUpdateOperationsInput>;
     path?: Nullable<StringFieldUpdateOperationsInput>;
     paymentMethods?: Nullable<PaymentMethodUncheckedUpdateManyWithoutLogoInput>;
     placement?: Nullable<StringFieldUpdateOperationsInput>;
-    questionId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    recommendationId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    responseId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     services?: Nullable<ServiceUncheckedUpdateManyWithoutImageInput>;
     size?: Nullable<IntFieldUpdateOperationsInput>;
-    tags?: Nullable<TagUncheckedUpdateManyWithoutImageInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     user?: Nullable<UserUncheckedUpdateManyWithoutAvatorInput>;
 }
 
 export class AttachmentUncheckedUpdateWithoutPaymentMethodsInput {
-    answerId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     attachmentType?: Nullable<EnumAttachmentTypeFieldUpdateOperationsInput>;
+    businessProfiles?: Nullable<BusinessProfileUncheckedUpdateManyWithoutCoverInput>;
     commentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     downloadable?: Nullable<BoolFieldUpdateOperationsInput>;
     duration?: Nullable<IntFieldUpdateOperationsInput>;
     encoding?: Nullable<NullableStringFieldUpdateOperationsInput>;
     filename?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    formId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    forumAnswerId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    forumId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    gradeId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     helpStepId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     mimetype?: Nullable<NullableStringFieldUpdateOperationsInput>;
     orders?: Nullable<OrderUncheckedUpdateManyWithoutReceiptInput>;
     path?: Nullable<StringFieldUpdateOperationsInput>;
     placement?: Nullable<StringFieldUpdateOperationsInput>;
-    questionId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    recommendationId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    responseId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     services?: Nullable<ServiceUncheckedUpdateManyWithoutImageInput>;
     size?: Nullable<IntFieldUpdateOperationsInput>;
-    tags?: Nullable<TagUncheckedUpdateManyWithoutImageInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    user?: Nullable<UserUncheckedUpdateManyWithoutAvatorInput>;
-}
-
-export class AttachmentUncheckedUpdateWithoutQuestionInput {
-    answerId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    attachmentType?: Nullable<EnumAttachmentTypeFieldUpdateOperationsInput>;
-    commentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    downloadable?: Nullable<BoolFieldUpdateOperationsInput>;
-    duration?: Nullable<IntFieldUpdateOperationsInput>;
-    encoding?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    filename?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    formId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    forumAnswerId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    forumId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    gradeId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    helpStepId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    mimetype?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    orders?: Nullable<OrderUncheckedUpdateManyWithoutReceiptInput>;
-    path?: Nullable<StringFieldUpdateOperationsInput>;
-    paymentMethods?: Nullable<PaymentMethodUncheckedUpdateManyWithoutLogoInput>;
-    placement?: Nullable<StringFieldUpdateOperationsInput>;
-    recommendationId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    responseId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    services?: Nullable<ServiceUncheckedUpdateManyWithoutImageInput>;
-    size?: Nullable<IntFieldUpdateOperationsInput>;
-    tags?: Nullable<TagUncheckedUpdateManyWithoutImageInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    user?: Nullable<UserUncheckedUpdateManyWithoutAvatorInput>;
-}
-
-export class AttachmentUncheckedUpdateWithoutRecommendationInput {
-    answerId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    attachmentType?: Nullable<EnumAttachmentTypeFieldUpdateOperationsInput>;
-    commentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    downloadable?: Nullable<BoolFieldUpdateOperationsInput>;
-    duration?: Nullable<IntFieldUpdateOperationsInput>;
-    encoding?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    filename?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    formId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    forumAnswerId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    forumId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    gradeId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    helpStepId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    mimetype?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    orders?: Nullable<OrderUncheckedUpdateManyWithoutReceiptInput>;
-    path?: Nullable<StringFieldUpdateOperationsInput>;
-    paymentMethods?: Nullable<PaymentMethodUncheckedUpdateManyWithoutLogoInput>;
-    placement?: Nullable<StringFieldUpdateOperationsInput>;
-    questionId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    responseId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    services?: Nullable<ServiceUncheckedUpdateManyWithoutImageInput>;
-    size?: Nullable<IntFieldUpdateOperationsInput>;
-    tags?: Nullable<TagUncheckedUpdateManyWithoutImageInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    user?: Nullable<UserUncheckedUpdateManyWithoutAvatorInput>;
-}
-
-export class AttachmentUncheckedUpdateWithoutResponseInput {
-    answerId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    attachmentType?: Nullable<EnumAttachmentTypeFieldUpdateOperationsInput>;
-    commentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    downloadable?: Nullable<BoolFieldUpdateOperationsInput>;
-    duration?: Nullable<IntFieldUpdateOperationsInput>;
-    encoding?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    filename?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    formId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    forumAnswerId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    forumId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    gradeId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    helpStepId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    mimetype?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    orders?: Nullable<OrderUncheckedUpdateManyWithoutReceiptInput>;
-    path?: Nullable<StringFieldUpdateOperationsInput>;
-    paymentMethods?: Nullable<PaymentMethodUncheckedUpdateManyWithoutLogoInput>;
-    placement?: Nullable<StringFieldUpdateOperationsInput>;
-    questionId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    recommendationId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    services?: Nullable<ServiceUncheckedUpdateManyWithoutImageInput>;
-    size?: Nullable<IntFieldUpdateOperationsInput>;
-    tags?: Nullable<TagUncheckedUpdateManyWithoutImageInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     user?: Nullable<UserUncheckedUpdateManyWithoutAvatorInput>;
 }
 
 export class AttachmentUncheckedUpdateWithoutServicesInput {
-    answerId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     attachmentType?: Nullable<EnumAttachmentTypeFieldUpdateOperationsInput>;
+    businessProfiles?: Nullable<BusinessProfileUncheckedUpdateManyWithoutCoverInput>;
     commentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     downloadable?: Nullable<BoolFieldUpdateOperationsInput>;
     duration?: Nullable<IntFieldUpdateOperationsInput>;
     encoding?: Nullable<NullableStringFieldUpdateOperationsInput>;
     filename?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    formId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    forumAnswerId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    forumId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    gradeId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     helpStepId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     mimetype?: Nullable<NullableStringFieldUpdateOperationsInput>;
@@ -3018,57 +1075,20 @@ export class AttachmentUncheckedUpdateWithoutServicesInput {
     path?: Nullable<StringFieldUpdateOperationsInput>;
     paymentMethods?: Nullable<PaymentMethodUncheckedUpdateManyWithoutLogoInput>;
     placement?: Nullable<StringFieldUpdateOperationsInput>;
-    questionId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    recommendationId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    responseId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    size?: Nullable<IntFieldUpdateOperationsInput>;
-    tags?: Nullable<TagUncheckedUpdateManyWithoutImageInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    user?: Nullable<UserUncheckedUpdateManyWithoutAvatorInput>;
-}
-
-export class AttachmentUncheckedUpdateWithoutTagsInput {
-    answerId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    attachmentType?: Nullable<EnumAttachmentTypeFieldUpdateOperationsInput>;
-    commentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    downloadable?: Nullable<BoolFieldUpdateOperationsInput>;
-    duration?: Nullable<IntFieldUpdateOperationsInput>;
-    encoding?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    filename?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    formId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    forumAnswerId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    forumId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    gradeId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    helpStepId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    mimetype?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    orders?: Nullable<OrderUncheckedUpdateManyWithoutReceiptInput>;
-    path?: Nullable<StringFieldUpdateOperationsInput>;
-    paymentMethods?: Nullable<PaymentMethodUncheckedUpdateManyWithoutLogoInput>;
-    placement?: Nullable<StringFieldUpdateOperationsInput>;
-    questionId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    recommendationId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    responseId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    services?: Nullable<ServiceUncheckedUpdateManyWithoutImageInput>;
     size?: Nullable<IntFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     user?: Nullable<UserUncheckedUpdateManyWithoutAvatorInput>;
 }
 
 export class AttachmentUncheckedUpdateWithoutUserInput {
-    answerId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     attachmentType?: Nullable<EnumAttachmentTypeFieldUpdateOperationsInput>;
+    businessProfiles?: Nullable<BusinessProfileUncheckedUpdateManyWithoutCoverInput>;
     commentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     downloadable?: Nullable<BoolFieldUpdateOperationsInput>;
     duration?: Nullable<IntFieldUpdateOperationsInput>;
     encoding?: Nullable<NullableStringFieldUpdateOperationsInput>;
     filename?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    formId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    forumAnswerId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    forumId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    gradeId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     helpStepId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     mimetype?: Nullable<NullableStringFieldUpdateOperationsInput>;
@@ -3076,28 +1096,20 @@ export class AttachmentUncheckedUpdateWithoutUserInput {
     path?: Nullable<StringFieldUpdateOperationsInput>;
     paymentMethods?: Nullable<PaymentMethodUncheckedUpdateManyWithoutLogoInput>;
     placement?: Nullable<StringFieldUpdateOperationsInput>;
-    questionId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    recommendationId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    responseId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     services?: Nullable<ServiceUncheckedUpdateManyWithoutImageInput>;
     size?: Nullable<IntFieldUpdateOperationsInput>;
-    tags?: Nullable<TagUncheckedUpdateManyWithoutImageInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
 
 export class AttachmentUpdateInput {
-    answer?: Nullable<AnswerUpdateOneWithoutAttachmentsInput>;
     attachmentType?: Nullable<EnumAttachmentTypeFieldUpdateOperationsInput>;
+    businessProfiles?: Nullable<BusinessProfileUpdateManyWithoutCoverInput>;
     comment?: Nullable<CommentUpdateOneWithoutAttachmentsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     downloadable?: Nullable<BoolFieldUpdateOperationsInput>;
     duration?: Nullable<IntFieldUpdateOperationsInput>;
     encoding?: Nullable<NullableStringFieldUpdateOperationsInput>;
     filename?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    form?: Nullable<FormUpdateOneWithoutAttachmentsInput>;
-    forum?: Nullable<ForumUpdateOneWithoutAttachmentsInput>;
-    forumAnswer?: Nullable<ForumAnswerUpdateOneWithoutAttachmentsInput>;
-    grade?: Nullable<GradeUpdateOneWithoutAttachmentsInput>;
     helpStep?: Nullable<HelpStepUpdateOneWithoutAttachmentsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     mimetype?: Nullable<NullableStringFieldUpdateOperationsInput>;
@@ -3105,12 +1117,8 @@ export class AttachmentUpdateInput {
     path?: Nullable<StringFieldUpdateOperationsInput>;
     paymentMethods?: Nullable<PaymentMethodUpdateManyWithoutLogoInput>;
     placement?: Nullable<StringFieldUpdateOperationsInput>;
-    question?: Nullable<QuestionUpdateOneWithoutAttachmentsInput>;
-    recommendation?: Nullable<RecommendationUpdateOneWithoutAttachmentsInput>;
-    response?: Nullable<ResponseUpdateOneWithoutAttachmentsInput>;
     services?: Nullable<ServiceUpdateManyWithoutImageInput>;
     size?: Nullable<IntFieldUpdateOperationsInput>;
-    tags?: Nullable<TagUpdateManyWithoutImageInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     user?: Nullable<UserUpdateManyWithoutAvatorInput>;
 }
@@ -3130,32 +1138,7 @@ export class AttachmentUpdateManyMutationInput {
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
 
-export class AttachmentUpdateManyWithWhereWithoutAnswerInput {
-    data: AttachmentUncheckedUpdateManyWithoutAttachmentsInput;
-    where: AttachmentScalarWhereInput;
-}
-
 export class AttachmentUpdateManyWithWhereWithoutCommentInput {
-    data: AttachmentUncheckedUpdateManyWithoutAttachmentsInput;
-    where: AttachmentScalarWhereInput;
-}
-
-export class AttachmentUpdateManyWithWhereWithoutFormInput {
-    data: AttachmentUncheckedUpdateManyWithoutAttachmentsInput;
-    where: AttachmentScalarWhereInput;
-}
-
-export class AttachmentUpdateManyWithWhereWithoutForumAnswerInput {
-    data: AttachmentUncheckedUpdateManyWithoutAttachmentsInput;
-    where: AttachmentScalarWhereInput;
-}
-
-export class AttachmentUpdateManyWithWhereWithoutForumInput {
-    data: AttachmentUncheckedUpdateManyWithoutAttachmentsInput;
-    where: AttachmentScalarWhereInput;
-}
-
-export class AttachmentUpdateManyWithWhereWithoutGradeInput {
     data: AttachmentUncheckedUpdateManyWithoutAttachmentsInput;
     where: AttachmentScalarWhereInput;
 }
@@ -3163,35 +1146,6 @@ export class AttachmentUpdateManyWithWhereWithoutGradeInput {
 export class AttachmentUpdateManyWithWhereWithoutHelpStepInput {
     data: AttachmentUncheckedUpdateManyWithoutAttachmentsInput;
     where: AttachmentScalarWhereInput;
-}
-
-export class AttachmentUpdateManyWithWhereWithoutQuestionInput {
-    data: AttachmentUncheckedUpdateManyWithoutAttachmentsInput;
-    where: AttachmentScalarWhereInput;
-}
-
-export class AttachmentUpdateManyWithWhereWithoutRecommendationInput {
-    data: AttachmentUncheckedUpdateManyWithoutAttachmentsInput;
-    where: AttachmentScalarWhereInput;
-}
-
-export class AttachmentUpdateManyWithWhereWithoutResponseInput {
-    data: AttachmentUncheckedUpdateManyWithoutAttachmentsInput;
-    where: AttachmentScalarWhereInput;
-}
-
-export class AttachmentUpdateManyWithoutAnswerInput {
-    connect?: Nullable<AttachmentWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AttachmentCreateOrConnectWithoutAnswerInput[]>;
-    create?: Nullable<AttachmentCreateWithoutAnswerInput[]>;
-    createMany?: Nullable<AttachmentCreateManyAnswerInputEnvelope>;
-    delete?: Nullable<AttachmentWhereUniqueInput[]>;
-    deleteMany?: Nullable<AttachmentScalarWhereInput[]>;
-    disconnect?: Nullable<AttachmentWhereUniqueInput[]>;
-    set?: Nullable<AttachmentWhereUniqueInput[]>;
-    update?: Nullable<AttachmentUpdateWithWhereUniqueWithoutAnswerInput[]>;
-    updateMany?: Nullable<AttachmentUpdateManyWithWhereWithoutAnswerInput[]>;
-    upsert?: Nullable<AttachmentUpsertWithWhereUniqueWithoutAnswerInput[]>;
 }
 
 export class AttachmentUpdateManyWithoutCommentInput {
@@ -3208,62 +1162,6 @@ export class AttachmentUpdateManyWithoutCommentInput {
     upsert?: Nullable<AttachmentUpsertWithWhereUniqueWithoutCommentInput[]>;
 }
 
-export class AttachmentUpdateManyWithoutFormInput {
-    connect?: Nullable<AttachmentWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AttachmentCreateOrConnectWithoutFormInput[]>;
-    create?: Nullable<AttachmentCreateWithoutFormInput[]>;
-    createMany?: Nullable<AttachmentCreateManyFormInputEnvelope>;
-    delete?: Nullable<AttachmentWhereUniqueInput[]>;
-    deleteMany?: Nullable<AttachmentScalarWhereInput[]>;
-    disconnect?: Nullable<AttachmentWhereUniqueInput[]>;
-    set?: Nullable<AttachmentWhereUniqueInput[]>;
-    update?: Nullable<AttachmentUpdateWithWhereUniqueWithoutFormInput[]>;
-    updateMany?: Nullable<AttachmentUpdateManyWithWhereWithoutFormInput[]>;
-    upsert?: Nullable<AttachmentUpsertWithWhereUniqueWithoutFormInput[]>;
-}
-
-export class AttachmentUpdateManyWithoutForumAnswerInput {
-    connect?: Nullable<AttachmentWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AttachmentCreateOrConnectWithoutForumAnswerInput[]>;
-    create?: Nullable<AttachmentCreateWithoutForumAnswerInput[]>;
-    createMany?: Nullable<AttachmentCreateManyForumAnswerInputEnvelope>;
-    delete?: Nullable<AttachmentWhereUniqueInput[]>;
-    deleteMany?: Nullable<AttachmentScalarWhereInput[]>;
-    disconnect?: Nullable<AttachmentWhereUniqueInput[]>;
-    set?: Nullable<AttachmentWhereUniqueInput[]>;
-    update?: Nullable<AttachmentUpdateWithWhereUniqueWithoutForumAnswerInput[]>;
-    updateMany?: Nullable<AttachmentUpdateManyWithWhereWithoutForumAnswerInput[]>;
-    upsert?: Nullable<AttachmentUpsertWithWhereUniqueWithoutForumAnswerInput[]>;
-}
-
-export class AttachmentUpdateManyWithoutForumInput {
-    connect?: Nullable<AttachmentWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AttachmentCreateOrConnectWithoutForumInput[]>;
-    create?: Nullable<AttachmentCreateWithoutForumInput[]>;
-    createMany?: Nullable<AttachmentCreateManyForumInputEnvelope>;
-    delete?: Nullable<AttachmentWhereUniqueInput[]>;
-    deleteMany?: Nullable<AttachmentScalarWhereInput[]>;
-    disconnect?: Nullable<AttachmentWhereUniqueInput[]>;
-    set?: Nullable<AttachmentWhereUniqueInput[]>;
-    update?: Nullable<AttachmentUpdateWithWhereUniqueWithoutForumInput[]>;
-    updateMany?: Nullable<AttachmentUpdateManyWithWhereWithoutForumInput[]>;
-    upsert?: Nullable<AttachmentUpsertWithWhereUniqueWithoutForumInput[]>;
-}
-
-export class AttachmentUpdateManyWithoutGradeInput {
-    connect?: Nullable<AttachmentWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AttachmentCreateOrConnectWithoutGradeInput[]>;
-    create?: Nullable<AttachmentCreateWithoutGradeInput[]>;
-    createMany?: Nullable<AttachmentCreateManyGradeInputEnvelope>;
-    delete?: Nullable<AttachmentWhereUniqueInput[]>;
-    deleteMany?: Nullable<AttachmentScalarWhereInput[]>;
-    disconnect?: Nullable<AttachmentWhereUniqueInput[]>;
-    set?: Nullable<AttachmentWhereUniqueInput[]>;
-    update?: Nullable<AttachmentUpdateWithWhereUniqueWithoutGradeInput[]>;
-    updateMany?: Nullable<AttachmentUpdateManyWithWhereWithoutGradeInput[]>;
-    upsert?: Nullable<AttachmentUpsertWithWhereUniqueWithoutGradeInput[]>;
-}
-
 export class AttachmentUpdateManyWithoutHelpStepInput {
     connect?: Nullable<AttachmentWhereUniqueInput[]>;
     connectOrCreate?: Nullable<AttachmentCreateOrConnectWithoutHelpStepInput[]>;
@@ -3278,46 +1176,12 @@ export class AttachmentUpdateManyWithoutHelpStepInput {
     upsert?: Nullable<AttachmentUpsertWithWhereUniqueWithoutHelpStepInput[]>;
 }
 
-export class AttachmentUpdateManyWithoutQuestionInput {
-    connect?: Nullable<AttachmentWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AttachmentCreateOrConnectWithoutQuestionInput[]>;
-    create?: Nullable<AttachmentCreateWithoutQuestionInput[]>;
-    createMany?: Nullable<AttachmentCreateManyQuestionInputEnvelope>;
-    delete?: Nullable<AttachmentWhereUniqueInput[]>;
-    deleteMany?: Nullable<AttachmentScalarWhereInput[]>;
-    disconnect?: Nullable<AttachmentWhereUniqueInput[]>;
-    set?: Nullable<AttachmentWhereUniqueInput[]>;
-    update?: Nullable<AttachmentUpdateWithWhereUniqueWithoutQuestionInput[]>;
-    updateMany?: Nullable<AttachmentUpdateManyWithWhereWithoutQuestionInput[]>;
-    upsert?: Nullable<AttachmentUpsertWithWhereUniqueWithoutQuestionInput[]>;
-}
-
-export class AttachmentUpdateManyWithoutRecommendationInput {
-    connect?: Nullable<AttachmentWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AttachmentCreateOrConnectWithoutRecommendationInput[]>;
-    create?: Nullable<AttachmentCreateWithoutRecommendationInput[]>;
-    createMany?: Nullable<AttachmentCreateManyRecommendationInputEnvelope>;
-    delete?: Nullable<AttachmentWhereUniqueInput[]>;
-    deleteMany?: Nullable<AttachmentScalarWhereInput[]>;
-    disconnect?: Nullable<AttachmentWhereUniqueInput[]>;
-    set?: Nullable<AttachmentWhereUniqueInput[]>;
-    update?: Nullable<AttachmentUpdateWithWhereUniqueWithoutRecommendationInput[]>;
-    updateMany?: Nullable<AttachmentUpdateManyWithWhereWithoutRecommendationInput[]>;
-    upsert?: Nullable<AttachmentUpsertWithWhereUniqueWithoutRecommendationInput[]>;
-}
-
-export class AttachmentUpdateManyWithoutResponseInput {
-    connect?: Nullable<AttachmentWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AttachmentCreateOrConnectWithoutResponseInput[]>;
-    create?: Nullable<AttachmentCreateWithoutResponseInput[]>;
-    createMany?: Nullable<AttachmentCreateManyResponseInputEnvelope>;
-    delete?: Nullable<AttachmentWhereUniqueInput[]>;
-    deleteMany?: Nullable<AttachmentScalarWhereInput[]>;
-    disconnect?: Nullable<AttachmentWhereUniqueInput[]>;
-    set?: Nullable<AttachmentWhereUniqueInput[]>;
-    update?: Nullable<AttachmentUpdateWithWhereUniqueWithoutResponseInput[]>;
-    updateMany?: Nullable<AttachmentUpdateManyWithWhereWithoutResponseInput[]>;
-    upsert?: Nullable<AttachmentUpsertWithWhereUniqueWithoutResponseInput[]>;
+export class AttachmentUpdateOneRequiredWithoutBusinessProfilesInput {
+    connect?: Nullable<AttachmentWhereUniqueInput>;
+    connectOrCreate?: Nullable<AttachmentCreateOrConnectWithoutBusinessProfilesInput>;
+    create?: Nullable<AttachmentUncheckedCreateWithoutBusinessProfilesInput>;
+    update?: Nullable<AttachmentUncheckedUpdateWithoutBusinessProfilesInput>;
+    upsert?: Nullable<AttachmentUpsertWithoutBusinessProfilesInput>;
 }
 
 export class AttachmentUpdateOneRequiredWithoutPaymentMethodsInput {
@@ -3326,14 +1190,6 @@ export class AttachmentUpdateOneRequiredWithoutPaymentMethodsInput {
     create?: Nullable<AttachmentUncheckedCreateWithoutPaymentMethodsInput>;
     update?: Nullable<AttachmentUncheckedUpdateWithoutPaymentMethodsInput>;
     upsert?: Nullable<AttachmentUpsertWithoutPaymentMethodsInput>;
-}
-
-export class AttachmentUpdateOneRequiredWithoutServicesInput {
-    connect?: Nullable<AttachmentWhereUniqueInput>;
-    connectOrCreate?: Nullable<AttachmentCreateOrConnectWithoutServicesInput>;
-    create?: Nullable<AttachmentUncheckedCreateWithoutServicesInput>;
-    update?: Nullable<AttachmentUncheckedUpdateWithoutServicesInput>;
-    upsert?: Nullable<AttachmentUpsertWithoutServicesInput>;
 }
 
 export class AttachmentUpdateOneWithoutOrdersInput {
@@ -3346,14 +1202,14 @@ export class AttachmentUpdateOneWithoutOrdersInput {
     upsert?: Nullable<AttachmentUpsertWithoutOrdersInput>;
 }
 
-export class AttachmentUpdateOneWithoutTagsInput {
+export class AttachmentUpdateOneWithoutServicesInput {
     connect?: Nullable<AttachmentWhereUniqueInput>;
-    connectOrCreate?: Nullable<AttachmentCreateOrConnectWithoutTagsInput>;
-    create?: Nullable<AttachmentUncheckedCreateWithoutTagsInput>;
+    connectOrCreate?: Nullable<AttachmentCreateOrConnectWithoutServicesInput>;
+    create?: Nullable<AttachmentUncheckedCreateWithoutServicesInput>;
     delete?: Nullable<boolean>;
     disconnect?: Nullable<boolean>;
-    update?: Nullable<AttachmentUncheckedUpdateWithoutTagsInput>;
-    upsert?: Nullable<AttachmentUpsertWithoutTagsInput>;
+    update?: Nullable<AttachmentUncheckedUpdateWithoutServicesInput>;
+    upsert?: Nullable<AttachmentUpsertWithoutServicesInput>;
 }
 
 export class AttachmentUpdateOneWithoutUserInput {
@@ -3366,33 +1222,8 @@ export class AttachmentUpdateOneWithoutUserInput {
     upsert?: Nullable<AttachmentUpsertWithoutUserInput>;
 }
 
-export class AttachmentUpdateWithWhereUniqueWithoutAnswerInput {
-    data: AttachmentUncheckedUpdateWithoutAnswerInput;
-    where: AttachmentWhereUniqueInput;
-}
-
 export class AttachmentUpdateWithWhereUniqueWithoutCommentInput {
     data: AttachmentUncheckedUpdateWithoutCommentInput;
-    where: AttachmentWhereUniqueInput;
-}
-
-export class AttachmentUpdateWithWhereUniqueWithoutFormInput {
-    data: AttachmentUncheckedUpdateWithoutFormInput;
-    where: AttachmentWhereUniqueInput;
-}
-
-export class AttachmentUpdateWithWhereUniqueWithoutForumAnswerInput {
-    data: AttachmentUncheckedUpdateWithoutForumAnswerInput;
-    where: AttachmentWhereUniqueInput;
-}
-
-export class AttachmentUpdateWithWhereUniqueWithoutForumInput {
-    data: AttachmentUncheckedUpdateWithoutForumInput;
-    where: AttachmentWhereUniqueInput;
-}
-
-export class AttachmentUpdateWithWhereUniqueWithoutGradeInput {
-    data: AttachmentUncheckedUpdateWithoutGradeInput;
     where: AttachmentWhereUniqueInput;
 }
 
@@ -3401,22 +1232,7 @@ export class AttachmentUpdateWithWhereUniqueWithoutHelpStepInput {
     where: AttachmentWhereUniqueInput;
 }
 
-export class AttachmentUpdateWithWhereUniqueWithoutQuestionInput {
-    data: AttachmentUncheckedUpdateWithoutQuestionInput;
-    where: AttachmentWhereUniqueInput;
-}
-
-export class AttachmentUpdateWithWhereUniqueWithoutRecommendationInput {
-    data: AttachmentUncheckedUpdateWithoutRecommendationInput;
-    where: AttachmentWhereUniqueInput;
-}
-
-export class AttachmentUpdateWithWhereUniqueWithoutResponseInput {
-    data: AttachmentUncheckedUpdateWithoutResponseInput;
-    where: AttachmentWhereUniqueInput;
-}
-
-export class AttachmentUpdateWithoutAnswerInput {
+export class AttachmentUpdateWithoutBusinessProfilesInput {
     attachmentType?: Nullable<EnumAttachmentTypeFieldUpdateOperationsInput>;
     comment?: Nullable<CommentUpdateOneWithoutAttachmentsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
@@ -3424,10 +1240,6 @@ export class AttachmentUpdateWithoutAnswerInput {
     duration?: Nullable<IntFieldUpdateOperationsInput>;
     encoding?: Nullable<NullableStringFieldUpdateOperationsInput>;
     filename?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    form?: Nullable<FormUpdateOneWithoutAttachmentsInput>;
-    forum?: Nullable<ForumUpdateOneWithoutAttachmentsInput>;
-    forumAnswer?: Nullable<ForumAnswerUpdateOneWithoutAttachmentsInput>;
-    grade?: Nullable<GradeUpdateOneWithoutAttachmentsInput>;
     helpStep?: Nullable<HelpStepUpdateOneWithoutAttachmentsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     mimetype?: Nullable<NullableStringFieldUpdateOperationsInput>;
@@ -3435,28 +1247,20 @@ export class AttachmentUpdateWithoutAnswerInput {
     path?: Nullable<StringFieldUpdateOperationsInput>;
     paymentMethods?: Nullable<PaymentMethodUpdateManyWithoutLogoInput>;
     placement?: Nullable<StringFieldUpdateOperationsInput>;
-    question?: Nullable<QuestionUpdateOneWithoutAttachmentsInput>;
-    recommendation?: Nullable<RecommendationUpdateOneWithoutAttachmentsInput>;
-    response?: Nullable<ResponseUpdateOneWithoutAttachmentsInput>;
     services?: Nullable<ServiceUpdateManyWithoutImageInput>;
     size?: Nullable<IntFieldUpdateOperationsInput>;
-    tags?: Nullable<TagUpdateManyWithoutImageInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     user?: Nullable<UserUpdateManyWithoutAvatorInput>;
 }
 
 export class AttachmentUpdateWithoutCommentInput {
-    answer?: Nullable<AnswerUpdateOneWithoutAttachmentsInput>;
     attachmentType?: Nullable<EnumAttachmentTypeFieldUpdateOperationsInput>;
+    businessProfiles?: Nullable<BusinessProfileUpdateManyWithoutCoverInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     downloadable?: Nullable<BoolFieldUpdateOperationsInput>;
     duration?: Nullable<IntFieldUpdateOperationsInput>;
     encoding?: Nullable<NullableStringFieldUpdateOperationsInput>;
     filename?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    form?: Nullable<FormUpdateOneWithoutAttachmentsInput>;
-    forum?: Nullable<ForumUpdateOneWithoutAttachmentsInput>;
-    forumAnswer?: Nullable<ForumAnswerUpdateOneWithoutAttachmentsInput>;
-    grade?: Nullable<GradeUpdateOneWithoutAttachmentsInput>;
     helpStep?: Nullable<HelpStepUpdateOneWithoutAttachmentsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     mimetype?: Nullable<NullableStringFieldUpdateOperationsInput>;
@@ -3464,319 +1268,84 @@ export class AttachmentUpdateWithoutCommentInput {
     path?: Nullable<StringFieldUpdateOperationsInput>;
     paymentMethods?: Nullable<PaymentMethodUpdateManyWithoutLogoInput>;
     placement?: Nullable<StringFieldUpdateOperationsInput>;
-    question?: Nullable<QuestionUpdateOneWithoutAttachmentsInput>;
-    recommendation?: Nullable<RecommendationUpdateOneWithoutAttachmentsInput>;
-    response?: Nullable<ResponseUpdateOneWithoutAttachmentsInput>;
     services?: Nullable<ServiceUpdateManyWithoutImageInput>;
     size?: Nullable<IntFieldUpdateOperationsInput>;
-    tags?: Nullable<TagUpdateManyWithoutImageInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    user?: Nullable<UserUpdateManyWithoutAvatorInput>;
-}
-
-export class AttachmentUpdateWithoutFormInput {
-    answer?: Nullable<AnswerUpdateOneWithoutAttachmentsInput>;
-    attachmentType?: Nullable<EnumAttachmentTypeFieldUpdateOperationsInput>;
-    comment?: Nullable<CommentUpdateOneWithoutAttachmentsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    downloadable?: Nullable<BoolFieldUpdateOperationsInput>;
-    duration?: Nullable<IntFieldUpdateOperationsInput>;
-    encoding?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    filename?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    forum?: Nullable<ForumUpdateOneWithoutAttachmentsInput>;
-    forumAnswer?: Nullable<ForumAnswerUpdateOneWithoutAttachmentsInput>;
-    grade?: Nullable<GradeUpdateOneWithoutAttachmentsInput>;
-    helpStep?: Nullable<HelpStepUpdateOneWithoutAttachmentsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    mimetype?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    orders?: Nullable<OrderUpdateManyWithoutReceiptInput>;
-    path?: Nullable<StringFieldUpdateOperationsInput>;
-    paymentMethods?: Nullable<PaymentMethodUpdateManyWithoutLogoInput>;
-    placement?: Nullable<StringFieldUpdateOperationsInput>;
-    question?: Nullable<QuestionUpdateOneWithoutAttachmentsInput>;
-    recommendation?: Nullable<RecommendationUpdateOneWithoutAttachmentsInput>;
-    response?: Nullable<ResponseUpdateOneWithoutAttachmentsInput>;
-    services?: Nullable<ServiceUpdateManyWithoutImageInput>;
-    size?: Nullable<IntFieldUpdateOperationsInput>;
-    tags?: Nullable<TagUpdateManyWithoutImageInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    user?: Nullable<UserUpdateManyWithoutAvatorInput>;
-}
-
-export class AttachmentUpdateWithoutForumAnswerInput {
-    answer?: Nullable<AnswerUpdateOneWithoutAttachmentsInput>;
-    attachmentType?: Nullable<EnumAttachmentTypeFieldUpdateOperationsInput>;
-    comment?: Nullable<CommentUpdateOneWithoutAttachmentsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    downloadable?: Nullable<BoolFieldUpdateOperationsInput>;
-    duration?: Nullable<IntFieldUpdateOperationsInput>;
-    encoding?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    filename?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    form?: Nullable<FormUpdateOneWithoutAttachmentsInput>;
-    forum?: Nullable<ForumUpdateOneWithoutAttachmentsInput>;
-    grade?: Nullable<GradeUpdateOneWithoutAttachmentsInput>;
-    helpStep?: Nullable<HelpStepUpdateOneWithoutAttachmentsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    mimetype?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    orders?: Nullable<OrderUpdateManyWithoutReceiptInput>;
-    path?: Nullable<StringFieldUpdateOperationsInput>;
-    paymentMethods?: Nullable<PaymentMethodUpdateManyWithoutLogoInput>;
-    placement?: Nullable<StringFieldUpdateOperationsInput>;
-    question?: Nullable<QuestionUpdateOneWithoutAttachmentsInput>;
-    recommendation?: Nullable<RecommendationUpdateOneWithoutAttachmentsInput>;
-    response?: Nullable<ResponseUpdateOneWithoutAttachmentsInput>;
-    services?: Nullable<ServiceUpdateManyWithoutImageInput>;
-    size?: Nullable<IntFieldUpdateOperationsInput>;
-    tags?: Nullable<TagUpdateManyWithoutImageInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    user?: Nullable<UserUpdateManyWithoutAvatorInput>;
-}
-
-export class AttachmentUpdateWithoutForumInput {
-    answer?: Nullable<AnswerUpdateOneWithoutAttachmentsInput>;
-    attachmentType?: Nullable<EnumAttachmentTypeFieldUpdateOperationsInput>;
-    comment?: Nullable<CommentUpdateOneWithoutAttachmentsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    downloadable?: Nullable<BoolFieldUpdateOperationsInput>;
-    duration?: Nullable<IntFieldUpdateOperationsInput>;
-    encoding?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    filename?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    form?: Nullable<FormUpdateOneWithoutAttachmentsInput>;
-    forumAnswer?: Nullable<ForumAnswerUpdateOneWithoutAttachmentsInput>;
-    grade?: Nullable<GradeUpdateOneWithoutAttachmentsInput>;
-    helpStep?: Nullable<HelpStepUpdateOneWithoutAttachmentsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    mimetype?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    orders?: Nullable<OrderUpdateManyWithoutReceiptInput>;
-    path?: Nullable<StringFieldUpdateOperationsInput>;
-    paymentMethods?: Nullable<PaymentMethodUpdateManyWithoutLogoInput>;
-    placement?: Nullable<StringFieldUpdateOperationsInput>;
-    question?: Nullable<QuestionUpdateOneWithoutAttachmentsInput>;
-    recommendation?: Nullable<RecommendationUpdateOneWithoutAttachmentsInput>;
-    response?: Nullable<ResponseUpdateOneWithoutAttachmentsInput>;
-    services?: Nullable<ServiceUpdateManyWithoutImageInput>;
-    size?: Nullable<IntFieldUpdateOperationsInput>;
-    tags?: Nullable<TagUpdateManyWithoutImageInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    user?: Nullable<UserUpdateManyWithoutAvatorInput>;
-}
-
-export class AttachmentUpdateWithoutGradeInput {
-    answer?: Nullable<AnswerUpdateOneWithoutAttachmentsInput>;
-    attachmentType?: Nullable<EnumAttachmentTypeFieldUpdateOperationsInput>;
-    comment?: Nullable<CommentUpdateOneWithoutAttachmentsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    downloadable?: Nullable<BoolFieldUpdateOperationsInput>;
-    duration?: Nullable<IntFieldUpdateOperationsInput>;
-    encoding?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    filename?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    form?: Nullable<FormUpdateOneWithoutAttachmentsInput>;
-    forum?: Nullable<ForumUpdateOneWithoutAttachmentsInput>;
-    forumAnswer?: Nullable<ForumAnswerUpdateOneWithoutAttachmentsInput>;
-    helpStep?: Nullable<HelpStepUpdateOneWithoutAttachmentsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    mimetype?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    orders?: Nullable<OrderUpdateManyWithoutReceiptInput>;
-    path?: Nullable<StringFieldUpdateOperationsInput>;
-    paymentMethods?: Nullable<PaymentMethodUpdateManyWithoutLogoInput>;
-    placement?: Nullable<StringFieldUpdateOperationsInput>;
-    question?: Nullable<QuestionUpdateOneWithoutAttachmentsInput>;
-    recommendation?: Nullable<RecommendationUpdateOneWithoutAttachmentsInput>;
-    response?: Nullable<ResponseUpdateOneWithoutAttachmentsInput>;
-    services?: Nullable<ServiceUpdateManyWithoutImageInput>;
-    size?: Nullable<IntFieldUpdateOperationsInput>;
-    tags?: Nullable<TagUpdateManyWithoutImageInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     user?: Nullable<UserUpdateManyWithoutAvatorInput>;
 }
 
 export class AttachmentUpdateWithoutHelpStepInput {
-    answer?: Nullable<AnswerUpdateOneWithoutAttachmentsInput>;
     attachmentType?: Nullable<EnumAttachmentTypeFieldUpdateOperationsInput>;
+    businessProfiles?: Nullable<BusinessProfileUpdateManyWithoutCoverInput>;
     comment?: Nullable<CommentUpdateOneWithoutAttachmentsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     downloadable?: Nullable<BoolFieldUpdateOperationsInput>;
     duration?: Nullable<IntFieldUpdateOperationsInput>;
     encoding?: Nullable<NullableStringFieldUpdateOperationsInput>;
     filename?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    form?: Nullable<FormUpdateOneWithoutAttachmentsInput>;
-    forum?: Nullable<ForumUpdateOneWithoutAttachmentsInput>;
-    forumAnswer?: Nullable<ForumAnswerUpdateOneWithoutAttachmentsInput>;
-    grade?: Nullable<GradeUpdateOneWithoutAttachmentsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     mimetype?: Nullable<NullableStringFieldUpdateOperationsInput>;
     orders?: Nullable<OrderUpdateManyWithoutReceiptInput>;
     path?: Nullable<StringFieldUpdateOperationsInput>;
     paymentMethods?: Nullable<PaymentMethodUpdateManyWithoutLogoInput>;
     placement?: Nullable<StringFieldUpdateOperationsInput>;
-    question?: Nullable<QuestionUpdateOneWithoutAttachmentsInput>;
-    recommendation?: Nullable<RecommendationUpdateOneWithoutAttachmentsInput>;
-    response?: Nullable<ResponseUpdateOneWithoutAttachmentsInput>;
     services?: Nullable<ServiceUpdateManyWithoutImageInput>;
     size?: Nullable<IntFieldUpdateOperationsInput>;
-    tags?: Nullable<TagUpdateManyWithoutImageInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     user?: Nullable<UserUpdateManyWithoutAvatorInput>;
 }
 
 export class AttachmentUpdateWithoutOrdersInput {
-    answer?: Nullable<AnswerUpdateOneWithoutAttachmentsInput>;
     attachmentType?: Nullable<EnumAttachmentTypeFieldUpdateOperationsInput>;
+    businessProfiles?: Nullable<BusinessProfileUpdateManyWithoutCoverInput>;
     comment?: Nullable<CommentUpdateOneWithoutAttachmentsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     downloadable?: Nullable<BoolFieldUpdateOperationsInput>;
     duration?: Nullable<IntFieldUpdateOperationsInput>;
     encoding?: Nullable<NullableStringFieldUpdateOperationsInput>;
     filename?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    form?: Nullable<FormUpdateOneWithoutAttachmentsInput>;
-    forum?: Nullable<ForumUpdateOneWithoutAttachmentsInput>;
-    forumAnswer?: Nullable<ForumAnswerUpdateOneWithoutAttachmentsInput>;
-    grade?: Nullable<GradeUpdateOneWithoutAttachmentsInput>;
     helpStep?: Nullable<HelpStepUpdateOneWithoutAttachmentsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     mimetype?: Nullable<NullableStringFieldUpdateOperationsInput>;
     path?: Nullable<StringFieldUpdateOperationsInput>;
     paymentMethods?: Nullable<PaymentMethodUpdateManyWithoutLogoInput>;
     placement?: Nullable<StringFieldUpdateOperationsInput>;
-    question?: Nullable<QuestionUpdateOneWithoutAttachmentsInput>;
-    recommendation?: Nullable<RecommendationUpdateOneWithoutAttachmentsInput>;
-    response?: Nullable<ResponseUpdateOneWithoutAttachmentsInput>;
     services?: Nullable<ServiceUpdateManyWithoutImageInput>;
     size?: Nullable<IntFieldUpdateOperationsInput>;
-    tags?: Nullable<TagUpdateManyWithoutImageInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     user?: Nullable<UserUpdateManyWithoutAvatorInput>;
 }
 
 export class AttachmentUpdateWithoutPaymentMethodsInput {
-    answer?: Nullable<AnswerUpdateOneWithoutAttachmentsInput>;
     attachmentType?: Nullable<EnumAttachmentTypeFieldUpdateOperationsInput>;
+    businessProfiles?: Nullable<BusinessProfileUpdateManyWithoutCoverInput>;
     comment?: Nullable<CommentUpdateOneWithoutAttachmentsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     downloadable?: Nullable<BoolFieldUpdateOperationsInput>;
     duration?: Nullable<IntFieldUpdateOperationsInput>;
     encoding?: Nullable<NullableStringFieldUpdateOperationsInput>;
     filename?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    form?: Nullable<FormUpdateOneWithoutAttachmentsInput>;
-    forum?: Nullable<ForumUpdateOneWithoutAttachmentsInput>;
-    forumAnswer?: Nullable<ForumAnswerUpdateOneWithoutAttachmentsInput>;
-    grade?: Nullable<GradeUpdateOneWithoutAttachmentsInput>;
     helpStep?: Nullable<HelpStepUpdateOneWithoutAttachmentsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     mimetype?: Nullable<NullableStringFieldUpdateOperationsInput>;
     orders?: Nullable<OrderUpdateManyWithoutReceiptInput>;
     path?: Nullable<StringFieldUpdateOperationsInput>;
     placement?: Nullable<StringFieldUpdateOperationsInput>;
-    question?: Nullable<QuestionUpdateOneWithoutAttachmentsInput>;
-    recommendation?: Nullable<RecommendationUpdateOneWithoutAttachmentsInput>;
-    response?: Nullable<ResponseUpdateOneWithoutAttachmentsInput>;
     services?: Nullable<ServiceUpdateManyWithoutImageInput>;
     size?: Nullable<IntFieldUpdateOperationsInput>;
-    tags?: Nullable<TagUpdateManyWithoutImageInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    user?: Nullable<UserUpdateManyWithoutAvatorInput>;
-}
-
-export class AttachmentUpdateWithoutQuestionInput {
-    answer?: Nullable<AnswerUpdateOneWithoutAttachmentsInput>;
-    attachmentType?: Nullable<EnumAttachmentTypeFieldUpdateOperationsInput>;
-    comment?: Nullable<CommentUpdateOneWithoutAttachmentsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    downloadable?: Nullable<BoolFieldUpdateOperationsInput>;
-    duration?: Nullable<IntFieldUpdateOperationsInput>;
-    encoding?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    filename?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    form?: Nullable<FormUpdateOneWithoutAttachmentsInput>;
-    forum?: Nullable<ForumUpdateOneWithoutAttachmentsInput>;
-    forumAnswer?: Nullable<ForumAnswerUpdateOneWithoutAttachmentsInput>;
-    grade?: Nullable<GradeUpdateOneWithoutAttachmentsInput>;
-    helpStep?: Nullable<HelpStepUpdateOneWithoutAttachmentsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    mimetype?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    orders?: Nullable<OrderUpdateManyWithoutReceiptInput>;
-    path?: Nullable<StringFieldUpdateOperationsInput>;
-    paymentMethods?: Nullable<PaymentMethodUpdateManyWithoutLogoInput>;
-    placement?: Nullable<StringFieldUpdateOperationsInput>;
-    recommendation?: Nullable<RecommendationUpdateOneWithoutAttachmentsInput>;
-    response?: Nullable<ResponseUpdateOneWithoutAttachmentsInput>;
-    services?: Nullable<ServiceUpdateManyWithoutImageInput>;
-    size?: Nullable<IntFieldUpdateOperationsInput>;
-    tags?: Nullable<TagUpdateManyWithoutImageInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    user?: Nullable<UserUpdateManyWithoutAvatorInput>;
-}
-
-export class AttachmentUpdateWithoutRecommendationInput {
-    answer?: Nullable<AnswerUpdateOneWithoutAttachmentsInput>;
-    attachmentType?: Nullable<EnumAttachmentTypeFieldUpdateOperationsInput>;
-    comment?: Nullable<CommentUpdateOneWithoutAttachmentsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    downloadable?: Nullable<BoolFieldUpdateOperationsInput>;
-    duration?: Nullable<IntFieldUpdateOperationsInput>;
-    encoding?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    filename?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    form?: Nullable<FormUpdateOneWithoutAttachmentsInput>;
-    forum?: Nullable<ForumUpdateOneWithoutAttachmentsInput>;
-    forumAnswer?: Nullable<ForumAnswerUpdateOneWithoutAttachmentsInput>;
-    grade?: Nullable<GradeUpdateOneWithoutAttachmentsInput>;
-    helpStep?: Nullable<HelpStepUpdateOneWithoutAttachmentsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    mimetype?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    orders?: Nullable<OrderUpdateManyWithoutReceiptInput>;
-    path?: Nullable<StringFieldUpdateOperationsInput>;
-    paymentMethods?: Nullable<PaymentMethodUpdateManyWithoutLogoInput>;
-    placement?: Nullable<StringFieldUpdateOperationsInput>;
-    question?: Nullable<QuestionUpdateOneWithoutAttachmentsInput>;
-    response?: Nullable<ResponseUpdateOneWithoutAttachmentsInput>;
-    services?: Nullable<ServiceUpdateManyWithoutImageInput>;
-    size?: Nullable<IntFieldUpdateOperationsInput>;
-    tags?: Nullable<TagUpdateManyWithoutImageInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    user?: Nullable<UserUpdateManyWithoutAvatorInput>;
-}
-
-export class AttachmentUpdateWithoutResponseInput {
-    answer?: Nullable<AnswerUpdateOneWithoutAttachmentsInput>;
-    attachmentType?: Nullable<EnumAttachmentTypeFieldUpdateOperationsInput>;
-    comment?: Nullable<CommentUpdateOneWithoutAttachmentsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    downloadable?: Nullable<BoolFieldUpdateOperationsInput>;
-    duration?: Nullable<IntFieldUpdateOperationsInput>;
-    encoding?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    filename?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    form?: Nullable<FormUpdateOneWithoutAttachmentsInput>;
-    forum?: Nullable<ForumUpdateOneWithoutAttachmentsInput>;
-    forumAnswer?: Nullable<ForumAnswerUpdateOneWithoutAttachmentsInput>;
-    grade?: Nullable<GradeUpdateOneWithoutAttachmentsInput>;
-    helpStep?: Nullable<HelpStepUpdateOneWithoutAttachmentsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    mimetype?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    orders?: Nullable<OrderUpdateManyWithoutReceiptInput>;
-    path?: Nullable<StringFieldUpdateOperationsInput>;
-    paymentMethods?: Nullable<PaymentMethodUpdateManyWithoutLogoInput>;
-    placement?: Nullable<StringFieldUpdateOperationsInput>;
-    question?: Nullable<QuestionUpdateOneWithoutAttachmentsInput>;
-    recommendation?: Nullable<RecommendationUpdateOneWithoutAttachmentsInput>;
-    services?: Nullable<ServiceUpdateManyWithoutImageInput>;
-    size?: Nullable<IntFieldUpdateOperationsInput>;
-    tags?: Nullable<TagUpdateManyWithoutImageInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     user?: Nullable<UserUpdateManyWithoutAvatorInput>;
 }
 
 export class AttachmentUpdateWithoutServicesInput {
-    answer?: Nullable<AnswerUpdateOneWithoutAttachmentsInput>;
     attachmentType?: Nullable<EnumAttachmentTypeFieldUpdateOperationsInput>;
+    businessProfiles?: Nullable<BusinessProfileUpdateManyWithoutCoverInput>;
     comment?: Nullable<CommentUpdateOneWithoutAttachmentsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     downloadable?: Nullable<BoolFieldUpdateOperationsInput>;
     duration?: Nullable<IntFieldUpdateOperationsInput>;
     encoding?: Nullable<NullableStringFieldUpdateOperationsInput>;
     filename?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    form?: Nullable<FormUpdateOneWithoutAttachmentsInput>;
-    forum?: Nullable<ForumUpdateOneWithoutAttachmentsInput>;
-    forumAnswer?: Nullable<ForumAnswerUpdateOneWithoutAttachmentsInput>;
-    grade?: Nullable<GradeUpdateOneWithoutAttachmentsInput>;
     helpStep?: Nullable<HelpStepUpdateOneWithoutAttachmentsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     mimetype?: Nullable<NullableStringFieldUpdateOperationsInput>;
@@ -3784,57 +1353,20 @@ export class AttachmentUpdateWithoutServicesInput {
     path?: Nullable<StringFieldUpdateOperationsInput>;
     paymentMethods?: Nullable<PaymentMethodUpdateManyWithoutLogoInput>;
     placement?: Nullable<StringFieldUpdateOperationsInput>;
-    question?: Nullable<QuestionUpdateOneWithoutAttachmentsInput>;
-    recommendation?: Nullable<RecommendationUpdateOneWithoutAttachmentsInput>;
-    response?: Nullable<ResponseUpdateOneWithoutAttachmentsInput>;
-    size?: Nullable<IntFieldUpdateOperationsInput>;
-    tags?: Nullable<TagUpdateManyWithoutImageInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    user?: Nullable<UserUpdateManyWithoutAvatorInput>;
-}
-
-export class AttachmentUpdateWithoutTagsInput {
-    answer?: Nullable<AnswerUpdateOneWithoutAttachmentsInput>;
-    attachmentType?: Nullable<EnumAttachmentTypeFieldUpdateOperationsInput>;
-    comment?: Nullable<CommentUpdateOneWithoutAttachmentsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    downloadable?: Nullable<BoolFieldUpdateOperationsInput>;
-    duration?: Nullable<IntFieldUpdateOperationsInput>;
-    encoding?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    filename?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    form?: Nullable<FormUpdateOneWithoutAttachmentsInput>;
-    forum?: Nullable<ForumUpdateOneWithoutAttachmentsInput>;
-    forumAnswer?: Nullable<ForumAnswerUpdateOneWithoutAttachmentsInput>;
-    grade?: Nullable<GradeUpdateOneWithoutAttachmentsInput>;
-    helpStep?: Nullable<HelpStepUpdateOneWithoutAttachmentsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    mimetype?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    orders?: Nullable<OrderUpdateManyWithoutReceiptInput>;
-    path?: Nullable<StringFieldUpdateOperationsInput>;
-    paymentMethods?: Nullable<PaymentMethodUpdateManyWithoutLogoInput>;
-    placement?: Nullable<StringFieldUpdateOperationsInput>;
-    question?: Nullable<QuestionUpdateOneWithoutAttachmentsInput>;
-    recommendation?: Nullable<RecommendationUpdateOneWithoutAttachmentsInput>;
-    response?: Nullable<ResponseUpdateOneWithoutAttachmentsInput>;
-    services?: Nullable<ServiceUpdateManyWithoutImageInput>;
     size?: Nullable<IntFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     user?: Nullable<UserUpdateManyWithoutAvatorInput>;
 }
 
 export class AttachmentUpdateWithoutUserInput {
-    answer?: Nullable<AnswerUpdateOneWithoutAttachmentsInput>;
     attachmentType?: Nullable<EnumAttachmentTypeFieldUpdateOperationsInput>;
+    businessProfiles?: Nullable<BusinessProfileUpdateManyWithoutCoverInput>;
     comment?: Nullable<CommentUpdateOneWithoutAttachmentsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     downloadable?: Nullable<BoolFieldUpdateOperationsInput>;
     duration?: Nullable<IntFieldUpdateOperationsInput>;
     encoding?: Nullable<NullableStringFieldUpdateOperationsInput>;
     filename?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    form?: Nullable<FormUpdateOneWithoutAttachmentsInput>;
-    forum?: Nullable<ForumUpdateOneWithoutAttachmentsInput>;
-    forumAnswer?: Nullable<ForumAnswerUpdateOneWithoutAttachmentsInput>;
-    grade?: Nullable<GradeUpdateOneWithoutAttachmentsInput>;
     helpStep?: Nullable<HelpStepUpdateOneWithoutAttachmentsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     mimetype?: Nullable<NullableStringFieldUpdateOperationsInput>;
@@ -3842,48 +1374,14 @@ export class AttachmentUpdateWithoutUserInput {
     path?: Nullable<StringFieldUpdateOperationsInput>;
     paymentMethods?: Nullable<PaymentMethodUpdateManyWithoutLogoInput>;
     placement?: Nullable<StringFieldUpdateOperationsInput>;
-    question?: Nullable<QuestionUpdateOneWithoutAttachmentsInput>;
-    recommendation?: Nullable<RecommendationUpdateOneWithoutAttachmentsInput>;
-    response?: Nullable<ResponseUpdateOneWithoutAttachmentsInput>;
     services?: Nullable<ServiceUpdateManyWithoutImageInput>;
     size?: Nullable<IntFieldUpdateOperationsInput>;
-    tags?: Nullable<TagUpdateManyWithoutImageInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class AttachmentUpsertWithWhereUniqueWithoutAnswerInput {
-    create: AttachmentUncheckedCreateWithoutAnswerInput;
-    update: AttachmentUncheckedUpdateWithoutAnswerInput;
-    where: AttachmentWhereUniqueInput;
 }
 
 export class AttachmentUpsertWithWhereUniqueWithoutCommentInput {
     create: AttachmentUncheckedCreateWithoutCommentInput;
     update: AttachmentUncheckedUpdateWithoutCommentInput;
-    where: AttachmentWhereUniqueInput;
-}
-
-export class AttachmentUpsertWithWhereUniqueWithoutFormInput {
-    create: AttachmentUncheckedCreateWithoutFormInput;
-    update: AttachmentUncheckedUpdateWithoutFormInput;
-    where: AttachmentWhereUniqueInput;
-}
-
-export class AttachmentUpsertWithWhereUniqueWithoutForumAnswerInput {
-    create: AttachmentUncheckedCreateWithoutForumAnswerInput;
-    update: AttachmentUncheckedUpdateWithoutForumAnswerInput;
-    where: AttachmentWhereUniqueInput;
-}
-
-export class AttachmentUpsertWithWhereUniqueWithoutForumInput {
-    create: AttachmentUncheckedCreateWithoutForumInput;
-    update: AttachmentUncheckedUpdateWithoutForumInput;
-    where: AttachmentWhereUniqueInput;
-}
-
-export class AttachmentUpsertWithWhereUniqueWithoutGradeInput {
-    create: AttachmentUncheckedCreateWithoutGradeInput;
-    update: AttachmentUncheckedUpdateWithoutGradeInput;
     where: AttachmentWhereUniqueInput;
 }
 
@@ -3893,22 +1391,9 @@ export class AttachmentUpsertWithWhereUniqueWithoutHelpStepInput {
     where: AttachmentWhereUniqueInput;
 }
 
-export class AttachmentUpsertWithWhereUniqueWithoutQuestionInput {
-    create: AttachmentUncheckedCreateWithoutQuestionInput;
-    update: AttachmentUncheckedUpdateWithoutQuestionInput;
-    where: AttachmentWhereUniqueInput;
-}
-
-export class AttachmentUpsertWithWhereUniqueWithoutRecommendationInput {
-    create: AttachmentUncheckedCreateWithoutRecommendationInput;
-    update: AttachmentUncheckedUpdateWithoutRecommendationInput;
-    where: AttachmentWhereUniqueInput;
-}
-
-export class AttachmentUpsertWithWhereUniqueWithoutResponseInput {
-    create: AttachmentUncheckedCreateWithoutResponseInput;
-    update: AttachmentUncheckedUpdateWithoutResponseInput;
-    where: AttachmentWhereUniqueInput;
+export class AttachmentUpsertWithoutBusinessProfilesInput {
+    create: AttachmentUncheckedCreateWithoutBusinessProfilesInput;
+    update: AttachmentUncheckedUpdateWithoutBusinessProfilesInput;
 }
 
 export class AttachmentUpsertWithoutOrdersInput {
@@ -3926,11 +1411,6 @@ export class AttachmentUpsertWithoutServicesInput {
     update: AttachmentUncheckedUpdateWithoutServicesInput;
 }
 
-export class AttachmentUpsertWithoutTagsInput {
-    create: AttachmentUncheckedCreateWithoutTagsInput;
-    update: AttachmentUncheckedUpdateWithoutTagsInput;
-}
-
 export class AttachmentUpsertWithoutUserInput {
     create: AttachmentUncheckedCreateWithoutUserInput;
     update: AttachmentUncheckedUpdateWithoutUserInput;
@@ -3940,9 +1420,8 @@ export class AttachmentWhereInput {
     AND?: Nullable<AttachmentWhereInput[]>;
     NOT?: Nullable<AttachmentWhereInput[]>;
     OR?: Nullable<AttachmentWhereInput[]>;
-    answer?: Nullable<AnswerWhereInput>;
-    answerId?: Nullable<StringNullableFilter>;
     attachmentType?: Nullable<EnumAttachmentTypeFilter>;
+    businessProfiles?: Nullable<BusinessProfileListRelationFilter>;
     comment?: Nullable<CommentWhereInput>;
     commentId?: Nullable<StringNullableFilter>;
     createdAt?: Nullable<DateTimeFilter>;
@@ -3950,14 +1429,6 @@ export class AttachmentWhereInput {
     duration?: Nullable<IntFilter>;
     encoding?: Nullable<StringNullableFilter>;
     filename?: Nullable<StringNullableFilter>;
-    form?: Nullable<FormWhereInput>;
-    formId?: Nullable<StringNullableFilter>;
-    forum?: Nullable<ForumWhereInput>;
-    forumAnswer?: Nullable<ForumAnswerWhereInput>;
-    forumAnswerId?: Nullable<StringNullableFilter>;
-    forumId?: Nullable<StringNullableFilter>;
-    grade?: Nullable<GradeWhereInput>;
-    gradeId?: Nullable<StringNullableFilter>;
     helpStep?: Nullable<HelpStepWhereInput>;
     helpStepId?: Nullable<StringNullableFilter>;
     id?: Nullable<StringFilter>;
@@ -3966,15 +1437,8 @@ export class AttachmentWhereInput {
     path?: Nullable<StringFilter>;
     paymentMethods?: Nullable<PaymentMethodListRelationFilter>;
     placement?: Nullable<StringFilter>;
-    question?: Nullable<QuestionWhereInput>;
-    questionId?: Nullable<StringNullableFilter>;
-    recommendation?: Nullable<RecommendationWhereInput>;
-    recommendationId?: Nullable<StringNullableFilter>;
-    response?: Nullable<ResponseWhereInput>;
-    responseId?: Nullable<StringNullableFilter>;
     services?: Nullable<ServiceListRelationFilter>;
     size?: Nullable<IntFilter>;
-    tags?: Nullable<TagListRelationFilter>;
     updatedAt?: Nullable<DateTimeFilter>;
     user?: Nullable<UserListRelationFilter>;
 }
@@ -3997,22 +1461,6 @@ export class BoolFilter {
     not?: Nullable<NestedBoolFilter>;
 }
 
-export class BoolNullableFilter {
-    equals?: Nullable<boolean>;
-    not?: Nullable<NestedBoolNullableFilter>;
-}
-
-export class BoolNullableWithAggregatesFilter {
-    _count?: Nullable<NestedIntNullableFilter>;
-    _max?: Nullable<NestedBoolNullableFilter>;
-    _min?: Nullable<NestedBoolNullableFilter>;
-    count?: Nullable<NestedIntNullableFilter>;
-    equals?: Nullable<boolean>;
-    max?: Nullable<NestedBoolNullableFilter>;
-    min?: Nullable<NestedBoolNullableFilter>;
-    not?: Nullable<NestedBoolNullableWithAggregatesFilter>;
-}
-
 export class BoolWithAggregatesFilter {
     _count?: Nullable<NestedIntFilter>;
     _max?: Nullable<NestedBoolFilter>;
@@ -4022,6 +1470,340 @@ export class BoolWithAggregatesFilter {
     max?: Nullable<NestedBoolFilter>;
     min?: Nullable<NestedBoolFilter>;
     not?: Nullable<NestedBoolWithAggregatesFilter>;
+}
+
+export class BusinessProfileCreateInput {
+    about: string;
+    cover: AttachmentCreateNestedOneWithoutBusinessProfilesInput;
+    createdAt?: Nullable<DateTime>;
+    id?: Nullable<string>;
+    mode: BusinnessMode;
+    owner: UserCreateNestedOneWithoutBusinessProfileInput;
+    updatedAt?: Nullable<DateTime>;
+}
+
+export class BusinessProfileCreateManyCoverInput {
+    about: string;
+    createdAt?: Nullable<DateTime>;
+    id?: Nullable<string>;
+    mode: BusinnessMode;
+    ownerId: string;
+    updatedAt?: Nullable<DateTime>;
+}
+
+export class BusinessProfileCreateManyCoverInputEnvelope {
+    data: BusinessProfileCreateManyCoverInput[];
+    skipDuplicates?: Nullable<boolean>;
+}
+
+export class BusinessProfileCreateManyInput {
+    about: string;
+    coverId: string;
+    createdAt?: Nullable<DateTime>;
+    id?: Nullable<string>;
+    mode: BusinnessMode;
+    ownerId: string;
+    updatedAt?: Nullable<DateTime>;
+}
+
+export class BusinessProfileCreateNestedManyWithoutCoverInput {
+    connect?: Nullable<BusinessProfileWhereUniqueInput[]>;
+    connectOrCreate?: Nullable<BusinessProfileCreateOrConnectWithoutCoverInput[]>;
+    create?: Nullable<BusinessProfileCreateWithoutCoverInput[]>;
+    createMany?: Nullable<BusinessProfileCreateManyCoverInputEnvelope>;
+}
+
+export class BusinessProfileCreateNestedOneWithoutOwnerInput {
+    connect?: Nullable<BusinessProfileWhereUniqueInput>;
+    connectOrCreate?: Nullable<BusinessProfileCreateOrConnectWithoutOwnerInput>;
+    create?: Nullable<BusinessProfileUncheckedCreateWithoutOwnerInput>;
+}
+
+export class BusinessProfileCreateOrConnectWithoutCoverInput {
+    create: BusinessProfileUncheckedCreateWithoutCoverInput;
+    where: BusinessProfileWhereUniqueInput;
+}
+
+export class BusinessProfileCreateOrConnectWithoutOwnerInput {
+    create: BusinessProfileUncheckedCreateWithoutOwnerInput;
+    where: BusinessProfileWhereUniqueInput;
+}
+
+export class BusinessProfileCreateWithoutCoverInput {
+    about: string;
+    createdAt?: Nullable<DateTime>;
+    id?: Nullable<string>;
+    mode: BusinnessMode;
+    owner: UserCreateNestedOneWithoutBusinessProfileInput;
+    updatedAt?: Nullable<DateTime>;
+}
+
+export class BusinessProfileCreateWithoutOwnerInput {
+    about: string;
+    cover: AttachmentCreateNestedOneWithoutBusinessProfilesInput;
+    createdAt?: Nullable<DateTime>;
+    id?: Nullable<string>;
+    mode: BusinnessMode;
+    updatedAt?: Nullable<DateTime>;
+}
+
+export class BusinessProfileListRelationFilter {
+    every?: Nullable<BusinessProfileWhereInput>;
+    none?: Nullable<BusinessProfileWhereInput>;
+    some?: Nullable<BusinessProfileWhereInput>;
+}
+
+export class BusinessProfileOrderByInput {
+    about?: Nullable<SortOrder>;
+    coverId?: Nullable<SortOrder>;
+    createdAt?: Nullable<SortOrder>;
+    id?: Nullable<SortOrder>;
+    mode?: Nullable<SortOrder>;
+    ownerId?: Nullable<SortOrder>;
+    updatedAt?: Nullable<SortOrder>;
+}
+
+export class BusinessProfileRelationFilter {
+    is?: Nullable<BusinessProfileWhereInput>;
+    isNot?: Nullable<BusinessProfileWhereInput>;
+}
+
+export class BusinessProfileScalarWhereInput {
+    AND?: Nullable<BusinessProfileScalarWhereInput[]>;
+    NOT?: Nullable<BusinessProfileScalarWhereInput[]>;
+    OR?: Nullable<BusinessProfileScalarWhereInput[]>;
+    about?: Nullable<StringFilter>;
+    coverId?: Nullable<StringFilter>;
+    createdAt?: Nullable<DateTimeFilter>;
+    id?: Nullable<StringFilter>;
+    mode?: Nullable<EnumBusinnessModeFilter>;
+    ownerId?: Nullable<StringFilter>;
+    updatedAt?: Nullable<DateTimeFilter>;
+}
+
+export class BusinessProfileScalarWhereWithAggregatesInput {
+    AND?: Nullable<BusinessProfileScalarWhereWithAggregatesInput[]>;
+    NOT?: Nullable<BusinessProfileScalarWhereWithAggregatesInput[]>;
+    OR?: Nullable<BusinessProfileScalarWhereWithAggregatesInput[]>;
+    about?: Nullable<StringWithAggregatesFilter>;
+    coverId?: Nullable<StringWithAggregatesFilter>;
+    createdAt?: Nullable<DateTimeWithAggregatesFilter>;
+    id?: Nullable<StringWithAggregatesFilter>;
+    mode?: Nullable<EnumBusinnessModeWithAggregatesFilter>;
+    ownerId?: Nullable<StringWithAggregatesFilter>;
+    updatedAt?: Nullable<DateTimeWithAggregatesFilter>;
+}
+
+export class BusinessProfileUncheckedCreateInput {
+    about: string;
+    coverId: string;
+    createdAt?: Nullable<DateTime>;
+    id?: Nullable<string>;
+    mode: BusinnessMode;
+    ownerId: string;
+    updatedAt?: Nullable<DateTime>;
+}
+
+export class BusinessProfileUncheckedCreateNestedManyWithoutCoverInput {
+    connect?: Nullable<BusinessProfileWhereUniqueInput[]>;
+    connectOrCreate?: Nullable<BusinessProfileCreateOrConnectWithoutCoverInput[]>;
+    create?: Nullable<BusinessProfileCreateWithoutCoverInput[]>;
+    createMany?: Nullable<BusinessProfileCreateManyCoverInputEnvelope>;
+}
+
+export class BusinessProfileUncheckedCreateNestedOneWithoutOwnerInput {
+    connect?: Nullable<BusinessProfileWhereUniqueInput>;
+    connectOrCreate?: Nullable<BusinessProfileCreateOrConnectWithoutOwnerInput>;
+    create?: Nullable<BusinessProfileUncheckedCreateWithoutOwnerInput>;
+}
+
+export class BusinessProfileUncheckedCreateWithoutCoverInput {
+    about: string;
+    createdAt?: Nullable<DateTime>;
+    id?: Nullable<string>;
+    mode: BusinnessMode;
+    ownerId: string;
+    updatedAt?: Nullable<DateTime>;
+}
+
+export class BusinessProfileUncheckedCreateWithoutOwnerInput {
+    about: string;
+    coverId: string;
+    createdAt?: Nullable<DateTime>;
+    id?: Nullable<string>;
+    mode: BusinnessMode;
+    updatedAt?: Nullable<DateTime>;
+}
+
+export class BusinessProfileUncheckedUpdateInput {
+    about?: Nullable<StringFieldUpdateOperationsInput>;
+    coverId?: Nullable<StringFieldUpdateOperationsInput>;
+    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    id?: Nullable<StringFieldUpdateOperationsInput>;
+    mode?: Nullable<EnumBusinnessModeFieldUpdateOperationsInput>;
+    ownerId?: Nullable<StringFieldUpdateOperationsInput>;
+    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+}
+
+export class BusinessProfileUncheckedUpdateManyInput {
+    about?: Nullable<StringFieldUpdateOperationsInput>;
+    coverId?: Nullable<StringFieldUpdateOperationsInput>;
+    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    id?: Nullable<StringFieldUpdateOperationsInput>;
+    mode?: Nullable<EnumBusinnessModeFieldUpdateOperationsInput>;
+    ownerId?: Nullable<StringFieldUpdateOperationsInput>;
+    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+}
+
+export class BusinessProfileUncheckedUpdateManyWithoutBusinessProfilesInput {
+    about?: Nullable<StringFieldUpdateOperationsInput>;
+    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    id?: Nullable<StringFieldUpdateOperationsInput>;
+    mode?: Nullable<EnumBusinnessModeFieldUpdateOperationsInput>;
+    ownerId?: Nullable<StringFieldUpdateOperationsInput>;
+    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+}
+
+export class BusinessProfileUncheckedUpdateManyWithoutCoverInput {
+    connect?: Nullable<BusinessProfileWhereUniqueInput[]>;
+    connectOrCreate?: Nullable<BusinessProfileCreateOrConnectWithoutCoverInput[]>;
+    create?: Nullable<BusinessProfileCreateWithoutCoverInput[]>;
+    createMany?: Nullable<BusinessProfileCreateManyCoverInputEnvelope>;
+    delete?: Nullable<BusinessProfileWhereUniqueInput[]>;
+    deleteMany?: Nullable<BusinessProfileScalarWhereInput[]>;
+    disconnect?: Nullable<BusinessProfileWhereUniqueInput[]>;
+    set?: Nullable<BusinessProfileWhereUniqueInput[]>;
+    update?: Nullable<BusinessProfileUpdateWithWhereUniqueWithoutCoverInput[]>;
+    updateMany?: Nullable<BusinessProfileUpdateManyWithWhereWithoutCoverInput[]>;
+    upsert?: Nullable<BusinessProfileUpsertWithWhereUniqueWithoutCoverInput[]>;
+}
+
+export class BusinessProfileUncheckedUpdateOneWithoutOwnerInput {
+    connect?: Nullable<BusinessProfileWhereUniqueInput>;
+    connectOrCreate?: Nullable<BusinessProfileCreateOrConnectWithoutOwnerInput>;
+    create?: Nullable<BusinessProfileUncheckedCreateWithoutOwnerInput>;
+    delete?: Nullable<boolean>;
+    disconnect?: Nullable<boolean>;
+    update?: Nullable<BusinessProfileUncheckedUpdateWithoutOwnerInput>;
+    upsert?: Nullable<BusinessProfileUpsertWithoutOwnerInput>;
+}
+
+export class BusinessProfileUncheckedUpdateWithoutCoverInput {
+    about?: Nullable<StringFieldUpdateOperationsInput>;
+    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    id?: Nullable<StringFieldUpdateOperationsInput>;
+    mode?: Nullable<EnumBusinnessModeFieldUpdateOperationsInput>;
+    ownerId?: Nullable<StringFieldUpdateOperationsInput>;
+    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+}
+
+export class BusinessProfileUncheckedUpdateWithoutOwnerInput {
+    about?: Nullable<StringFieldUpdateOperationsInput>;
+    coverId?: Nullable<StringFieldUpdateOperationsInput>;
+    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    id?: Nullable<StringFieldUpdateOperationsInput>;
+    mode?: Nullable<EnumBusinnessModeFieldUpdateOperationsInput>;
+    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+}
+
+export class BusinessProfileUpdateInput {
+    about?: Nullable<StringFieldUpdateOperationsInput>;
+    cover?: Nullable<AttachmentUpdateOneRequiredWithoutBusinessProfilesInput>;
+    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    id?: Nullable<StringFieldUpdateOperationsInput>;
+    mode?: Nullable<EnumBusinnessModeFieldUpdateOperationsInput>;
+    owner?: Nullable<UserUpdateOneRequiredWithoutBusinessProfileInput>;
+    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+}
+
+export class BusinessProfileUpdateManyMutationInput {
+    about?: Nullable<StringFieldUpdateOperationsInput>;
+    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    id?: Nullable<StringFieldUpdateOperationsInput>;
+    mode?: Nullable<EnumBusinnessModeFieldUpdateOperationsInput>;
+    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+}
+
+export class BusinessProfileUpdateManyWithWhereWithoutCoverInput {
+    data: BusinessProfileUncheckedUpdateManyWithoutBusinessProfilesInput;
+    where: BusinessProfileScalarWhereInput;
+}
+
+export class BusinessProfileUpdateManyWithoutCoverInput {
+    connect?: Nullable<BusinessProfileWhereUniqueInput[]>;
+    connectOrCreate?: Nullable<BusinessProfileCreateOrConnectWithoutCoverInput[]>;
+    create?: Nullable<BusinessProfileCreateWithoutCoverInput[]>;
+    createMany?: Nullable<BusinessProfileCreateManyCoverInputEnvelope>;
+    delete?: Nullable<BusinessProfileWhereUniqueInput[]>;
+    deleteMany?: Nullable<BusinessProfileScalarWhereInput[]>;
+    disconnect?: Nullable<BusinessProfileWhereUniqueInput[]>;
+    set?: Nullable<BusinessProfileWhereUniqueInput[]>;
+    update?: Nullable<BusinessProfileUpdateWithWhereUniqueWithoutCoverInput[]>;
+    updateMany?: Nullable<BusinessProfileUpdateManyWithWhereWithoutCoverInput[]>;
+    upsert?: Nullable<BusinessProfileUpsertWithWhereUniqueWithoutCoverInput[]>;
+}
+
+export class BusinessProfileUpdateOneWithoutOwnerInput {
+    connect?: Nullable<BusinessProfileWhereUniqueInput>;
+    connectOrCreate?: Nullable<BusinessProfileCreateOrConnectWithoutOwnerInput>;
+    create?: Nullable<BusinessProfileUncheckedCreateWithoutOwnerInput>;
+    delete?: Nullable<boolean>;
+    disconnect?: Nullable<boolean>;
+    update?: Nullable<BusinessProfileUncheckedUpdateWithoutOwnerInput>;
+    upsert?: Nullable<BusinessProfileUpsertWithoutOwnerInput>;
+}
+
+export class BusinessProfileUpdateWithWhereUniqueWithoutCoverInput {
+    data: BusinessProfileUncheckedUpdateWithoutCoverInput;
+    where: BusinessProfileWhereUniqueInput;
+}
+
+export class BusinessProfileUpdateWithoutCoverInput {
+    about?: Nullable<StringFieldUpdateOperationsInput>;
+    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    id?: Nullable<StringFieldUpdateOperationsInput>;
+    mode?: Nullable<EnumBusinnessModeFieldUpdateOperationsInput>;
+    owner?: Nullable<UserUpdateOneRequiredWithoutBusinessProfileInput>;
+    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+}
+
+export class BusinessProfileUpdateWithoutOwnerInput {
+    about?: Nullable<StringFieldUpdateOperationsInput>;
+    cover?: Nullable<AttachmentUpdateOneRequiredWithoutBusinessProfilesInput>;
+    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    id?: Nullable<StringFieldUpdateOperationsInput>;
+    mode?: Nullable<EnumBusinnessModeFieldUpdateOperationsInput>;
+    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+}
+
+export class BusinessProfileUpsertWithWhereUniqueWithoutCoverInput {
+    create: BusinessProfileUncheckedCreateWithoutCoverInput;
+    update: BusinessProfileUncheckedUpdateWithoutCoverInput;
+    where: BusinessProfileWhereUniqueInput;
+}
+
+export class BusinessProfileUpsertWithoutOwnerInput {
+    create: BusinessProfileUncheckedCreateWithoutOwnerInput;
+    update: BusinessProfileUncheckedUpdateWithoutOwnerInput;
+}
+
+export class BusinessProfileWhereInput {
+    AND?: Nullable<BusinessProfileWhereInput[]>;
+    NOT?: Nullable<BusinessProfileWhereInput[]>;
+    OR?: Nullable<BusinessProfileWhereInput[]>;
+    about?: Nullable<StringFilter>;
+    cover?: Nullable<AttachmentWhereInput>;
+    coverId?: Nullable<StringFilter>;
+    createdAt?: Nullable<DateTimeFilter>;
+    id?: Nullable<StringFilter>;
+    mode?: Nullable<EnumBusinnessModeFilter>;
+    owner?: Nullable<UserWhereInput>;
+    ownerId?: Nullable<StringFilter>;
+    updatedAt?: Nullable<DateTimeFilter>;
+}
+
+export class BusinessProfileWhereUniqueInput {
+    id?: Nullable<string>;
 }
 
 export class CasbinRuleCreateInput {
@@ -4169,9 +1951,8 @@ export class CommentCreateInput {
     commentsEnabled?: Nullable<boolean>;
     content: string;
     createdAt?: Nullable<DateTime>;
-    forum?: Nullable<ForumCreateNestedOneWithoutCommentsInput>;
-    forumAnswer?: Nullable<ForumAnswerCreateNestedOneWithoutCommentsInput>;
     id?: Nullable<string>;
+    review?: Nullable<ReviewCreateNestedOneWithoutCommentsInput>;
     state?: Nullable<State>;
     updatedAt?: Nullable<DateTime>;
 }
@@ -4181,9 +1962,8 @@ export class CommentCreateManyAuthorInput {
     commentsEnabled?: Nullable<boolean>;
     content: string;
     createdAt?: Nullable<DateTime>;
-    forumAnswerId?: Nullable<string>;
-    forumId?: Nullable<string>;
     id?: Nullable<string>;
+    reviewId: string;
     state?: Nullable<State>;
     updatedAt?: Nullable<DateTime>;
 }
@@ -4198,9 +1978,8 @@ export class CommentCreateManyCommentInput {
     commentsEnabled?: Nullable<boolean>;
     content: string;
     createdAt?: Nullable<DateTime>;
-    forumAnswerId?: Nullable<string>;
-    forumId?: Nullable<string>;
     id?: Nullable<string>;
+    reviewId: string;
     state?: Nullable<State>;
     updatedAt?: Nullable<DateTime>;
 }
@@ -4210,51 +1989,32 @@ export class CommentCreateManyCommentInputEnvelope {
     skipDuplicates?: Nullable<boolean>;
 }
 
-export class CommentCreateManyForumAnswerInput {
-    authorId: string;
-    commentId?: Nullable<string>;
-    commentsEnabled?: Nullable<boolean>;
-    content: string;
-    createdAt?: Nullable<DateTime>;
-    forumId?: Nullable<string>;
-    id?: Nullable<string>;
-    state?: Nullable<State>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class CommentCreateManyForumAnswerInputEnvelope {
-    data: CommentCreateManyForumAnswerInput[];
-    skipDuplicates?: Nullable<boolean>;
-}
-
-export class CommentCreateManyForumInput {
-    authorId: string;
-    commentId?: Nullable<string>;
-    commentsEnabled?: Nullable<boolean>;
-    content: string;
-    createdAt?: Nullable<DateTime>;
-    forumAnswerId?: Nullable<string>;
-    id?: Nullable<string>;
-    state?: Nullable<State>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class CommentCreateManyForumInputEnvelope {
-    data: CommentCreateManyForumInput[];
-    skipDuplicates?: Nullable<boolean>;
-}
-
 export class CommentCreateManyInput {
     authorId: string;
     commentId?: Nullable<string>;
     commentsEnabled?: Nullable<boolean>;
     content: string;
     createdAt?: Nullable<DateTime>;
-    forumAnswerId?: Nullable<string>;
-    forumId?: Nullable<string>;
+    id?: Nullable<string>;
+    reviewId: string;
+    state?: Nullable<State>;
+    updatedAt?: Nullable<DateTime>;
+}
+
+export class CommentCreateManyReviewInput {
+    authorId: string;
+    commentId?: Nullable<string>;
+    commentsEnabled?: Nullable<boolean>;
+    content: string;
+    createdAt?: Nullable<DateTime>;
     id?: Nullable<string>;
     state?: Nullable<State>;
     updatedAt?: Nullable<DateTime>;
+}
+
+export class CommentCreateManyReviewInputEnvelope {
+    data: CommentCreateManyReviewInput[];
+    skipDuplicates?: Nullable<boolean>;
 }
 
 export class CommentCreateNestedManyWithoutAuthorInput {
@@ -4271,18 +2031,11 @@ export class CommentCreateNestedManyWithoutCommentInput {
     createMany?: Nullable<CommentCreateManyCommentInputEnvelope>;
 }
 
-export class CommentCreateNestedManyWithoutForumAnswerInput {
+export class CommentCreateNestedManyWithoutReviewInput {
     connect?: Nullable<CommentWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<CommentCreateOrConnectWithoutForumAnswerInput[]>;
-    create?: Nullable<CommentCreateWithoutForumAnswerInput[]>;
-    createMany?: Nullable<CommentCreateManyForumAnswerInputEnvelope>;
-}
-
-export class CommentCreateNestedManyWithoutForumInput {
-    connect?: Nullable<CommentWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<CommentCreateOrConnectWithoutForumInput[]>;
-    create?: Nullable<CommentCreateWithoutForumInput[]>;
-    createMany?: Nullable<CommentCreateManyForumInputEnvelope>;
+    connectOrCreate?: Nullable<CommentCreateOrConnectWithoutReviewInput[]>;
+    create?: Nullable<CommentCreateWithoutReviewInput[]>;
+    createMany?: Nullable<CommentCreateManyReviewInputEnvelope>;
 }
 
 export class CommentCreateNestedOneWithoutAttachmentsInput {
@@ -4317,13 +2070,8 @@ export class CommentCreateOrConnectWithoutCommentsInput {
     where: CommentWhereUniqueInput;
 }
 
-export class CommentCreateOrConnectWithoutForumAnswerInput {
-    create: CommentUncheckedCreateWithoutForumAnswerInput;
-    where: CommentWhereUniqueInput;
-}
-
-export class CommentCreateOrConnectWithoutForumInput {
-    create: CommentUncheckedCreateWithoutForumInput;
+export class CommentCreateOrConnectWithoutReviewInput {
+    create: CommentUncheckedCreateWithoutReviewInput;
     where: CommentWhereUniqueInput;
 }
 
@@ -4334,9 +2082,8 @@ export class CommentCreateWithoutAttachmentsInput {
     commentsEnabled?: Nullable<boolean>;
     content: string;
     createdAt?: Nullable<DateTime>;
-    forum?: Nullable<ForumCreateNestedOneWithoutCommentsInput>;
-    forumAnswer?: Nullable<ForumAnswerCreateNestedOneWithoutCommentsInput>;
     id?: Nullable<string>;
+    review?: Nullable<ReviewCreateNestedOneWithoutCommentsInput>;
     state?: Nullable<State>;
     updatedAt?: Nullable<DateTime>;
 }
@@ -4348,9 +2095,8 @@ export class CommentCreateWithoutAuthorInput {
     commentsEnabled?: Nullable<boolean>;
     content: string;
     createdAt?: Nullable<DateTime>;
-    forum?: Nullable<ForumCreateNestedOneWithoutCommentsInput>;
-    forumAnswer?: Nullable<ForumAnswerCreateNestedOneWithoutCommentsInput>;
     id?: Nullable<string>;
+    review?: Nullable<ReviewCreateNestedOneWithoutCommentsInput>;
     state?: Nullable<State>;
     updatedAt?: Nullable<DateTime>;
 }
@@ -4362,9 +2108,8 @@ export class CommentCreateWithoutCommentInput {
     commentsEnabled?: Nullable<boolean>;
     content: string;
     createdAt?: Nullable<DateTime>;
-    forum?: Nullable<ForumCreateNestedOneWithoutCommentsInput>;
-    forumAnswer?: Nullable<ForumAnswerCreateNestedOneWithoutCommentsInput>;
     id?: Nullable<string>;
+    review?: Nullable<ReviewCreateNestedOneWithoutCommentsInput>;
     state?: Nullable<State>;
     updatedAt?: Nullable<DateTime>;
 }
@@ -4376,14 +2121,13 @@ export class CommentCreateWithoutCommentsInput {
     commentsEnabled?: Nullable<boolean>;
     content: string;
     createdAt?: Nullable<DateTime>;
-    forum?: Nullable<ForumCreateNestedOneWithoutCommentsInput>;
-    forumAnswer?: Nullable<ForumAnswerCreateNestedOneWithoutCommentsInput>;
     id?: Nullable<string>;
+    review?: Nullable<ReviewCreateNestedOneWithoutCommentsInput>;
     state?: Nullable<State>;
     updatedAt?: Nullable<DateTime>;
 }
 
-export class CommentCreateWithoutForumAnswerInput {
+export class CommentCreateWithoutReviewInput {
     attachments?: Nullable<AttachmentCreateNestedManyWithoutCommentInput>;
     author: UserCreateNestedOneWithoutCommentsInput;
     comment?: Nullable<CommentCreateNestedOneWithoutCommentsInput>;
@@ -4391,21 +2135,6 @@ export class CommentCreateWithoutForumAnswerInput {
     commentsEnabled?: Nullable<boolean>;
     content: string;
     createdAt?: Nullable<DateTime>;
-    forum?: Nullable<ForumCreateNestedOneWithoutCommentsInput>;
-    id?: Nullable<string>;
-    state?: Nullable<State>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class CommentCreateWithoutForumInput {
-    attachments?: Nullable<AttachmentCreateNestedManyWithoutCommentInput>;
-    author: UserCreateNestedOneWithoutCommentsInput;
-    comment?: Nullable<CommentCreateNestedOneWithoutCommentsInput>;
-    comments?: Nullable<CommentCreateNestedManyWithoutCommentInput>;
-    commentsEnabled?: Nullable<boolean>;
-    content: string;
-    createdAt?: Nullable<DateTime>;
-    forumAnswer?: Nullable<ForumAnswerCreateNestedOneWithoutCommentsInput>;
     id?: Nullable<string>;
     state?: Nullable<State>;
     updatedAt?: Nullable<DateTime>;
@@ -4423,9 +2152,8 @@ export class CommentOrderByInput {
     commentsEnabled?: Nullable<SortOrder>;
     content?: Nullable<SortOrder>;
     createdAt?: Nullable<SortOrder>;
-    forumAnswerId?: Nullable<SortOrder>;
-    forumId?: Nullable<SortOrder>;
     id?: Nullable<SortOrder>;
+    reviewId?: Nullable<SortOrder>;
     state?: Nullable<SortOrder>;
     updatedAt?: Nullable<SortOrder>;
 }
@@ -4444,9 +2172,8 @@ export class CommentScalarWhereInput {
     commentsEnabled?: Nullable<BoolFilter>;
     content?: Nullable<StringFilter>;
     createdAt?: Nullable<DateTimeFilter>;
-    forumAnswerId?: Nullable<StringNullableFilter>;
-    forumId?: Nullable<StringNullableFilter>;
     id?: Nullable<StringFilter>;
+    reviewId?: Nullable<StringFilter>;
     state?: Nullable<EnumStateFilter>;
     updatedAt?: Nullable<DateTimeFilter>;
 }
@@ -4460,9 +2187,8 @@ export class CommentScalarWhereWithAggregatesInput {
     commentsEnabled?: Nullable<BoolWithAggregatesFilter>;
     content?: Nullable<StringWithAggregatesFilter>;
     createdAt?: Nullable<DateTimeWithAggregatesFilter>;
-    forumAnswerId?: Nullable<StringNullableWithAggregatesFilter>;
-    forumId?: Nullable<StringNullableWithAggregatesFilter>;
     id?: Nullable<StringWithAggregatesFilter>;
+    reviewId?: Nullable<StringWithAggregatesFilter>;
     state?: Nullable<EnumStateWithAggregatesFilter>;
     updatedAt?: Nullable<DateTimeWithAggregatesFilter>;
 }
@@ -4475,9 +2201,8 @@ export class CommentUncheckedCreateInput {
     commentsEnabled?: Nullable<boolean>;
     content: string;
     createdAt?: Nullable<DateTime>;
-    forumAnswerId?: Nullable<string>;
-    forumId?: Nullable<string>;
     id?: Nullable<string>;
+    reviewId: string;
     state?: Nullable<State>;
     updatedAt?: Nullable<DateTime>;
 }
@@ -4496,18 +2221,11 @@ export class CommentUncheckedCreateNestedManyWithoutCommentInput {
     createMany?: Nullable<CommentCreateManyCommentInputEnvelope>;
 }
 
-export class CommentUncheckedCreateNestedManyWithoutForumAnswerInput {
+export class CommentUncheckedCreateNestedManyWithoutReviewInput {
     connect?: Nullable<CommentWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<CommentCreateOrConnectWithoutForumAnswerInput[]>;
-    create?: Nullable<CommentCreateWithoutForumAnswerInput[]>;
-    createMany?: Nullable<CommentCreateManyForumAnswerInputEnvelope>;
-}
-
-export class CommentUncheckedCreateNestedManyWithoutForumInput {
-    connect?: Nullable<CommentWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<CommentCreateOrConnectWithoutForumInput[]>;
-    create?: Nullable<CommentCreateWithoutForumInput[]>;
-    createMany?: Nullable<CommentCreateManyForumInputEnvelope>;
+    connectOrCreate?: Nullable<CommentCreateOrConnectWithoutReviewInput[]>;
+    create?: Nullable<CommentCreateWithoutReviewInput[]>;
+    createMany?: Nullable<CommentCreateManyReviewInputEnvelope>;
 }
 
 export class CommentUncheckedCreateWithoutAttachmentsInput {
@@ -4517,9 +2235,8 @@ export class CommentUncheckedCreateWithoutAttachmentsInput {
     commentsEnabled?: Nullable<boolean>;
     content: string;
     createdAt?: Nullable<DateTime>;
-    forumAnswerId?: Nullable<string>;
-    forumId?: Nullable<string>;
     id?: Nullable<string>;
+    reviewId: string;
     state?: Nullable<State>;
     updatedAt?: Nullable<DateTime>;
 }
@@ -4531,9 +2248,8 @@ export class CommentUncheckedCreateWithoutAuthorInput {
     commentsEnabled?: Nullable<boolean>;
     content: string;
     createdAt?: Nullable<DateTime>;
-    forumAnswerId?: Nullable<string>;
-    forumId?: Nullable<string>;
     id?: Nullable<string>;
+    reviewId: string;
     state?: Nullable<State>;
     updatedAt?: Nullable<DateTime>;
 }
@@ -4545,9 +2261,8 @@ export class CommentUncheckedCreateWithoutCommentInput {
     commentsEnabled?: Nullable<boolean>;
     content: string;
     createdAt?: Nullable<DateTime>;
-    forumAnswerId?: Nullable<string>;
-    forumId?: Nullable<string>;
     id?: Nullable<string>;
+    reviewId: string;
     state?: Nullable<State>;
     updatedAt?: Nullable<DateTime>;
 }
@@ -4559,14 +2274,13 @@ export class CommentUncheckedCreateWithoutCommentsInput {
     commentsEnabled?: Nullable<boolean>;
     content: string;
     createdAt?: Nullable<DateTime>;
-    forumAnswerId?: Nullable<string>;
-    forumId?: Nullable<string>;
     id?: Nullable<string>;
+    reviewId: string;
     state?: Nullable<State>;
     updatedAt?: Nullable<DateTime>;
 }
 
-export class CommentUncheckedCreateWithoutForumAnswerInput {
+export class CommentUncheckedCreateWithoutReviewInput {
     attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutCommentInput>;
     authorId: string;
     commentId?: Nullable<string>;
@@ -4574,21 +2288,6 @@ export class CommentUncheckedCreateWithoutForumAnswerInput {
     commentsEnabled?: Nullable<boolean>;
     content: string;
     createdAt?: Nullable<DateTime>;
-    forumId?: Nullable<string>;
-    id?: Nullable<string>;
-    state?: Nullable<State>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class CommentUncheckedCreateWithoutForumInput {
-    attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutCommentInput>;
-    authorId: string;
-    commentId?: Nullable<string>;
-    comments?: Nullable<CommentUncheckedCreateNestedManyWithoutCommentInput>;
-    commentsEnabled?: Nullable<boolean>;
-    content: string;
-    createdAt?: Nullable<DateTime>;
-    forumAnswerId?: Nullable<string>;
     id?: Nullable<string>;
     state?: Nullable<State>;
     updatedAt?: Nullable<DateTime>;
@@ -4602,9 +2301,8 @@ export class CommentUncheckedUpdateInput {
     commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
     content?: Nullable<StringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    forumAnswerId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    forumId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
+    reviewId?: Nullable<StringFieldUpdateOperationsInput>;
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
@@ -4615,9 +2313,8 @@ export class CommentUncheckedUpdateManyInput {
     commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
     content?: Nullable<StringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    forumAnswerId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    forumId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
+    reviewId?: Nullable<StringFieldUpdateOperationsInput>;
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
@@ -4655,39 +2352,24 @@ export class CommentUncheckedUpdateManyWithoutCommentsInput {
     commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
     content?: Nullable<StringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    forumAnswerId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    forumId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
+    reviewId?: Nullable<StringFieldUpdateOperationsInput>;
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
 
-export class CommentUncheckedUpdateManyWithoutForumAnswerInput {
+export class CommentUncheckedUpdateManyWithoutReviewInput {
     connect?: Nullable<CommentWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<CommentCreateOrConnectWithoutForumAnswerInput[]>;
-    create?: Nullable<CommentCreateWithoutForumAnswerInput[]>;
-    createMany?: Nullable<CommentCreateManyForumAnswerInputEnvelope>;
+    connectOrCreate?: Nullable<CommentCreateOrConnectWithoutReviewInput[]>;
+    create?: Nullable<CommentCreateWithoutReviewInput[]>;
+    createMany?: Nullable<CommentCreateManyReviewInputEnvelope>;
     delete?: Nullable<CommentWhereUniqueInput[]>;
     deleteMany?: Nullable<CommentScalarWhereInput[]>;
     disconnect?: Nullable<CommentWhereUniqueInput[]>;
     set?: Nullable<CommentWhereUniqueInput[]>;
-    update?: Nullable<CommentUpdateWithWhereUniqueWithoutForumAnswerInput[]>;
-    updateMany?: Nullable<CommentUpdateManyWithWhereWithoutForumAnswerInput[]>;
-    upsert?: Nullable<CommentUpsertWithWhereUniqueWithoutForumAnswerInput[]>;
-}
-
-export class CommentUncheckedUpdateManyWithoutForumInput {
-    connect?: Nullable<CommentWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<CommentCreateOrConnectWithoutForumInput[]>;
-    create?: Nullable<CommentCreateWithoutForumInput[]>;
-    createMany?: Nullable<CommentCreateManyForumInputEnvelope>;
-    delete?: Nullable<CommentWhereUniqueInput[]>;
-    deleteMany?: Nullable<CommentScalarWhereInput[]>;
-    disconnect?: Nullable<CommentWhereUniqueInput[]>;
-    set?: Nullable<CommentWhereUniqueInput[]>;
-    update?: Nullable<CommentUpdateWithWhereUniqueWithoutForumInput[]>;
-    updateMany?: Nullable<CommentUpdateManyWithWhereWithoutForumInput[]>;
-    upsert?: Nullable<CommentUpsertWithWhereUniqueWithoutForumInput[]>;
+    update?: Nullable<CommentUpdateWithWhereUniqueWithoutReviewInput[]>;
+    updateMany?: Nullable<CommentUpdateManyWithWhereWithoutReviewInput[]>;
+    upsert?: Nullable<CommentUpsertWithWhereUniqueWithoutReviewInput[]>;
 }
 
 export class CommentUncheckedUpdateWithoutAttachmentsInput {
@@ -4697,9 +2379,8 @@ export class CommentUncheckedUpdateWithoutAttachmentsInput {
     commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
     content?: Nullable<StringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    forumAnswerId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    forumId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
+    reviewId?: Nullable<StringFieldUpdateOperationsInput>;
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
@@ -4711,9 +2392,8 @@ export class CommentUncheckedUpdateWithoutAuthorInput {
     commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
     content?: Nullable<StringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    forumAnswerId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    forumId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
+    reviewId?: Nullable<StringFieldUpdateOperationsInput>;
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
@@ -4725,9 +2405,8 @@ export class CommentUncheckedUpdateWithoutCommentInput {
     commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
     content?: Nullable<StringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    forumAnswerId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    forumId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
+    reviewId?: Nullable<StringFieldUpdateOperationsInput>;
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
@@ -4739,14 +2418,13 @@ export class CommentUncheckedUpdateWithoutCommentsInput {
     commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
     content?: Nullable<StringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    forumAnswerId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    forumId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
+    reviewId?: Nullable<StringFieldUpdateOperationsInput>;
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
 
-export class CommentUncheckedUpdateWithoutForumAnswerInput {
+export class CommentUncheckedUpdateWithoutReviewInput {
     attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutCommentInput>;
     authorId?: Nullable<StringFieldUpdateOperationsInput>;
     commentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
@@ -4754,21 +2432,6 @@ export class CommentUncheckedUpdateWithoutForumAnswerInput {
     commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
     content?: Nullable<StringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    forumId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class CommentUncheckedUpdateWithoutForumInput {
-    attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutCommentInput>;
-    authorId?: Nullable<StringFieldUpdateOperationsInput>;
-    commentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    comments?: Nullable<CommentUncheckedUpdateManyWithoutCommentInput>;
-    commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    content?: Nullable<StringFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    forumAnswerId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
@@ -4782,9 +2445,8 @@ export class CommentUpdateInput {
     commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
     content?: Nullable<StringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    forum?: Nullable<ForumUpdateOneWithoutCommentsInput>;
-    forumAnswer?: Nullable<ForumAnswerUpdateOneWithoutCommentsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
+    review?: Nullable<ReviewUpdateOneWithoutCommentsInput>;
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
@@ -4808,12 +2470,7 @@ export class CommentUpdateManyWithWhereWithoutCommentInput {
     where: CommentScalarWhereInput;
 }
 
-export class CommentUpdateManyWithWhereWithoutForumAnswerInput {
-    data: CommentUncheckedUpdateManyWithoutCommentsInput;
-    where: CommentScalarWhereInput;
-}
-
-export class CommentUpdateManyWithWhereWithoutForumInput {
+export class CommentUpdateManyWithWhereWithoutReviewInput {
     data: CommentUncheckedUpdateManyWithoutCommentsInput;
     where: CommentScalarWhereInput;
 }
@@ -4846,32 +2503,18 @@ export class CommentUpdateManyWithoutCommentInput {
     upsert?: Nullable<CommentUpsertWithWhereUniqueWithoutCommentInput[]>;
 }
 
-export class CommentUpdateManyWithoutForumAnswerInput {
+export class CommentUpdateManyWithoutReviewInput {
     connect?: Nullable<CommentWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<CommentCreateOrConnectWithoutForumAnswerInput[]>;
-    create?: Nullable<CommentCreateWithoutForumAnswerInput[]>;
-    createMany?: Nullable<CommentCreateManyForumAnswerInputEnvelope>;
+    connectOrCreate?: Nullable<CommentCreateOrConnectWithoutReviewInput[]>;
+    create?: Nullable<CommentCreateWithoutReviewInput[]>;
+    createMany?: Nullable<CommentCreateManyReviewInputEnvelope>;
     delete?: Nullable<CommentWhereUniqueInput[]>;
     deleteMany?: Nullable<CommentScalarWhereInput[]>;
     disconnect?: Nullable<CommentWhereUniqueInput[]>;
     set?: Nullable<CommentWhereUniqueInput[]>;
-    update?: Nullable<CommentUpdateWithWhereUniqueWithoutForumAnswerInput[]>;
-    updateMany?: Nullable<CommentUpdateManyWithWhereWithoutForumAnswerInput[]>;
-    upsert?: Nullable<CommentUpsertWithWhereUniqueWithoutForumAnswerInput[]>;
-}
-
-export class CommentUpdateManyWithoutForumInput {
-    connect?: Nullable<CommentWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<CommentCreateOrConnectWithoutForumInput[]>;
-    create?: Nullable<CommentCreateWithoutForumInput[]>;
-    createMany?: Nullable<CommentCreateManyForumInputEnvelope>;
-    delete?: Nullable<CommentWhereUniqueInput[]>;
-    deleteMany?: Nullable<CommentScalarWhereInput[]>;
-    disconnect?: Nullable<CommentWhereUniqueInput[]>;
-    set?: Nullable<CommentWhereUniqueInput[]>;
-    update?: Nullable<CommentUpdateWithWhereUniqueWithoutForumInput[]>;
-    updateMany?: Nullable<CommentUpdateManyWithWhereWithoutForumInput[]>;
-    upsert?: Nullable<CommentUpsertWithWhereUniqueWithoutForumInput[]>;
+    update?: Nullable<CommentUpdateWithWhereUniqueWithoutReviewInput[]>;
+    updateMany?: Nullable<CommentUpdateManyWithWhereWithoutReviewInput[]>;
+    upsert?: Nullable<CommentUpsertWithWhereUniqueWithoutReviewInput[]>;
 }
 
 export class CommentUpdateOneWithoutAttachmentsInput {
@@ -4904,13 +2547,8 @@ export class CommentUpdateWithWhereUniqueWithoutCommentInput {
     where: CommentWhereUniqueInput;
 }
 
-export class CommentUpdateWithWhereUniqueWithoutForumAnswerInput {
-    data: CommentUncheckedUpdateWithoutForumAnswerInput;
-    where: CommentWhereUniqueInput;
-}
-
-export class CommentUpdateWithWhereUniqueWithoutForumInput {
-    data: CommentUncheckedUpdateWithoutForumInput;
+export class CommentUpdateWithWhereUniqueWithoutReviewInput {
+    data: CommentUncheckedUpdateWithoutReviewInput;
     where: CommentWhereUniqueInput;
 }
 
@@ -4921,9 +2559,8 @@ export class CommentUpdateWithoutAttachmentsInput {
     commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
     content?: Nullable<StringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    forum?: Nullable<ForumUpdateOneWithoutCommentsInput>;
-    forumAnswer?: Nullable<ForumAnswerUpdateOneWithoutCommentsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
+    review?: Nullable<ReviewUpdateOneWithoutCommentsInput>;
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
@@ -4935,9 +2572,8 @@ export class CommentUpdateWithoutAuthorInput {
     commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
     content?: Nullable<StringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    forum?: Nullable<ForumUpdateOneWithoutCommentsInput>;
-    forumAnswer?: Nullable<ForumAnswerUpdateOneWithoutCommentsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
+    review?: Nullable<ReviewUpdateOneWithoutCommentsInput>;
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
@@ -4949,9 +2585,8 @@ export class CommentUpdateWithoutCommentInput {
     commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
     content?: Nullable<StringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    forum?: Nullable<ForumUpdateOneWithoutCommentsInput>;
-    forumAnswer?: Nullable<ForumAnswerUpdateOneWithoutCommentsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
+    review?: Nullable<ReviewUpdateOneWithoutCommentsInput>;
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
@@ -4963,14 +2598,13 @@ export class CommentUpdateWithoutCommentsInput {
     commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
     content?: Nullable<StringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    forum?: Nullable<ForumUpdateOneWithoutCommentsInput>;
-    forumAnswer?: Nullable<ForumAnswerUpdateOneWithoutCommentsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
+    review?: Nullable<ReviewUpdateOneWithoutCommentsInput>;
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
 
-export class CommentUpdateWithoutForumAnswerInput {
+export class CommentUpdateWithoutReviewInput {
     attachments?: Nullable<AttachmentUpdateManyWithoutCommentInput>;
     author?: Nullable<UserUpdateOneRequiredWithoutCommentsInput>;
     comment?: Nullable<CommentUpdateOneWithoutCommentsInput>;
@@ -4978,21 +2612,6 @@ export class CommentUpdateWithoutForumAnswerInput {
     commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
     content?: Nullable<StringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    forum?: Nullable<ForumUpdateOneWithoutCommentsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class CommentUpdateWithoutForumInput {
-    attachments?: Nullable<AttachmentUpdateManyWithoutCommentInput>;
-    author?: Nullable<UserUpdateOneRequiredWithoutCommentsInput>;
-    comment?: Nullable<CommentUpdateOneWithoutCommentsInput>;
-    comments?: Nullable<CommentUpdateManyWithoutCommentInput>;
-    commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    content?: Nullable<StringFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    forumAnswer?: Nullable<ForumAnswerUpdateOneWithoutCommentsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
@@ -5010,15 +2629,9 @@ export class CommentUpsertWithWhereUniqueWithoutCommentInput {
     where: CommentWhereUniqueInput;
 }
 
-export class CommentUpsertWithWhereUniqueWithoutForumAnswerInput {
-    create: CommentUncheckedCreateWithoutForumAnswerInput;
-    update: CommentUncheckedUpdateWithoutForumAnswerInput;
-    where: CommentWhereUniqueInput;
-}
-
-export class CommentUpsertWithWhereUniqueWithoutForumInput {
-    create: CommentUncheckedCreateWithoutForumInput;
-    update: CommentUncheckedUpdateWithoutForumInput;
+export class CommentUpsertWithWhereUniqueWithoutReviewInput {
+    create: CommentUncheckedCreateWithoutReviewInput;
+    update: CommentUncheckedUpdateWithoutReviewInput;
     where: CommentWhereUniqueInput;
 }
 
@@ -5045,11 +2658,9 @@ export class CommentWhereInput {
     commentsEnabled?: Nullable<BoolFilter>;
     content?: Nullable<StringFilter>;
     createdAt?: Nullable<DateTimeFilter>;
-    forum?: Nullable<ForumWhereInput>;
-    forumAnswer?: Nullable<ForumAnswerWhereInput>;
-    forumAnswerId?: Nullable<StringNullableFilter>;
-    forumId?: Nullable<StringNullableFilter>;
     id?: Nullable<StringFilter>;
+    review?: Nullable<ReviewWhereInput>;
+    reviewId?: Nullable<StringFilter>;
     state?: Nullable<EnumStateFilter>;
     updatedAt?: Nullable<DateTimeFilter>;
 }
@@ -5265,76 +2876,28 @@ export class EnumAttachmentTypeWithAggregatesFilter {
     notIn?: Nullable<AttachmentType[]>;
 }
 
-export class EnumForumTypeFieldUpdateOperationsInput {
-    set?: Nullable<ForumType>;
+export class EnumBusinnessModeFieldUpdateOperationsInput {
+    set?: Nullable<BusinnessMode>;
 }
 
-export class EnumForumTypeFilter {
-    equals?: Nullable<ForumType>;
-    in?: Nullable<ForumType[]>;
-    not?: Nullable<NestedEnumForumTypeFilter>;
-    notIn?: Nullable<ForumType[]>;
+export class EnumBusinnessModeFilter {
+    equals?: Nullable<BusinnessMode>;
+    in?: Nullable<BusinnessMode[]>;
+    not?: Nullable<NestedEnumBusinnessModeFilter>;
+    notIn?: Nullable<BusinnessMode[]>;
 }
 
-export class EnumForumTypeWithAggregatesFilter {
+export class EnumBusinnessModeWithAggregatesFilter {
     _count?: Nullable<NestedIntFilter>;
-    _max?: Nullable<NestedEnumForumTypeFilter>;
-    _min?: Nullable<NestedEnumForumTypeFilter>;
+    _max?: Nullable<NestedEnumBusinnessModeFilter>;
+    _min?: Nullable<NestedEnumBusinnessModeFilter>;
     count?: Nullable<NestedIntFilter>;
-    equals?: Nullable<ForumType>;
-    in?: Nullable<ForumType[]>;
-    max?: Nullable<NestedEnumForumTypeFilter>;
-    min?: Nullable<NestedEnumForumTypeFilter>;
-    not?: Nullable<NestedEnumForumTypeWithAggregatesFilter>;
-    notIn?: Nullable<ForumType[]>;
-}
-
-export class EnumQuestionTypeFieldUpdateOperationsInput {
-    set?: Nullable<QuestionType>;
-}
-
-export class EnumQuestionTypeFilter {
-    equals?: Nullable<QuestionType>;
-    in?: Nullable<QuestionType[]>;
-    not?: Nullable<NestedEnumQuestionTypeFilter>;
-    notIn?: Nullable<QuestionType[]>;
-}
-
-export class EnumQuestionTypeWithAggregatesFilter {
-    _count?: Nullable<NestedIntFilter>;
-    _max?: Nullable<NestedEnumQuestionTypeFilter>;
-    _min?: Nullable<NestedEnumQuestionTypeFilter>;
-    count?: Nullable<NestedIntFilter>;
-    equals?: Nullable<QuestionType>;
-    in?: Nullable<QuestionType[]>;
-    max?: Nullable<NestedEnumQuestionTypeFilter>;
-    min?: Nullable<NestedEnumQuestionTypeFilter>;
-    not?: Nullable<NestedEnumQuestionTypeWithAggregatesFilter>;
-    notIn?: Nullable<QuestionType[]>;
-}
-
-export class EnumRecommendationTypeFieldUpdateOperationsInput {
-    set?: Nullable<RecommendationType>;
-}
-
-export class EnumRecommendationTypeFilter {
-    equals?: Nullable<RecommendationType>;
-    in?: Nullable<RecommendationType[]>;
-    not?: Nullable<NestedEnumRecommendationTypeFilter>;
-    notIn?: Nullable<RecommendationType[]>;
-}
-
-export class EnumRecommendationTypeWithAggregatesFilter {
-    _count?: Nullable<NestedIntFilter>;
-    _max?: Nullable<NestedEnumRecommendationTypeFilter>;
-    _min?: Nullable<NestedEnumRecommendationTypeFilter>;
-    count?: Nullable<NestedIntFilter>;
-    equals?: Nullable<RecommendationType>;
-    in?: Nullable<RecommendationType[]>;
-    max?: Nullable<NestedEnumRecommendationTypeFilter>;
-    min?: Nullable<NestedEnumRecommendationTypeFilter>;
-    not?: Nullable<NestedEnumRecommendationTypeWithAggregatesFilter>;
-    notIn?: Nullable<RecommendationType[]>;
+    equals?: Nullable<BusinnessMode>;
+    in?: Nullable<BusinnessMode[]>;
+    max?: Nullable<NestedEnumBusinnessModeFilter>;
+    min?: Nullable<NestedEnumBusinnessModeFilter>;
+    not?: Nullable<NestedEnumBusinnessModeWithAggregatesFilter>;
+    notIn?: Nullable<BusinnessMode[]>;
 }
 
 export class EnumRoleFieldUpdateOperationsInput {
@@ -5495,2581 +3058,6 @@ export class FloatWithAggregatesFilter {
     not?: Nullable<NestedFloatWithAggregatesFilter>;
     notIn?: Nullable<number[]>;
     sum?: Nullable<NestedFloatFilter>;
-}
-
-export class FormCreateInput {
-    attachments?: Nullable<AttachmentCreateNestedManyWithoutFormInput>;
-    author: UserCreateNestedOneWithoutFormsInput;
-    createdAt?: Nullable<DateTime>;
-    description?: Nullable<string>;
-    grades?: Nullable<GradeCreateNestedManyWithoutFormInput>;
-    id?: Nullable<string>;
-    responses?: Nullable<ResponseCreateNestedManyWithoutFormInput>;
-    state?: Nullable<State>;
-    tagId?: Nullable<string>;
-    tags?: Nullable<TagCreateNestedManyWithoutFormsInput>;
-    title: string;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class FormCreateManyAuthorInput {
-    createdAt?: Nullable<DateTime>;
-    description?: Nullable<string>;
-    id?: Nullable<string>;
-    state?: Nullable<State>;
-    tagId?: Nullable<string>;
-    title: string;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class FormCreateManyAuthorInputEnvelope {
-    data: FormCreateManyAuthorInput[];
-    skipDuplicates?: Nullable<boolean>;
-}
-
-export class FormCreateManyInput {
-    authorId: string;
-    createdAt?: Nullable<DateTime>;
-    description?: Nullable<string>;
-    id?: Nullable<string>;
-    state?: Nullable<State>;
-    tagId?: Nullable<string>;
-    title: string;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class FormCreateNestedManyWithoutAuthorInput {
-    connect?: Nullable<FormWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<FormCreateOrConnectWithoutAuthorInput[]>;
-    create?: Nullable<FormCreateWithoutAuthorInput[]>;
-    createMany?: Nullable<FormCreateManyAuthorInputEnvelope>;
-}
-
-export class FormCreateNestedManyWithoutTagsInput {
-    connect?: Nullable<FormWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<FormCreateOrConnectWithoutTagsInput[]>;
-    create?: Nullable<FormCreateWithoutTagsInput[]>;
-}
-
-export class FormCreateNestedOneWithoutAttachmentsInput {
-    connect?: Nullable<FormWhereUniqueInput>;
-    connectOrCreate?: Nullable<FormCreateOrConnectWithoutAttachmentsInput>;
-    create?: Nullable<FormUncheckedCreateWithoutAttachmentsInput>;
-}
-
-export class FormCreateNestedOneWithoutGradesInput {
-    connect?: Nullable<FormWhereUniqueInput>;
-    connectOrCreate?: Nullable<FormCreateOrConnectWithoutGradesInput>;
-    create?: Nullable<FormUncheckedCreateWithoutGradesInput>;
-}
-
-export class FormCreateNestedOneWithoutResponsesInput {
-    connect?: Nullable<FormWhereUniqueInput>;
-    connectOrCreate?: Nullable<FormCreateOrConnectWithoutResponsesInput>;
-    create?: Nullable<FormUncheckedCreateWithoutResponsesInput>;
-}
-
-export class FormCreateOrConnectWithoutAttachmentsInput {
-    create: FormUncheckedCreateWithoutAttachmentsInput;
-    where: FormWhereUniqueInput;
-}
-
-export class FormCreateOrConnectWithoutAuthorInput {
-    create: FormUncheckedCreateWithoutAuthorInput;
-    where: FormWhereUniqueInput;
-}
-
-export class FormCreateOrConnectWithoutGradesInput {
-    create: FormUncheckedCreateWithoutGradesInput;
-    where: FormWhereUniqueInput;
-}
-
-export class FormCreateOrConnectWithoutResponsesInput {
-    create: FormUncheckedCreateWithoutResponsesInput;
-    where: FormWhereUniqueInput;
-}
-
-export class FormCreateOrConnectWithoutTagsInput {
-    create: FormUncheckedCreateWithoutTagsInput;
-    where: FormWhereUniqueInput;
-}
-
-export class FormCreateWithoutAttachmentsInput {
-    author: UserCreateNestedOneWithoutFormsInput;
-    createdAt?: Nullable<DateTime>;
-    description?: Nullable<string>;
-    grades?: Nullable<GradeCreateNestedManyWithoutFormInput>;
-    id?: Nullable<string>;
-    responses?: Nullable<ResponseCreateNestedManyWithoutFormInput>;
-    state?: Nullable<State>;
-    tagId?: Nullable<string>;
-    tags?: Nullable<TagCreateNestedManyWithoutFormsInput>;
-    title: string;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class FormCreateWithoutAuthorInput {
-    attachments?: Nullable<AttachmentCreateNestedManyWithoutFormInput>;
-    createdAt?: Nullable<DateTime>;
-    description?: Nullable<string>;
-    grades?: Nullable<GradeCreateNestedManyWithoutFormInput>;
-    id?: Nullable<string>;
-    responses?: Nullable<ResponseCreateNestedManyWithoutFormInput>;
-    state?: Nullable<State>;
-    tagId?: Nullable<string>;
-    tags?: Nullable<TagCreateNestedManyWithoutFormsInput>;
-    title: string;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class FormCreateWithoutGradesInput {
-    attachments?: Nullable<AttachmentCreateNestedManyWithoutFormInput>;
-    author: UserCreateNestedOneWithoutFormsInput;
-    createdAt?: Nullable<DateTime>;
-    description?: Nullable<string>;
-    id?: Nullable<string>;
-    responses?: Nullable<ResponseCreateNestedManyWithoutFormInput>;
-    state?: Nullable<State>;
-    tagId?: Nullable<string>;
-    tags?: Nullable<TagCreateNestedManyWithoutFormsInput>;
-    title: string;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class FormCreateWithoutResponsesInput {
-    attachments?: Nullable<AttachmentCreateNestedManyWithoutFormInput>;
-    author: UserCreateNestedOneWithoutFormsInput;
-    createdAt?: Nullable<DateTime>;
-    description?: Nullable<string>;
-    grades?: Nullable<GradeCreateNestedManyWithoutFormInput>;
-    id?: Nullable<string>;
-    state?: Nullable<State>;
-    tagId?: Nullable<string>;
-    tags?: Nullable<TagCreateNestedManyWithoutFormsInput>;
-    title: string;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class FormCreateWithoutTagsInput {
-    attachments?: Nullable<AttachmentCreateNestedManyWithoutFormInput>;
-    author: UserCreateNestedOneWithoutFormsInput;
-    createdAt?: Nullable<DateTime>;
-    description?: Nullable<string>;
-    grades?: Nullable<GradeCreateNestedManyWithoutFormInput>;
-    id?: Nullable<string>;
-    responses?: Nullable<ResponseCreateNestedManyWithoutFormInput>;
-    state?: Nullable<State>;
-    tagId?: Nullable<string>;
-    title: string;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class FormListRelationFilter {
-    every?: Nullable<FormWhereInput>;
-    none?: Nullable<FormWhereInput>;
-    some?: Nullable<FormWhereInput>;
-}
-
-export class FormOrderByInput {
-    authorId?: Nullable<SortOrder>;
-    createdAt?: Nullable<SortOrder>;
-    description?: Nullable<SortOrder>;
-    id?: Nullable<SortOrder>;
-    state?: Nullable<SortOrder>;
-    tagId?: Nullable<SortOrder>;
-    title?: Nullable<SortOrder>;
-    updatedAt?: Nullable<SortOrder>;
-}
-
-export class FormRelationFilter {
-    is?: Nullable<FormWhereInput>;
-    isNot?: Nullable<FormWhereInput>;
-}
-
-export class FormScalarWhereInput {
-    AND?: Nullable<FormScalarWhereInput[]>;
-    NOT?: Nullable<FormScalarWhereInput[]>;
-    OR?: Nullable<FormScalarWhereInput[]>;
-    authorId?: Nullable<StringFilter>;
-    createdAt?: Nullable<DateTimeFilter>;
-    description?: Nullable<StringNullableFilter>;
-    id?: Nullable<StringFilter>;
-    state?: Nullable<EnumStateFilter>;
-    tagId?: Nullable<StringNullableFilter>;
-    title?: Nullable<StringFilter>;
-    updatedAt?: Nullable<DateTimeFilter>;
-}
-
-export class FormScalarWhereWithAggregatesInput {
-    AND?: Nullable<FormScalarWhereWithAggregatesInput[]>;
-    NOT?: Nullable<FormScalarWhereWithAggregatesInput[]>;
-    OR?: Nullable<FormScalarWhereWithAggregatesInput[]>;
-    authorId?: Nullable<StringWithAggregatesFilter>;
-    createdAt?: Nullable<DateTimeWithAggregatesFilter>;
-    description?: Nullable<StringNullableWithAggregatesFilter>;
-    id?: Nullable<StringWithAggregatesFilter>;
-    state?: Nullable<EnumStateWithAggregatesFilter>;
-    tagId?: Nullable<StringNullableWithAggregatesFilter>;
-    title?: Nullable<StringWithAggregatesFilter>;
-    updatedAt?: Nullable<DateTimeWithAggregatesFilter>;
-}
-
-export class FormUncheckedCreateInput {
-    attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutFormInput>;
-    authorId: string;
-    createdAt?: Nullable<DateTime>;
-    description?: Nullable<string>;
-    grades?: Nullable<GradeUncheckedCreateNestedManyWithoutFormInput>;
-    id?: Nullable<string>;
-    responses?: Nullable<ResponseUncheckedCreateNestedManyWithoutFormInput>;
-    state?: Nullable<State>;
-    tagId?: Nullable<string>;
-    title: string;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class FormUncheckedCreateNestedManyWithoutAuthorInput {
-    connect?: Nullable<FormWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<FormCreateOrConnectWithoutAuthorInput[]>;
-    create?: Nullable<FormCreateWithoutAuthorInput[]>;
-    createMany?: Nullable<FormCreateManyAuthorInputEnvelope>;
-}
-
-export class FormUncheckedCreateWithoutAttachmentsInput {
-    authorId: string;
-    createdAt?: Nullable<DateTime>;
-    description?: Nullable<string>;
-    grades?: Nullable<GradeUncheckedCreateNestedManyWithoutFormInput>;
-    id?: Nullable<string>;
-    responses?: Nullable<ResponseUncheckedCreateNestedManyWithoutFormInput>;
-    state?: Nullable<State>;
-    tagId?: Nullable<string>;
-    title: string;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class FormUncheckedCreateWithoutAuthorInput {
-    attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutFormInput>;
-    createdAt?: Nullable<DateTime>;
-    description?: Nullable<string>;
-    grades?: Nullable<GradeUncheckedCreateNestedManyWithoutFormInput>;
-    id?: Nullable<string>;
-    responses?: Nullable<ResponseUncheckedCreateNestedManyWithoutFormInput>;
-    state?: Nullable<State>;
-    tagId?: Nullable<string>;
-    title: string;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class FormUncheckedCreateWithoutGradesInput {
-    attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutFormInput>;
-    authorId: string;
-    createdAt?: Nullable<DateTime>;
-    description?: Nullable<string>;
-    id?: Nullable<string>;
-    responses?: Nullable<ResponseUncheckedCreateNestedManyWithoutFormInput>;
-    state?: Nullable<State>;
-    tagId?: Nullable<string>;
-    title: string;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class FormUncheckedCreateWithoutResponsesInput {
-    attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutFormInput>;
-    authorId: string;
-    createdAt?: Nullable<DateTime>;
-    description?: Nullable<string>;
-    grades?: Nullable<GradeUncheckedCreateNestedManyWithoutFormInput>;
-    id?: Nullable<string>;
-    state?: Nullable<State>;
-    tagId?: Nullable<string>;
-    title: string;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class FormUncheckedCreateWithoutTagsInput {
-    attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutFormInput>;
-    authorId: string;
-    createdAt?: Nullable<DateTime>;
-    description?: Nullable<string>;
-    grades?: Nullable<GradeUncheckedCreateNestedManyWithoutFormInput>;
-    id?: Nullable<string>;
-    responses?: Nullable<ResponseUncheckedCreateNestedManyWithoutFormInput>;
-    state?: Nullable<State>;
-    tagId?: Nullable<string>;
-    title: string;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class FormUncheckedUpdateInput {
-    attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutFormInput>;
-    authorId?: Nullable<StringFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    grades?: Nullable<GradeUncheckedUpdateManyWithoutFormInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    responses?: Nullable<ResponseUncheckedUpdateManyWithoutFormInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    tagId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    title?: Nullable<StringFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class FormUncheckedUpdateManyInput {
-    authorId?: Nullable<StringFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    tagId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    title?: Nullable<StringFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class FormUncheckedUpdateManyWithoutAuthorInput {
-    connect?: Nullable<FormWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<FormCreateOrConnectWithoutAuthorInput[]>;
-    create?: Nullable<FormCreateWithoutAuthorInput[]>;
-    createMany?: Nullable<FormCreateManyAuthorInputEnvelope>;
-    delete?: Nullable<FormWhereUniqueInput[]>;
-    deleteMany?: Nullable<FormScalarWhereInput[]>;
-    disconnect?: Nullable<FormWhereUniqueInput[]>;
-    set?: Nullable<FormWhereUniqueInput[]>;
-    update?: Nullable<FormUpdateWithWhereUniqueWithoutAuthorInput[]>;
-    updateMany?: Nullable<FormUpdateManyWithWhereWithoutAuthorInput[]>;
-    upsert?: Nullable<FormUpsertWithWhereUniqueWithoutAuthorInput[]>;
-}
-
-export class FormUncheckedUpdateManyWithoutFormsInput {
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    tagId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    title?: Nullable<StringFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class FormUncheckedUpdateWithoutAttachmentsInput {
-    authorId?: Nullable<StringFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    grades?: Nullable<GradeUncheckedUpdateManyWithoutFormInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    responses?: Nullable<ResponseUncheckedUpdateManyWithoutFormInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    tagId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    title?: Nullable<StringFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class FormUncheckedUpdateWithoutAuthorInput {
-    attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutFormInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    grades?: Nullable<GradeUncheckedUpdateManyWithoutFormInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    responses?: Nullable<ResponseUncheckedUpdateManyWithoutFormInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    tagId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    title?: Nullable<StringFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class FormUncheckedUpdateWithoutGradesInput {
-    attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutFormInput>;
-    authorId?: Nullable<StringFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    responses?: Nullable<ResponseUncheckedUpdateManyWithoutFormInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    tagId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    title?: Nullable<StringFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class FormUncheckedUpdateWithoutResponsesInput {
-    attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutFormInput>;
-    authorId?: Nullable<StringFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    grades?: Nullable<GradeUncheckedUpdateManyWithoutFormInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    tagId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    title?: Nullable<StringFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class FormUncheckedUpdateWithoutTagsInput {
-    attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutFormInput>;
-    authorId?: Nullable<StringFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    grades?: Nullable<GradeUncheckedUpdateManyWithoutFormInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    responses?: Nullable<ResponseUncheckedUpdateManyWithoutFormInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    tagId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    title?: Nullable<StringFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class FormUpdateInput {
-    attachments?: Nullable<AttachmentUpdateManyWithoutFormInput>;
-    author?: Nullable<UserUpdateOneRequiredWithoutFormsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    grades?: Nullable<GradeUpdateManyWithoutFormInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    responses?: Nullable<ResponseUpdateManyWithoutFormInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    tagId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    tags?: Nullable<TagUpdateManyWithoutFormsInput>;
-    title?: Nullable<StringFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class FormUpdateManyMutationInput {
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    tagId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    title?: Nullable<StringFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class FormUpdateManyWithWhereWithoutAuthorInput {
-    data: FormUncheckedUpdateManyWithoutFormsInput;
-    where: FormScalarWhereInput;
-}
-
-export class FormUpdateManyWithWhereWithoutTagsInput {
-    data: FormUncheckedUpdateManyWithoutFormsInput;
-    where: FormScalarWhereInput;
-}
-
-export class FormUpdateManyWithoutAuthorInput {
-    connect?: Nullable<FormWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<FormCreateOrConnectWithoutAuthorInput[]>;
-    create?: Nullable<FormCreateWithoutAuthorInput[]>;
-    createMany?: Nullable<FormCreateManyAuthorInputEnvelope>;
-    delete?: Nullable<FormWhereUniqueInput[]>;
-    deleteMany?: Nullable<FormScalarWhereInput[]>;
-    disconnect?: Nullable<FormWhereUniqueInput[]>;
-    set?: Nullable<FormWhereUniqueInput[]>;
-    update?: Nullable<FormUpdateWithWhereUniqueWithoutAuthorInput[]>;
-    updateMany?: Nullable<FormUpdateManyWithWhereWithoutAuthorInput[]>;
-    upsert?: Nullable<FormUpsertWithWhereUniqueWithoutAuthorInput[]>;
-}
-
-export class FormUpdateManyWithoutTagsInput {
-    connect?: Nullable<FormWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<FormCreateOrConnectWithoutTagsInput[]>;
-    create?: Nullable<FormCreateWithoutTagsInput[]>;
-    delete?: Nullable<FormWhereUniqueInput[]>;
-    deleteMany?: Nullable<FormScalarWhereInput[]>;
-    disconnect?: Nullable<FormWhereUniqueInput[]>;
-    set?: Nullable<FormWhereUniqueInput[]>;
-    update?: Nullable<FormUpdateWithWhereUniqueWithoutTagsInput[]>;
-    updateMany?: Nullable<FormUpdateManyWithWhereWithoutTagsInput[]>;
-    upsert?: Nullable<FormUpsertWithWhereUniqueWithoutTagsInput[]>;
-}
-
-export class FormUpdateOneRequiredWithoutResponsesInput {
-    connect?: Nullable<FormWhereUniqueInput>;
-    connectOrCreate?: Nullable<FormCreateOrConnectWithoutResponsesInput>;
-    create?: Nullable<FormUncheckedCreateWithoutResponsesInput>;
-    update?: Nullable<FormUncheckedUpdateWithoutResponsesInput>;
-    upsert?: Nullable<FormUpsertWithoutResponsesInput>;
-}
-
-export class FormUpdateOneWithoutAttachmentsInput {
-    connect?: Nullable<FormWhereUniqueInput>;
-    connectOrCreate?: Nullable<FormCreateOrConnectWithoutAttachmentsInput>;
-    create?: Nullable<FormUncheckedCreateWithoutAttachmentsInput>;
-    delete?: Nullable<boolean>;
-    disconnect?: Nullable<boolean>;
-    update?: Nullable<FormUncheckedUpdateWithoutAttachmentsInput>;
-    upsert?: Nullable<FormUpsertWithoutAttachmentsInput>;
-}
-
-export class FormUpdateOneWithoutGradesInput {
-    connect?: Nullable<FormWhereUniqueInput>;
-    connectOrCreate?: Nullable<FormCreateOrConnectWithoutGradesInput>;
-    create?: Nullable<FormUncheckedCreateWithoutGradesInput>;
-    delete?: Nullable<boolean>;
-    disconnect?: Nullable<boolean>;
-    update?: Nullable<FormUncheckedUpdateWithoutGradesInput>;
-    upsert?: Nullable<FormUpsertWithoutGradesInput>;
-}
-
-export class FormUpdateWithWhereUniqueWithoutAuthorInput {
-    data: FormUncheckedUpdateWithoutAuthorInput;
-    where: FormWhereUniqueInput;
-}
-
-export class FormUpdateWithWhereUniqueWithoutTagsInput {
-    data: FormUncheckedUpdateWithoutTagsInput;
-    where: FormWhereUniqueInput;
-}
-
-export class FormUpdateWithoutAttachmentsInput {
-    author?: Nullable<UserUpdateOneRequiredWithoutFormsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    grades?: Nullable<GradeUpdateManyWithoutFormInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    responses?: Nullable<ResponseUpdateManyWithoutFormInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    tagId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    tags?: Nullable<TagUpdateManyWithoutFormsInput>;
-    title?: Nullable<StringFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class FormUpdateWithoutAuthorInput {
-    attachments?: Nullable<AttachmentUpdateManyWithoutFormInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    grades?: Nullable<GradeUpdateManyWithoutFormInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    responses?: Nullable<ResponseUpdateManyWithoutFormInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    tagId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    tags?: Nullable<TagUpdateManyWithoutFormsInput>;
-    title?: Nullable<StringFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class FormUpdateWithoutGradesInput {
-    attachments?: Nullable<AttachmentUpdateManyWithoutFormInput>;
-    author?: Nullable<UserUpdateOneRequiredWithoutFormsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    responses?: Nullable<ResponseUpdateManyWithoutFormInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    tagId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    tags?: Nullable<TagUpdateManyWithoutFormsInput>;
-    title?: Nullable<StringFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class FormUpdateWithoutResponsesInput {
-    attachments?: Nullable<AttachmentUpdateManyWithoutFormInput>;
-    author?: Nullable<UserUpdateOneRequiredWithoutFormsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    grades?: Nullable<GradeUpdateManyWithoutFormInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    tagId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    tags?: Nullable<TagUpdateManyWithoutFormsInput>;
-    title?: Nullable<StringFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class FormUpdateWithoutTagsInput {
-    attachments?: Nullable<AttachmentUpdateManyWithoutFormInput>;
-    author?: Nullable<UserUpdateOneRequiredWithoutFormsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    grades?: Nullable<GradeUpdateManyWithoutFormInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    responses?: Nullable<ResponseUpdateManyWithoutFormInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    tagId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    title?: Nullable<StringFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class FormUpsertWithWhereUniqueWithoutAuthorInput {
-    create: FormUncheckedCreateWithoutAuthorInput;
-    update: FormUncheckedUpdateWithoutAuthorInput;
-    where: FormWhereUniqueInput;
-}
-
-export class FormUpsertWithWhereUniqueWithoutTagsInput {
-    create: FormUncheckedCreateWithoutTagsInput;
-    update: FormUncheckedUpdateWithoutTagsInput;
-    where: FormWhereUniqueInput;
-}
-
-export class FormUpsertWithoutAttachmentsInput {
-    create: FormUncheckedCreateWithoutAttachmentsInput;
-    update: FormUncheckedUpdateWithoutAttachmentsInput;
-}
-
-export class FormUpsertWithoutGradesInput {
-    create: FormUncheckedCreateWithoutGradesInput;
-    update: FormUncheckedUpdateWithoutGradesInput;
-}
-
-export class FormUpsertWithoutResponsesInput {
-    create: FormUncheckedCreateWithoutResponsesInput;
-    update: FormUncheckedUpdateWithoutResponsesInput;
-}
-
-export class FormWhereInput {
-    AND?: Nullable<FormWhereInput[]>;
-    NOT?: Nullable<FormWhereInput[]>;
-    OR?: Nullable<FormWhereInput[]>;
-    attachments?: Nullable<AttachmentListRelationFilter>;
-    author?: Nullable<UserWhereInput>;
-    authorId?: Nullable<StringFilter>;
-    createdAt?: Nullable<DateTimeFilter>;
-    description?: Nullable<StringNullableFilter>;
-    grades?: Nullable<GradeListRelationFilter>;
-    id?: Nullable<StringFilter>;
-    responses?: Nullable<ResponseListRelationFilter>;
-    state?: Nullable<EnumStateFilter>;
-    tagId?: Nullable<StringNullableFilter>;
-    tags?: Nullable<TagListRelationFilter>;
-    title?: Nullable<StringFilter>;
-    updatedAt?: Nullable<DateTimeFilter>;
-}
-
-export class FormWhereUniqueInput {
-    id?: Nullable<string>;
-}
-
-export class ForumAnswerCreateInput {
-    attachments?: Nullable<AttachmentCreateNestedManyWithoutForumAnswerInput>;
-    author: UserCreateNestedOneWithoutForumAnswersInput;
-    comments?: Nullable<CommentCreateNestedManyWithoutForumAnswerInput>;
-    commentsEnabled?: Nullable<boolean>;
-    content: string;
-    createdAt?: Nullable<DateTime>;
-    forum: ForumCreateNestedOneWithoutForumAnswersInput;
-    id?: Nullable<string>;
-    state?: Nullable<State>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class ForumAnswerCreateManyAuthorInput {
-    commentsEnabled?: Nullable<boolean>;
-    content: string;
-    createdAt?: Nullable<DateTime>;
-    forumId: string;
-    id?: Nullable<string>;
-    state?: Nullable<State>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class ForumAnswerCreateManyAuthorInputEnvelope {
-    data: ForumAnswerCreateManyAuthorInput[];
-    skipDuplicates?: Nullable<boolean>;
-}
-
-export class ForumAnswerCreateManyForumInput {
-    authorId: string;
-    commentsEnabled?: Nullable<boolean>;
-    content: string;
-    createdAt?: Nullable<DateTime>;
-    id?: Nullable<string>;
-    state?: Nullable<State>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class ForumAnswerCreateManyForumInputEnvelope {
-    data: ForumAnswerCreateManyForumInput[];
-    skipDuplicates?: Nullable<boolean>;
-}
-
-export class ForumAnswerCreateManyInput {
-    authorId: string;
-    commentsEnabled?: Nullable<boolean>;
-    content: string;
-    createdAt?: Nullable<DateTime>;
-    forumId: string;
-    id?: Nullable<string>;
-    state?: Nullable<State>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class ForumAnswerCreateNestedManyWithoutAuthorInput {
-    connect?: Nullable<ForumAnswerWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<ForumAnswerCreateOrConnectWithoutAuthorInput[]>;
-    create?: Nullable<ForumAnswerCreateWithoutAuthorInput[]>;
-    createMany?: Nullable<ForumAnswerCreateManyAuthorInputEnvelope>;
-}
-
-export class ForumAnswerCreateNestedManyWithoutForumInput {
-    connect?: Nullable<ForumAnswerWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<ForumAnswerCreateOrConnectWithoutForumInput[]>;
-    create?: Nullable<ForumAnswerCreateWithoutForumInput[]>;
-    createMany?: Nullable<ForumAnswerCreateManyForumInputEnvelope>;
-}
-
-export class ForumAnswerCreateNestedOneWithoutAttachmentsInput {
-    connect?: Nullable<ForumAnswerWhereUniqueInput>;
-    connectOrCreate?: Nullable<ForumAnswerCreateOrConnectWithoutAttachmentsInput>;
-    create?: Nullable<ForumAnswerUncheckedCreateWithoutAttachmentsInput>;
-}
-
-export class ForumAnswerCreateNestedOneWithoutCommentsInput {
-    connect?: Nullable<ForumAnswerWhereUniqueInput>;
-    connectOrCreate?: Nullable<ForumAnswerCreateOrConnectWithoutCommentsInput>;
-    create?: Nullable<ForumAnswerUncheckedCreateWithoutCommentsInput>;
-}
-
-export class ForumAnswerCreateOrConnectWithoutAttachmentsInput {
-    create: ForumAnswerUncheckedCreateWithoutAttachmentsInput;
-    where: ForumAnswerWhereUniqueInput;
-}
-
-export class ForumAnswerCreateOrConnectWithoutAuthorInput {
-    create: ForumAnswerUncheckedCreateWithoutAuthorInput;
-    where: ForumAnswerWhereUniqueInput;
-}
-
-export class ForumAnswerCreateOrConnectWithoutCommentsInput {
-    create: ForumAnswerUncheckedCreateWithoutCommentsInput;
-    where: ForumAnswerWhereUniqueInput;
-}
-
-export class ForumAnswerCreateOrConnectWithoutForumInput {
-    create: ForumAnswerUncheckedCreateWithoutForumInput;
-    where: ForumAnswerWhereUniqueInput;
-}
-
-export class ForumAnswerCreateWithoutAttachmentsInput {
-    author: UserCreateNestedOneWithoutForumAnswersInput;
-    comments?: Nullable<CommentCreateNestedManyWithoutForumAnswerInput>;
-    commentsEnabled?: Nullable<boolean>;
-    content: string;
-    createdAt?: Nullable<DateTime>;
-    forum: ForumCreateNestedOneWithoutForumAnswersInput;
-    id?: Nullable<string>;
-    state?: Nullable<State>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class ForumAnswerCreateWithoutAuthorInput {
-    attachments?: Nullable<AttachmentCreateNestedManyWithoutForumAnswerInput>;
-    comments?: Nullable<CommentCreateNestedManyWithoutForumAnswerInput>;
-    commentsEnabled?: Nullable<boolean>;
-    content: string;
-    createdAt?: Nullable<DateTime>;
-    forum: ForumCreateNestedOneWithoutForumAnswersInput;
-    id?: Nullable<string>;
-    state?: Nullable<State>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class ForumAnswerCreateWithoutCommentsInput {
-    attachments?: Nullable<AttachmentCreateNestedManyWithoutForumAnswerInput>;
-    author: UserCreateNestedOneWithoutForumAnswersInput;
-    commentsEnabled?: Nullable<boolean>;
-    content: string;
-    createdAt?: Nullable<DateTime>;
-    forum: ForumCreateNestedOneWithoutForumAnswersInput;
-    id?: Nullable<string>;
-    state?: Nullable<State>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class ForumAnswerCreateWithoutForumInput {
-    attachments?: Nullable<AttachmentCreateNestedManyWithoutForumAnswerInput>;
-    author: UserCreateNestedOneWithoutForumAnswersInput;
-    comments?: Nullable<CommentCreateNestedManyWithoutForumAnswerInput>;
-    commentsEnabled?: Nullable<boolean>;
-    content: string;
-    createdAt?: Nullable<DateTime>;
-    id?: Nullable<string>;
-    state?: Nullable<State>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class ForumAnswerListRelationFilter {
-    every?: Nullable<ForumAnswerWhereInput>;
-    none?: Nullable<ForumAnswerWhereInput>;
-    some?: Nullable<ForumAnswerWhereInput>;
-}
-
-export class ForumAnswerOrderByInput {
-    authorId?: Nullable<SortOrder>;
-    commentsEnabled?: Nullable<SortOrder>;
-    content?: Nullable<SortOrder>;
-    createdAt?: Nullable<SortOrder>;
-    forumId?: Nullable<SortOrder>;
-    id?: Nullable<SortOrder>;
-    state?: Nullable<SortOrder>;
-    updatedAt?: Nullable<SortOrder>;
-}
-
-export class ForumAnswerRelationFilter {
-    is?: Nullable<ForumAnswerWhereInput>;
-    isNot?: Nullable<ForumAnswerWhereInput>;
-}
-
-export class ForumAnswerScalarWhereInput {
-    AND?: Nullable<ForumAnswerScalarWhereInput[]>;
-    NOT?: Nullable<ForumAnswerScalarWhereInput[]>;
-    OR?: Nullable<ForumAnswerScalarWhereInput[]>;
-    authorId?: Nullable<StringFilter>;
-    commentsEnabled?: Nullable<BoolFilter>;
-    content?: Nullable<StringFilter>;
-    createdAt?: Nullable<DateTimeFilter>;
-    forumId?: Nullable<StringFilter>;
-    id?: Nullable<StringFilter>;
-    state?: Nullable<EnumStateFilter>;
-    updatedAt?: Nullable<DateTimeFilter>;
-}
-
-export class ForumAnswerScalarWhereWithAggregatesInput {
-    AND?: Nullable<ForumAnswerScalarWhereWithAggregatesInput[]>;
-    NOT?: Nullable<ForumAnswerScalarWhereWithAggregatesInput[]>;
-    OR?: Nullable<ForumAnswerScalarWhereWithAggregatesInput[]>;
-    authorId?: Nullable<StringWithAggregatesFilter>;
-    commentsEnabled?: Nullable<BoolWithAggregatesFilter>;
-    content?: Nullable<StringWithAggregatesFilter>;
-    createdAt?: Nullable<DateTimeWithAggregatesFilter>;
-    forumId?: Nullable<StringWithAggregatesFilter>;
-    id?: Nullable<StringWithAggregatesFilter>;
-    state?: Nullable<EnumStateWithAggregatesFilter>;
-    updatedAt?: Nullable<DateTimeWithAggregatesFilter>;
-}
-
-export class ForumAnswerUncheckedCreateInput {
-    attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutForumAnswerInput>;
-    authorId: string;
-    comments?: Nullable<CommentUncheckedCreateNestedManyWithoutForumAnswerInput>;
-    commentsEnabled?: Nullable<boolean>;
-    content: string;
-    createdAt?: Nullable<DateTime>;
-    forumId: string;
-    id?: Nullable<string>;
-    state?: Nullable<State>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class ForumAnswerUncheckedCreateNestedManyWithoutAuthorInput {
-    connect?: Nullable<ForumAnswerWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<ForumAnswerCreateOrConnectWithoutAuthorInput[]>;
-    create?: Nullable<ForumAnswerCreateWithoutAuthorInput[]>;
-    createMany?: Nullable<ForumAnswerCreateManyAuthorInputEnvelope>;
-}
-
-export class ForumAnswerUncheckedCreateNestedManyWithoutForumInput {
-    connect?: Nullable<ForumAnswerWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<ForumAnswerCreateOrConnectWithoutForumInput[]>;
-    create?: Nullable<ForumAnswerCreateWithoutForumInput[]>;
-    createMany?: Nullable<ForumAnswerCreateManyForumInputEnvelope>;
-}
-
-export class ForumAnswerUncheckedCreateWithoutAttachmentsInput {
-    authorId: string;
-    comments?: Nullable<CommentUncheckedCreateNestedManyWithoutForumAnswerInput>;
-    commentsEnabled?: Nullable<boolean>;
-    content: string;
-    createdAt?: Nullable<DateTime>;
-    forumId: string;
-    id?: Nullable<string>;
-    state?: Nullable<State>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class ForumAnswerUncheckedCreateWithoutAuthorInput {
-    attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutForumAnswerInput>;
-    comments?: Nullable<CommentUncheckedCreateNestedManyWithoutForumAnswerInput>;
-    commentsEnabled?: Nullable<boolean>;
-    content: string;
-    createdAt?: Nullable<DateTime>;
-    forumId: string;
-    id?: Nullable<string>;
-    state?: Nullable<State>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class ForumAnswerUncheckedCreateWithoutCommentsInput {
-    attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutForumAnswerInput>;
-    authorId: string;
-    commentsEnabled?: Nullable<boolean>;
-    content: string;
-    createdAt?: Nullable<DateTime>;
-    forumId: string;
-    id?: Nullable<string>;
-    state?: Nullable<State>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class ForumAnswerUncheckedCreateWithoutForumInput {
-    attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutForumAnswerInput>;
-    authorId: string;
-    comments?: Nullable<CommentUncheckedCreateNestedManyWithoutForumAnswerInput>;
-    commentsEnabled?: Nullable<boolean>;
-    content: string;
-    createdAt?: Nullable<DateTime>;
-    id?: Nullable<string>;
-    state?: Nullable<State>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class ForumAnswerUncheckedUpdateInput {
-    attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutForumAnswerInput>;
-    authorId?: Nullable<StringFieldUpdateOperationsInput>;
-    comments?: Nullable<CommentUncheckedUpdateManyWithoutForumAnswerInput>;
-    commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    content?: Nullable<StringFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    forumId?: Nullable<StringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class ForumAnswerUncheckedUpdateManyInput {
-    authorId?: Nullable<StringFieldUpdateOperationsInput>;
-    commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    content?: Nullable<StringFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    forumId?: Nullable<StringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class ForumAnswerUncheckedUpdateManyWithoutAuthorInput {
-    connect?: Nullable<ForumAnswerWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<ForumAnswerCreateOrConnectWithoutAuthorInput[]>;
-    create?: Nullable<ForumAnswerCreateWithoutAuthorInput[]>;
-    createMany?: Nullable<ForumAnswerCreateManyAuthorInputEnvelope>;
-    delete?: Nullable<ForumAnswerWhereUniqueInput[]>;
-    deleteMany?: Nullable<ForumAnswerScalarWhereInput[]>;
-    disconnect?: Nullable<ForumAnswerWhereUniqueInput[]>;
-    set?: Nullable<ForumAnswerWhereUniqueInput[]>;
-    update?: Nullable<ForumAnswerUpdateWithWhereUniqueWithoutAuthorInput[]>;
-    updateMany?: Nullable<ForumAnswerUpdateManyWithWhereWithoutAuthorInput[]>;
-    upsert?: Nullable<ForumAnswerUpsertWithWhereUniqueWithoutAuthorInput[]>;
-}
-
-export class ForumAnswerUncheckedUpdateManyWithoutForumAnswersInput {
-    commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    content?: Nullable<StringFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    forumId?: Nullable<StringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class ForumAnswerUncheckedUpdateManyWithoutForumInput {
-    connect?: Nullable<ForumAnswerWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<ForumAnswerCreateOrConnectWithoutForumInput[]>;
-    create?: Nullable<ForumAnswerCreateWithoutForumInput[]>;
-    createMany?: Nullable<ForumAnswerCreateManyForumInputEnvelope>;
-    delete?: Nullable<ForumAnswerWhereUniqueInput[]>;
-    deleteMany?: Nullable<ForumAnswerScalarWhereInput[]>;
-    disconnect?: Nullable<ForumAnswerWhereUniqueInput[]>;
-    set?: Nullable<ForumAnswerWhereUniqueInput[]>;
-    update?: Nullable<ForumAnswerUpdateWithWhereUniqueWithoutForumInput[]>;
-    updateMany?: Nullable<ForumAnswerUpdateManyWithWhereWithoutForumInput[]>;
-    upsert?: Nullable<ForumAnswerUpsertWithWhereUniqueWithoutForumInput[]>;
-}
-
-export class ForumAnswerUncheckedUpdateWithoutAttachmentsInput {
-    authorId?: Nullable<StringFieldUpdateOperationsInput>;
-    comments?: Nullable<CommentUncheckedUpdateManyWithoutForumAnswerInput>;
-    commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    content?: Nullable<StringFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    forumId?: Nullable<StringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class ForumAnswerUncheckedUpdateWithoutAuthorInput {
-    attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutForumAnswerInput>;
-    comments?: Nullable<CommentUncheckedUpdateManyWithoutForumAnswerInput>;
-    commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    content?: Nullable<StringFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    forumId?: Nullable<StringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class ForumAnswerUncheckedUpdateWithoutCommentsInput {
-    attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutForumAnswerInput>;
-    authorId?: Nullable<StringFieldUpdateOperationsInput>;
-    commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    content?: Nullable<StringFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    forumId?: Nullable<StringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class ForumAnswerUncheckedUpdateWithoutForumInput {
-    attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutForumAnswerInput>;
-    authorId?: Nullable<StringFieldUpdateOperationsInput>;
-    comments?: Nullable<CommentUncheckedUpdateManyWithoutForumAnswerInput>;
-    commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    content?: Nullable<StringFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class ForumAnswerUpdateInput {
-    attachments?: Nullable<AttachmentUpdateManyWithoutForumAnswerInput>;
-    author?: Nullable<UserUpdateOneRequiredWithoutForumAnswersInput>;
-    comments?: Nullable<CommentUpdateManyWithoutForumAnswerInput>;
-    commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    content?: Nullable<StringFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    forum?: Nullable<ForumUpdateOneRequiredWithoutForumAnswersInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class ForumAnswerUpdateManyMutationInput {
-    commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    content?: Nullable<StringFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class ForumAnswerUpdateManyWithWhereWithoutAuthorInput {
-    data: ForumAnswerUncheckedUpdateManyWithoutForumAnswersInput;
-    where: ForumAnswerScalarWhereInput;
-}
-
-export class ForumAnswerUpdateManyWithWhereWithoutForumInput {
-    data: ForumAnswerUncheckedUpdateManyWithoutForumAnswersInput;
-    where: ForumAnswerScalarWhereInput;
-}
-
-export class ForumAnswerUpdateManyWithoutAuthorInput {
-    connect?: Nullable<ForumAnswerWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<ForumAnswerCreateOrConnectWithoutAuthorInput[]>;
-    create?: Nullable<ForumAnswerCreateWithoutAuthorInput[]>;
-    createMany?: Nullable<ForumAnswerCreateManyAuthorInputEnvelope>;
-    delete?: Nullable<ForumAnswerWhereUniqueInput[]>;
-    deleteMany?: Nullable<ForumAnswerScalarWhereInput[]>;
-    disconnect?: Nullable<ForumAnswerWhereUniqueInput[]>;
-    set?: Nullable<ForumAnswerWhereUniqueInput[]>;
-    update?: Nullable<ForumAnswerUpdateWithWhereUniqueWithoutAuthorInput[]>;
-    updateMany?: Nullable<ForumAnswerUpdateManyWithWhereWithoutAuthorInput[]>;
-    upsert?: Nullable<ForumAnswerUpsertWithWhereUniqueWithoutAuthorInput[]>;
-}
-
-export class ForumAnswerUpdateManyWithoutForumInput {
-    connect?: Nullable<ForumAnswerWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<ForumAnswerCreateOrConnectWithoutForumInput[]>;
-    create?: Nullable<ForumAnswerCreateWithoutForumInput[]>;
-    createMany?: Nullable<ForumAnswerCreateManyForumInputEnvelope>;
-    delete?: Nullable<ForumAnswerWhereUniqueInput[]>;
-    deleteMany?: Nullable<ForumAnswerScalarWhereInput[]>;
-    disconnect?: Nullable<ForumAnswerWhereUniqueInput[]>;
-    set?: Nullable<ForumAnswerWhereUniqueInput[]>;
-    update?: Nullable<ForumAnswerUpdateWithWhereUniqueWithoutForumInput[]>;
-    updateMany?: Nullable<ForumAnswerUpdateManyWithWhereWithoutForumInput[]>;
-    upsert?: Nullable<ForumAnswerUpsertWithWhereUniqueWithoutForumInput[]>;
-}
-
-export class ForumAnswerUpdateOneWithoutAttachmentsInput {
-    connect?: Nullable<ForumAnswerWhereUniqueInput>;
-    connectOrCreate?: Nullable<ForumAnswerCreateOrConnectWithoutAttachmentsInput>;
-    create?: Nullable<ForumAnswerUncheckedCreateWithoutAttachmentsInput>;
-    delete?: Nullable<boolean>;
-    disconnect?: Nullable<boolean>;
-    update?: Nullable<ForumAnswerUncheckedUpdateWithoutAttachmentsInput>;
-    upsert?: Nullable<ForumAnswerUpsertWithoutAttachmentsInput>;
-}
-
-export class ForumAnswerUpdateOneWithoutCommentsInput {
-    connect?: Nullable<ForumAnswerWhereUniqueInput>;
-    connectOrCreate?: Nullable<ForumAnswerCreateOrConnectWithoutCommentsInput>;
-    create?: Nullable<ForumAnswerUncheckedCreateWithoutCommentsInput>;
-    delete?: Nullable<boolean>;
-    disconnect?: Nullable<boolean>;
-    update?: Nullable<ForumAnswerUncheckedUpdateWithoutCommentsInput>;
-    upsert?: Nullable<ForumAnswerUpsertWithoutCommentsInput>;
-}
-
-export class ForumAnswerUpdateWithWhereUniqueWithoutAuthorInput {
-    data: ForumAnswerUncheckedUpdateWithoutAuthorInput;
-    where: ForumAnswerWhereUniqueInput;
-}
-
-export class ForumAnswerUpdateWithWhereUniqueWithoutForumInput {
-    data: ForumAnswerUncheckedUpdateWithoutForumInput;
-    where: ForumAnswerWhereUniqueInput;
-}
-
-export class ForumAnswerUpdateWithoutAttachmentsInput {
-    author?: Nullable<UserUpdateOneRequiredWithoutForumAnswersInput>;
-    comments?: Nullable<CommentUpdateManyWithoutForumAnswerInput>;
-    commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    content?: Nullable<StringFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    forum?: Nullable<ForumUpdateOneRequiredWithoutForumAnswersInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class ForumAnswerUpdateWithoutAuthorInput {
-    attachments?: Nullable<AttachmentUpdateManyWithoutForumAnswerInput>;
-    comments?: Nullable<CommentUpdateManyWithoutForumAnswerInput>;
-    commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    content?: Nullable<StringFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    forum?: Nullable<ForumUpdateOneRequiredWithoutForumAnswersInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class ForumAnswerUpdateWithoutCommentsInput {
-    attachments?: Nullable<AttachmentUpdateManyWithoutForumAnswerInput>;
-    author?: Nullable<UserUpdateOneRequiredWithoutForumAnswersInput>;
-    commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    content?: Nullable<StringFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    forum?: Nullable<ForumUpdateOneRequiredWithoutForumAnswersInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class ForumAnswerUpdateWithoutForumInput {
-    attachments?: Nullable<AttachmentUpdateManyWithoutForumAnswerInput>;
-    author?: Nullable<UserUpdateOneRequiredWithoutForumAnswersInput>;
-    comments?: Nullable<CommentUpdateManyWithoutForumAnswerInput>;
-    commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    content?: Nullable<StringFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class ForumAnswerUpsertWithWhereUniqueWithoutAuthorInput {
-    create: ForumAnswerUncheckedCreateWithoutAuthorInput;
-    update: ForumAnswerUncheckedUpdateWithoutAuthorInput;
-    where: ForumAnswerWhereUniqueInput;
-}
-
-export class ForumAnswerUpsertWithWhereUniqueWithoutForumInput {
-    create: ForumAnswerUncheckedCreateWithoutForumInput;
-    update: ForumAnswerUncheckedUpdateWithoutForumInput;
-    where: ForumAnswerWhereUniqueInput;
-}
-
-export class ForumAnswerUpsertWithoutAttachmentsInput {
-    create: ForumAnswerUncheckedCreateWithoutAttachmentsInput;
-    update: ForumAnswerUncheckedUpdateWithoutAttachmentsInput;
-}
-
-export class ForumAnswerUpsertWithoutCommentsInput {
-    create: ForumAnswerUncheckedCreateWithoutCommentsInput;
-    update: ForumAnswerUncheckedUpdateWithoutCommentsInput;
-}
-
-export class ForumAnswerWhereInput {
-    AND?: Nullable<ForumAnswerWhereInput[]>;
-    NOT?: Nullable<ForumAnswerWhereInput[]>;
-    OR?: Nullable<ForumAnswerWhereInput[]>;
-    attachments?: Nullable<AttachmentListRelationFilter>;
-    author?: Nullable<UserWhereInput>;
-    authorId?: Nullable<StringFilter>;
-    comments?: Nullable<CommentListRelationFilter>;
-    commentsEnabled?: Nullable<BoolFilter>;
-    content?: Nullable<StringFilter>;
-    createdAt?: Nullable<DateTimeFilter>;
-    forum?: Nullable<ForumWhereInput>;
-    forumId?: Nullable<StringFilter>;
-    id?: Nullable<StringFilter>;
-    state?: Nullable<EnumStateFilter>;
-    updatedAt?: Nullable<DateTimeFilter>;
-}
-
-export class ForumAnswerWhereUniqueInput {
-    id?: Nullable<string>;
-}
-
-export class ForumCreateInput {
-    attachments?: Nullable<AttachmentCreateNestedManyWithoutForumInput>;
-    author: UserCreateNestedOneWithoutForumsInput;
-    comments?: Nullable<CommentCreateNestedManyWithoutForumInput>;
-    commentsEnabled?: Nullable<boolean>;
-    createdAt?: Nullable<DateTime>;
-    description: string;
-    forumAnswers?: Nullable<ForumAnswerCreateNestedManyWithoutForumInput>;
-    id?: Nullable<string>;
-    question: string;
-    state?: Nullable<State>;
-    tags?: Nullable<TagCreateNestedManyWithoutForumsInput>;
-    type?: Nullable<ForumType>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class ForumCreateManyAuthorInput {
-    commentsEnabled?: Nullable<boolean>;
-    createdAt?: Nullable<DateTime>;
-    description: string;
-    id?: Nullable<string>;
-    question: string;
-    state?: Nullable<State>;
-    type?: Nullable<ForumType>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class ForumCreateManyAuthorInputEnvelope {
-    data: ForumCreateManyAuthorInput[];
-    skipDuplicates?: Nullable<boolean>;
-}
-
-export class ForumCreateManyInput {
-    authorId: string;
-    commentsEnabled?: Nullable<boolean>;
-    createdAt?: Nullable<DateTime>;
-    description: string;
-    id?: Nullable<string>;
-    question: string;
-    state?: Nullable<State>;
-    type?: Nullable<ForumType>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class ForumCreateNestedManyWithoutAuthorInput {
-    connect?: Nullable<ForumWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<ForumCreateOrConnectWithoutAuthorInput[]>;
-    create?: Nullable<ForumCreateWithoutAuthorInput[]>;
-    createMany?: Nullable<ForumCreateManyAuthorInputEnvelope>;
-}
-
-export class ForumCreateNestedManyWithoutTagsInput {
-    connect?: Nullable<ForumWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<ForumCreateOrConnectWithoutTagsInput[]>;
-    create?: Nullable<ForumCreateWithoutTagsInput[]>;
-}
-
-export class ForumCreateNestedOneWithoutAttachmentsInput {
-    connect?: Nullable<ForumWhereUniqueInput>;
-    connectOrCreate?: Nullable<ForumCreateOrConnectWithoutAttachmentsInput>;
-    create?: Nullable<ForumUncheckedCreateWithoutAttachmentsInput>;
-}
-
-export class ForumCreateNestedOneWithoutCommentsInput {
-    connect?: Nullable<ForumWhereUniqueInput>;
-    connectOrCreate?: Nullable<ForumCreateOrConnectWithoutCommentsInput>;
-    create?: Nullable<ForumUncheckedCreateWithoutCommentsInput>;
-}
-
-export class ForumCreateNestedOneWithoutForumAnswersInput {
-    connect?: Nullable<ForumWhereUniqueInput>;
-    connectOrCreate?: Nullable<ForumCreateOrConnectWithoutForumAnswersInput>;
-    create?: Nullable<ForumUncheckedCreateWithoutForumAnswersInput>;
-}
-
-export class ForumCreateOrConnectWithoutAttachmentsInput {
-    create: ForumUncheckedCreateWithoutAttachmentsInput;
-    where: ForumWhereUniqueInput;
-}
-
-export class ForumCreateOrConnectWithoutAuthorInput {
-    create: ForumUncheckedCreateWithoutAuthorInput;
-    where: ForumWhereUniqueInput;
-}
-
-export class ForumCreateOrConnectWithoutCommentsInput {
-    create: ForumUncheckedCreateWithoutCommentsInput;
-    where: ForumWhereUniqueInput;
-}
-
-export class ForumCreateOrConnectWithoutForumAnswersInput {
-    create: ForumUncheckedCreateWithoutForumAnswersInput;
-    where: ForumWhereUniqueInput;
-}
-
-export class ForumCreateOrConnectWithoutTagsInput {
-    create: ForumUncheckedCreateWithoutTagsInput;
-    where: ForumWhereUniqueInput;
-}
-
-export class ForumCreateWithoutAttachmentsInput {
-    author: UserCreateNestedOneWithoutForumsInput;
-    comments?: Nullable<CommentCreateNestedManyWithoutForumInput>;
-    commentsEnabled?: Nullable<boolean>;
-    createdAt?: Nullable<DateTime>;
-    description: string;
-    forumAnswers?: Nullable<ForumAnswerCreateNestedManyWithoutForumInput>;
-    id?: Nullable<string>;
-    question: string;
-    state?: Nullable<State>;
-    tags?: Nullable<TagCreateNestedManyWithoutForumsInput>;
-    type?: Nullable<ForumType>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class ForumCreateWithoutAuthorInput {
-    attachments?: Nullable<AttachmentCreateNestedManyWithoutForumInput>;
-    comments?: Nullable<CommentCreateNestedManyWithoutForumInput>;
-    commentsEnabled?: Nullable<boolean>;
-    createdAt?: Nullable<DateTime>;
-    description: string;
-    forumAnswers?: Nullable<ForumAnswerCreateNestedManyWithoutForumInput>;
-    id?: Nullable<string>;
-    question: string;
-    state?: Nullable<State>;
-    tags?: Nullable<TagCreateNestedManyWithoutForumsInput>;
-    type?: Nullable<ForumType>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class ForumCreateWithoutCommentsInput {
-    attachments?: Nullable<AttachmentCreateNestedManyWithoutForumInput>;
-    author: UserCreateNestedOneWithoutForumsInput;
-    commentsEnabled?: Nullable<boolean>;
-    createdAt?: Nullable<DateTime>;
-    description: string;
-    forumAnswers?: Nullable<ForumAnswerCreateNestedManyWithoutForumInput>;
-    id?: Nullable<string>;
-    question: string;
-    state?: Nullable<State>;
-    tags?: Nullable<TagCreateNestedManyWithoutForumsInput>;
-    type?: Nullable<ForumType>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class ForumCreateWithoutForumAnswersInput {
-    attachments?: Nullable<AttachmentCreateNestedManyWithoutForumInput>;
-    author: UserCreateNestedOneWithoutForumsInput;
-    comments?: Nullable<CommentCreateNestedManyWithoutForumInput>;
-    commentsEnabled?: Nullable<boolean>;
-    createdAt?: Nullable<DateTime>;
-    description: string;
-    id?: Nullable<string>;
-    question: string;
-    state?: Nullable<State>;
-    tags?: Nullable<TagCreateNestedManyWithoutForumsInput>;
-    type?: Nullable<ForumType>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class ForumCreateWithoutTagsInput {
-    attachments?: Nullable<AttachmentCreateNestedManyWithoutForumInput>;
-    author: UserCreateNestedOneWithoutForumsInput;
-    comments?: Nullable<CommentCreateNestedManyWithoutForumInput>;
-    commentsEnabled?: Nullable<boolean>;
-    createdAt?: Nullable<DateTime>;
-    description: string;
-    forumAnswers?: Nullable<ForumAnswerCreateNestedManyWithoutForumInput>;
-    id?: Nullable<string>;
-    question: string;
-    state?: Nullable<State>;
-    type?: Nullable<ForumType>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class ForumListRelationFilter {
-    every?: Nullable<ForumWhereInput>;
-    none?: Nullable<ForumWhereInput>;
-    some?: Nullable<ForumWhereInput>;
-}
-
-export class ForumOrderByInput {
-    authorId?: Nullable<SortOrder>;
-    commentsEnabled?: Nullable<SortOrder>;
-    createdAt?: Nullable<SortOrder>;
-    description?: Nullable<SortOrder>;
-    id?: Nullable<SortOrder>;
-    question?: Nullable<SortOrder>;
-    state?: Nullable<SortOrder>;
-    type?: Nullable<SortOrder>;
-    updatedAt?: Nullable<SortOrder>;
-}
-
-export class ForumRelationFilter {
-    is?: Nullable<ForumWhereInput>;
-    isNot?: Nullable<ForumWhereInput>;
-}
-
-export class ForumScalarWhereInput {
-    AND?: Nullable<ForumScalarWhereInput[]>;
-    NOT?: Nullable<ForumScalarWhereInput[]>;
-    OR?: Nullable<ForumScalarWhereInput[]>;
-    authorId?: Nullable<StringFilter>;
-    commentsEnabled?: Nullable<BoolFilter>;
-    createdAt?: Nullable<DateTimeFilter>;
-    description?: Nullable<StringFilter>;
-    id?: Nullable<StringFilter>;
-    question?: Nullable<StringFilter>;
-    state?: Nullable<EnumStateFilter>;
-    type?: Nullable<EnumForumTypeFilter>;
-    updatedAt?: Nullable<DateTimeFilter>;
-}
-
-export class ForumScalarWhereWithAggregatesInput {
-    AND?: Nullable<ForumScalarWhereWithAggregatesInput[]>;
-    NOT?: Nullable<ForumScalarWhereWithAggregatesInput[]>;
-    OR?: Nullable<ForumScalarWhereWithAggregatesInput[]>;
-    authorId?: Nullable<StringWithAggregatesFilter>;
-    commentsEnabled?: Nullable<BoolWithAggregatesFilter>;
-    createdAt?: Nullable<DateTimeWithAggregatesFilter>;
-    description?: Nullable<StringWithAggregatesFilter>;
-    id?: Nullable<StringWithAggregatesFilter>;
-    question?: Nullable<StringWithAggregatesFilter>;
-    state?: Nullable<EnumStateWithAggregatesFilter>;
-    type?: Nullable<EnumForumTypeWithAggregatesFilter>;
-    updatedAt?: Nullable<DateTimeWithAggregatesFilter>;
-}
-
-export class ForumUncheckedCreateInput {
-    attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutForumInput>;
-    authorId: string;
-    comments?: Nullable<CommentUncheckedCreateNestedManyWithoutForumInput>;
-    commentsEnabled?: Nullable<boolean>;
-    createdAt?: Nullable<DateTime>;
-    description: string;
-    forumAnswers?: Nullable<ForumAnswerUncheckedCreateNestedManyWithoutForumInput>;
-    id?: Nullable<string>;
-    question: string;
-    state?: Nullable<State>;
-    type?: Nullable<ForumType>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class ForumUncheckedCreateNestedManyWithoutAuthorInput {
-    connect?: Nullable<ForumWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<ForumCreateOrConnectWithoutAuthorInput[]>;
-    create?: Nullable<ForumCreateWithoutAuthorInput[]>;
-    createMany?: Nullable<ForumCreateManyAuthorInputEnvelope>;
-}
-
-export class ForumUncheckedCreateWithoutAttachmentsInput {
-    authorId: string;
-    comments?: Nullable<CommentUncheckedCreateNestedManyWithoutForumInput>;
-    commentsEnabled?: Nullable<boolean>;
-    createdAt?: Nullable<DateTime>;
-    description: string;
-    forumAnswers?: Nullable<ForumAnswerUncheckedCreateNestedManyWithoutForumInput>;
-    id?: Nullable<string>;
-    question: string;
-    state?: Nullable<State>;
-    type?: Nullable<ForumType>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class ForumUncheckedCreateWithoutAuthorInput {
-    attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutForumInput>;
-    comments?: Nullable<CommentUncheckedCreateNestedManyWithoutForumInput>;
-    commentsEnabled?: Nullable<boolean>;
-    createdAt?: Nullable<DateTime>;
-    description: string;
-    forumAnswers?: Nullable<ForumAnswerUncheckedCreateNestedManyWithoutForumInput>;
-    id?: Nullable<string>;
-    question: string;
-    state?: Nullable<State>;
-    type?: Nullable<ForumType>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class ForumUncheckedCreateWithoutCommentsInput {
-    attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutForumInput>;
-    authorId: string;
-    commentsEnabled?: Nullable<boolean>;
-    createdAt?: Nullable<DateTime>;
-    description: string;
-    forumAnswers?: Nullable<ForumAnswerUncheckedCreateNestedManyWithoutForumInput>;
-    id?: Nullable<string>;
-    question: string;
-    state?: Nullable<State>;
-    type?: Nullable<ForumType>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class ForumUncheckedCreateWithoutForumAnswersInput {
-    attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutForumInput>;
-    authorId: string;
-    comments?: Nullable<CommentUncheckedCreateNestedManyWithoutForumInput>;
-    commentsEnabled?: Nullable<boolean>;
-    createdAt?: Nullable<DateTime>;
-    description: string;
-    id?: Nullable<string>;
-    question: string;
-    state?: Nullable<State>;
-    type?: Nullable<ForumType>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class ForumUncheckedCreateWithoutTagsInput {
-    attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutForumInput>;
-    authorId: string;
-    comments?: Nullable<CommentUncheckedCreateNestedManyWithoutForumInput>;
-    commentsEnabled?: Nullable<boolean>;
-    createdAt?: Nullable<DateTime>;
-    description: string;
-    forumAnswers?: Nullable<ForumAnswerUncheckedCreateNestedManyWithoutForumInput>;
-    id?: Nullable<string>;
-    question: string;
-    state?: Nullable<State>;
-    type?: Nullable<ForumType>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class ForumUncheckedUpdateInput {
-    attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutForumInput>;
-    authorId?: Nullable<StringFieldUpdateOperationsInput>;
-    comments?: Nullable<CommentUncheckedUpdateManyWithoutForumInput>;
-    commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<StringFieldUpdateOperationsInput>;
-    forumAnswers?: Nullable<ForumAnswerUncheckedUpdateManyWithoutForumInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    question?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    type?: Nullable<EnumForumTypeFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class ForumUncheckedUpdateManyInput {
-    authorId?: Nullable<StringFieldUpdateOperationsInput>;
-    commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<StringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    question?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    type?: Nullable<EnumForumTypeFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class ForumUncheckedUpdateManyWithoutAuthorInput {
-    connect?: Nullable<ForumWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<ForumCreateOrConnectWithoutAuthorInput[]>;
-    create?: Nullable<ForumCreateWithoutAuthorInput[]>;
-    createMany?: Nullable<ForumCreateManyAuthorInputEnvelope>;
-    delete?: Nullable<ForumWhereUniqueInput[]>;
-    deleteMany?: Nullable<ForumScalarWhereInput[]>;
-    disconnect?: Nullable<ForumWhereUniqueInput[]>;
-    set?: Nullable<ForumWhereUniqueInput[]>;
-    update?: Nullable<ForumUpdateWithWhereUniqueWithoutAuthorInput[]>;
-    updateMany?: Nullable<ForumUpdateManyWithWhereWithoutAuthorInput[]>;
-    upsert?: Nullable<ForumUpsertWithWhereUniqueWithoutAuthorInput[]>;
-}
-
-export class ForumUncheckedUpdateManyWithoutForumsInput {
-    commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<StringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    question?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    type?: Nullable<EnumForumTypeFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class ForumUncheckedUpdateWithoutAttachmentsInput {
-    authorId?: Nullable<StringFieldUpdateOperationsInput>;
-    comments?: Nullable<CommentUncheckedUpdateManyWithoutForumInput>;
-    commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<StringFieldUpdateOperationsInput>;
-    forumAnswers?: Nullable<ForumAnswerUncheckedUpdateManyWithoutForumInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    question?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    type?: Nullable<EnumForumTypeFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class ForumUncheckedUpdateWithoutAuthorInput {
-    attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutForumInput>;
-    comments?: Nullable<CommentUncheckedUpdateManyWithoutForumInput>;
-    commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<StringFieldUpdateOperationsInput>;
-    forumAnswers?: Nullable<ForumAnswerUncheckedUpdateManyWithoutForumInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    question?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    type?: Nullable<EnumForumTypeFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class ForumUncheckedUpdateWithoutCommentsInput {
-    attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutForumInput>;
-    authorId?: Nullable<StringFieldUpdateOperationsInput>;
-    commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<StringFieldUpdateOperationsInput>;
-    forumAnswers?: Nullable<ForumAnswerUncheckedUpdateManyWithoutForumInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    question?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    type?: Nullable<EnumForumTypeFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class ForumUncheckedUpdateWithoutForumAnswersInput {
-    attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutForumInput>;
-    authorId?: Nullable<StringFieldUpdateOperationsInput>;
-    comments?: Nullable<CommentUncheckedUpdateManyWithoutForumInput>;
-    commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<StringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    question?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    type?: Nullable<EnumForumTypeFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class ForumUncheckedUpdateWithoutTagsInput {
-    attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutForumInput>;
-    authorId?: Nullable<StringFieldUpdateOperationsInput>;
-    comments?: Nullable<CommentUncheckedUpdateManyWithoutForumInput>;
-    commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<StringFieldUpdateOperationsInput>;
-    forumAnswers?: Nullable<ForumAnswerUncheckedUpdateManyWithoutForumInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    question?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    type?: Nullable<EnumForumTypeFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class ForumUpdateInput {
-    attachments?: Nullable<AttachmentUpdateManyWithoutForumInput>;
-    author?: Nullable<UserUpdateOneRequiredWithoutForumsInput>;
-    comments?: Nullable<CommentUpdateManyWithoutForumInput>;
-    commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<StringFieldUpdateOperationsInput>;
-    forumAnswers?: Nullable<ForumAnswerUpdateManyWithoutForumInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    question?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    tags?: Nullable<TagUpdateManyWithoutForumsInput>;
-    type?: Nullable<EnumForumTypeFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class ForumUpdateManyMutationInput {
-    commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<StringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    question?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    type?: Nullable<EnumForumTypeFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class ForumUpdateManyWithWhereWithoutAuthorInput {
-    data: ForumUncheckedUpdateManyWithoutForumsInput;
-    where: ForumScalarWhereInput;
-}
-
-export class ForumUpdateManyWithWhereWithoutTagsInput {
-    data: ForumUncheckedUpdateManyWithoutForumsInput;
-    where: ForumScalarWhereInput;
-}
-
-export class ForumUpdateManyWithoutAuthorInput {
-    connect?: Nullable<ForumWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<ForumCreateOrConnectWithoutAuthorInput[]>;
-    create?: Nullable<ForumCreateWithoutAuthorInput[]>;
-    createMany?: Nullable<ForumCreateManyAuthorInputEnvelope>;
-    delete?: Nullable<ForumWhereUniqueInput[]>;
-    deleteMany?: Nullable<ForumScalarWhereInput[]>;
-    disconnect?: Nullable<ForumWhereUniqueInput[]>;
-    set?: Nullable<ForumWhereUniqueInput[]>;
-    update?: Nullable<ForumUpdateWithWhereUniqueWithoutAuthorInput[]>;
-    updateMany?: Nullable<ForumUpdateManyWithWhereWithoutAuthorInput[]>;
-    upsert?: Nullable<ForumUpsertWithWhereUniqueWithoutAuthorInput[]>;
-}
-
-export class ForumUpdateManyWithoutTagsInput {
-    connect?: Nullable<ForumWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<ForumCreateOrConnectWithoutTagsInput[]>;
-    create?: Nullable<ForumCreateWithoutTagsInput[]>;
-    delete?: Nullable<ForumWhereUniqueInput[]>;
-    deleteMany?: Nullable<ForumScalarWhereInput[]>;
-    disconnect?: Nullable<ForumWhereUniqueInput[]>;
-    set?: Nullable<ForumWhereUniqueInput[]>;
-    update?: Nullable<ForumUpdateWithWhereUniqueWithoutTagsInput[]>;
-    updateMany?: Nullable<ForumUpdateManyWithWhereWithoutTagsInput[]>;
-    upsert?: Nullable<ForumUpsertWithWhereUniqueWithoutTagsInput[]>;
-}
-
-export class ForumUpdateOneRequiredWithoutForumAnswersInput {
-    connect?: Nullable<ForumWhereUniqueInput>;
-    connectOrCreate?: Nullable<ForumCreateOrConnectWithoutForumAnswersInput>;
-    create?: Nullable<ForumUncheckedCreateWithoutForumAnswersInput>;
-    update?: Nullable<ForumUncheckedUpdateWithoutForumAnswersInput>;
-    upsert?: Nullable<ForumUpsertWithoutForumAnswersInput>;
-}
-
-export class ForumUpdateOneWithoutAttachmentsInput {
-    connect?: Nullable<ForumWhereUniqueInput>;
-    connectOrCreate?: Nullable<ForumCreateOrConnectWithoutAttachmentsInput>;
-    create?: Nullable<ForumUncheckedCreateWithoutAttachmentsInput>;
-    delete?: Nullable<boolean>;
-    disconnect?: Nullable<boolean>;
-    update?: Nullable<ForumUncheckedUpdateWithoutAttachmentsInput>;
-    upsert?: Nullable<ForumUpsertWithoutAttachmentsInput>;
-}
-
-export class ForumUpdateOneWithoutCommentsInput {
-    connect?: Nullable<ForumWhereUniqueInput>;
-    connectOrCreate?: Nullable<ForumCreateOrConnectWithoutCommentsInput>;
-    create?: Nullable<ForumUncheckedCreateWithoutCommentsInput>;
-    delete?: Nullable<boolean>;
-    disconnect?: Nullable<boolean>;
-    update?: Nullable<ForumUncheckedUpdateWithoutCommentsInput>;
-    upsert?: Nullable<ForumUpsertWithoutCommentsInput>;
-}
-
-export class ForumUpdateWithWhereUniqueWithoutAuthorInput {
-    data: ForumUncheckedUpdateWithoutAuthorInput;
-    where: ForumWhereUniqueInput;
-}
-
-export class ForumUpdateWithWhereUniqueWithoutTagsInput {
-    data: ForumUncheckedUpdateWithoutTagsInput;
-    where: ForumWhereUniqueInput;
-}
-
-export class ForumUpdateWithoutAttachmentsInput {
-    author?: Nullable<UserUpdateOneRequiredWithoutForumsInput>;
-    comments?: Nullable<CommentUpdateManyWithoutForumInput>;
-    commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<StringFieldUpdateOperationsInput>;
-    forumAnswers?: Nullable<ForumAnswerUpdateManyWithoutForumInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    question?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    tags?: Nullable<TagUpdateManyWithoutForumsInput>;
-    type?: Nullable<EnumForumTypeFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class ForumUpdateWithoutAuthorInput {
-    attachments?: Nullable<AttachmentUpdateManyWithoutForumInput>;
-    comments?: Nullable<CommentUpdateManyWithoutForumInput>;
-    commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<StringFieldUpdateOperationsInput>;
-    forumAnswers?: Nullable<ForumAnswerUpdateManyWithoutForumInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    question?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    tags?: Nullable<TagUpdateManyWithoutForumsInput>;
-    type?: Nullable<EnumForumTypeFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class ForumUpdateWithoutCommentsInput {
-    attachments?: Nullable<AttachmentUpdateManyWithoutForumInput>;
-    author?: Nullable<UserUpdateOneRequiredWithoutForumsInput>;
-    commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<StringFieldUpdateOperationsInput>;
-    forumAnswers?: Nullable<ForumAnswerUpdateManyWithoutForumInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    question?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    tags?: Nullable<TagUpdateManyWithoutForumsInput>;
-    type?: Nullable<EnumForumTypeFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class ForumUpdateWithoutForumAnswersInput {
-    attachments?: Nullable<AttachmentUpdateManyWithoutForumInput>;
-    author?: Nullable<UserUpdateOneRequiredWithoutForumsInput>;
-    comments?: Nullable<CommentUpdateManyWithoutForumInput>;
-    commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<StringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    question?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    tags?: Nullable<TagUpdateManyWithoutForumsInput>;
-    type?: Nullable<EnumForumTypeFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class ForumUpdateWithoutTagsInput {
-    attachments?: Nullable<AttachmentUpdateManyWithoutForumInput>;
-    author?: Nullable<UserUpdateOneRequiredWithoutForumsInput>;
-    comments?: Nullable<CommentUpdateManyWithoutForumInput>;
-    commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<StringFieldUpdateOperationsInput>;
-    forumAnswers?: Nullable<ForumAnswerUpdateManyWithoutForumInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    question?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    type?: Nullable<EnumForumTypeFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class ForumUpsertWithWhereUniqueWithoutAuthorInput {
-    create: ForumUncheckedCreateWithoutAuthorInput;
-    update: ForumUncheckedUpdateWithoutAuthorInput;
-    where: ForumWhereUniqueInput;
-}
-
-export class ForumUpsertWithWhereUniqueWithoutTagsInput {
-    create: ForumUncheckedCreateWithoutTagsInput;
-    update: ForumUncheckedUpdateWithoutTagsInput;
-    where: ForumWhereUniqueInput;
-}
-
-export class ForumUpsertWithoutAttachmentsInput {
-    create: ForumUncheckedCreateWithoutAttachmentsInput;
-    update: ForumUncheckedUpdateWithoutAttachmentsInput;
-}
-
-export class ForumUpsertWithoutCommentsInput {
-    create: ForumUncheckedCreateWithoutCommentsInput;
-    update: ForumUncheckedUpdateWithoutCommentsInput;
-}
-
-export class ForumUpsertWithoutForumAnswersInput {
-    create: ForumUncheckedCreateWithoutForumAnswersInput;
-    update: ForumUncheckedUpdateWithoutForumAnswersInput;
-}
-
-export class ForumWhereInput {
-    AND?: Nullable<ForumWhereInput[]>;
-    NOT?: Nullable<ForumWhereInput[]>;
-    OR?: Nullable<ForumWhereInput[]>;
-    attachments?: Nullable<AttachmentListRelationFilter>;
-    author?: Nullable<UserWhereInput>;
-    authorId?: Nullable<StringFilter>;
-    comments?: Nullable<CommentListRelationFilter>;
-    commentsEnabled?: Nullable<BoolFilter>;
-    createdAt?: Nullable<DateTimeFilter>;
-    description?: Nullable<StringFilter>;
-    forumAnswers?: Nullable<ForumAnswerListRelationFilter>;
-    id?: Nullable<StringFilter>;
-    question?: Nullable<StringFilter>;
-    state?: Nullable<EnumStateFilter>;
-    tags?: Nullable<TagListRelationFilter>;
-    type?: Nullable<EnumForumTypeFilter>;
-    updatedAt?: Nullable<DateTimeFilter>;
-}
-
-export class ForumWhereUniqueInput {
-    id?: Nullable<string>;
-}
-
-export class GradeCreateInput {
-    attachments?: Nullable<AttachmentCreateNestedManyWithoutGradeInput>;
-    createdAt?: Nullable<DateTime>;
-    description: string;
-    form?: Nullable<FormCreateNestedOneWithoutGradesInput>;
-    id?: Nullable<string>;
-    maxInclusive?: Nullable<boolean>;
-    maxValue?: Nullable<number>;
-    minInclusive?: Nullable<boolean>;
-    minValue?: Nullable<number>;
-    name: string;
-    questions?: Nullable<QuestionCreateNestedManyWithoutGradeInput>;
-    recommendations?: Nullable<RecommendationCreateNestedManyWithoutGradeInput>;
-    responses?: Nullable<ResponseCreateNestedManyWithoutGradeInput>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class GradeCreateManyFormInput {
-    createdAt?: Nullable<DateTime>;
-    description: string;
-    id?: Nullable<string>;
-    maxInclusive?: Nullable<boolean>;
-    maxValue?: Nullable<number>;
-    minInclusive?: Nullable<boolean>;
-    minValue?: Nullable<number>;
-    name: string;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class GradeCreateManyFormInputEnvelope {
-    data: GradeCreateManyFormInput[];
-    skipDuplicates?: Nullable<boolean>;
-}
-
-export class GradeCreateManyInput {
-    createdAt?: Nullable<DateTime>;
-    description: string;
-    formId?: Nullable<string>;
-    id?: Nullable<string>;
-    maxInclusive?: Nullable<boolean>;
-    maxValue?: Nullable<number>;
-    minInclusive?: Nullable<boolean>;
-    minValue?: Nullable<number>;
-    name: string;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class GradeCreateNestedManyWithoutFormInput {
-    connect?: Nullable<GradeWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<GradeCreateOrConnectWithoutFormInput[]>;
-    create?: Nullable<GradeCreateWithoutFormInput[]>;
-    createMany?: Nullable<GradeCreateManyFormInputEnvelope>;
-}
-
-export class GradeCreateNestedOneWithoutAttachmentsInput {
-    connect?: Nullable<GradeWhereUniqueInput>;
-    connectOrCreate?: Nullable<GradeCreateOrConnectWithoutAttachmentsInput>;
-    create?: Nullable<GradeUncheckedCreateWithoutAttachmentsInput>;
-}
-
-export class GradeCreateNestedOneWithoutQuestionsInput {
-    connect?: Nullable<GradeWhereUniqueInput>;
-    connectOrCreate?: Nullable<GradeCreateOrConnectWithoutQuestionsInput>;
-    create?: Nullable<GradeUncheckedCreateWithoutQuestionsInput>;
-}
-
-export class GradeCreateNestedOneWithoutRecommendationsInput {
-    connect?: Nullable<GradeWhereUniqueInput>;
-    connectOrCreate?: Nullable<GradeCreateOrConnectWithoutRecommendationsInput>;
-    create?: Nullable<GradeUncheckedCreateWithoutRecommendationsInput>;
-}
-
-export class GradeCreateNestedOneWithoutResponsesInput {
-    connect?: Nullable<GradeWhereUniqueInput>;
-    connectOrCreate?: Nullable<GradeCreateOrConnectWithoutResponsesInput>;
-    create?: Nullable<GradeUncheckedCreateWithoutResponsesInput>;
-}
-
-export class GradeCreateOrConnectWithoutAttachmentsInput {
-    create: GradeUncheckedCreateWithoutAttachmentsInput;
-    where: GradeWhereUniqueInput;
-}
-
-export class GradeCreateOrConnectWithoutFormInput {
-    create: GradeUncheckedCreateWithoutFormInput;
-    where: GradeWhereUniqueInput;
-}
-
-export class GradeCreateOrConnectWithoutQuestionsInput {
-    create: GradeUncheckedCreateWithoutQuestionsInput;
-    where: GradeWhereUniqueInput;
-}
-
-export class GradeCreateOrConnectWithoutRecommendationsInput {
-    create: GradeUncheckedCreateWithoutRecommendationsInput;
-    where: GradeWhereUniqueInput;
-}
-
-export class GradeCreateOrConnectWithoutResponsesInput {
-    create: GradeUncheckedCreateWithoutResponsesInput;
-    where: GradeWhereUniqueInput;
-}
-
-export class GradeCreateWithoutAttachmentsInput {
-    createdAt?: Nullable<DateTime>;
-    description: string;
-    form?: Nullable<FormCreateNestedOneWithoutGradesInput>;
-    id?: Nullable<string>;
-    maxInclusive?: Nullable<boolean>;
-    maxValue?: Nullable<number>;
-    minInclusive?: Nullable<boolean>;
-    minValue?: Nullable<number>;
-    name: string;
-    questions?: Nullable<QuestionCreateNestedManyWithoutGradeInput>;
-    recommendations?: Nullable<RecommendationCreateNestedManyWithoutGradeInput>;
-    responses?: Nullable<ResponseCreateNestedManyWithoutGradeInput>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class GradeCreateWithoutFormInput {
-    attachments?: Nullable<AttachmentCreateNestedManyWithoutGradeInput>;
-    createdAt?: Nullable<DateTime>;
-    description: string;
-    id?: Nullable<string>;
-    maxInclusive?: Nullable<boolean>;
-    maxValue?: Nullable<number>;
-    minInclusive?: Nullable<boolean>;
-    minValue?: Nullable<number>;
-    name: string;
-    questions?: Nullable<QuestionCreateNestedManyWithoutGradeInput>;
-    recommendations?: Nullable<RecommendationCreateNestedManyWithoutGradeInput>;
-    responses?: Nullable<ResponseCreateNestedManyWithoutGradeInput>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class GradeCreateWithoutQuestionsInput {
-    attachments?: Nullable<AttachmentCreateNestedManyWithoutGradeInput>;
-    createdAt?: Nullable<DateTime>;
-    description: string;
-    form?: Nullable<FormCreateNestedOneWithoutGradesInput>;
-    id?: Nullable<string>;
-    maxInclusive?: Nullable<boolean>;
-    maxValue?: Nullable<number>;
-    minInclusive?: Nullable<boolean>;
-    minValue?: Nullable<number>;
-    name: string;
-    recommendations?: Nullable<RecommendationCreateNestedManyWithoutGradeInput>;
-    responses?: Nullable<ResponseCreateNestedManyWithoutGradeInput>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class GradeCreateWithoutRecommendationsInput {
-    attachments?: Nullable<AttachmentCreateNestedManyWithoutGradeInput>;
-    createdAt?: Nullable<DateTime>;
-    description: string;
-    form?: Nullable<FormCreateNestedOneWithoutGradesInput>;
-    id?: Nullable<string>;
-    maxInclusive?: Nullable<boolean>;
-    maxValue?: Nullable<number>;
-    minInclusive?: Nullable<boolean>;
-    minValue?: Nullable<number>;
-    name: string;
-    questions?: Nullable<QuestionCreateNestedManyWithoutGradeInput>;
-    responses?: Nullable<ResponseCreateNestedManyWithoutGradeInput>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class GradeCreateWithoutResponsesInput {
-    attachments?: Nullable<AttachmentCreateNestedManyWithoutGradeInput>;
-    createdAt?: Nullable<DateTime>;
-    description: string;
-    form?: Nullable<FormCreateNestedOneWithoutGradesInput>;
-    id?: Nullable<string>;
-    maxInclusive?: Nullable<boolean>;
-    maxValue?: Nullable<number>;
-    minInclusive?: Nullable<boolean>;
-    minValue?: Nullable<number>;
-    name: string;
-    questions?: Nullable<QuestionCreateNestedManyWithoutGradeInput>;
-    recommendations?: Nullable<RecommendationCreateNestedManyWithoutGradeInput>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class GradeListRelationFilter {
-    every?: Nullable<GradeWhereInput>;
-    none?: Nullable<GradeWhereInput>;
-    some?: Nullable<GradeWhereInput>;
-}
-
-export class GradeOrderByInput {
-    createdAt?: Nullable<SortOrder>;
-    description?: Nullable<SortOrder>;
-    formId?: Nullable<SortOrder>;
-    id?: Nullable<SortOrder>;
-    maxInclusive?: Nullable<SortOrder>;
-    maxValue?: Nullable<SortOrder>;
-    minInclusive?: Nullable<SortOrder>;
-    minValue?: Nullable<SortOrder>;
-    name?: Nullable<SortOrder>;
-    updatedAt?: Nullable<SortOrder>;
-}
-
-export class GradeRelationFilter {
-    is?: Nullable<GradeWhereInput>;
-    isNot?: Nullable<GradeWhereInput>;
-}
-
-export class GradeScalarWhereInput {
-    AND?: Nullable<GradeScalarWhereInput[]>;
-    NOT?: Nullable<GradeScalarWhereInput[]>;
-    OR?: Nullable<GradeScalarWhereInput[]>;
-    createdAt?: Nullable<DateTimeFilter>;
-    description?: Nullable<StringFilter>;
-    formId?: Nullable<StringNullableFilter>;
-    id?: Nullable<StringFilter>;
-    maxInclusive?: Nullable<BoolFilter>;
-    maxValue?: Nullable<IntNullableFilter>;
-    minInclusive?: Nullable<BoolFilter>;
-    minValue?: Nullable<IntNullableFilter>;
-    name?: Nullable<StringFilter>;
-    updatedAt?: Nullable<DateTimeFilter>;
-}
-
-export class GradeScalarWhereWithAggregatesInput {
-    AND?: Nullable<GradeScalarWhereWithAggregatesInput[]>;
-    NOT?: Nullable<GradeScalarWhereWithAggregatesInput[]>;
-    OR?: Nullable<GradeScalarWhereWithAggregatesInput[]>;
-    createdAt?: Nullable<DateTimeWithAggregatesFilter>;
-    description?: Nullable<StringWithAggregatesFilter>;
-    formId?: Nullable<StringNullableWithAggregatesFilter>;
-    id?: Nullable<StringWithAggregatesFilter>;
-    maxInclusive?: Nullable<BoolWithAggregatesFilter>;
-    maxValue?: Nullable<IntNullableWithAggregatesFilter>;
-    minInclusive?: Nullable<BoolWithAggregatesFilter>;
-    minValue?: Nullable<IntNullableWithAggregatesFilter>;
-    name?: Nullable<StringWithAggregatesFilter>;
-    updatedAt?: Nullable<DateTimeWithAggregatesFilter>;
-}
-
-export class GradeUncheckedCreateInput {
-    attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutGradeInput>;
-    createdAt?: Nullable<DateTime>;
-    description: string;
-    formId?: Nullable<string>;
-    id?: Nullable<string>;
-    maxInclusive?: Nullable<boolean>;
-    maxValue?: Nullable<number>;
-    minInclusive?: Nullable<boolean>;
-    minValue?: Nullable<number>;
-    name: string;
-    questions?: Nullable<QuestionUncheckedCreateNestedManyWithoutGradeInput>;
-    recommendations?: Nullable<RecommendationUncheckedCreateNestedManyWithoutGradeInput>;
-    responses?: Nullable<ResponseUncheckedCreateNestedManyWithoutGradeInput>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class GradeUncheckedCreateNestedManyWithoutFormInput {
-    connect?: Nullable<GradeWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<GradeCreateOrConnectWithoutFormInput[]>;
-    create?: Nullable<GradeCreateWithoutFormInput[]>;
-    createMany?: Nullable<GradeCreateManyFormInputEnvelope>;
-}
-
-export class GradeUncheckedCreateWithoutAttachmentsInput {
-    createdAt?: Nullable<DateTime>;
-    description: string;
-    formId?: Nullable<string>;
-    id?: Nullable<string>;
-    maxInclusive?: Nullable<boolean>;
-    maxValue?: Nullable<number>;
-    minInclusive?: Nullable<boolean>;
-    minValue?: Nullable<number>;
-    name: string;
-    questions?: Nullable<QuestionUncheckedCreateNestedManyWithoutGradeInput>;
-    recommendations?: Nullable<RecommendationUncheckedCreateNestedManyWithoutGradeInput>;
-    responses?: Nullable<ResponseUncheckedCreateNestedManyWithoutGradeInput>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class GradeUncheckedCreateWithoutFormInput {
-    attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutGradeInput>;
-    createdAt?: Nullable<DateTime>;
-    description: string;
-    id?: Nullable<string>;
-    maxInclusive?: Nullable<boolean>;
-    maxValue?: Nullable<number>;
-    minInclusive?: Nullable<boolean>;
-    minValue?: Nullable<number>;
-    name: string;
-    questions?: Nullable<QuestionUncheckedCreateNestedManyWithoutGradeInput>;
-    recommendations?: Nullable<RecommendationUncheckedCreateNestedManyWithoutGradeInput>;
-    responses?: Nullable<ResponseUncheckedCreateNestedManyWithoutGradeInput>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class GradeUncheckedCreateWithoutQuestionsInput {
-    attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutGradeInput>;
-    createdAt?: Nullable<DateTime>;
-    description: string;
-    formId?: Nullable<string>;
-    id?: Nullable<string>;
-    maxInclusive?: Nullable<boolean>;
-    maxValue?: Nullable<number>;
-    minInclusive?: Nullable<boolean>;
-    minValue?: Nullable<number>;
-    name: string;
-    recommendations?: Nullable<RecommendationUncheckedCreateNestedManyWithoutGradeInput>;
-    responses?: Nullable<ResponseUncheckedCreateNestedManyWithoutGradeInput>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class GradeUncheckedCreateWithoutRecommendationsInput {
-    attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutGradeInput>;
-    createdAt?: Nullable<DateTime>;
-    description: string;
-    formId?: Nullable<string>;
-    id?: Nullable<string>;
-    maxInclusive?: Nullable<boolean>;
-    maxValue?: Nullable<number>;
-    minInclusive?: Nullable<boolean>;
-    minValue?: Nullable<number>;
-    name: string;
-    questions?: Nullable<QuestionUncheckedCreateNestedManyWithoutGradeInput>;
-    responses?: Nullable<ResponseUncheckedCreateNestedManyWithoutGradeInput>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class GradeUncheckedCreateWithoutResponsesInput {
-    attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutGradeInput>;
-    createdAt?: Nullable<DateTime>;
-    description: string;
-    formId?: Nullable<string>;
-    id?: Nullable<string>;
-    maxInclusive?: Nullable<boolean>;
-    maxValue?: Nullable<number>;
-    minInclusive?: Nullable<boolean>;
-    minValue?: Nullable<number>;
-    name: string;
-    questions?: Nullable<QuestionUncheckedCreateNestedManyWithoutGradeInput>;
-    recommendations?: Nullable<RecommendationUncheckedCreateNestedManyWithoutGradeInput>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class GradeUncheckedUpdateInput {
-    attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutGradeInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<StringFieldUpdateOperationsInput>;
-    formId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    maxInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    maxValue?: Nullable<NullableIntFieldUpdateOperationsInput>;
-    minInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    minValue?: Nullable<NullableIntFieldUpdateOperationsInput>;
-    name?: Nullable<StringFieldUpdateOperationsInput>;
-    questions?: Nullable<QuestionUncheckedUpdateManyWithoutGradeInput>;
-    recommendations?: Nullable<RecommendationUncheckedUpdateManyWithoutGradeInput>;
-    responses?: Nullable<ResponseUncheckedUpdateManyWithoutGradeInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class GradeUncheckedUpdateManyInput {
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<StringFieldUpdateOperationsInput>;
-    formId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    maxInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    maxValue?: Nullable<NullableIntFieldUpdateOperationsInput>;
-    minInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    minValue?: Nullable<NullableIntFieldUpdateOperationsInput>;
-    name?: Nullable<StringFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class GradeUncheckedUpdateManyWithoutFormInput {
-    connect?: Nullable<GradeWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<GradeCreateOrConnectWithoutFormInput[]>;
-    create?: Nullable<GradeCreateWithoutFormInput[]>;
-    createMany?: Nullable<GradeCreateManyFormInputEnvelope>;
-    delete?: Nullable<GradeWhereUniqueInput[]>;
-    deleteMany?: Nullable<GradeScalarWhereInput[]>;
-    disconnect?: Nullable<GradeWhereUniqueInput[]>;
-    set?: Nullable<GradeWhereUniqueInput[]>;
-    update?: Nullable<GradeUpdateWithWhereUniqueWithoutFormInput[]>;
-    updateMany?: Nullable<GradeUpdateManyWithWhereWithoutFormInput[]>;
-    upsert?: Nullable<GradeUpsertWithWhereUniqueWithoutFormInput[]>;
-}
-
-export class GradeUncheckedUpdateManyWithoutGradesInput {
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<StringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    maxInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    maxValue?: Nullable<NullableIntFieldUpdateOperationsInput>;
-    minInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    minValue?: Nullable<NullableIntFieldUpdateOperationsInput>;
-    name?: Nullable<StringFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class GradeUncheckedUpdateWithoutAttachmentsInput {
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<StringFieldUpdateOperationsInput>;
-    formId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    maxInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    maxValue?: Nullable<NullableIntFieldUpdateOperationsInput>;
-    minInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    minValue?: Nullable<NullableIntFieldUpdateOperationsInput>;
-    name?: Nullable<StringFieldUpdateOperationsInput>;
-    questions?: Nullable<QuestionUncheckedUpdateManyWithoutGradeInput>;
-    recommendations?: Nullable<RecommendationUncheckedUpdateManyWithoutGradeInput>;
-    responses?: Nullable<ResponseUncheckedUpdateManyWithoutGradeInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class GradeUncheckedUpdateWithoutFormInput {
-    attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutGradeInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<StringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    maxInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    maxValue?: Nullable<NullableIntFieldUpdateOperationsInput>;
-    minInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    minValue?: Nullable<NullableIntFieldUpdateOperationsInput>;
-    name?: Nullable<StringFieldUpdateOperationsInput>;
-    questions?: Nullable<QuestionUncheckedUpdateManyWithoutGradeInput>;
-    recommendations?: Nullable<RecommendationUncheckedUpdateManyWithoutGradeInput>;
-    responses?: Nullable<ResponseUncheckedUpdateManyWithoutGradeInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class GradeUncheckedUpdateWithoutQuestionsInput {
-    attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutGradeInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<StringFieldUpdateOperationsInput>;
-    formId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    maxInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    maxValue?: Nullable<NullableIntFieldUpdateOperationsInput>;
-    minInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    minValue?: Nullable<NullableIntFieldUpdateOperationsInput>;
-    name?: Nullable<StringFieldUpdateOperationsInput>;
-    recommendations?: Nullable<RecommendationUncheckedUpdateManyWithoutGradeInput>;
-    responses?: Nullable<ResponseUncheckedUpdateManyWithoutGradeInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class GradeUncheckedUpdateWithoutRecommendationsInput {
-    attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutGradeInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<StringFieldUpdateOperationsInput>;
-    formId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    maxInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    maxValue?: Nullable<NullableIntFieldUpdateOperationsInput>;
-    minInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    minValue?: Nullable<NullableIntFieldUpdateOperationsInput>;
-    name?: Nullable<StringFieldUpdateOperationsInput>;
-    questions?: Nullable<QuestionUncheckedUpdateManyWithoutGradeInput>;
-    responses?: Nullable<ResponseUncheckedUpdateManyWithoutGradeInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class GradeUncheckedUpdateWithoutResponsesInput {
-    attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutGradeInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<StringFieldUpdateOperationsInput>;
-    formId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    maxInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    maxValue?: Nullable<NullableIntFieldUpdateOperationsInput>;
-    minInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    minValue?: Nullable<NullableIntFieldUpdateOperationsInput>;
-    name?: Nullable<StringFieldUpdateOperationsInput>;
-    questions?: Nullable<QuestionUncheckedUpdateManyWithoutGradeInput>;
-    recommendations?: Nullable<RecommendationUncheckedUpdateManyWithoutGradeInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class GradeUpdateInput {
-    attachments?: Nullable<AttachmentUpdateManyWithoutGradeInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<StringFieldUpdateOperationsInput>;
-    form?: Nullable<FormUpdateOneWithoutGradesInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    maxInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    maxValue?: Nullable<NullableIntFieldUpdateOperationsInput>;
-    minInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    minValue?: Nullable<NullableIntFieldUpdateOperationsInput>;
-    name?: Nullable<StringFieldUpdateOperationsInput>;
-    questions?: Nullable<QuestionUpdateManyWithoutGradeInput>;
-    recommendations?: Nullable<RecommendationUpdateManyWithoutGradeInput>;
-    responses?: Nullable<ResponseUpdateManyWithoutGradeInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class GradeUpdateManyMutationInput {
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<StringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    maxInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    maxValue?: Nullable<NullableIntFieldUpdateOperationsInput>;
-    minInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    minValue?: Nullable<NullableIntFieldUpdateOperationsInput>;
-    name?: Nullable<StringFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class GradeUpdateManyWithWhereWithoutFormInput {
-    data: GradeUncheckedUpdateManyWithoutGradesInput;
-    where: GradeScalarWhereInput;
-}
-
-export class GradeUpdateManyWithoutFormInput {
-    connect?: Nullable<GradeWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<GradeCreateOrConnectWithoutFormInput[]>;
-    create?: Nullable<GradeCreateWithoutFormInput[]>;
-    createMany?: Nullable<GradeCreateManyFormInputEnvelope>;
-    delete?: Nullable<GradeWhereUniqueInput[]>;
-    deleteMany?: Nullable<GradeScalarWhereInput[]>;
-    disconnect?: Nullable<GradeWhereUniqueInput[]>;
-    set?: Nullable<GradeWhereUniqueInput[]>;
-    update?: Nullable<GradeUpdateWithWhereUniqueWithoutFormInput[]>;
-    updateMany?: Nullable<GradeUpdateManyWithWhereWithoutFormInput[]>;
-    upsert?: Nullable<GradeUpsertWithWhereUniqueWithoutFormInput[]>;
-}
-
-export class GradeUpdateOneRequiredWithoutQuestionsInput {
-    connect?: Nullable<GradeWhereUniqueInput>;
-    connectOrCreate?: Nullable<GradeCreateOrConnectWithoutQuestionsInput>;
-    create?: Nullable<GradeUncheckedCreateWithoutQuestionsInput>;
-    update?: Nullable<GradeUncheckedUpdateWithoutQuestionsInput>;
-    upsert?: Nullable<GradeUpsertWithoutQuestionsInput>;
-}
-
-export class GradeUpdateOneRequiredWithoutResponsesInput {
-    connect?: Nullable<GradeWhereUniqueInput>;
-    connectOrCreate?: Nullable<GradeCreateOrConnectWithoutResponsesInput>;
-    create?: Nullable<GradeUncheckedCreateWithoutResponsesInput>;
-    update?: Nullable<GradeUncheckedUpdateWithoutResponsesInput>;
-    upsert?: Nullable<GradeUpsertWithoutResponsesInput>;
-}
-
-export class GradeUpdateOneWithoutAttachmentsInput {
-    connect?: Nullable<GradeWhereUniqueInput>;
-    connectOrCreate?: Nullable<GradeCreateOrConnectWithoutAttachmentsInput>;
-    create?: Nullable<GradeUncheckedCreateWithoutAttachmentsInput>;
-    delete?: Nullable<boolean>;
-    disconnect?: Nullable<boolean>;
-    update?: Nullable<GradeUncheckedUpdateWithoutAttachmentsInput>;
-    upsert?: Nullable<GradeUpsertWithoutAttachmentsInput>;
-}
-
-export class GradeUpdateOneWithoutRecommendationsInput {
-    connect?: Nullable<GradeWhereUniqueInput>;
-    connectOrCreate?: Nullable<GradeCreateOrConnectWithoutRecommendationsInput>;
-    create?: Nullable<GradeUncheckedCreateWithoutRecommendationsInput>;
-    delete?: Nullable<boolean>;
-    disconnect?: Nullable<boolean>;
-    update?: Nullable<GradeUncheckedUpdateWithoutRecommendationsInput>;
-    upsert?: Nullable<GradeUpsertWithoutRecommendationsInput>;
-}
-
-export class GradeUpdateWithWhereUniqueWithoutFormInput {
-    data: GradeUncheckedUpdateWithoutFormInput;
-    where: GradeWhereUniqueInput;
-}
-
-export class GradeUpdateWithoutAttachmentsInput {
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<StringFieldUpdateOperationsInput>;
-    form?: Nullable<FormUpdateOneWithoutGradesInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    maxInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    maxValue?: Nullable<NullableIntFieldUpdateOperationsInput>;
-    minInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    minValue?: Nullable<NullableIntFieldUpdateOperationsInput>;
-    name?: Nullable<StringFieldUpdateOperationsInput>;
-    questions?: Nullable<QuestionUpdateManyWithoutGradeInput>;
-    recommendations?: Nullable<RecommendationUpdateManyWithoutGradeInput>;
-    responses?: Nullable<ResponseUpdateManyWithoutGradeInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class GradeUpdateWithoutFormInput {
-    attachments?: Nullable<AttachmentUpdateManyWithoutGradeInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<StringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    maxInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    maxValue?: Nullable<NullableIntFieldUpdateOperationsInput>;
-    minInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    minValue?: Nullable<NullableIntFieldUpdateOperationsInput>;
-    name?: Nullable<StringFieldUpdateOperationsInput>;
-    questions?: Nullable<QuestionUpdateManyWithoutGradeInput>;
-    recommendations?: Nullable<RecommendationUpdateManyWithoutGradeInput>;
-    responses?: Nullable<ResponseUpdateManyWithoutGradeInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class GradeUpdateWithoutQuestionsInput {
-    attachments?: Nullable<AttachmentUpdateManyWithoutGradeInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<StringFieldUpdateOperationsInput>;
-    form?: Nullable<FormUpdateOneWithoutGradesInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    maxInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    maxValue?: Nullable<NullableIntFieldUpdateOperationsInput>;
-    minInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    minValue?: Nullable<NullableIntFieldUpdateOperationsInput>;
-    name?: Nullable<StringFieldUpdateOperationsInput>;
-    recommendations?: Nullable<RecommendationUpdateManyWithoutGradeInput>;
-    responses?: Nullable<ResponseUpdateManyWithoutGradeInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class GradeUpdateWithoutRecommendationsInput {
-    attachments?: Nullable<AttachmentUpdateManyWithoutGradeInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<StringFieldUpdateOperationsInput>;
-    form?: Nullable<FormUpdateOneWithoutGradesInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    maxInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    maxValue?: Nullable<NullableIntFieldUpdateOperationsInput>;
-    minInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    minValue?: Nullable<NullableIntFieldUpdateOperationsInput>;
-    name?: Nullable<StringFieldUpdateOperationsInput>;
-    questions?: Nullable<QuestionUpdateManyWithoutGradeInput>;
-    responses?: Nullable<ResponseUpdateManyWithoutGradeInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class GradeUpdateWithoutResponsesInput {
-    attachments?: Nullable<AttachmentUpdateManyWithoutGradeInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<StringFieldUpdateOperationsInput>;
-    form?: Nullable<FormUpdateOneWithoutGradesInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    maxInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    maxValue?: Nullable<NullableIntFieldUpdateOperationsInput>;
-    minInclusive?: Nullable<BoolFieldUpdateOperationsInput>;
-    minValue?: Nullable<NullableIntFieldUpdateOperationsInput>;
-    name?: Nullable<StringFieldUpdateOperationsInput>;
-    questions?: Nullable<QuestionUpdateManyWithoutGradeInput>;
-    recommendations?: Nullable<RecommendationUpdateManyWithoutGradeInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class GradeUpsertWithWhereUniqueWithoutFormInput {
-    create: GradeUncheckedCreateWithoutFormInput;
-    update: GradeUncheckedUpdateWithoutFormInput;
-    where: GradeWhereUniqueInput;
-}
-
-export class GradeUpsertWithoutAttachmentsInput {
-    create: GradeUncheckedCreateWithoutAttachmentsInput;
-    update: GradeUncheckedUpdateWithoutAttachmentsInput;
-}
-
-export class GradeUpsertWithoutQuestionsInput {
-    create: GradeUncheckedCreateWithoutQuestionsInput;
-    update: GradeUncheckedUpdateWithoutQuestionsInput;
-}
-
-export class GradeUpsertWithoutRecommendationsInput {
-    create: GradeUncheckedCreateWithoutRecommendationsInput;
-    update: GradeUncheckedUpdateWithoutRecommendationsInput;
-}
-
-export class GradeUpsertWithoutResponsesInput {
-    create: GradeUncheckedCreateWithoutResponsesInput;
-    update: GradeUncheckedUpdateWithoutResponsesInput;
-}
-
-export class GradeWhereInput {
-    AND?: Nullable<GradeWhereInput[]>;
-    NOT?: Nullable<GradeWhereInput[]>;
-    OR?: Nullable<GradeWhereInput[]>;
-    attachments?: Nullable<AttachmentListRelationFilter>;
-    createdAt?: Nullable<DateTimeFilter>;
-    description?: Nullable<StringFilter>;
-    form?: Nullable<FormWhereInput>;
-    formId?: Nullable<StringNullableFilter>;
-    id?: Nullable<StringFilter>;
-    maxInclusive?: Nullable<BoolFilter>;
-    maxValue?: Nullable<IntNullableFilter>;
-    minInclusive?: Nullable<BoolFilter>;
-    minValue?: Nullable<IntNullableFilter>;
-    name?: Nullable<StringFilter>;
-    questions?: Nullable<QuestionListRelationFilter>;
-    recommendations?: Nullable<RecommendationListRelationFilter>;
-    responses?: Nullable<ResponseListRelationFilter>;
-    updatedAt?: Nullable<DateTimeFilter>;
-}
-
-export class GradeWhereUniqueInput {
-    id?: Nullable<string>;
 }
 
 export class HelpCreateInput {
@@ -8627,38 +3615,6 @@ export class IntFilter {
     notIn?: Nullable<number[]>;
 }
 
-export class IntNullableFilter {
-    equals?: Nullable<number>;
-    gt?: Nullable<number>;
-    gte?: Nullable<number>;
-    in?: Nullable<number[]>;
-    lt?: Nullable<number>;
-    lte?: Nullable<number>;
-    not?: Nullable<NestedIntNullableFilter>;
-    notIn?: Nullable<number[]>;
-}
-
-export class IntNullableWithAggregatesFilter {
-    _avg?: Nullable<NestedFloatNullableFilter>;
-    _count?: Nullable<NestedIntNullableFilter>;
-    _max?: Nullable<NestedIntNullableFilter>;
-    _min?: Nullable<NestedIntNullableFilter>;
-    _sum?: Nullable<NestedIntNullableFilter>;
-    avg?: Nullable<NestedFloatNullableFilter>;
-    count?: Nullable<NestedIntNullableFilter>;
-    equals?: Nullable<number>;
-    gt?: Nullable<number>;
-    gte?: Nullable<number>;
-    in?: Nullable<number[]>;
-    lt?: Nullable<number>;
-    lte?: Nullable<number>;
-    max?: Nullable<NestedIntNullableFilter>;
-    min?: Nullable<NestedIntNullableFilter>;
-    not?: Nullable<NestedIntNullableWithAggregatesFilter>;
-    notIn?: Nullable<number[]>;
-    sum?: Nullable<NestedIntNullableFilter>;
-}
-
 export class IntWithAggregatesFilter {
     _avg?: Nullable<NestedFloatFilter>;
     _count?: Nullable<NestedIntFilter>;
@@ -8678,6 +3634,190 @@ export class IntWithAggregatesFilter {
     not?: Nullable<NestedIntWithAggregatesFilter>;
     notIn?: Nullable<number[]>;
     sum?: Nullable<NestedIntFilter>;
+}
+
+export class LocationCreateInput {
+    createdAt?: Nullable<DateTime>;
+    id?: Nullable<string>;
+    lat: number;
+    lon: number;
+    name?: Nullable<string>;
+    state?: Nullable<State>;
+    updatedAt?: Nullable<DateTime>;
+    users?: Nullable<UserCreateNestedManyWithoutLocationInput>;
+}
+
+export class LocationCreateManyInput {
+    createdAt?: Nullable<DateTime>;
+    id?: Nullable<string>;
+    lat: number;
+    lon: number;
+    name?: Nullable<string>;
+    state?: Nullable<State>;
+    updatedAt?: Nullable<DateTime>;
+}
+
+export class LocationCreateNestedOneWithoutUsersInput {
+    connect?: Nullable<LocationWhereUniqueInput>;
+    connectOrCreate?: Nullable<LocationCreateOrConnectWithoutUsersInput>;
+    create?: Nullable<LocationUncheckedCreateWithoutUsersInput>;
+}
+
+export class LocationCreateOrConnectWithoutUsersInput {
+    create: LocationUncheckedCreateWithoutUsersInput;
+    where: LocationWhereUniqueInput;
+}
+
+export class LocationCreateWithoutUsersInput {
+    createdAt?: Nullable<DateTime>;
+    id?: Nullable<string>;
+    lat: number;
+    lon: number;
+    name?: Nullable<string>;
+    state?: Nullable<State>;
+    updatedAt?: Nullable<DateTime>;
+}
+
+export class LocationOrderByInput {
+    createdAt?: Nullable<SortOrder>;
+    id?: Nullable<SortOrder>;
+    lat?: Nullable<SortOrder>;
+    lon?: Nullable<SortOrder>;
+    name?: Nullable<SortOrder>;
+    state?: Nullable<SortOrder>;
+    updatedAt?: Nullable<SortOrder>;
+}
+
+export class LocationRelationFilter {
+    is?: Nullable<LocationWhereInput>;
+    isNot?: Nullable<LocationWhereInput>;
+}
+
+export class LocationScalarWhereWithAggregatesInput {
+    AND?: Nullable<LocationScalarWhereWithAggregatesInput[]>;
+    NOT?: Nullable<LocationScalarWhereWithAggregatesInput[]>;
+    OR?: Nullable<LocationScalarWhereWithAggregatesInput[]>;
+    createdAt?: Nullable<DateTimeWithAggregatesFilter>;
+    id?: Nullable<StringWithAggregatesFilter>;
+    lat?: Nullable<FloatWithAggregatesFilter>;
+    lon?: Nullable<FloatWithAggregatesFilter>;
+    name?: Nullable<StringWithAggregatesFilter>;
+    state?: Nullable<EnumStateWithAggregatesFilter>;
+    updatedAt?: Nullable<DateTimeWithAggregatesFilter>;
+}
+
+export class LocationUncheckedCreateInput {
+    createdAt?: Nullable<DateTime>;
+    id?: Nullable<string>;
+    lat: number;
+    lon: number;
+    name?: Nullable<string>;
+    state?: Nullable<State>;
+    updatedAt?: Nullable<DateTime>;
+    users?: Nullable<UserUncheckedCreateNestedManyWithoutLocationInput>;
+}
+
+export class LocationUncheckedCreateWithoutUsersInput {
+    createdAt?: Nullable<DateTime>;
+    id?: Nullable<string>;
+    lat: number;
+    lon: number;
+    name?: Nullable<string>;
+    state?: Nullable<State>;
+    updatedAt?: Nullable<DateTime>;
+}
+
+export class LocationUncheckedUpdateInput {
+    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    id?: Nullable<StringFieldUpdateOperationsInput>;
+    lat?: Nullable<FloatFieldUpdateOperationsInput>;
+    lon?: Nullable<FloatFieldUpdateOperationsInput>;
+    name?: Nullable<StringFieldUpdateOperationsInput>;
+    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
+    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    users?: Nullable<UserUncheckedUpdateManyWithoutLocationInput>;
+}
+
+export class LocationUncheckedUpdateManyInput {
+    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    id?: Nullable<StringFieldUpdateOperationsInput>;
+    lat?: Nullable<FloatFieldUpdateOperationsInput>;
+    lon?: Nullable<FloatFieldUpdateOperationsInput>;
+    name?: Nullable<StringFieldUpdateOperationsInput>;
+    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
+    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+}
+
+export class LocationUncheckedUpdateWithoutUsersInput {
+    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    id?: Nullable<StringFieldUpdateOperationsInput>;
+    lat?: Nullable<FloatFieldUpdateOperationsInput>;
+    lon?: Nullable<FloatFieldUpdateOperationsInput>;
+    name?: Nullable<StringFieldUpdateOperationsInput>;
+    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
+    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+}
+
+export class LocationUpdateInput {
+    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    id?: Nullable<StringFieldUpdateOperationsInput>;
+    lat?: Nullable<FloatFieldUpdateOperationsInput>;
+    lon?: Nullable<FloatFieldUpdateOperationsInput>;
+    name?: Nullable<StringFieldUpdateOperationsInput>;
+    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
+    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    users?: Nullable<UserUpdateManyWithoutLocationInput>;
+}
+
+export class LocationUpdateManyMutationInput {
+    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    id?: Nullable<StringFieldUpdateOperationsInput>;
+    lat?: Nullable<FloatFieldUpdateOperationsInput>;
+    lon?: Nullable<FloatFieldUpdateOperationsInput>;
+    name?: Nullable<StringFieldUpdateOperationsInput>;
+    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
+    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+}
+
+export class LocationUpdateOneRequiredWithoutUsersInput {
+    connect?: Nullable<LocationWhereUniqueInput>;
+    connectOrCreate?: Nullable<LocationCreateOrConnectWithoutUsersInput>;
+    create?: Nullable<LocationUncheckedCreateWithoutUsersInput>;
+    update?: Nullable<LocationUncheckedUpdateWithoutUsersInput>;
+    upsert?: Nullable<LocationUpsertWithoutUsersInput>;
+}
+
+export class LocationUpdateWithoutUsersInput {
+    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    id?: Nullable<StringFieldUpdateOperationsInput>;
+    lat?: Nullable<FloatFieldUpdateOperationsInput>;
+    lon?: Nullable<FloatFieldUpdateOperationsInput>;
+    name?: Nullable<StringFieldUpdateOperationsInput>;
+    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
+    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+}
+
+export class LocationUpsertWithoutUsersInput {
+    create: LocationUncheckedCreateWithoutUsersInput;
+    update: LocationUncheckedUpdateWithoutUsersInput;
+}
+
+export class LocationWhereInput {
+    AND?: Nullable<LocationWhereInput[]>;
+    NOT?: Nullable<LocationWhereInput[]>;
+    OR?: Nullable<LocationWhereInput[]>;
+    createdAt?: Nullable<DateTimeFilter>;
+    id?: Nullable<StringFilter>;
+    lat?: Nullable<FloatFilter>;
+    lon?: Nullable<FloatFilter>;
+    name?: Nullable<StringFilter>;
+    state?: Nullable<EnumStateFilter>;
+    updatedAt?: Nullable<DateTimeFilter>;
+    users?: Nullable<UserListRelationFilter>;
+}
+
+export class LocationWhereUniqueInput {
+    id?: Nullable<string>;
 }
 
 export class MpesaPaymentCreateInput {
@@ -9011,22 +4151,6 @@ export class NestedBoolFilter {
     not?: Nullable<NestedBoolFilter>;
 }
 
-export class NestedBoolNullableFilter {
-    equals?: Nullable<boolean>;
-    not?: Nullable<NestedBoolNullableFilter>;
-}
-
-export class NestedBoolNullableWithAggregatesFilter {
-    _count?: Nullable<NestedIntNullableFilter>;
-    _max?: Nullable<NestedBoolNullableFilter>;
-    _min?: Nullable<NestedBoolNullableFilter>;
-    count?: Nullable<NestedIntNullableFilter>;
-    equals?: Nullable<boolean>;
-    max?: Nullable<NestedBoolNullableFilter>;
-    min?: Nullable<NestedBoolNullableFilter>;
-    not?: Nullable<NestedBoolNullableWithAggregatesFilter>;
-}
-
 export class NestedBoolWithAggregatesFilter {
     _count?: Nullable<NestedIntFilter>;
     _max?: Nullable<NestedBoolFilter>;
@@ -9086,64 +4210,24 @@ export class NestedEnumAttachmentTypeWithAggregatesFilter {
     notIn?: Nullable<AttachmentType[]>;
 }
 
-export class NestedEnumForumTypeFilter {
-    equals?: Nullable<ForumType>;
-    in?: Nullable<ForumType[]>;
-    not?: Nullable<NestedEnumForumTypeFilter>;
-    notIn?: Nullable<ForumType[]>;
+export class NestedEnumBusinnessModeFilter {
+    equals?: Nullable<BusinnessMode>;
+    in?: Nullable<BusinnessMode[]>;
+    not?: Nullable<NestedEnumBusinnessModeFilter>;
+    notIn?: Nullable<BusinnessMode[]>;
 }
 
-export class NestedEnumForumTypeWithAggregatesFilter {
+export class NestedEnumBusinnessModeWithAggregatesFilter {
     _count?: Nullable<NestedIntFilter>;
-    _max?: Nullable<NestedEnumForumTypeFilter>;
-    _min?: Nullable<NestedEnumForumTypeFilter>;
+    _max?: Nullable<NestedEnumBusinnessModeFilter>;
+    _min?: Nullable<NestedEnumBusinnessModeFilter>;
     count?: Nullable<NestedIntFilter>;
-    equals?: Nullable<ForumType>;
-    in?: Nullable<ForumType[]>;
-    max?: Nullable<NestedEnumForumTypeFilter>;
-    min?: Nullable<NestedEnumForumTypeFilter>;
-    not?: Nullable<NestedEnumForumTypeWithAggregatesFilter>;
-    notIn?: Nullable<ForumType[]>;
-}
-
-export class NestedEnumQuestionTypeFilter {
-    equals?: Nullable<QuestionType>;
-    in?: Nullable<QuestionType[]>;
-    not?: Nullable<NestedEnumQuestionTypeFilter>;
-    notIn?: Nullable<QuestionType[]>;
-}
-
-export class NestedEnumQuestionTypeWithAggregatesFilter {
-    _count?: Nullable<NestedIntFilter>;
-    _max?: Nullable<NestedEnumQuestionTypeFilter>;
-    _min?: Nullable<NestedEnumQuestionTypeFilter>;
-    count?: Nullable<NestedIntFilter>;
-    equals?: Nullable<QuestionType>;
-    in?: Nullable<QuestionType[]>;
-    max?: Nullable<NestedEnumQuestionTypeFilter>;
-    min?: Nullable<NestedEnumQuestionTypeFilter>;
-    not?: Nullable<NestedEnumQuestionTypeWithAggregatesFilter>;
-    notIn?: Nullable<QuestionType[]>;
-}
-
-export class NestedEnumRecommendationTypeFilter {
-    equals?: Nullable<RecommendationType>;
-    in?: Nullable<RecommendationType[]>;
-    not?: Nullable<NestedEnumRecommendationTypeFilter>;
-    notIn?: Nullable<RecommendationType[]>;
-}
-
-export class NestedEnumRecommendationTypeWithAggregatesFilter {
-    _count?: Nullable<NestedIntFilter>;
-    _max?: Nullable<NestedEnumRecommendationTypeFilter>;
-    _min?: Nullable<NestedEnumRecommendationTypeFilter>;
-    count?: Nullable<NestedIntFilter>;
-    equals?: Nullable<RecommendationType>;
-    in?: Nullable<RecommendationType[]>;
-    max?: Nullable<NestedEnumRecommendationTypeFilter>;
-    min?: Nullable<NestedEnumRecommendationTypeFilter>;
-    not?: Nullable<NestedEnumRecommendationTypeWithAggregatesFilter>;
-    notIn?: Nullable<RecommendationType[]>;
+    equals?: Nullable<BusinnessMode>;
+    in?: Nullable<BusinnessMode[]>;
+    max?: Nullable<NestedEnumBusinnessModeFilter>;
+    min?: Nullable<NestedEnumBusinnessModeFilter>;
+    not?: Nullable<NestedEnumBusinnessModeWithAggregatesFilter>;
+    notIn?: Nullable<BusinnessMode[]>;
 }
 
 export class NestedEnumRoleFilter {
@@ -9257,17 +4341,6 @@ export class NestedFloatFilter {
     notIn?: Nullable<number[]>;
 }
 
-export class NestedFloatNullableFilter {
-    equals?: Nullable<number>;
-    gt?: Nullable<number>;
-    gte?: Nullable<number>;
-    in?: Nullable<number[]>;
-    lt?: Nullable<number>;
-    lte?: Nullable<number>;
-    not?: Nullable<NestedFloatNullableFilter>;
-    notIn?: Nullable<number[]>;
-}
-
 export class NestedFloatWithAggregatesFilter {
     _avg?: Nullable<NestedFloatFilter>;
     _count?: Nullable<NestedIntFilter>;
@@ -9309,27 +4382,6 @@ export class NestedIntNullableFilter {
     lte?: Nullable<number>;
     not?: Nullable<NestedIntNullableFilter>;
     notIn?: Nullable<number[]>;
-}
-
-export class NestedIntNullableWithAggregatesFilter {
-    _avg?: Nullable<NestedFloatNullableFilter>;
-    _count?: Nullable<NestedIntNullableFilter>;
-    _max?: Nullable<NestedIntNullableFilter>;
-    _min?: Nullable<NestedIntNullableFilter>;
-    _sum?: Nullable<NestedIntNullableFilter>;
-    avg?: Nullable<NestedFloatNullableFilter>;
-    count?: Nullable<NestedIntNullableFilter>;
-    equals?: Nullable<number>;
-    gt?: Nullable<number>;
-    gte?: Nullable<number>;
-    in?: Nullable<number[]>;
-    lt?: Nullable<number>;
-    lte?: Nullable<number>;
-    max?: Nullable<NestedIntNullableFilter>;
-    min?: Nullable<NestedIntNullableFilter>;
-    not?: Nullable<NestedIntNullableWithAggregatesFilter>;
-    notIn?: Nullable<number[]>;
-    sum?: Nullable<NestedIntNullableFilter>;
 }
 
 export class NestedIntWithAggregatesFilter {
@@ -9419,18 +4471,6 @@ export class NestedStringWithAggregatesFilter {
     not?: Nullable<NestedStringWithAggregatesFilter>;
     notIn?: Nullable<string[]>;
     startsWith?: Nullable<string>;
-}
-
-export class NullableBoolFieldUpdateOperationsInput {
-    set?: Nullable<boolean>;
-}
-
-export class NullableIntFieldUpdateOperationsInput {
-    decrement?: Nullable<number>;
-    divide?: Nullable<number>;
-    increment?: Nullable<number>;
-    multiply?: Nullable<number>;
-    set?: Nullable<number>;
 }
 
 export class NullableStringFieldUpdateOperationsInput {
@@ -10419,778 +5459,6 @@ export class PaymentMethodWhereUniqueInput {
     id?: Nullable<string>;
 }
 
-export class QuestionCreateInput {
-    answers?: Nullable<AnswerCreateNestedManyWithoutQuestionInput>;
-    attachments?: Nullable<AttachmentCreateNestedManyWithoutQuestionInput>;
-    createdAt?: Nullable<DateTime>;
-    grade: GradeCreateNestedOneWithoutQuestionsInput;
-    id?: Nullable<string>;
-    instruction?: Nullable<string>;
-    question: string;
-    questionNumber: number;
-    questionType?: Nullable<QuestionType>;
-    updatedAt?: Nullable<DateTime>;
-    weight?: Nullable<number>;
-}
-
-export class QuestionCreateManyGradeInput {
-    createdAt?: Nullable<DateTime>;
-    id?: Nullable<string>;
-    instruction?: Nullable<string>;
-    question: string;
-    questionNumber: number;
-    questionType?: Nullable<QuestionType>;
-    updatedAt?: Nullable<DateTime>;
-    weight?: Nullable<number>;
-}
-
-export class QuestionCreateManyGradeInputEnvelope {
-    data: QuestionCreateManyGradeInput[];
-    skipDuplicates?: Nullable<boolean>;
-}
-
-export class QuestionCreateManyInput {
-    createdAt?: Nullable<DateTime>;
-    gradeId: string;
-    id?: Nullable<string>;
-    instruction?: Nullable<string>;
-    question: string;
-    questionNumber: number;
-    questionType?: Nullable<QuestionType>;
-    updatedAt?: Nullable<DateTime>;
-    weight?: Nullable<number>;
-}
-
-export class QuestionCreateNestedManyWithoutGradeInput {
-    connect?: Nullable<QuestionWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<QuestionCreateOrConnectWithoutGradeInput[]>;
-    create?: Nullable<QuestionCreateWithoutGradeInput[]>;
-    createMany?: Nullable<QuestionCreateManyGradeInputEnvelope>;
-}
-
-export class QuestionCreateNestedOneWithoutAnswersInput {
-    connect?: Nullable<QuestionWhereUniqueInput>;
-    connectOrCreate?: Nullable<QuestionCreateOrConnectWithoutAnswersInput>;
-    create?: Nullable<QuestionUncheckedCreateWithoutAnswersInput>;
-}
-
-export class QuestionCreateNestedOneWithoutAttachmentsInput {
-    connect?: Nullable<QuestionWhereUniqueInput>;
-    connectOrCreate?: Nullable<QuestionCreateOrConnectWithoutAttachmentsInput>;
-    create?: Nullable<QuestionUncheckedCreateWithoutAttachmentsInput>;
-}
-
-export class QuestionCreateOrConnectWithoutAnswersInput {
-    create: QuestionUncheckedCreateWithoutAnswersInput;
-    where: QuestionWhereUniqueInput;
-}
-
-export class QuestionCreateOrConnectWithoutAttachmentsInput {
-    create: QuestionUncheckedCreateWithoutAttachmentsInput;
-    where: QuestionWhereUniqueInput;
-}
-
-export class QuestionCreateOrConnectWithoutGradeInput {
-    create: QuestionUncheckedCreateWithoutGradeInput;
-    where: QuestionWhereUniqueInput;
-}
-
-export class QuestionCreateWithoutAnswersInput {
-    attachments?: Nullable<AttachmentCreateNestedManyWithoutQuestionInput>;
-    createdAt?: Nullable<DateTime>;
-    grade: GradeCreateNestedOneWithoutQuestionsInput;
-    id?: Nullable<string>;
-    instruction?: Nullable<string>;
-    question: string;
-    questionNumber: number;
-    questionType?: Nullable<QuestionType>;
-    updatedAt?: Nullable<DateTime>;
-    weight?: Nullable<number>;
-}
-
-export class QuestionCreateWithoutAttachmentsInput {
-    answers?: Nullable<AnswerCreateNestedManyWithoutQuestionInput>;
-    createdAt?: Nullable<DateTime>;
-    grade: GradeCreateNestedOneWithoutQuestionsInput;
-    id?: Nullable<string>;
-    instruction?: Nullable<string>;
-    question: string;
-    questionNumber: number;
-    questionType?: Nullable<QuestionType>;
-    updatedAt?: Nullable<DateTime>;
-    weight?: Nullable<number>;
-}
-
-export class QuestionCreateWithoutGradeInput {
-    answers?: Nullable<AnswerCreateNestedManyWithoutQuestionInput>;
-    attachments?: Nullable<AttachmentCreateNestedManyWithoutQuestionInput>;
-    createdAt?: Nullable<DateTime>;
-    id?: Nullable<string>;
-    instruction?: Nullable<string>;
-    question: string;
-    questionNumber: number;
-    questionType?: Nullable<QuestionType>;
-    updatedAt?: Nullable<DateTime>;
-    weight?: Nullable<number>;
-}
-
-export class QuestionListRelationFilter {
-    every?: Nullable<QuestionWhereInput>;
-    none?: Nullable<QuestionWhereInput>;
-    some?: Nullable<QuestionWhereInput>;
-}
-
-export class QuestionOrderByInput {
-    createdAt?: Nullable<SortOrder>;
-    gradeId?: Nullable<SortOrder>;
-    id?: Nullable<SortOrder>;
-    instruction?: Nullable<SortOrder>;
-    question?: Nullable<SortOrder>;
-    questionNumber?: Nullable<SortOrder>;
-    questionType?: Nullable<SortOrder>;
-    updatedAt?: Nullable<SortOrder>;
-    weight?: Nullable<SortOrder>;
-}
-
-export class QuestionRelationFilter {
-    is?: Nullable<QuestionWhereInput>;
-    isNot?: Nullable<QuestionWhereInput>;
-}
-
-export class QuestionScalarWhereInput {
-    AND?: Nullable<QuestionScalarWhereInput[]>;
-    NOT?: Nullable<QuestionScalarWhereInput[]>;
-    OR?: Nullable<QuestionScalarWhereInput[]>;
-    createdAt?: Nullable<DateTimeFilter>;
-    gradeId?: Nullable<StringFilter>;
-    id?: Nullable<StringFilter>;
-    instruction?: Nullable<StringNullableFilter>;
-    question?: Nullable<StringFilter>;
-    questionNumber?: Nullable<IntFilter>;
-    questionType?: Nullable<EnumQuestionTypeFilter>;
-    updatedAt?: Nullable<DateTimeFilter>;
-    weight?: Nullable<FloatFilter>;
-}
-
-export class QuestionScalarWhereWithAggregatesInput {
-    AND?: Nullable<QuestionScalarWhereWithAggregatesInput[]>;
-    NOT?: Nullable<QuestionScalarWhereWithAggregatesInput[]>;
-    OR?: Nullable<QuestionScalarWhereWithAggregatesInput[]>;
-    createdAt?: Nullable<DateTimeWithAggregatesFilter>;
-    gradeId?: Nullable<StringWithAggregatesFilter>;
-    id?: Nullable<StringWithAggregatesFilter>;
-    instruction?: Nullable<StringNullableWithAggregatesFilter>;
-    question?: Nullable<StringWithAggregatesFilter>;
-    questionNumber?: Nullable<IntWithAggregatesFilter>;
-    questionType?: Nullable<EnumQuestionTypeWithAggregatesFilter>;
-    updatedAt?: Nullable<DateTimeWithAggregatesFilter>;
-    weight?: Nullable<FloatWithAggregatesFilter>;
-}
-
-export class QuestionUncheckedCreateInput {
-    answers?: Nullable<AnswerUncheckedCreateNestedManyWithoutQuestionInput>;
-    attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutQuestionInput>;
-    createdAt?: Nullable<DateTime>;
-    gradeId: string;
-    id?: Nullable<string>;
-    instruction?: Nullable<string>;
-    question: string;
-    questionNumber: number;
-    questionType?: Nullable<QuestionType>;
-    updatedAt?: Nullable<DateTime>;
-    weight?: Nullable<number>;
-}
-
-export class QuestionUncheckedCreateNestedManyWithoutGradeInput {
-    connect?: Nullable<QuestionWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<QuestionCreateOrConnectWithoutGradeInput[]>;
-    create?: Nullable<QuestionCreateWithoutGradeInput[]>;
-    createMany?: Nullable<QuestionCreateManyGradeInputEnvelope>;
-}
-
-export class QuestionUncheckedCreateWithoutAnswersInput {
-    attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutQuestionInput>;
-    createdAt?: Nullable<DateTime>;
-    gradeId: string;
-    id?: Nullable<string>;
-    instruction?: Nullable<string>;
-    question: string;
-    questionNumber: number;
-    questionType?: Nullable<QuestionType>;
-    updatedAt?: Nullable<DateTime>;
-    weight?: Nullable<number>;
-}
-
-export class QuestionUncheckedCreateWithoutAttachmentsInput {
-    answers?: Nullable<AnswerUncheckedCreateNestedManyWithoutQuestionInput>;
-    createdAt?: Nullable<DateTime>;
-    gradeId: string;
-    id?: Nullable<string>;
-    instruction?: Nullable<string>;
-    question: string;
-    questionNumber: number;
-    questionType?: Nullable<QuestionType>;
-    updatedAt?: Nullable<DateTime>;
-    weight?: Nullable<number>;
-}
-
-export class QuestionUncheckedCreateWithoutGradeInput {
-    answers?: Nullable<AnswerUncheckedCreateNestedManyWithoutQuestionInput>;
-    attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutQuestionInput>;
-    createdAt?: Nullable<DateTime>;
-    id?: Nullable<string>;
-    instruction?: Nullable<string>;
-    question: string;
-    questionNumber: number;
-    questionType?: Nullable<QuestionType>;
-    updatedAt?: Nullable<DateTime>;
-    weight?: Nullable<number>;
-}
-
-export class QuestionUncheckedUpdateInput {
-    answers?: Nullable<AnswerUncheckedUpdateManyWithoutQuestionInput>;
-    attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutQuestionInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    gradeId?: Nullable<StringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    instruction?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    question?: Nullable<StringFieldUpdateOperationsInput>;
-    questionNumber?: Nullable<IntFieldUpdateOperationsInput>;
-    questionType?: Nullable<EnumQuestionTypeFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    weight?: Nullable<FloatFieldUpdateOperationsInput>;
-}
-
-export class QuestionUncheckedUpdateManyInput {
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    gradeId?: Nullable<StringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    instruction?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    question?: Nullable<StringFieldUpdateOperationsInput>;
-    questionNumber?: Nullable<IntFieldUpdateOperationsInput>;
-    questionType?: Nullable<EnumQuestionTypeFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    weight?: Nullable<FloatFieldUpdateOperationsInput>;
-}
-
-export class QuestionUncheckedUpdateManyWithoutGradeInput {
-    connect?: Nullable<QuestionWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<QuestionCreateOrConnectWithoutGradeInput[]>;
-    create?: Nullable<QuestionCreateWithoutGradeInput[]>;
-    createMany?: Nullable<QuestionCreateManyGradeInputEnvelope>;
-    delete?: Nullable<QuestionWhereUniqueInput[]>;
-    deleteMany?: Nullable<QuestionScalarWhereInput[]>;
-    disconnect?: Nullable<QuestionWhereUniqueInput[]>;
-    set?: Nullable<QuestionWhereUniqueInput[]>;
-    update?: Nullable<QuestionUpdateWithWhereUniqueWithoutGradeInput[]>;
-    updateMany?: Nullable<QuestionUpdateManyWithWhereWithoutGradeInput[]>;
-    upsert?: Nullable<QuestionUpsertWithWhereUniqueWithoutGradeInput[]>;
-}
-
-export class QuestionUncheckedUpdateManyWithoutQuestionsInput {
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    instruction?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    question?: Nullable<StringFieldUpdateOperationsInput>;
-    questionNumber?: Nullable<IntFieldUpdateOperationsInput>;
-    questionType?: Nullable<EnumQuestionTypeFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    weight?: Nullable<FloatFieldUpdateOperationsInput>;
-}
-
-export class QuestionUncheckedUpdateWithoutAnswersInput {
-    attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutQuestionInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    gradeId?: Nullable<StringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    instruction?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    question?: Nullable<StringFieldUpdateOperationsInput>;
-    questionNumber?: Nullable<IntFieldUpdateOperationsInput>;
-    questionType?: Nullable<EnumQuestionTypeFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    weight?: Nullable<FloatFieldUpdateOperationsInput>;
-}
-
-export class QuestionUncheckedUpdateWithoutAttachmentsInput {
-    answers?: Nullable<AnswerUncheckedUpdateManyWithoutQuestionInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    gradeId?: Nullable<StringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    instruction?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    question?: Nullable<StringFieldUpdateOperationsInput>;
-    questionNumber?: Nullable<IntFieldUpdateOperationsInput>;
-    questionType?: Nullable<EnumQuestionTypeFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    weight?: Nullable<FloatFieldUpdateOperationsInput>;
-}
-
-export class QuestionUncheckedUpdateWithoutGradeInput {
-    answers?: Nullable<AnswerUncheckedUpdateManyWithoutQuestionInput>;
-    attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutQuestionInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    instruction?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    question?: Nullable<StringFieldUpdateOperationsInput>;
-    questionNumber?: Nullable<IntFieldUpdateOperationsInput>;
-    questionType?: Nullable<EnumQuestionTypeFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    weight?: Nullable<FloatFieldUpdateOperationsInput>;
-}
-
-export class QuestionUpdateInput {
-    answers?: Nullable<AnswerUpdateManyWithoutQuestionInput>;
-    attachments?: Nullable<AttachmentUpdateManyWithoutQuestionInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    grade?: Nullable<GradeUpdateOneRequiredWithoutQuestionsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    instruction?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    question?: Nullable<StringFieldUpdateOperationsInput>;
-    questionNumber?: Nullable<IntFieldUpdateOperationsInput>;
-    questionType?: Nullable<EnumQuestionTypeFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    weight?: Nullable<FloatFieldUpdateOperationsInput>;
-}
-
-export class QuestionUpdateManyMutationInput {
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    instruction?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    question?: Nullable<StringFieldUpdateOperationsInput>;
-    questionNumber?: Nullable<IntFieldUpdateOperationsInput>;
-    questionType?: Nullable<EnumQuestionTypeFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    weight?: Nullable<FloatFieldUpdateOperationsInput>;
-}
-
-export class QuestionUpdateManyWithWhereWithoutGradeInput {
-    data: QuestionUncheckedUpdateManyWithoutQuestionsInput;
-    where: QuestionScalarWhereInput;
-}
-
-export class QuestionUpdateManyWithoutGradeInput {
-    connect?: Nullable<QuestionWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<QuestionCreateOrConnectWithoutGradeInput[]>;
-    create?: Nullable<QuestionCreateWithoutGradeInput[]>;
-    createMany?: Nullable<QuestionCreateManyGradeInputEnvelope>;
-    delete?: Nullable<QuestionWhereUniqueInput[]>;
-    deleteMany?: Nullable<QuestionScalarWhereInput[]>;
-    disconnect?: Nullable<QuestionWhereUniqueInput[]>;
-    set?: Nullable<QuestionWhereUniqueInput[]>;
-    update?: Nullable<QuestionUpdateWithWhereUniqueWithoutGradeInput[]>;
-    updateMany?: Nullable<QuestionUpdateManyWithWhereWithoutGradeInput[]>;
-    upsert?: Nullable<QuestionUpsertWithWhereUniqueWithoutGradeInput[]>;
-}
-
-export class QuestionUpdateOneRequiredWithoutAnswersInput {
-    connect?: Nullable<QuestionWhereUniqueInput>;
-    connectOrCreate?: Nullable<QuestionCreateOrConnectWithoutAnswersInput>;
-    create?: Nullable<QuestionUncheckedCreateWithoutAnswersInput>;
-    update?: Nullable<QuestionUncheckedUpdateWithoutAnswersInput>;
-    upsert?: Nullable<QuestionUpsertWithoutAnswersInput>;
-}
-
-export class QuestionUpdateOneWithoutAttachmentsInput {
-    connect?: Nullable<QuestionWhereUniqueInput>;
-    connectOrCreate?: Nullable<QuestionCreateOrConnectWithoutAttachmentsInput>;
-    create?: Nullable<QuestionUncheckedCreateWithoutAttachmentsInput>;
-    delete?: Nullable<boolean>;
-    disconnect?: Nullable<boolean>;
-    update?: Nullable<QuestionUncheckedUpdateWithoutAttachmentsInput>;
-    upsert?: Nullable<QuestionUpsertWithoutAttachmentsInput>;
-}
-
-export class QuestionUpdateWithWhereUniqueWithoutGradeInput {
-    data: QuestionUncheckedUpdateWithoutGradeInput;
-    where: QuestionWhereUniqueInput;
-}
-
-export class QuestionUpdateWithoutAnswersInput {
-    attachments?: Nullable<AttachmentUpdateManyWithoutQuestionInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    grade?: Nullable<GradeUpdateOneRequiredWithoutQuestionsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    instruction?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    question?: Nullable<StringFieldUpdateOperationsInput>;
-    questionNumber?: Nullable<IntFieldUpdateOperationsInput>;
-    questionType?: Nullable<EnumQuestionTypeFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    weight?: Nullable<FloatFieldUpdateOperationsInput>;
-}
-
-export class QuestionUpdateWithoutAttachmentsInput {
-    answers?: Nullable<AnswerUpdateManyWithoutQuestionInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    grade?: Nullable<GradeUpdateOneRequiredWithoutQuestionsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    instruction?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    question?: Nullable<StringFieldUpdateOperationsInput>;
-    questionNumber?: Nullable<IntFieldUpdateOperationsInput>;
-    questionType?: Nullable<EnumQuestionTypeFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    weight?: Nullable<FloatFieldUpdateOperationsInput>;
-}
-
-export class QuestionUpdateWithoutGradeInput {
-    answers?: Nullable<AnswerUpdateManyWithoutQuestionInput>;
-    attachments?: Nullable<AttachmentUpdateManyWithoutQuestionInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    instruction?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    question?: Nullable<StringFieldUpdateOperationsInput>;
-    questionNumber?: Nullable<IntFieldUpdateOperationsInput>;
-    questionType?: Nullable<EnumQuestionTypeFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    weight?: Nullable<FloatFieldUpdateOperationsInput>;
-}
-
-export class QuestionUpsertWithWhereUniqueWithoutGradeInput {
-    create: QuestionUncheckedCreateWithoutGradeInput;
-    update: QuestionUncheckedUpdateWithoutGradeInput;
-    where: QuestionWhereUniqueInput;
-}
-
-export class QuestionUpsertWithoutAnswersInput {
-    create: QuestionUncheckedCreateWithoutAnswersInput;
-    update: QuestionUncheckedUpdateWithoutAnswersInput;
-}
-
-export class QuestionUpsertWithoutAttachmentsInput {
-    create: QuestionUncheckedCreateWithoutAttachmentsInput;
-    update: QuestionUncheckedUpdateWithoutAttachmentsInput;
-}
-
-export class QuestionWhereInput {
-    AND?: Nullable<QuestionWhereInput[]>;
-    NOT?: Nullable<QuestionWhereInput[]>;
-    OR?: Nullable<QuestionWhereInput[]>;
-    answers?: Nullable<AnswerListRelationFilter>;
-    attachments?: Nullable<AttachmentListRelationFilter>;
-    createdAt?: Nullable<DateTimeFilter>;
-    grade?: Nullable<GradeWhereInput>;
-    gradeId?: Nullable<StringFilter>;
-    id?: Nullable<StringFilter>;
-    instruction?: Nullable<StringNullableFilter>;
-    question?: Nullable<StringFilter>;
-    questionNumber?: Nullable<IntFilter>;
-    questionType?: Nullable<EnumQuestionTypeFilter>;
-    updatedAt?: Nullable<DateTimeFilter>;
-    weight?: Nullable<FloatFilter>;
-}
-
-export class QuestionWhereUniqueInput {
-    id?: Nullable<string>;
-}
-
-export class RecommendationCreateInput {
-    attachments?: Nullable<AttachmentCreateNestedManyWithoutRecommendationInput>;
-    content: string;
-    createdAt?: Nullable<DateTime>;
-    grade?: Nullable<GradeCreateNestedOneWithoutRecommendationsInput>;
-    id?: Nullable<string>;
-    type?: Nullable<RecommendationType>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class RecommendationCreateManyGradeInput {
-    content: string;
-    createdAt?: Nullable<DateTime>;
-    id?: Nullable<string>;
-    type?: Nullable<RecommendationType>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class RecommendationCreateManyGradeInputEnvelope {
-    data: RecommendationCreateManyGradeInput[];
-    skipDuplicates?: Nullable<boolean>;
-}
-
-export class RecommendationCreateManyInput {
-    content: string;
-    createdAt?: Nullable<DateTime>;
-    gradeId?: Nullable<string>;
-    id?: Nullable<string>;
-    type?: Nullable<RecommendationType>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class RecommendationCreateNestedManyWithoutGradeInput {
-    connect?: Nullable<RecommendationWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<RecommendationCreateOrConnectWithoutGradeInput[]>;
-    create?: Nullable<RecommendationCreateWithoutGradeInput[]>;
-    createMany?: Nullable<RecommendationCreateManyGradeInputEnvelope>;
-}
-
-export class RecommendationCreateNestedOneWithoutAttachmentsInput {
-    connect?: Nullable<RecommendationWhereUniqueInput>;
-    connectOrCreate?: Nullable<RecommendationCreateOrConnectWithoutAttachmentsInput>;
-    create?: Nullable<RecommendationUncheckedCreateWithoutAttachmentsInput>;
-}
-
-export class RecommendationCreateOrConnectWithoutAttachmentsInput {
-    create: RecommendationUncheckedCreateWithoutAttachmentsInput;
-    where: RecommendationWhereUniqueInput;
-}
-
-export class RecommendationCreateOrConnectWithoutGradeInput {
-    create: RecommendationUncheckedCreateWithoutGradeInput;
-    where: RecommendationWhereUniqueInput;
-}
-
-export class RecommendationCreateWithoutAttachmentsInput {
-    content: string;
-    createdAt?: Nullable<DateTime>;
-    grade?: Nullable<GradeCreateNestedOneWithoutRecommendationsInput>;
-    id?: Nullable<string>;
-    type?: Nullable<RecommendationType>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class RecommendationCreateWithoutGradeInput {
-    attachments?: Nullable<AttachmentCreateNestedManyWithoutRecommendationInput>;
-    content: string;
-    createdAt?: Nullable<DateTime>;
-    id?: Nullable<string>;
-    type?: Nullable<RecommendationType>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class RecommendationListRelationFilter {
-    every?: Nullable<RecommendationWhereInput>;
-    none?: Nullable<RecommendationWhereInput>;
-    some?: Nullable<RecommendationWhereInput>;
-}
-
-export class RecommendationOrderByInput {
-    content?: Nullable<SortOrder>;
-    createdAt?: Nullable<SortOrder>;
-    gradeId?: Nullable<SortOrder>;
-    id?: Nullable<SortOrder>;
-    type?: Nullable<SortOrder>;
-    updatedAt?: Nullable<SortOrder>;
-}
-
-export class RecommendationRelationFilter {
-    is?: Nullable<RecommendationWhereInput>;
-    isNot?: Nullable<RecommendationWhereInput>;
-}
-
-export class RecommendationScalarWhereInput {
-    AND?: Nullable<RecommendationScalarWhereInput[]>;
-    NOT?: Nullable<RecommendationScalarWhereInput[]>;
-    OR?: Nullable<RecommendationScalarWhereInput[]>;
-    content?: Nullable<StringFilter>;
-    createdAt?: Nullable<DateTimeFilter>;
-    gradeId?: Nullable<StringNullableFilter>;
-    id?: Nullable<StringFilter>;
-    type?: Nullable<EnumRecommendationTypeFilter>;
-    updatedAt?: Nullable<DateTimeFilter>;
-}
-
-export class RecommendationScalarWhereWithAggregatesInput {
-    AND?: Nullable<RecommendationScalarWhereWithAggregatesInput[]>;
-    NOT?: Nullable<RecommendationScalarWhereWithAggregatesInput[]>;
-    OR?: Nullable<RecommendationScalarWhereWithAggregatesInput[]>;
-    content?: Nullable<StringWithAggregatesFilter>;
-    createdAt?: Nullable<DateTimeWithAggregatesFilter>;
-    gradeId?: Nullable<StringNullableWithAggregatesFilter>;
-    id?: Nullable<StringWithAggregatesFilter>;
-    type?: Nullable<EnumRecommendationTypeWithAggregatesFilter>;
-    updatedAt?: Nullable<DateTimeWithAggregatesFilter>;
-}
-
-export class RecommendationUncheckedCreateInput {
-    attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutRecommendationInput>;
-    content: string;
-    createdAt?: Nullable<DateTime>;
-    gradeId?: Nullable<string>;
-    id?: Nullable<string>;
-    type?: Nullable<RecommendationType>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class RecommendationUncheckedCreateNestedManyWithoutGradeInput {
-    connect?: Nullable<RecommendationWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<RecommendationCreateOrConnectWithoutGradeInput[]>;
-    create?: Nullable<RecommendationCreateWithoutGradeInput[]>;
-    createMany?: Nullable<RecommendationCreateManyGradeInputEnvelope>;
-}
-
-export class RecommendationUncheckedCreateWithoutAttachmentsInput {
-    content: string;
-    createdAt?: Nullable<DateTime>;
-    gradeId?: Nullable<string>;
-    id?: Nullable<string>;
-    type?: Nullable<RecommendationType>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class RecommendationUncheckedCreateWithoutGradeInput {
-    attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutRecommendationInput>;
-    content: string;
-    createdAt?: Nullable<DateTime>;
-    id?: Nullable<string>;
-    type?: Nullable<RecommendationType>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class RecommendationUncheckedUpdateInput {
-    attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutRecommendationInput>;
-    content?: Nullable<StringFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    gradeId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    type?: Nullable<EnumRecommendationTypeFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class RecommendationUncheckedUpdateManyInput {
-    content?: Nullable<StringFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    gradeId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    type?: Nullable<EnumRecommendationTypeFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class RecommendationUncheckedUpdateManyWithoutGradeInput {
-    connect?: Nullable<RecommendationWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<RecommendationCreateOrConnectWithoutGradeInput[]>;
-    create?: Nullable<RecommendationCreateWithoutGradeInput[]>;
-    createMany?: Nullable<RecommendationCreateManyGradeInputEnvelope>;
-    delete?: Nullable<RecommendationWhereUniqueInput[]>;
-    deleteMany?: Nullable<RecommendationScalarWhereInput[]>;
-    disconnect?: Nullable<RecommendationWhereUniqueInput[]>;
-    set?: Nullable<RecommendationWhereUniqueInput[]>;
-    update?: Nullable<RecommendationUpdateWithWhereUniqueWithoutGradeInput[]>;
-    updateMany?: Nullable<RecommendationUpdateManyWithWhereWithoutGradeInput[]>;
-    upsert?: Nullable<RecommendationUpsertWithWhereUniqueWithoutGradeInput[]>;
-}
-
-export class RecommendationUncheckedUpdateManyWithoutRecommendationsInput {
-    content?: Nullable<StringFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    type?: Nullable<EnumRecommendationTypeFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class RecommendationUncheckedUpdateWithoutAttachmentsInput {
-    content?: Nullable<StringFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    gradeId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    type?: Nullable<EnumRecommendationTypeFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class RecommendationUncheckedUpdateWithoutGradeInput {
-    attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutRecommendationInput>;
-    content?: Nullable<StringFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    type?: Nullable<EnumRecommendationTypeFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class RecommendationUpdateInput {
-    attachments?: Nullable<AttachmentUpdateManyWithoutRecommendationInput>;
-    content?: Nullable<StringFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    grade?: Nullable<GradeUpdateOneWithoutRecommendationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    type?: Nullable<EnumRecommendationTypeFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class RecommendationUpdateManyMutationInput {
-    content?: Nullable<StringFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    type?: Nullable<EnumRecommendationTypeFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class RecommendationUpdateManyWithWhereWithoutGradeInput {
-    data: RecommendationUncheckedUpdateManyWithoutRecommendationsInput;
-    where: RecommendationScalarWhereInput;
-}
-
-export class RecommendationUpdateManyWithoutGradeInput {
-    connect?: Nullable<RecommendationWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<RecommendationCreateOrConnectWithoutGradeInput[]>;
-    create?: Nullable<RecommendationCreateWithoutGradeInput[]>;
-    createMany?: Nullable<RecommendationCreateManyGradeInputEnvelope>;
-    delete?: Nullable<RecommendationWhereUniqueInput[]>;
-    deleteMany?: Nullable<RecommendationScalarWhereInput[]>;
-    disconnect?: Nullable<RecommendationWhereUniqueInput[]>;
-    set?: Nullable<RecommendationWhereUniqueInput[]>;
-    update?: Nullable<RecommendationUpdateWithWhereUniqueWithoutGradeInput[]>;
-    updateMany?: Nullable<RecommendationUpdateManyWithWhereWithoutGradeInput[]>;
-    upsert?: Nullable<RecommendationUpsertWithWhereUniqueWithoutGradeInput[]>;
-}
-
-export class RecommendationUpdateOneWithoutAttachmentsInput {
-    connect?: Nullable<RecommendationWhereUniqueInput>;
-    connectOrCreate?: Nullable<RecommendationCreateOrConnectWithoutAttachmentsInput>;
-    create?: Nullable<RecommendationUncheckedCreateWithoutAttachmentsInput>;
-    delete?: Nullable<boolean>;
-    disconnect?: Nullable<boolean>;
-    update?: Nullable<RecommendationUncheckedUpdateWithoutAttachmentsInput>;
-    upsert?: Nullable<RecommendationUpsertWithoutAttachmentsInput>;
-}
-
-export class RecommendationUpdateWithWhereUniqueWithoutGradeInput {
-    data: RecommendationUncheckedUpdateWithoutGradeInput;
-    where: RecommendationWhereUniqueInput;
-}
-
-export class RecommendationUpdateWithoutAttachmentsInput {
-    content?: Nullable<StringFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    grade?: Nullable<GradeUpdateOneWithoutRecommendationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    type?: Nullable<EnumRecommendationTypeFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class RecommendationUpdateWithoutGradeInput {
-    attachments?: Nullable<AttachmentUpdateManyWithoutRecommendationInput>;
-    content?: Nullable<StringFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    type?: Nullable<EnumRecommendationTypeFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class RecommendationUpsertWithWhereUniqueWithoutGradeInput {
-    create: RecommendationUncheckedCreateWithoutGradeInput;
-    update: RecommendationUncheckedUpdateWithoutGradeInput;
-    where: RecommendationWhereUniqueInput;
-}
-
-export class RecommendationUpsertWithoutAttachmentsInput {
-    create: RecommendationUncheckedCreateWithoutAttachmentsInput;
-    update: RecommendationUncheckedUpdateWithoutAttachmentsInput;
-}
-
-export class RecommendationWhereInput {
-    AND?: Nullable<RecommendationWhereInput[]>;
-    NOT?: Nullable<RecommendationWhereInput[]>;
-    OR?: Nullable<RecommendationWhereInput[]>;
-    attachments?: Nullable<AttachmentListRelationFilter>;
-    content?: Nullable<StringFilter>;
-    createdAt?: Nullable<DateTimeFilter>;
-    grade?: Nullable<GradeWhereInput>;
-    gradeId?: Nullable<StringNullableFilter>;
-    id?: Nullable<StringFilter>;
-    type?: Nullable<EnumRecommendationTypeFilter>;
-    updatedAt?: Nullable<DateTimeFilter>;
-}
-
-export class RecommendationWhereUniqueInput {
-    id?: Nullable<string>;
-}
-
 export class RegisterDeviceInput {
     fcm_id?: Nullable<string>;
     id: string;
@@ -11198,657 +5466,487 @@ export class RegisterDeviceInput {
     userId?: Nullable<string>;
 }
 
-export class ResponseCreateInput {
-    answers?: Nullable<AnswerCreateNestedManyWithoutResponseInput>;
-    attachments?: Nullable<AttachmentCreateNestedManyWithoutResponseInput>;
-    author?: Nullable<UserCreateNestedOneWithoutResponsesInput>;
+export class ReviewCreateInput {
+    author: UserCreateNestedOneWithoutReviewsInput;
+    comments?: Nullable<CommentCreateNestedManyWithoutReviewInput>;
+    content?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
-    form: FormCreateNestedOneWithoutResponsesInput;
-    grade: GradeCreateNestedOneWithoutResponsesInput;
     id?: Nullable<string>;
+    reviewee: UserCreateNestedOneWithoutReviewedInput;
     state?: Nullable<State>;
     updatedAt?: Nullable<DateTime>;
+    value?: Nullable<number>;
 }
 
-export class ResponseCreateManyAuthorInput {
+export class ReviewCreateManyAuthorInput {
+    content?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
-    formId: string;
-    gradeId: string;
     id?: Nullable<string>;
+    revieweeId: string;
     state?: Nullable<State>;
     updatedAt?: Nullable<DateTime>;
+    value?: Nullable<number>;
 }
 
-export class ResponseCreateManyAuthorInputEnvelope {
-    data: ResponseCreateManyAuthorInput[];
+export class ReviewCreateManyAuthorInputEnvelope {
+    data: ReviewCreateManyAuthorInput[];
     skipDuplicates?: Nullable<boolean>;
 }
 
-export class ResponseCreateManyFormInput {
-    authorId?: Nullable<string>;
+export class ReviewCreateManyInput {
+    authorId: string;
+    content?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
-    gradeId: string;
+    id?: Nullable<string>;
+    revieweeId: string;
+    state?: Nullable<State>;
+    updatedAt?: Nullable<DateTime>;
+    value?: Nullable<number>;
+}
+
+export class ReviewCreateManyRevieweeInput {
+    authorId: string;
+    content?: Nullable<string>;
+    createdAt?: Nullable<DateTime>;
     id?: Nullable<string>;
     state?: Nullable<State>;
     updatedAt?: Nullable<DateTime>;
+    value?: Nullable<number>;
 }
 
-export class ResponseCreateManyFormInputEnvelope {
-    data: ResponseCreateManyFormInput[];
+export class ReviewCreateManyRevieweeInputEnvelope {
+    data: ReviewCreateManyRevieweeInput[];
     skipDuplicates?: Nullable<boolean>;
 }
 
-export class ResponseCreateManyGradeInput {
-    authorId?: Nullable<string>;
+export class ReviewCreateNestedManyWithoutAuthorInput {
+    connect?: Nullable<ReviewWhereUniqueInput[]>;
+    connectOrCreate?: Nullable<ReviewCreateOrConnectWithoutAuthorInput[]>;
+    create?: Nullable<ReviewCreateWithoutAuthorInput[]>;
+    createMany?: Nullable<ReviewCreateManyAuthorInputEnvelope>;
+}
+
+export class ReviewCreateNestedManyWithoutRevieweeInput {
+    connect?: Nullable<ReviewWhereUniqueInput[]>;
+    connectOrCreate?: Nullable<ReviewCreateOrConnectWithoutRevieweeInput[]>;
+    create?: Nullable<ReviewCreateWithoutRevieweeInput[]>;
+    createMany?: Nullable<ReviewCreateManyRevieweeInputEnvelope>;
+}
+
+export class ReviewCreateNestedOneWithoutCommentsInput {
+    connect?: Nullable<ReviewWhereUniqueInput>;
+    connectOrCreate?: Nullable<ReviewCreateOrConnectWithoutCommentsInput>;
+    create?: Nullable<ReviewUncheckedCreateWithoutCommentsInput>;
+}
+
+export class ReviewCreateOrConnectWithoutAuthorInput {
+    create: ReviewUncheckedCreateWithoutAuthorInput;
+    where: ReviewWhereUniqueInput;
+}
+
+export class ReviewCreateOrConnectWithoutCommentsInput {
+    create: ReviewUncheckedCreateWithoutCommentsInput;
+    where: ReviewWhereUniqueInput;
+}
+
+export class ReviewCreateOrConnectWithoutRevieweeInput {
+    create: ReviewUncheckedCreateWithoutRevieweeInput;
+    where: ReviewWhereUniqueInput;
+}
+
+export class ReviewCreateWithoutAuthorInput {
+    comments?: Nullable<CommentCreateNestedManyWithoutReviewInput>;
+    content?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
-    formId: string;
+    id?: Nullable<string>;
+    reviewee: UserCreateNestedOneWithoutReviewedInput;
+    state?: Nullable<State>;
+    updatedAt?: Nullable<DateTime>;
+    value?: Nullable<number>;
+}
+
+export class ReviewCreateWithoutCommentsInput {
+    author: UserCreateNestedOneWithoutReviewsInput;
+    content?: Nullable<string>;
+    createdAt?: Nullable<DateTime>;
+    id?: Nullable<string>;
+    reviewee: UserCreateNestedOneWithoutReviewedInput;
+    state?: Nullable<State>;
+    updatedAt?: Nullable<DateTime>;
+    value?: Nullable<number>;
+}
+
+export class ReviewCreateWithoutRevieweeInput {
+    author: UserCreateNestedOneWithoutReviewsInput;
+    comments?: Nullable<CommentCreateNestedManyWithoutReviewInput>;
+    content?: Nullable<string>;
+    createdAt?: Nullable<DateTime>;
     id?: Nullable<string>;
     state?: Nullable<State>;
     updatedAt?: Nullable<DateTime>;
+    value?: Nullable<number>;
 }
 
-export class ResponseCreateManyGradeInputEnvelope {
-    data: ResponseCreateManyGradeInput[];
-    skipDuplicates?: Nullable<boolean>;
+export class ReviewListRelationFilter {
+    every?: Nullable<ReviewWhereInput>;
+    none?: Nullable<ReviewWhereInput>;
+    some?: Nullable<ReviewWhereInput>;
 }
 
-export class ResponseCreateManyInput {
-    authorId?: Nullable<string>;
-    createdAt?: Nullable<DateTime>;
-    formId: string;
-    gradeId: string;
-    id?: Nullable<string>;
-    state?: Nullable<State>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class ResponseCreateNestedManyWithoutAuthorInput {
-    connect?: Nullable<ResponseWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<ResponseCreateOrConnectWithoutAuthorInput[]>;
-    create?: Nullable<ResponseCreateWithoutAuthorInput[]>;
-    createMany?: Nullable<ResponseCreateManyAuthorInputEnvelope>;
-}
-
-export class ResponseCreateNestedManyWithoutFormInput {
-    connect?: Nullable<ResponseWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<ResponseCreateOrConnectWithoutFormInput[]>;
-    create?: Nullable<ResponseCreateWithoutFormInput[]>;
-    createMany?: Nullable<ResponseCreateManyFormInputEnvelope>;
-}
-
-export class ResponseCreateNestedManyWithoutGradeInput {
-    connect?: Nullable<ResponseWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<ResponseCreateOrConnectWithoutGradeInput[]>;
-    create?: Nullable<ResponseCreateWithoutGradeInput[]>;
-    createMany?: Nullable<ResponseCreateManyGradeInputEnvelope>;
-}
-
-export class ResponseCreateNestedOneWithoutAnswersInput {
-    connect?: Nullable<ResponseWhereUniqueInput>;
-    connectOrCreate?: Nullable<ResponseCreateOrConnectWithoutAnswersInput>;
-    create?: Nullable<ResponseUncheckedCreateWithoutAnswersInput>;
-}
-
-export class ResponseCreateNestedOneWithoutAttachmentsInput {
-    connect?: Nullable<ResponseWhereUniqueInput>;
-    connectOrCreate?: Nullable<ResponseCreateOrConnectWithoutAttachmentsInput>;
-    create?: Nullable<ResponseUncheckedCreateWithoutAttachmentsInput>;
-}
-
-export class ResponseCreateOrConnectWithoutAnswersInput {
-    create: ResponseUncheckedCreateWithoutAnswersInput;
-    where: ResponseWhereUniqueInput;
-}
-
-export class ResponseCreateOrConnectWithoutAttachmentsInput {
-    create: ResponseUncheckedCreateWithoutAttachmentsInput;
-    where: ResponseWhereUniqueInput;
-}
-
-export class ResponseCreateOrConnectWithoutAuthorInput {
-    create: ResponseUncheckedCreateWithoutAuthorInput;
-    where: ResponseWhereUniqueInput;
-}
-
-export class ResponseCreateOrConnectWithoutFormInput {
-    create: ResponseUncheckedCreateWithoutFormInput;
-    where: ResponseWhereUniqueInput;
-}
-
-export class ResponseCreateOrConnectWithoutGradeInput {
-    create: ResponseUncheckedCreateWithoutGradeInput;
-    where: ResponseWhereUniqueInput;
-}
-
-export class ResponseCreateWithoutAnswersInput {
-    attachments?: Nullable<AttachmentCreateNestedManyWithoutResponseInput>;
-    author?: Nullable<UserCreateNestedOneWithoutResponsesInput>;
-    createdAt?: Nullable<DateTime>;
-    form: FormCreateNestedOneWithoutResponsesInput;
-    grade: GradeCreateNestedOneWithoutResponsesInput;
-    id?: Nullable<string>;
-    state?: Nullable<State>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class ResponseCreateWithoutAttachmentsInput {
-    answers?: Nullable<AnswerCreateNestedManyWithoutResponseInput>;
-    author?: Nullable<UserCreateNestedOneWithoutResponsesInput>;
-    createdAt?: Nullable<DateTime>;
-    form: FormCreateNestedOneWithoutResponsesInput;
-    grade: GradeCreateNestedOneWithoutResponsesInput;
-    id?: Nullable<string>;
-    state?: Nullable<State>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class ResponseCreateWithoutAuthorInput {
-    answers?: Nullable<AnswerCreateNestedManyWithoutResponseInput>;
-    attachments?: Nullable<AttachmentCreateNestedManyWithoutResponseInput>;
-    createdAt?: Nullable<DateTime>;
-    form: FormCreateNestedOneWithoutResponsesInput;
-    grade: GradeCreateNestedOneWithoutResponsesInput;
-    id?: Nullable<string>;
-    state?: Nullable<State>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class ResponseCreateWithoutFormInput {
-    answers?: Nullable<AnswerCreateNestedManyWithoutResponseInput>;
-    attachments?: Nullable<AttachmentCreateNestedManyWithoutResponseInput>;
-    author?: Nullable<UserCreateNestedOneWithoutResponsesInput>;
-    createdAt?: Nullable<DateTime>;
-    grade: GradeCreateNestedOneWithoutResponsesInput;
-    id?: Nullable<string>;
-    state?: Nullable<State>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class ResponseCreateWithoutGradeInput {
-    answers?: Nullable<AnswerCreateNestedManyWithoutResponseInput>;
-    attachments?: Nullable<AttachmentCreateNestedManyWithoutResponseInput>;
-    author?: Nullable<UserCreateNestedOneWithoutResponsesInput>;
-    createdAt?: Nullable<DateTime>;
-    form: FormCreateNestedOneWithoutResponsesInput;
-    id?: Nullable<string>;
-    state?: Nullable<State>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class ResponseListRelationFilter {
-    every?: Nullable<ResponseWhereInput>;
-    none?: Nullable<ResponseWhereInput>;
-    some?: Nullable<ResponseWhereInput>;
-}
-
-export class ResponseOrderByInput {
+export class ReviewOrderByInput {
     authorId?: Nullable<SortOrder>;
+    content?: Nullable<SortOrder>;
     createdAt?: Nullable<SortOrder>;
-    formId?: Nullable<SortOrder>;
-    gradeId?: Nullable<SortOrder>;
     id?: Nullable<SortOrder>;
+    revieweeId?: Nullable<SortOrder>;
     state?: Nullable<SortOrder>;
     updatedAt?: Nullable<SortOrder>;
+    value?: Nullable<SortOrder>;
 }
 
-export class ResponseRelationFilter {
-    is?: Nullable<ResponseWhereInput>;
-    isNot?: Nullable<ResponseWhereInput>;
+export class ReviewRelationFilter {
+    is?: Nullable<ReviewWhereInput>;
+    isNot?: Nullable<ReviewWhereInput>;
 }
 
-export class ResponseScalarWhereInput {
-    AND?: Nullable<ResponseScalarWhereInput[]>;
-    NOT?: Nullable<ResponseScalarWhereInput[]>;
-    OR?: Nullable<ResponseScalarWhereInput[]>;
-    authorId?: Nullable<StringNullableFilter>;
+export class ReviewScalarWhereInput {
+    AND?: Nullable<ReviewScalarWhereInput[]>;
+    NOT?: Nullable<ReviewScalarWhereInput[]>;
+    OR?: Nullable<ReviewScalarWhereInput[]>;
+    authorId?: Nullable<StringFilter>;
+    content?: Nullable<StringNullableFilter>;
     createdAt?: Nullable<DateTimeFilter>;
-    formId?: Nullable<StringFilter>;
-    gradeId?: Nullable<StringFilter>;
     id?: Nullable<StringFilter>;
+    revieweeId?: Nullable<StringFilter>;
     state?: Nullable<EnumStateFilter>;
     updatedAt?: Nullable<DateTimeFilter>;
+    value?: Nullable<IntFilter>;
 }
 
-export class ResponseScalarWhereWithAggregatesInput {
-    AND?: Nullable<ResponseScalarWhereWithAggregatesInput[]>;
-    NOT?: Nullable<ResponseScalarWhereWithAggregatesInput[]>;
-    OR?: Nullable<ResponseScalarWhereWithAggregatesInput[]>;
-    authorId?: Nullable<StringNullableWithAggregatesFilter>;
+export class ReviewScalarWhereWithAggregatesInput {
+    AND?: Nullable<ReviewScalarWhereWithAggregatesInput[]>;
+    NOT?: Nullable<ReviewScalarWhereWithAggregatesInput[]>;
+    OR?: Nullable<ReviewScalarWhereWithAggregatesInput[]>;
+    authorId?: Nullable<StringWithAggregatesFilter>;
+    content?: Nullable<StringNullableWithAggregatesFilter>;
     createdAt?: Nullable<DateTimeWithAggregatesFilter>;
-    formId?: Nullable<StringWithAggregatesFilter>;
-    gradeId?: Nullable<StringWithAggregatesFilter>;
     id?: Nullable<StringWithAggregatesFilter>;
+    revieweeId?: Nullable<StringWithAggregatesFilter>;
     state?: Nullable<EnumStateWithAggregatesFilter>;
     updatedAt?: Nullable<DateTimeWithAggregatesFilter>;
+    value?: Nullable<IntWithAggregatesFilter>;
 }
 
-export class ResponseUncheckedCreateInput {
-    answers?: Nullable<AnswerUncheckedCreateNestedManyWithoutResponseInput>;
-    attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutResponseInput>;
-    authorId?: Nullable<string>;
+export class ReviewUncheckedCreateInput {
+    authorId: string;
+    comments?: Nullable<CommentUncheckedCreateNestedManyWithoutReviewInput>;
+    content?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
-    formId: string;
-    gradeId: string;
+    id?: Nullable<string>;
+    revieweeId: string;
+    state?: Nullable<State>;
+    updatedAt?: Nullable<DateTime>;
+    value?: Nullable<number>;
+}
+
+export class ReviewUncheckedCreateNestedManyWithoutAuthorInput {
+    connect?: Nullable<ReviewWhereUniqueInput[]>;
+    connectOrCreate?: Nullable<ReviewCreateOrConnectWithoutAuthorInput[]>;
+    create?: Nullable<ReviewCreateWithoutAuthorInput[]>;
+    createMany?: Nullable<ReviewCreateManyAuthorInputEnvelope>;
+}
+
+export class ReviewUncheckedCreateNestedManyWithoutRevieweeInput {
+    connect?: Nullable<ReviewWhereUniqueInput[]>;
+    connectOrCreate?: Nullable<ReviewCreateOrConnectWithoutRevieweeInput[]>;
+    create?: Nullable<ReviewCreateWithoutRevieweeInput[]>;
+    createMany?: Nullable<ReviewCreateManyRevieweeInputEnvelope>;
+}
+
+export class ReviewUncheckedCreateWithoutAuthorInput {
+    comments?: Nullable<CommentUncheckedCreateNestedManyWithoutReviewInput>;
+    content?: Nullable<string>;
+    createdAt?: Nullable<DateTime>;
+    id?: Nullable<string>;
+    revieweeId: string;
+    state?: Nullable<State>;
+    updatedAt?: Nullable<DateTime>;
+    value?: Nullable<number>;
+}
+
+export class ReviewUncheckedCreateWithoutCommentsInput {
+    authorId: string;
+    content?: Nullable<string>;
+    createdAt?: Nullable<DateTime>;
+    id?: Nullable<string>;
+    revieweeId: string;
+    state?: Nullable<State>;
+    updatedAt?: Nullable<DateTime>;
+    value?: Nullable<number>;
+}
+
+export class ReviewUncheckedCreateWithoutRevieweeInput {
+    authorId: string;
+    comments?: Nullable<CommentUncheckedCreateNestedManyWithoutReviewInput>;
+    content?: Nullable<string>;
+    createdAt?: Nullable<DateTime>;
     id?: Nullable<string>;
     state?: Nullable<State>;
     updatedAt?: Nullable<DateTime>;
+    value?: Nullable<number>;
 }
 
-export class ResponseUncheckedCreateNestedManyWithoutAuthorInput {
-    connect?: Nullable<ResponseWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<ResponseCreateOrConnectWithoutAuthorInput[]>;
-    create?: Nullable<ResponseCreateWithoutAuthorInput[]>;
-    createMany?: Nullable<ResponseCreateManyAuthorInputEnvelope>;
-}
-
-export class ResponseUncheckedCreateNestedManyWithoutFormInput {
-    connect?: Nullable<ResponseWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<ResponseCreateOrConnectWithoutFormInput[]>;
-    create?: Nullable<ResponseCreateWithoutFormInput[]>;
-    createMany?: Nullable<ResponseCreateManyFormInputEnvelope>;
-}
-
-export class ResponseUncheckedCreateNestedManyWithoutGradeInput {
-    connect?: Nullable<ResponseWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<ResponseCreateOrConnectWithoutGradeInput[]>;
-    create?: Nullable<ResponseCreateWithoutGradeInput[]>;
-    createMany?: Nullable<ResponseCreateManyGradeInputEnvelope>;
-}
-
-export class ResponseUncheckedCreateWithoutAnswersInput {
-    attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutResponseInput>;
-    authorId?: Nullable<string>;
-    createdAt?: Nullable<DateTime>;
-    formId: string;
-    gradeId: string;
-    id?: Nullable<string>;
-    state?: Nullable<State>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class ResponseUncheckedCreateWithoutAttachmentsInput {
-    answers?: Nullable<AnswerUncheckedCreateNestedManyWithoutResponseInput>;
-    authorId?: Nullable<string>;
-    createdAt?: Nullable<DateTime>;
-    formId: string;
-    gradeId: string;
-    id?: Nullable<string>;
-    state?: Nullable<State>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class ResponseUncheckedCreateWithoutAuthorInput {
-    answers?: Nullable<AnswerUncheckedCreateNestedManyWithoutResponseInput>;
-    attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutResponseInput>;
-    createdAt?: Nullable<DateTime>;
-    formId: string;
-    gradeId: string;
-    id?: Nullable<string>;
-    state?: Nullable<State>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class ResponseUncheckedCreateWithoutFormInput {
-    answers?: Nullable<AnswerUncheckedCreateNestedManyWithoutResponseInput>;
-    attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutResponseInput>;
-    authorId?: Nullable<string>;
-    createdAt?: Nullable<DateTime>;
-    gradeId: string;
-    id?: Nullable<string>;
-    state?: Nullable<State>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class ResponseUncheckedCreateWithoutGradeInput {
-    answers?: Nullable<AnswerUncheckedCreateNestedManyWithoutResponseInput>;
-    attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutResponseInput>;
-    authorId?: Nullable<string>;
-    createdAt?: Nullable<DateTime>;
-    formId: string;
-    id?: Nullable<string>;
-    state?: Nullable<State>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class ResponseUncheckedUpdateInput {
-    answers?: Nullable<AnswerUncheckedUpdateManyWithoutResponseInput>;
-    attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutResponseInput>;
-    authorId?: Nullable<NullableStringFieldUpdateOperationsInput>;
+export class ReviewUncheckedUpdateInput {
+    authorId?: Nullable<StringFieldUpdateOperationsInput>;
+    comments?: Nullable<CommentUncheckedUpdateManyWithoutReviewInput>;
+    content?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    formId?: Nullable<StringFieldUpdateOperationsInput>;
-    gradeId?: Nullable<StringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
+    revieweeId?: Nullable<StringFieldUpdateOperationsInput>;
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    value?: Nullable<IntFieldUpdateOperationsInput>;
 }
 
-export class ResponseUncheckedUpdateManyInput {
-    authorId?: Nullable<NullableStringFieldUpdateOperationsInput>;
+export class ReviewUncheckedUpdateManyInput {
+    authorId?: Nullable<StringFieldUpdateOperationsInput>;
+    content?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    formId?: Nullable<StringFieldUpdateOperationsInput>;
-    gradeId?: Nullable<StringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
+    revieweeId?: Nullable<StringFieldUpdateOperationsInput>;
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    value?: Nullable<IntFieldUpdateOperationsInput>;
 }
 
-export class ResponseUncheckedUpdateManyWithoutAuthorInput {
-    connect?: Nullable<ResponseWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<ResponseCreateOrConnectWithoutAuthorInput[]>;
-    create?: Nullable<ResponseCreateWithoutAuthorInput[]>;
-    createMany?: Nullable<ResponseCreateManyAuthorInputEnvelope>;
-    delete?: Nullable<ResponseWhereUniqueInput[]>;
-    deleteMany?: Nullable<ResponseScalarWhereInput[]>;
-    disconnect?: Nullable<ResponseWhereUniqueInput[]>;
-    set?: Nullable<ResponseWhereUniqueInput[]>;
-    update?: Nullable<ResponseUpdateWithWhereUniqueWithoutAuthorInput[]>;
-    updateMany?: Nullable<ResponseUpdateManyWithWhereWithoutAuthorInput[]>;
-    upsert?: Nullable<ResponseUpsertWithWhereUniqueWithoutAuthorInput[]>;
+export class ReviewUncheckedUpdateManyWithoutAuthorInput {
+    connect?: Nullable<ReviewWhereUniqueInput[]>;
+    connectOrCreate?: Nullable<ReviewCreateOrConnectWithoutAuthorInput[]>;
+    create?: Nullable<ReviewCreateWithoutAuthorInput[]>;
+    createMany?: Nullable<ReviewCreateManyAuthorInputEnvelope>;
+    delete?: Nullable<ReviewWhereUniqueInput[]>;
+    deleteMany?: Nullable<ReviewScalarWhereInput[]>;
+    disconnect?: Nullable<ReviewWhereUniqueInput[]>;
+    set?: Nullable<ReviewWhereUniqueInput[]>;
+    update?: Nullable<ReviewUpdateWithWhereUniqueWithoutAuthorInput[]>;
+    updateMany?: Nullable<ReviewUpdateManyWithWhereWithoutAuthorInput[]>;
+    upsert?: Nullable<ReviewUpsertWithWhereUniqueWithoutAuthorInput[]>;
 }
 
-export class ResponseUncheckedUpdateManyWithoutFormInput {
-    connect?: Nullable<ResponseWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<ResponseCreateOrConnectWithoutFormInput[]>;
-    create?: Nullable<ResponseCreateWithoutFormInput[]>;
-    createMany?: Nullable<ResponseCreateManyFormInputEnvelope>;
-    delete?: Nullable<ResponseWhereUniqueInput[]>;
-    deleteMany?: Nullable<ResponseScalarWhereInput[]>;
-    disconnect?: Nullable<ResponseWhereUniqueInput[]>;
-    set?: Nullable<ResponseWhereUniqueInput[]>;
-    update?: Nullable<ResponseUpdateWithWhereUniqueWithoutFormInput[]>;
-    updateMany?: Nullable<ResponseUpdateManyWithWhereWithoutFormInput[]>;
-    upsert?: Nullable<ResponseUpsertWithWhereUniqueWithoutFormInput[]>;
-}
-
-export class ResponseUncheckedUpdateManyWithoutGradeInput {
-    connect?: Nullable<ResponseWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<ResponseCreateOrConnectWithoutGradeInput[]>;
-    create?: Nullable<ResponseCreateWithoutGradeInput[]>;
-    createMany?: Nullable<ResponseCreateManyGradeInputEnvelope>;
-    delete?: Nullable<ResponseWhereUniqueInput[]>;
-    deleteMany?: Nullable<ResponseScalarWhereInput[]>;
-    disconnect?: Nullable<ResponseWhereUniqueInput[]>;
-    set?: Nullable<ResponseWhereUniqueInput[]>;
-    update?: Nullable<ResponseUpdateWithWhereUniqueWithoutGradeInput[]>;
-    updateMany?: Nullable<ResponseUpdateManyWithWhereWithoutGradeInput[]>;
-    upsert?: Nullable<ResponseUpsertWithWhereUniqueWithoutGradeInput[]>;
-}
-
-export class ResponseUncheckedUpdateManyWithoutResponsesInput {
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    formId?: Nullable<StringFieldUpdateOperationsInput>;
-    gradeId?: Nullable<StringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class ResponseUncheckedUpdateWithoutAnswersInput {
-    attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutResponseInput>;
-    authorId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    formId?: Nullable<StringFieldUpdateOperationsInput>;
-    gradeId?: Nullable<StringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class ResponseUncheckedUpdateWithoutAttachmentsInput {
-    answers?: Nullable<AnswerUncheckedUpdateManyWithoutResponseInput>;
-    authorId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    formId?: Nullable<StringFieldUpdateOperationsInput>;
-    gradeId?: Nullable<StringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class ResponseUncheckedUpdateWithoutAuthorInput {
-    answers?: Nullable<AnswerUncheckedUpdateManyWithoutResponseInput>;
-    attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutResponseInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    formId?: Nullable<StringFieldUpdateOperationsInput>;
-    gradeId?: Nullable<StringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class ResponseUncheckedUpdateWithoutFormInput {
-    answers?: Nullable<AnswerUncheckedUpdateManyWithoutResponseInput>;
-    attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutResponseInput>;
-    authorId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    gradeId?: Nullable<StringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class ResponseUncheckedUpdateWithoutGradeInput {
-    answers?: Nullable<AnswerUncheckedUpdateManyWithoutResponseInput>;
-    attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutResponseInput>;
-    authorId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    formId?: Nullable<StringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class ResponseUpdateInput {
-    answers?: Nullable<AnswerUpdateManyWithoutResponseInput>;
-    attachments?: Nullable<AttachmentUpdateManyWithoutResponseInput>;
-    author?: Nullable<UserUpdateOneWithoutResponsesInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    form?: Nullable<FormUpdateOneRequiredWithoutResponsesInput>;
-    grade?: Nullable<GradeUpdateOneRequiredWithoutResponsesInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class ResponseUpdateManyMutationInput {
+export class ReviewUncheckedUpdateManyWithoutReviewedInput {
+    authorId?: Nullable<StringFieldUpdateOperationsInput>;
+    content?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    value?: Nullable<IntFieldUpdateOperationsInput>;
 }
 
-export class ResponseUpdateManyWithWhereWithoutAuthorInput {
-    data: ResponseUncheckedUpdateManyWithoutResponsesInput;
-    where: ResponseScalarWhereInput;
+export class ReviewUncheckedUpdateManyWithoutRevieweeInput {
+    connect?: Nullable<ReviewWhereUniqueInput[]>;
+    connectOrCreate?: Nullable<ReviewCreateOrConnectWithoutRevieweeInput[]>;
+    create?: Nullable<ReviewCreateWithoutRevieweeInput[]>;
+    createMany?: Nullable<ReviewCreateManyRevieweeInputEnvelope>;
+    delete?: Nullable<ReviewWhereUniqueInput[]>;
+    deleteMany?: Nullable<ReviewScalarWhereInput[]>;
+    disconnect?: Nullable<ReviewWhereUniqueInput[]>;
+    set?: Nullable<ReviewWhereUniqueInput[]>;
+    update?: Nullable<ReviewUpdateWithWhereUniqueWithoutRevieweeInput[]>;
+    updateMany?: Nullable<ReviewUpdateManyWithWhereWithoutRevieweeInput[]>;
+    upsert?: Nullable<ReviewUpsertWithWhereUniqueWithoutRevieweeInput[]>;
 }
 
-export class ResponseUpdateManyWithWhereWithoutFormInput {
-    data: ResponseUncheckedUpdateManyWithoutResponsesInput;
-    where: ResponseScalarWhereInput;
+export class ReviewUncheckedUpdateManyWithoutReviewsInput {
+    content?: Nullable<NullableStringFieldUpdateOperationsInput>;
+    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    id?: Nullable<StringFieldUpdateOperationsInput>;
+    revieweeId?: Nullable<StringFieldUpdateOperationsInput>;
+    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
+    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    value?: Nullable<IntFieldUpdateOperationsInput>;
 }
 
-export class ResponseUpdateManyWithWhereWithoutGradeInput {
-    data: ResponseUncheckedUpdateManyWithoutResponsesInput;
-    where: ResponseScalarWhereInput;
+export class ReviewUncheckedUpdateWithoutAuthorInput {
+    comments?: Nullable<CommentUncheckedUpdateManyWithoutReviewInput>;
+    content?: Nullable<NullableStringFieldUpdateOperationsInput>;
+    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    id?: Nullable<StringFieldUpdateOperationsInput>;
+    revieweeId?: Nullable<StringFieldUpdateOperationsInput>;
+    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
+    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    value?: Nullable<IntFieldUpdateOperationsInput>;
 }
 
-export class ResponseUpdateManyWithoutAuthorInput {
-    connect?: Nullable<ResponseWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<ResponseCreateOrConnectWithoutAuthorInput[]>;
-    create?: Nullable<ResponseCreateWithoutAuthorInput[]>;
-    createMany?: Nullable<ResponseCreateManyAuthorInputEnvelope>;
-    delete?: Nullable<ResponseWhereUniqueInput[]>;
-    deleteMany?: Nullable<ResponseScalarWhereInput[]>;
-    disconnect?: Nullable<ResponseWhereUniqueInput[]>;
-    set?: Nullable<ResponseWhereUniqueInput[]>;
-    update?: Nullable<ResponseUpdateWithWhereUniqueWithoutAuthorInput[]>;
-    updateMany?: Nullable<ResponseUpdateManyWithWhereWithoutAuthorInput[]>;
-    upsert?: Nullable<ResponseUpsertWithWhereUniqueWithoutAuthorInput[]>;
+export class ReviewUncheckedUpdateWithoutCommentsInput {
+    authorId?: Nullable<StringFieldUpdateOperationsInput>;
+    content?: Nullable<NullableStringFieldUpdateOperationsInput>;
+    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    id?: Nullable<StringFieldUpdateOperationsInput>;
+    revieweeId?: Nullable<StringFieldUpdateOperationsInput>;
+    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
+    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    value?: Nullable<IntFieldUpdateOperationsInput>;
 }
 
-export class ResponseUpdateManyWithoutFormInput {
-    connect?: Nullable<ResponseWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<ResponseCreateOrConnectWithoutFormInput[]>;
-    create?: Nullable<ResponseCreateWithoutFormInput[]>;
-    createMany?: Nullable<ResponseCreateManyFormInputEnvelope>;
-    delete?: Nullable<ResponseWhereUniqueInput[]>;
-    deleteMany?: Nullable<ResponseScalarWhereInput[]>;
-    disconnect?: Nullable<ResponseWhereUniqueInput[]>;
-    set?: Nullable<ResponseWhereUniqueInput[]>;
-    update?: Nullable<ResponseUpdateWithWhereUniqueWithoutFormInput[]>;
-    updateMany?: Nullable<ResponseUpdateManyWithWhereWithoutFormInput[]>;
-    upsert?: Nullable<ResponseUpsertWithWhereUniqueWithoutFormInput[]>;
+export class ReviewUncheckedUpdateWithoutRevieweeInput {
+    authorId?: Nullable<StringFieldUpdateOperationsInput>;
+    comments?: Nullable<CommentUncheckedUpdateManyWithoutReviewInput>;
+    content?: Nullable<NullableStringFieldUpdateOperationsInput>;
+    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    id?: Nullable<StringFieldUpdateOperationsInput>;
+    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
+    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    value?: Nullable<IntFieldUpdateOperationsInput>;
 }
 
-export class ResponseUpdateManyWithoutGradeInput {
-    connect?: Nullable<ResponseWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<ResponseCreateOrConnectWithoutGradeInput[]>;
-    create?: Nullable<ResponseCreateWithoutGradeInput[]>;
-    createMany?: Nullable<ResponseCreateManyGradeInputEnvelope>;
-    delete?: Nullable<ResponseWhereUniqueInput[]>;
-    deleteMany?: Nullable<ResponseScalarWhereInput[]>;
-    disconnect?: Nullable<ResponseWhereUniqueInput[]>;
-    set?: Nullable<ResponseWhereUniqueInput[]>;
-    update?: Nullable<ResponseUpdateWithWhereUniqueWithoutGradeInput[]>;
-    updateMany?: Nullable<ResponseUpdateManyWithWhereWithoutGradeInput[]>;
-    upsert?: Nullable<ResponseUpsertWithWhereUniqueWithoutGradeInput[]>;
+export class ReviewUpdateInput {
+    author?: Nullable<UserUpdateOneRequiredWithoutReviewsInput>;
+    comments?: Nullable<CommentUpdateManyWithoutReviewInput>;
+    content?: Nullable<NullableStringFieldUpdateOperationsInput>;
+    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    id?: Nullable<StringFieldUpdateOperationsInput>;
+    reviewee?: Nullable<UserUpdateOneRequiredWithoutReviewedInput>;
+    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
+    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    value?: Nullable<IntFieldUpdateOperationsInput>;
 }
 
-export class ResponseUpdateOneRequiredWithoutAnswersInput {
-    connect?: Nullable<ResponseWhereUniqueInput>;
-    connectOrCreate?: Nullable<ResponseCreateOrConnectWithoutAnswersInput>;
-    create?: Nullable<ResponseUncheckedCreateWithoutAnswersInput>;
-    update?: Nullable<ResponseUncheckedUpdateWithoutAnswersInput>;
-    upsert?: Nullable<ResponseUpsertWithoutAnswersInput>;
+export class ReviewUpdateManyMutationInput {
+    content?: Nullable<NullableStringFieldUpdateOperationsInput>;
+    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    id?: Nullable<StringFieldUpdateOperationsInput>;
+    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
+    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    value?: Nullable<IntFieldUpdateOperationsInput>;
 }
 
-export class ResponseUpdateOneWithoutAttachmentsInput {
-    connect?: Nullable<ResponseWhereUniqueInput>;
-    connectOrCreate?: Nullable<ResponseCreateOrConnectWithoutAttachmentsInput>;
-    create?: Nullable<ResponseUncheckedCreateWithoutAttachmentsInput>;
+export class ReviewUpdateManyWithWhereWithoutAuthorInput {
+    data: ReviewUncheckedUpdateManyWithoutReviewsInput;
+    where: ReviewScalarWhereInput;
+}
+
+export class ReviewUpdateManyWithWhereWithoutRevieweeInput {
+    data: ReviewUncheckedUpdateManyWithoutReviewedInput;
+    where: ReviewScalarWhereInput;
+}
+
+export class ReviewUpdateManyWithoutAuthorInput {
+    connect?: Nullable<ReviewWhereUniqueInput[]>;
+    connectOrCreate?: Nullable<ReviewCreateOrConnectWithoutAuthorInput[]>;
+    create?: Nullable<ReviewCreateWithoutAuthorInput[]>;
+    createMany?: Nullable<ReviewCreateManyAuthorInputEnvelope>;
+    delete?: Nullable<ReviewWhereUniqueInput[]>;
+    deleteMany?: Nullable<ReviewScalarWhereInput[]>;
+    disconnect?: Nullable<ReviewWhereUniqueInput[]>;
+    set?: Nullable<ReviewWhereUniqueInput[]>;
+    update?: Nullable<ReviewUpdateWithWhereUniqueWithoutAuthorInput[]>;
+    updateMany?: Nullable<ReviewUpdateManyWithWhereWithoutAuthorInput[]>;
+    upsert?: Nullable<ReviewUpsertWithWhereUniqueWithoutAuthorInput[]>;
+}
+
+export class ReviewUpdateManyWithoutRevieweeInput {
+    connect?: Nullable<ReviewWhereUniqueInput[]>;
+    connectOrCreate?: Nullable<ReviewCreateOrConnectWithoutRevieweeInput[]>;
+    create?: Nullable<ReviewCreateWithoutRevieweeInput[]>;
+    createMany?: Nullable<ReviewCreateManyRevieweeInputEnvelope>;
+    delete?: Nullable<ReviewWhereUniqueInput[]>;
+    deleteMany?: Nullable<ReviewScalarWhereInput[]>;
+    disconnect?: Nullable<ReviewWhereUniqueInput[]>;
+    set?: Nullable<ReviewWhereUniqueInput[]>;
+    update?: Nullable<ReviewUpdateWithWhereUniqueWithoutRevieweeInput[]>;
+    updateMany?: Nullable<ReviewUpdateManyWithWhereWithoutRevieweeInput[]>;
+    upsert?: Nullable<ReviewUpsertWithWhereUniqueWithoutRevieweeInput[]>;
+}
+
+export class ReviewUpdateOneWithoutCommentsInput {
+    connect?: Nullable<ReviewWhereUniqueInput>;
+    connectOrCreate?: Nullable<ReviewCreateOrConnectWithoutCommentsInput>;
+    create?: Nullable<ReviewUncheckedCreateWithoutCommentsInput>;
     delete?: Nullable<boolean>;
     disconnect?: Nullable<boolean>;
-    update?: Nullable<ResponseUncheckedUpdateWithoutAttachmentsInput>;
-    upsert?: Nullable<ResponseUpsertWithoutAttachmentsInput>;
+    update?: Nullable<ReviewUncheckedUpdateWithoutCommentsInput>;
+    upsert?: Nullable<ReviewUpsertWithoutCommentsInput>;
 }
 
-export class ResponseUpdateWithWhereUniqueWithoutAuthorInput {
-    data: ResponseUncheckedUpdateWithoutAuthorInput;
-    where: ResponseWhereUniqueInput;
+export class ReviewUpdateWithWhereUniqueWithoutAuthorInput {
+    data: ReviewUncheckedUpdateWithoutAuthorInput;
+    where: ReviewWhereUniqueInput;
 }
 
-export class ResponseUpdateWithWhereUniqueWithoutFormInput {
-    data: ResponseUncheckedUpdateWithoutFormInput;
-    where: ResponseWhereUniqueInput;
+export class ReviewUpdateWithWhereUniqueWithoutRevieweeInput {
+    data: ReviewUncheckedUpdateWithoutRevieweeInput;
+    where: ReviewWhereUniqueInput;
 }
 
-export class ResponseUpdateWithWhereUniqueWithoutGradeInput {
-    data: ResponseUncheckedUpdateWithoutGradeInput;
-    where: ResponseWhereUniqueInput;
-}
-
-export class ResponseUpdateWithoutAnswersInput {
-    attachments?: Nullable<AttachmentUpdateManyWithoutResponseInput>;
-    author?: Nullable<UserUpdateOneWithoutResponsesInput>;
+export class ReviewUpdateWithoutAuthorInput {
+    comments?: Nullable<CommentUpdateManyWithoutReviewInput>;
+    content?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    form?: Nullable<FormUpdateOneRequiredWithoutResponsesInput>;
-    grade?: Nullable<GradeUpdateOneRequiredWithoutResponsesInput>;
+    id?: Nullable<StringFieldUpdateOperationsInput>;
+    reviewee?: Nullable<UserUpdateOneRequiredWithoutReviewedInput>;
+    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
+    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    value?: Nullable<IntFieldUpdateOperationsInput>;
+}
+
+export class ReviewUpdateWithoutCommentsInput {
+    author?: Nullable<UserUpdateOneRequiredWithoutReviewsInput>;
+    content?: Nullable<NullableStringFieldUpdateOperationsInput>;
+    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    id?: Nullable<StringFieldUpdateOperationsInput>;
+    reviewee?: Nullable<UserUpdateOneRequiredWithoutReviewedInput>;
+    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
+    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    value?: Nullable<IntFieldUpdateOperationsInput>;
+}
+
+export class ReviewUpdateWithoutRevieweeInput {
+    author?: Nullable<UserUpdateOneRequiredWithoutReviewsInput>;
+    comments?: Nullable<CommentUpdateManyWithoutReviewInput>;
+    content?: Nullable<NullableStringFieldUpdateOperationsInput>;
+    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    value?: Nullable<IntFieldUpdateOperationsInput>;
 }
 
-export class ResponseUpdateWithoutAttachmentsInput {
-    answers?: Nullable<AnswerUpdateManyWithoutResponseInput>;
-    author?: Nullable<UserUpdateOneWithoutResponsesInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    form?: Nullable<FormUpdateOneRequiredWithoutResponsesInput>;
-    grade?: Nullable<GradeUpdateOneRequiredWithoutResponsesInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+export class ReviewUpsertWithWhereUniqueWithoutAuthorInput {
+    create: ReviewUncheckedCreateWithoutAuthorInput;
+    update: ReviewUncheckedUpdateWithoutAuthorInput;
+    where: ReviewWhereUniqueInput;
 }
 
-export class ResponseUpdateWithoutAuthorInput {
-    answers?: Nullable<AnswerUpdateManyWithoutResponseInput>;
-    attachments?: Nullable<AttachmentUpdateManyWithoutResponseInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    form?: Nullable<FormUpdateOneRequiredWithoutResponsesInput>;
-    grade?: Nullable<GradeUpdateOneRequiredWithoutResponsesInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+export class ReviewUpsertWithWhereUniqueWithoutRevieweeInput {
+    create: ReviewUncheckedCreateWithoutRevieweeInput;
+    update: ReviewUncheckedUpdateWithoutRevieweeInput;
+    where: ReviewWhereUniqueInput;
 }
 
-export class ResponseUpdateWithoutFormInput {
-    answers?: Nullable<AnswerUpdateManyWithoutResponseInput>;
-    attachments?: Nullable<AttachmentUpdateManyWithoutResponseInput>;
-    author?: Nullable<UserUpdateOneWithoutResponsesInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    grade?: Nullable<GradeUpdateOneRequiredWithoutResponsesInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+export class ReviewUpsertWithoutCommentsInput {
+    create: ReviewUncheckedCreateWithoutCommentsInput;
+    update: ReviewUncheckedUpdateWithoutCommentsInput;
 }
 
-export class ResponseUpdateWithoutGradeInput {
-    answers?: Nullable<AnswerUpdateManyWithoutResponseInput>;
-    attachments?: Nullable<AttachmentUpdateManyWithoutResponseInput>;
-    author?: Nullable<UserUpdateOneWithoutResponsesInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    form?: Nullable<FormUpdateOneRequiredWithoutResponsesInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class ResponseUpsertWithWhereUniqueWithoutAuthorInput {
-    create: ResponseUncheckedCreateWithoutAuthorInput;
-    update: ResponseUncheckedUpdateWithoutAuthorInput;
-    where: ResponseWhereUniqueInput;
-}
-
-export class ResponseUpsertWithWhereUniqueWithoutFormInput {
-    create: ResponseUncheckedCreateWithoutFormInput;
-    update: ResponseUncheckedUpdateWithoutFormInput;
-    where: ResponseWhereUniqueInput;
-}
-
-export class ResponseUpsertWithWhereUniqueWithoutGradeInput {
-    create: ResponseUncheckedCreateWithoutGradeInput;
-    update: ResponseUncheckedUpdateWithoutGradeInput;
-    where: ResponseWhereUniqueInput;
-}
-
-export class ResponseUpsertWithoutAnswersInput {
-    create: ResponseUncheckedCreateWithoutAnswersInput;
-    update: ResponseUncheckedUpdateWithoutAnswersInput;
-}
-
-export class ResponseUpsertWithoutAttachmentsInput {
-    create: ResponseUncheckedCreateWithoutAttachmentsInput;
-    update: ResponseUncheckedUpdateWithoutAttachmentsInput;
-}
-
-export class ResponseWhereInput {
-    AND?: Nullable<ResponseWhereInput[]>;
-    NOT?: Nullable<ResponseWhereInput[]>;
-    OR?: Nullable<ResponseWhereInput[]>;
-    answers?: Nullable<AnswerListRelationFilter>;
-    attachments?: Nullable<AttachmentListRelationFilter>;
+export class ReviewWhereInput {
+    AND?: Nullable<ReviewWhereInput[]>;
+    NOT?: Nullable<ReviewWhereInput[]>;
+    OR?: Nullable<ReviewWhereInput[]>;
     author?: Nullable<UserWhereInput>;
-    authorId?: Nullable<StringNullableFilter>;
+    authorId?: Nullable<StringFilter>;
+    comments?: Nullable<CommentListRelationFilter>;
+    content?: Nullable<StringNullableFilter>;
     createdAt?: Nullable<DateTimeFilter>;
-    form?: Nullable<FormWhereInput>;
-    formId?: Nullable<StringFilter>;
-    grade?: Nullable<GradeWhereInput>;
-    gradeId?: Nullable<StringFilter>;
     id?: Nullable<StringFilter>;
+    reviewee?: Nullable<UserWhereInput>;
+    revieweeId?: Nullable<StringFilter>;
     state?: Nullable<EnumStateFilter>;
     updatedAt?: Nullable<DateTimeFilter>;
+    value?: Nullable<IntFilter>;
 }
 
-export class ResponseWhereUniqueInput {
+export class ReviewWhereUniqueInput {
     id?: Nullable<string>;
 }
 
@@ -12393,27 +6491,46 @@ export class SelcomPaymentWhereUniqueInput {
 }
 
 export class ServiceCreateInput {
+    author: UserCreateNestedOneWithoutServicesInput;
     createdAt?: Nullable<DateTime>;
+    currency?: Nullable<string>;
     description?: Nullable<string>;
     id?: Nullable<string>;
-    image: AttachmentCreateNestedOneWithoutServicesInput;
+    image?: Nullable<AttachmentCreateNestedOneWithoutServicesInput>;
     name: string;
     orders?: Nullable<OrderCreateNestedManyWithoutServiceInput>;
     price: number;
     state?: Nullable<State>;
     updatedAt?: Nullable<DateTime>;
-    value: number;
+}
+
+export class ServiceCreateManyAuthorInput {
+    createdAt?: Nullable<DateTime>;
+    currency?: Nullable<string>;
+    description?: Nullable<string>;
+    id?: Nullable<string>;
+    imageId?: Nullable<string>;
+    name: string;
+    price: number;
+    state?: Nullable<State>;
+    updatedAt?: Nullable<DateTime>;
+}
+
+export class ServiceCreateManyAuthorInputEnvelope {
+    data: ServiceCreateManyAuthorInput[];
+    skipDuplicates?: Nullable<boolean>;
 }
 
 export class ServiceCreateManyImageInput {
+    authorId: string;
     createdAt?: Nullable<DateTime>;
+    currency?: Nullable<string>;
     description?: Nullable<string>;
     id?: Nullable<string>;
     name: string;
     price: number;
     state?: Nullable<State>;
     updatedAt?: Nullable<DateTime>;
-    value: number;
 }
 
 export class ServiceCreateManyImageInputEnvelope {
@@ -12422,15 +6539,23 @@ export class ServiceCreateManyImageInputEnvelope {
 }
 
 export class ServiceCreateManyInput {
+    authorId: string;
     createdAt?: Nullable<DateTime>;
+    currency?: Nullable<string>;
     description?: Nullable<string>;
     id?: Nullable<string>;
-    imageId: string;
+    imageId?: Nullable<string>;
     name: string;
     price: number;
     state?: Nullable<State>;
     updatedAt?: Nullable<DateTime>;
-    value: number;
+}
+
+export class ServiceCreateNestedManyWithoutAuthorInput {
+    connect?: Nullable<ServiceWhereUniqueInput[]>;
+    connectOrCreate?: Nullable<ServiceCreateOrConnectWithoutAuthorInput[]>;
+    create?: Nullable<ServiceCreateWithoutAuthorInput[]>;
+    createMany?: Nullable<ServiceCreateManyAuthorInputEnvelope>;
 }
 
 export class ServiceCreateNestedManyWithoutImageInput {
@@ -12446,6 +6571,11 @@ export class ServiceCreateNestedOneWithoutOrdersInput {
     create?: Nullable<ServiceUncheckedCreateWithoutOrdersInput>;
 }
 
+export class ServiceCreateOrConnectWithoutAuthorInput {
+    create: ServiceUncheckedCreateWithoutAuthorInput;
+    where: ServiceWhereUniqueInput;
+}
+
 export class ServiceCreateOrConnectWithoutImageInput {
     create: ServiceUncheckedCreateWithoutImageInput;
     where: ServiceWhereUniqueInput;
@@ -12456,8 +6586,23 @@ export class ServiceCreateOrConnectWithoutOrdersInput {
     where: ServiceWhereUniqueInput;
 }
 
-export class ServiceCreateWithoutImageInput {
+export class ServiceCreateWithoutAuthorInput {
     createdAt?: Nullable<DateTime>;
+    currency?: Nullable<string>;
+    description?: Nullable<string>;
+    id?: Nullable<string>;
+    image?: Nullable<AttachmentCreateNestedOneWithoutServicesInput>;
+    name: string;
+    orders?: Nullable<OrderCreateNestedManyWithoutServiceInput>;
+    price: number;
+    state?: Nullable<State>;
+    updatedAt?: Nullable<DateTime>;
+}
+
+export class ServiceCreateWithoutImageInput {
+    author: UserCreateNestedOneWithoutServicesInput;
+    createdAt?: Nullable<DateTime>;
+    currency?: Nullable<string>;
     description?: Nullable<string>;
     id?: Nullable<string>;
     name: string;
@@ -12465,19 +6610,19 @@ export class ServiceCreateWithoutImageInput {
     price: number;
     state?: Nullable<State>;
     updatedAt?: Nullable<DateTime>;
-    value: number;
 }
 
 export class ServiceCreateWithoutOrdersInput {
+    author: UserCreateNestedOneWithoutServicesInput;
     createdAt?: Nullable<DateTime>;
+    currency?: Nullable<string>;
     description?: Nullable<string>;
     id?: Nullable<string>;
-    image: AttachmentCreateNestedOneWithoutServicesInput;
+    image?: Nullable<AttachmentCreateNestedOneWithoutServicesInput>;
     name: string;
     price: number;
     state?: Nullable<State>;
     updatedAt?: Nullable<DateTime>;
-    value: number;
 }
 
 export class ServiceListRelationFilter {
@@ -12487,7 +6632,9 @@ export class ServiceListRelationFilter {
 }
 
 export class ServiceOrderByInput {
+    authorId?: Nullable<SortOrder>;
     createdAt?: Nullable<SortOrder>;
+    currency?: Nullable<SortOrder>;
     description?: Nullable<SortOrder>;
     id?: Nullable<SortOrder>;
     imageId?: Nullable<SortOrder>;
@@ -12495,7 +6642,6 @@ export class ServiceOrderByInput {
     price?: Nullable<SortOrder>;
     state?: Nullable<SortOrder>;
     updatedAt?: Nullable<SortOrder>;
-    value?: Nullable<SortOrder>;
 }
 
 export class ServiceRelationFilter {
@@ -12507,43 +6653,53 @@ export class ServiceScalarWhereInput {
     AND?: Nullable<ServiceScalarWhereInput[]>;
     NOT?: Nullable<ServiceScalarWhereInput[]>;
     OR?: Nullable<ServiceScalarWhereInput[]>;
+    authorId?: Nullable<StringFilter>;
     createdAt?: Nullable<DateTimeFilter>;
+    currency?: Nullable<StringFilter>;
     description?: Nullable<StringNullableFilter>;
     id?: Nullable<StringFilter>;
-    imageId?: Nullable<StringFilter>;
+    imageId?: Nullable<StringNullableFilter>;
     name?: Nullable<StringFilter>;
     price?: Nullable<FloatFilter>;
     state?: Nullable<EnumStateFilter>;
     updatedAt?: Nullable<DateTimeFilter>;
-    value?: Nullable<FloatFilter>;
 }
 
 export class ServiceScalarWhereWithAggregatesInput {
     AND?: Nullable<ServiceScalarWhereWithAggregatesInput[]>;
     NOT?: Nullable<ServiceScalarWhereWithAggregatesInput[]>;
     OR?: Nullable<ServiceScalarWhereWithAggregatesInput[]>;
+    authorId?: Nullable<StringWithAggregatesFilter>;
     createdAt?: Nullable<DateTimeWithAggregatesFilter>;
+    currency?: Nullable<StringWithAggregatesFilter>;
     description?: Nullable<StringNullableWithAggregatesFilter>;
     id?: Nullable<StringWithAggregatesFilter>;
-    imageId?: Nullable<StringWithAggregatesFilter>;
+    imageId?: Nullable<StringNullableWithAggregatesFilter>;
     name?: Nullable<StringWithAggregatesFilter>;
     price?: Nullable<FloatWithAggregatesFilter>;
     state?: Nullable<EnumStateWithAggregatesFilter>;
     updatedAt?: Nullable<DateTimeWithAggregatesFilter>;
-    value?: Nullable<FloatWithAggregatesFilter>;
 }
 
 export class ServiceUncheckedCreateInput {
+    authorId: string;
     createdAt?: Nullable<DateTime>;
+    currency?: Nullable<string>;
     description?: Nullable<string>;
     id?: Nullable<string>;
-    imageId: string;
+    imageId?: Nullable<string>;
     name: string;
     orders?: Nullable<OrderUncheckedCreateNestedManyWithoutServiceInput>;
     price: number;
     state?: Nullable<State>;
     updatedAt?: Nullable<DateTime>;
-    value: number;
+}
+
+export class ServiceUncheckedCreateNestedManyWithoutAuthorInput {
+    connect?: Nullable<ServiceWhereUniqueInput[]>;
+    connectOrCreate?: Nullable<ServiceCreateOrConnectWithoutAuthorInput[]>;
+    create?: Nullable<ServiceCreateWithoutAuthorInput[]>;
+    createMany?: Nullable<ServiceCreateManyAuthorInputEnvelope>;
 }
 
 export class ServiceUncheckedCreateNestedManyWithoutImageInput {
@@ -12553,8 +6709,23 @@ export class ServiceUncheckedCreateNestedManyWithoutImageInput {
     createMany?: Nullable<ServiceCreateManyImageInputEnvelope>;
 }
 
-export class ServiceUncheckedCreateWithoutImageInput {
+export class ServiceUncheckedCreateWithoutAuthorInput {
     createdAt?: Nullable<DateTime>;
+    currency?: Nullable<string>;
+    description?: Nullable<string>;
+    id?: Nullable<string>;
+    imageId?: Nullable<string>;
+    name: string;
+    orders?: Nullable<OrderUncheckedCreateNestedManyWithoutServiceInput>;
+    price: number;
+    state?: Nullable<State>;
+    updatedAt?: Nullable<DateTime>;
+}
+
+export class ServiceUncheckedCreateWithoutImageInput {
+    authorId: string;
+    createdAt?: Nullable<DateTime>;
+    currency?: Nullable<string>;
     description?: Nullable<string>;
     id?: Nullable<string>;
     name: string;
@@ -12562,44 +6733,60 @@ export class ServiceUncheckedCreateWithoutImageInput {
     price: number;
     state?: Nullable<State>;
     updatedAt?: Nullable<DateTime>;
-    value: number;
 }
 
 export class ServiceUncheckedCreateWithoutOrdersInput {
+    authorId: string;
     createdAt?: Nullable<DateTime>;
+    currency?: Nullable<string>;
     description?: Nullable<string>;
     id?: Nullable<string>;
-    imageId: string;
+    imageId?: Nullable<string>;
     name: string;
     price: number;
     state?: Nullable<State>;
     updatedAt?: Nullable<DateTime>;
-    value: number;
 }
 
 export class ServiceUncheckedUpdateInput {
+    authorId?: Nullable<StringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    currency?: Nullable<StringFieldUpdateOperationsInput>;
     description?: Nullable<NullableStringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
-    imageId?: Nullable<StringFieldUpdateOperationsInput>;
+    imageId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     name?: Nullable<StringFieldUpdateOperationsInput>;
     orders?: Nullable<OrderUncheckedUpdateManyWithoutServiceInput>;
     price?: Nullable<FloatFieldUpdateOperationsInput>;
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    value?: Nullable<FloatFieldUpdateOperationsInput>;
 }
 
 export class ServiceUncheckedUpdateManyInput {
+    authorId?: Nullable<StringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    currency?: Nullable<StringFieldUpdateOperationsInput>;
     description?: Nullable<NullableStringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
-    imageId?: Nullable<StringFieldUpdateOperationsInput>;
+    imageId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     name?: Nullable<StringFieldUpdateOperationsInput>;
     price?: Nullable<FloatFieldUpdateOperationsInput>;
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    value?: Nullable<FloatFieldUpdateOperationsInput>;
+}
+
+export class ServiceUncheckedUpdateManyWithoutAuthorInput {
+    connect?: Nullable<ServiceWhereUniqueInput[]>;
+    connectOrCreate?: Nullable<ServiceCreateOrConnectWithoutAuthorInput[]>;
+    create?: Nullable<ServiceCreateWithoutAuthorInput[]>;
+    createMany?: Nullable<ServiceCreateManyAuthorInputEnvelope>;
+    delete?: Nullable<ServiceWhereUniqueInput[]>;
+    deleteMany?: Nullable<ServiceScalarWhereInput[]>;
+    disconnect?: Nullable<ServiceWhereUniqueInput[]>;
+    set?: Nullable<ServiceWhereUniqueInput[]>;
+    update?: Nullable<ServiceUpdateWithWhereUniqueWithoutAuthorInput[]>;
+    updateMany?: Nullable<ServiceUpdateManyWithWhereWithoutAuthorInput[]>;
+    upsert?: Nullable<ServiceUpsertWithWhereUniqueWithoutAuthorInput[]>;
 }
 
 export class ServiceUncheckedUpdateManyWithoutImageInput {
@@ -12618,17 +6805,33 @@ export class ServiceUncheckedUpdateManyWithoutImageInput {
 
 export class ServiceUncheckedUpdateManyWithoutServicesInput {
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    currency?: Nullable<StringFieldUpdateOperationsInput>;
     description?: Nullable<NullableStringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
+    imageId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     name?: Nullable<StringFieldUpdateOperationsInput>;
     price?: Nullable<FloatFieldUpdateOperationsInput>;
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    value?: Nullable<FloatFieldUpdateOperationsInput>;
+}
+
+export class ServiceUncheckedUpdateWithoutAuthorInput {
+    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    currency?: Nullable<StringFieldUpdateOperationsInput>;
+    description?: Nullable<NullableStringFieldUpdateOperationsInput>;
+    id?: Nullable<StringFieldUpdateOperationsInput>;
+    imageId?: Nullable<NullableStringFieldUpdateOperationsInput>;
+    name?: Nullable<StringFieldUpdateOperationsInput>;
+    orders?: Nullable<OrderUncheckedUpdateManyWithoutServiceInput>;
+    price?: Nullable<FloatFieldUpdateOperationsInput>;
+    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
+    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
 
 export class ServiceUncheckedUpdateWithoutImageInput {
+    authorId?: Nullable<StringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    currency?: Nullable<StringFieldUpdateOperationsInput>;
     description?: Nullable<NullableStringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     name?: Nullable<StringFieldUpdateOperationsInput>;
@@ -12636,48 +6839,68 @@ export class ServiceUncheckedUpdateWithoutImageInput {
     price?: Nullable<FloatFieldUpdateOperationsInput>;
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    value?: Nullable<FloatFieldUpdateOperationsInput>;
 }
 
 export class ServiceUncheckedUpdateWithoutOrdersInput {
+    authorId?: Nullable<StringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    currency?: Nullable<StringFieldUpdateOperationsInput>;
     description?: Nullable<NullableStringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
-    imageId?: Nullable<StringFieldUpdateOperationsInput>;
+    imageId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     name?: Nullable<StringFieldUpdateOperationsInput>;
     price?: Nullable<FloatFieldUpdateOperationsInput>;
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    value?: Nullable<FloatFieldUpdateOperationsInput>;
 }
 
 export class ServiceUpdateInput {
+    author?: Nullable<UserUpdateOneRequiredWithoutServicesInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    currency?: Nullable<StringFieldUpdateOperationsInput>;
     description?: Nullable<NullableStringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
-    image?: Nullable<AttachmentUpdateOneRequiredWithoutServicesInput>;
+    image?: Nullable<AttachmentUpdateOneWithoutServicesInput>;
     name?: Nullable<StringFieldUpdateOperationsInput>;
     orders?: Nullable<OrderUpdateManyWithoutServiceInput>;
     price?: Nullable<FloatFieldUpdateOperationsInput>;
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    value?: Nullable<FloatFieldUpdateOperationsInput>;
 }
 
 export class ServiceUpdateManyMutationInput {
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    currency?: Nullable<StringFieldUpdateOperationsInput>;
     description?: Nullable<NullableStringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     name?: Nullable<StringFieldUpdateOperationsInput>;
     price?: Nullable<FloatFieldUpdateOperationsInput>;
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    value?: Nullable<FloatFieldUpdateOperationsInput>;
+}
+
+export class ServiceUpdateManyWithWhereWithoutAuthorInput {
+    data: ServiceUncheckedUpdateManyWithoutServicesInput;
+    where: ServiceScalarWhereInput;
 }
 
 export class ServiceUpdateManyWithWhereWithoutImageInput {
     data: ServiceUncheckedUpdateManyWithoutServicesInput;
     where: ServiceScalarWhereInput;
+}
+
+export class ServiceUpdateManyWithoutAuthorInput {
+    connect?: Nullable<ServiceWhereUniqueInput[]>;
+    connectOrCreate?: Nullable<ServiceCreateOrConnectWithoutAuthorInput[]>;
+    create?: Nullable<ServiceCreateWithoutAuthorInput[]>;
+    createMany?: Nullable<ServiceCreateManyAuthorInputEnvelope>;
+    delete?: Nullable<ServiceWhereUniqueInput[]>;
+    deleteMany?: Nullable<ServiceScalarWhereInput[]>;
+    disconnect?: Nullable<ServiceWhereUniqueInput[]>;
+    set?: Nullable<ServiceWhereUniqueInput[]>;
+    update?: Nullable<ServiceUpdateWithWhereUniqueWithoutAuthorInput[]>;
+    updateMany?: Nullable<ServiceUpdateManyWithWhereWithoutAuthorInput[]>;
+    upsert?: Nullable<ServiceUpsertWithWhereUniqueWithoutAuthorInput[]>;
 }
 
 export class ServiceUpdateManyWithoutImageInput {
@@ -12702,13 +6925,33 @@ export class ServiceUpdateOneRequiredWithoutOrdersInput {
     upsert?: Nullable<ServiceUpsertWithoutOrdersInput>;
 }
 
+export class ServiceUpdateWithWhereUniqueWithoutAuthorInput {
+    data: ServiceUncheckedUpdateWithoutAuthorInput;
+    where: ServiceWhereUniqueInput;
+}
+
 export class ServiceUpdateWithWhereUniqueWithoutImageInput {
     data: ServiceUncheckedUpdateWithoutImageInput;
     where: ServiceWhereUniqueInput;
 }
 
-export class ServiceUpdateWithoutImageInput {
+export class ServiceUpdateWithoutAuthorInput {
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    currency?: Nullable<StringFieldUpdateOperationsInput>;
+    description?: Nullable<NullableStringFieldUpdateOperationsInput>;
+    id?: Nullable<StringFieldUpdateOperationsInput>;
+    image?: Nullable<AttachmentUpdateOneWithoutServicesInput>;
+    name?: Nullable<StringFieldUpdateOperationsInput>;
+    orders?: Nullable<OrderUpdateManyWithoutServiceInput>;
+    price?: Nullable<FloatFieldUpdateOperationsInput>;
+    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
+    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+}
+
+export class ServiceUpdateWithoutImageInput {
+    author?: Nullable<UserUpdateOneRequiredWithoutServicesInput>;
+    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    currency?: Nullable<StringFieldUpdateOperationsInput>;
     description?: Nullable<NullableStringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     name?: Nullable<StringFieldUpdateOperationsInput>;
@@ -12716,19 +6959,25 @@ export class ServiceUpdateWithoutImageInput {
     price?: Nullable<FloatFieldUpdateOperationsInput>;
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    value?: Nullable<FloatFieldUpdateOperationsInput>;
 }
 
 export class ServiceUpdateWithoutOrdersInput {
+    author?: Nullable<UserUpdateOneRequiredWithoutServicesInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    currency?: Nullable<StringFieldUpdateOperationsInput>;
     description?: Nullable<NullableStringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
-    image?: Nullable<AttachmentUpdateOneRequiredWithoutServicesInput>;
+    image?: Nullable<AttachmentUpdateOneWithoutServicesInput>;
     name?: Nullable<StringFieldUpdateOperationsInput>;
     price?: Nullable<FloatFieldUpdateOperationsInput>;
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    value?: Nullable<FloatFieldUpdateOperationsInput>;
+}
+
+export class ServiceUpsertWithWhereUniqueWithoutAuthorInput {
+    create: ServiceUncheckedCreateWithoutAuthorInput;
+    update: ServiceUncheckedUpdateWithoutAuthorInput;
+    where: ServiceWhereUniqueInput;
 }
 
 export class ServiceUpsertWithWhereUniqueWithoutImageInput {
@@ -12746,17 +6995,19 @@ export class ServiceWhereInput {
     AND?: Nullable<ServiceWhereInput[]>;
     NOT?: Nullable<ServiceWhereInput[]>;
     OR?: Nullable<ServiceWhereInput[]>;
+    author?: Nullable<UserWhereInput>;
+    authorId?: Nullable<StringFilter>;
     createdAt?: Nullable<DateTimeFilter>;
+    currency?: Nullable<StringFilter>;
     description?: Nullable<StringNullableFilter>;
     id?: Nullable<StringFilter>;
     image?: Nullable<AttachmentWhereInput>;
-    imageId?: Nullable<StringFilter>;
+    imageId?: Nullable<StringNullableFilter>;
     name?: Nullable<StringFilter>;
     orders?: Nullable<OrderListRelationFilter>;
     price?: Nullable<FloatFilter>;
     state?: Nullable<EnumStateFilter>;
     updatedAt?: Nullable<DateTimeFilter>;
-    value?: Nullable<FloatFilter>;
 }
 
 export class ServiceWhereUniqueInput {
@@ -12848,435 +7099,9 @@ export class StringWithAggregatesFilter {
     startsWith?: Nullable<string>;
 }
 
-export class TagCreateInput {
-    createdAt?: Nullable<DateTime>;
-    description?: Nullable<string>;
-    forms?: Nullable<FormCreateNestedManyWithoutTagsInput>;
-    forums?: Nullable<ForumCreateNestedManyWithoutTagsInput>;
-    id?: Nullable<string>;
-    image?: Nullable<AttachmentCreateNestedOneWithoutTagsInput>;
-    name: string;
-    state?: Nullable<State>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class TagCreateManyImageInput {
-    createdAt?: Nullable<DateTime>;
-    description?: Nullable<string>;
-    id?: Nullable<string>;
-    name: string;
-    state?: Nullable<State>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class TagCreateManyImageInputEnvelope {
-    data: TagCreateManyImageInput[];
-    skipDuplicates?: Nullable<boolean>;
-}
-
-export class TagCreateManyInput {
-    attachmentId?: Nullable<string>;
-    createdAt?: Nullable<DateTime>;
-    description?: Nullable<string>;
-    id?: Nullable<string>;
-    name: string;
-    state?: Nullable<State>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class TagCreateNestedManyWithoutFormsInput {
-    connect?: Nullable<TagWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<TagCreateOrConnectWithoutFormsInput[]>;
-    create?: Nullable<TagCreateWithoutFormsInput[]>;
-}
-
-export class TagCreateNestedManyWithoutForumsInput {
-    connect?: Nullable<TagWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<TagCreateOrConnectWithoutForumsInput[]>;
-    create?: Nullable<TagCreateWithoutForumsInput[]>;
-}
-
-export class TagCreateNestedManyWithoutImageInput {
-    connect?: Nullable<TagWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<TagCreateOrConnectWithoutImageInput[]>;
-    create?: Nullable<TagCreateWithoutImageInput[]>;
-    createMany?: Nullable<TagCreateManyImageInputEnvelope>;
-}
-
-export class TagCreateOrConnectWithoutFormsInput {
-    create: TagUncheckedCreateWithoutFormsInput;
-    where: TagWhereUniqueInput;
-}
-
-export class TagCreateOrConnectWithoutForumsInput {
-    create: TagUncheckedCreateWithoutForumsInput;
-    where: TagWhereUniqueInput;
-}
-
-export class TagCreateOrConnectWithoutImageInput {
-    create: TagUncheckedCreateWithoutImageInput;
-    where: TagWhereUniqueInput;
-}
-
-export class TagCreateWithoutFormsInput {
-    createdAt?: Nullable<DateTime>;
-    description?: Nullable<string>;
-    forums?: Nullable<ForumCreateNestedManyWithoutTagsInput>;
-    id?: Nullable<string>;
-    image?: Nullable<AttachmentCreateNestedOneWithoutTagsInput>;
-    name: string;
-    state?: Nullable<State>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class TagCreateWithoutForumsInput {
-    createdAt?: Nullable<DateTime>;
-    description?: Nullable<string>;
-    forms?: Nullable<FormCreateNestedManyWithoutTagsInput>;
-    id?: Nullable<string>;
-    image?: Nullable<AttachmentCreateNestedOneWithoutTagsInput>;
-    name: string;
-    state?: Nullable<State>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class TagCreateWithoutImageInput {
-    createdAt?: Nullable<DateTime>;
-    description?: Nullable<string>;
-    forms?: Nullable<FormCreateNestedManyWithoutTagsInput>;
-    forums?: Nullable<ForumCreateNestedManyWithoutTagsInput>;
-    id?: Nullable<string>;
-    name: string;
-    state?: Nullable<State>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class TagListRelationFilter {
-    every?: Nullable<TagWhereInput>;
-    none?: Nullable<TagWhereInput>;
-    some?: Nullable<TagWhereInput>;
-}
-
-export class TagOrderByInput {
-    attachmentId?: Nullable<SortOrder>;
-    createdAt?: Nullable<SortOrder>;
-    description?: Nullable<SortOrder>;
-    id?: Nullable<SortOrder>;
-    name?: Nullable<SortOrder>;
-    state?: Nullable<SortOrder>;
-    updatedAt?: Nullable<SortOrder>;
-}
-
-export class TagScalarWhereInput {
-    AND?: Nullable<TagScalarWhereInput[]>;
-    NOT?: Nullable<TagScalarWhereInput[]>;
-    OR?: Nullable<TagScalarWhereInput[]>;
-    attachmentId?: Nullable<StringNullableFilter>;
-    createdAt?: Nullable<DateTimeFilter>;
-    description?: Nullable<StringNullableFilter>;
-    id?: Nullable<StringFilter>;
-    name?: Nullable<StringFilter>;
-    state?: Nullable<EnumStateFilter>;
-    updatedAt?: Nullable<DateTimeFilter>;
-}
-
-export class TagScalarWhereWithAggregatesInput {
-    AND?: Nullable<TagScalarWhereWithAggregatesInput[]>;
-    NOT?: Nullable<TagScalarWhereWithAggregatesInput[]>;
-    OR?: Nullable<TagScalarWhereWithAggregatesInput[]>;
-    attachmentId?: Nullable<StringNullableWithAggregatesFilter>;
-    createdAt?: Nullable<DateTimeWithAggregatesFilter>;
-    description?: Nullable<StringNullableWithAggregatesFilter>;
-    id?: Nullable<StringWithAggregatesFilter>;
-    name?: Nullable<StringWithAggregatesFilter>;
-    state?: Nullable<EnumStateWithAggregatesFilter>;
-    updatedAt?: Nullable<DateTimeWithAggregatesFilter>;
-}
-
-export class TagUncheckedCreateInput {
-    attachmentId?: Nullable<string>;
-    createdAt?: Nullable<DateTime>;
-    description?: Nullable<string>;
-    id?: Nullable<string>;
-    name: string;
-    state?: Nullable<State>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class TagUncheckedCreateNestedManyWithoutImageInput {
-    connect?: Nullable<TagWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<TagCreateOrConnectWithoutImageInput[]>;
-    create?: Nullable<TagCreateWithoutImageInput[]>;
-    createMany?: Nullable<TagCreateManyImageInputEnvelope>;
-}
-
-export class TagUncheckedCreateWithoutFormsInput {
-    attachmentId?: Nullable<string>;
-    createdAt?: Nullable<DateTime>;
-    description?: Nullable<string>;
-    id?: Nullable<string>;
-    name: string;
-    state?: Nullable<State>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class TagUncheckedCreateWithoutForumsInput {
-    attachmentId?: Nullable<string>;
-    createdAt?: Nullable<DateTime>;
-    description?: Nullable<string>;
-    id?: Nullable<string>;
-    name: string;
-    state?: Nullable<State>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class TagUncheckedCreateWithoutImageInput {
-    createdAt?: Nullable<DateTime>;
-    description?: Nullable<string>;
-    id?: Nullable<string>;
-    name: string;
-    state?: Nullable<State>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class TagUncheckedUpdateInput {
-    attachmentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    name?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class TagUncheckedUpdateManyInput {
-    attachmentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    name?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class TagUncheckedUpdateManyWithoutImageInput {
-    connect?: Nullable<TagWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<TagCreateOrConnectWithoutImageInput[]>;
-    create?: Nullable<TagCreateWithoutImageInput[]>;
-    createMany?: Nullable<TagCreateManyImageInputEnvelope>;
-    delete?: Nullable<TagWhereUniqueInput[]>;
-    deleteMany?: Nullable<TagScalarWhereInput[]>;
-    disconnect?: Nullable<TagWhereUniqueInput[]>;
-    set?: Nullable<TagWhereUniqueInput[]>;
-    update?: Nullable<TagUpdateWithWhereUniqueWithoutImageInput[]>;
-    updateMany?: Nullable<TagUpdateManyWithWhereWithoutImageInput[]>;
-    upsert?: Nullable<TagUpsertWithWhereUniqueWithoutImageInput[]>;
-}
-
-export class TagUncheckedUpdateManyWithoutTagsInput {
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    name?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class TagUncheckedUpdateWithoutFormsInput {
-    attachmentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    name?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class TagUncheckedUpdateWithoutForumsInput {
-    attachmentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    name?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class TagUncheckedUpdateWithoutImageInput {
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    name?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class TagUpdateInput {
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    forms?: Nullable<FormUpdateManyWithoutTagsInput>;
-    forums?: Nullable<ForumUpdateManyWithoutTagsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    image?: Nullable<AttachmentUpdateOneWithoutTagsInput>;
-    name?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class TagUpdateManyMutationInput {
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    name?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class TagUpdateManyWithWhereWithoutFormsInput {
-    data: TagUncheckedUpdateManyWithoutTagsInput;
-    where: TagScalarWhereInput;
-}
-
-export class TagUpdateManyWithWhereWithoutForumsInput {
-    data: TagUncheckedUpdateManyWithoutTagsInput;
-    where: TagScalarWhereInput;
-}
-
-export class TagUpdateManyWithWhereWithoutImageInput {
-    data: TagUncheckedUpdateManyWithoutTagsInput;
-    where: TagScalarWhereInput;
-}
-
-export class TagUpdateManyWithoutFormsInput {
-    connect?: Nullable<TagWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<TagCreateOrConnectWithoutFormsInput[]>;
-    create?: Nullable<TagCreateWithoutFormsInput[]>;
-    delete?: Nullable<TagWhereUniqueInput[]>;
-    deleteMany?: Nullable<TagScalarWhereInput[]>;
-    disconnect?: Nullable<TagWhereUniqueInput[]>;
-    set?: Nullable<TagWhereUniqueInput[]>;
-    update?: Nullable<TagUpdateWithWhereUniqueWithoutFormsInput[]>;
-    updateMany?: Nullable<TagUpdateManyWithWhereWithoutFormsInput[]>;
-    upsert?: Nullable<TagUpsertWithWhereUniqueWithoutFormsInput[]>;
-}
-
-export class TagUpdateManyWithoutForumsInput {
-    connect?: Nullable<TagWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<TagCreateOrConnectWithoutForumsInput[]>;
-    create?: Nullable<TagCreateWithoutForumsInput[]>;
-    delete?: Nullable<TagWhereUniqueInput[]>;
-    deleteMany?: Nullable<TagScalarWhereInput[]>;
-    disconnect?: Nullable<TagWhereUniqueInput[]>;
-    set?: Nullable<TagWhereUniqueInput[]>;
-    update?: Nullable<TagUpdateWithWhereUniqueWithoutForumsInput[]>;
-    updateMany?: Nullable<TagUpdateManyWithWhereWithoutForumsInput[]>;
-    upsert?: Nullable<TagUpsertWithWhereUniqueWithoutForumsInput[]>;
-}
-
-export class TagUpdateManyWithoutImageInput {
-    connect?: Nullable<TagWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<TagCreateOrConnectWithoutImageInput[]>;
-    create?: Nullable<TagCreateWithoutImageInput[]>;
-    createMany?: Nullable<TagCreateManyImageInputEnvelope>;
-    delete?: Nullable<TagWhereUniqueInput[]>;
-    deleteMany?: Nullable<TagScalarWhereInput[]>;
-    disconnect?: Nullable<TagWhereUniqueInput[]>;
-    set?: Nullable<TagWhereUniqueInput[]>;
-    update?: Nullable<TagUpdateWithWhereUniqueWithoutImageInput[]>;
-    updateMany?: Nullable<TagUpdateManyWithWhereWithoutImageInput[]>;
-    upsert?: Nullable<TagUpsertWithWhereUniqueWithoutImageInput[]>;
-}
-
-export class TagUpdateWithWhereUniqueWithoutFormsInput {
-    data: TagUncheckedUpdateWithoutFormsInput;
-    where: TagWhereUniqueInput;
-}
-
-export class TagUpdateWithWhereUniqueWithoutForumsInput {
-    data: TagUncheckedUpdateWithoutForumsInput;
-    where: TagWhereUniqueInput;
-}
-
-export class TagUpdateWithWhereUniqueWithoutImageInput {
-    data: TagUncheckedUpdateWithoutImageInput;
-    where: TagWhereUniqueInput;
-}
-
-export class TagUpdateWithoutFormsInput {
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    forums?: Nullable<ForumUpdateManyWithoutTagsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    image?: Nullable<AttachmentUpdateOneWithoutTagsInput>;
-    name?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class TagUpdateWithoutForumsInput {
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    forms?: Nullable<FormUpdateManyWithoutTagsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    image?: Nullable<AttachmentUpdateOneWithoutTagsInput>;
-    name?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class TagUpdateWithoutImageInput {
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    description?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    forms?: Nullable<FormUpdateManyWithoutTagsInput>;
-    forums?: Nullable<ForumUpdateManyWithoutTagsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    name?: Nullable<StringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class TagUpsertWithWhereUniqueWithoutFormsInput {
-    create: TagUncheckedCreateWithoutFormsInput;
-    update: TagUncheckedUpdateWithoutFormsInput;
-    where: TagWhereUniqueInput;
-}
-
-export class TagUpsertWithWhereUniqueWithoutForumsInput {
-    create: TagUncheckedCreateWithoutForumsInput;
-    update: TagUncheckedUpdateWithoutForumsInput;
-    where: TagWhereUniqueInput;
-}
-
-export class TagUpsertWithWhereUniqueWithoutImageInput {
-    create: TagUncheckedCreateWithoutImageInput;
-    update: TagUncheckedUpdateWithoutImageInput;
-    where: TagWhereUniqueInput;
-}
-
-export class TagWhereInput {
-    AND?: Nullable<TagWhereInput[]>;
-    NOT?: Nullable<TagWhereInput[]>;
-    OR?: Nullable<TagWhereInput[]>;
-    attachmentId?: Nullable<StringNullableFilter>;
-    createdAt?: Nullable<DateTimeFilter>;
-    description?: Nullable<StringNullableFilter>;
-    forms?: Nullable<FormListRelationFilter>;
-    forums?: Nullable<ForumListRelationFilter>;
-    id?: Nullable<StringFilter>;
-    image?: Nullable<AttachmentWhereInput>;
-    name?: Nullable<StringFilter>;
-    state?: Nullable<EnumStateFilter>;
-    updatedAt?: Nullable<DateTimeFilter>;
-}
-
-export class TagWhereUniqueInput {
-    id?: Nullable<string>;
-}
-
 export class TransactionCreateInput {
     createdAt?: Nullable<DateTime>;
     id?: Nullable<string>;
-    initiator: UserCreateNestedOneWithoutTransactionsInput;
     mpesaPayment?: Nullable<MpesaPaymentCreateNestedOneWithoutTransactionInput>;
     order: OrderCreateNestedOneWithoutTransactionsInput;
     paymentMethod: PaymentMethodCreateNestedOneWithoutTransactionsInput;
@@ -13285,24 +7110,6 @@ export class TransactionCreateInput {
     state?: Nullable<State>;
     type: TransactionType;
     updatedAt?: Nullable<DateTime>;
-}
-
-export class TransactionCreateManyInitiatorInput {
-    createdAt?: Nullable<DateTime>;
-    id?: Nullable<string>;
-    mpesaPaymentId?: Nullable<string>;
-    orderId: string;
-    paymentMethodId: string;
-    selcomDisbursementId?: Nullable<string>;
-    selcomPaymentId?: Nullable<string>;
-    state?: Nullable<State>;
-    type: TransactionType;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class TransactionCreateManyInitiatorInputEnvelope {
-    data: TransactionCreateManyInitiatorInput[];
-    skipDuplicates?: Nullable<boolean>;
 }
 
 export class TransactionCreateManyInput {
@@ -13316,7 +7123,6 @@ export class TransactionCreateManyInput {
     state?: Nullable<State>;
     type: TransactionType;
     updatedAt?: Nullable<DateTime>;
-    userId: string;
 }
 
 export class TransactionCreateManyOrderInput {
@@ -13329,7 +7135,6 @@ export class TransactionCreateManyOrderInput {
     state?: Nullable<State>;
     type: TransactionType;
     updatedAt?: Nullable<DateTime>;
-    userId: string;
 }
 
 export class TransactionCreateManyOrderInputEnvelope {
@@ -13347,19 +7152,11 @@ export class TransactionCreateManyPaymentMethodInput {
     state?: Nullable<State>;
     type: TransactionType;
     updatedAt?: Nullable<DateTime>;
-    userId: string;
 }
 
 export class TransactionCreateManyPaymentMethodInputEnvelope {
     data: TransactionCreateManyPaymentMethodInput[];
     skipDuplicates?: Nullable<boolean>;
-}
-
-export class TransactionCreateNestedManyWithoutInitiatorInput {
-    connect?: Nullable<TransactionWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<TransactionCreateOrConnectWithoutInitiatorInput[]>;
-    create?: Nullable<TransactionCreateWithoutInitiatorInput[]>;
-    createMany?: Nullable<TransactionCreateManyInitiatorInputEnvelope>;
 }
 
 export class TransactionCreateNestedManyWithoutOrderInput {
@@ -13394,11 +7191,6 @@ export class TransactionCreateNestedOneWithoutSelcomPaymentInput {
     create?: Nullable<TransactionUncheckedCreateWithoutSelcomPaymentInput>;
 }
 
-export class TransactionCreateOrConnectWithoutInitiatorInput {
-    create: TransactionUncheckedCreateWithoutInitiatorInput;
-    where: TransactionWhereUniqueInput;
-}
-
 export class TransactionCreateOrConnectWithoutMpesaPaymentInput {
     create: TransactionUncheckedCreateWithoutMpesaPaymentInput;
     where: TransactionWhereUniqueInput;
@@ -13424,23 +7216,9 @@ export class TransactionCreateOrConnectWithoutSelcomPaymentInput {
     where: TransactionWhereUniqueInput;
 }
 
-export class TransactionCreateWithoutInitiatorInput {
-    createdAt?: Nullable<DateTime>;
-    id?: Nullable<string>;
-    mpesaPayment?: Nullable<MpesaPaymentCreateNestedOneWithoutTransactionInput>;
-    order: OrderCreateNestedOneWithoutTransactionsInput;
-    paymentMethod: PaymentMethodCreateNestedOneWithoutTransactionsInput;
-    selcomDisbursement?: Nullable<SelcomDisbursementCreateNestedOneWithoutTransactionInput>;
-    selcomPayment?: Nullable<SelcomPaymentCreateNestedOneWithoutTransactionInput>;
-    state?: Nullable<State>;
-    type: TransactionType;
-    updatedAt?: Nullable<DateTime>;
-}
-
 export class TransactionCreateWithoutMpesaPaymentInput {
     createdAt?: Nullable<DateTime>;
     id?: Nullable<string>;
-    initiator: UserCreateNestedOneWithoutTransactionsInput;
     order: OrderCreateNestedOneWithoutTransactionsInput;
     paymentMethod: PaymentMethodCreateNestedOneWithoutTransactionsInput;
     selcomDisbursement?: Nullable<SelcomDisbursementCreateNestedOneWithoutTransactionInput>;
@@ -13453,7 +7231,6 @@ export class TransactionCreateWithoutMpesaPaymentInput {
 export class TransactionCreateWithoutOrderInput {
     createdAt?: Nullable<DateTime>;
     id?: Nullable<string>;
-    initiator: UserCreateNestedOneWithoutTransactionsInput;
     mpesaPayment?: Nullable<MpesaPaymentCreateNestedOneWithoutTransactionInput>;
     paymentMethod: PaymentMethodCreateNestedOneWithoutTransactionsInput;
     selcomDisbursement?: Nullable<SelcomDisbursementCreateNestedOneWithoutTransactionInput>;
@@ -13466,7 +7243,6 @@ export class TransactionCreateWithoutOrderInput {
 export class TransactionCreateWithoutPaymentMethodInput {
     createdAt?: Nullable<DateTime>;
     id?: Nullable<string>;
-    initiator: UserCreateNestedOneWithoutTransactionsInput;
     mpesaPayment?: Nullable<MpesaPaymentCreateNestedOneWithoutTransactionInput>;
     order: OrderCreateNestedOneWithoutTransactionsInput;
     selcomDisbursement?: Nullable<SelcomDisbursementCreateNestedOneWithoutTransactionInput>;
@@ -13479,7 +7255,6 @@ export class TransactionCreateWithoutPaymentMethodInput {
 export class TransactionCreateWithoutSelcomDisbursementInput {
     createdAt?: Nullable<DateTime>;
     id?: Nullable<string>;
-    initiator: UserCreateNestedOneWithoutTransactionsInput;
     mpesaPayment?: Nullable<MpesaPaymentCreateNestedOneWithoutTransactionInput>;
     order: OrderCreateNestedOneWithoutTransactionsInput;
     paymentMethod: PaymentMethodCreateNestedOneWithoutTransactionsInput;
@@ -13492,7 +7267,6 @@ export class TransactionCreateWithoutSelcomDisbursementInput {
 export class TransactionCreateWithoutSelcomPaymentInput {
     createdAt?: Nullable<DateTime>;
     id?: Nullable<string>;
-    initiator: UserCreateNestedOneWithoutTransactionsInput;
     mpesaPayment?: Nullable<MpesaPaymentCreateNestedOneWithoutTransactionInput>;
     order: OrderCreateNestedOneWithoutTransactionsInput;
     paymentMethod: PaymentMethodCreateNestedOneWithoutTransactionsInput;
@@ -13519,7 +7293,6 @@ export class TransactionOrderByInput {
     state?: Nullable<SortOrder>;
     type?: Nullable<SortOrder>;
     updatedAt?: Nullable<SortOrder>;
-    userId?: Nullable<SortOrder>;
 }
 
 export class TransactionRelationFilter {
@@ -13541,7 +7314,6 @@ export class TransactionScalarWhereInput {
     state?: Nullable<EnumStateFilter>;
     type?: Nullable<EnumTransactionTypeFilter>;
     updatedAt?: Nullable<DateTimeFilter>;
-    userId?: Nullable<StringFilter>;
 }
 
 export class TransactionScalarWhereWithAggregatesInput {
@@ -13558,7 +7330,6 @@ export class TransactionScalarWhereWithAggregatesInput {
     state?: Nullable<EnumStateWithAggregatesFilter>;
     type?: Nullable<EnumTransactionTypeWithAggregatesFilter>;
     updatedAt?: Nullable<DateTimeWithAggregatesFilter>;
-    userId?: Nullable<StringWithAggregatesFilter>;
 }
 
 export class TransactionUncheckedCreateInput {
@@ -13572,14 +7343,6 @@ export class TransactionUncheckedCreateInput {
     state?: Nullable<State>;
     type: TransactionType;
     updatedAt?: Nullable<DateTime>;
-    userId: string;
-}
-
-export class TransactionUncheckedCreateNestedManyWithoutInitiatorInput {
-    connect?: Nullable<TransactionWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<TransactionCreateOrConnectWithoutInitiatorInput[]>;
-    create?: Nullable<TransactionCreateWithoutInitiatorInput[]>;
-    createMany?: Nullable<TransactionCreateManyInitiatorInputEnvelope>;
 }
 
 export class TransactionUncheckedCreateNestedManyWithoutOrderInput {
@@ -13614,19 +7377,6 @@ export class TransactionUncheckedCreateNestedOneWithoutSelcomPaymentInput {
     create?: Nullable<TransactionUncheckedCreateWithoutSelcomPaymentInput>;
 }
 
-export class TransactionUncheckedCreateWithoutInitiatorInput {
-    createdAt?: Nullable<DateTime>;
-    id?: Nullable<string>;
-    mpesaPaymentId?: Nullable<string>;
-    orderId: string;
-    paymentMethodId: string;
-    selcomDisbursementId?: Nullable<string>;
-    selcomPaymentId?: Nullable<string>;
-    state?: Nullable<State>;
-    type: TransactionType;
-    updatedAt?: Nullable<DateTime>;
-}
-
 export class TransactionUncheckedCreateWithoutMpesaPaymentInput {
     createdAt?: Nullable<DateTime>;
     id?: Nullable<string>;
@@ -13637,7 +7387,6 @@ export class TransactionUncheckedCreateWithoutMpesaPaymentInput {
     state?: Nullable<State>;
     type: TransactionType;
     updatedAt?: Nullable<DateTime>;
-    userId: string;
 }
 
 export class TransactionUncheckedCreateWithoutOrderInput {
@@ -13650,7 +7399,6 @@ export class TransactionUncheckedCreateWithoutOrderInput {
     state?: Nullable<State>;
     type: TransactionType;
     updatedAt?: Nullable<DateTime>;
-    userId: string;
 }
 
 export class TransactionUncheckedCreateWithoutPaymentMethodInput {
@@ -13663,7 +7411,6 @@ export class TransactionUncheckedCreateWithoutPaymentMethodInput {
     state?: Nullable<State>;
     type: TransactionType;
     updatedAt?: Nullable<DateTime>;
-    userId: string;
 }
 
 export class TransactionUncheckedCreateWithoutSelcomDisbursementInput {
@@ -13676,7 +7423,6 @@ export class TransactionUncheckedCreateWithoutSelcomDisbursementInput {
     state?: Nullable<State>;
     type: TransactionType;
     updatedAt?: Nullable<DateTime>;
-    userId: string;
 }
 
 export class TransactionUncheckedCreateWithoutSelcomPaymentInput {
@@ -13689,7 +7435,6 @@ export class TransactionUncheckedCreateWithoutSelcomPaymentInput {
     state?: Nullable<State>;
     type: TransactionType;
     updatedAt?: Nullable<DateTime>;
-    userId: string;
 }
 
 export class TransactionUncheckedUpdateInput {
@@ -13703,7 +7448,6 @@ export class TransactionUncheckedUpdateInput {
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
     type?: Nullable<EnumTransactionTypeFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    userId?: Nullable<StringFieldUpdateOperationsInput>;
 }
 
 export class TransactionUncheckedUpdateManyInput {
@@ -13717,21 +7461,6 @@ export class TransactionUncheckedUpdateManyInput {
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
     type?: Nullable<EnumTransactionTypeFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    userId?: Nullable<StringFieldUpdateOperationsInput>;
-}
-
-export class TransactionUncheckedUpdateManyWithoutInitiatorInput {
-    connect?: Nullable<TransactionWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<TransactionCreateOrConnectWithoutInitiatorInput[]>;
-    create?: Nullable<TransactionCreateWithoutInitiatorInput[]>;
-    createMany?: Nullable<TransactionCreateManyInitiatorInputEnvelope>;
-    delete?: Nullable<TransactionWhereUniqueInput[]>;
-    deleteMany?: Nullable<TransactionScalarWhereInput[]>;
-    disconnect?: Nullable<TransactionWhereUniqueInput[]>;
-    set?: Nullable<TransactionWhereUniqueInput[]>;
-    update?: Nullable<TransactionUpdateWithWhereUniqueWithoutInitiatorInput[]>;
-    updateMany?: Nullable<TransactionUpdateManyWithWhereWithoutInitiatorInput[]>;
-    upsert?: Nullable<TransactionUpsertWithWhereUniqueWithoutInitiatorInput[]>;
 }
 
 export class TransactionUncheckedUpdateManyWithoutOrderInput {
@@ -13766,7 +7495,6 @@ export class TransactionUncheckedUpdateManyWithoutTransactionsInput {
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     mpesaPaymentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    orderId?: Nullable<StringFieldUpdateOperationsInput>;
     paymentMethodId?: Nullable<StringFieldUpdateOperationsInput>;
     selcomDisbursementId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     selcomPaymentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
@@ -13805,19 +7533,6 @@ export class TransactionUncheckedUpdateOneWithoutSelcomPaymentInput {
     upsert?: Nullable<TransactionUpsertWithoutSelcomPaymentInput>;
 }
 
-export class TransactionUncheckedUpdateWithoutInitiatorInput {
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    mpesaPaymentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    orderId?: Nullable<StringFieldUpdateOperationsInput>;
-    paymentMethodId?: Nullable<StringFieldUpdateOperationsInput>;
-    selcomDisbursementId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    selcomPaymentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    type?: Nullable<EnumTransactionTypeFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
 export class TransactionUncheckedUpdateWithoutMpesaPaymentInput {
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
@@ -13828,7 +7543,6 @@ export class TransactionUncheckedUpdateWithoutMpesaPaymentInput {
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
     type?: Nullable<EnumTransactionTypeFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    userId?: Nullable<StringFieldUpdateOperationsInput>;
 }
 
 export class TransactionUncheckedUpdateWithoutOrderInput {
@@ -13841,7 +7555,6 @@ export class TransactionUncheckedUpdateWithoutOrderInput {
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
     type?: Nullable<EnumTransactionTypeFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    userId?: Nullable<StringFieldUpdateOperationsInput>;
 }
 
 export class TransactionUncheckedUpdateWithoutPaymentMethodInput {
@@ -13854,7 +7567,6 @@ export class TransactionUncheckedUpdateWithoutPaymentMethodInput {
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
     type?: Nullable<EnumTransactionTypeFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    userId?: Nullable<StringFieldUpdateOperationsInput>;
 }
 
 export class TransactionUncheckedUpdateWithoutSelcomDisbursementInput {
@@ -13867,7 +7579,6 @@ export class TransactionUncheckedUpdateWithoutSelcomDisbursementInput {
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
     type?: Nullable<EnumTransactionTypeFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    userId?: Nullable<StringFieldUpdateOperationsInput>;
 }
 
 export class TransactionUncheckedUpdateWithoutSelcomPaymentInput {
@@ -13880,13 +7591,11 @@ export class TransactionUncheckedUpdateWithoutSelcomPaymentInput {
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
     type?: Nullable<EnumTransactionTypeFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    userId?: Nullable<StringFieldUpdateOperationsInput>;
 }
 
 export class TransactionUpdateInput {
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
-    initiator?: Nullable<UserUpdateOneRequiredWithoutTransactionsInput>;
     mpesaPayment?: Nullable<MpesaPaymentUpdateOneWithoutTransactionInput>;
     order?: Nullable<OrderUpdateOneRequiredWithoutTransactionsInput>;
     paymentMethod?: Nullable<PaymentMethodUpdateOneRequiredWithoutTransactionsInput>;
@@ -13905,11 +7614,6 @@ export class TransactionUpdateManyMutationInput {
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
 
-export class TransactionUpdateManyWithWhereWithoutInitiatorInput {
-    data: TransactionUncheckedUpdateManyWithoutTransactionsInput;
-    where: TransactionScalarWhereInput;
-}
-
 export class TransactionUpdateManyWithWhereWithoutOrderInput {
     data: TransactionUncheckedUpdateManyWithoutTransactionsInput;
     where: TransactionScalarWhereInput;
@@ -13918,20 +7622,6 @@ export class TransactionUpdateManyWithWhereWithoutOrderInput {
 export class TransactionUpdateManyWithWhereWithoutPaymentMethodInput {
     data: TransactionUncheckedUpdateManyWithoutTransactionsInput;
     where: TransactionScalarWhereInput;
-}
-
-export class TransactionUpdateManyWithoutInitiatorInput {
-    connect?: Nullable<TransactionWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<TransactionCreateOrConnectWithoutInitiatorInput[]>;
-    create?: Nullable<TransactionCreateWithoutInitiatorInput[]>;
-    createMany?: Nullable<TransactionCreateManyInitiatorInputEnvelope>;
-    delete?: Nullable<TransactionWhereUniqueInput[]>;
-    deleteMany?: Nullable<TransactionScalarWhereInput[]>;
-    disconnect?: Nullable<TransactionWhereUniqueInput[]>;
-    set?: Nullable<TransactionWhereUniqueInput[]>;
-    update?: Nullable<TransactionUpdateWithWhereUniqueWithoutInitiatorInput[]>;
-    updateMany?: Nullable<TransactionUpdateManyWithWhereWithoutInitiatorInput[]>;
-    upsert?: Nullable<TransactionUpsertWithWhereUniqueWithoutInitiatorInput[]>;
 }
 
 export class TransactionUpdateManyWithoutOrderInput {
@@ -13992,11 +7682,6 @@ export class TransactionUpdateOneWithoutSelcomPaymentInput {
     upsert?: Nullable<TransactionUpsertWithoutSelcomPaymentInput>;
 }
 
-export class TransactionUpdateWithWhereUniqueWithoutInitiatorInput {
-    data: TransactionUncheckedUpdateWithoutInitiatorInput;
-    where: TransactionWhereUniqueInput;
-}
-
 export class TransactionUpdateWithWhereUniqueWithoutOrderInput {
     data: TransactionUncheckedUpdateWithoutOrderInput;
     where: TransactionWhereUniqueInput;
@@ -14007,23 +7692,9 @@ export class TransactionUpdateWithWhereUniqueWithoutPaymentMethodInput {
     where: TransactionWhereUniqueInput;
 }
 
-export class TransactionUpdateWithoutInitiatorInput {
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    mpesaPayment?: Nullable<MpesaPaymentUpdateOneWithoutTransactionInput>;
-    order?: Nullable<OrderUpdateOneRequiredWithoutTransactionsInput>;
-    paymentMethod?: Nullable<PaymentMethodUpdateOneRequiredWithoutTransactionsInput>;
-    selcomDisbursement?: Nullable<SelcomDisbursementUpdateOneWithoutTransactionInput>;
-    selcomPayment?: Nullable<SelcomPaymentUpdateOneWithoutTransactionInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    type?: Nullable<EnumTransactionTypeFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
 export class TransactionUpdateWithoutMpesaPaymentInput {
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
-    initiator?: Nullable<UserUpdateOneRequiredWithoutTransactionsInput>;
     order?: Nullable<OrderUpdateOneRequiredWithoutTransactionsInput>;
     paymentMethod?: Nullable<PaymentMethodUpdateOneRequiredWithoutTransactionsInput>;
     selcomDisbursement?: Nullable<SelcomDisbursementUpdateOneWithoutTransactionInput>;
@@ -14036,7 +7707,6 @@ export class TransactionUpdateWithoutMpesaPaymentInput {
 export class TransactionUpdateWithoutOrderInput {
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
-    initiator?: Nullable<UserUpdateOneRequiredWithoutTransactionsInput>;
     mpesaPayment?: Nullable<MpesaPaymentUpdateOneWithoutTransactionInput>;
     paymentMethod?: Nullable<PaymentMethodUpdateOneRequiredWithoutTransactionsInput>;
     selcomDisbursement?: Nullable<SelcomDisbursementUpdateOneWithoutTransactionInput>;
@@ -14049,7 +7719,6 @@ export class TransactionUpdateWithoutOrderInput {
 export class TransactionUpdateWithoutPaymentMethodInput {
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
-    initiator?: Nullable<UserUpdateOneRequiredWithoutTransactionsInput>;
     mpesaPayment?: Nullable<MpesaPaymentUpdateOneWithoutTransactionInput>;
     order?: Nullable<OrderUpdateOneRequiredWithoutTransactionsInput>;
     selcomDisbursement?: Nullable<SelcomDisbursementUpdateOneWithoutTransactionInput>;
@@ -14062,7 +7731,6 @@ export class TransactionUpdateWithoutPaymentMethodInput {
 export class TransactionUpdateWithoutSelcomDisbursementInput {
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
-    initiator?: Nullable<UserUpdateOneRequiredWithoutTransactionsInput>;
     mpesaPayment?: Nullable<MpesaPaymentUpdateOneWithoutTransactionInput>;
     order?: Nullable<OrderUpdateOneRequiredWithoutTransactionsInput>;
     paymentMethod?: Nullable<PaymentMethodUpdateOneRequiredWithoutTransactionsInput>;
@@ -14075,7 +7743,6 @@ export class TransactionUpdateWithoutSelcomDisbursementInput {
 export class TransactionUpdateWithoutSelcomPaymentInput {
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
-    initiator?: Nullable<UserUpdateOneRequiredWithoutTransactionsInput>;
     mpesaPayment?: Nullable<MpesaPaymentUpdateOneWithoutTransactionInput>;
     order?: Nullable<OrderUpdateOneRequiredWithoutTransactionsInput>;
     paymentMethod?: Nullable<PaymentMethodUpdateOneRequiredWithoutTransactionsInput>;
@@ -14083,12 +7750,6 @@ export class TransactionUpdateWithoutSelcomPaymentInput {
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
     type?: Nullable<EnumTransactionTypeFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class TransactionUpsertWithWhereUniqueWithoutInitiatorInput {
-    create: TransactionUncheckedCreateWithoutInitiatorInput;
-    update: TransactionUncheckedUpdateWithoutInitiatorInput;
-    where: TransactionWhereUniqueInput;
 }
 
 export class TransactionUpsertWithWhereUniqueWithoutOrderInput {
@@ -14124,7 +7785,6 @@ export class TransactionWhereInput {
     OR?: Nullable<TransactionWhereInput[]>;
     createdAt?: Nullable<DateTimeFilter>;
     id?: Nullable<StringFilter>;
-    initiator?: Nullable<UserWhereInput>;
     mpesaPayment?: Nullable<MpesaPaymentWhereInput>;
     mpesaPaymentId?: Nullable<StringNullableFilter>;
     order?: Nullable<OrderWhereInput>;
@@ -14138,7 +7798,6 @@ export class TransactionWhereInput {
     state?: Nullable<EnumStateFilter>;
     type?: Nullable<EnumTransactionTypeFilter>;
     updatedAt?: Nullable<DateTimeFilter>;
-    userId?: Nullable<StringFilter>;
 }
 
 export class TransactionWhereUniqueInput {
@@ -14147,6 +7806,7 @@ export class TransactionWhereUniqueInput {
 
 export class UserCreateInput {
     avator?: Nullable<AttachmentCreateNestedOneWithoutUserInput>;
+    businessProfile?: Nullable<BusinessProfileCreateNestedOneWithoutOwnerInput>;
     comments?: Nullable<CommentCreateNestedManyWithoutAuthorInput>;
     createdAt?: Nullable<DateTime>;
     device?: Nullable<DeviceCreateNestedOneWithoutUserInput>;
@@ -14154,16 +7814,15 @@ export class UserCreateInput {
     displayName: string;
     email: string;
     emailVerified?: Nullable<boolean>;
-    forms?: Nullable<FormCreateNestedManyWithoutAuthorInput>;
-    forumAnswers?: Nullable<ForumAnswerCreateNestedManyWithoutAuthorInput>;
-    forums?: Nullable<ForumCreateNestedManyWithoutAuthorInput>;
     id?: Nullable<string>;
+    location: LocationCreateNestedOneWithoutUsersInput;
     orders?: Nullable<OrderCreateNestedManyWithoutOwnerInput>;
     phoneNumber?: Nullable<string>;
-    responses?: Nullable<ResponseCreateNestedManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewCreateNestedManyWithoutRevieweeInput>;
+    reviews?: Nullable<ReviewCreateNestedManyWithoutAuthorInput>;
     role?: Nullable<Role>;
+    services?: Nullable<ServiceCreateNestedManyWithoutAuthorInput>;
     state?: Nullable<State>;
-    transactions?: Nullable<TransactionCreateNestedManyWithoutInitiatorInput>;
     updatedAt?: Nullable<DateTime>;
 }
 
@@ -14174,6 +7833,7 @@ export class UserCreateManyAvatorInput {
     email: string;
     emailVerified?: Nullable<boolean>;
     id?: Nullable<string>;
+    locationId: string;
     phoneNumber?: Nullable<string>;
     role?: Nullable<Role>;
     state?: Nullable<State>;
@@ -14193,10 +7853,30 @@ export class UserCreateManyInput {
     email: string;
     emailVerified?: Nullable<boolean>;
     id?: Nullable<string>;
+    locationId: string;
     phoneNumber?: Nullable<string>;
     role?: Nullable<Role>;
     state?: Nullable<State>;
     updatedAt?: Nullable<DateTime>;
+}
+
+export class UserCreateManyLocationInput {
+    avatorId?: Nullable<string>;
+    createdAt?: Nullable<DateTime>;
+    disabled?: Nullable<boolean>;
+    displayName: string;
+    email: string;
+    emailVerified?: Nullable<boolean>;
+    id?: Nullable<string>;
+    phoneNumber?: Nullable<string>;
+    role?: Nullable<Role>;
+    state?: Nullable<State>;
+    updatedAt?: Nullable<DateTime>;
+}
+
+export class UserCreateManyLocationInputEnvelope {
+    data: UserCreateManyLocationInput[];
+    skipDuplicates?: Nullable<boolean>;
 }
 
 export class UserCreateNestedManyWithoutAvatorInput {
@@ -14204,6 +7884,19 @@ export class UserCreateNestedManyWithoutAvatorInput {
     connectOrCreate?: Nullable<UserCreateOrConnectWithoutAvatorInput[]>;
     create?: Nullable<UserCreateWithoutAvatorInput[]>;
     createMany?: Nullable<UserCreateManyAvatorInputEnvelope>;
+}
+
+export class UserCreateNestedManyWithoutLocationInput {
+    connect?: Nullable<UserWhereUniqueInput[]>;
+    connectOrCreate?: Nullable<UserCreateOrConnectWithoutLocationInput[]>;
+    create?: Nullable<UserCreateWithoutLocationInput[]>;
+    createMany?: Nullable<UserCreateManyLocationInputEnvelope>;
+}
+
+export class UserCreateNestedOneWithoutBusinessProfileInput {
+    connect?: Nullable<UserWhereUniqueInput>;
+    connectOrCreate?: Nullable<UserCreateOrConnectWithoutBusinessProfileInput>;
+    create?: Nullable<UserUncheckedCreateWithoutBusinessProfileInput>;
 }
 
 export class UserCreateNestedOneWithoutCommentsInput {
@@ -14218,44 +7911,37 @@ export class UserCreateNestedOneWithoutDeviceInput {
     create?: Nullable<UserUncheckedCreateWithoutDeviceInput>;
 }
 
-export class UserCreateNestedOneWithoutFormsInput {
-    connect?: Nullable<UserWhereUniqueInput>;
-    connectOrCreate?: Nullable<UserCreateOrConnectWithoutFormsInput>;
-    create?: Nullable<UserUncheckedCreateWithoutFormsInput>;
-}
-
-export class UserCreateNestedOneWithoutForumAnswersInput {
-    connect?: Nullable<UserWhereUniqueInput>;
-    connectOrCreate?: Nullable<UserCreateOrConnectWithoutForumAnswersInput>;
-    create?: Nullable<UserUncheckedCreateWithoutForumAnswersInput>;
-}
-
-export class UserCreateNestedOneWithoutForumsInput {
-    connect?: Nullable<UserWhereUniqueInput>;
-    connectOrCreate?: Nullable<UserCreateOrConnectWithoutForumsInput>;
-    create?: Nullable<UserUncheckedCreateWithoutForumsInput>;
-}
-
 export class UserCreateNestedOneWithoutOrdersInput {
     connect?: Nullable<UserWhereUniqueInput>;
     connectOrCreate?: Nullable<UserCreateOrConnectWithoutOrdersInput>;
     create?: Nullable<UserUncheckedCreateWithoutOrdersInput>;
 }
 
-export class UserCreateNestedOneWithoutResponsesInput {
+export class UserCreateNestedOneWithoutReviewedInput {
     connect?: Nullable<UserWhereUniqueInput>;
-    connectOrCreate?: Nullable<UserCreateOrConnectWithoutResponsesInput>;
-    create?: Nullable<UserUncheckedCreateWithoutResponsesInput>;
+    connectOrCreate?: Nullable<UserCreateOrConnectWithoutReviewedInput>;
+    create?: Nullable<UserUncheckedCreateWithoutReviewedInput>;
 }
 
-export class UserCreateNestedOneWithoutTransactionsInput {
+export class UserCreateNestedOneWithoutReviewsInput {
     connect?: Nullable<UserWhereUniqueInput>;
-    connectOrCreate?: Nullable<UserCreateOrConnectWithoutTransactionsInput>;
-    create?: Nullable<UserUncheckedCreateWithoutTransactionsInput>;
+    connectOrCreate?: Nullable<UserCreateOrConnectWithoutReviewsInput>;
+    create?: Nullable<UserUncheckedCreateWithoutReviewsInput>;
+}
+
+export class UserCreateNestedOneWithoutServicesInput {
+    connect?: Nullable<UserWhereUniqueInput>;
+    connectOrCreate?: Nullable<UserCreateOrConnectWithoutServicesInput>;
+    create?: Nullable<UserUncheckedCreateWithoutServicesInput>;
 }
 
 export class UserCreateOrConnectWithoutAvatorInput {
     create: UserUncheckedCreateWithoutAvatorInput;
+    where: UserWhereUniqueInput;
+}
+
+export class UserCreateOrConnectWithoutBusinessProfileInput {
+    create: UserUncheckedCreateWithoutBusinessProfileInput;
     where: UserWhereUniqueInput;
 }
 
@@ -14269,18 +7955,8 @@ export class UserCreateOrConnectWithoutDeviceInput {
     where: UserWhereUniqueInput;
 }
 
-export class UserCreateOrConnectWithoutFormsInput {
-    create: UserUncheckedCreateWithoutFormsInput;
-    where: UserWhereUniqueInput;
-}
-
-export class UserCreateOrConnectWithoutForumAnswersInput {
-    create: UserUncheckedCreateWithoutForumAnswersInput;
-    where: UserWhereUniqueInput;
-}
-
-export class UserCreateOrConnectWithoutForumsInput {
-    create: UserUncheckedCreateWithoutForumsInput;
+export class UserCreateOrConnectWithoutLocationInput {
+    create: UserUncheckedCreateWithoutLocationInput;
     where: UserWhereUniqueInput;
 }
 
@@ -14289,17 +7965,23 @@ export class UserCreateOrConnectWithoutOrdersInput {
     where: UserWhereUniqueInput;
 }
 
-export class UserCreateOrConnectWithoutResponsesInput {
-    create: UserUncheckedCreateWithoutResponsesInput;
+export class UserCreateOrConnectWithoutReviewedInput {
+    create: UserUncheckedCreateWithoutReviewedInput;
     where: UserWhereUniqueInput;
 }
 
-export class UserCreateOrConnectWithoutTransactionsInput {
-    create: UserUncheckedCreateWithoutTransactionsInput;
+export class UserCreateOrConnectWithoutReviewsInput {
+    create: UserUncheckedCreateWithoutReviewsInput;
+    where: UserWhereUniqueInput;
+}
+
+export class UserCreateOrConnectWithoutServicesInput {
+    create: UserUncheckedCreateWithoutServicesInput;
     where: UserWhereUniqueInput;
 }
 
 export class UserCreateWithoutAvatorInput {
+    businessProfile?: Nullable<BusinessProfileCreateNestedOneWithoutOwnerInput>;
     comments?: Nullable<CommentCreateNestedManyWithoutAuthorInput>;
     createdAt?: Nullable<DateTime>;
     device?: Nullable<DeviceCreateNestedOneWithoutUserInput>;
@@ -14307,63 +7989,84 @@ export class UserCreateWithoutAvatorInput {
     displayName: string;
     email: string;
     emailVerified?: Nullable<boolean>;
-    forms?: Nullable<FormCreateNestedManyWithoutAuthorInput>;
-    forumAnswers?: Nullable<ForumAnswerCreateNestedManyWithoutAuthorInput>;
-    forums?: Nullable<ForumCreateNestedManyWithoutAuthorInput>;
     id?: Nullable<string>;
+    location: LocationCreateNestedOneWithoutUsersInput;
     orders?: Nullable<OrderCreateNestedManyWithoutOwnerInput>;
     phoneNumber?: Nullable<string>;
-    responses?: Nullable<ResponseCreateNestedManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewCreateNestedManyWithoutRevieweeInput>;
+    reviews?: Nullable<ReviewCreateNestedManyWithoutAuthorInput>;
     role?: Nullable<Role>;
+    services?: Nullable<ServiceCreateNestedManyWithoutAuthorInput>;
     state?: Nullable<State>;
-    transactions?: Nullable<TransactionCreateNestedManyWithoutInitiatorInput>;
+    updatedAt?: Nullable<DateTime>;
+}
+
+export class UserCreateWithoutBusinessProfileInput {
+    avator?: Nullable<AttachmentCreateNestedOneWithoutUserInput>;
+    comments?: Nullable<CommentCreateNestedManyWithoutAuthorInput>;
+    createdAt?: Nullable<DateTime>;
+    device?: Nullable<DeviceCreateNestedOneWithoutUserInput>;
+    disabled?: Nullable<boolean>;
+    displayName: string;
+    email: string;
+    emailVerified?: Nullable<boolean>;
+    id?: Nullable<string>;
+    location: LocationCreateNestedOneWithoutUsersInput;
+    orders?: Nullable<OrderCreateNestedManyWithoutOwnerInput>;
+    phoneNumber?: Nullable<string>;
+    reviewed?: Nullable<ReviewCreateNestedManyWithoutRevieweeInput>;
+    reviews?: Nullable<ReviewCreateNestedManyWithoutAuthorInput>;
+    role?: Nullable<Role>;
+    services?: Nullable<ServiceCreateNestedManyWithoutAuthorInput>;
+    state?: Nullable<State>;
     updatedAt?: Nullable<DateTime>;
 }
 
 export class UserCreateWithoutCommentsInput {
     avator?: Nullable<AttachmentCreateNestedOneWithoutUserInput>;
+    businessProfile?: Nullable<BusinessProfileCreateNestedOneWithoutOwnerInput>;
     createdAt?: Nullable<DateTime>;
     device?: Nullable<DeviceCreateNestedOneWithoutUserInput>;
     disabled?: Nullable<boolean>;
     displayName: string;
     email: string;
     emailVerified?: Nullable<boolean>;
-    forms?: Nullable<FormCreateNestedManyWithoutAuthorInput>;
-    forumAnswers?: Nullable<ForumAnswerCreateNestedManyWithoutAuthorInput>;
-    forums?: Nullable<ForumCreateNestedManyWithoutAuthorInput>;
     id?: Nullable<string>;
+    location: LocationCreateNestedOneWithoutUsersInput;
     orders?: Nullable<OrderCreateNestedManyWithoutOwnerInput>;
     phoneNumber?: Nullable<string>;
-    responses?: Nullable<ResponseCreateNestedManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewCreateNestedManyWithoutRevieweeInput>;
+    reviews?: Nullable<ReviewCreateNestedManyWithoutAuthorInput>;
     role?: Nullable<Role>;
+    services?: Nullable<ServiceCreateNestedManyWithoutAuthorInput>;
     state?: Nullable<State>;
-    transactions?: Nullable<TransactionCreateNestedManyWithoutInitiatorInput>;
     updatedAt?: Nullable<DateTime>;
 }
 
 export class UserCreateWithoutDeviceInput {
     avator?: Nullable<AttachmentCreateNestedOneWithoutUserInput>;
+    businessProfile?: Nullable<BusinessProfileCreateNestedOneWithoutOwnerInput>;
     comments?: Nullable<CommentCreateNestedManyWithoutAuthorInput>;
     createdAt?: Nullable<DateTime>;
     disabled?: Nullable<boolean>;
     displayName: string;
     email: string;
     emailVerified?: Nullable<boolean>;
-    forms?: Nullable<FormCreateNestedManyWithoutAuthorInput>;
-    forumAnswers?: Nullable<ForumAnswerCreateNestedManyWithoutAuthorInput>;
-    forums?: Nullable<ForumCreateNestedManyWithoutAuthorInput>;
     id?: Nullable<string>;
+    location: LocationCreateNestedOneWithoutUsersInput;
     orders?: Nullable<OrderCreateNestedManyWithoutOwnerInput>;
     phoneNumber?: Nullable<string>;
-    responses?: Nullable<ResponseCreateNestedManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewCreateNestedManyWithoutRevieweeInput>;
+    reviews?: Nullable<ReviewCreateNestedManyWithoutAuthorInput>;
     role?: Nullable<Role>;
+    services?: Nullable<ServiceCreateNestedManyWithoutAuthorInput>;
     state?: Nullable<State>;
-    transactions?: Nullable<TransactionCreateNestedManyWithoutInitiatorInput>;
     updatedAt?: Nullable<DateTime>;
 }
 
-export class UserCreateWithoutFormsInput {
+export class UserCreateWithoutLocationInput {
     avator?: Nullable<AttachmentCreateNestedOneWithoutUserInput>;
+    businessProfile?: Nullable<BusinessProfileCreateNestedOneWithoutOwnerInput>;
     comments?: Nullable<CommentCreateNestedManyWithoutAuthorInput>;
     createdAt?: Nullable<DateTime>;
     device?: Nullable<DeviceCreateNestedOneWithoutUserInput>;
@@ -14371,62 +8074,20 @@ export class UserCreateWithoutFormsInput {
     displayName: string;
     email: string;
     emailVerified?: Nullable<boolean>;
-    forumAnswers?: Nullable<ForumAnswerCreateNestedManyWithoutAuthorInput>;
-    forums?: Nullable<ForumCreateNestedManyWithoutAuthorInput>;
     id?: Nullable<string>;
     orders?: Nullable<OrderCreateNestedManyWithoutOwnerInput>;
     phoneNumber?: Nullable<string>;
-    responses?: Nullable<ResponseCreateNestedManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewCreateNestedManyWithoutRevieweeInput>;
+    reviews?: Nullable<ReviewCreateNestedManyWithoutAuthorInput>;
     role?: Nullable<Role>;
+    services?: Nullable<ServiceCreateNestedManyWithoutAuthorInput>;
     state?: Nullable<State>;
-    transactions?: Nullable<TransactionCreateNestedManyWithoutInitiatorInput>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class UserCreateWithoutForumAnswersInput {
-    avator?: Nullable<AttachmentCreateNestedOneWithoutUserInput>;
-    comments?: Nullable<CommentCreateNestedManyWithoutAuthorInput>;
-    createdAt?: Nullable<DateTime>;
-    device?: Nullable<DeviceCreateNestedOneWithoutUserInput>;
-    disabled?: Nullable<boolean>;
-    displayName: string;
-    email: string;
-    emailVerified?: Nullable<boolean>;
-    forms?: Nullable<FormCreateNestedManyWithoutAuthorInput>;
-    forums?: Nullable<ForumCreateNestedManyWithoutAuthorInput>;
-    id?: Nullable<string>;
-    orders?: Nullable<OrderCreateNestedManyWithoutOwnerInput>;
-    phoneNumber?: Nullable<string>;
-    responses?: Nullable<ResponseCreateNestedManyWithoutAuthorInput>;
-    role?: Nullable<Role>;
-    state?: Nullable<State>;
-    transactions?: Nullable<TransactionCreateNestedManyWithoutInitiatorInput>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class UserCreateWithoutForumsInput {
-    avator?: Nullable<AttachmentCreateNestedOneWithoutUserInput>;
-    comments?: Nullable<CommentCreateNestedManyWithoutAuthorInput>;
-    createdAt?: Nullable<DateTime>;
-    device?: Nullable<DeviceCreateNestedOneWithoutUserInput>;
-    disabled?: Nullable<boolean>;
-    displayName: string;
-    email: string;
-    emailVerified?: Nullable<boolean>;
-    forms?: Nullable<FormCreateNestedManyWithoutAuthorInput>;
-    forumAnswers?: Nullable<ForumAnswerCreateNestedManyWithoutAuthorInput>;
-    id?: Nullable<string>;
-    orders?: Nullable<OrderCreateNestedManyWithoutOwnerInput>;
-    phoneNumber?: Nullable<string>;
-    responses?: Nullable<ResponseCreateNestedManyWithoutAuthorInput>;
-    role?: Nullable<Role>;
-    state?: Nullable<State>;
-    transactions?: Nullable<TransactionCreateNestedManyWithoutInitiatorInput>;
     updatedAt?: Nullable<DateTime>;
 }
 
 export class UserCreateWithoutOrdersInput {
     avator?: Nullable<AttachmentCreateNestedOneWithoutUserInput>;
+    businessProfile?: Nullable<BusinessProfileCreateNestedOneWithoutOwnerInput>;
     comments?: Nullable<CommentCreateNestedManyWithoutAuthorInput>;
     createdAt?: Nullable<DateTime>;
     device?: Nullable<DeviceCreateNestedOneWithoutUserInput>;
@@ -14434,20 +8095,20 @@ export class UserCreateWithoutOrdersInput {
     displayName: string;
     email: string;
     emailVerified?: Nullable<boolean>;
-    forms?: Nullable<FormCreateNestedManyWithoutAuthorInput>;
-    forumAnswers?: Nullable<ForumAnswerCreateNestedManyWithoutAuthorInput>;
-    forums?: Nullable<ForumCreateNestedManyWithoutAuthorInput>;
     id?: Nullable<string>;
+    location: LocationCreateNestedOneWithoutUsersInput;
     phoneNumber?: Nullable<string>;
-    responses?: Nullable<ResponseCreateNestedManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewCreateNestedManyWithoutRevieweeInput>;
+    reviews?: Nullable<ReviewCreateNestedManyWithoutAuthorInput>;
     role?: Nullable<Role>;
+    services?: Nullable<ServiceCreateNestedManyWithoutAuthorInput>;
     state?: Nullable<State>;
-    transactions?: Nullable<TransactionCreateNestedManyWithoutInitiatorInput>;
     updatedAt?: Nullable<DateTime>;
 }
 
-export class UserCreateWithoutResponsesInput {
+export class UserCreateWithoutReviewedInput {
     avator?: Nullable<AttachmentCreateNestedOneWithoutUserInput>;
+    businessProfile?: Nullable<BusinessProfileCreateNestedOneWithoutOwnerInput>;
     comments?: Nullable<CommentCreateNestedManyWithoutAuthorInput>;
     createdAt?: Nullable<DateTime>;
     device?: Nullable<DeviceCreateNestedOneWithoutUserInput>;
@@ -14455,20 +8116,20 @@ export class UserCreateWithoutResponsesInput {
     displayName: string;
     email: string;
     emailVerified?: Nullable<boolean>;
-    forms?: Nullable<FormCreateNestedManyWithoutAuthorInput>;
-    forumAnswers?: Nullable<ForumAnswerCreateNestedManyWithoutAuthorInput>;
-    forums?: Nullable<ForumCreateNestedManyWithoutAuthorInput>;
     id?: Nullable<string>;
+    location: LocationCreateNestedOneWithoutUsersInput;
     orders?: Nullable<OrderCreateNestedManyWithoutOwnerInput>;
     phoneNumber?: Nullable<string>;
+    reviews?: Nullable<ReviewCreateNestedManyWithoutAuthorInput>;
     role?: Nullable<Role>;
+    services?: Nullable<ServiceCreateNestedManyWithoutAuthorInput>;
     state?: Nullable<State>;
-    transactions?: Nullable<TransactionCreateNestedManyWithoutInitiatorInput>;
     updatedAt?: Nullable<DateTime>;
 }
 
-export class UserCreateWithoutTransactionsInput {
+export class UserCreateWithoutReviewsInput {
     avator?: Nullable<AttachmentCreateNestedOneWithoutUserInput>;
+    businessProfile?: Nullable<BusinessProfileCreateNestedOneWithoutOwnerInput>;
     comments?: Nullable<CommentCreateNestedManyWithoutAuthorInput>;
     createdAt?: Nullable<DateTime>;
     device?: Nullable<DeviceCreateNestedOneWithoutUserInput>;
@@ -14476,13 +8137,33 @@ export class UserCreateWithoutTransactionsInput {
     displayName: string;
     email: string;
     emailVerified?: Nullable<boolean>;
-    forms?: Nullable<FormCreateNestedManyWithoutAuthorInput>;
-    forumAnswers?: Nullable<ForumAnswerCreateNestedManyWithoutAuthorInput>;
-    forums?: Nullable<ForumCreateNestedManyWithoutAuthorInput>;
     id?: Nullable<string>;
+    location: LocationCreateNestedOneWithoutUsersInput;
     orders?: Nullable<OrderCreateNestedManyWithoutOwnerInput>;
     phoneNumber?: Nullable<string>;
-    responses?: Nullable<ResponseCreateNestedManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewCreateNestedManyWithoutRevieweeInput>;
+    role?: Nullable<Role>;
+    services?: Nullable<ServiceCreateNestedManyWithoutAuthorInput>;
+    state?: Nullable<State>;
+    updatedAt?: Nullable<DateTime>;
+}
+
+export class UserCreateWithoutServicesInput {
+    avator?: Nullable<AttachmentCreateNestedOneWithoutUserInput>;
+    businessProfile?: Nullable<BusinessProfileCreateNestedOneWithoutOwnerInput>;
+    comments?: Nullable<CommentCreateNestedManyWithoutAuthorInput>;
+    createdAt?: Nullable<DateTime>;
+    device?: Nullable<DeviceCreateNestedOneWithoutUserInput>;
+    disabled?: Nullable<boolean>;
+    displayName: string;
+    email: string;
+    emailVerified?: Nullable<boolean>;
+    id?: Nullable<string>;
+    location: LocationCreateNestedOneWithoutUsersInput;
+    orders?: Nullable<OrderCreateNestedManyWithoutOwnerInput>;
+    phoneNumber?: Nullable<string>;
+    reviewed?: Nullable<ReviewCreateNestedManyWithoutRevieweeInput>;
+    reviews?: Nullable<ReviewCreateNestedManyWithoutAuthorInput>;
     role?: Nullable<Role>;
     state?: Nullable<State>;
     updatedAt?: Nullable<DateTime>;
@@ -14502,6 +8183,7 @@ export class UserOrderByInput {
     email?: Nullable<SortOrder>;
     emailVerified?: Nullable<SortOrder>;
     id?: Nullable<SortOrder>;
+    locationId?: Nullable<SortOrder>;
     phoneNumber?: Nullable<SortOrder>;
     role?: Nullable<SortOrder>;
     state?: Nullable<SortOrder>;
@@ -14524,6 +8206,7 @@ export class UserScalarWhereInput {
     email?: Nullable<StringFilter>;
     emailVerified?: Nullable<BoolFilter>;
     id?: Nullable<StringFilter>;
+    locationId?: Nullable<StringFilter>;
     phoneNumber?: Nullable<StringNullableFilter>;
     role?: Nullable<EnumRoleFilter>;
     state?: Nullable<EnumStateFilter>;
@@ -14541,6 +8224,7 @@ export class UserScalarWhereWithAggregatesInput {
     email?: Nullable<StringWithAggregatesFilter>;
     emailVerified?: Nullable<BoolWithAggregatesFilter>;
     id?: Nullable<StringWithAggregatesFilter>;
+    locationId?: Nullable<StringWithAggregatesFilter>;
     phoneNumber?: Nullable<StringNullableWithAggregatesFilter>;
     role?: Nullable<EnumRoleWithAggregatesFilter>;
     state?: Nullable<EnumStateWithAggregatesFilter>;
@@ -14549,6 +8233,7 @@ export class UserScalarWhereWithAggregatesInput {
 
 export class UserUncheckedCreateInput {
     avatorId?: Nullable<string>;
+    businessProfile?: Nullable<BusinessProfileUncheckedCreateNestedOneWithoutOwnerInput>;
     comments?: Nullable<CommentUncheckedCreateNestedManyWithoutAuthorInput>;
     createdAt?: Nullable<DateTime>;
     device?: Nullable<DeviceUncheckedCreateNestedOneWithoutUserInput>;
@@ -14556,16 +8241,15 @@ export class UserUncheckedCreateInput {
     displayName: string;
     email: string;
     emailVerified?: Nullable<boolean>;
-    forms?: Nullable<FormUncheckedCreateNestedManyWithoutAuthorInput>;
-    forumAnswers?: Nullable<ForumAnswerUncheckedCreateNestedManyWithoutAuthorInput>;
-    forums?: Nullable<ForumUncheckedCreateNestedManyWithoutAuthorInput>;
     id?: Nullable<string>;
+    locationId: string;
     orders?: Nullable<OrderUncheckedCreateNestedManyWithoutOwnerInput>;
     phoneNumber?: Nullable<string>;
-    responses?: Nullable<ResponseUncheckedCreateNestedManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUncheckedCreateNestedManyWithoutRevieweeInput>;
+    reviews?: Nullable<ReviewUncheckedCreateNestedManyWithoutAuthorInput>;
     role?: Nullable<Role>;
+    services?: Nullable<ServiceUncheckedCreateNestedManyWithoutAuthorInput>;
     state?: Nullable<State>;
-    transactions?: Nullable<TransactionUncheckedCreateNestedManyWithoutInitiatorInput>;
     updatedAt?: Nullable<DateTime>;
 }
 
@@ -14576,7 +8260,15 @@ export class UserUncheckedCreateNestedManyWithoutAvatorInput {
     createMany?: Nullable<UserCreateManyAvatorInputEnvelope>;
 }
 
+export class UserUncheckedCreateNestedManyWithoutLocationInput {
+    connect?: Nullable<UserWhereUniqueInput[]>;
+    connectOrCreate?: Nullable<UserCreateOrConnectWithoutLocationInput[]>;
+    create?: Nullable<UserCreateWithoutLocationInput[]>;
+    createMany?: Nullable<UserCreateManyLocationInputEnvelope>;
+}
+
 export class UserUncheckedCreateWithoutAvatorInput {
+    businessProfile?: Nullable<BusinessProfileUncheckedCreateNestedOneWithoutOwnerInput>;
     comments?: Nullable<CommentUncheckedCreateNestedManyWithoutAuthorInput>;
     createdAt?: Nullable<DateTime>;
     device?: Nullable<DeviceUncheckedCreateNestedOneWithoutUserInput>;
@@ -14584,63 +8276,84 @@ export class UserUncheckedCreateWithoutAvatorInput {
     displayName: string;
     email: string;
     emailVerified?: Nullable<boolean>;
-    forms?: Nullable<FormUncheckedCreateNestedManyWithoutAuthorInput>;
-    forumAnswers?: Nullable<ForumAnswerUncheckedCreateNestedManyWithoutAuthorInput>;
-    forums?: Nullable<ForumUncheckedCreateNestedManyWithoutAuthorInput>;
     id?: Nullable<string>;
+    locationId: string;
     orders?: Nullable<OrderUncheckedCreateNestedManyWithoutOwnerInput>;
     phoneNumber?: Nullable<string>;
-    responses?: Nullable<ResponseUncheckedCreateNestedManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUncheckedCreateNestedManyWithoutRevieweeInput>;
+    reviews?: Nullable<ReviewUncheckedCreateNestedManyWithoutAuthorInput>;
     role?: Nullable<Role>;
+    services?: Nullable<ServiceUncheckedCreateNestedManyWithoutAuthorInput>;
     state?: Nullable<State>;
-    transactions?: Nullable<TransactionUncheckedCreateNestedManyWithoutInitiatorInput>;
+    updatedAt?: Nullable<DateTime>;
+}
+
+export class UserUncheckedCreateWithoutBusinessProfileInput {
+    avatorId?: Nullable<string>;
+    comments?: Nullable<CommentUncheckedCreateNestedManyWithoutAuthorInput>;
+    createdAt?: Nullable<DateTime>;
+    device?: Nullable<DeviceUncheckedCreateNestedOneWithoutUserInput>;
+    disabled?: Nullable<boolean>;
+    displayName: string;
+    email: string;
+    emailVerified?: Nullable<boolean>;
+    id?: Nullable<string>;
+    locationId: string;
+    orders?: Nullable<OrderUncheckedCreateNestedManyWithoutOwnerInput>;
+    phoneNumber?: Nullable<string>;
+    reviewed?: Nullable<ReviewUncheckedCreateNestedManyWithoutRevieweeInput>;
+    reviews?: Nullable<ReviewUncheckedCreateNestedManyWithoutAuthorInput>;
+    role?: Nullable<Role>;
+    services?: Nullable<ServiceUncheckedCreateNestedManyWithoutAuthorInput>;
+    state?: Nullable<State>;
     updatedAt?: Nullable<DateTime>;
 }
 
 export class UserUncheckedCreateWithoutCommentsInput {
     avatorId?: Nullable<string>;
+    businessProfile?: Nullable<BusinessProfileUncheckedCreateNestedOneWithoutOwnerInput>;
     createdAt?: Nullable<DateTime>;
     device?: Nullable<DeviceUncheckedCreateNestedOneWithoutUserInput>;
     disabled?: Nullable<boolean>;
     displayName: string;
     email: string;
     emailVerified?: Nullable<boolean>;
-    forms?: Nullable<FormUncheckedCreateNestedManyWithoutAuthorInput>;
-    forumAnswers?: Nullable<ForumAnswerUncheckedCreateNestedManyWithoutAuthorInput>;
-    forums?: Nullable<ForumUncheckedCreateNestedManyWithoutAuthorInput>;
     id?: Nullable<string>;
+    locationId: string;
     orders?: Nullable<OrderUncheckedCreateNestedManyWithoutOwnerInput>;
     phoneNumber?: Nullable<string>;
-    responses?: Nullable<ResponseUncheckedCreateNestedManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUncheckedCreateNestedManyWithoutRevieweeInput>;
+    reviews?: Nullable<ReviewUncheckedCreateNestedManyWithoutAuthorInput>;
     role?: Nullable<Role>;
+    services?: Nullable<ServiceUncheckedCreateNestedManyWithoutAuthorInput>;
     state?: Nullable<State>;
-    transactions?: Nullable<TransactionUncheckedCreateNestedManyWithoutInitiatorInput>;
     updatedAt?: Nullable<DateTime>;
 }
 
 export class UserUncheckedCreateWithoutDeviceInput {
     avatorId?: Nullable<string>;
+    businessProfile?: Nullable<BusinessProfileUncheckedCreateNestedOneWithoutOwnerInput>;
     comments?: Nullable<CommentUncheckedCreateNestedManyWithoutAuthorInput>;
     createdAt?: Nullable<DateTime>;
     disabled?: Nullable<boolean>;
     displayName: string;
     email: string;
     emailVerified?: Nullable<boolean>;
-    forms?: Nullable<FormUncheckedCreateNestedManyWithoutAuthorInput>;
-    forumAnswers?: Nullable<ForumAnswerUncheckedCreateNestedManyWithoutAuthorInput>;
-    forums?: Nullable<ForumUncheckedCreateNestedManyWithoutAuthorInput>;
     id?: Nullable<string>;
+    locationId: string;
     orders?: Nullable<OrderUncheckedCreateNestedManyWithoutOwnerInput>;
     phoneNumber?: Nullable<string>;
-    responses?: Nullable<ResponseUncheckedCreateNestedManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUncheckedCreateNestedManyWithoutRevieweeInput>;
+    reviews?: Nullable<ReviewUncheckedCreateNestedManyWithoutAuthorInput>;
     role?: Nullable<Role>;
+    services?: Nullable<ServiceUncheckedCreateNestedManyWithoutAuthorInput>;
     state?: Nullable<State>;
-    transactions?: Nullable<TransactionUncheckedCreateNestedManyWithoutInitiatorInput>;
     updatedAt?: Nullable<DateTime>;
 }
 
-export class UserUncheckedCreateWithoutFormsInput {
+export class UserUncheckedCreateWithoutLocationInput {
     avatorId?: Nullable<string>;
+    businessProfile?: Nullable<BusinessProfileUncheckedCreateNestedOneWithoutOwnerInput>;
     comments?: Nullable<CommentUncheckedCreateNestedManyWithoutAuthorInput>;
     createdAt?: Nullable<DateTime>;
     device?: Nullable<DeviceUncheckedCreateNestedOneWithoutUserInput>;
@@ -14648,62 +8361,20 @@ export class UserUncheckedCreateWithoutFormsInput {
     displayName: string;
     email: string;
     emailVerified?: Nullable<boolean>;
-    forumAnswers?: Nullable<ForumAnswerUncheckedCreateNestedManyWithoutAuthorInput>;
-    forums?: Nullable<ForumUncheckedCreateNestedManyWithoutAuthorInput>;
     id?: Nullable<string>;
     orders?: Nullable<OrderUncheckedCreateNestedManyWithoutOwnerInput>;
     phoneNumber?: Nullable<string>;
-    responses?: Nullable<ResponseUncheckedCreateNestedManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUncheckedCreateNestedManyWithoutRevieweeInput>;
+    reviews?: Nullable<ReviewUncheckedCreateNestedManyWithoutAuthorInput>;
     role?: Nullable<Role>;
+    services?: Nullable<ServiceUncheckedCreateNestedManyWithoutAuthorInput>;
     state?: Nullable<State>;
-    transactions?: Nullable<TransactionUncheckedCreateNestedManyWithoutInitiatorInput>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class UserUncheckedCreateWithoutForumAnswersInput {
-    avatorId?: Nullable<string>;
-    comments?: Nullable<CommentUncheckedCreateNestedManyWithoutAuthorInput>;
-    createdAt?: Nullable<DateTime>;
-    device?: Nullable<DeviceUncheckedCreateNestedOneWithoutUserInput>;
-    disabled?: Nullable<boolean>;
-    displayName: string;
-    email: string;
-    emailVerified?: Nullable<boolean>;
-    forms?: Nullable<FormUncheckedCreateNestedManyWithoutAuthorInput>;
-    forums?: Nullable<ForumUncheckedCreateNestedManyWithoutAuthorInput>;
-    id?: Nullable<string>;
-    orders?: Nullable<OrderUncheckedCreateNestedManyWithoutOwnerInput>;
-    phoneNumber?: Nullable<string>;
-    responses?: Nullable<ResponseUncheckedCreateNestedManyWithoutAuthorInput>;
-    role?: Nullable<Role>;
-    state?: Nullable<State>;
-    transactions?: Nullable<TransactionUncheckedCreateNestedManyWithoutInitiatorInput>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class UserUncheckedCreateWithoutForumsInput {
-    avatorId?: Nullable<string>;
-    comments?: Nullable<CommentUncheckedCreateNestedManyWithoutAuthorInput>;
-    createdAt?: Nullable<DateTime>;
-    device?: Nullable<DeviceUncheckedCreateNestedOneWithoutUserInput>;
-    disabled?: Nullable<boolean>;
-    displayName: string;
-    email: string;
-    emailVerified?: Nullable<boolean>;
-    forms?: Nullable<FormUncheckedCreateNestedManyWithoutAuthorInput>;
-    forumAnswers?: Nullable<ForumAnswerUncheckedCreateNestedManyWithoutAuthorInput>;
-    id?: Nullable<string>;
-    orders?: Nullable<OrderUncheckedCreateNestedManyWithoutOwnerInput>;
-    phoneNumber?: Nullable<string>;
-    responses?: Nullable<ResponseUncheckedCreateNestedManyWithoutAuthorInput>;
-    role?: Nullable<Role>;
-    state?: Nullable<State>;
-    transactions?: Nullable<TransactionUncheckedCreateNestedManyWithoutInitiatorInput>;
     updatedAt?: Nullable<DateTime>;
 }
 
 export class UserUncheckedCreateWithoutOrdersInput {
     avatorId?: Nullable<string>;
+    businessProfile?: Nullable<BusinessProfileUncheckedCreateNestedOneWithoutOwnerInput>;
     comments?: Nullable<CommentUncheckedCreateNestedManyWithoutAuthorInput>;
     createdAt?: Nullable<DateTime>;
     device?: Nullable<DeviceUncheckedCreateNestedOneWithoutUserInput>;
@@ -14711,20 +8382,20 @@ export class UserUncheckedCreateWithoutOrdersInput {
     displayName: string;
     email: string;
     emailVerified?: Nullable<boolean>;
-    forms?: Nullable<FormUncheckedCreateNestedManyWithoutAuthorInput>;
-    forumAnswers?: Nullable<ForumAnswerUncheckedCreateNestedManyWithoutAuthorInput>;
-    forums?: Nullable<ForumUncheckedCreateNestedManyWithoutAuthorInput>;
     id?: Nullable<string>;
+    locationId: string;
     phoneNumber?: Nullable<string>;
-    responses?: Nullable<ResponseUncheckedCreateNestedManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUncheckedCreateNestedManyWithoutRevieweeInput>;
+    reviews?: Nullable<ReviewUncheckedCreateNestedManyWithoutAuthorInput>;
     role?: Nullable<Role>;
+    services?: Nullable<ServiceUncheckedCreateNestedManyWithoutAuthorInput>;
     state?: Nullable<State>;
-    transactions?: Nullable<TransactionUncheckedCreateNestedManyWithoutInitiatorInput>;
     updatedAt?: Nullable<DateTime>;
 }
 
-export class UserUncheckedCreateWithoutResponsesInput {
+export class UserUncheckedCreateWithoutReviewedInput {
     avatorId?: Nullable<string>;
+    businessProfile?: Nullable<BusinessProfileUncheckedCreateNestedOneWithoutOwnerInput>;
     comments?: Nullable<CommentUncheckedCreateNestedManyWithoutAuthorInput>;
     createdAt?: Nullable<DateTime>;
     device?: Nullable<DeviceUncheckedCreateNestedOneWithoutUserInput>;
@@ -14732,20 +8403,20 @@ export class UserUncheckedCreateWithoutResponsesInput {
     displayName: string;
     email: string;
     emailVerified?: Nullable<boolean>;
-    forms?: Nullable<FormUncheckedCreateNestedManyWithoutAuthorInput>;
-    forumAnswers?: Nullable<ForumAnswerUncheckedCreateNestedManyWithoutAuthorInput>;
-    forums?: Nullable<ForumUncheckedCreateNestedManyWithoutAuthorInput>;
     id?: Nullable<string>;
+    locationId: string;
     orders?: Nullable<OrderUncheckedCreateNestedManyWithoutOwnerInput>;
     phoneNumber?: Nullable<string>;
+    reviews?: Nullable<ReviewUncheckedCreateNestedManyWithoutAuthorInput>;
     role?: Nullable<Role>;
+    services?: Nullable<ServiceUncheckedCreateNestedManyWithoutAuthorInput>;
     state?: Nullable<State>;
-    transactions?: Nullable<TransactionUncheckedCreateNestedManyWithoutInitiatorInput>;
     updatedAt?: Nullable<DateTime>;
 }
 
-export class UserUncheckedCreateWithoutTransactionsInput {
+export class UserUncheckedCreateWithoutReviewsInput {
     avatorId?: Nullable<string>;
+    businessProfile?: Nullable<BusinessProfileUncheckedCreateNestedOneWithoutOwnerInput>;
     comments?: Nullable<CommentUncheckedCreateNestedManyWithoutAuthorInput>;
     createdAt?: Nullable<DateTime>;
     device?: Nullable<DeviceUncheckedCreateNestedOneWithoutUserInput>;
@@ -14753,13 +8424,33 @@ export class UserUncheckedCreateWithoutTransactionsInput {
     displayName: string;
     email: string;
     emailVerified?: Nullable<boolean>;
-    forms?: Nullable<FormUncheckedCreateNestedManyWithoutAuthorInput>;
-    forumAnswers?: Nullable<ForumAnswerUncheckedCreateNestedManyWithoutAuthorInput>;
-    forums?: Nullable<ForumUncheckedCreateNestedManyWithoutAuthorInput>;
     id?: Nullable<string>;
+    locationId: string;
     orders?: Nullable<OrderUncheckedCreateNestedManyWithoutOwnerInput>;
     phoneNumber?: Nullable<string>;
-    responses?: Nullable<ResponseUncheckedCreateNestedManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUncheckedCreateNestedManyWithoutRevieweeInput>;
+    role?: Nullable<Role>;
+    services?: Nullable<ServiceUncheckedCreateNestedManyWithoutAuthorInput>;
+    state?: Nullable<State>;
+    updatedAt?: Nullable<DateTime>;
+}
+
+export class UserUncheckedCreateWithoutServicesInput {
+    avatorId?: Nullable<string>;
+    businessProfile?: Nullable<BusinessProfileUncheckedCreateNestedOneWithoutOwnerInput>;
+    comments?: Nullable<CommentUncheckedCreateNestedManyWithoutAuthorInput>;
+    createdAt?: Nullable<DateTime>;
+    device?: Nullable<DeviceUncheckedCreateNestedOneWithoutUserInput>;
+    disabled?: Nullable<boolean>;
+    displayName: string;
+    email: string;
+    emailVerified?: Nullable<boolean>;
+    id?: Nullable<string>;
+    locationId: string;
+    orders?: Nullable<OrderUncheckedCreateNestedManyWithoutOwnerInput>;
+    phoneNumber?: Nullable<string>;
+    reviewed?: Nullable<ReviewUncheckedCreateNestedManyWithoutRevieweeInput>;
+    reviews?: Nullable<ReviewUncheckedCreateNestedManyWithoutAuthorInput>;
     role?: Nullable<Role>;
     state?: Nullable<State>;
     updatedAt?: Nullable<DateTime>;
@@ -14767,6 +8458,7 @@ export class UserUncheckedCreateWithoutTransactionsInput {
 
 export class UserUncheckedUpdateInput {
     avatorId?: Nullable<NullableStringFieldUpdateOperationsInput>;
+    businessProfile?: Nullable<BusinessProfileUncheckedUpdateOneWithoutOwnerInput>;
     comments?: Nullable<CommentUncheckedUpdateManyWithoutAuthorInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     device?: Nullable<DeviceUncheckedUpdateOneWithoutUserInput>;
@@ -14774,16 +8466,15 @@ export class UserUncheckedUpdateInput {
     displayName?: Nullable<StringFieldUpdateOperationsInput>;
     email?: Nullable<StringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
-    forms?: Nullable<FormUncheckedUpdateManyWithoutAuthorInput>;
-    forumAnswers?: Nullable<ForumAnswerUncheckedUpdateManyWithoutAuthorInput>;
-    forums?: Nullable<ForumUncheckedUpdateManyWithoutAuthorInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
+    locationId?: Nullable<StringFieldUpdateOperationsInput>;
     orders?: Nullable<OrderUncheckedUpdateManyWithoutOwnerInput>;
     phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    responses?: Nullable<ResponseUncheckedUpdateManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUncheckedUpdateManyWithoutRevieweeInput>;
+    reviews?: Nullable<ReviewUncheckedUpdateManyWithoutAuthorInput>;
     role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
+    services?: Nullable<ServiceUncheckedUpdateManyWithoutAuthorInput>;
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    transactions?: Nullable<TransactionUncheckedUpdateManyWithoutInitiatorInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
 
@@ -14795,6 +8486,7 @@ export class UserUncheckedUpdateManyInput {
     email?: Nullable<StringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
+    locationId?: Nullable<StringFieldUpdateOperationsInput>;
     phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
     role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
@@ -14815,7 +8507,36 @@ export class UserUncheckedUpdateManyWithoutAvatorInput {
     upsert?: Nullable<UserUpsertWithWhereUniqueWithoutAvatorInput[]>;
 }
 
+export class UserUncheckedUpdateManyWithoutLocationInput {
+    connect?: Nullable<UserWhereUniqueInput[]>;
+    connectOrCreate?: Nullable<UserCreateOrConnectWithoutLocationInput[]>;
+    create?: Nullable<UserCreateWithoutLocationInput[]>;
+    createMany?: Nullable<UserCreateManyLocationInputEnvelope>;
+    delete?: Nullable<UserWhereUniqueInput[]>;
+    deleteMany?: Nullable<UserScalarWhereInput[]>;
+    disconnect?: Nullable<UserWhereUniqueInput[]>;
+    set?: Nullable<UserWhereUniqueInput[]>;
+    update?: Nullable<UserUpdateWithWhereUniqueWithoutLocationInput[]>;
+    updateMany?: Nullable<UserUpdateManyWithWhereWithoutLocationInput[]>;
+    upsert?: Nullable<UserUpsertWithWhereUniqueWithoutLocationInput[]>;
+}
+
 export class UserUncheckedUpdateManyWithoutUserInput {
+    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    disabled?: Nullable<BoolFieldUpdateOperationsInput>;
+    displayName?: Nullable<StringFieldUpdateOperationsInput>;
+    email?: Nullable<StringFieldUpdateOperationsInput>;
+    emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
+    id?: Nullable<StringFieldUpdateOperationsInput>;
+    locationId?: Nullable<StringFieldUpdateOperationsInput>;
+    phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
+    role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
+    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
+    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+}
+
+export class UserUncheckedUpdateManyWithoutUsersInput {
+    avatorId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     disabled?: Nullable<BoolFieldUpdateOperationsInput>;
     displayName?: Nullable<StringFieldUpdateOperationsInput>;
@@ -14829,6 +8550,7 @@ export class UserUncheckedUpdateManyWithoutUserInput {
 }
 
 export class UserUncheckedUpdateWithoutAvatorInput {
+    businessProfile?: Nullable<BusinessProfileUncheckedUpdateOneWithoutOwnerInput>;
     comments?: Nullable<CommentUncheckedUpdateManyWithoutAuthorInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     device?: Nullable<DeviceUncheckedUpdateOneWithoutUserInput>;
@@ -14836,63 +8558,84 @@ export class UserUncheckedUpdateWithoutAvatorInput {
     displayName?: Nullable<StringFieldUpdateOperationsInput>;
     email?: Nullable<StringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
-    forms?: Nullable<FormUncheckedUpdateManyWithoutAuthorInput>;
-    forumAnswers?: Nullable<ForumAnswerUncheckedUpdateManyWithoutAuthorInput>;
-    forums?: Nullable<ForumUncheckedUpdateManyWithoutAuthorInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
+    locationId?: Nullable<StringFieldUpdateOperationsInput>;
     orders?: Nullable<OrderUncheckedUpdateManyWithoutOwnerInput>;
     phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    responses?: Nullable<ResponseUncheckedUpdateManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUncheckedUpdateManyWithoutRevieweeInput>;
+    reviews?: Nullable<ReviewUncheckedUpdateManyWithoutAuthorInput>;
     role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
+    services?: Nullable<ServiceUncheckedUpdateManyWithoutAuthorInput>;
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    transactions?: Nullable<TransactionUncheckedUpdateManyWithoutInitiatorInput>;
+    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+}
+
+export class UserUncheckedUpdateWithoutBusinessProfileInput {
+    avatorId?: Nullable<NullableStringFieldUpdateOperationsInput>;
+    comments?: Nullable<CommentUncheckedUpdateManyWithoutAuthorInput>;
+    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    device?: Nullable<DeviceUncheckedUpdateOneWithoutUserInput>;
+    disabled?: Nullable<BoolFieldUpdateOperationsInput>;
+    displayName?: Nullable<StringFieldUpdateOperationsInput>;
+    email?: Nullable<StringFieldUpdateOperationsInput>;
+    emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
+    id?: Nullable<StringFieldUpdateOperationsInput>;
+    locationId?: Nullable<StringFieldUpdateOperationsInput>;
+    orders?: Nullable<OrderUncheckedUpdateManyWithoutOwnerInput>;
+    phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
+    reviewed?: Nullable<ReviewUncheckedUpdateManyWithoutRevieweeInput>;
+    reviews?: Nullable<ReviewUncheckedUpdateManyWithoutAuthorInput>;
+    role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
+    services?: Nullable<ServiceUncheckedUpdateManyWithoutAuthorInput>;
+    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
 
 export class UserUncheckedUpdateWithoutCommentsInput {
     avatorId?: Nullable<NullableStringFieldUpdateOperationsInput>;
+    businessProfile?: Nullable<BusinessProfileUncheckedUpdateOneWithoutOwnerInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     device?: Nullable<DeviceUncheckedUpdateOneWithoutUserInput>;
     disabled?: Nullable<BoolFieldUpdateOperationsInput>;
     displayName?: Nullable<StringFieldUpdateOperationsInput>;
     email?: Nullable<StringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
-    forms?: Nullable<FormUncheckedUpdateManyWithoutAuthorInput>;
-    forumAnswers?: Nullable<ForumAnswerUncheckedUpdateManyWithoutAuthorInput>;
-    forums?: Nullable<ForumUncheckedUpdateManyWithoutAuthorInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
+    locationId?: Nullable<StringFieldUpdateOperationsInput>;
     orders?: Nullable<OrderUncheckedUpdateManyWithoutOwnerInput>;
     phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    responses?: Nullable<ResponseUncheckedUpdateManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUncheckedUpdateManyWithoutRevieweeInput>;
+    reviews?: Nullable<ReviewUncheckedUpdateManyWithoutAuthorInput>;
     role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
+    services?: Nullable<ServiceUncheckedUpdateManyWithoutAuthorInput>;
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    transactions?: Nullable<TransactionUncheckedUpdateManyWithoutInitiatorInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
 
 export class UserUncheckedUpdateWithoutDeviceInput {
     avatorId?: Nullable<NullableStringFieldUpdateOperationsInput>;
+    businessProfile?: Nullable<BusinessProfileUncheckedUpdateOneWithoutOwnerInput>;
     comments?: Nullable<CommentUncheckedUpdateManyWithoutAuthorInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     disabled?: Nullable<BoolFieldUpdateOperationsInput>;
     displayName?: Nullable<StringFieldUpdateOperationsInput>;
     email?: Nullable<StringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
-    forms?: Nullable<FormUncheckedUpdateManyWithoutAuthorInput>;
-    forumAnswers?: Nullable<ForumAnswerUncheckedUpdateManyWithoutAuthorInput>;
-    forums?: Nullable<ForumUncheckedUpdateManyWithoutAuthorInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
+    locationId?: Nullable<StringFieldUpdateOperationsInput>;
     orders?: Nullable<OrderUncheckedUpdateManyWithoutOwnerInput>;
     phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    responses?: Nullable<ResponseUncheckedUpdateManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUncheckedUpdateManyWithoutRevieweeInput>;
+    reviews?: Nullable<ReviewUncheckedUpdateManyWithoutAuthorInput>;
     role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
+    services?: Nullable<ServiceUncheckedUpdateManyWithoutAuthorInput>;
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    transactions?: Nullable<TransactionUncheckedUpdateManyWithoutInitiatorInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
 
-export class UserUncheckedUpdateWithoutFormsInput {
+export class UserUncheckedUpdateWithoutLocationInput {
     avatorId?: Nullable<NullableStringFieldUpdateOperationsInput>;
+    businessProfile?: Nullable<BusinessProfileUncheckedUpdateOneWithoutOwnerInput>;
     comments?: Nullable<CommentUncheckedUpdateManyWithoutAuthorInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     device?: Nullable<DeviceUncheckedUpdateOneWithoutUserInput>;
@@ -14900,62 +8643,20 @@ export class UserUncheckedUpdateWithoutFormsInput {
     displayName?: Nullable<StringFieldUpdateOperationsInput>;
     email?: Nullable<StringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
-    forumAnswers?: Nullable<ForumAnswerUncheckedUpdateManyWithoutAuthorInput>;
-    forums?: Nullable<ForumUncheckedUpdateManyWithoutAuthorInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     orders?: Nullable<OrderUncheckedUpdateManyWithoutOwnerInput>;
     phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    responses?: Nullable<ResponseUncheckedUpdateManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUncheckedUpdateManyWithoutRevieweeInput>;
+    reviews?: Nullable<ReviewUncheckedUpdateManyWithoutAuthorInput>;
     role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
+    services?: Nullable<ServiceUncheckedUpdateManyWithoutAuthorInput>;
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    transactions?: Nullable<TransactionUncheckedUpdateManyWithoutInitiatorInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class UserUncheckedUpdateWithoutForumAnswersInput {
-    avatorId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    comments?: Nullable<CommentUncheckedUpdateManyWithoutAuthorInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    device?: Nullable<DeviceUncheckedUpdateOneWithoutUserInput>;
-    disabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    displayName?: Nullable<StringFieldUpdateOperationsInput>;
-    email?: Nullable<StringFieldUpdateOperationsInput>;
-    emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
-    forms?: Nullable<FormUncheckedUpdateManyWithoutAuthorInput>;
-    forums?: Nullable<ForumUncheckedUpdateManyWithoutAuthorInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    orders?: Nullable<OrderUncheckedUpdateManyWithoutOwnerInput>;
-    phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    responses?: Nullable<ResponseUncheckedUpdateManyWithoutAuthorInput>;
-    role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    transactions?: Nullable<TransactionUncheckedUpdateManyWithoutInitiatorInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class UserUncheckedUpdateWithoutForumsInput {
-    avatorId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    comments?: Nullable<CommentUncheckedUpdateManyWithoutAuthorInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    device?: Nullable<DeviceUncheckedUpdateOneWithoutUserInput>;
-    disabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    displayName?: Nullable<StringFieldUpdateOperationsInput>;
-    email?: Nullable<StringFieldUpdateOperationsInput>;
-    emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
-    forms?: Nullable<FormUncheckedUpdateManyWithoutAuthorInput>;
-    forumAnswers?: Nullable<ForumAnswerUncheckedUpdateManyWithoutAuthorInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    orders?: Nullable<OrderUncheckedUpdateManyWithoutOwnerInput>;
-    phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    responses?: Nullable<ResponseUncheckedUpdateManyWithoutAuthorInput>;
-    role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    transactions?: Nullable<TransactionUncheckedUpdateManyWithoutInitiatorInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
 
 export class UserUncheckedUpdateWithoutOrdersInput {
     avatorId?: Nullable<NullableStringFieldUpdateOperationsInput>;
+    businessProfile?: Nullable<BusinessProfileUncheckedUpdateOneWithoutOwnerInput>;
     comments?: Nullable<CommentUncheckedUpdateManyWithoutAuthorInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     device?: Nullable<DeviceUncheckedUpdateOneWithoutUserInput>;
@@ -14963,20 +8664,20 @@ export class UserUncheckedUpdateWithoutOrdersInput {
     displayName?: Nullable<StringFieldUpdateOperationsInput>;
     email?: Nullable<StringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
-    forms?: Nullable<FormUncheckedUpdateManyWithoutAuthorInput>;
-    forumAnswers?: Nullable<ForumAnswerUncheckedUpdateManyWithoutAuthorInput>;
-    forums?: Nullable<ForumUncheckedUpdateManyWithoutAuthorInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
+    locationId?: Nullable<StringFieldUpdateOperationsInput>;
     phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    responses?: Nullable<ResponseUncheckedUpdateManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUncheckedUpdateManyWithoutRevieweeInput>;
+    reviews?: Nullable<ReviewUncheckedUpdateManyWithoutAuthorInput>;
     role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
+    services?: Nullable<ServiceUncheckedUpdateManyWithoutAuthorInput>;
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    transactions?: Nullable<TransactionUncheckedUpdateManyWithoutInitiatorInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
 
-export class UserUncheckedUpdateWithoutResponsesInput {
+export class UserUncheckedUpdateWithoutReviewedInput {
     avatorId?: Nullable<NullableStringFieldUpdateOperationsInput>;
+    businessProfile?: Nullable<BusinessProfileUncheckedUpdateOneWithoutOwnerInput>;
     comments?: Nullable<CommentUncheckedUpdateManyWithoutAuthorInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     device?: Nullable<DeviceUncheckedUpdateOneWithoutUserInput>;
@@ -14984,20 +8685,20 @@ export class UserUncheckedUpdateWithoutResponsesInput {
     displayName?: Nullable<StringFieldUpdateOperationsInput>;
     email?: Nullable<StringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
-    forms?: Nullable<FormUncheckedUpdateManyWithoutAuthorInput>;
-    forumAnswers?: Nullable<ForumAnswerUncheckedUpdateManyWithoutAuthorInput>;
-    forums?: Nullable<ForumUncheckedUpdateManyWithoutAuthorInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
+    locationId?: Nullable<StringFieldUpdateOperationsInput>;
     orders?: Nullable<OrderUncheckedUpdateManyWithoutOwnerInput>;
     phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
+    reviews?: Nullable<ReviewUncheckedUpdateManyWithoutAuthorInput>;
     role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
+    services?: Nullable<ServiceUncheckedUpdateManyWithoutAuthorInput>;
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    transactions?: Nullable<TransactionUncheckedUpdateManyWithoutInitiatorInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
 
-export class UserUncheckedUpdateWithoutTransactionsInput {
+export class UserUncheckedUpdateWithoutReviewsInput {
     avatorId?: Nullable<NullableStringFieldUpdateOperationsInput>;
+    businessProfile?: Nullable<BusinessProfileUncheckedUpdateOneWithoutOwnerInput>;
     comments?: Nullable<CommentUncheckedUpdateManyWithoutAuthorInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     device?: Nullable<DeviceUncheckedUpdateOneWithoutUserInput>;
@@ -15005,13 +8706,33 @@ export class UserUncheckedUpdateWithoutTransactionsInput {
     displayName?: Nullable<StringFieldUpdateOperationsInput>;
     email?: Nullable<StringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
-    forms?: Nullable<FormUncheckedUpdateManyWithoutAuthorInput>;
-    forumAnswers?: Nullable<ForumAnswerUncheckedUpdateManyWithoutAuthorInput>;
-    forums?: Nullable<ForumUncheckedUpdateManyWithoutAuthorInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
+    locationId?: Nullable<StringFieldUpdateOperationsInput>;
     orders?: Nullable<OrderUncheckedUpdateManyWithoutOwnerInput>;
     phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    responses?: Nullable<ResponseUncheckedUpdateManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUncheckedUpdateManyWithoutRevieweeInput>;
+    role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
+    services?: Nullable<ServiceUncheckedUpdateManyWithoutAuthorInput>;
+    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
+    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+}
+
+export class UserUncheckedUpdateWithoutServicesInput {
+    avatorId?: Nullable<NullableStringFieldUpdateOperationsInput>;
+    businessProfile?: Nullable<BusinessProfileUncheckedUpdateOneWithoutOwnerInput>;
+    comments?: Nullable<CommentUncheckedUpdateManyWithoutAuthorInput>;
+    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    device?: Nullable<DeviceUncheckedUpdateOneWithoutUserInput>;
+    disabled?: Nullable<BoolFieldUpdateOperationsInput>;
+    displayName?: Nullable<StringFieldUpdateOperationsInput>;
+    email?: Nullable<StringFieldUpdateOperationsInput>;
+    emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
+    id?: Nullable<StringFieldUpdateOperationsInput>;
+    locationId?: Nullable<StringFieldUpdateOperationsInput>;
+    orders?: Nullable<OrderUncheckedUpdateManyWithoutOwnerInput>;
+    phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
+    reviewed?: Nullable<ReviewUncheckedUpdateManyWithoutRevieweeInput>;
+    reviews?: Nullable<ReviewUncheckedUpdateManyWithoutAuthorInput>;
     role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
@@ -15019,6 +8740,7 @@ export class UserUncheckedUpdateWithoutTransactionsInput {
 
 export class UserUpdateInput {
     avator?: Nullable<AttachmentUpdateOneWithoutUserInput>;
+    businessProfile?: Nullable<BusinessProfileUpdateOneWithoutOwnerInput>;
     comments?: Nullable<CommentUpdateManyWithoutAuthorInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     device?: Nullable<DeviceUpdateOneWithoutUserInput>;
@@ -15026,16 +8748,15 @@ export class UserUpdateInput {
     displayName?: Nullable<StringFieldUpdateOperationsInput>;
     email?: Nullable<StringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
-    forms?: Nullable<FormUpdateManyWithoutAuthorInput>;
-    forumAnswers?: Nullable<ForumAnswerUpdateManyWithoutAuthorInput>;
-    forums?: Nullable<ForumUpdateManyWithoutAuthorInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
+    location?: Nullable<LocationUpdateOneRequiredWithoutUsersInput>;
     orders?: Nullable<OrderUpdateManyWithoutOwnerInput>;
     phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    responses?: Nullable<ResponseUpdateManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUpdateManyWithoutRevieweeInput>;
+    reviews?: Nullable<ReviewUpdateManyWithoutAuthorInput>;
     role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
+    services?: Nullable<ServiceUpdateManyWithoutAuthorInput>;
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    transactions?: Nullable<TransactionUpdateManyWithoutInitiatorInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
 
@@ -15057,6 +8778,11 @@ export class UserUpdateManyWithWhereWithoutAvatorInput {
     where: UserScalarWhereInput;
 }
 
+export class UserUpdateManyWithWhereWithoutLocationInput {
+    data: UserUncheckedUpdateManyWithoutUsersInput;
+    where: UserScalarWhereInput;
+}
+
 export class UserUpdateManyWithoutAvatorInput {
     connect?: Nullable<UserWhereUniqueInput[]>;
     connectOrCreate?: Nullable<UserCreateOrConnectWithoutAvatorInput[]>;
@@ -15071,36 +8797,34 @@ export class UserUpdateManyWithoutAvatorInput {
     upsert?: Nullable<UserUpsertWithWhereUniqueWithoutAvatorInput[]>;
 }
 
+export class UserUpdateManyWithoutLocationInput {
+    connect?: Nullable<UserWhereUniqueInput[]>;
+    connectOrCreate?: Nullable<UserCreateOrConnectWithoutLocationInput[]>;
+    create?: Nullable<UserCreateWithoutLocationInput[]>;
+    createMany?: Nullable<UserCreateManyLocationInputEnvelope>;
+    delete?: Nullable<UserWhereUniqueInput[]>;
+    deleteMany?: Nullable<UserScalarWhereInput[]>;
+    disconnect?: Nullable<UserWhereUniqueInput[]>;
+    set?: Nullable<UserWhereUniqueInput[]>;
+    update?: Nullable<UserUpdateWithWhereUniqueWithoutLocationInput[]>;
+    updateMany?: Nullable<UserUpdateManyWithWhereWithoutLocationInput[]>;
+    upsert?: Nullable<UserUpsertWithWhereUniqueWithoutLocationInput[]>;
+}
+
+export class UserUpdateOneRequiredWithoutBusinessProfileInput {
+    connect?: Nullable<UserWhereUniqueInput>;
+    connectOrCreate?: Nullable<UserCreateOrConnectWithoutBusinessProfileInput>;
+    create?: Nullable<UserUncheckedCreateWithoutBusinessProfileInput>;
+    update?: Nullable<UserUncheckedUpdateWithoutBusinessProfileInput>;
+    upsert?: Nullable<UserUpsertWithoutBusinessProfileInput>;
+}
+
 export class UserUpdateOneRequiredWithoutCommentsInput {
     connect?: Nullable<UserWhereUniqueInput>;
     connectOrCreate?: Nullable<UserCreateOrConnectWithoutCommentsInput>;
     create?: Nullable<UserUncheckedCreateWithoutCommentsInput>;
     update?: Nullable<UserUncheckedUpdateWithoutCommentsInput>;
     upsert?: Nullable<UserUpsertWithoutCommentsInput>;
-}
-
-export class UserUpdateOneRequiredWithoutFormsInput {
-    connect?: Nullable<UserWhereUniqueInput>;
-    connectOrCreate?: Nullable<UserCreateOrConnectWithoutFormsInput>;
-    create?: Nullable<UserUncheckedCreateWithoutFormsInput>;
-    update?: Nullable<UserUncheckedUpdateWithoutFormsInput>;
-    upsert?: Nullable<UserUpsertWithoutFormsInput>;
-}
-
-export class UserUpdateOneRequiredWithoutForumAnswersInput {
-    connect?: Nullable<UserWhereUniqueInput>;
-    connectOrCreate?: Nullable<UserCreateOrConnectWithoutForumAnswersInput>;
-    create?: Nullable<UserUncheckedCreateWithoutForumAnswersInput>;
-    update?: Nullable<UserUncheckedUpdateWithoutForumAnswersInput>;
-    upsert?: Nullable<UserUpsertWithoutForumAnswersInput>;
-}
-
-export class UserUpdateOneRequiredWithoutForumsInput {
-    connect?: Nullable<UserWhereUniqueInput>;
-    connectOrCreate?: Nullable<UserCreateOrConnectWithoutForumsInput>;
-    create?: Nullable<UserUncheckedCreateWithoutForumsInput>;
-    update?: Nullable<UserUncheckedUpdateWithoutForumsInput>;
-    upsert?: Nullable<UserUpsertWithoutForumsInput>;
 }
 
 export class UserUpdateOneRequiredWithoutOrdersInput {
@@ -15111,12 +8835,28 @@ export class UserUpdateOneRequiredWithoutOrdersInput {
     upsert?: Nullable<UserUpsertWithoutOrdersInput>;
 }
 
-export class UserUpdateOneRequiredWithoutTransactionsInput {
+export class UserUpdateOneRequiredWithoutReviewedInput {
     connect?: Nullable<UserWhereUniqueInput>;
-    connectOrCreate?: Nullable<UserCreateOrConnectWithoutTransactionsInput>;
-    create?: Nullable<UserUncheckedCreateWithoutTransactionsInput>;
-    update?: Nullable<UserUncheckedUpdateWithoutTransactionsInput>;
-    upsert?: Nullable<UserUpsertWithoutTransactionsInput>;
+    connectOrCreate?: Nullable<UserCreateOrConnectWithoutReviewedInput>;
+    create?: Nullable<UserUncheckedCreateWithoutReviewedInput>;
+    update?: Nullable<UserUncheckedUpdateWithoutReviewedInput>;
+    upsert?: Nullable<UserUpsertWithoutReviewedInput>;
+}
+
+export class UserUpdateOneRequiredWithoutReviewsInput {
+    connect?: Nullable<UserWhereUniqueInput>;
+    connectOrCreate?: Nullable<UserCreateOrConnectWithoutReviewsInput>;
+    create?: Nullable<UserUncheckedCreateWithoutReviewsInput>;
+    update?: Nullable<UserUncheckedUpdateWithoutReviewsInput>;
+    upsert?: Nullable<UserUpsertWithoutReviewsInput>;
+}
+
+export class UserUpdateOneRequiredWithoutServicesInput {
+    connect?: Nullable<UserWhereUniqueInput>;
+    connectOrCreate?: Nullable<UserCreateOrConnectWithoutServicesInput>;
+    create?: Nullable<UserUncheckedCreateWithoutServicesInput>;
+    update?: Nullable<UserUncheckedUpdateWithoutServicesInput>;
+    upsert?: Nullable<UserUpsertWithoutServicesInput>;
 }
 
 export class UserUpdateOneWithoutDeviceInput {
@@ -15129,22 +8869,18 @@ export class UserUpdateOneWithoutDeviceInput {
     upsert?: Nullable<UserUpsertWithoutDeviceInput>;
 }
 
-export class UserUpdateOneWithoutResponsesInput {
-    connect?: Nullable<UserWhereUniqueInput>;
-    connectOrCreate?: Nullable<UserCreateOrConnectWithoutResponsesInput>;
-    create?: Nullable<UserUncheckedCreateWithoutResponsesInput>;
-    delete?: Nullable<boolean>;
-    disconnect?: Nullable<boolean>;
-    update?: Nullable<UserUncheckedUpdateWithoutResponsesInput>;
-    upsert?: Nullable<UserUpsertWithoutResponsesInput>;
-}
-
 export class UserUpdateWithWhereUniqueWithoutAvatorInput {
     data: UserUncheckedUpdateWithoutAvatorInput;
     where: UserWhereUniqueInput;
 }
 
+export class UserUpdateWithWhereUniqueWithoutLocationInput {
+    data: UserUncheckedUpdateWithoutLocationInput;
+    where: UserWhereUniqueInput;
+}
+
 export class UserUpdateWithoutAvatorInput {
+    businessProfile?: Nullable<BusinessProfileUpdateOneWithoutOwnerInput>;
     comments?: Nullable<CommentUpdateManyWithoutAuthorInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     device?: Nullable<DeviceUpdateOneWithoutUserInput>;
@@ -15152,63 +8888,84 @@ export class UserUpdateWithoutAvatorInput {
     displayName?: Nullable<StringFieldUpdateOperationsInput>;
     email?: Nullable<StringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
-    forms?: Nullable<FormUpdateManyWithoutAuthorInput>;
-    forumAnswers?: Nullable<ForumAnswerUpdateManyWithoutAuthorInput>;
-    forums?: Nullable<ForumUpdateManyWithoutAuthorInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
+    location?: Nullable<LocationUpdateOneRequiredWithoutUsersInput>;
     orders?: Nullable<OrderUpdateManyWithoutOwnerInput>;
     phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    responses?: Nullable<ResponseUpdateManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUpdateManyWithoutRevieweeInput>;
+    reviews?: Nullable<ReviewUpdateManyWithoutAuthorInput>;
     role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
+    services?: Nullable<ServiceUpdateManyWithoutAuthorInput>;
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    transactions?: Nullable<TransactionUpdateManyWithoutInitiatorInput>;
+    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+}
+
+export class UserUpdateWithoutBusinessProfileInput {
+    avator?: Nullable<AttachmentUpdateOneWithoutUserInput>;
+    comments?: Nullable<CommentUpdateManyWithoutAuthorInput>;
+    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    device?: Nullable<DeviceUpdateOneWithoutUserInput>;
+    disabled?: Nullable<BoolFieldUpdateOperationsInput>;
+    displayName?: Nullable<StringFieldUpdateOperationsInput>;
+    email?: Nullable<StringFieldUpdateOperationsInput>;
+    emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
+    id?: Nullable<StringFieldUpdateOperationsInput>;
+    location?: Nullable<LocationUpdateOneRequiredWithoutUsersInput>;
+    orders?: Nullable<OrderUpdateManyWithoutOwnerInput>;
+    phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
+    reviewed?: Nullable<ReviewUpdateManyWithoutRevieweeInput>;
+    reviews?: Nullable<ReviewUpdateManyWithoutAuthorInput>;
+    role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
+    services?: Nullable<ServiceUpdateManyWithoutAuthorInput>;
+    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
 
 export class UserUpdateWithoutCommentsInput {
     avator?: Nullable<AttachmentUpdateOneWithoutUserInput>;
+    businessProfile?: Nullable<BusinessProfileUpdateOneWithoutOwnerInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     device?: Nullable<DeviceUpdateOneWithoutUserInput>;
     disabled?: Nullable<BoolFieldUpdateOperationsInput>;
     displayName?: Nullable<StringFieldUpdateOperationsInput>;
     email?: Nullable<StringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
-    forms?: Nullable<FormUpdateManyWithoutAuthorInput>;
-    forumAnswers?: Nullable<ForumAnswerUpdateManyWithoutAuthorInput>;
-    forums?: Nullable<ForumUpdateManyWithoutAuthorInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
+    location?: Nullable<LocationUpdateOneRequiredWithoutUsersInput>;
     orders?: Nullable<OrderUpdateManyWithoutOwnerInput>;
     phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    responses?: Nullable<ResponseUpdateManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUpdateManyWithoutRevieweeInput>;
+    reviews?: Nullable<ReviewUpdateManyWithoutAuthorInput>;
     role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
+    services?: Nullable<ServiceUpdateManyWithoutAuthorInput>;
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    transactions?: Nullable<TransactionUpdateManyWithoutInitiatorInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
 
 export class UserUpdateWithoutDeviceInput {
     avator?: Nullable<AttachmentUpdateOneWithoutUserInput>;
+    businessProfile?: Nullable<BusinessProfileUpdateOneWithoutOwnerInput>;
     comments?: Nullable<CommentUpdateManyWithoutAuthorInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     disabled?: Nullable<BoolFieldUpdateOperationsInput>;
     displayName?: Nullable<StringFieldUpdateOperationsInput>;
     email?: Nullable<StringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
-    forms?: Nullable<FormUpdateManyWithoutAuthorInput>;
-    forumAnswers?: Nullable<ForumAnswerUpdateManyWithoutAuthorInput>;
-    forums?: Nullable<ForumUpdateManyWithoutAuthorInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
+    location?: Nullable<LocationUpdateOneRequiredWithoutUsersInput>;
     orders?: Nullable<OrderUpdateManyWithoutOwnerInput>;
     phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    responses?: Nullable<ResponseUpdateManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUpdateManyWithoutRevieweeInput>;
+    reviews?: Nullable<ReviewUpdateManyWithoutAuthorInput>;
     role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
+    services?: Nullable<ServiceUpdateManyWithoutAuthorInput>;
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    transactions?: Nullable<TransactionUpdateManyWithoutInitiatorInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
 
-export class UserUpdateWithoutFormsInput {
+export class UserUpdateWithoutLocationInput {
     avator?: Nullable<AttachmentUpdateOneWithoutUserInput>;
+    businessProfile?: Nullable<BusinessProfileUpdateOneWithoutOwnerInput>;
     comments?: Nullable<CommentUpdateManyWithoutAuthorInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     device?: Nullable<DeviceUpdateOneWithoutUserInput>;
@@ -15216,62 +8973,20 @@ export class UserUpdateWithoutFormsInput {
     displayName?: Nullable<StringFieldUpdateOperationsInput>;
     email?: Nullable<StringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
-    forumAnswers?: Nullable<ForumAnswerUpdateManyWithoutAuthorInput>;
-    forums?: Nullable<ForumUpdateManyWithoutAuthorInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     orders?: Nullable<OrderUpdateManyWithoutOwnerInput>;
     phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    responses?: Nullable<ResponseUpdateManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUpdateManyWithoutRevieweeInput>;
+    reviews?: Nullable<ReviewUpdateManyWithoutAuthorInput>;
     role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
+    services?: Nullable<ServiceUpdateManyWithoutAuthorInput>;
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    transactions?: Nullable<TransactionUpdateManyWithoutInitiatorInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class UserUpdateWithoutForumAnswersInput {
-    avator?: Nullable<AttachmentUpdateOneWithoutUserInput>;
-    comments?: Nullable<CommentUpdateManyWithoutAuthorInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    device?: Nullable<DeviceUpdateOneWithoutUserInput>;
-    disabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    displayName?: Nullable<StringFieldUpdateOperationsInput>;
-    email?: Nullable<StringFieldUpdateOperationsInput>;
-    emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
-    forms?: Nullable<FormUpdateManyWithoutAuthorInput>;
-    forums?: Nullable<ForumUpdateManyWithoutAuthorInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    orders?: Nullable<OrderUpdateManyWithoutOwnerInput>;
-    phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    responses?: Nullable<ResponseUpdateManyWithoutAuthorInput>;
-    role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    transactions?: Nullable<TransactionUpdateManyWithoutInitiatorInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-}
-
-export class UserUpdateWithoutForumsInput {
-    avator?: Nullable<AttachmentUpdateOneWithoutUserInput>;
-    comments?: Nullable<CommentUpdateManyWithoutAuthorInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    device?: Nullable<DeviceUpdateOneWithoutUserInput>;
-    disabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    displayName?: Nullable<StringFieldUpdateOperationsInput>;
-    email?: Nullable<StringFieldUpdateOperationsInput>;
-    emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
-    forms?: Nullable<FormUpdateManyWithoutAuthorInput>;
-    forumAnswers?: Nullable<ForumAnswerUpdateManyWithoutAuthorInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    orders?: Nullable<OrderUpdateManyWithoutOwnerInput>;
-    phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    responses?: Nullable<ResponseUpdateManyWithoutAuthorInput>;
-    role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
-    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    transactions?: Nullable<TransactionUpdateManyWithoutInitiatorInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
 
 export class UserUpdateWithoutOrdersInput {
     avator?: Nullable<AttachmentUpdateOneWithoutUserInput>;
+    businessProfile?: Nullable<BusinessProfileUpdateOneWithoutOwnerInput>;
     comments?: Nullable<CommentUpdateManyWithoutAuthorInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     device?: Nullable<DeviceUpdateOneWithoutUserInput>;
@@ -15279,20 +8994,20 @@ export class UserUpdateWithoutOrdersInput {
     displayName?: Nullable<StringFieldUpdateOperationsInput>;
     email?: Nullable<StringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
-    forms?: Nullable<FormUpdateManyWithoutAuthorInput>;
-    forumAnswers?: Nullable<ForumAnswerUpdateManyWithoutAuthorInput>;
-    forums?: Nullable<ForumUpdateManyWithoutAuthorInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
+    location?: Nullable<LocationUpdateOneRequiredWithoutUsersInput>;
     phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    responses?: Nullable<ResponseUpdateManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUpdateManyWithoutRevieweeInput>;
+    reviews?: Nullable<ReviewUpdateManyWithoutAuthorInput>;
     role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
+    services?: Nullable<ServiceUpdateManyWithoutAuthorInput>;
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    transactions?: Nullable<TransactionUpdateManyWithoutInitiatorInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
 
-export class UserUpdateWithoutResponsesInput {
+export class UserUpdateWithoutReviewedInput {
     avator?: Nullable<AttachmentUpdateOneWithoutUserInput>;
+    businessProfile?: Nullable<BusinessProfileUpdateOneWithoutOwnerInput>;
     comments?: Nullable<CommentUpdateManyWithoutAuthorInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     device?: Nullable<DeviceUpdateOneWithoutUserInput>;
@@ -15300,20 +9015,20 @@ export class UserUpdateWithoutResponsesInput {
     displayName?: Nullable<StringFieldUpdateOperationsInput>;
     email?: Nullable<StringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
-    forms?: Nullable<FormUpdateManyWithoutAuthorInput>;
-    forumAnswers?: Nullable<ForumAnswerUpdateManyWithoutAuthorInput>;
-    forums?: Nullable<ForumUpdateManyWithoutAuthorInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
+    location?: Nullable<LocationUpdateOneRequiredWithoutUsersInput>;
     orders?: Nullable<OrderUpdateManyWithoutOwnerInput>;
     phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
+    reviews?: Nullable<ReviewUpdateManyWithoutAuthorInput>;
     role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
+    services?: Nullable<ServiceUpdateManyWithoutAuthorInput>;
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
-    transactions?: Nullable<TransactionUpdateManyWithoutInitiatorInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
 
-export class UserUpdateWithoutTransactionsInput {
+export class UserUpdateWithoutReviewsInput {
     avator?: Nullable<AttachmentUpdateOneWithoutUserInput>;
+    businessProfile?: Nullable<BusinessProfileUpdateOneWithoutOwnerInput>;
     comments?: Nullable<CommentUpdateManyWithoutAuthorInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     device?: Nullable<DeviceUpdateOneWithoutUserInput>;
@@ -15321,13 +9036,33 @@ export class UserUpdateWithoutTransactionsInput {
     displayName?: Nullable<StringFieldUpdateOperationsInput>;
     email?: Nullable<StringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
-    forms?: Nullable<FormUpdateManyWithoutAuthorInput>;
-    forumAnswers?: Nullable<ForumAnswerUpdateManyWithoutAuthorInput>;
-    forums?: Nullable<ForumUpdateManyWithoutAuthorInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
+    location?: Nullable<LocationUpdateOneRequiredWithoutUsersInput>;
     orders?: Nullable<OrderUpdateManyWithoutOwnerInput>;
     phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    responses?: Nullable<ResponseUpdateManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUpdateManyWithoutRevieweeInput>;
+    role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
+    services?: Nullable<ServiceUpdateManyWithoutAuthorInput>;
+    state?: Nullable<EnumStateFieldUpdateOperationsInput>;
+    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+}
+
+export class UserUpdateWithoutServicesInput {
+    avator?: Nullable<AttachmentUpdateOneWithoutUserInput>;
+    businessProfile?: Nullable<BusinessProfileUpdateOneWithoutOwnerInput>;
+    comments?: Nullable<CommentUpdateManyWithoutAuthorInput>;
+    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    device?: Nullable<DeviceUpdateOneWithoutUserInput>;
+    disabled?: Nullable<BoolFieldUpdateOperationsInput>;
+    displayName?: Nullable<StringFieldUpdateOperationsInput>;
+    email?: Nullable<StringFieldUpdateOperationsInput>;
+    emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
+    id?: Nullable<StringFieldUpdateOperationsInput>;
+    location?: Nullable<LocationUpdateOneRequiredWithoutUsersInput>;
+    orders?: Nullable<OrderUpdateManyWithoutOwnerInput>;
+    phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
+    reviewed?: Nullable<ReviewUpdateManyWithoutRevieweeInput>;
+    reviews?: Nullable<ReviewUpdateManyWithoutAuthorInput>;
     role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
     state?: Nullable<EnumStateFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
@@ -15337,6 +9072,17 @@ export class UserUpsertWithWhereUniqueWithoutAvatorInput {
     create: UserUncheckedCreateWithoutAvatorInput;
     update: UserUncheckedUpdateWithoutAvatorInput;
     where: UserWhereUniqueInput;
+}
+
+export class UserUpsertWithWhereUniqueWithoutLocationInput {
+    create: UserUncheckedCreateWithoutLocationInput;
+    update: UserUncheckedUpdateWithoutLocationInput;
+    where: UserWhereUniqueInput;
+}
+
+export class UserUpsertWithoutBusinessProfileInput {
+    create: UserUncheckedCreateWithoutBusinessProfileInput;
+    update: UserUncheckedUpdateWithoutBusinessProfileInput;
 }
 
 export class UserUpsertWithoutCommentsInput {
@@ -15349,34 +9095,24 @@ export class UserUpsertWithoutDeviceInput {
     update: UserUncheckedUpdateWithoutDeviceInput;
 }
 
-export class UserUpsertWithoutFormsInput {
-    create: UserUncheckedCreateWithoutFormsInput;
-    update: UserUncheckedUpdateWithoutFormsInput;
-}
-
-export class UserUpsertWithoutForumAnswersInput {
-    create: UserUncheckedCreateWithoutForumAnswersInput;
-    update: UserUncheckedUpdateWithoutForumAnswersInput;
-}
-
-export class UserUpsertWithoutForumsInput {
-    create: UserUncheckedCreateWithoutForumsInput;
-    update: UserUncheckedUpdateWithoutForumsInput;
-}
-
 export class UserUpsertWithoutOrdersInput {
     create: UserUncheckedCreateWithoutOrdersInput;
     update: UserUncheckedUpdateWithoutOrdersInput;
 }
 
-export class UserUpsertWithoutResponsesInput {
-    create: UserUncheckedCreateWithoutResponsesInput;
-    update: UserUncheckedUpdateWithoutResponsesInput;
+export class UserUpsertWithoutReviewedInput {
+    create: UserUncheckedCreateWithoutReviewedInput;
+    update: UserUncheckedUpdateWithoutReviewedInput;
 }
 
-export class UserUpsertWithoutTransactionsInput {
-    create: UserUncheckedCreateWithoutTransactionsInput;
-    update: UserUncheckedUpdateWithoutTransactionsInput;
+export class UserUpsertWithoutReviewsInput {
+    create: UserUncheckedCreateWithoutReviewsInput;
+    update: UserUncheckedUpdateWithoutReviewsInput;
+}
+
+export class UserUpsertWithoutServicesInput {
+    create: UserUncheckedCreateWithoutServicesInput;
+    update: UserUncheckedUpdateWithoutServicesInput;
 }
 
 export class UserWhereInput {
@@ -15385,6 +9121,7 @@ export class UserWhereInput {
     OR?: Nullable<UserWhereInput[]>;
     avator?: Nullable<AttachmentWhereInput>;
     avatorId?: Nullable<StringNullableFilter>;
+    businessProfile?: Nullable<BusinessProfileWhereInput>;
     comments?: Nullable<CommentListRelationFilter>;
     createdAt?: Nullable<DateTimeFilter>;
     device?: Nullable<DeviceWhereInput>;
@@ -15392,37 +9129,22 @@ export class UserWhereInput {
     displayName?: Nullable<StringFilter>;
     email?: Nullable<StringFilter>;
     emailVerified?: Nullable<BoolFilter>;
-    forms?: Nullable<FormListRelationFilter>;
-    forumAnswers?: Nullable<ForumAnswerListRelationFilter>;
-    forums?: Nullable<ForumListRelationFilter>;
     id?: Nullable<StringFilter>;
+    location?: Nullable<LocationWhereInput>;
+    locationId?: Nullable<StringFilter>;
     orders?: Nullable<OrderListRelationFilter>;
     phoneNumber?: Nullable<StringNullableFilter>;
-    responses?: Nullable<ResponseListRelationFilter>;
+    reviewed?: Nullable<ReviewListRelationFilter>;
+    reviews?: Nullable<ReviewListRelationFilter>;
     role?: Nullable<EnumRoleFilter>;
+    services?: Nullable<ServiceListRelationFilter>;
     state?: Nullable<EnumStateFilter>;
-    transactions?: Nullable<TransactionListRelationFilter>;
     updatedAt?: Nullable<DateTimeFilter>;
 }
 
 export class UserWhereUniqueInput {
     email?: Nullable<string>;
     id?: Nullable<string>;
-}
-
-export class AggregateAnswer {
-    _count?: Nullable<AnswerCountAggregateOutputType>;
-    _max?: Nullable<AnswerMaxAggregateOutputType>;
-    _min?: Nullable<AnswerMinAggregateOutputType>;
-    count?: Nullable<AnswerCountAggregateOutputType>;
-    max?: Nullable<AnswerMaxAggregateOutputType>;
-    min?: Nullable<AnswerMinAggregateOutputType>;
-}
-
-export class AggregateAnswerResponse {
-    data?: Nullable<AggregateAnswer>;
-    message: string;
-    status: boolean;
 }
 
 export class AggregateAttachment {
@@ -15440,6 +9162,21 @@ export class AggregateAttachment {
 
 export class AggregateAttachmentResponse {
     data?: Nullable<AggregateAttachment>;
+    message: string;
+    status: boolean;
+}
+
+export class AggregateBusinessProfile {
+    _count?: Nullable<BusinessProfileCountAggregateOutputType>;
+    _max?: Nullable<BusinessProfileMaxAggregateOutputType>;
+    _min?: Nullable<BusinessProfileMinAggregateOutputType>;
+    count?: Nullable<BusinessProfileCountAggregateOutputType>;
+    max?: Nullable<BusinessProfileMaxAggregateOutputType>;
+    min?: Nullable<BusinessProfileMinAggregateOutputType>;
+}
+
+export class AggregateBusinessProfileResponse {
+    data?: Nullable<AggregateBusinessProfile>;
     message: string;
     status: boolean;
 }
@@ -15493,70 +9230,6 @@ export class AggregateDeviceResponse {
     status: boolean;
 }
 
-export class AggregateForm {
-    _count?: Nullable<FormCountAggregateOutputType>;
-    _max?: Nullable<FormMaxAggregateOutputType>;
-    _min?: Nullable<FormMinAggregateOutputType>;
-    count?: Nullable<FormCountAggregateOutputType>;
-    max?: Nullable<FormMaxAggregateOutputType>;
-    min?: Nullable<FormMinAggregateOutputType>;
-}
-
-export class AggregateFormResponse {
-    data?: Nullable<AggregateForm>;
-    message: string;
-    status: boolean;
-}
-
-export class AggregateForum {
-    _count?: Nullable<ForumCountAggregateOutputType>;
-    _max?: Nullable<ForumMaxAggregateOutputType>;
-    _min?: Nullable<ForumMinAggregateOutputType>;
-    count?: Nullable<ForumCountAggregateOutputType>;
-    max?: Nullable<ForumMaxAggregateOutputType>;
-    min?: Nullable<ForumMinAggregateOutputType>;
-}
-
-export class AggregateForumAnswer {
-    _count?: Nullable<ForumAnswerCountAggregateOutputType>;
-    _max?: Nullable<ForumAnswerMaxAggregateOutputType>;
-    _min?: Nullable<ForumAnswerMinAggregateOutputType>;
-    count?: Nullable<ForumAnswerCountAggregateOutputType>;
-    max?: Nullable<ForumAnswerMaxAggregateOutputType>;
-    min?: Nullable<ForumAnswerMinAggregateOutputType>;
-}
-
-export class AggregateForumAnswerResponse {
-    data?: Nullable<AggregateForumAnswer>;
-    message: string;
-    status: boolean;
-}
-
-export class AggregateForumResponse {
-    data?: Nullable<AggregateForum>;
-    message: string;
-    status: boolean;
-}
-
-export class AggregateGrade {
-    _avg?: Nullable<GradeAvgAggregateOutputType>;
-    _count?: Nullable<GradeCountAggregateOutputType>;
-    _max?: Nullable<GradeMaxAggregateOutputType>;
-    _min?: Nullable<GradeMinAggregateOutputType>;
-    _sum?: Nullable<GradeSumAggregateOutputType>;
-    avg?: Nullable<GradeAvgAggregateOutputType>;
-    count?: Nullable<GradeCountAggregateOutputType>;
-    max?: Nullable<GradeMaxAggregateOutputType>;
-    min?: Nullable<GradeMinAggregateOutputType>;
-    sum?: Nullable<GradeSumAggregateOutputType>;
-}
-
-export class AggregateGradeResponse {
-    data?: Nullable<AggregateGrade>;
-    message: string;
-    status: boolean;
-}
-
 export class AggregateHelp {
     _count?: Nullable<HelpCountAggregateOutputType>;
     _max?: Nullable<HelpMaxAggregateOutputType>;
@@ -15587,6 +9260,25 @@ export class AggregateHelpStep {
 
 export class AggregateHelpStepResponse {
     data?: Nullable<AggregateHelpStep>;
+    message: string;
+    status: boolean;
+}
+
+export class AggregateLocation {
+    _avg?: Nullable<LocationAvgAggregateOutputType>;
+    _count?: Nullable<LocationCountAggregateOutputType>;
+    _max?: Nullable<LocationMaxAggregateOutputType>;
+    _min?: Nullable<LocationMinAggregateOutputType>;
+    _sum?: Nullable<LocationSumAggregateOutputType>;
+    avg?: Nullable<LocationAvgAggregateOutputType>;
+    count?: Nullable<LocationCountAggregateOutputType>;
+    max?: Nullable<LocationMaxAggregateOutputType>;
+    min?: Nullable<LocationMinAggregateOutputType>;
+    sum?: Nullable<LocationSumAggregateOutputType>;
+}
+
+export class AggregateLocationResponse {
+    data?: Nullable<AggregateLocation>;
     message: string;
     status: boolean;
 }
@@ -15640,51 +9332,21 @@ export class AggregatePaymentMethodResponse {
     status: boolean;
 }
 
-export class AggregateQuestion {
-    _avg?: Nullable<QuestionAvgAggregateOutputType>;
-    _count?: Nullable<QuestionCountAggregateOutputType>;
-    _max?: Nullable<QuestionMaxAggregateOutputType>;
-    _min?: Nullable<QuestionMinAggregateOutputType>;
-    _sum?: Nullable<QuestionSumAggregateOutputType>;
-    avg?: Nullable<QuestionAvgAggregateOutputType>;
-    count?: Nullable<QuestionCountAggregateOutputType>;
-    max?: Nullable<QuestionMaxAggregateOutputType>;
-    min?: Nullable<QuestionMinAggregateOutputType>;
-    sum?: Nullable<QuestionSumAggregateOutputType>;
+export class AggregateReview {
+    _avg?: Nullable<ReviewAvgAggregateOutputType>;
+    _count?: Nullable<ReviewCountAggregateOutputType>;
+    _max?: Nullable<ReviewMaxAggregateOutputType>;
+    _min?: Nullable<ReviewMinAggregateOutputType>;
+    _sum?: Nullable<ReviewSumAggregateOutputType>;
+    avg?: Nullable<ReviewAvgAggregateOutputType>;
+    count?: Nullable<ReviewCountAggregateOutputType>;
+    max?: Nullable<ReviewMaxAggregateOutputType>;
+    min?: Nullable<ReviewMinAggregateOutputType>;
+    sum?: Nullable<ReviewSumAggregateOutputType>;
 }
 
-export class AggregateQuestionResponse {
-    data?: Nullable<AggregateQuestion>;
-    message: string;
-    status: boolean;
-}
-
-export class AggregateRecommendation {
-    _count?: Nullable<RecommendationCountAggregateOutputType>;
-    _max?: Nullable<RecommendationMaxAggregateOutputType>;
-    _min?: Nullable<RecommendationMinAggregateOutputType>;
-    count?: Nullable<RecommendationCountAggregateOutputType>;
-    max?: Nullable<RecommendationMaxAggregateOutputType>;
-    min?: Nullable<RecommendationMinAggregateOutputType>;
-}
-
-export class AggregateRecommendationResponse {
-    data?: Nullable<AggregateRecommendation>;
-    message: string;
-    status: boolean;
-}
-
-export class AggregateResponse {
-    _count?: Nullable<ResponseCountAggregateOutputType>;
-    _max?: Nullable<ResponseMaxAggregateOutputType>;
-    _min?: Nullable<ResponseMinAggregateOutputType>;
-    count?: Nullable<ResponseCountAggregateOutputType>;
-    max?: Nullable<ResponseMaxAggregateOutputType>;
-    min?: Nullable<ResponseMinAggregateOutputType>;
-}
-
-export class AggregateResponseResponse {
-    data?: Nullable<AggregateResponse>;
+export class AggregateReviewResponse {
+    data?: Nullable<AggregateReview>;
     message: string;
     status: boolean;
 }
@@ -15746,21 +9408,6 @@ export class AggregateServiceResponse {
     status: boolean;
 }
 
-export class AggregateTag {
-    _count?: Nullable<TagCountAggregateOutputType>;
-    _max?: Nullable<TagMaxAggregateOutputType>;
-    _min?: Nullable<TagMinAggregateOutputType>;
-    count?: Nullable<TagCountAggregateOutputType>;
-    max?: Nullable<TagMaxAggregateOutputType>;
-    min?: Nullable<TagMinAggregateOutputType>;
-}
-
-export class AggregateTagResponse {
-    data?: Nullable<AggregateTag>;
-    message: string;
-    status: boolean;
-}
-
 export class AggregateTransaction {
     _count?: Nullable<TransactionCountAggregateOutputType>;
     _max?: Nullable<TransactionMaxAggregateOutputType>;
@@ -15791,78 +9438,9 @@ export class AggregateUserResponse {
     status: boolean;
 }
 
-export class Answer {
-    attachments: Attachment[];
-    booleanValue?: Nullable<boolean>;
-    createdAt: DateTime;
-    id: string;
-    question: Question;
-    questionId: string;
-    response: Response;
-    responseId: string;
-    textValue?: Nullable<string>;
-    updatedAt: DateTime;
-}
-
-export class AnswerBatchResponse {
-    data?: Nullable<BatchPayload>;
-    message: string;
-    status: boolean;
-}
-
-export class AnswerCountAggregateOutputType {
-    _all: number;
-    booleanValue: number;
-    createdAt: number;
-    id: number;
-    questionId: number;
-    responseId: number;
-    textValue: number;
-    updatedAt: number;
-}
-
-export class AnswerCountResponse {
-    data?: Nullable<number>;
-    message: string;
-    status: boolean;
-}
-
-export class AnswerListResponse {
-    data?: Nullable<Answer[]>;
-    message: string;
-    status: boolean;
-}
-
-export class AnswerMaxAggregateOutputType {
-    booleanValue?: Nullable<boolean>;
-    createdAt?: Nullable<DateTime>;
-    id?: Nullable<string>;
-    questionId?: Nullable<string>;
-    responseId?: Nullable<string>;
-    textValue?: Nullable<string>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class AnswerMinAggregateOutputType {
-    booleanValue?: Nullable<boolean>;
-    createdAt?: Nullable<DateTime>;
-    id?: Nullable<string>;
-    questionId?: Nullable<string>;
-    responseId?: Nullable<string>;
-    textValue?: Nullable<string>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class AnswerResponse {
-    data?: Nullable<Answer>;
-    message: string;
-    status: boolean;
-}
-
 export class Attachment {
-    answer?: Nullable<Answer>;
-    answerId?: Nullable<string>;
     attachmentType: AttachmentType;
+    businessProfiles: BusinessProfile[];
     comment?: Nullable<Comment>;
     commentId?: Nullable<string>;
     createdAt: DateTime;
@@ -15870,14 +9448,6 @@ export class Attachment {
     duration: number;
     encoding?: Nullable<string>;
     filename?: Nullable<string>;
-    form?: Nullable<Form>;
-    formId?: Nullable<string>;
-    forum?: Nullable<Forum>;
-    forumAnswer?: Nullable<ForumAnswer>;
-    forumAnswerId?: Nullable<string>;
-    forumId?: Nullable<string>;
-    grade?: Nullable<Grade>;
-    gradeId?: Nullable<string>;
     helpStep?: Nullable<HelpStep>;
     helpStepId?: Nullable<string>;
     id: string;
@@ -15886,15 +9456,8 @@ export class Attachment {
     path: string;
     paymentMethods: PaymentMethod[];
     placement: string;
-    question?: Nullable<Question>;
-    questionId?: Nullable<string>;
-    recommendation?: Nullable<Recommendation>;
-    recommendationId?: Nullable<string>;
-    response?: Nullable<Response>;
-    responseId?: Nullable<string>;
     services: Service[];
     size: number;
-    tags: Tag[];
     updatedAt: DateTime;
     user: User[];
 }
@@ -15912,7 +9475,6 @@ export class AttachmentBatchResponse {
 
 export class AttachmentCountAggregateOutputType {
     _all: number;
-    answerId: number;
     attachmentType: number;
     commentId: number;
     createdAt: number;
@@ -15920,18 +9482,11 @@ export class AttachmentCountAggregateOutputType {
     duration: number;
     encoding: number;
     filename: number;
-    formId: number;
-    forumAnswerId: number;
-    forumId: number;
-    gradeId: number;
     helpStepId: number;
     id: number;
     mimetype: number;
     path: number;
     placement: number;
-    questionId: number;
-    recommendationId: number;
-    responseId: number;
     size: number;
     updatedAt: number;
 }
@@ -15949,7 +9504,6 @@ export class AttachmentListResponse {
 }
 
 export class AttachmentMaxAggregateOutputType {
-    answerId?: Nullable<string>;
     attachmentType?: Nullable<AttachmentType>;
     commentId?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
@@ -15957,24 +9511,16 @@ export class AttachmentMaxAggregateOutputType {
     duration?: Nullable<number>;
     encoding?: Nullable<string>;
     filename?: Nullable<string>;
-    formId?: Nullable<string>;
-    forumAnswerId?: Nullable<string>;
-    forumId?: Nullable<string>;
-    gradeId?: Nullable<string>;
     helpStepId?: Nullable<string>;
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
     path?: Nullable<string>;
     placement?: Nullable<string>;
-    questionId?: Nullable<string>;
-    recommendationId?: Nullable<string>;
-    responseId?: Nullable<string>;
     size?: Nullable<number>;
     updatedAt?: Nullable<DateTime>;
 }
 
 export class AttachmentMinAggregateOutputType {
-    answerId?: Nullable<string>;
     attachmentType?: Nullable<AttachmentType>;
     commentId?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
@@ -15982,18 +9528,11 @@ export class AttachmentMinAggregateOutputType {
     duration?: Nullable<number>;
     encoding?: Nullable<string>;
     filename?: Nullable<string>;
-    formId?: Nullable<string>;
-    forumAnswerId?: Nullable<string>;
-    forumId?: Nullable<string>;
-    gradeId?: Nullable<string>;
     helpStepId?: Nullable<string>;
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
     path?: Nullable<string>;
     placement?: Nullable<string>;
-    questionId?: Nullable<string>;
-    recommendationId?: Nullable<string>;
-    responseId?: Nullable<string>;
     size?: Nullable<number>;
     updatedAt?: Nullable<DateTime>;
 }
@@ -16018,6 +9557,73 @@ export class AuthResult {
 
 export class BatchPayload {
     count: number;
+}
+
+export class BusinessProfile {
+    about: string;
+    cover: Attachment;
+    coverId: string;
+    createdAt: DateTime;
+    id: string;
+    mode: BusinnessMode;
+    owner: User;
+    ownerId: string;
+    updatedAt: DateTime;
+}
+
+export class BusinessProfileBatchResponse {
+    data?: Nullable<BatchPayload>;
+    message: string;
+    status: boolean;
+}
+
+export class BusinessProfileCountAggregateOutputType {
+    _all: number;
+    about: number;
+    coverId: number;
+    createdAt: number;
+    id: number;
+    mode: number;
+    ownerId: number;
+    updatedAt: number;
+}
+
+export class BusinessProfileCountResponse {
+    data?: Nullable<number>;
+    message: string;
+    status: boolean;
+}
+
+export class BusinessProfileListResponse {
+    data?: Nullable<BusinessProfile[]>;
+    message: string;
+    status: boolean;
+}
+
+export class BusinessProfileMaxAggregateOutputType {
+    about?: Nullable<string>;
+    coverId?: Nullable<string>;
+    createdAt?: Nullable<DateTime>;
+    id?: Nullable<string>;
+    mode?: Nullable<BusinnessMode>;
+    ownerId?: Nullable<string>;
+    updatedAt?: Nullable<DateTime>;
+}
+
+export class BusinessProfileMinAggregateOutputType {
+    about?: Nullable<string>;
+    coverId?: Nullable<string>;
+    createdAt?: Nullable<DateTime>;
+    id?: Nullable<string>;
+    mode?: Nullable<BusinnessMode>;
+    ownerId?: Nullable<string>;
+    updatedAt?: Nullable<DateTime>;
+}
+
+export class BusinessProfileResponse {
+    data?: Nullable<BusinessProfile>;
+    message: string;
+    status: boolean;
 }
 
 export class CasbinRule {
@@ -16115,11 +9721,9 @@ export class Comment {
     commentsEnabled: boolean;
     content: string;
     createdAt: DateTime;
-    forum?: Nullable<Forum>;
-    forumAnswer?: Nullable<ForumAnswer>;
-    forumAnswerId?: Nullable<string>;
-    forumId?: Nullable<string>;
     id: string;
+    review?: Nullable<Review>;
+    reviewId: string;
     state: State;
     updatedAt: DateTime;
 }
@@ -16137,9 +9741,8 @@ export class CommentCountAggregateOutputType {
     commentsEnabled: number;
     content: number;
     createdAt: number;
-    forumAnswerId: number;
-    forumId: number;
     id: number;
+    reviewId: number;
     state: number;
     updatedAt: number;
 }
@@ -16162,9 +9765,8 @@ export class CommentMaxAggregateOutputType {
     commentsEnabled?: Nullable<boolean>;
     content?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
-    forumAnswerId?: Nullable<string>;
-    forumId?: Nullable<string>;
     id?: Nullable<string>;
+    reviewId?: Nullable<string>;
     state?: Nullable<State>;
     updatedAt?: Nullable<DateTime>;
 }
@@ -16175,9 +9777,8 @@ export class CommentMinAggregateOutputType {
     commentsEnabled?: Nullable<boolean>;
     content?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
-    forumAnswerId?: Nullable<string>;
-    forumId?: Nullable<string>;
     id?: Nullable<string>;
+    reviewId?: Nullable<string>;
     state?: Nullable<State>;
     updatedAt?: Nullable<DateTime>;
 }
@@ -16240,323 +9841,6 @@ export class DeviceResponse {
     data?: Nullable<Device>;
     message: string;
     status: boolean;
-}
-
-export class Form {
-    attachments: Attachment[];
-    author: User;
-    authorId: string;
-    createdAt: DateTime;
-    description?: Nullable<string>;
-    grades: Grade[];
-    id: string;
-    responses: Response[];
-    state: State;
-    tagId?: Nullable<string>;
-    tags: Tag[];
-    title: string;
-    updatedAt: DateTime;
-}
-
-export class FormBatchResponse {
-    data?: Nullable<BatchPayload>;
-    message: string;
-    status: boolean;
-}
-
-export class FormCountAggregateOutputType {
-    _all: number;
-    authorId: number;
-    createdAt: number;
-    description: number;
-    id: number;
-    state: number;
-    tagId: number;
-    title: number;
-    updatedAt: number;
-}
-
-export class FormCountResponse {
-    data?: Nullable<number>;
-    message: string;
-    status: boolean;
-}
-
-export class FormListResponse {
-    data?: Nullable<Form[]>;
-    message: string;
-    status: boolean;
-}
-
-export class FormMaxAggregateOutputType {
-    authorId?: Nullable<string>;
-    createdAt?: Nullable<DateTime>;
-    description?: Nullable<string>;
-    id?: Nullable<string>;
-    state?: Nullable<State>;
-    tagId?: Nullable<string>;
-    title?: Nullable<string>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class FormMinAggregateOutputType {
-    authorId?: Nullable<string>;
-    createdAt?: Nullable<DateTime>;
-    description?: Nullable<string>;
-    id?: Nullable<string>;
-    state?: Nullable<State>;
-    tagId?: Nullable<string>;
-    title?: Nullable<string>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class FormResponse {
-    data?: Nullable<Form>;
-    message: string;
-    status: boolean;
-}
-
-export class Forum {
-    attachments: Attachment[];
-    author: User;
-    authorId: string;
-    comments: Comment[];
-    commentsEnabled: boolean;
-    createdAt: DateTime;
-    description: string;
-    forumAnswers: ForumAnswer[];
-    id: string;
-    question: string;
-    state: State;
-    tags: Tag[];
-    type: ForumType;
-    updatedAt: DateTime;
-}
-
-export class ForumAnswer {
-    attachments: Attachment[];
-    author: User;
-    authorId: string;
-    comments: Comment[];
-    commentsEnabled: boolean;
-    content: string;
-    createdAt: DateTime;
-    forum: Forum;
-    forumId: string;
-    id: string;
-    state: State;
-    updatedAt: DateTime;
-}
-
-export class ForumAnswerBatchResponse {
-    data?: Nullable<BatchPayload>;
-    message: string;
-    status: boolean;
-}
-
-export class ForumAnswerCountAggregateOutputType {
-    _all: number;
-    authorId: number;
-    commentsEnabled: number;
-    content: number;
-    createdAt: number;
-    forumId: number;
-    id: number;
-    state: number;
-    updatedAt: number;
-}
-
-export class ForumAnswerCountResponse {
-    data?: Nullable<number>;
-    message: string;
-    status: boolean;
-}
-
-export class ForumAnswerListResponse {
-    data?: Nullable<ForumAnswer[]>;
-    message: string;
-    status: boolean;
-}
-
-export class ForumAnswerMaxAggregateOutputType {
-    authorId?: Nullable<string>;
-    commentsEnabled?: Nullable<boolean>;
-    content?: Nullable<string>;
-    createdAt?: Nullable<DateTime>;
-    forumId?: Nullable<string>;
-    id?: Nullable<string>;
-    state?: Nullable<State>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class ForumAnswerMinAggregateOutputType {
-    authorId?: Nullable<string>;
-    commentsEnabled?: Nullable<boolean>;
-    content?: Nullable<string>;
-    createdAt?: Nullable<DateTime>;
-    forumId?: Nullable<string>;
-    id?: Nullable<string>;
-    state?: Nullable<State>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class ForumAnswerResponse {
-    data?: Nullable<ForumAnswer>;
-    message: string;
-    status: boolean;
-}
-
-export class ForumBatchResponse {
-    data?: Nullable<BatchPayload>;
-    message: string;
-    status: boolean;
-}
-
-export class ForumCountAggregateOutputType {
-    _all: number;
-    authorId: number;
-    commentsEnabled: number;
-    createdAt: number;
-    description: number;
-    id: number;
-    question: number;
-    state: number;
-    type: number;
-    updatedAt: number;
-}
-
-export class ForumCountResponse {
-    data?: Nullable<number>;
-    message: string;
-    status: boolean;
-}
-
-export class ForumListResponse {
-    data?: Nullable<Forum[]>;
-    message: string;
-    status: boolean;
-}
-
-export class ForumMaxAggregateOutputType {
-    authorId?: Nullable<string>;
-    commentsEnabled?: Nullable<boolean>;
-    createdAt?: Nullable<DateTime>;
-    description?: Nullable<string>;
-    id?: Nullable<string>;
-    question?: Nullable<string>;
-    state?: Nullable<State>;
-    type?: Nullable<ForumType>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class ForumMinAggregateOutputType {
-    authorId?: Nullable<string>;
-    commentsEnabled?: Nullable<boolean>;
-    createdAt?: Nullable<DateTime>;
-    description?: Nullable<string>;
-    id?: Nullable<string>;
-    question?: Nullable<string>;
-    state?: Nullable<State>;
-    type?: Nullable<ForumType>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class ForumResponse {
-    data?: Nullable<Forum>;
-    message: string;
-    status: boolean;
-}
-
-export class Grade {
-    attachments: Attachment[];
-    createdAt: DateTime;
-    description: string;
-    form?: Nullable<Form>;
-    formId?: Nullable<string>;
-    id: string;
-    maxInclusive: boolean;
-    maxValue?: Nullable<number>;
-    minInclusive: boolean;
-    minValue?: Nullable<number>;
-    name: string;
-    questions: Question[];
-    recommendations: Recommendation[];
-    responses: Response[];
-    updatedAt: DateTime;
-}
-
-export class GradeAvgAggregateOutputType {
-    maxValue?: Nullable<number>;
-    minValue?: Nullable<number>;
-}
-
-export class GradeBatchResponse {
-    data?: Nullable<BatchPayload>;
-    message: string;
-    status: boolean;
-}
-
-export class GradeCountAggregateOutputType {
-    _all: number;
-    createdAt: number;
-    description: number;
-    formId: number;
-    id: number;
-    maxInclusive: number;
-    maxValue: number;
-    minInclusive: number;
-    minValue: number;
-    name: number;
-    updatedAt: number;
-}
-
-export class GradeCountResponse {
-    data?: Nullable<number>;
-    message: string;
-    status: boolean;
-}
-
-export class GradeListResponse {
-    data?: Nullable<Grade[]>;
-    message: string;
-    status: boolean;
-}
-
-export class GradeMaxAggregateOutputType {
-    createdAt?: Nullable<DateTime>;
-    description?: Nullable<string>;
-    formId?: Nullable<string>;
-    id?: Nullable<string>;
-    maxInclusive?: Nullable<boolean>;
-    maxValue?: Nullable<number>;
-    minInclusive?: Nullable<boolean>;
-    minValue?: Nullable<number>;
-    name?: Nullable<string>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class GradeMinAggregateOutputType {
-    createdAt?: Nullable<DateTime>;
-    description?: Nullable<string>;
-    formId?: Nullable<string>;
-    id?: Nullable<string>;
-    maxInclusive?: Nullable<boolean>;
-    maxValue?: Nullable<number>;
-    minInclusive?: Nullable<boolean>;
-    minValue?: Nullable<number>;
-    name?: Nullable<string>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class GradeResponse {
-    data?: Nullable<Grade>;
-    message: string;
-    status: boolean;
-}
-
-export class GradeSumAggregateOutputType {
-    maxValue?: Nullable<number>;
-    minValue?: Nullable<number>;
 }
 
 export class Help {
@@ -16704,6 +9988,82 @@ export class HelpStepSumAggregateOutputType {
     stepNumber?: Nullable<number>;
 }
 
+export class Location {
+    createdAt: DateTime;
+    id: string;
+    lat: number;
+    lon: number;
+    name: string;
+    state: State;
+    updatedAt: DateTime;
+    users: User[];
+}
+
+export class LocationAvgAggregateOutputType {
+    lat?: Nullable<number>;
+    lon?: Nullable<number>;
+}
+
+export class LocationBatchResponse {
+    data?: Nullable<BatchPayload>;
+    message: string;
+    status: boolean;
+}
+
+export class LocationCountAggregateOutputType {
+    _all: number;
+    createdAt: number;
+    id: number;
+    lat: number;
+    lon: number;
+    name: number;
+    state: number;
+    updatedAt: number;
+}
+
+export class LocationCountResponse {
+    data?: Nullable<number>;
+    message: string;
+    status: boolean;
+}
+
+export class LocationListResponse {
+    data?: Nullable<Location[]>;
+    message: string;
+    status: boolean;
+}
+
+export class LocationMaxAggregateOutputType {
+    createdAt?: Nullable<DateTime>;
+    id?: Nullable<string>;
+    lat?: Nullable<number>;
+    lon?: Nullable<number>;
+    name?: Nullable<string>;
+    state?: Nullable<State>;
+    updatedAt?: Nullable<DateTime>;
+}
+
+export class LocationMinAggregateOutputType {
+    createdAt?: Nullable<DateTime>;
+    id?: Nullable<string>;
+    lat?: Nullable<number>;
+    lon?: Nullable<number>;
+    name?: Nullable<string>;
+    state?: Nullable<State>;
+    updatedAt?: Nullable<DateTime>;
+}
+
+export class LocationResponse {
+    data?: Nullable<Location>;
+    message: string;
+    status: boolean;
+}
+
+export class LocationSumAggregateOutputType {
+    lat?: Nullable<number>;
+    lon?: Nullable<number>;
+}
+
 export class MpesaPayment {
     createdAt: DateTime;
     id: string;
@@ -16811,9 +10171,7 @@ export class MpesaPaymentResponse {
 }
 
 export abstract class IMutation {
-    abstract createOneForm(data: FormCreateInput): FormResponse | Promise<FormResponse>;
-
-    abstract createOneForum(data: ForumCreateInput): ForumResponse | Promise<ForumResponse>;
+    abstract createOneComment(data: CommentCreateInput): CommentResponse | Promise<CommentResponse>;
 
     abstract createOneHelp(data: HelpCreateInput): HelpResponse | Promise<HelpResponse>;
 
@@ -16821,11 +10179,9 @@ export abstract class IMutation {
 
     abstract createOnePaymentMethod(data: PaymentMethodCreateInput): PaymentMethodResponse | Promise<PaymentMethodResponse>;
 
-    abstract createOneResponse(data: ResponseCreateInput): ResponseResponse | Promise<ResponseResponse>;
+    abstract createOneReview(data: ReviewCreateInput): ReviewResponse | Promise<ReviewResponse>;
 
     abstract createOneService(data: ServiceCreateInput): ServiceResponse | Promise<ServiceResponse>;
-
-    abstract createOneTag(data: TagCreateInput): TagResponse | Promise<TagResponse>;
 
     abstract createOneUser(data: UserCreateInput): UserResponse | Promise<UserResponse>;
 
@@ -16841,9 +10197,7 @@ export abstract class IMutation {
 
     abstract signup(credentials: SignupInput): AuthResult | Promise<AuthResult>;
 
-    abstract updateOneForm(data: FormUpdateInput, where: FormWhereUniqueInput): FormResponse | Promise<FormResponse>;
-
-    abstract updateOneForum(data: ForumUpdateInput, where: ForumWhereUniqueInput): ForumResponse | Promise<ForumResponse>;
+    abstract updateOneComment(data: CommentUpdateInput, where: CommentWhereUniqueInput): CommentResponse | Promise<CommentResponse>;
 
     abstract updateOneHelp(data: HelpUpdateInput, where: HelpWhereUniqueInput): HelpResponse | Promise<HelpResponse>;
 
@@ -16851,11 +10205,9 @@ export abstract class IMutation {
 
     abstract updateOnePaymentMethod(data: PaymentMethodUpdateInput, where: PaymentMethodWhereUniqueInput): PaymentMethodResponse | Promise<PaymentMethodResponse>;
 
-    abstract updateOneResponse(data: ResponseUpdateInput, where: ResponseWhereUniqueInput): ResponseResponse | Promise<ResponseResponse>;
+    abstract updateOneReview(data: ReviewUpdateInput, where: ReviewWhereUniqueInput): ReviewResponse | Promise<ReviewResponse>;
 
     abstract updateOneService(data: ServiceUpdateInput, where: ServiceWhereUniqueInput): ServiceResponse | Promise<ServiceResponse>;
-
-    abstract updateOneTag(data: TagUpdateInput, where: TagWhereUniqueInput): TagResponse | Promise<TagResponse>;
 
     abstract updateOneUser(data: UserUpdateInput, where: UserWhereUniqueInput): UserResponse | Promise<UserResponse>;
 
@@ -17031,9 +10383,7 @@ export class PaymentMethodResponse {
 }
 
 export abstract class IQuery {
-    abstract findManyForm(cursor?: Nullable<FormWhereUniqueInput>, distinct?: Nullable<FormScalarFieldEnum[]>, orderBy?: Nullable<FormOrderByInput[]>, skip?: Nullable<number>, take?: Nullable<number>, where?: Nullable<FormWhereInput>): FormListResponse | Promise<FormListResponse>;
-
-    abstract findManyForum(cursor?: Nullable<ForumWhereUniqueInput>, distinct?: Nullable<ForumScalarFieldEnum[]>, orderBy?: Nullable<ForumOrderByInput[]>, skip?: Nullable<number>, take?: Nullable<number>, where?: Nullable<ForumWhereInput>): ForumListResponse | Promise<ForumListResponse>;
+    abstract findManyComment(cursor?: Nullable<CommentWhereUniqueInput>, distinct?: Nullable<CommentScalarFieldEnum[]>, orderBy?: Nullable<CommentOrderByInput[]>, skip?: Nullable<number>, take?: Nullable<number>, where?: Nullable<CommentWhereInput>): CommentListResponse | Promise<CommentListResponse>;
 
     abstract findManyHelp(cursor?: Nullable<HelpWhereUniqueInput>, distinct?: Nullable<HelpScalarFieldEnum[]>, orderBy?: Nullable<HelpOrderByInput[]>, skip?: Nullable<number>, take?: Nullable<number>, where?: Nullable<HelpWhereInput>): HelpListResponse | Promise<HelpListResponse>;
 
@@ -17041,17 +10391,13 @@ export abstract class IQuery {
 
     abstract findManyPaymentMethod(cursor?: Nullable<PaymentMethodWhereUniqueInput>, distinct?: Nullable<PaymentMethodScalarFieldEnum[]>, orderBy?: Nullable<PaymentMethodOrderByInput[]>, skip?: Nullable<number>, take?: Nullable<number>, where?: Nullable<PaymentMethodWhereInput>): PaymentMethodListResponse | Promise<PaymentMethodListResponse>;
 
-    abstract findManyResponse(cursor?: Nullable<ResponseWhereUniqueInput>, distinct?: Nullable<ResponseScalarFieldEnum[]>, orderBy?: Nullable<ResponseOrderByInput[]>, skip?: Nullable<number>, take?: Nullable<number>, where?: Nullable<ResponseWhereInput>): ResponseListResponse | Promise<ResponseListResponse>;
+    abstract findManyReview(cursor?: Nullable<ReviewWhereUniqueInput>, distinct?: Nullable<ReviewScalarFieldEnum[]>, orderBy?: Nullable<ReviewOrderByInput[]>, skip?: Nullable<number>, take?: Nullable<number>, where?: Nullable<ReviewWhereInput>): ReviewListResponse | Promise<ReviewListResponse>;
 
     abstract findManyService(cursor?: Nullable<ServiceWhereUniqueInput>, distinct?: Nullable<ServiceScalarFieldEnum[]>, orderBy?: Nullable<ServiceOrderByInput[]>, skip?: Nullable<number>, take?: Nullable<number>, where?: Nullable<ServiceWhereInput>): ServiceListResponse | Promise<ServiceListResponse>;
 
-    abstract findManyTag(cursor?: Nullable<TagWhereUniqueInput>, distinct?: Nullable<TagScalarFieldEnum[]>, orderBy?: Nullable<TagOrderByInput[]>, skip?: Nullable<number>, take?: Nullable<number>, where?: Nullable<TagWhereInput>): TagListResponse | Promise<TagListResponse>;
-
     abstract findManyUser(cursor?: Nullable<UserWhereUniqueInput>, distinct?: Nullable<UserScalarFieldEnum[]>, orderBy?: Nullable<UserOrderByInput[]>, skip?: Nullable<number>, take?: Nullable<number>, where?: Nullable<UserWhereInput>): UserListResponse | Promise<UserListResponse>;
 
-    abstract findUniqueForm(where: FormWhereUniqueInput): FormResponse | Promise<FormResponse>;
-
-    abstract findUniqueForum(where: ForumWhereUniqueInput): ForumResponse | Promise<ForumResponse>;
+    abstract findUniqueComment(where: CommentWhereUniqueInput): CommentResponse | Promise<CommentResponse>;
 
     abstract findUniqueHelp(where: HelpWhereUniqueInput): HelpResponse | Promise<HelpResponse>;
 
@@ -17059,234 +10405,93 @@ export abstract class IQuery {
 
     abstract findUniquePaymentMethod(where: PaymentMethodWhereUniqueInput): PaymentMethodResponse | Promise<PaymentMethodResponse>;
 
-    abstract findUniqueResponse(where: ResponseWhereUniqueInput): ResponseResponse | Promise<ResponseResponse>;
+    abstract findUniqueReview(where: ReviewWhereUniqueInput): ReviewResponse | Promise<ReviewResponse>;
 
     abstract findUniqueService(where: ServiceWhereUniqueInput): ServiceResponse | Promise<ServiceResponse>;
-
-    abstract findUniqueTag(where: TagWhereUniqueInput): TagResponse | Promise<TagResponse>;
 
     abstract findUniqueUser(where: UserWhereUniqueInput): UserResponse | Promise<UserResponse>;
 
     abstract version(): Nullable<string> | Promise<Nullable<string>>;
 }
 
-export class Question {
-    answers: Answer[];
-    attachments: Attachment[];
-    createdAt: DateTime;
-    grade: Grade;
-    gradeId: string;
-    id: string;
-    instruction?: Nullable<string>;
-    question: string;
-    questionNumber: number;
-    questionType: QuestionType;
-    updatedAt: DateTime;
-    weight: number;
-}
-
-export class QuestionAvgAggregateOutputType {
-    questionNumber?: Nullable<number>;
-    weight?: Nullable<number>;
-}
-
-export class QuestionBatchResponse {
-    data?: Nullable<BatchPayload>;
-    message: string;
-    status: boolean;
-}
-
-export class QuestionCountAggregateOutputType {
-    _all: number;
-    createdAt: number;
-    gradeId: number;
-    id: number;
-    instruction: number;
-    question: number;
-    questionNumber: number;
-    questionType: number;
-    updatedAt: number;
-    weight: number;
-}
-
-export class QuestionCountResponse {
-    data?: Nullable<number>;
-    message: string;
-    status: boolean;
-}
-
-export class QuestionListResponse {
-    data?: Nullable<Question[]>;
-    message: string;
-    status: boolean;
-}
-
-export class QuestionMaxAggregateOutputType {
-    createdAt?: Nullable<DateTime>;
-    gradeId?: Nullable<string>;
-    id?: Nullable<string>;
-    instruction?: Nullable<string>;
-    question?: Nullable<string>;
-    questionNumber?: Nullable<number>;
-    questionType?: Nullable<QuestionType>;
-    updatedAt?: Nullable<DateTime>;
-    weight?: Nullable<number>;
-}
-
-export class QuestionMinAggregateOutputType {
-    createdAt?: Nullable<DateTime>;
-    gradeId?: Nullable<string>;
-    id?: Nullable<string>;
-    instruction?: Nullable<string>;
-    question?: Nullable<string>;
-    questionNumber?: Nullable<number>;
-    questionType?: Nullable<QuestionType>;
-    updatedAt?: Nullable<DateTime>;
-    weight?: Nullable<number>;
-}
-
-export class QuestionResponse {
-    data?: Nullable<Question>;
-    message: string;
-    status: boolean;
-}
-
-export class QuestionSumAggregateOutputType {
-    questionNumber?: Nullable<number>;
-    weight?: Nullable<number>;
-}
-
-export class Recommendation {
-    attachments: Attachment[];
-    content: string;
-    createdAt: DateTime;
-    grade?: Nullable<Grade>;
-    gradeId?: Nullable<string>;
-    id: string;
-    type: RecommendationType;
-    updatedAt: DateTime;
-}
-
-export class RecommendationBatchResponse {
-    data?: Nullable<BatchPayload>;
-    message: string;
-    status: boolean;
-}
-
-export class RecommendationCountAggregateOutputType {
-    _all: number;
-    content: number;
-    createdAt: number;
-    gradeId: number;
-    id: number;
-    type: number;
-    updatedAt: number;
-}
-
-export class RecommendationCountResponse {
-    data?: Nullable<number>;
-    message: string;
-    status: boolean;
-}
-
-export class RecommendationListResponse {
-    data?: Nullable<Recommendation[]>;
-    message: string;
-    status: boolean;
-}
-
-export class RecommendationMaxAggregateOutputType {
+export class Review {
+    author: User;
+    authorId: string;
+    comments: Comment[];
     content?: Nullable<string>;
-    createdAt?: Nullable<DateTime>;
-    gradeId?: Nullable<string>;
-    id?: Nullable<string>;
-    type?: Nullable<RecommendationType>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class RecommendationMinAggregateOutputType {
-    content?: Nullable<string>;
-    createdAt?: Nullable<DateTime>;
-    gradeId?: Nullable<string>;
-    id?: Nullable<string>;
-    type?: Nullable<RecommendationType>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class RecommendationResponse {
-    data?: Nullable<Recommendation>;
-    message: string;
-    status: boolean;
-}
-
-export class Response {
-    answers: Answer[];
-    attachments: Attachment[];
-    author?: Nullable<User>;
-    authorId?: Nullable<string>;
     createdAt: DateTime;
-    form: Form;
-    formId: string;
-    grade: Grade;
-    gradeId: string;
     id: string;
+    reviewee: User;
+    revieweeId: string;
     state: State;
     updatedAt: DateTime;
+    value: number;
 }
 
-export class ResponseBatchResponse {
+export class ReviewAvgAggregateOutputType {
+    value?: Nullable<number>;
+}
+
+export class ReviewBatchResponse {
     data?: Nullable<BatchPayload>;
     message: string;
     status: boolean;
 }
 
-export class ResponseCountAggregateOutputType {
+export class ReviewCountAggregateOutputType {
     _all: number;
     authorId: number;
+    content: number;
     createdAt: number;
-    formId: number;
-    gradeId: number;
     id: number;
+    revieweeId: number;
     state: number;
     updatedAt: number;
+    value: number;
 }
 
-export class ResponseCountResponse {
+export class ReviewCountResponse {
     data?: Nullable<number>;
     message: string;
     status: boolean;
 }
 
-export class ResponseListResponse {
-    data?: Nullable<Response[]>;
+export class ReviewListResponse {
+    data?: Nullable<Review[]>;
     message: string;
     status: boolean;
 }
 
-export class ResponseMaxAggregateOutputType {
+export class ReviewMaxAggregateOutputType {
     authorId?: Nullable<string>;
+    content?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
-    formId?: Nullable<string>;
-    gradeId?: Nullable<string>;
     id?: Nullable<string>;
+    revieweeId?: Nullable<string>;
     state?: Nullable<State>;
     updatedAt?: Nullable<DateTime>;
+    value?: Nullable<number>;
 }
 
-export class ResponseMinAggregateOutputType {
+export class ReviewMinAggregateOutputType {
     authorId?: Nullable<string>;
+    content?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
-    formId?: Nullable<string>;
-    gradeId?: Nullable<string>;
     id?: Nullable<string>;
+    revieweeId?: Nullable<string>;
     state?: Nullable<State>;
     updatedAt?: Nullable<DateTime>;
+    value?: Nullable<number>;
 }
 
-export class ResponseResponse {
-    data?: Nullable<Response>;
+export class ReviewResponse {
+    data?: Nullable<Review>;
     message: string;
     status: boolean;
+}
+
+export class ReviewSumAggregateOutputType {
+    value?: Nullable<number>;
 }
 
 export class SelcomDisbursement {
@@ -17490,22 +10695,23 @@ export class SelcomPaymentSumAggregateOutputType {
 }
 
 export class Service {
+    author: User;
+    authorId: string;
     createdAt: DateTime;
+    currency: string;
     description?: Nullable<string>;
     id: string;
-    image: Attachment;
-    imageId: string;
+    image?: Nullable<Attachment>;
+    imageId?: Nullable<string>;
     name: string;
     orders: Order[];
     price: number;
     state: State;
     updatedAt: DateTime;
-    value: number;
 }
 
 export class ServiceAvgAggregateOutputType {
     price?: Nullable<number>;
-    value?: Nullable<number>;
 }
 
 export class ServiceBatchResponse {
@@ -17516,7 +10722,9 @@ export class ServiceBatchResponse {
 
 export class ServiceCountAggregateOutputType {
     _all: number;
+    authorId: number;
     createdAt: number;
+    currency: number;
     description: number;
     id: number;
     imageId: number;
@@ -17524,7 +10732,6 @@ export class ServiceCountAggregateOutputType {
     price: number;
     state: number;
     updatedAt: number;
-    value: number;
 }
 
 export class ServiceCountResponse {
@@ -17540,7 +10747,9 @@ export class ServiceListResponse {
 }
 
 export class ServiceMaxAggregateOutputType {
+    authorId?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
+    currency?: Nullable<string>;
     description?: Nullable<string>;
     id?: Nullable<string>;
     imageId?: Nullable<string>;
@@ -17548,11 +10757,12 @@ export class ServiceMaxAggregateOutputType {
     price?: Nullable<number>;
     state?: Nullable<State>;
     updatedAt?: Nullable<DateTime>;
-    value?: Nullable<number>;
 }
 
 export class ServiceMinAggregateOutputType {
+    authorId?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
+    currency?: Nullable<string>;
     description?: Nullable<string>;
     id?: Nullable<string>;
     imageId?: Nullable<string>;
@@ -17560,7 +10770,6 @@ export class ServiceMinAggregateOutputType {
     price?: Nullable<number>;
     state?: Nullable<State>;
     updatedAt?: Nullable<DateTime>;
-    value?: Nullable<number>;
 }
 
 export class ServiceResponse {
@@ -17571,7 +10780,6 @@ export class ServiceResponse {
 
 export class ServiceSumAggregateOutputType {
     price?: Nullable<number>;
-    value?: Nullable<number>;
 }
 
 export class SignOutResult {
@@ -17579,78 +10787,9 @@ export class SignOutResult {
     status?: Nullable<boolean>;
 }
 
-export class Tag {
-    attachmentId?: Nullable<string>;
-    createdAt: DateTime;
-    description?: Nullable<string>;
-    forms: Form[];
-    forums: Forum[];
-    id: string;
-    image?: Nullable<Attachment>;
-    name: string;
-    state: State;
-    updatedAt: DateTime;
-}
-
-export class TagBatchResponse {
-    data?: Nullable<BatchPayload>;
-    message: string;
-    status: boolean;
-}
-
-export class TagCountAggregateOutputType {
-    _all: number;
-    attachmentId: number;
-    createdAt: number;
-    description: number;
-    id: number;
-    name: number;
-    state: number;
-    updatedAt: number;
-}
-
-export class TagCountResponse {
-    data?: Nullable<number>;
-    message: string;
-    status: boolean;
-}
-
-export class TagListResponse {
-    data?: Nullable<Tag[]>;
-    message: string;
-    status: boolean;
-}
-
-export class TagMaxAggregateOutputType {
-    attachmentId?: Nullable<string>;
-    createdAt?: Nullable<DateTime>;
-    description?: Nullable<string>;
-    id?: Nullable<string>;
-    name?: Nullable<string>;
-    state?: Nullable<State>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class TagMinAggregateOutputType {
-    attachmentId?: Nullable<string>;
-    createdAt?: Nullable<DateTime>;
-    description?: Nullable<string>;
-    id?: Nullable<string>;
-    name?: Nullable<string>;
-    state?: Nullable<State>;
-    updatedAt?: Nullable<DateTime>;
-}
-
-export class TagResponse {
-    data?: Nullable<Tag>;
-    message: string;
-    status: boolean;
-}
-
 export class Transaction {
     createdAt: DateTime;
     id: string;
-    initiator: User;
     mpesaPayment?: Nullable<MpesaPayment>;
     mpesaPaymentId?: Nullable<string>;
     order: Order;
@@ -17664,7 +10803,6 @@ export class Transaction {
     state: State;
     type: TransactionType;
     updatedAt: DateTime;
-    userId: string;
 }
 
 export class TransactionBatchResponse {
@@ -17685,7 +10823,6 @@ export class TransactionCountAggregateOutputType {
     state: number;
     type: number;
     updatedAt: number;
-    userId: number;
 }
 
 export class TransactionCountResponse {
@@ -17711,7 +10848,6 @@ export class TransactionMaxAggregateOutputType {
     state?: Nullable<State>;
     type?: Nullable<TransactionType>;
     updatedAt?: Nullable<DateTime>;
-    userId?: Nullable<string>;
 }
 
 export class TransactionMinAggregateOutputType {
@@ -17725,7 +10861,6 @@ export class TransactionMinAggregateOutputType {
     state?: Nullable<State>;
     type?: Nullable<TransactionType>;
     updatedAt?: Nullable<DateTime>;
-    userId?: Nullable<string>;
 }
 
 export class TransactionResponse {
@@ -17737,6 +10872,7 @@ export class TransactionResponse {
 export class User {
     avator?: Nullable<Attachment>;
     avatorId?: Nullable<string>;
+    businessProfile?: Nullable<BusinessProfile>;
     comments: Comment[];
     createdAt: DateTime;
     device?: Nullable<Device>;
@@ -17744,17 +10880,17 @@ export class User {
     displayName: string;
     email: string;
     emailVerified: boolean;
-    forms: Form[];
-    forumAnswers: ForumAnswer[];
-    forums: Forum[];
     id: string;
     lastSeen?: Nullable<DateTime>;
+    location: Location;
+    locationId: string;
     orders: Order[];
     phoneNumber?: Nullable<string>;
-    responses: Response[];
+    reviewed: Review[];
+    reviews: Review[];
     role: Role;
+    services: Service[];
     state: State;
-    transactions: Transaction[];
     updatedAt: DateTime;
 }
 
@@ -17773,6 +10909,7 @@ export class UserCountAggregateOutputType {
     email: number;
     emailVerified: number;
     id: number;
+    locationId: number;
     phoneNumber: number;
     role: number;
     state: number;
@@ -17799,6 +10936,7 @@ export class UserMaxAggregateOutputType {
     email?: Nullable<string>;
     emailVerified?: Nullable<boolean>;
     id?: Nullable<string>;
+    locationId?: Nullable<string>;
     phoneNumber?: Nullable<string>;
     role?: Nullable<Role>;
     state?: Nullable<State>;
@@ -17813,6 +10951,7 @@ export class UserMinAggregateOutputType {
     email?: Nullable<string>;
     emailVerified?: Nullable<boolean>;
     id?: Nullable<string>;
+    locationId?: Nullable<string>;
     phoneNumber?: Nullable<string>;
     role?: Nullable<Role>;
     state?: Nullable<State>;

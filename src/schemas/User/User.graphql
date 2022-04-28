@@ -9,51 +9,17 @@ type User {
           avatorId: String
           role: Role!
           state: State!
-          forms(where: FormWhereInput
-              orderBy: [FormOrderByInput!]
-              cursor: FormWhereUniqueInput
+          businessProfile: BusinessProfile
+          services(where: ServiceWhereInput
+              orderBy: [ServiceOrderByInput!]
+              cursor: ServiceWhereUniqueInput
               take: Int
               skip: Int
-              distinct: [FormScalarFieldEnum!]
-              ): [Form!]!
-          responses(where: ResponseWhereInput
-              orderBy: [ResponseOrderByInput!]
-              cursor: ResponseWhereUniqueInput
-              take: Int
-              skip: Int
-              distinct: [ResponseScalarFieldEnum!]
-              ): [Response!]!
+              distinct: [ServiceScalarFieldEnum!]
+              ): [Service!]!
           createdAt: DateTime!
           updatedAt: DateTime!
-          forums(where: ForumWhereInput
-              orderBy: [ForumOrderByInput!]
-              cursor: ForumWhereUniqueInput
-              take: Int
-              skip: Int
-              distinct: [ForumScalarFieldEnum!]
-              ): [Forum!]!
-          forumAnswers(where: ForumAnswerWhereInput
-              orderBy: [ForumAnswerOrderByInput!]
-              cursor: ForumAnswerWhereUniqueInput
-              take: Int
-              skip: Int
-              distinct: [ForumAnswerScalarFieldEnum!]
-              ): [ForumAnswer!]!
-          comments(where: CommentWhereInput
-              orderBy: [CommentOrderByInput!]
-              cursor: CommentWhereUniqueInput
-              take: Int
-              skip: Int
-              distinct: [CommentScalarFieldEnum!]
-              ): [Comment!]!
           device: Device
-          transactions(where: TransactionWhereInput
-              orderBy: [TransactionOrderByInput!]
-              cursor: TransactionWhereUniqueInput
-              take: Int
-              skip: Int
-              distinct: [TransactionScalarFieldEnum!]
-              ): [Transaction!]!
           orders(where: OrderWhereInput
               orderBy: [OrderOrderByInput!]
               cursor: OrderWhereUniqueInput
@@ -61,6 +27,29 @@ type User {
               skip: Int
               distinct: [OrderScalarFieldEnum!]
               ): [Order!]!
+          reviews(where: ReviewWhereInput
+              orderBy: [ReviewOrderByInput!]
+              cursor: ReviewWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [ReviewScalarFieldEnum!]
+              ): [Review!]!
+          reviewed(where: ReviewWhereInput
+              orderBy: [ReviewOrderByInput!]
+              cursor: ReviewWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [ReviewScalarFieldEnum!]
+              ): [Review!]!
+          comments(where: CommentWhereInput
+              orderBy: [CommentOrderByInput!]
+              cursor: CommentWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [CommentScalarFieldEnum!]
+              ): [Comment!]!
+          location: Location!
+          locationId: String!
     }
 
       type UserListResponse {

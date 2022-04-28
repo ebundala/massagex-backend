@@ -70,15 +70,11 @@ export class PaymentService{
            include:{
                mpesaPayment:true,
                selcomPayment:true,
-               initiator:true,
+            
                order:true
            },
            data:{
-               initiator:{
-                   connect:{
-                       id: auth.uid
-                   }
-               },
+            
                order:{
                    connect:{
                        id:order.id

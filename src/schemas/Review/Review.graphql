@@ -1,0 +1,66 @@
+type Review {
+          id: String!
+          author: User!
+          authorId: String!
+          reviewee: User!
+          revieweeId: String!
+          value: Int!
+          content: String
+          state: State!
+          comments(where: CommentWhereInput
+              orderBy: [CommentOrderByInput!]
+              cursor: CommentWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [CommentScalarFieldEnum!]
+              ): [Comment!]!
+          createdAt: DateTime!
+          updatedAt: DateTime!
+    }
+
+      type ReviewListResponse {
+        status: Boolean!
+        data: [Review!]
+        message: String!
+      }
+     
+
+      type ReviewResponse {
+        status: Boolean!
+        data: Review
+        message: String!
+      }
+      
+      type ReviewBatchResponse {
+        status: Boolean!
+        data: BatchPayload
+        message: String!
+      }
+      type AggregateReviewResponse {
+        status: Boolean!
+        data: AggregateReview
+        message: String!
+      }
+      type ReviewCountResponse {
+        status: Boolean!
+        data: Int
+        message: String!
+      }
+      extend type Query {
+    findUniqueReview(where: ReviewWhereUniqueInput!): ReviewResponse!
+    findManyReview(
+      where: ReviewWhereInput
+      orderBy: [ReviewOrderByInput!]
+      cursor: ReviewWhereUniqueInput
+      distinct: [ReviewScalarFieldEnum!]
+      skip: Int
+      take: Int
+    ): ReviewListResponse!
+  }
+extend type Mutation {
+    createOneReview(data: ReviewCreateInput!): ReviewResponse!
+    updateOneReview(
+      where: ReviewWhereUniqueInput!
+      data: ReviewUpdateInput!
+    ): ReviewResponse!
+  }

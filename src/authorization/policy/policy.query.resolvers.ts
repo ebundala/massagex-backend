@@ -11,7 +11,7 @@ export class PolicyQueryResolver {
   
 @Query()
 @UseGuards(AuthorizerGuard)
-findUniqueForm(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
+findUniqueComment(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
     return this.service.handle(parent, args, ctx, info);
   }
 
@@ -19,23 +19,7 @@ findUniqueForm(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @I
 
 @Query()
 @UseGuards(AuthorizerGuard)
-findManyForm(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Query()
-@UseGuards(AuthorizerGuard)
-findUniqueForum(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Query()
-@UseGuards(AuthorizerGuard)
-findManyForum(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
+findManyComment(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
     return this.service.handle(parent, args, ctx, info);
   }
 
@@ -91,7 +75,7 @@ findManyPaymentMethod(@Parent() parent, @Args() args, @Context() ctx: TenantCont
 
 @Query()
 @UseGuards(AuthorizerGuard)
-findUniqueResponse(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
+findUniqueReview(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
     return this.service.handle(parent, args, ctx, info);
   }
 
@@ -99,7 +83,7 @@ findUniqueResponse(@Parent() parent, @Args() args, @Context() ctx: TenantContext
 
 @Query()
 @UseGuards(AuthorizerGuard)
-findManyResponse(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
+findManyReview(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
     return this.service.handle(parent, args, ctx, info);
   }
 
@@ -116,22 +100,6 @@ findUniqueService(@Parent() parent, @Args() args, @Context() ctx: TenantContext,
 @Query()
 @UseGuards(AuthorizerGuard)
 findManyService(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Query()
-@UseGuards(AuthorizerGuard)
-findUniqueTag(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Query()
-@UseGuards(AuthorizerGuard)
-findManyTag(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
     return this.service.handle(parent, args, ctx, info);
   }
 

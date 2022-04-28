@@ -1,0 +1,41 @@
+type BusinessProfile {
+          id: String!
+          owner: User!
+          ownerId: String!
+          mode: BusinnessMode!
+          cover: Attachment!
+          coverId: String!
+          about: String!
+          createdAt: DateTime!
+          updatedAt: DateTime!
+    }
+
+      type BusinessProfileListResponse {
+        status: Boolean!
+        data: [BusinessProfile!]
+        message: String!
+      }
+     
+
+      type BusinessProfileResponse {
+        status: Boolean!
+        data: BusinessProfile
+        message: String!
+      }
+      
+      type BusinessProfileBatchResponse {
+        status: Boolean!
+        data: BatchPayload
+        message: String!
+      }
+      type AggregateBusinessProfileResponse {
+        status: Boolean!
+        data: AggregateBusinessProfile
+        message: String!
+      }
+      type BusinessProfileCountResponse {
+        status: Boolean!
+        data: Int
+        message: String!
+      }
+      

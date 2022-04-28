@@ -2,6 +2,8 @@ type Comment {
           id: String!
           author: User!
           authorId: String!
+          review: Review
+          reviewId: String!
           attachments(where: AttachmentWhereInput
               orderBy: [AttachmentOrderByInput!]
               cursor: AttachmentWhereUniqueInput
@@ -21,10 +23,6 @@ type Comment {
           state: State!
           createdAt: DateTime!
           updatedAt: DateTime!
-          forum: Forum
-          forumId: String
-          forumAnswer: ForumAnswer
-          forumAnswerId: String
           comment: Comment
           commentId: String
     }
@@ -57,4 +55,21 @@ type Comment {
         data: Int
         message: String!
       }
-      
+      extend type Query {
+    findUniqueComment(where: CommentWhereUniqueInput!): CommentResponse!
+    findManyComment(
+      where: CommentWhereInput
+      orderBy: [CommentOrderByInput!]
+      cursor: CommentWhereUniqueInput
+      distinct: [CommentScalarFieldEnum!]
+      skip: Int
+      take: Int
+    ): CommentListResponse!
+  }
+extend type Mutation {
+    createOneComment(data: CommentCreateInput!): CommentResponse!
+    updateOneComment(
+      where: CommentWhereUniqueInput!
+      data: CommentUpdateInput!
+    ): CommentResponse!
+  }

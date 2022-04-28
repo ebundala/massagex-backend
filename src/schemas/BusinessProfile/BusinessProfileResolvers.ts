@@ -7,19 +7,19 @@
       import { UseGuards } from '@nestjs/common';
       import { Resolver, Mutation,Query,Info, Args, Context, Parent } from '@nestjs/graphql';
       import { 
-      Answer,
-      AnswerResponse,
-      AnswerBatchResponse,
-      AnswerCountResponse,
-      AnswerListResponse,
-      AggregateAnswerResponse,
-    //  AnswerCreateInput,
-    //  AnswerUpdateInput,
-     // AnswerUpdateManyMutationInput,
-     // AnswerWhereUniqueInput,
-     // AnswerWhereInput,
-     // AnswerOrderByInput,
-     // AnswerScalarFieldEnum,
+      BusinessProfile,
+      BusinessProfileResponse,
+      BusinessProfileBatchResponse,
+      BusinessProfileCountResponse,
+      BusinessProfileListResponse,
+      AggregateBusinessProfileResponse,
+    //  BusinessProfileCreateInput,
+    //  BusinessProfileUpdateInput,
+     // BusinessProfileUpdateManyMutationInput,
+     // BusinessProfileWhereUniqueInput,
+     // BusinessProfileWhereInput,
+     // BusinessProfileOrderByInput,
+     // BusinessProfileScalarFieldEnum,
      // BatchPayload,
       
     } from '../../models/graphql';
@@ -27,9 +27,9 @@
       import { TenantContext } from '@mechsoft/common';
       import {AuthorizerGuard} from '@mechsoft/enforcer';
 
-      @Resolver((of)=>Answer)
+      @Resolver((of)=>BusinessProfile)
       @UseGuards(AuthorizerGuard)
-      export class AnswerResolver {
+      export class BusinessProfileResolver {
           
          
         }

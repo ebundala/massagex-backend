@@ -18,33 +18,8 @@ type Attachment {
               skip: Int
               distinct: [UserScalarFieldEnum!]
               ): [User!]!
-          form: Form
-          formId: String
-          grade: Grade
-          gradeId: String
-          response: Response
-          responseId: String
-          question: Question
-          questionId: String
-          answer: Answer
-          answerId: String
-          recommendation: Recommendation
-          recommendationId: String
-          forum: Forum
-          forumId: String
-          forumAnswer: ForumAnswer
-          forumAnswerId: String
           comment: Comment
           commentId: String
-          tags(where: TagWhereInput
-              orderBy: [TagOrderByInput!]
-              cursor: TagWhereUniqueInput
-              take: Int
-              skip: Int
-              distinct: [TagScalarFieldEnum!]
-              ): [Tag!]!
-          helpStep: HelpStep
-          helpStepId: String
           paymentMethods(where: PaymentMethodWhereInput
               orderBy: [PaymentMethodOrderByInput!]
               cursor: PaymentMethodWhereUniqueInput
@@ -66,6 +41,15 @@ type Attachment {
               skip: Int
               distinct: [OrderScalarFieldEnum!]
               ): [Order!]!
+          businessProfiles(where: BusinessProfileWhereInput
+              orderBy: [BusinessProfileOrderByInput!]
+              cursor: BusinessProfileWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [BusinessProfileScalarFieldEnum!]
+              ): [BusinessProfile!]!
+          helpStep: HelpStep
+          helpStepId: String
     }
 
       type AttachmentListResponse {

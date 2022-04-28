@@ -3,12 +3,14 @@ type Service {
           name: String!
           description: String
           price: Float!
-          value: Float!
+          currency: String!
           state: State!
           createdAt: DateTime!
           updatedAt: DateTime!
-          imageId: String!
-          image: Attachment!
+          authorId: String!
+          author: User!
+          imageId: String
+          image: Attachment
           orders(where: OrderWhereInput
               orderBy: [OrderOrderByInput!]
               cursor: OrderWhereUniqueInput

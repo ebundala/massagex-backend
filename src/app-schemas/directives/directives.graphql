@@ -26,40 +26,7 @@ extend input AttachmentCreateManyInput{
 extend input AttachmentCreateWithoutUserInput{
     path: String! @file(path:"../../../../public/uploads")
 }
-
-extend input AttachmentCreateWithoutTagsInput{
-    path: String! @file(path:"../../../../public/uploads")
-}
-
-extend input AttachmentCreateWithoutFormInput{
-    path: String! @file(path:"../../../../public/uploads")
-}
-
-extend input AttachmentCreateWithoutGradeInput{
-    path: String! @file(path:"../../../../public/uploads")
-}
-
-extend input AttachmentCreateWithoutResponseInput{
-    path: String! @file(path:"../../../../public/uploads")
-}
-
-extend input AttachmentCreateWithoutQuestionInput{
-    path: String! @file(path:"../../../../public/uploads")
-}
-
-extend input AttachmentCreateWithoutAnswerInput{
-    path: String! @file(path:"../../../../public/uploads")
-}
-
-extend input AttachmentCreateWithoutRecommendationInput{
-    path: String! @file(path:"../../../../public/uploads")
-}
-
-extend input AttachmentCreateWithoutForumInput{
-    path: String! @file(path:"../../../../public/uploads")
-}
-
-extend input AttachmentCreateWithoutForumAnswerInput{
+extend input AttachmentCreateWithoutBusinessProfilesInput{
     path: String! @file(path:"../../../../public/uploads")
 }
 
@@ -86,37 +53,7 @@ extend input AttachmentCreateWithoutPaymentMethodsInput{
 }
 
 # create many inputs
-extend input AttachmentCreateManyFormInput{
-    path: String! @file(path:"../../../../public/uploads")
-}
 
-extend input AttachmentCreateManyGradeInput{
-    path: String! @file(path:"../../../../public/uploads")
-}
-
-extend input AttachmentCreateManyResponseInput{
-    path: String! @file(path:"../../../../public/uploads")
-}
-
-extend input AttachmentCreateManyQuestionInput{
-    path: String! @file(path:"../../../../public/uploads")
-}
-
-extend input AttachmentCreateManyAnswerInput{
-    path: String! @file(path:"../../../../public/uploads")
-}
-
-extend input AttachmentCreateManyRecommendationInput{
-    path: String! @file(path:"../../../../public/uploads")
-}
-
-extend input AttachmentCreateManyForumInput{
-    path: String! @file(path:"../../../../public/uploads")
-}
-
-extend input AttachmentCreateManyForumAnswerInput{
-    path: String! @file(path:"../../../../public/uploads")
-}
 
 extend input AttachmentCreateManyCommentInput{
     path: String! @file(path:"../../../../public/uploads")
@@ -136,40 +73,10 @@ extend input AttachmentUncheckedCreateInput{
 extend input AttachmentUncheckedCreateWithoutUserInput{
     path: String! @file(path:"../../../../public/uploads")
 }
-extend input AttachmentUncheckedCreateWithoutTagsInput{
+extend input AttachmentUncheckedCreateWithoutBusinessProfilesInput{
     path: String! @file(path:"../../../../public/uploads")
 }
 
-
-extend input AttachmentUncheckedCreateWithoutFormInput{
-    path: String! @file(path:"../../../../public/uploads")
-}
-
-extend input AttachmentUncheckedCreateWithoutGradeInput {
-    path: String! @file(path:"../../../../public/uploads")
-}
-extend input AttachmentUncheckedCreateWithoutResponseInput{
-    path: String! @file(path:"../../../../public/uploads")
-}
-
-extend input AttachmentUncheckedCreateWithoutQuestionInput{
-    path: String! @file(path:"../../../../public/uploads")
-}
-extend input AttachmentUncheckedCreateWithoutAnswerInput{
-    path: String! @file(path:"../../../../public/uploads")
-}
-extend input AttachmentUncheckedCreateWithoutRecommendationInput{
-    path: String! @file(path:"../../../../public/uploads")
-}
-
-extend input AttachmentUncheckedCreateWithoutForumInput{
-    path: String! @file(path:"../../../../public/uploads")
-}
-
-
-extend input AttachmentUncheckedCreateWithoutForumAnswerInput{
-    path: String! @file(path:"../../../../public/uploads")
-}
 extend input AttachmentUncheckedCreateWithoutCommentInput{
     path: String! @file(path:"../../../../public/uploads")
 }

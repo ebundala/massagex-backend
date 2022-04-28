@@ -59,7 +59,7 @@ paybill(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() i
 
 @Mutation()
 @UseGuards(AuthorizerGuard)
-createOneForm(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
+createOneComment(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
     return this.service.handle(parent, args, ctx, info);
   }
 
@@ -67,23 +67,7 @@ createOneForm(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @In
 
 @Mutation()
 @UseGuards(AuthorizerGuard)
-updateOneForm(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Mutation()
-@UseGuards(AuthorizerGuard)
-createOneForum(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Mutation()
-@UseGuards(AuthorizerGuard)
-updateOneForum(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
+updateOneComment(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
     return this.service.handle(parent, args, ctx, info);
   }
 
@@ -139,7 +123,7 @@ updateOnePaymentMethod(@Parent() parent, @Args() args, @Context() ctx: TenantCon
 
 @Mutation()
 @UseGuards(AuthorizerGuard)
-createOneResponse(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
+createOneReview(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
     return this.service.handle(parent, args, ctx, info);
   }
 
@@ -147,7 +131,7 @@ createOneResponse(@Parent() parent, @Args() args, @Context() ctx: TenantContext,
 
 @Mutation()
 @UseGuards(AuthorizerGuard)
-updateOneResponse(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
+updateOneReview(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
     return this.service.handle(parent, args, ctx, info);
   }
 
@@ -164,22 +148,6 @@ createOneService(@Parent() parent, @Args() args, @Context() ctx: TenantContext, 
 @Mutation()
 @UseGuards(AuthorizerGuard)
 updateOneService(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Mutation()
-@UseGuards(AuthorizerGuard)
-createOneTag(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Mutation()
-@UseGuards(AuthorizerGuard)
-updateOneTag(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
     return this.service.handle(parent, args, ctx, info);
   }
 

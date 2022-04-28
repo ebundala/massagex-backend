@@ -32,40 +32,19 @@ const options: SdlGeneratorServiceOptions = {
         mutations: true,
       },
       {
-        name: 'Answer',
+        name: 'BusinessProfile',
         queries: true,
         mutations: true,
       },
-      {
-        name: 'Recommendation',
-        queries: true,
-        mutations: true,
-      },
-      {
-        name: 'Question',
-        queries: true,
-        mutations: true,
-      },
-      {
-        name: 'Comment',
-        queries: true,
-        mutations: true,
-      },
+      
+      
       {
         name: 'HelpStep',
         queries: true,
         mutations: true,
       },
-      {
-        name: 'ForumAnswer',
-        queries: true,
-        mutations: true,
-      },
-      {
-        name: 'Grade',
-        queries: true,
-        mutations: true,
-      },
+      
+     
       {
         name: 'Location',
         queries: true,
