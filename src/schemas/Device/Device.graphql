@@ -4,6 +4,7 @@ type Device {
           type: String!
           user: User
           userId: String
+          recordStatus: RecordStatus!
     }
 
       type DeviceListResponse {

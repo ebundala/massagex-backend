@@ -9,4 +9,10 @@ import { UseGuards } from '@nestjs/common';
 export class PolicySubscriptionResolver {
   constructor(private readonly service: PolicyService) { }
   
+@Subscription()
+@UseGuards(AuthorizerGuard)
+locations(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
+    return this.service.handle(parent, args, ctx, info);
+  }
+
 }

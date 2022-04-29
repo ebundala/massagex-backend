@@ -32,21 +32,6 @@
       export class ReviewResolver {
           
          
-    @Query((returns)=>ReviewResponse)
-
-    findUniqueReview(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info):Promise<ReviewResponse|any>{
-      const select = ctx.prisma.getSelection(info).valueOf('data', 'Review', { select: {  } });
-      return ctx.prisma.review.findUnique({...args,...select})
-      .then((data)=>({
-        status:true,
-        data,
-        message:'ok'
-      })).catch(({message})=>({
-       status:false,
-       data:null,
-       message:message||'unknown error'
-      }))
-    }
     @Query((returns)=>ReviewListResponse)
     findManyReview(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info):Promise<ReviewListResponse|any>{
       const select = ctx.prisma.getSelection(info).valueOf('data', 'Review', { select: {  } });
@@ -61,33 +46,5 @@
        message:message||'unknown error'
       }));
       
-    }
-    @Mutation((returns)=>ReviewResponse)
-    createOneReview(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info):Promise<ReviewResponse|any>{
-      const select = ctx.prisma.getSelection(info).valueOf('data', 'Review', { select: {  } });
-      return ctx.prisma.review.create({...args,...select})
-      .then((data)=>({
-        status:true,
-        data,
-        message:'ok'
-      })).catch(({message})=>({
-       status:false,
-       data:null,
-       message:message||'unknown error'
-      }))
-    }
-    @Mutation((returns)=>ReviewResponse)
-    updateOneReview(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info):Promise<ReviewResponse|any>{
-      const select = ctx.prisma.getSelection(info).valueOf('data', 'Review', { select: {  } });
-      return ctx.prisma.review.update({...args,...select})
-      .then((data)=>({
-        status:true,
-        data,
-        message:'ok'
-      })).catch(({message})=>({
-       status:false,
-       data:null,
-       message:message||'unknown error'
-      }))
     }
         }

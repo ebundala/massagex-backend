@@ -1,0 +1,57 @@
+type Category {
+          id: String!
+          name: String!
+          description: String
+          picture: Attachment
+          pictureId: String
+          createdAt: DateTime!
+          updatedAt: DateTime!
+          services(where: ServiceWhereInput
+              orderBy: [ServiceOrderByInput!]
+              cursor: ServiceWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [ServiceScalarFieldEnum!]
+              ): [Service!]!
+    }
+
+      type CategoryListResponse {
+        status: Boolean!
+        data: [Category!]
+        message: String!
+      }
+     
+
+      type CategoryResponse {
+        status: Boolean!
+        data: Category
+        message: String!
+      }
+      
+      type CategoryBatchResponse {
+        status: Boolean!
+        data: BatchPayload
+        message: String!
+      }
+      type AggregateCategoryResponse {
+        status: Boolean!
+        data: AggregateCategory
+        message: String!
+      }
+      type CategoryCountResponse {
+        status: Boolean!
+        data: Int
+        message: String!
+      }
+      
+    extend type Query {
+    
+    findManyCategory(
+      where: CategoryWhereInput
+      orderBy: [CategoryOrderByInput!]
+      cursor: CategoryWhereUniqueInput
+      distinct: [CategoryScalarFieldEnum!]
+      skip: Int
+      take: Int
+    ): CategoryListResponse!
+  }

@@ -10,109 +10,159 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model User {
-  id              String           @id @default(cuid())
-  email           String           @unique
-  displayName     String
-  phoneNumber     String?
-  emailVerified   Boolean          @default(false)
-  disabled        Boolean          @default(true)
-  avator          Attachment?      @relation(fields: [avatorId], references: [id])
-  avatorId        String?
-  role            Role             @default(USER)
-  state           State            @default(PENDING)
-  businessProfile BusinessProfile?
-  services        Service[]
-  createdAt       DateTime         @default(now())
-  updatedAt       DateTime         @updatedAt
-  device          Device?
-  orders          Order[]
-  reviews         Review[]         @relation("reviewerToReview")
-  reviewed        Review[]         @relation("revieweeToReview")
-  comments        Comment[]
-  location        Location?         @relation(fields: [locationId], references: [id])
-  locationId      String?
+enum Gender {
+  MALE
+  FEMALE
+  UNSPECIFIED
 }
 
-enum BusinnessMode {
+// Track user accounts status
+enum AccountStatus {
+  ENABLED
+  DISABLED
+  DELETED
+
+}
+
+// Track storage status of record
+enum RecordStatus {
+  DRAFT
+  ACTIVE
+  INACTIVE
+  DELETED
+}
+
+model User {
+  id              String        @id @default(cuid())
+  email           String        @unique
+  displayName     String
+  phoneNumber     String?
+  dateOfBirth     DateTime?
+  emailVerified   Boolean       @default(false)
+  disabled        Boolean       @default(true)
+  avator          Attachment?   @relation(fields: [avatorId], references: [id])
+  avatorId        String?
+  role            Role          @default(USER)
+  recordStatus    RecordStatus  @default(ACTIVE)
+  state           AccountStatus @default(ENABLED)
+  gender          Gender        @default(UNSPECIFIED)
+  businessProfile Business?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  device          Device?
+  ordered        Order[]
+  reviews         Review[]      @relation("reviewerToReview")
+  reviewed        Review[]      @relation("revieweeToReview")
+  comments        Comment[]
+  location        Location?     @relation(fields: [locationId], references: [id])
+  locationId      String?
+  abuseReports    AbuseReport[]
+  favorites        Favorite[]
+  abuseReported   AbuseReport[] @relation("AbuseReporterToUser")
+  favorited       Favorite[]    @relation("FavoritedToUser")
+}
+
+enum BusinessMode {
   OFFICE_MODE
   MOBILE_MODE
 }
 
-model BusinessProfile {
-  id        String        @id @default(cuid())
-  owner     User          @relation(fields: [ownerId], references: [id])
-  ownerId   String
-  mode      BusinnessMode  @default(OFFICE_MODE)
-  cover     Attachment    @relation(fields: [coverId], references: [id])
-  coverId   String
-  about     String
-  // location   Location      @relation(fields: [locationId], references: [id])
-  // locationId String
-  createdAt DateTime      @default(now())
-  updatedAt DateTime      @updatedAt
+enum BusinessStatus {
+  ONLINE
+  OFFLINE
+}
+
+model Business {
+  id           String         @id @default(cuid())
+  owner        User           @relation(fields: [ownerId], references: [id])
+  ownerId      String
+  mode         BusinessMode   @default(OFFICE_MODE)
+  cover        Attachment?    @relation(fields: [coverId], references: [id])
+  coverId      String?
+  about        String
+  businessName String
+  state        BusinessStatus @default(OFFLINE)
+  recordStatus RecordStatus   @default(ACTIVE)
+  services     Service[]      @relation("businessToService")
+  orders       Order[]        @relation("businessToOrder")
+  attachments  Attachment[]   @relation("businessToGallery")
+  location     Location?      @relation(fields: [locationId], references: [id])
+  locationId   String?
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  abuseReports AbuseReport[]
+  favorite     Favorite[]
 
 }
 
 model Device {
-  id     String  @id
-  fcm_id String?
-  type   String  @default("ANDROID")
-  user   User?   @relation(fields: [userId], references: [id])
-  userId String?
+  id           String       @id
+  fcm_id       String?
+  type         String       @default("ANDROID")
+  user         User?        @relation(fields: [userId], references: [id])
+  userId       String?
+  recordStatus RecordStatus @default(ACTIVE)
 }
 
 model Attachment {
-  id               String            @id @default(cuid())
-  path             String
-  filename         String?
-  mimetype         String?
-  encoding         String?
-  duration         Int               @default(0)
-  size             Int               @default(0)
-  attachmentType   AttachmentType    @default(IMAGE)
-  downloadable     Boolean           @default(false)
-  placement        String            @default("default")
-  createdAt        DateTime          @default(now())
-  updatedAt        DateTime          @updatedAt
-  user             User[]
-  comment          Comment?          @relation(fields: [commentId], references: [id])
-  commentId        String?
-  paymentMethods   PaymentMethod[]
-  services         Service[]
-  orders           Order[]
-  businessProfiles BusinessProfile[]
-  helpStep         HelpStep?         @relation(fields: [helpStepId], references: [id])
-  helpStepId       String?
+  id             String          @id @default(cuid())
+  path           String
+  filename       String?
+  mimetype       String?
+  encoding       String?
+  recordStatus   RecordStatus    @default(ACTIVE)
+  duration       Int             @default(0)
+  size           Int             @default(0)
+  attachmentType AttachmentType  @default(IMAGE)
+  downloadable   Boolean         @default(false)
+  placement      String          @default("default")
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  users          User[]
+  comment        Comment?        @relation(fields: [commentId], references: [id])
+  commentId      String?
+  paymentMethods PaymentMethod[]
+  services       Service[]
+  orders         Order[]
+  businesses     Business[]
+  helpStep       HelpStep?       @relation(fields: [helpStepId], references: [id])
+  helpStepId     String?
+  reviews        Review?         @relation(fields: [reviewId], references: [id])
+  reviewId       String?
+  userId         String?
+  business       Business?       @relation("businessToGallery", fields: [businessId], references: [id])
+  businessId     String?
+  Category       Category[]
 }
 
 model Location {
-  id        String                    @id @default(cuid())
-  name      String                    @default("unknown")
-  geom      Unsupported("geography")?
-  lat       Float
-  lon       Float
-  state     State                     @default(PENDING)
-  createdAt DateTime                  @default(now())
-  updatedAt DateTime                  @updatedAt
-  // business  BusinessProfile[]
-  users     User[]
+  id           String                    @id @default(cuid())
+  name         String                    @default("unknown")
+  geom         Unsupported("geography")?
+  lat          Float
+  lon          Float
+  recordStatus RecordStatus              @default(ACTIVE)
+  createdAt    DateTime                  @default(now())
+  updatedAt    DateTime                  @updatedAt
+  users        User[]
+  businesses   Business[]
+}
+
+model spatial_ref_sys {
+  srid      Int     @id
+  auth_name String? @db.VarChar(256)
+  auth_srid Int?
+  srtext    String? @db.VarChar(2048)
+  proj4text String? @db.VarChar(2048)
+
+  @@ignore
 }
 
 enum Role {
-  USER
   ADMIN
   MODERATOR
-  ORGANIZATION
-}
-
-enum State {
-  PENDING
-  REVIEW
-  REJECTED
-  APPROVED
-  COMPLETED
-  ARCHIVED
+  BUSINESS
+  USER
 }
 
 enum AttachmentType {
@@ -124,34 +174,110 @@ enum AttachmentType {
 
 // review part
 model Review {
-  id         String    @id @default(cuid())
-  author     User      @relation("reviewerToReview", fields: [authorId], references: [id])
-  authorId   String
-  reviewee   User      @relation("revieweeToReview", fields: [revieweeId], references: [id])
-  revieweeId String
-  value      Int       @default(0)
-  content    String?
-  state      State     @default(PENDING)
-  comments   Comment[]
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime  @updatedAt
+  id           String        @id @default(cuid())
+  author       User          @relation("reviewerToReview", fields: [authorId], references: [id])
+  authorId     String
+  reviewee     User          @relation("revieweeToReview", fields: [revieweeId], references: [id])
+  revieweeId   String
+  value        Int           @default(0)
+  content      String?
+  attachments  Attachment[]
+  recordStatus RecordStatus  @default(ACTIVE)
+  comments     Comment[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  abuseReports AbuseReport[]
+  favorites    Favorite[]
 }
 
 model Comment {
-  id              String       @id @default(cuid())
-  author          User         @relation(fields: [authorId], references: [id])
+  id              String        @id @default(cuid())
+  author          User          @relation(fields: [authorId], references: [id])
   authorId        String
-  review          Review?      @relation(fields: [reviewId], references: [id])
+  review          Review?       @relation(fields: [reviewId], references: [id])
   reviewId        String
   attachments     Attachment[]
-  comments        Comment[]    @relation("CommentToComment")
-  commentsEnabled Boolean      @default(false)
+  comments        Comment[]     @relation("CommentToComment")
+  commentsEnabled Boolean       @default(false)
   content         String
-  state           State        @default(PENDING)
-  createdAt       DateTime     @default(now())
-  updatedAt       DateTime     @updatedAt
-  comment         Comment?     @relation("CommentToComment", fields: [commentId], references: [id])
+  recordStatus    RecordStatus  @default(ACTIVE)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  comment         Comment?      @relation("CommentToComment", fields: [commentId], references: [id])
   commentId       String?
+  abuseReports    AbuseReport[]
+  favorites       Favorite[]
+}
+
+enum AbuseReportStatus {
+  SUBMITED
+  PROCESSING
+  MITIGATED
+}
+
+// holds types which can be abused by user usually which are edited by user directly
+model AbuseRecordType {
+  id           String        @id @default(cuid())
+  name         String
+  abuseReports AbuseReport[]
+}
+
+// holds types which can be favorited by user
+model FavoriteRecordType {
+  id        String     @id @default(cuid())
+  name      String
+  favorites Favorite[]
+}
+
+// hold abuse records for moderation of content
+model AbuseReport {
+  id           String            @id @default(cuid())
+  number       Int               @default(autoincrement())
+  report       String?
+  author       User              @relation("AbuseReporterToUser", fields: [authorId], references: [id])
+  authorId     String
+  type         AbuseRecordType   @relation(fields: [typeId], references: [id])
+  typeId       String
+  users        User?             @relation(fields: [userId], references: [id])
+  reviews      Review?           @relation(fields: [reviewId], references: [id])
+  comments     Comment?          @relation(fields: [commentId], references: [id])
+  Business     Business?         @relation(fields: [businessId], references: [id])
+  service      Service?          @relation(fields: [serviceId], references: [id])
+  orders       Order?            @relation(fields: [orderId], references: [id])
+  recordStatus RecordStatus      @default(ACTIVE)
+  state        AbuseReportStatus @default(SUBMITED)
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+  userId       String?
+  reviewId     String?
+  commentId    String?
+  businessId   String?
+  serviceId    String?
+  orderId      String?
+}
+
+// Favorites
+model Favorite {
+  id           String             @id @default(cuid())
+  author       User               @relation("FavoritedToUser", fields: [authorId], references: [id])
+  authorId     String
+  type         FavoriteRecordType @relation(fields: [typeId], references: [id])
+  typeId       String
+  users        User?              @relation(fields: [userId], references: [id])
+  reviews      Review?            @relation(fields: [reviewId], references: [id])
+  comments     Comment?           @relation(fields: [commentId], references: [id])
+  Business     Business?          @relation(fields: [businessId], references: [id])
+  service      Service?           @relation(fields: [serviceId], references: [id])
+  orders       Order?             @relation(fields: [orderId], references: [id])
+  recordStatus RecordStatus       @default(ACTIVE)
+  createdAt    DateTime           @default(now())
+  updatedAt    DateTime           @updatedAt
+  userId       String?
+  reviewId     String?
+  commentId    String?
+  businessId   String?
+  serviceId    String?
+  orderId      String?
 }
 
 //casbin table
@@ -166,7 +292,7 @@ model CasbinRule {
   v4        String?
   v5        String?
   createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) @updatedAt
+  updatedAt DateTime @updatedAt
 
   @@map("casbin_rule")
 }
@@ -174,74 +300,113 @@ model CasbinRule {
 //help table
 
 model Help {
-  id          String     @id @default(cuid())
-  topic       String
-  description String?
-  steps       HelpStep[]
-  state       State      @default(PENDING)
-  audience    Role       @default(USER)
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
+  id           String       @id @default(cuid())
+  topic        String
+  description  String?
+  steps        HelpStep[]
+  recordStatus RecordStatus @default(ACTIVE)
+  audience     Role         @default(USER)
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
 }
 
 model HelpStep {
-  id          String       @id @default(cuid())
-  stepNumber  Int
-  title       String
-  description String?
-  state       State        @default(PENDING)
-  attachments Attachment[]
-  help        Help         @relation(fields: [helpId], references: [id])
-  helpId      String
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
+  id           String       @id @default(cuid())
+  stepNumber   Int
+  title        String
+  description  String?
+  recordStatus RecordStatus @default(ACTIVE)
+  attachments  Attachment[]
+  help         Help         @relation(fields: [helpId], references: [id])
+  helpId       String
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
 }
 
 // payment and subscription
-
-model Service {
-  id          String     @id @default(cuid())
+model Category {
+  id          String      @id @default(cuid())
   name        String
   description String?
-  price       Float
-  currency    String     @default("TZS")
-  state       State      @default(PENDING)
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
-  authorId    String
-  author      User       @relation(fields: [authorId], references: [id])
-  imageId     String?
-  image       Attachment? @relation(fields: [imageId], references: [id])
-  orders      Order[]
+  picture     Attachment? @relation(fields: [pictureId], references: [id])
+  pictureId   String?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  services    Service[]
+}
+
+model Service {
+  id           String        @id @default(cuid())
+  name         String
+  description  String?
+  price        Float
+  metadata     String[]
+  currency     String        @default("TZS")
+  recordStatus RecordStatus  @default(ACTIVE)
+  category     Category?     @relation(fields: [categoryId], references: [id])
+  categoryId   String?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  imageId      String?
+  image        Attachment?   @relation(fields: [imageId], references: [id])
+  business     Business      @relation("businessToService", fields: [businessId], references: [id])
+  businessId   String
+  orders       Order[]
+  abuseReports AbuseReport[]
+  favorites    Favorite[]
+}
+
+enum OrderStatus {
+  WAITING
+  ACCEPTED
+  REJECTED
+  PROCESSED
 }
 
 model Order {
   id           String        @id @default(cuid())
   quantity     Int
-  state        State         @default(PENDING)
+  recordStatus RecordStatus  @default(ACTIVE)
+  orderStatus  OrderStatus   @default(WAITING)
   notes        String?
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
-  serviceId    String
   ownerId      String
   receiptId    String?
   owner        User          @relation(fields: [ownerId], references: [id])
   receipt      Attachment?   @relation(fields: [receiptId], references: [id])
   service      Service       @relation(fields: [serviceId], references: [id])
+  serviceId    String
   transactions Transaction[]
+  Business     Business?     @relation("businessToOrder", fields: [businessId], references: [id])
+  businessId   String?
+  abuseReports AbuseReport[]
+  favorites    Favorite[]
+}
+
+enum PaymentMethodStatus {
+  ENABLED
+  DISABLED
 }
 
 model PaymentMethod {
-  id           String            @id @default(cuid())
+  id           String              @id @default(cuid())
   name         String
   description  String?
-  logo         Attachment        @relation(fields: [attachmentId], references: [id])
+  logo         Attachment          @relation(fields: [attachmentId], references: [id])
   attachmentId String
   code         SelcomUtilityCode
   transactions Transaction[]
-  state        State             @default(PENDING)
-  createdAt    DateTime          @default(now())
-  updatedAt    DateTime          @updatedAt
+  recordStatus RecordStatus        @default(DRAFT)
+  state        PaymentMethodStatus @default(ENABLED)
+  createdAt    DateTime            @default(now())
+  updatedAt    DateTime            @updatedAt
+}
+
+enum TransactionStatus {
+  PENDING
+  SUCCESS
+  FAILED
 }
 
 model Transaction {
@@ -249,8 +414,6 @@ model Transaction {
   paymentMethod        PaymentMethod       @relation(fields: [paymentMethodId], references: [id])
   paymentMethodId      String
   type                 TransactionType
-  // initiator            User                @relation(fields: [userId], references: [id])
-  // userId               String
   order                Order               @relation(fields: [orderId], references: [id])
   orderId              String
   mpesaPayment         MpesaPayment?       @relation(fields: [mpesaPaymentId], references: [id])
@@ -259,16 +422,17 @@ model Transaction {
   selcomPaymentId      String?
   selcomDisbursement   SelcomDisbursement? @relation(fields: [selcomDisbursementId], references: [id])
   selcomDisbursementId String?
-  state                State               @default(PENDING)
+  state                TransactionStatus   @default(PENDING)
+  recordStatus         RecordStatus        @default(ACTIVE)
   createdAt            DateTime            @default(now())
   updatedAt            DateTime            @updatedAt
 }
 
 model MpesaPayment {
-  id                              String       @id @default(cuid())
+  id                              String        @id @default(cuid())
   input_Amount                    String
-  input_Country                   String       @default("TZN")
-  input_Currency                  String       @default("TZS")
+  input_Country                   String        @default("TZN")
+  input_Currency                  String        @default("TZS")
   input_CustomerMSISDN            String
   input_ServiceProviderCode       String
   input_ThirdPartyConversationID  String
@@ -280,43 +444,46 @@ model MpesaPayment {
   output_ThirdPartyConversationID String?
   output_TransactionID            String?
   transaction                     Transaction?
-  state                           State        @default(PENDING)
-  createdAt                       DateTime     @default(now())
-  updatedAt                       DateTime     @updatedAt
+  state                           PaymentStatus @default(PENDING)
+  recordStatus                    RecordStatus  @default(ACTIVE)
+  createdAt                       DateTime      @default(now())
+  updatedAt                       DateTime      @updatedAt
 }
 
 model SelcomDisbursement {
-  id          String              @id @default(cuid())
-  amount      Int
-  reference   String?
-  resultCode  String?
-  status      SelcomPaymentStatus @default(PENDING)
-  transId     String
-  userId      Int
-  utilitycode SelcomUtilityCode
-  utilityref  String
-  validation  SelcomPaymentStatus @default(PENDING)
-  transaction Transaction?
-  state       State               @default(PENDING)
-  createdAt   DateTime            @default(now())
-  updatedAt   DateTime            @updatedAt
+  id           String            @id @default(cuid())
+  amount       Int
+  reference    String?
+  resultCode   String?
+  status       PaymentStatus     @default(PENDING)
+  transId      String
+  userId       Int
+  utilitycode  SelcomUtilityCode
+  utilityref   String
+  validation   PaymentStatus     @default(PENDING)
+  transaction  Transaction?
+  state        PaymentStatus     @default(PENDING)
+  recordStatus RecordStatus      @default(ACTIVE)
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
 }
 
 model SelcomPayment {
-  id          String              @id @default(cuid())
-  transId     String
-  amount      Int
-  msisdn      String
-  operator    String?
-  reference   String?
-  resultCode  String?
-  status      SelcomPaymentStatus @default(PENDING)
-  utilityref  Int
-  validation  SelcomPaymentStatus @default(PENDING)
-  transaction Transaction?
-  state       State               @default(PENDING)
-  createdAt   DateTime            @default(now())
-  updatedAt   DateTime            @updatedAt
+  id           String        @id @default(cuid())
+  transId      String
+  amount       Int
+  msisdn       String
+  operator     String?
+  reference    String?
+  resultCode   String?
+  status       PaymentStatus @default(PENDING)
+  utilityref   Int
+  validation   PaymentStatus @default(PENDING)
+  transaction  Transaction?
+  state        PaymentStatus @default(PENDING)
+  recordStatus RecordStatus  @default(ACTIVE)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
 }
 
 enum TransactionType {
@@ -334,8 +501,9 @@ enum SelcomUtilityCode {
   TTCASHIN
 }
 
-enum SelcomPaymentStatus {
+enum PaymentStatus {
   PENDING
   SUCCESS
   FAILED
+
 }

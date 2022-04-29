@@ -59,15 +59,7 @@ paybill(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() i
 
 @Mutation()
 @UseGuards(AuthorizerGuard)
-createOneComment(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Mutation()
-@UseGuards(AuthorizerGuard)
-updateOneComment(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
+locationFeed(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
     return this.service.handle(parent, args, ctx, info);
   }
 
@@ -84,78 +76,6 @@ createOneHelp(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @In
 @Mutation()
 @UseGuards(AuthorizerGuard)
 updateOneHelp(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Mutation()
-@UseGuards(AuthorizerGuard)
-createOneOrder(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Mutation()
-@UseGuards(AuthorizerGuard)
-updateOneOrder(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Mutation()
-@UseGuards(AuthorizerGuard)
-createOnePaymentMethod(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Mutation()
-@UseGuards(AuthorizerGuard)
-updateOnePaymentMethod(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Mutation()
-@UseGuards(AuthorizerGuard)
-createOneReview(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Mutation()
-@UseGuards(AuthorizerGuard)
-updateOneReview(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Mutation()
-@UseGuards(AuthorizerGuard)
-createOneService(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Mutation()
-@UseGuards(AuthorizerGuard)
-updateOneService(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Mutation()
-@UseGuards(AuthorizerGuard)
-createOneUser(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
     return this.service.handle(parent, args, ctx, info);
   }
 

@@ -3,14 +3,17 @@ type Service {
           name: String!
           description: String
           price: Float!
+          metadata: [String!]!
           currency: String!
-          state: State!
+          recordStatus: RecordStatus!
+          category: Category
+          categoryId: String
           createdAt: DateTime!
           updatedAt: DateTime!
-          authorId: String!
-          author: User!
           imageId: String
           image: Attachment
+          business: Business!
+          businessId: String!
           orders(where: OrderWhereInput
               orderBy: [OrderOrderByInput!]
               cursor: OrderWhereUniqueInput
@@ -18,6 +21,20 @@ type Service {
               skip: Int
               distinct: [OrderScalarFieldEnum!]
               ): [Order!]!
+          abuseReports(where: AbuseReportWhereInput
+              orderBy: [AbuseReportOrderByInput!]
+              cursor: AbuseReportWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [AbuseReportScalarFieldEnum!]
+              ): [AbuseReport!]!
+          favorites(where: FavoriteWhereInput
+              orderBy: [FavoriteOrderByInput!]
+              cursor: FavoriteWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [FavoriteScalarFieldEnum!]
+              ): [Favorite!]!
     }
 
       type ServiceListResponse {
@@ -48,21 +65,4 @@ type Service {
         data: Int
         message: String!
       }
-      extend type Query {
-    findUniqueService(where: ServiceWhereUniqueInput!): ServiceResponse!
-    findManyService(
-      where: ServiceWhereInput
-      orderBy: [ServiceOrderByInput!]
-      cursor: ServiceWhereUniqueInput
-      distinct: [ServiceScalarFieldEnum!]
-      skip: Int
-      take: Int
-    ): ServiceListResponse!
-  }
-extend type Mutation {
-    createOneService(data: ServiceCreateInput!): ServiceResponse!
-    updateOneService(
-      where: ServiceWhereUniqueInput!
-      data: ServiceUpdateInput!
-    ): ServiceResponse!
-  }
+      

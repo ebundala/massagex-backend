@@ -2,7 +2,7 @@ import { AppLogger } from "@mechsoft/app-logger";
 import { Bloc, BlocAttach, BlocFieldResolver, BlocValidate, BusinessRequest, PrismaAttach, PrismaHookHandler, PrismaHookRequest } from "@mechsoft/business-rules-manager";
 import { TenantContext } from "@mechsoft/common";
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
-import {State,Prisma } from "@prisma/client";
+//import { } from "@prisma/client";
 import * as DataLoader from "dataloader";
 import { PhoneNumber } from "graphql-scalars/mocks";
 import { AuthService } from "src/app-schemas/auth/auth-service";
@@ -24,6 +24,7 @@ import {
   uniqueEmailPerAccount
 } from '../rules.definitions';
 import { v4 as uuidv4 } from 'uuid';
+
 @Injectable()
 @Bloc()
 export class BusinessLogicService {
@@ -98,7 +99,7 @@ export class BusinessLogicService {
   }
 
   @BlocAttach('signup.input.credentials.avator')
-  async avator(v: BusinessRequest, next: (arg0: BusinessRequest<any>) => any) {
+  async avator(v: BusinessRequest<TenantContext>, next: (arg0: BusinessRequest<any>) => any) {
     const { args, context } = v;
     const { credentials, ...rest } = args;
     const { avator } = credentials
@@ -110,10 +111,10 @@ export class BusinessLogicService {
     }
     return next(v)
   }
-
+  
   @BlocAttach('updateOneService.input.data.image.create.path')
   @BlocAttach('createOneService.input.data.image.create.path')
-  async serviceImage(v: BusinessRequest, next: (arg0: BusinessRequest<any>) => any) {
+  async serviceImage(v: BusinessRequest<TenantContext>, next: (arg0: BusinessRequest<any>) => any) {
     
     const { args, context } = v;
     const { data, ...rest } = args;
@@ -126,10 +127,11 @@ export class BusinessLogicService {
     }
     return next(v)
   }
+
   //upload user avator
   @BlocAttach('createOneUser.input.data.avator.create.path')
   @BlocAttach('updateOneUser.input.data.avator.create.path')
-  async updateAvator(v: BusinessRequest, next: (arg0: BusinessRequest<any>) => any) {
+  async updateAvator(v: BusinessRequest<TenantContext>, next: (arg0: BusinessRequest<any>) => any) {
     
     const { args, context } = v;
     const { data, ...rest } = args;
@@ -146,7 +148,7 @@ export class BusinessLogicService {
   @BlocAttach('updateOneOrder.input.data.receipt.create.path')
   //TODO investigate further not needed maybe for create scenario
   @BlocAttach('createOneOrder.input.data.receipt.create.path')
-  async orderReceipt(v: BusinessRequest, next: (arg0: BusinessRequest<any>) => any) {
+  async orderReceipt(v: BusinessRequest<TenantContext>, next: (arg0: BusinessRequest<any>) => any) {
     
     const { args, context } = v;
     const { data, ...rest } = args;
@@ -171,7 +173,7 @@ export class BusinessLogicService {
   }
  
   @BlocValidate('findUniqueUser')
-  async findUniqueUserBloc(v: BusinessRequest) {
+  async findUniqueUserBloc(v: BusinessRequest<TenantContext>) {
     const { args, context } = v;
     const { where } = args;
     const { auth, select } = context;
@@ -180,24 +182,24 @@ export class BusinessLogicService {
   }
 
   @BlocValidate('updateOneUser')
-  async updateOneUserBloc(v: BusinessRequest) {
+  async updateOneUserBloc(v: BusinessRequest<TenantContext>) {
     const { args, context } = v;
     const { where } = args;
     const { auth } = context;
     return { rules: [onlyOwnerhasAccess(where.id)], facts: auth }
   }
 
-  // @BlocFieldResolver("User","lastSeen",function(this:BusinessLogicService,...args){
-  //   return new DataLoader((async function (keys: any){  
-  //     debugger    
-  //     const lastseen= await this.redisCache.mget(keys);
-  //     return lastseen;
-  //   }).bind(this))
-  // })
-  // async lastSeen(parent:User,args: any, ctx:TenantContext,info:any,
-  //  dataloader:DataLoader<string,string>) {
-  //   return dataloader.load(`last-seen-${parent.id}`);
-  // }
+  @BlocFieldResolver("User","lastSeen",function(this:BusinessLogicService,...args){
+    return new DataLoader((async function (keys: any){  
+      debugger    
+      const lastseen= await this.redisCache.mget(keys);
+      return lastseen;
+    }).bind(this))
+  })
+  async lastSeen(parent:User,args: any, ctx:TenantContext,info:any,
+   dataloader:DataLoader<string,string>) {
+    return dataloader.load(`last-seen-${parent.id}`);
+  }
 
   async createAttachments(attachments: { create: string | any[]; },context:TenantContext){
     const uploads=[];
@@ -210,18 +212,14 @@ export class BusinessLogicService {
     });
     
     const files2 = await Promise.all(files)
-    //console.log(files,files2);
     return files2;
   }
-  //Attachments at root
+
+  //Attachments at root models
   @BlocAttach('createOneForum.input.data.attachments.create.path')
-  @BlocAttach('createOneForm.input.data.attachments.create.path')
-  @BlocAttach('createOneResponse.input.data.attachments.create.path')
-  @BlocAttach('createOneForumAnswer.input.data.attachments.create.path')
+  @BlocAttach('createOneReview.input.data.attachments.create.path')
   @BlocAttach('createOneComment.input.data.attachments.create.path')
-  @BlocAttach('updateOneForm.input.data.attachments.create.path')
-  @BlocAttach('updateOneForum.input.data.attachments.create.path')
-  async uploadAttachment(v: BusinessRequest, next: (arg0: BusinessRequest<any>) => any) {
+  async uploadAttachment(v: BusinessRequest<TenantContext>, next: (arg0: BusinessRequest<any>) => any) {
     const { args, context } = v;
     if(context["uploadAttachment"]==true){
       return next(v);
@@ -234,384 +232,16 @@ export class BusinessLogicService {
     const files2 = await this.createAttachments(attachments,context);
     
     v.args.data.attachments = { ...opts,connect: files2.map((e)=>({id:e.id}))};
+   //mark context as having attachment processed
     v.context["uploadAttachment"]=true;
     
     return next(v)
   }
 
-  // @BlocAttach('createOneForm.input.data.grades.attachments.create.path')
-  // async uploadGradesAttachment(v:BusinessRequest,next: (arg0: BusinessRequest<any>) => any){
-  //   debugger
-  //  return next(v)
-  // }
-
- // RECOMMENDATION ATTACHMENTS
-
-// create recommendation attachment
-  @BlocAttach('createOneForm.input.data.grades.create.recommendations.create.attachments.create.path')
-  async uploadRecommendationsAttachment(v:BusinessRequest,next: (arg0: BusinessRequest<any>) => any){
-    const { args, context } = v;
-    const { data, ...rest } = args;
-    const { grades } = data;
-    const operations = []
-    debugger
-    for(let i=0;i<grades?.create?.length;i++){
-          const grade = grades.create[i];
-          const {recommendations} = grade;
-          for(let j=0;j<recommendations?.create?.length;j++){
-            const recommendation = recommendations.create[j];
-            const {attachments} = recommendation;
-            const op = ()=>{
-              return new Promise(async(resolve,reject)=>{
-                debugger
-                if(attachments?.create?.length){
-            const files = await this.createAttachments(attachments,context);
-            const filesIds = files.map((v)=>({id:v.id}))
-            v.args.data.grades.create[i].recommendations.create[j].attachments = {connect:filesIds}
-                }
-            return resolve(v);
-          });
-          }
-            operations.push(op());
-          }
-          
-    }
-    
-   const vv = await Promise.all(operations);
-    debugger
-   return next(v)
-  }
-  // Update recommendations pictures
-  @BlocAttach('updateOneForm.input.data.grades.update.data.recommendations.update.data.attachments.create.path')
-  async uploadUpdatedRecommmeandationAttachment(v:BusinessRequest,next: (arg0: BusinessRequest<any>) => any){
-    const { args, context } = v;
-    const { data, ...rest } = args;
-    const { grades } = data;
-    const operations = [];
-    debugger;
-    for(let i=0;i<grades?.update?.length;i++){
-      const grade = grades.update[i];
-      const {recommendations} = grade.data;
-      for(let j=0;j<recommendations?.update?.length;j++){
-        const recommendation = recommendations.update[j];
-        const {attachments} = recommendation.data;
-        const op = ()=>{
-          return new Promise(async(resolve,reject)=>{
-            debugger
-            if(attachments?.create?.length){
-        const files = await this.createAttachments(attachments,context);
-        const filesIds = files.map((v)=>({id:v.id}))
-        v.args.data.grades.update[i].data.recommendations.update[j].data.attachments.connect = filesIds;
-        v.args.data.grades.update[i].data.recommendations.update[j].data.attachments.create = [];
-
-      }
-        return resolve(v);
-      });
-      }
-        operations.push(op());
-      }
-      
-    }
-const vv = await Promise.all(operations);
-    return next(v);
-  }
- // Update recommendations pictures when updating grades
- @BlocAttach('updateOneForm.input.data.grades.update.data.recommendations.create.attachments.create.path')
- async uploadUpdatedRecommmeandationAttachment2(v:BusinessRequest,next: (arg0: BusinessRequest<any>) => any){
-   const { args, context } = v;
-   const { data, ...rest } = args;
-   const { grades } = data;
-   const operations = [];
-   debugger;
-   for(let i=0;i<grades?.update?.length;i++){
-     const grade = grades.update[i];
-     const {recommendations} = grade.data;
-     for(let j=0;j<recommendations?.create?.length;j++){
-       const recommendation = recommendations.create[j];
-       const {attachments} = recommendation;
-       const op = ()=>{
-         return new Promise(async(resolve,reject)=>{
-           debugger
-           if(attachments?.create?.length){
-       const files = await this.createAttachments(attachments,context);
-       const filesIds = files.map((v)=>({id:v.id}))
-       v.args.data.grades.update[i].data.recommendations.create[j].attachments.connect = filesIds;
-       v.args.data.grades.update[i].data.recommendations.create[j].attachments.create = [];
-
-     }
-       return resolve(v);
-     });
-     }
-       operations.push(op());
-     }
-     
-   }
-const vv = await Promise.all(operations);
-   return next(v);
- }
- // update recommendation picture during grades creation
- @BlocAttach('updateOneForm.input.data.grades.create.recommendations.create.attachments.create.path')
- async uploadUpdatedRecommmeandationAttachment3(v:BusinessRequest,next: (arg0: BusinessRequest<any>) => any){
-   const { args, context } = v;
-   const { data, ...rest } = args;
-   const { grades } = data;
-   const operations = [];
-   debugger;
-   for(let i=0;i<grades?.create?.length;i++){
-     const grade = grades.create[i];
-     const {recommendations} = grade;
-     for(let j=0;j<recommendations?.create?.length;j++){
-       const recommendation = recommendations.create[j];
-       const {attachments} = recommendation;
-       const op = ()=>{
-         return new Promise(async(resolve,reject)=>{
-           debugger
-           if(attachments?.create?.length){
-       const files = await this.createAttachments(attachments,context);
-       const filesIds = files.map((v)=>({id:v.id}))
-       v.args.data.grades.create[i].recommendations.create[j].attachments.connect = filesIds;
-       v.args.data.grades.create[i].recommendations.create[j].attachments.create = [];
-
-     }
-       return resolve(v);
-     });
-     }
-       operations.push(op());
-     }
-     
-   }
-    const vv = await Promise.all(operations);
-   return next(v);
- }
-
- // QUESTIONS ATTACHMENTS
-
- // create question attachment
- @BlocAttach('createOneForm.input.data.grades.create.questions.create.attachments.create.path')
- async uploadQuestionsAttachment(v:BusinessRequest,next: (arg0: BusinessRequest<any>) => any){
-   const { args, context } = v;
-   const { data, ...rest } = args;
-   const { grades } = data;
-   const operations = [];
-   debugger
-   for(let i=0;i<grades?.create?.length;i++){
-         const grade = grades.create[i];
-         const {questions} = grade;
-         for(let j=0;j<questions?.create?.length;j++){
-           const question = questions.create[j];
-           const {attachments} = question;
-           const op = ()=>{
-             return new Promise(async(resolve,reject)=>{
-               if(attachments.create){
-           const files = await this.createAttachments(attachments,context);
-           const filesIds = files.map((v)=>({id:v.id}))
-           v.args.data.grades.create[i].questions.create[j].attachments = {connect:filesIds}
-               }
-           return resolve(v);
-         });
-         }
-           operations.push(op());
-         }
-         
-   }
-  const vv = await Promise.all(operations);
-   debugger
-   return next(v)
- }
- // update question attachments
- @BlocAttach('updateOneForm.input.data.grades.update.data.questions.update.data.attachments.create.path')
- async uploadUpdatedQuestionsAttachment(v:BusinessRequest,next: (arg0: BusinessRequest<any>) => any){
-   const { args, context } = v;
-   const { data, ...rest } = args;
-   const { grades } = data;
-   const operations = [];
-   debugger
-   for(let i=0;i<grades?.update?.length;i++){
-         const grade = grades.update[i];
-         const {questions} = grade.data;
-         for(let j=0;j<questions?.update?.length;j++){
-           const question = questions.update[j];
-           const {attachments} = question.data;
-           const op = ()=>{
-             return new Promise(async(resolve,reject)=>{
-               if(attachments.create.length){
-           const files = await this.createAttachments(attachments,context);
-           const filesIds = files.map((v)=>({id:v.id}))
-           v.args.data.grades.update[i].data.questions.update[j].data.attachments.connect=filesIds;
-           v.args.data.grades.update[i].data.questions.update[j].data.attachments.create=[];
-         }
-           return resolve(v);
-         });
-         }
-           operations.push(op());
-         }
-         
-   }
-  const vv = await Promise.all(operations);
-   debugger
-   return next(v)
- }
- // upload a question attachment during creation of new question while updating grades
- @BlocAttach('updateOneForm.input.data.grades.update.data.questions.create.attachments.create.path')
- async uploadQuestionsAttachment2(v:BusinessRequest,next: (arg0: BusinessRequest<any>) => any){
-   const { args, context } = v;
-   const { data, ...rest } = args;
-   const { grades } = data;
-   const operations = [];
-   debugger
-   for(let i=0;i<grades?.update?.length;i++){
-         const grade = grades.update[i];
-         const {questions} = grade.data;
-         for(let j=0;j<questions?.update?.length;j++){
-           const question = questions.create[j];
-           const {attachments} = question;
-           const op = ()=>{
-             return new Promise(async(resolve,reject)=>{
-               if(attachments.create.length){
-           const files = await this.createAttachments(attachments,context);
-           const filesIds = files.map((v)=>({id:v.id}))
-           v.args.data.grades.update[i].data.questions.create[j].attachments.connect=filesIds;
-           v.args.data.grades.update[i].data.questions.create[j].attachments.create=[];
-         }
-           return resolve(v);
-         });
-         }
-           operations.push(op());
-         }
-         
-   }
-  const vv = await Promise.all(operations);
-   debugger
-   return next(v)
- }
- // upload a question attachment during creation of new grade while updating form
- @BlocAttach('updateOneForm.input.data.grades.create.questions.create.attachments.create.path')
- async uploadQuestionsAttachment3(v:BusinessRequest,next: (arg0: BusinessRequest<any>) => any){
-   const { args, context } = v;
-   const { data, ...rest } = args;
-   const { grades } = data;
-   const operations = [];
-   debugger
-   for(let i=0;i<grades?.create?.length;i++){
-         const grade = grades.create[i];
-         const {questions} = grade;
-         for(let j=0;j<questions?.create?.length;j++){
-           const question = questions.create[j];
-           const {attachments} = question;
-           const op = ()=>{
-             return new Promise(async(resolve,reject)=>{
-               if(attachments.create.length){
-           const files = await this.createAttachments(attachments,context);
-           const filesIds = files.map((v)=>({id:v.id}))
-           v.args.data.grades.create[i].questions.create[j].attachments.connect=filesIds;
-           v.args.data.grades.create[i].questions.create[j].attachments.create=[];
-         }
-           return resolve(v);
-         });
-         }
-           operations.push(op());
-         }
-         
-   }
-  const vv = await Promise.all(operations);
-   debugger
-   return next(v)
- }
-
-//FORUM ANSWERS ATTACHMENTS
-// upload attachment during forum creation and annswer creation
-@BlocAttach('createOneForum.input.data.forumAnswers.create.attachments.create.path')
-async uploadForumAnswerAttachment(v,next){
-  const { args, context } = v;
-  const { data, ...rest } = args;
-  const { forumAnswers } = data;
-  const operations = [];
-  debugger
-  for(let i=0;i<forumAnswers?.create?.length;i++){
-        const forumAnswer = forumAnswers.create[i];
-        const {attachments} = forumAnswer;
-          const op = ()=>{
-            return new Promise(async(resolve,reject)=>{
-              if(attachments.create.length){
-          const files = await this.createAttachments(attachments,context);
-          const filesIds = files.map((v)=>({id:v.id}))
-          v.args.data.forumAnswers.create[i].attachments.connect=filesIds;
-          v.args.data.forumAnswers.create[i].attachments.create=[];
-        }
-          return resolve(v);
-        });
-      }
-        operations.push(op());    
-    }
-
-  const vv = await Promise.all(operations);
-  debugger
-  return next(v)
-}
-
-//upload files during forum update and answer creation
-@BlocAttach('updateOneForum.input.data.forumAnswers.create.attachments.create.path')
-async uploadForumAnswerAttachment2(v,next){
-  const { args, context } = v;
-  const { data, ...rest } = args;
-  const { forumAnswers } = data;
-  const operations = [];
-  debugger
-  for(let i=0;i<forumAnswers?.create?.length;i++){
-        const forumAnswer = forumAnswers.create[i];
-        const {attachments} = forumAnswer;
-          const op = ()=>{
-            return new Promise(async(resolve,reject)=>{
-              if(attachments.create.length){
-          const files = await this.createAttachments(attachments,context);
-          const filesIds = files.map((v)=>({id:v.id}))
-          v.args.data.forumAnswers.create[i].attachments.connect=filesIds;
-          v.args.data.forumAnswers.create[i].attachments.create=[];
-        }
-          return resolve(v);
-        });
-      }
-        operations.push(op());    
-    }
-
-  const vv = await Promise.all(operations);
-  debugger
-  return next(v)
-}
-
-//upload files during forum update and answer update
-@BlocAttach('updateOneForum.input.data.forumAnswers.update.data.attachments.create.path')
-async uploadForumAnswerAttachment3(v:BusinessRequest,next: (arg0: BusinessRequest<any>) => any){
-  
-  const { args, context } = v;
-  const { data, ...rest } = args;
-  const { forumAnswers } = data;
-  const operations = [];
-  debugger
-  for(let i=0;i<forumAnswers?.update?.length;i++){
-        const forumAnswer = forumAnswers.update[i];
-        const {attachments} = forumAnswer.data;
-          const op = ()=>{
-            return new Promise(async(resolve,reject)=>{
-              if(attachments.create.length){
-          const files = await this.createAttachments(attachments,context);
-          const filesIds = files.map((v)=>({id:v.id}))
-          v.args.data.forumAnswers.update[i].data.attachments.connect=filesIds;
-          v.args.data.forumAnswers.update[i].data.attachments.create=[];
-        }
-          return resolve(v);
-        });
-      }
-        operations.push(op());    
-    }
-  const vv = await Promise.all(operations);
-  debugger
-  return next(v)
-}
 
 // HELP  ATTACHMENTS
 @BlocAttach('createOneHelp.input.data.steps.create.attachments.create.path')
-async uploadHelpAttachment(v,next){
+async uploadHelpAttachment(v: BusinessRequest<TenantContext>,next){
   const { args, context } = v;
   const { data, ...rest } = args;
   const { steps } = data;
@@ -641,7 +271,7 @@ async uploadHelpAttachment(v,next){
 
 //upload files during help update and helpstep creation
 @BlocAttach('updateOneHelp.input.data.steps.create.attachments.create.path')
-async uploadHelpAttachment2(v,next){
+async uploadHelpAttachment2(v:BusinessRequest<TenantContext>,next){
   const { args, context } = v;
   const { data, ...rest } = args;
   const { steps } = data;
@@ -671,7 +301,7 @@ async uploadHelpAttachment2(v,next){
 
 //upload files during help update and helpstep update
 @BlocAttach('updateOneHelp.input.data.steps.update.data.attachments.create.path')
-async uploadHelpAttachment3(v:BusinessRequest,next: (arg0: BusinessRequest<any>) => any){
+async uploadHelpAttachment3(v:BusinessRequest<TenantContext>,next: (arg0: BusinessRequest<any>) => any){
   const { args, context } = v;
   const { data, ...rest } = args;
   const { steps } = data;

@@ -12,7 +12,8 @@ type PaymentMethod {
               skip: Int
               distinct: [TransactionScalarFieldEnum!]
               ): [Transaction!]!
-          state: State!
+          recordStatus: RecordStatus!
+          state: PaymentMethodStatus!
           createdAt: DateTime!
           updatedAt: DateTime!
     }
@@ -45,8 +46,9 @@ type PaymentMethod {
         data: Int
         message: String!
       }
-      extend type Query {
-    findUniquePaymentMethod(where: PaymentMethodWhereUniqueInput!): PaymentMethodResponse!
+      
+    extend type Query {
+    
     findManyPaymentMethod(
       where: PaymentMethodWhereInput
       orderBy: [PaymentMethodOrderByInput!]
@@ -55,11 +57,4 @@ type PaymentMethod {
       skip: Int
       take: Int
     ): PaymentMethodListResponse!
-  }
-extend type Mutation {
-    createOnePaymentMethod(data: PaymentMethodCreateInput!): PaymentMethodResponse!
-    updateOnePaymentMethod(
-      where: PaymentMethodWhereUniqueInput!
-      data: PaymentMethodUpdateInput!
-    ): PaymentMethodResponse!
   }

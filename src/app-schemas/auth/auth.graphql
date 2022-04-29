@@ -9,7 +9,7 @@ input SignupInput {
 	password: String!
 	displayName: String!
 	phoneNumber: String
-	# gender: Gender!
+	gender: Gender
 	dateOfBirth: DateTime
 	avator:Upload
 }

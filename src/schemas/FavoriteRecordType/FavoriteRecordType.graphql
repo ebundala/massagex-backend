@@ -1,0 +1,41 @@
+type FavoriteRecordType {
+          id: String!
+          name: String!
+          favorites(where: FavoriteWhereInput
+              orderBy: [FavoriteOrderByInput!]
+              cursor: FavoriteWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [FavoriteScalarFieldEnum!]
+              ): [Favorite!]!
+    }
+
+      type FavoriteRecordTypeListResponse {
+        status: Boolean!
+        data: [FavoriteRecordType!]
+        message: String!
+      }
+     
+
+      type FavoriteRecordTypeResponse {
+        status: Boolean!
+        data: FavoriteRecordType
+        message: String!
+      }
+      
+      type FavoriteRecordTypeBatchResponse {
+        status: Boolean!
+        data: BatchPayload
+        message: String!
+      }
+      type AggregateFavoriteRecordTypeResponse {
+        status: Boolean!
+        data: AggregateFavoriteRecordType
+        message: String!
+      }
+      type FavoriteRecordTypeCountResponse {
+        status: Boolean!
+        data: Int
+        message: String!
+      }
+      

@@ -23,10 +23,10 @@ extend input AttachmentCreateManyInput{
 
 
 # create without inputs
-extend input AttachmentCreateWithoutUserInput{
+extend input AttachmentCreateWithoutUsersInput{
     path: String! @file(path:"../../../../public/uploads")
 }
-extend input AttachmentCreateWithoutBusinessProfilesInput{
+extend input AttachmentCreateWithoutBusinessesInput{
     path: String! @file(path:"../../../../public/uploads")
 }
 
@@ -70,10 +70,10 @@ extend input AttachmentUncheckedCreateInput{
     path: String! @file(path:"../../../../public/uploads")
 }
 
-extend input AttachmentUncheckedCreateWithoutUserInput{
+extend input AttachmentUncheckedCreateWithoutUsersInput{
     path: String! @file(path:"../../../../public/uploads")
 }
-extend input AttachmentUncheckedCreateWithoutBusinessProfilesInput{
+extend input AttachmentUncheckedCreateWithoutBusinessesInput{
     path: String! @file(path:"../../../../public/uploads")
 }
 

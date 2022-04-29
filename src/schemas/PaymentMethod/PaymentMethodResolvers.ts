@@ -32,21 +32,6 @@
       export class PaymentMethodResolver {
           
          
-    @Query((returns)=>PaymentMethodResponse)
-
-    findUniquePaymentMethod(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info):Promise<PaymentMethodResponse|any>{
-      const select = ctx.prisma.getSelection(info).valueOf('data', 'PaymentMethod', { select: {  } });
-      return ctx.prisma.paymentMethod.findUnique({...args,...select})
-      .then((data)=>({
-        status:true,
-        data,
-        message:'ok'
-      })).catch(({message})=>({
-       status:false,
-       data:null,
-       message:message||'unknown error'
-      }))
-    }
     @Query((returns)=>PaymentMethodListResponse)
     findManyPaymentMethod(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info):Promise<PaymentMethodListResponse|any>{
       const select = ctx.prisma.getSelection(info).valueOf('data', 'PaymentMethod', { select: {  } });
@@ -61,33 +46,5 @@
        message:message||'unknown error'
       }));
       
-    }
-    @Mutation((returns)=>PaymentMethodResponse)
-    createOnePaymentMethod(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info):Promise<PaymentMethodResponse|any>{
-      const select = ctx.prisma.getSelection(info).valueOf('data', 'PaymentMethod', { select: {  } });
-      return ctx.prisma.paymentMethod.create({...args,...select})
-      .then((data)=>({
-        status:true,
-        data,
-        message:'ok'
-      })).catch(({message})=>({
-       status:false,
-       data:null,
-       message:message||'unknown error'
-      }))
-    }
-    @Mutation((returns)=>PaymentMethodResponse)
-    updateOnePaymentMethod(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info):Promise<PaymentMethodResponse|any>{
-      const select = ctx.prisma.getSelection(info).valueOf('data', 'PaymentMethod', { select: {  } });
-      return ctx.prisma.paymentMethod.update({...args,...select})
-      .then((data)=>({
-        status:true,
-        data,
-        message:'ok'
-      })).catch(({message})=>({
-       status:false,
-       data:null,
-       message:message||'unknown error'
-      }))
     }
         }

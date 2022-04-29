@@ -9,7 +9,7 @@ type Help {
               skip: Int
               distinct: [HelpStepScalarFieldEnum!]
               ): [HelpStep!]!
-          state: State!
+          recordStatus: RecordStatus!
           audience: Role!
           createdAt: DateTime!
           updatedAt: DateTime!
@@ -43,7 +43,9 @@ type Help {
         data: Int
         message: String!
       }
-      extend type Query {
+      
+    extend type Query {
+    
     findUniqueHelp(where: HelpWhereUniqueInput!): HelpResponse!
     findManyHelp(
       where: HelpWhereInput
@@ -54,7 +56,8 @@ type Help {
       take: Int
     ): HelpListResponse!
   }
-extend type Mutation {
+    extend type Mutation {
+    
     createOneHelp(data: HelpCreateInput!): HelpResponse!
     updateOneHelp(
       where: HelpWhereUniqueInput!

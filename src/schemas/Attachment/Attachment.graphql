@@ -4,6 +4,7 @@ type Attachment {
           filename: String
           mimetype: String
           encoding: String
+          recordStatus: RecordStatus!
           duration: Int!
           size: Int!
           attachmentType: AttachmentType!
@@ -11,7 +12,7 @@ type Attachment {
           placement: String!
           createdAt: DateTime!
           updatedAt: DateTime!
-          user(where: UserWhereInput
+          users(where: UserWhereInput
               orderBy: [UserOrderByInput!]
               cursor: UserWhereUniqueInput
               take: Int
@@ -41,15 +42,27 @@ type Attachment {
               skip: Int
               distinct: [OrderScalarFieldEnum!]
               ): [Order!]!
-          businessProfiles(where: BusinessProfileWhereInput
-              orderBy: [BusinessProfileOrderByInput!]
-              cursor: BusinessProfileWhereUniqueInput
+          businesses(where: BusinessWhereInput
+              orderBy: [BusinessOrderByInput!]
+              cursor: BusinessWhereUniqueInput
               take: Int
               skip: Int
-              distinct: [BusinessProfileScalarFieldEnum!]
-              ): [BusinessProfile!]!
+              distinct: [BusinessScalarFieldEnum!]
+              ): [Business!]!
           helpStep: HelpStep
           helpStepId: String
+          reviews: Review
+          reviewId: String
+          userId: String
+          business: Business
+          businessId: String
+          Category(where: CategoryWhereInput
+              orderBy: [CategoryOrderByInput!]
+              cursor: CategoryWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [CategoryScalarFieldEnum!]
+              ): [Category!]!
     }
 
       type AttachmentListResponse {

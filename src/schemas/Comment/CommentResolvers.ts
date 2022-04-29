@@ -32,21 +32,6 @@
       export class CommentResolver {
           
          
-    @Query((returns)=>CommentResponse)
-
-    findUniqueComment(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info):Promise<CommentResponse|any>{
-      const select = ctx.prisma.getSelection(info).valueOf('data', 'Comment', { select: {  } });
-      return ctx.prisma.comment.findUnique({...args,...select})
-      .then((data)=>({
-        status:true,
-        data,
-        message:'ok'
-      })).catch(({message})=>({
-       status:false,
-       data:null,
-       message:message||'unknown error'
-      }))
-    }
     @Query((returns)=>CommentListResponse)
     findManyComment(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info):Promise<CommentListResponse|any>{
       const select = ctx.prisma.getSelection(info).valueOf('data', 'Comment', { select: {  } });
@@ -61,33 +46,5 @@
        message:message||'unknown error'
       }));
       
-    }
-    @Mutation((returns)=>CommentResponse)
-    createOneComment(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info):Promise<CommentResponse|any>{
-      const select = ctx.prisma.getSelection(info).valueOf('data', 'Comment', { select: {  } });
-      return ctx.prisma.comment.create({...args,...select})
-      .then((data)=>({
-        status:true,
-        data,
-        message:'ok'
-      })).catch(({message})=>({
-       status:false,
-       data:null,
-       message:message||'unknown error'
-      }))
-    }
-    @Mutation((returns)=>CommentResponse)
-    updateOneComment(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info):Promise<CommentResponse|any>{
-      const select = ctx.prisma.getSelection(info).valueOf('data', 'Comment', { select: {  } });
-      return ctx.prisma.comment.update({...args,...select})
-      .then((data)=>({
-        status:true,
-        data,
-        message:'ok'
-      })).catch(({message})=>({
-       status:false,
-       data:null,
-       message:message||'unknown error'
-      }))
     }
         }

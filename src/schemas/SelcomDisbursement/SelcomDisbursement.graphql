@@ -3,14 +3,15 @@ type SelcomDisbursement {
           amount: Int!
           reference: String
           resultCode: String
-          status: SelcomPaymentStatus!
+          status: PaymentStatus!
           transId: String!
           userId: Int!
           utilitycode: SelcomUtilityCode!
           utilityref: String!
-          validation: SelcomPaymentStatus!
+          validation: PaymentStatus!
           transaction: Transaction
-          state: State!
+          state: PaymentStatus!
+          recordStatus: RecordStatus!
           createdAt: DateTime!
           updatedAt: DateTime!
     }

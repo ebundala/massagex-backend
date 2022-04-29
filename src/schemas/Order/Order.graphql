@@ -1,16 +1,17 @@
 type Order {
           id: String!
           quantity: Int!
-          state: State!
+          recordStatus: RecordStatus!
+          orderStatus: OrderStatus!
           notes: String
           createdAt: DateTime!
           updatedAt: DateTime!
-          serviceId: String!
           ownerId: String!
           receiptId: String
           owner: User!
           receipt: Attachment
           service: Service!
+          serviceId: String!
           transactions(where: TransactionWhereInput
               orderBy: [TransactionOrderByInput!]
               cursor: TransactionWhereUniqueInput
@@ -18,6 +19,22 @@ type Order {
               skip: Int
               distinct: [TransactionScalarFieldEnum!]
               ): [Transaction!]!
+          Business: Business
+          businessId: String
+          abuseReports(where: AbuseReportWhereInput
+              orderBy: [AbuseReportOrderByInput!]
+              cursor: AbuseReportWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [AbuseReportScalarFieldEnum!]
+              ): [AbuseReport!]!
+          favorites(where: FavoriteWhereInput
+              orderBy: [FavoriteOrderByInput!]
+              cursor: FavoriteWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [FavoriteScalarFieldEnum!]
+              ): [Favorite!]!
     }
 
       type OrderListResponse {
@@ -48,21 +65,4 @@ type Order {
         data: Int
         message: String!
       }
-      extend type Query {
-    findUniqueOrder(where: OrderWhereUniqueInput!): OrderResponse!
-    findManyOrder(
-      where: OrderWhereInput
-      orderBy: [OrderOrderByInput!]
-      cursor: OrderWhereUniqueInput
-      distinct: [OrderScalarFieldEnum!]
-      skip: Int
-      take: Int
-    ): OrderListResponse!
-  }
-extend type Mutation {
-    createOneOrder(data: OrderCreateInput!): OrderResponse!
-    updateOneOrder(
-      where: OrderWhereUniqueInput!
-      data: OrderUpdateInput!
-    ): OrderResponse!
-  }
+      

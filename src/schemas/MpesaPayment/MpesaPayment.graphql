@@ -14,7 +14,8 @@ type MpesaPayment {
           output_ThirdPartyConversationID: String
           output_TransactionID: String
           transaction: Transaction
-          state: State!
+          state: PaymentStatus!
+          recordStatus: RecordStatus!
           createdAt: DateTime!
           updatedAt: DateTime!
     }

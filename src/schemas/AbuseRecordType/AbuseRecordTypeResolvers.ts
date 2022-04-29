@@ -7,19 +7,19 @@
       import { UseGuards } from '@nestjs/common';
       import { Resolver, Mutation,Query,Info, Args, Context, Parent } from '@nestjs/graphql';
       import { 
-      BusinessProfile,
-      BusinessProfileResponse,
-      BusinessProfileBatchResponse,
-      BusinessProfileCountResponse,
-      BusinessProfileListResponse,
-      AggregateBusinessProfileResponse,
-    //  BusinessProfileCreateInput,
-    //  BusinessProfileUpdateInput,
-     // BusinessProfileUpdateManyMutationInput,
-     // BusinessProfileWhereUniqueInput,
-     // BusinessProfileWhereInput,
-     // BusinessProfileOrderByInput,
-     // BusinessProfileScalarFieldEnum,
+      AbuseRecordType,
+      AbuseRecordTypeResponse,
+      AbuseRecordTypeBatchResponse,
+      AbuseRecordTypeCountResponse,
+      AbuseRecordTypeListResponse,
+      AggregateAbuseRecordTypeResponse,
+    //  AbuseRecordTypeCreateInput,
+    //  AbuseRecordTypeUpdateInput,
+     // AbuseRecordTypeUpdateManyMutationInput,
+     // AbuseRecordTypeWhereUniqueInput,
+     // AbuseRecordTypeWhereInput,
+     // AbuseRecordTypeOrderByInput,
+     // AbuseRecordTypeScalarFieldEnum,
      // BatchPayload,
       
     } from '../../models/graphql';
@@ -27,9 +27,9 @@
       import { TenantContext } from '@mechsoft/common';
       import {AuthorizerGuard} from '@mechsoft/enforcer';
 
-      @Resolver((of)=>BusinessProfile)
+      @Resolver((of)=>AbuseRecordType)
       @UseGuards(AuthorizerGuard)
-      export class BusinessProfileResolver {
+      export class AbuseRecordTypeResolver {
           
          
         }

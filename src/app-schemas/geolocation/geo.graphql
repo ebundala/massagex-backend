@@ -1,0 +1,554 @@
+scalar JSONObject
+
+input LatLngInput {
+    lat: Float!
+    lng: Float!
+}
+
+type LatLng {
+    lat: Float!
+    lng: Float!
+}
+
+
+
+input RouteQueryInput{
+    origin: LatLngInput!
+    destination: LatLngInput!
+    mode:  TravelMode
+    waypoints: [LatLngInput!]
+    alternatives: Boolean
+    avoid: [TravelRestriction!]
+    language: Language
+    units: UnitSystem
+    region: String
+    arrival_time: DateTime
+    departure_time: DateTime
+    traffic_model: TrafficModel
+    transit_mode: [TransitMode!]
+    transit_routing_preference: TransitRoutingPreference
+    optimize: Boolean
+}
+
+type RouteResponse{
+    status: Boolean!
+    message: String!
+    data:DirectionsResponseData
+}
+type DirectionsResponseData {
+    geocoded_waypoints: [GeocodedWaypoint]
+    routes: [DirectionsRoute]
+    available_travel_modes: [String]
+}
+type GeocodedWaypoint {
+    geocoder_status: GeocodedWaypointStatus
+    partial_match: Boolean
+    place_id: String
+    types: [String]
+
+}
+enum GeocodedWaypointStatus {
+    OK
+    ZERO_RESULTS
+}
+
+enum DirectionsReponseStatus {
+    OK 
+    NOT_FOUND 
+    ZERO_RESULTS 
+    MAX_WAYPOINTS_EXCEEDED 
+    MAX_ROUTE_LENGTH_EXCEEDED 
+    INVALID_REQUEST 
+    OVER_DAILY_LIMIT 
+    OVER_QUERY_LIMIT 
+    REQUEST_DENIED 
+    UNKNOWN_ERROR 
+}
+type DirectionsRoute {
+    summary: String
+    legs: [RouteLeg]
+    waypoint_order: [Float]
+    overview_polyline: Polyline
+    bounds: LatLngBounds
+    copyrights: String
+    warnings: [String]
+    fare: TransitFare
+    overview_path:[LatLng]
+}
+type Polyline {
+    points: String
+}
+type TransitFare {
+    currency: String
+    value: Float
+    text: String
+}
+type RouteLeg {
+    steps: [DirectionsStep]
+    
+    distance: MapDistance
+    
+    duration: MapDuration
+    
+    duration_in_traffic: MapDuration
+    arrival_time: MapTime
+    
+    departure_time: MapTime
+    
+    start_location: LatLng
+    
+    end_location: LatLng
+    start_address: String
+    end_address: String
+}
+
+type DirectionsStep {
+    html_instructions: String
+   
+    distance: MapDistance
+   
+    duration: MapDuration
+    start_location: LatLng
+    end_location: LatLng
+    
+    maneuver: String
+   
+    polyline: Polyline
+    
+    steps: DirectionsStep
+    transit_details: TransitDetails
+}
+
+type TransitDetails {
+    
+    arrival_stop: TransitStop
+    
+    departure_stop: TransitStop
+    
+    arrival_time: MapTime
+    
+    departure_time: MapTime
+    
+    headsign: String
+   
+    headway: Float
+    
+    num_stops: Float
+    
+    line: TransitLine
+}
+
+type  TransitStop {
+    
+    name: String
+    
+    location: LatLng
+}
+
+type  TransitLine {
+    
+    name: String
+    
+    short_name: String
+    
+    color: String
+   
+    agencies: [TransitAgency]
+    
+    url: String
+    
+    icon: String
+    
+    text_color: String
+    
+    vehicle: TransitVehicle
+}
+
+type  TransitAgency {
+    
+    name: String
+    
+    phone: String
+    
+    url: String
+}
+type  TransitVehicle {
+    
+    name: String
+    
+    type: VehicleType
+    
+    icon: String
+    
+    local_icon: String
+}
+
+
+type MapDistance {
+    value: Float
+    text: String
+}
+
+type MapDuration {
+    value: Float
+    text: String
+}
+
+type MapTime {
+     value: DateTime
+    text: String
+    time_zone: String
+}
+input GeocodeInput {
+    place_id: String
+    address: String
+    bounds: LatLngBoundsInput
+    language: String
+    region: String
+    components: GeocodeComponentsInput
+}
+input ReverseGeocodeInput {
+    place_id: String
+    latlng: LatLngInput
+    language: Language
+    result_type: [String!]
+    location_type: [ReverseGeocodingLocationType!]
+}
+
+input LatLngBoundsInput {
+    northeast: LatLngInput!
+    southwest: LatLngInput!
+}
+
+type LatLngBounds {
+    northeast: LatLng!
+    southwest: LatLng!
+}
+
+input GeocodeComponentsInput {
+    postal_code: String
+    country: String
+    route: String
+    administrative_area: String
+}
+
+type GeocodeResponse {
+  status: Boolean!
+    message: String!
+    data:GeocodeResponseData
+}
+
+type GeocodeResponseData {
+    results:[GeocodeResult]
+}
+
+type ReverseGeocodeResponseData {
+     results:[GeocodeResult]
+}
+type GeocodeResult {
+    types: [String]
+    formatted_address: String
+    address_components: [AddressComponent]
+    postcode_localities: [String]
+    geometry: AddressGeometry
+    plus_code: PlusCode
+    partial_match: Boolean
+    place_id: ID
+}
+type AddressComponent {
+    types: [String]
+    long_name: String
+    short_name: String
+}
+type PlusCode {
+    global_code: String
+    compound__code: String
+}
+type AddressGeometry {
+    location: LatLng
+    location_type: LocationType 
+    viewport: LatLngBounds 
+    bounds: LatLngBounds
+}
+
+type ReverseGeocodeResponse {
+    status: Boolean!
+    message: String!
+    data: ReverseGeocodeResponseData
+}
+input PlaceAutocompleteInput {
+    input: String!
+    sessiontoken:String
+    offset: Int
+    origin: LatLngInput
+    location: LatLngInput 
+    radius: Float
+    language: String
+    types: String
+    components: [String]
+    strictbounds: Boolean
+}
+
+type PlaceAutocompleteResponseData {
+    predictions: [PlaceAutocompleteResult]
+}
+type PlaceAutocompleteResult {
+description: String
+distance_meters: Float
+place_id: String
+terms: [PredictionTerm]
+types: [String]
+matched_substrings: [PredictionSubstring]
+structured_formatting: StructuredFormatting
+}
+
+type PredictionTerm {
+    value: String
+    offset: Int
+}
+
+type PredictionSubstring {
+    value: String
+    offset: Int
+}
+type StructuredFormatting {
+    main_text: String
+    main_text_matched_substrings: [PredictionSubstring]
+    secondary_text: String
+}
+type PlaceAutocompleteResponse {
+    status: Boolean!
+    message: String!
+    data: PlaceAutocompleteResponseData
+}
+extend type Query{
+    route(data:RouteQueryInput!):RouteResponse!
+    geocode(data:GeocodeInput!):GeocodeResponse!
+    reverseGeocode(data:ReverseGeocodeInput!):ReverseGeocodeResponse!
+    placesAutocomplete(data:PlaceAutocompleteInput):PlaceAutocompleteResponse!
+}
+
+enum AddressType {
+  street_address
+  route
+  intersection
+  political
+  country
+  administrative_area_level_1
+  administrative_area_level_2
+  administrative_area_level_3
+  administrative_area_level_4
+  administrative_area_level_5
+  colloquial_area
+  locality
+  ward
+  sublocality
+  sublocality_level_1
+  sublocality_level_2
+  sublocality_level_3
+  sublocality_level_4
+  sublocality_level_5
+  neighborhood
+  premise
+  subpremise
+  postal_code
+  natural_feature
+  airport
+  park
+  point_of_interest
+  establishment
+  #address component types
+  
+    floor
+    post_box 
+    postal_town 
+    room
+    street_number 
+    bus_station
+    train_station
+    transit_station
+  #unknown from
+    food
+    store
+    lodging
+    church
+    place_of_worship
+    plus_code
+}
+
+enum ReverseGeocodingLocationType {
+    ROOFTOP
+    RANGE_INTERPOLATED
+    GEOMETRIC_CENTER
+    APPROXIMATE
+}
+
+enum Language {
+ar
+be
+bg
+bn
+bs
+ca
+cs
+cy
+da
+de
+el
+en
+en_GB
+en_US
+es
+es_419
+et
+eu
+fa
+fi
+fr
+fr_CA
+gl
+gu
+he
+hi
+hr
+hu
+id
+is
+it
+iw
+ja
+kn
+ko
+lt
+lv
+ml
+mr
+ms
+nl
+no
+pl
+pt
+pt_BR
+ro
+ru
+sk
+sl
+sr
+sv
+sw
+ta
+te
+th
+tl
+tr
+uk
+vi
+zh_CN
+zh_TW
+}
+
+enum LocationType {   
+    ROOFTOP 
+    RANGE_INTERPOLATED 
+    GEOMETRIC_CENTER 
+    APPROXIMATE
+}
+
+enum VehicleType {
+    
+    RAIL 
+    
+    METRO_RAIL 
+    
+    SUBWAY 
+    
+    TRAM 
+    
+    MONORAIL 
+    
+    HEAVY_RAIL 
+    
+    COMMUTER_TRAIN 
+    
+    HIGH_SPEED_TRAIN 
+    
+    BUS 
+    
+    INTERCITY_BUS 
+    
+    TROLLEYBUS 
+    
+    SHARE_TAXI 
+    
+    FERRY 
+    
+    CABLE_CAR 
+    
+    GONDOLA_LIFT 
+    
+    FUNICULAR 
+    
+    OTHER
+}
+
+enum Maneuver {
+    turn_slight_left 
+    turn_sharp_left
+    uturn_left 
+    turn_left
+    turn_slight_right
+    turn_sharp_right
+    uturn_right
+    turn_right
+    straight
+    ramp_left
+    ramp_right
+    merge
+    fork_left
+    fork_right
+    ferry
+    ferry_train
+    roundabout_left
+    roundabout_right
+    
+}
+
+enum TravelMode {
+driving
+walking
+bicycling
+transit
+}
+
+enum UnitSystem {
+    METRIC
+    IMPERIAL
+}
+
+enum TravelRestriction {
+    tolls
+    highways
+    ferries
+    traffic
+    indoor
+    }
+
+
+enum TrafficModel {
+    best_guess
+    pessimistic
+    optimistic
+}
+
+enum TransitMode {
+    bus 
+    subway
+    train 
+    tram 
+    rail
+}
+
+enum TransitRoutingPreference {
+    less_walking 
+    fewer_transfers
+}

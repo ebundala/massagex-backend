@@ -13,7 +13,7 @@ import {
   
   Role,
   SignOutResult,
-  State,
+  AccountStatus,
   User,
 
 } from '../../models/graphql';
@@ -155,7 +155,7 @@ export class AuthService {
       if (!user) {
         throw new GraphQLError('Signin failed user does not exist');
       }
-      if (user.state === State.ARCHIVED || user.state === State.REJECTED || user.state === State.COMPLETED) {
+      if (user.state === AccountStatus.DISABLED || user.state === AccountStatus.DELETED) {
         throw new GraphQLError("Your account is deactivated")
       }
       // if (user.state === State.PENDING || user.state === State.REVIEW) {

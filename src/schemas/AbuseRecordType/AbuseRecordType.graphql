@@ -1,0 +1,41 @@
+type AbuseRecordType {
+          id: String!
+          name: String!
+          abuseReports(where: AbuseReportWhereInput
+              orderBy: [AbuseReportOrderByInput!]
+              cursor: AbuseReportWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [AbuseReportScalarFieldEnum!]
+              ): [AbuseReport!]!
+    }
+
+      type AbuseRecordTypeListResponse {
+        status: Boolean!
+        data: [AbuseRecordType!]
+        message: String!
+      }
+     
+
+      type AbuseRecordTypeResponse {
+        status: Boolean!
+        data: AbuseRecordType
+        message: String!
+      }
+      
+      type AbuseRecordTypeBatchResponse {
+        status: Boolean!
+        data: BatchPayload
+        message: String!
+      }
+      type AggregateAbuseRecordTypeResponse {
+        status: Boolean!
+        data: AggregateAbuseRecordType
+        message: String!
+      }
+      type AbuseRecordTypeCountResponse {
+        status: Boolean!
+        data: Int
+        message: String!
+      }
+      

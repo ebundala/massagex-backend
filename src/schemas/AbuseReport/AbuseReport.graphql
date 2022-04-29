@@ -1,0 +1,55 @@
+type AbuseReport {
+          id: String!
+          number: Int!
+          report: String
+          author: User!
+          authorId: String!
+          type: AbuseRecordType!
+          typeId: String!
+          users: User
+          reviews: Review
+          comments: Comment
+          Business: Business
+          service: Service
+          orders: Order
+          recordStatus: RecordStatus!
+          state: AbuseReportStatus!
+          createdAt: DateTime!
+          updatedAt: DateTime!
+          userId: String
+          reviewId: String
+          commentId: String
+          businessId: String
+          serviceId: String
+          orderId: String
+    }
+
+      type AbuseReportListResponse {
+        status: Boolean!
+        data: [AbuseReport!]
+        message: String!
+      }
+     
+
+      type AbuseReportResponse {
+        status: Boolean!
+        data: AbuseReport
+        message: String!
+      }
+      
+      type AbuseReportBatchResponse {
+        status: Boolean!
+        data: BatchPayload
+        message: String!
+      }
+      type AggregateAbuseReportResponse {
+        status: Boolean!
+        data: AggregateAbuseReport
+        message: String!
+      }
+      type AbuseReportCountResponse {
+        status: Boolean!
+        data: Int
+        message: String!
+      }
+      

@@ -1,5 +1,5 @@
 import { HttpException, Injectable } from "@nestjs/common";
-import { SelcomUtilityCode, State, TransactionType } from "@prisma/client";
+import { SelcomUtilityCode, OrderStatus, TransactionType, TransactionStatus, PaymentStatus } from "@prisma/client";
 import {  MpesaPaymentCreateNestedOneWithoutTransactionInput, PaybillRequest, SelcomPaymentCreateNestedOneWithoutTransactionInput } from "src/models/graphql";
 import { MpesaTzService } from "src/mpesa-tz/mpesa-tz.service";
 import { TenantContext } from "@mechsoft/common";
@@ -18,7 +18,7 @@ export class PaymentService{
        const order  = await prisma.order.findUnique({where:{id:orderId},include:{
            service:true,           
        }});
-       if(!order||order.state==State.ARCHIVED||order.state==State.REJECTED||order.state == State.PENDING){
+       if(!order||order.orderStatus==OrderStatus.REJECTED){
         throw new HttpException({status:false,message:"Invalid order"},400)
      }
      const methodItem = await prisma.paymentMethod.findUnique({where:{id:method}});
@@ -98,7 +98,7 @@ export class PaymentService{
                    id:transaction.id
                },
                data:{
-                   state:State.COMPLETED,
+                   state:TransactionStatus.SUCCESS,
                    mpesaPayment:{                       
                        update:{
                            output_ConversationID:result.output_ConversationID,
@@ -106,10 +106,11 @@ export class PaymentService{
                            output_ResponseDesc: result.output_ResponseDesc,
                            output_ThirdPartyConversationID: result.output_ThirdPartyConversationID,
                            output_TransactionID: result.output_TransactionID, 
-                           state:State.COMPLETED,                          
+                           state:PaymentStatus.SUCCESS,                          
                            order:{
                                update:{
-                                   state:State.ARCHIVED
+                                   state:OrderStatus.PROCESSED
+                                   
                                }
                            }
                        }
@@ -129,7 +130,7 @@ export class PaymentService{
                 id:transaction.id
             },
             data:{
-                state:State.COMPLETED,
+                state:TransactionStatus.FAILED,
                 mpesaPayment:{                       
                     update:{
                         output_ConversationID:result.output_ConversationID,
@@ -137,10 +138,10 @@ export class PaymentService{
                         output_ResponseDesc: result.output_ResponseDesc,
                         output_ThirdPartyConversationID: result.output_ThirdPartyConversationID,
                         output_TransactionID: result.output_TransactionID, 
-                        state:State.REJECTED,                          
+                        state:PaymentStatus.FAILED,                          
                         // order:{
                         //     update:{
-                        //         state:State.ARCHIVED
+                        //         state:OrderStatus.PROCESSED
                         //     }
                         // }
                     }

@@ -6,7 +6,14 @@ type Review {
           revieweeId: String!
           value: Int!
           content: String
-          state: State!
+          attachments(where: AttachmentWhereInput
+              orderBy: [AttachmentOrderByInput!]
+              cursor: AttachmentWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [AttachmentScalarFieldEnum!]
+              ): [Attachment!]!
+          recordStatus: RecordStatus!
           comments(where: CommentWhereInput
               orderBy: [CommentOrderByInput!]
               cursor: CommentWhereUniqueInput
@@ -16,6 +23,20 @@ type Review {
               ): [Comment!]!
           createdAt: DateTime!
           updatedAt: DateTime!
+          abuseReports(where: AbuseReportWhereInput
+              orderBy: [AbuseReportOrderByInput!]
+              cursor: AbuseReportWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [AbuseReportScalarFieldEnum!]
+              ): [AbuseReport!]!
+          favorites(where: FavoriteWhereInput
+              orderBy: [FavoriteOrderByInput!]
+              cursor: FavoriteWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [FavoriteScalarFieldEnum!]
+              ): [Favorite!]!
     }
 
       type ReviewListResponse {
@@ -46,8 +67,9 @@ type Review {
         data: Int
         message: String!
       }
-      extend type Query {
-    findUniqueReview(where: ReviewWhereUniqueInput!): ReviewResponse!
+      
+    extend type Query {
+    
     findManyReview(
       where: ReviewWhereInput
       orderBy: [ReviewOrderByInput!]
@@ -56,11 +78,4 @@ type Review {
       skip: Int
       take: Int
     ): ReviewListResponse!
-  }
-extend type Mutation {
-    createOneReview(data: ReviewCreateInput!): ReviewResponse!
-    updateOneReview(
-      where: ReviewWhereUniqueInput!
-      data: ReviewUpdateInput!
-    ): ReviewResponse!
   }

@@ -6,11 +6,12 @@ type SelcomPayment {
           operator: String
           reference: String
           resultCode: String
-          status: SelcomPaymentStatus!
+          status: PaymentStatus!
           utilityref: Int!
-          validation: SelcomPaymentStatus!
+          validation: PaymentStatus!
           transaction: Transaction
-          state: State!
+          state: PaymentStatus!
+          recordStatus: RecordStatus!
           createdAt: DateTime!
           updatedAt: DateTime!
     }

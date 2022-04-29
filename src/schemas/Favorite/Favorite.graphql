@@ -1,0 +1,52 @@
+type Favorite {
+          id: String!
+          author: User!
+          authorId: String!
+          type: FavoriteRecordType!
+          typeId: String!
+          users: User
+          reviews: Review
+          comments: Comment
+          Business: Business
+          service: Service
+          orders: Order
+          recordStatus: RecordStatus!
+          createdAt: DateTime!
+          updatedAt: DateTime!
+          userId: String
+          reviewId: String
+          commentId: String
+          businessId: String
+          serviceId: String
+          orderId: String
+    }
+
+      type FavoriteListResponse {
+        status: Boolean!
+        data: [Favorite!]
+        message: String!
+      }
+     
+
+      type FavoriteResponse {
+        status: Boolean!
+        data: Favorite
+        message: String!
+      }
+      
+      type FavoriteBatchResponse {
+        status: Boolean!
+        data: BatchPayload
+        message: String!
+      }
+      type AggregateFavoriteResponse {
+        status: Boolean!
+        data: AggregateFavorite
+        message: String!
+      }
+      type FavoriteCountResponse {
+        status: Boolean!
+        data: Int
+        message: String!
+      }
+      

@@ -1,0 +1,92 @@
+type Business {
+          id: String!
+          owner: User!
+          ownerId: String!
+          mode: BusinessMode!
+          cover: Attachment
+          coverId: String
+          about: String!
+          businessName: String!
+          state: BusinessStatus!
+          recordStatus: RecordStatus!
+          services(where: ServiceWhereInput
+              orderBy: [ServiceOrderByInput!]
+              cursor: ServiceWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [ServiceScalarFieldEnum!]
+              ): [Service!]!
+          orders(where: OrderWhereInput
+              orderBy: [OrderOrderByInput!]
+              cursor: OrderWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [OrderScalarFieldEnum!]
+              ): [Order!]!
+          attachments(where: AttachmentWhereInput
+              orderBy: [AttachmentOrderByInput!]
+              cursor: AttachmentWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [AttachmentScalarFieldEnum!]
+              ): [Attachment!]!
+          location: Location
+          locationId: String
+          createdAt: DateTime!
+          updatedAt: DateTime!
+          abuseReports(where: AbuseReportWhereInput
+              orderBy: [AbuseReportOrderByInput!]
+              cursor: AbuseReportWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [AbuseReportScalarFieldEnum!]
+              ): [AbuseReport!]!
+          favorite(where: FavoriteWhereInput
+              orderBy: [FavoriteOrderByInput!]
+              cursor: FavoriteWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [FavoriteScalarFieldEnum!]
+              ): [Favorite!]!
+    }
+
+      type BusinessListResponse {
+        status: Boolean!
+        data: [Business!]
+        message: String!
+      }
+     
+
+      type BusinessResponse {
+        status: Boolean!
+        data: Business
+        message: String!
+      }
+      
+      type BusinessBatchResponse {
+        status: Boolean!
+        data: BatchPayload
+        message: String!
+      }
+      type AggregateBusinessResponse {
+        status: Boolean!
+        data: AggregateBusiness
+        message: String!
+      }
+      type BusinessCountResponse {
+        status: Boolean!
+        data: Int
+        message: String!
+      }
+      
+    extend type Query {
+    
+    findManyBusiness(
+      where: BusinessWhereInput
+      orderBy: [BusinessOrderByInput!]
+      cursor: BusinessWhereUniqueInput
+      distinct: [BusinessScalarFieldEnum!]
+      skip: Int
+      take: Int
+    ): BusinessListResponse!
+  }

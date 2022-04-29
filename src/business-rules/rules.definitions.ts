@@ -1,5 +1,6 @@
+import { AccountStatus, RecordStatus } from "@prisma/client"
 import { Rule } from "json-rules-engine"
-import { Role, State, } from "../models/graphql"
+import { Role } from "../models/graphql"
 
 export const uniqueEmailPerAccount = (email: string) => new Rule({
     name: 'uniqueEmailPerAccount',
@@ -255,7 +256,7 @@ export const onlyOwnerOrProviderOrManagerCanUpdateOrder = (
                 {
                     fact: "role",
                     operator: "notIn",
-                    value: [Role.ADMIN, Role.MODERATOR]
+                    value: [Role.ADMIN, Role.BUSINESS]
                 },
                 {
                     all: [
@@ -286,7 +287,7 @@ export const onlyOwnerOrProviderOrManagerCanUpdateOrder = (
                         {
                             fact: "role",
                             operator: "equal",
-                            value: Role.MODERATOR,
+                            value: Role.BUSINESS,
                         },
                         staffCondition
                     ]
@@ -337,7 +338,7 @@ export const onlyProviderAndManagerCanProcessOrder = (customerId) => {
                 {
                     fact: "state",
                     operator: "in",
-                    value: [State.REVIEW, State.REJECTED, State.APPROVED, State.PENDING]
+                    value: [AccountStatus.DELETED, AccountStatus.DISABLED]
 
                 }
             ]
@@ -364,8 +365,14 @@ export const onlyConsumerCanCompleteOrder = (customerId) => {
                 {
                     fact: "state",
                     operator: "in",
-                    value: [State.COMPLETED, State.ARCHIVED,],
+                    value: [AccountStatus.DISABLED, AccountStatus.DELETED,],
+                },
+                {
+                    fact: "recordStatus",
+                    operator: "in",
+                    value: [RecordStatus.DELETED,],
                 }
+
             ]
         }
     })

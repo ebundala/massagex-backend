@@ -5,7 +5,7 @@ import { Order, NotificationType, Notification } from "src/models/graphql";
 import { RedisCache } from "src/pubsub/redis.service";
 import { FirebaseService } from "@mechsoft/firebase-admin";
 import { PrismaClient } from '@mechsoft/prisma-client';
-import { State } from "@prisma/client";
+//import { State } from "@prisma/client";
 import { AppLogger } from "@mechsoft/app-logger";
 
 export const ORDER_CHANGED = "ORDER_CHANGED";

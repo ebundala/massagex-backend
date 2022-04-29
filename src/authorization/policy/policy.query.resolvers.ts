@@ -11,7 +11,47 @@ export class PolicyQueryResolver {
   
 @Query()
 @UseGuards(AuthorizerGuard)
-findUniqueComment(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
+route(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
+    return this.service.handle(parent, args, ctx, info);
+  }
+
+
+
+@Query()
+@UseGuards(AuthorizerGuard)
+geocode(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
+    return this.service.handle(parent, args, ctx, info);
+  }
+
+
+
+@Query()
+@UseGuards(AuthorizerGuard)
+reverseGeocode(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
+    return this.service.handle(parent, args, ctx, info);
+  }
+
+
+
+@Query()
+@UseGuards(AuthorizerGuard)
+placesAutocomplete(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
+    return this.service.handle(parent, args, ctx, info);
+  }
+
+
+
+@Query()
+@UseGuards(AuthorizerGuard)
+findManyBusiness(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
+    return this.service.handle(parent, args, ctx, info);
+  }
+
+
+
+@Query()
+@UseGuards(AuthorizerGuard)
+findManyCategory(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
     return this.service.handle(parent, args, ctx, info);
   }
 
@@ -43,30 +83,6 @@ findManyHelp(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Inf
 
 @Query()
 @UseGuards(AuthorizerGuard)
-findUniqueOrder(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Query()
-@UseGuards(AuthorizerGuard)
-findManyOrder(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Query()
-@UseGuards(AuthorizerGuard)
-findUniquePaymentMethod(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Query()
-@UseGuards(AuthorizerGuard)
 findManyPaymentMethod(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
     return this.service.handle(parent, args, ctx, info);
   }
@@ -75,31 +91,7 @@ findManyPaymentMethod(@Parent() parent, @Args() args, @Context() ctx: TenantCont
 
 @Query()
 @UseGuards(AuthorizerGuard)
-findUniqueReview(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Query()
-@UseGuards(AuthorizerGuard)
 findManyReview(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Query()
-@UseGuards(AuthorizerGuard)
-findUniqueService(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
-    return this.service.handle(parent, args, ctx, info);
-  }
-
-
-
-@Query()
-@UseGuards(AuthorizerGuard)
-findManyService(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info) {
     return this.service.handle(parent, args, ctx, info);
   }
 

@@ -3,7 +3,7 @@ type Location {
           name: String!
           lat: Float!
           lon: Float!
-          state: State!
+          recordStatus: RecordStatus!
           createdAt: DateTime!
           updatedAt: DateTime!
           users(where: UserWhereInput
@@ -13,6 +13,13 @@ type Location {
               skip: Int
               distinct: [UserScalarFieldEnum!]
               ): [User!]!
+          businesses(where: BusinessWhereInput
+              orderBy: [BusinessOrderByInput!]
+              cursor: BusinessWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [BusinessScalarFieldEnum!]
+              ): [Business!]!
     }
 
       type LocationListResponse {

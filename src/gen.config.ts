@@ -13,12 +13,12 @@ const options: SdlGeneratorServiceOptions = {
 
     // excludeFields: ['Id'],
     excludeQueriesAndMutationsByModel: {
-      // 'User': ['upsertOne', 'deleteMany'],
-      // 'Invite':['findFirst','upsertOne'],
-      'PaymentMethod':['findFirst','upsertOne'],
-      // 'SelcomDisbursement':['findFirst','upsertOne'],
-      // 'SelcomPayment':['findFirst','upsertOne',],
-      // 'SelcomPayment':['findFirst','upsertOne'],
+       'User': ['createOne'],
+       'Review':['createOne','updateOne','findUnique'],
+       'Comment':['createOne','updateOne','findUnique'],
+       'Category':['createOne','updateOne','findUnique'],
+       'PaymentMethod':['createOne','updateOne','findUnique'],
+       'Business':['createOne','updateOne','findUnique'],
       // 'SelcomPayment':['findFirst','upsertOne'],
     },
     excludeQueriesAndMutations: [
@@ -32,19 +32,11 @@ const options: SdlGeneratorServiceOptions = {
         mutations: true,
       },
       {
-        name: 'BusinessProfile',
-        queries: true,
-        mutations: true,
-      },
-      
-      
-      {
         name: 'HelpStep',
         queries: true,
         mutations: true,
       },
       
-     
       {
         name: 'Location',
         queries: true,
@@ -76,15 +68,35 @@ const options: SdlGeneratorServiceOptions = {
         mutations: true,
       },
       {
-        name: 'SelcomPayment',
+        name: 'AbuseRecordType',
         queries: true,
         mutations: true,
       },
-      // {
-      //   name: 'PaymentMethod',
-      //   queries: false,
-      //   mutations: true,
-      // },
+      {
+        name: 'FavoriteRecordType',
+        queries: true,
+        mutations: true,
+      },
+      {
+        name: 'AbuseReport',
+        queries: true,
+        mutations: true,
+      },
+      {
+        name: 'Favorite',
+        queries: true,
+        mutations: true,
+      },
+      {
+        name: 'Service',
+        queries: true,
+        mutations: true,
+      },
+      {
+        name: 'Order',
+        queries: true,
+        mutations: true,
+      },
       {
         name: 'Device',
         queries: true,
@@ -101,7 +113,8 @@ const options: SdlGeneratorServiceOptions = {
         outputAs: 'class',
         customScalarTypeMapping: {
             Upload: 'Promise < FileUpload >',
-            DateTime: 'string'
+            DateTime: 'string',
+            Json: 'JSONObject'
         },
       additionalHeader: "import { FileUpload } from 'graphql-upload';"
     },

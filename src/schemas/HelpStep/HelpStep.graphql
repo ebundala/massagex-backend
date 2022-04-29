@@ -3,7 +3,7 @@ type HelpStep {
           stepNumber: Int!
           title: String!
           description: String
-          state: State!
+          recordStatus: RecordStatus!
           attachments(where: AttachmentWhereInput
               orderBy: [AttachmentOrderByInput!]
               cursor: AttachmentWhereUniqueInput

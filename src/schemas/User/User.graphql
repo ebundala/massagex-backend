@@ -3,24 +3,20 @@ type User {
           email: String!
           displayName: String!
           phoneNumber: String
+          dateOfBirth: DateTime
           emailVerified: Boolean!
           disabled: Boolean!
           avator: Attachment
           avatorId: String
           role: Role!
-          state: State!
-          businessProfile: BusinessProfile
-          services(where: ServiceWhereInput
-              orderBy: [ServiceOrderByInput!]
-              cursor: ServiceWhereUniqueInput
-              take: Int
-              skip: Int
-              distinct: [ServiceScalarFieldEnum!]
-              ): [Service!]!
+          recordStatus: RecordStatus!
+          state: AccountStatus!
+          gender: Gender!
+          businessProfile: Business
           createdAt: DateTime!
           updatedAt: DateTime!
           device: Device
-          orders(where: OrderWhereInput
+          ordered(where: OrderWhereInput
               orderBy: [OrderOrderByInput!]
               cursor: OrderWhereUniqueInput
               take: Int
@@ -48,8 +44,36 @@ type User {
               skip: Int
               distinct: [CommentScalarFieldEnum!]
               ): [Comment!]!
-          location: Location!
-          locationId: String!
+          location: Location
+          locationId: String
+          abuseReports(where: AbuseReportWhereInput
+              orderBy: [AbuseReportOrderByInput!]
+              cursor: AbuseReportWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [AbuseReportScalarFieldEnum!]
+              ): [AbuseReport!]!
+          favorites(where: FavoriteWhereInput
+              orderBy: [FavoriteOrderByInput!]
+              cursor: FavoriteWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [FavoriteScalarFieldEnum!]
+              ): [Favorite!]!
+          abuseReported(where: AbuseReportWhereInput
+              orderBy: [AbuseReportOrderByInput!]
+              cursor: AbuseReportWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [AbuseReportScalarFieldEnum!]
+              ): [AbuseReport!]!
+          favorited(where: FavoriteWhereInput
+              orderBy: [FavoriteOrderByInput!]
+              cursor: FavoriteWhereUniqueInput
+              take: Int
+              skip: Int
+              distinct: [FavoriteScalarFieldEnum!]
+              ): [Favorite!]!
     }
 
       type UserListResponse {
@@ -80,7 +104,9 @@ type User {
         data: Int
         message: String!
       }
-      extend type Query {
+      
+    extend type Query {
+    
     findUniqueUser(where: UserWhereUniqueInput!): UserResponse!
     findManyUser(
       where: UserWhereInput
@@ -91,8 +117,8 @@ type User {
       take: Int
     ): UserListResponse!
   }
-extend type Mutation {
-    createOneUser(data: UserCreateInput!): UserResponse!
+    extend type Mutation {
+    
     updateOneUser(
       where: UserWhereUniqueInput!
       data: UserUpdateInput!
