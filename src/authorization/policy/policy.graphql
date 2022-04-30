@@ -30,8 +30,10 @@ input SignupInput {
   password: PERMISSION
   displayName: PERMISSION
   phoneNumber: PERMISSION
+  gender: PERMISSION
   dateOfBirth: PERMISSION
   avator: PERMISSION
+  business: BusinessCreateInput
 }
 
 enum AuthMode {
@@ -585,6 +587,237 @@ input AttachmentUncheckedCreateWithoutPaymentMethodsInput {
   orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
   businesses: BusinessUncheckedCreateNestedManyWithoutCoverInput
   Category: CategoryUncheckedCreateNestedManyWithoutPictureInput
+}
+
+input AttachmentCreateManyBusinessInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  recordStatus: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  commentId: PERMISSION
+  helpStepId: PERMISSION
+  reviewId: PERMISSION
+  userId: PERMISSION
+}
+
+input AttachmentCreateManyReviewsInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  recordStatus: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  commentId: PERMISSION
+  helpStepId: PERMISSION
+  userId: PERMISSION
+  businessId: PERMISSION
+}
+
+input AttachmentCreateWithoutBusinessInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  recordStatus: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  userId: PERMISSION
+  users: UserCreateNestedManyWithoutAvatorInput
+  comment: CommentCreateNestedOneWithoutAttachmentsInput
+  paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
+  services: ServiceCreateNestedManyWithoutImageInput
+  orders: OrderCreateNestedManyWithoutReceiptInput
+  businesses: BusinessCreateNestedManyWithoutCoverInput
+  helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
+  reviews: ReviewCreateNestedOneWithoutAttachmentsInput
+  Category: CategoryCreateNestedManyWithoutPictureInput
+}
+
+input AttachmentCreateWithoutReviewsInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  recordStatus: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  userId: PERMISSION
+  users: UserCreateNestedManyWithoutAvatorInput
+  comment: CommentCreateNestedOneWithoutAttachmentsInput
+  paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
+  services: ServiceCreateNestedManyWithoutImageInput
+  orders: OrderCreateNestedManyWithoutReceiptInput
+  businesses: BusinessCreateNestedManyWithoutCoverInput
+  helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
+  business: BusinessCreateNestedOneWithoutAttachmentsInput
+  Category: CategoryCreateNestedManyWithoutPictureInput
+}
+
+input AttachmentCreateWithoutCategoryInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  recordStatus: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  userId: PERMISSION
+  users: UserCreateNestedManyWithoutAvatorInput
+  comment: CommentCreateNestedOneWithoutAttachmentsInput
+  paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
+  services: ServiceCreateNestedManyWithoutImageInput
+  orders: OrderCreateNestedManyWithoutReceiptInput
+  businesses: BusinessCreateNestedManyWithoutCoverInput
+  helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
+  reviews: ReviewCreateNestedOneWithoutAttachmentsInput
+  business: BusinessCreateNestedOneWithoutAttachmentsInput
+}
+
+input AttachmentUncheckedCreateWithoutBusinessInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  recordStatus: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  commentId: PERMISSION
+  helpStepId: PERMISSION
+  reviewId: PERMISSION
+  userId: PERMISSION
+  users: UserUncheckedCreateNestedManyWithoutAvatorInput
+  paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
+  services: ServiceUncheckedCreateNestedManyWithoutImageInput
+  orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
+  businesses: BusinessUncheckedCreateNestedManyWithoutCoverInput
+  Category: CategoryUncheckedCreateNestedManyWithoutPictureInput
+}
+
+input AttachmentUncheckedCreateWithoutCategoryInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  recordStatus: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  commentId: PERMISSION
+  helpStepId: PERMISSION
+  reviewId: PERMISSION
+  userId: PERMISSION
+  businessId: PERMISSION
+  users: UserUncheckedCreateNestedManyWithoutAvatorInput
+  paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
+  services: ServiceUncheckedCreateNestedManyWithoutImageInput
+  orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
+  businesses: BusinessUncheckedCreateNestedManyWithoutCoverInput
+}
+
+input AttachmentUncheckedCreateWithoutReviewsInput {
+  path: PERMISSION
+  id: PERMISSION
+  filename: PERMISSION
+  mimetype: PERMISSION
+  encoding: PERMISSION
+  recordStatus: PERMISSION
+  duration: PERMISSION
+  size: PERMISSION
+  attachmentType: PERMISSION
+  downloadable: PERMISSION
+  placement: PERMISSION
+  createdAt: PERMISSION
+  updatedAt: PERMISSION
+  commentId: PERMISSION
+  helpStepId: PERMISSION
+  userId: PERMISSION
+  businessId: PERMISSION
+  users: UserUncheckedCreateNestedManyWithoutAvatorInput
+  paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
+  services: ServiceUncheckedCreateNestedManyWithoutImageInput
+  orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
+  businesses: BusinessUncheckedCreateNestedManyWithoutCoverInput
+  Category: CategoryUncheckedCreateNestedManyWithoutPictureInput
+}
+
+input ServiceUncheckedUpdateWithoutBusinessInput {
+  image: AttachmentCreateInput
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  price: FloatFieldUpdateOperationsInput
+  currency: StringFieldUpdateOperationsInput
+  recordStatus: EnumRecordStatusFieldUpdateOperationsInput
+  categoryId: NullableStringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  imageId: NullableStringFieldUpdateOperationsInput
+  metadata: PERMISSION
+  orders: OrderUncheckedUpdateManyWithoutServiceInput
+  abuseReports: AbuseReportUncheckedUpdateManyWithoutServiceInput
+  favorites: FavoriteUncheckedUpdateManyWithoutServiceInput
+}
+
+input OrderUncheckedUpdateWithoutBusinessInput {
+  receipt: AttachmentCreateInput
+  id: StringFieldUpdateOperationsInput
+  quantity: IntFieldUpdateOperationsInput
+  recordStatus: EnumRecordStatusFieldUpdateOperationsInput
+  orderStatus: EnumOrderStatusFieldUpdateOperationsInput
+  notes: NullableStringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  ownerId: StringFieldUpdateOperationsInput
+  receiptId: NullableStringFieldUpdateOperationsInput
+  serviceId: StringFieldUpdateOperationsInput
+  transactions: TransactionUncheckedUpdateManyWithoutOrderInput
+  abuseReports: AbuseReportUncheckedUpdateManyWithoutOrdersInput
+  favorites: FavoriteUncheckedUpdateManyWithoutOrdersInput
 }
 
 """The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf)."""
@@ -10618,58 +10851,6 @@ input OrderCreateManyBusinessInputEnvelope {
   skipDuplicates: PERMISSION
 }
 
-input AttachmentCreateWithoutBusinessInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  recordStatus: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  userId: PERMISSION
-  users: UserCreateNestedManyWithoutAvatorInput
-  comment: CommentCreateNestedOneWithoutAttachmentsInput
-  paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
-  services: ServiceCreateNestedManyWithoutImageInput
-  orders: OrderCreateNestedManyWithoutReceiptInput
-  businesses: BusinessCreateNestedManyWithoutCoverInput
-  helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
-  reviews: ReviewCreateNestedOneWithoutAttachmentsInput
-  Category: CategoryCreateNestedManyWithoutPictureInput
-}
-
-input AttachmentUncheckedCreateWithoutBusinessInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  recordStatus: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  commentId: PERMISSION
-  helpStepId: PERMISSION
-  reviewId: PERMISSION
-  userId: PERMISSION
-  users: UserUncheckedCreateNestedManyWithoutAvatorInput
-  paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
-  services: ServiceUncheckedCreateNestedManyWithoutImageInput
-  orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
-  businesses: BusinessUncheckedCreateNestedManyWithoutCoverInput
-  Category: CategoryUncheckedCreateNestedManyWithoutPictureInput
-}
-
 input AttachmentCreateOrConnectWithoutBusinessInput {
   where: AttachmentWhereUniqueInput!
   create: AttachmentUncheckedCreateWithoutBusinessInput!
@@ -12121,58 +12302,6 @@ input UserUncheckedCreateWithoutReviewedInput {
 input UserCreateOrConnectWithoutReviewedInput {
   where: UserWhereUniqueInput!
   create: UserUncheckedCreateWithoutReviewedInput!
-}
-
-input AttachmentCreateWithoutReviewsInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  recordStatus: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  userId: PERMISSION
-  users: UserCreateNestedManyWithoutAvatorInput
-  comment: CommentCreateNestedOneWithoutAttachmentsInput
-  paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
-  services: ServiceCreateNestedManyWithoutImageInput
-  orders: OrderCreateNestedManyWithoutReceiptInput
-  businesses: BusinessCreateNestedManyWithoutCoverInput
-  helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
-  business: BusinessCreateNestedOneWithoutAttachmentsInput
-  Category: CategoryCreateNestedManyWithoutPictureInput
-}
-
-input AttachmentUncheckedCreateWithoutReviewsInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  recordStatus: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  commentId: PERMISSION
-  helpStepId: PERMISSION
-  userId: PERMISSION
-  businessId: PERMISSION
-  users: UserUncheckedCreateNestedManyWithoutAvatorInput
-  paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
-  services: ServiceUncheckedCreateNestedManyWithoutImageInput
-  orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
-  businesses: BusinessUncheckedCreateNestedManyWithoutCoverInput
-  Category: CategoryUncheckedCreateNestedManyWithoutPictureInput
 }
 
 input AttachmentCreateOrConnectWithoutReviewsInput {
@@ -14463,58 +14592,6 @@ input HelpUncheckedUpdateWithoutStepsInput {
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
-input AttachmentCreateWithoutCategoryInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  recordStatus: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  userId: PERMISSION
-  users: UserCreateNestedManyWithoutAvatorInput
-  comment: CommentCreateNestedOneWithoutAttachmentsInput
-  paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
-  services: ServiceCreateNestedManyWithoutImageInput
-  orders: OrderCreateNestedManyWithoutReceiptInput
-  businesses: BusinessCreateNestedManyWithoutCoverInput
-  helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
-  reviews: ReviewCreateNestedOneWithoutAttachmentsInput
-  business: BusinessCreateNestedOneWithoutAttachmentsInput
-}
-
-input AttachmentUncheckedCreateWithoutCategoryInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  recordStatus: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  commentId: PERMISSION
-  helpStepId: PERMISSION
-  reviewId: PERMISSION
-  userId: PERMISSION
-  businessId: PERMISSION
-  users: UserUncheckedCreateNestedManyWithoutAvatorInput
-  paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
-  services: ServiceUncheckedCreateNestedManyWithoutImageInput
-  orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
-  businesses: BusinessUncheckedCreateNestedManyWithoutCoverInput
-}
-
 input AttachmentCreateOrConnectWithoutCategoryInput {
   where: AttachmentWhereUniqueInput!
   create: AttachmentUncheckedCreateWithoutCategoryInput!
@@ -16685,26 +16762,6 @@ input OrderCreateManyBusinessInput {
   serviceId: PERMISSION
 }
 
-input AttachmentCreateManyBusinessInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  recordStatus: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  commentId: PERMISSION
-  helpStepId: PERMISSION
-  reviewId: PERMISSION
-  userId: PERMISSION
-}
-
 input AbuseReportCreateManyBusinessInput {
   id: PERMISSION
   number: PERMISSION
@@ -16753,23 +16810,6 @@ input ServiceUpdateWithoutBusinessInput {
   favorites: FavoriteUpdateManyWithoutServiceInput
 }
 
-input ServiceUncheckedUpdateWithoutBusinessInput {
-  id: StringFieldUpdateOperationsInput
-  name: StringFieldUpdateOperationsInput
-  description: NullableStringFieldUpdateOperationsInput
-  price: FloatFieldUpdateOperationsInput
-  currency: StringFieldUpdateOperationsInput
-  recordStatus: EnumRecordStatusFieldUpdateOperationsInput
-  categoryId: NullableStringFieldUpdateOperationsInput
-  createdAt: DateTimeFieldUpdateOperationsInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-  imageId: NullableStringFieldUpdateOperationsInput
-  metadata: PERMISSION
-  orders: OrderUncheckedUpdateManyWithoutServiceInput
-  abuseReports: AbuseReportUncheckedUpdateManyWithoutServiceInput
-  favorites: FavoriteUncheckedUpdateManyWithoutServiceInput
-}
-
 input ServiceUncheckedUpdateManyWithoutServicesInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
@@ -16798,22 +16838,6 @@ input OrderUpdateWithoutBusinessInput {
   transactions: TransactionUpdateManyWithoutOrderInput
   abuseReports: AbuseReportUpdateManyWithoutOrdersInput
   favorites: FavoriteUpdateManyWithoutOrdersInput
-}
-
-input OrderUncheckedUpdateWithoutBusinessInput {
-  id: StringFieldUpdateOperationsInput
-  quantity: IntFieldUpdateOperationsInput
-  recordStatus: EnumRecordStatusFieldUpdateOperationsInput
-  orderStatus: EnumOrderStatusFieldUpdateOperationsInput
-  notes: NullableStringFieldUpdateOperationsInput
-  createdAt: DateTimeFieldUpdateOperationsInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-  ownerId: StringFieldUpdateOperationsInput
-  receiptId: NullableStringFieldUpdateOperationsInput
-  serviceId: StringFieldUpdateOperationsInput
-  transactions: TransactionUncheckedUpdateManyWithoutOrderInput
-  abuseReports: AbuseReportUncheckedUpdateManyWithoutOrdersInput
-  favorites: FavoriteUncheckedUpdateManyWithoutOrdersInput
 }
 
 input OrderUncheckedUpdateManyWithoutOrdersInput {
@@ -17418,26 +17442,6 @@ input BusinessUncheckedUpdateWithoutLocationInput {
   attachments: AttachmentUncheckedUpdateManyWithoutBusinessInput
   abuseReports: AbuseReportUncheckedUpdateManyWithoutBusinessInput
   favorite: FavoriteUncheckedUpdateManyWithoutBusinessInput
-}
-
-input AttachmentCreateManyReviewsInput {
-  id: PERMISSION
-  path: PERMISSION
-  filename: PERMISSION
-  mimetype: PERMISSION
-  encoding: PERMISSION
-  recordStatus: PERMISSION
-  duration: PERMISSION
-  size: PERMISSION
-  attachmentType: PERMISSION
-  downloadable: PERMISSION
-  placement: PERMISSION
-  createdAt: PERMISSION
-  updatedAt: PERMISSION
-  commentId: PERMISSION
-  helpStepId: PERMISSION
-  userId: PERMISSION
-  businessId: PERMISSION
 }
 
 input CommentCreateManyReviewInput {

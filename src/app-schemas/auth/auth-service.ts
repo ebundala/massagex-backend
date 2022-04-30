@@ -64,7 +64,7 @@ export class AuthService {
   async signupWithEmail(data: SignupInput,
     prisma: PrismaClient, select,context:any
       ): Promise<AuthResult> {
-    const { email, password, displayName, phoneNumber, avator, dateOfBirth } = data;
+    const { email, password, displayName, phoneNumber, avator, dateOfBirth,gender,business } = data;
     
     
     try {
@@ -102,10 +102,17 @@ export class AuthService {
         if(phoneNumber){
           data.phoneNumber=phoneNumber;
         }
-        if (avator) {
+        if (avator) {          
           data.avator = (avator as any);
         }
-
+         
+        if(gender){
+          data.gender = gender;
+        }
+        if(business){
+          data.businessProfile={ create:(business as any)}
+          data.role=Role.BUSINESS
+        }
         
         //TODO find better way to pass context args to prisma hooks
         data["password"] = password;

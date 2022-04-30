@@ -12,6 +12,7 @@ input SignupInput {
 	gender: Gender
 	dateOfBirth: DateTime
 	avator:Upload
+	business: BusinessCreateWithoutOwnerInput
 }
 enum AuthMode{
 	EMAIL

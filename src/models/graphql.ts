@@ -2273,7 +2273,7 @@ export class AttachmentCreateManyBusinessInput {
     helpStepId?: Nullable<string>;
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
-    path: string;
+    path: Upload;
     placement?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
     reviewId?: Nullable<string>;
@@ -2370,7 +2370,7 @@ export class AttachmentCreateManyReviewsInput {
     helpStepId?: Nullable<string>;
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
-    path: string;
+    path: Upload;
     placement?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
     size?: Nullable<number>;
@@ -2511,7 +2511,7 @@ export class AttachmentCreateWithoutBusinessInput {
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
     orders?: Nullable<OrderCreateNestedManyWithoutReceiptInput>;
-    path: string;
+    path: Upload;
     paymentMethods?: Nullable<PaymentMethodCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
@@ -2563,7 +2563,7 @@ export class AttachmentCreateWithoutCategoryInput {
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
     orders?: Nullable<OrderCreateNestedManyWithoutReceiptInput>;
-    path: string;
+    path: Upload;
     paymentMethods?: Nullable<PaymentMethodCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
@@ -2694,7 +2694,7 @@ export class AttachmentCreateWithoutReviewsInput {
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
     orders?: Nullable<OrderCreateNestedManyWithoutReceiptInput>;
-    path: string;
+    path: Upload;
     paymentMethods?: Nullable<PaymentMethodCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
@@ -2906,7 +2906,7 @@ export class AttachmentUncheckedCreateWithoutBusinessInput {
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
     orders?: Nullable<OrderUncheckedCreateNestedManyWithoutReceiptInput>;
-    path: string;
+    path: Upload;
     paymentMethods?: Nullable<PaymentMethodUncheckedCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
@@ -2958,7 +2958,7 @@ export class AttachmentUncheckedCreateWithoutCategoryInput {
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
     orders?: Nullable<OrderUncheckedCreateNestedManyWithoutReceiptInput>;
-    path: string;
+    path: Upload;
     paymentMethods?: Nullable<PaymentMethodUncheckedCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
@@ -3089,7 +3089,7 @@ export class AttachmentUncheckedCreateWithoutReviewsInput {
     id?: Nullable<string>;
     mimetype?: Nullable<string>;
     orders?: Nullable<OrderUncheckedCreateNestedManyWithoutReceiptInput>;
-    path: string;
+    path: Upload;
     paymentMethods?: Nullable<PaymentMethodUncheckedCreateNestedManyWithoutLogoInput>;
     placement?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
@@ -11044,6 +11044,7 @@ export class OrderUncheckedUpdateWithoutBusinessInput {
     orderStatus?: Nullable<EnumOrderStatusFieldUpdateOperationsInput>;
     ownerId?: Nullable<StringFieldUpdateOperationsInput>;
     quantity?: Nullable<IntFieldUpdateOperationsInput>;
+    receipt?: Nullable<AttachmentCreateInput>;
     receiptId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
     serviceId?: Nullable<StringFieldUpdateOperationsInput>;
@@ -13820,6 +13821,7 @@ export class ServiceUncheckedUpdateWithoutBusinessInput {
     description?: Nullable<NullableStringFieldUpdateOperationsInput>;
     favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutServiceInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
+    image?: Nullable<AttachmentCreateInput>;
     imageId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     metadata?: Nullable<string[]>;
     name?: Nullable<StringFieldUpdateOperationsInput>;
@@ -14197,9 +14199,11 @@ export class ServiceWhereUniqueInput {
 
 export class SignupInput {
     avator?: Nullable<Upload>;
+    business?: Nullable<BusinessCreateInput>;
     dateOfBirth?: Nullable<DateTime>;
     displayName: string;
     email: string;
+    gender?: Nullable<Gender>;
     password: string;
     phoneNumber?: Nullable<string>;
 }

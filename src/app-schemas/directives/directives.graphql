@@ -1,103 +1,143 @@
-directive @file(path:String) on  INPUT_FIELD_DEFINITION
+directive @file(path: String) on  INPUT_FIELD_DEFINITION
 
-directive @thumbnail(size:ImageSize!) on FIELD
+directive @thumbnail(size: ImageSize!) on FIELD
 
 scalar Upload
 
 enum ImageSize {
-    smallest
-    small
-    medium
-    large
-    largest
+	smallest
+	small
+	medium
+	large
+	largest
 }
 
-extend input AttachmentCreateInput{
-    path: String! @file(path:"../../../../public/uploads")
+extend input AttachmentCreateInput {
+	path: String! @file(path: "../../../../public/uploads")
 }
 
 
-extend input AttachmentCreateManyInput{
-    path: String! @file(path:"../../../../public/uploads")
+extend input AttachmentCreateManyInput {
+	path: String! @file(path: "../../../../public/uploads")
 }
 
 
 # create without inputs
-extend input AttachmentCreateWithoutUsersInput{
-    path: String! @file(path:"../../../../public/uploads")
+extend input AttachmentCreateWithoutUsersInput {
+	path: String! @file(path: "../../../../public/uploads")
 }
-extend input AttachmentCreateWithoutBusinessesInput{
-    path: String! @file(path:"../../../../public/uploads")
-}
-
-extend input AttachmentCreateWithoutCommentInput{
-    path: String! @file(path:"../../../../public/uploads")
+extend input AttachmentCreateWithoutBusinessesInput {
+	path: String! @file(path: "../../../../public/uploads")
 }
 
-extend input AttachmentCreateWithoutHelpStepInput{
-    path: String! @file(path:"../../../../public/uploads")
+extend input AttachmentCreateWithoutCommentInput {
+	path: String! @file(path: "../../../../public/uploads")
 }
 
-extend input AttachmentCreateWithoutServicesInput{
-    path: String! @file(path:"../../../../public/uploads")
+extend input AttachmentCreateWithoutHelpStepInput {
+	path: String! @file(path: "../../../../public/uploads")
+}
+
+extend input AttachmentCreateWithoutServicesInput {
+	path: String! @file(path: "../../../../public/uploads")
 }
 
 
 
-extend input AttachmentCreateWithoutOrdersInput{
-    path: String! @file(path:"..././../../public/uploads")
+extend input AttachmentCreateWithoutOrdersInput {
+	path: String! @file(path: "..././../../public/uploads")
 }
 
-extend input AttachmentCreateWithoutPaymentMethodsInput{
-    path: String! @file(path:"../../../../public/uploads")
+extend input AttachmentCreateWithoutPaymentMethodsInput {
+	path: String! @file(path: "../../../../public/uploads")
 }
 
 # create many inputs
 
 
-extend input AttachmentCreateManyCommentInput{
-    path: String! @file(path:"../../../../public/uploads")
+extend input AttachmentCreateManyCommentInput {
+	path: String! @file(path: "../../../../public/uploads")
 }
 
-extend input AttachmentCreateManyHelpStepInput{
-    path: String! @file(path:"../../../../public/uploads")
+extend input AttachmentCreateManyHelpStepInput {
+	path: String! @file(path: "../../../../public/uploads")
 }
 
 
 
 # unchecked inputs
-extend input AttachmentUncheckedCreateInput{
+extend input AttachmentUncheckedCreateInput {
+	path: String! @file(path: "../../../../public/uploads")
+}
+
+extend input AttachmentUncheckedCreateWithoutUsersInput {
+	path: String! @file(path: "../../../../public/uploads")
+}
+extend input AttachmentUncheckedCreateWithoutBusinessesInput {
+	path: String! @file(path: "../../../../public/uploads")
+}
+
+extend input AttachmentUncheckedCreateWithoutCommentInput {
+	path: String! @file(path: "../../../../public/uploads")
+}
+
+extend input AttachmentUncheckedCreateWithoutHelpStepInput {
+	path: String! @file(path: "../../../../public/uploads")
+}
+
+extend input AttachmentUncheckedCreateWithoutServicesInput {
+	path: String! @file(path: "../../../../public/uploads")
+}
+
+extend input AttachmentUncheckedCreateWithoutOrdersInput {
+	path: String! @file(path: "../../../../public/uploads")
+}
+extend input AttachmentUncheckedCreateWithoutPaymentMethodsInput {
+	path: String! @file(path: "../../../../public/uploads")
+}
+
+extend input AttachmentCreateManyBusinessInput {
     path: String! @file(path:"../../../../public/uploads")
 }
 
-extend input AttachmentUncheckedCreateWithoutUsersInput{
-    path: String! @file(path:"../../../../public/uploads")
-}
-extend input AttachmentUncheckedCreateWithoutBusinessesInput{
+extend input AttachmentCreateManyReviewsInput {
     path: String! @file(path:"../../../../public/uploads")
 }
 
-extend input AttachmentUncheckedCreateWithoutCommentInput{
+extend input AttachmentCreateWithoutBusinessInput {
     path: String! @file(path:"../../../../public/uploads")
 }
 
-extend input AttachmentUncheckedCreateWithoutHelpStepInput{
+extend input AttachmentCreateWithoutReviewsInput {
     path: String! @file(path:"../../../../public/uploads")
 }
 
-extend input AttachmentUncheckedCreateWithoutServicesInput{
+extend input AttachmentCreateWithoutCategoryInput {
     path: String! @file(path:"../../../../public/uploads")
 }
 
-extend input AttachmentUncheckedCreateWithoutOrdersInput{
-    path: String! @file(path:"../../../../public/uploads")
-}
-extend input AttachmentUncheckedCreateWithoutPaymentMethodsInput{
+extend input AttachmentCreateWithoutReviewsInput {
     path: String! @file(path:"../../../../public/uploads")
 }
 
+extend input AttachmentUncheckedCreateWithoutBusinessInput {
+    path: String! @file(path:"../../../../public/uploads")
+}
+
+extend input AttachmentUncheckedCreateWithoutCategoryInput {
+    path: String! @file(path:"../../../../public/uploads")
+}
+
+extend input AttachmentUncheckedCreateWithoutReviewsInput {
+    path: String! @file(path:"../../../../public/uploads")
+}
 
 
+# handle edge cases for file upload during deep nested update
+extend input ServiceUncheckedUpdateWithoutBusinessInput {
+    image: AttachmentCreateInput
+}
 
-
-
+extend input OrderUncheckedUpdateWithoutBusinessInput {
+    receipt: AttachmentCreateInput
+}

@@ -175,9 +175,9 @@ enum AttachmentType {
 // review part
 model Review {
   id           String        @id @default(cuid())
-  author       User          @relation("reviewerToReview", fields: [authorId], references: [id])
+  author       User          @relation("revieweeToReview", fields: [authorId], references: [id])
   authorId     String
-  reviewee     User          @relation("revieweeToReview", fields: [revieweeId], references: [id])
+  reviewee     User          @relation("reviewerToReview", fields: [revieweeId], references: [id])
   revieweeId   String
   value        Int           @default(0)
   content      String?

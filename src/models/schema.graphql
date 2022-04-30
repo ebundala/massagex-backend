@@ -12,8 +12,10 @@ input SignupInput {
   password: String!
   displayName: String!
   phoneNumber: String
+  gender: Gender
   dateOfBirth: DateTime
   avator: Upload
+  business: BusinessCreateInput
 }
 
 enum AuthMode {
@@ -567,6 +569,237 @@ input AttachmentUncheckedCreateWithoutPaymentMethodsInput {
   orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
   businesses: BusinessUncheckedCreateNestedManyWithoutCoverInput
   Category: CategoryUncheckedCreateNestedManyWithoutPictureInput
+}
+
+input AttachmentCreateManyBusinessInput {
+  path: Upload!
+  id: String
+  filename: String
+  mimetype: String
+  encoding: String
+  recordStatus: RecordStatus
+  duration: Int
+  size: Int
+  attachmentType: AttachmentType
+  downloadable: Boolean
+  placement: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  commentId: String
+  helpStepId: String
+  reviewId: String
+  userId: String
+}
+
+input AttachmentCreateManyReviewsInput {
+  path: Upload!
+  id: String
+  filename: String
+  mimetype: String
+  encoding: String
+  recordStatus: RecordStatus
+  duration: Int
+  size: Int
+  attachmentType: AttachmentType
+  downloadable: Boolean
+  placement: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  commentId: String
+  helpStepId: String
+  userId: String
+  businessId: String
+}
+
+input AttachmentCreateWithoutBusinessInput {
+  path: Upload!
+  id: String
+  filename: String
+  mimetype: String
+  encoding: String
+  recordStatus: RecordStatus
+  duration: Int
+  size: Int
+  attachmentType: AttachmentType
+  downloadable: Boolean
+  placement: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  userId: String
+  users: UserCreateNestedManyWithoutAvatorInput
+  comment: CommentCreateNestedOneWithoutAttachmentsInput
+  paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
+  services: ServiceCreateNestedManyWithoutImageInput
+  orders: OrderCreateNestedManyWithoutReceiptInput
+  businesses: BusinessCreateNestedManyWithoutCoverInput
+  helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
+  reviews: ReviewCreateNestedOneWithoutAttachmentsInput
+  Category: CategoryCreateNestedManyWithoutPictureInput
+}
+
+input AttachmentCreateWithoutReviewsInput {
+  path: Upload!
+  id: String
+  filename: String
+  mimetype: String
+  encoding: String
+  recordStatus: RecordStatus
+  duration: Int
+  size: Int
+  attachmentType: AttachmentType
+  downloadable: Boolean
+  placement: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  userId: String
+  users: UserCreateNestedManyWithoutAvatorInput
+  comment: CommentCreateNestedOneWithoutAttachmentsInput
+  paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
+  services: ServiceCreateNestedManyWithoutImageInput
+  orders: OrderCreateNestedManyWithoutReceiptInput
+  businesses: BusinessCreateNestedManyWithoutCoverInput
+  helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
+  business: BusinessCreateNestedOneWithoutAttachmentsInput
+  Category: CategoryCreateNestedManyWithoutPictureInput
+}
+
+input AttachmentCreateWithoutCategoryInput {
+  path: Upload!
+  id: String
+  filename: String
+  mimetype: String
+  encoding: String
+  recordStatus: RecordStatus
+  duration: Int
+  size: Int
+  attachmentType: AttachmentType
+  downloadable: Boolean
+  placement: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  userId: String
+  users: UserCreateNestedManyWithoutAvatorInput
+  comment: CommentCreateNestedOneWithoutAttachmentsInput
+  paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
+  services: ServiceCreateNestedManyWithoutImageInput
+  orders: OrderCreateNestedManyWithoutReceiptInput
+  businesses: BusinessCreateNestedManyWithoutCoverInput
+  helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
+  reviews: ReviewCreateNestedOneWithoutAttachmentsInput
+  business: BusinessCreateNestedOneWithoutAttachmentsInput
+}
+
+input AttachmentUncheckedCreateWithoutBusinessInput {
+  path: Upload!
+  id: String
+  filename: String
+  mimetype: String
+  encoding: String
+  recordStatus: RecordStatus
+  duration: Int
+  size: Int
+  attachmentType: AttachmentType
+  downloadable: Boolean
+  placement: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  commentId: String
+  helpStepId: String
+  reviewId: String
+  userId: String
+  users: UserUncheckedCreateNestedManyWithoutAvatorInput
+  paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
+  services: ServiceUncheckedCreateNestedManyWithoutImageInput
+  orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
+  businesses: BusinessUncheckedCreateNestedManyWithoutCoverInput
+  Category: CategoryUncheckedCreateNestedManyWithoutPictureInput
+}
+
+input AttachmentUncheckedCreateWithoutCategoryInput {
+  path: Upload!
+  id: String
+  filename: String
+  mimetype: String
+  encoding: String
+  recordStatus: RecordStatus
+  duration: Int
+  size: Int
+  attachmentType: AttachmentType
+  downloadable: Boolean
+  placement: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  commentId: String
+  helpStepId: String
+  reviewId: String
+  userId: String
+  businessId: String
+  users: UserUncheckedCreateNestedManyWithoutAvatorInput
+  paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
+  services: ServiceUncheckedCreateNestedManyWithoutImageInput
+  orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
+  businesses: BusinessUncheckedCreateNestedManyWithoutCoverInput
+}
+
+input AttachmentUncheckedCreateWithoutReviewsInput {
+  path: Upload!
+  id: String
+  filename: String
+  mimetype: String
+  encoding: String
+  recordStatus: RecordStatus
+  duration: Int
+  size: Int
+  attachmentType: AttachmentType
+  downloadable: Boolean
+  placement: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  commentId: String
+  helpStepId: String
+  userId: String
+  businessId: String
+  users: UserUncheckedCreateNestedManyWithoutAvatorInput
+  paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
+  services: ServiceUncheckedCreateNestedManyWithoutImageInput
+  orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
+  businesses: BusinessUncheckedCreateNestedManyWithoutCoverInput
+  Category: CategoryUncheckedCreateNestedManyWithoutPictureInput
+}
+
+input ServiceUncheckedUpdateWithoutBusinessInput {
+  image: AttachmentCreateInput
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  price: FloatFieldUpdateOperationsInput
+  currency: StringFieldUpdateOperationsInput
+  recordStatus: EnumRecordStatusFieldUpdateOperationsInput
+  categoryId: NullableStringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  imageId: NullableStringFieldUpdateOperationsInput
+  metadata: [String!]
+  orders: OrderUncheckedUpdateManyWithoutServiceInput
+  abuseReports: AbuseReportUncheckedUpdateManyWithoutServiceInput
+  favorites: FavoriteUncheckedUpdateManyWithoutServiceInput
+}
+
+input OrderUncheckedUpdateWithoutBusinessInput {
+  receipt: AttachmentCreateInput
+  id: StringFieldUpdateOperationsInput
+  quantity: IntFieldUpdateOperationsInput
+  recordStatus: EnumRecordStatusFieldUpdateOperationsInput
+  orderStatus: EnumOrderStatusFieldUpdateOperationsInput
+  notes: NullableStringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  ownerId: StringFieldUpdateOperationsInput
+  receiptId: NullableStringFieldUpdateOperationsInput
+  serviceId: StringFieldUpdateOperationsInput
+  transactions: TransactionUncheckedUpdateManyWithoutOrderInput
+  abuseReports: AbuseReportUncheckedUpdateManyWithoutOrdersInput
+  favorites: FavoriteUncheckedUpdateManyWithoutOrdersInput
 }
 
 """
@@ -10602,58 +10835,6 @@ input OrderCreateManyBusinessInputEnvelope {
   skipDuplicates: Boolean
 }
 
-input AttachmentCreateWithoutBusinessInput {
-  id: String
-  path: String!
-  filename: String
-  mimetype: String
-  encoding: String
-  recordStatus: RecordStatus
-  duration: Int
-  size: Int
-  attachmentType: AttachmentType
-  downloadable: Boolean
-  placement: String
-  createdAt: DateTime
-  updatedAt: DateTime
-  userId: String
-  users: UserCreateNestedManyWithoutAvatorInput
-  comment: CommentCreateNestedOneWithoutAttachmentsInput
-  paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
-  services: ServiceCreateNestedManyWithoutImageInput
-  orders: OrderCreateNestedManyWithoutReceiptInput
-  businesses: BusinessCreateNestedManyWithoutCoverInput
-  helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
-  reviews: ReviewCreateNestedOneWithoutAttachmentsInput
-  Category: CategoryCreateNestedManyWithoutPictureInput
-}
-
-input AttachmentUncheckedCreateWithoutBusinessInput {
-  id: String
-  path: String!
-  filename: String
-  mimetype: String
-  encoding: String
-  recordStatus: RecordStatus
-  duration: Int
-  size: Int
-  attachmentType: AttachmentType
-  downloadable: Boolean
-  placement: String
-  createdAt: DateTime
-  updatedAt: DateTime
-  commentId: String
-  helpStepId: String
-  reviewId: String
-  userId: String
-  users: UserUncheckedCreateNestedManyWithoutAvatorInput
-  paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
-  services: ServiceUncheckedCreateNestedManyWithoutImageInput
-  orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
-  businesses: BusinessUncheckedCreateNestedManyWithoutCoverInput
-  Category: CategoryUncheckedCreateNestedManyWithoutPictureInput
-}
-
 input AttachmentCreateOrConnectWithoutBusinessInput {
   where: AttachmentWhereUniqueInput!
   create: AttachmentUncheckedCreateWithoutBusinessInput!
@@ -12105,58 +12286,6 @@ input UserUncheckedCreateWithoutReviewedInput {
 input UserCreateOrConnectWithoutReviewedInput {
   where: UserWhereUniqueInput!
   create: UserUncheckedCreateWithoutReviewedInput!
-}
-
-input AttachmentCreateWithoutReviewsInput {
-  id: String
-  path: String!
-  filename: String
-  mimetype: String
-  encoding: String
-  recordStatus: RecordStatus
-  duration: Int
-  size: Int
-  attachmentType: AttachmentType
-  downloadable: Boolean
-  placement: String
-  createdAt: DateTime
-  updatedAt: DateTime
-  userId: String
-  users: UserCreateNestedManyWithoutAvatorInput
-  comment: CommentCreateNestedOneWithoutAttachmentsInput
-  paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
-  services: ServiceCreateNestedManyWithoutImageInput
-  orders: OrderCreateNestedManyWithoutReceiptInput
-  businesses: BusinessCreateNestedManyWithoutCoverInput
-  helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
-  business: BusinessCreateNestedOneWithoutAttachmentsInput
-  Category: CategoryCreateNestedManyWithoutPictureInput
-}
-
-input AttachmentUncheckedCreateWithoutReviewsInput {
-  id: String
-  path: String!
-  filename: String
-  mimetype: String
-  encoding: String
-  recordStatus: RecordStatus
-  duration: Int
-  size: Int
-  attachmentType: AttachmentType
-  downloadable: Boolean
-  placement: String
-  createdAt: DateTime
-  updatedAt: DateTime
-  commentId: String
-  helpStepId: String
-  userId: String
-  businessId: String
-  users: UserUncheckedCreateNestedManyWithoutAvatorInput
-  paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
-  services: ServiceUncheckedCreateNestedManyWithoutImageInput
-  orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
-  businesses: BusinessUncheckedCreateNestedManyWithoutCoverInput
-  Category: CategoryUncheckedCreateNestedManyWithoutPictureInput
 }
 
 input AttachmentCreateOrConnectWithoutReviewsInput {
@@ -14447,58 +14576,6 @@ input HelpUncheckedUpdateWithoutStepsInput {
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
-input AttachmentCreateWithoutCategoryInput {
-  id: String
-  path: String!
-  filename: String
-  mimetype: String
-  encoding: String
-  recordStatus: RecordStatus
-  duration: Int
-  size: Int
-  attachmentType: AttachmentType
-  downloadable: Boolean
-  placement: String
-  createdAt: DateTime
-  updatedAt: DateTime
-  userId: String
-  users: UserCreateNestedManyWithoutAvatorInput
-  comment: CommentCreateNestedOneWithoutAttachmentsInput
-  paymentMethods: PaymentMethodCreateNestedManyWithoutLogoInput
-  services: ServiceCreateNestedManyWithoutImageInput
-  orders: OrderCreateNestedManyWithoutReceiptInput
-  businesses: BusinessCreateNestedManyWithoutCoverInput
-  helpStep: HelpStepCreateNestedOneWithoutAttachmentsInput
-  reviews: ReviewCreateNestedOneWithoutAttachmentsInput
-  business: BusinessCreateNestedOneWithoutAttachmentsInput
-}
-
-input AttachmentUncheckedCreateWithoutCategoryInput {
-  id: String
-  path: String!
-  filename: String
-  mimetype: String
-  encoding: String
-  recordStatus: RecordStatus
-  duration: Int
-  size: Int
-  attachmentType: AttachmentType
-  downloadable: Boolean
-  placement: String
-  createdAt: DateTime
-  updatedAt: DateTime
-  commentId: String
-  helpStepId: String
-  reviewId: String
-  userId: String
-  businessId: String
-  users: UserUncheckedCreateNestedManyWithoutAvatorInput
-  paymentMethods: PaymentMethodUncheckedCreateNestedManyWithoutLogoInput
-  services: ServiceUncheckedCreateNestedManyWithoutImageInput
-  orders: OrderUncheckedCreateNestedManyWithoutReceiptInput
-  businesses: BusinessUncheckedCreateNestedManyWithoutCoverInput
-}
-
 input AttachmentCreateOrConnectWithoutCategoryInput {
   where: AttachmentWhereUniqueInput!
   create: AttachmentUncheckedCreateWithoutCategoryInput!
@@ -16669,26 +16746,6 @@ input OrderCreateManyBusinessInput {
   serviceId: String!
 }
 
-input AttachmentCreateManyBusinessInput {
-  id: String
-  path: String!
-  filename: String
-  mimetype: String
-  encoding: String
-  recordStatus: RecordStatus
-  duration: Int
-  size: Int
-  attachmentType: AttachmentType
-  downloadable: Boolean
-  placement: String
-  createdAt: DateTime
-  updatedAt: DateTime
-  commentId: String
-  helpStepId: String
-  reviewId: String
-  userId: String
-}
-
 input AbuseReportCreateManyBusinessInput {
   id: String
   number: Int
@@ -16737,23 +16794,6 @@ input ServiceUpdateWithoutBusinessInput {
   favorites: FavoriteUpdateManyWithoutServiceInput
 }
 
-input ServiceUncheckedUpdateWithoutBusinessInput {
-  id: StringFieldUpdateOperationsInput
-  name: StringFieldUpdateOperationsInput
-  description: NullableStringFieldUpdateOperationsInput
-  price: FloatFieldUpdateOperationsInput
-  currency: StringFieldUpdateOperationsInput
-  recordStatus: EnumRecordStatusFieldUpdateOperationsInput
-  categoryId: NullableStringFieldUpdateOperationsInput
-  createdAt: DateTimeFieldUpdateOperationsInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-  imageId: NullableStringFieldUpdateOperationsInput
-  metadata: [String!]
-  orders: OrderUncheckedUpdateManyWithoutServiceInput
-  abuseReports: AbuseReportUncheckedUpdateManyWithoutServiceInput
-  favorites: FavoriteUncheckedUpdateManyWithoutServiceInput
-}
-
 input ServiceUncheckedUpdateManyWithoutServicesInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
@@ -16782,22 +16822,6 @@ input OrderUpdateWithoutBusinessInput {
   transactions: TransactionUpdateManyWithoutOrderInput
   abuseReports: AbuseReportUpdateManyWithoutOrdersInput
   favorites: FavoriteUpdateManyWithoutOrdersInput
-}
-
-input OrderUncheckedUpdateWithoutBusinessInput {
-  id: StringFieldUpdateOperationsInput
-  quantity: IntFieldUpdateOperationsInput
-  recordStatus: EnumRecordStatusFieldUpdateOperationsInput
-  orderStatus: EnumOrderStatusFieldUpdateOperationsInput
-  notes: NullableStringFieldUpdateOperationsInput
-  createdAt: DateTimeFieldUpdateOperationsInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-  ownerId: StringFieldUpdateOperationsInput
-  receiptId: NullableStringFieldUpdateOperationsInput
-  serviceId: StringFieldUpdateOperationsInput
-  transactions: TransactionUncheckedUpdateManyWithoutOrderInput
-  abuseReports: AbuseReportUncheckedUpdateManyWithoutOrdersInput
-  favorites: FavoriteUncheckedUpdateManyWithoutOrdersInput
 }
 
 input OrderUncheckedUpdateManyWithoutOrdersInput {
@@ -17402,26 +17426,6 @@ input BusinessUncheckedUpdateWithoutLocationInput {
   attachments: AttachmentUncheckedUpdateManyWithoutBusinessInput
   abuseReports: AbuseReportUncheckedUpdateManyWithoutBusinessInput
   favorite: FavoriteUncheckedUpdateManyWithoutBusinessInput
-}
-
-input AttachmentCreateManyReviewsInput {
-  id: String
-  path: String!
-  filename: String
-  mimetype: String
-  encoding: String
-  recordStatus: RecordStatus
-  duration: Int
-  size: Int
-  attachmentType: AttachmentType
-  downloadable: Boolean
-  placement: String
-  createdAt: DateTime
-  updatedAt: DateTime
-  commentId: String
-  helpStepId: String
-  userId: String
-  businessId: String
 }
 
 input CommentCreateManyReviewInput {

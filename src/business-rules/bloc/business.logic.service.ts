@@ -2,13 +2,13 @@ import { AppLogger } from "@mechsoft/app-logger";
 import { Bloc, BlocAttach, BlocFieldResolver, BlocValidate, BusinessRequest, PrismaAttach, PrismaHookHandler, PrismaHookRequest } from "@mechsoft/business-rules-manager";
 import { TenantContext } from "@mechsoft/common";
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
-//import { } from "@prisma/client";
+//import { BusinessCreateArgs } from "@prisma/client";
 import * as DataLoader from "dataloader";
-import { PhoneNumber } from "graphql-scalars/mocks";
-import { AuthService } from "src/app-schemas/auth/auth-service";
-import { User, UserCreateInput } from "src/models/graphql";
+import { AuthService, } from "src/app-schemas/auth/auth-service";
+import {  BusinessCreateWithoutOwnerInput, User, UserCreateInput, UserUpdateInput } from "src/models/graphql";
 import { RedisCache } from "src/pubsub/redis.service";
 import { uploadFile } from "src/utils/file.utils";
+import {SignupInput} from "../../models/graphql";
 //import * as uuid from 'uuid';
 import {
   canCreateOnlyOneOrganization, isUserSensitiveInfo,
@@ -39,9 +39,24 @@ export class BusinessLogicService {
  get redis(): RedisCache{
     return this.redisCache;
   }
+
+  async createAttachments(attachments: { create: string | any[]; },context:TenantContext){
+    const uploads=[];
+     for(let i=0;i<attachments?.create?.length;i++) {
+        const item =attachments.create[i];
+        uploads.push(uploadFile((item as any).path));
+     }
+    const files = (await ( Promise.all(uploads))).map((file)=>{
+      return context.prisma.attachment.create({ data: file });
+    });
+    
+    const files2 = await Promise.all(files)
+    return files2;
+  }
+
   @PrismaAttach("User","create",true)
   async createFirebaseUser(v:PrismaHookRequest<UserCreateInput>,next: PrismaHookHandler){ 
-    debugger;
+    
     const {displayName,email,phoneNumber,password} = v.params.args.data;
     this.logger.debug("create user",displayName,email,phoneNumber,password);
     
@@ -54,8 +69,7 @@ export class BusinessLogicService {
     // if(!password){
     // FIXME: send email to reset password return undifined error
     // await this.authService.sendPasswordResetEmail({email,displayName,phoneNumber,id:user.uid});
-    // }
-    this.logger.debug("created user",user);   
+    // }   
     return next(v);
     }catch(e){
       if(v.params.args.data.id){
@@ -98,10 +112,11 @@ export class BusinessLogicService {
     return next(v);
   }
 
+  // upload user avator during signup
   @BlocAttach('signup.input.credentials.avator')
   async avator(v: BusinessRequest<TenantContext>, next: (arg0: BusinessRequest<any>) => any) {
     const { args, context } = v;
-    const { credentials, ...rest } = args;
+    const { credentials} = args as {credentials:SignupInput};
     const { avator } = credentials
     const file = await uploadFile(avator)
     const avator2 = await context.prisma.attachment.create({ data: { ...file } })
@@ -111,30 +126,28 @@ export class BusinessLogicService {
     }
     return next(v)
   }
-  
-  @BlocAttach('updateOneService.input.data.image.create.path')
-  @BlocAttach('createOneService.input.data.image.create.path')
-  async serviceImage(v: BusinessRequest<TenantContext>, next: (arg0: BusinessRequest<any>) => any) {
-    
+  //Upload Business cover image during signup
+  @BlocAttach('signup.input.credentials.business.cover.create.path')
+  async businessCover(v: BusinessRequest<TenantContext>, next: (arg0: BusinessRequest<any>) => any) {
     const { args, context } = v;
-    const { data, ...rest } = args;
-    const { image } = data
-    const file = await uploadFile(image.create.path)
-    const file2 = await context.prisma.attachment.create({ data: { ...file } })
+    const { credentials} = args as  {credentials:SignupInput};
+    const business = credentials.business as BusinessCreateWithoutOwnerInput;
+    const file = await uploadFile(business.cover.create.path)
+    const businessCover = await context.prisma.attachment.create({ data: { ...file } })
 
-    if (file2 && file2.id) {
-      v.args.data.image = { connect: { id: file2.id } };
+    if (businessCover && businessCover.id) {
+      v.args.credentials.business.cover = { connect: { id: businessCover.id } };
     }
     return next(v)
   }
 
-  //upload user avator
-  @BlocAttach('createOneUser.input.data.avator.create.path')
+ 
+  // Update user avator 
   @BlocAttach('updateOneUser.input.data.avator.create.path')
   async updateAvator(v: BusinessRequest<TenantContext>, next: (arg0: BusinessRequest<any>) => any) {
     
     const { args, context } = v;
-    const { data, ...rest } = args;
+    const { data, ...rest } = args as {data:UserUpdateInput};
     const { avator } = data
     const file = await uploadFile(avator.create.path)
     const file2 = await context.prisma.attachment.create({ data: { ...file } })
@@ -145,98 +158,242 @@ export class BusinessLogicService {
     return next(v)
   }
 
-  @BlocAttach('updateOneOrder.input.data.receipt.create.path')
-  //TODO investigate further not needed maybe for create scenario
-  @BlocAttach('createOneOrder.input.data.receipt.create.path')
-  async orderReceipt(v: BusinessRequest<TenantContext>, next: (arg0: BusinessRequest<any>) => any) {
-    
-    const { args, context } = v;
-    const { data, ...rest } = args;
-    const { receipt } = data
-    const file = await uploadFile(receipt.create.path)
-    const file2 = await context.prisma.attachment.create({ data: { ...file } })
-
-    if (file2 && file2.id) {
-      v.args.data.receipt = { connect: { id: file2.id } };
+//  upload image on reviews during creation via user entry
+@BlocAttach('updateOneUser.input.data.reviewed.create.attachments.create.path')
+async uploadReviewAttachments(v: BusinessRequest<TenantContext>, next: (arg0: BusinessRequest<any>) => any) {
+  
+  const { args, context } = v;
+  const { data, ...rest } = args as {data:UserUpdateInput};
+  const { reviewed } = data 
+  const attachmentsTasks = [];
+  const reviews = reviewed.create; 
+  for(let i=0;i<reviews.length;i++){
+    const attachments = reviews[i].attachments.create;
+    for(let j=0;j<attachments.length;j++){
+      const task = new Promise(async (resolve,reject)=>{
+       const attachment = attachments[j].path;
+      const file = await uploadFile(attachment)
+      const file2 = await context.prisma.attachment.create({ data: { ...file } })
+      if (file2 && file2.id) {
+        let connect = v.args.data.reviewed.create[i].attachments.connect??[];
+        connect[j]={ id: file2.id };
+        v.args.data.reviewed.create[i].attachments.connect=connect;
+        v.args.data.reviewed.create[i].attachments.create.splice(j,1);
+      }
+      resolve(file2);
+      });
+      attachmentsTasks.push(task);
     }
-    return next(v)
   }
 
-  //Validation rules
-  @BlocValidate('signup.input.credentials.email')
-  async oneEmailPerAccount(v: BusinessRequest<TenantContext>) {
-    const { args, context } = v;
-    const { credentials } = args;
-    const { prisma } = context;    
-    const facts = await prisma.user.findUnique({ where: { email: credentials.email }, select: { email: true } })
-    return { rules: [uniqueEmailPerAccount(credentials.email)], facts }
+  await Promise.all(attachmentsTasks);
+  return next(v)
+}
+
+//  upload image on reviews during update via user entry
+@BlocAttach('updateOneUser.input.data.reviewed.update.data.attachments.create.path')
+async uploadReviewAttachments2(v: BusinessRequest<TenantContext>, next: (arg0: BusinessRequest<any>) => any) {
+  const { args, context } = v;
+  const { data, ...rest } = args as {data:UserUpdateInput};
+  const { reviewed } = data 
+  const attachmentsTasks = [];
+  const reviews = reviewed.update; 
+  for(let i=0;i<reviews.length;i++){
+    const attachments = reviews[i].data.attachments.create;
+    for(let j=0;j<attachments.length;j++){
+      const task = new Promise(async (resolve,reject)=>{
+       const attachment = attachments[j].path;
+      const file = await uploadFile(attachment)
+      const file2 = await context.prisma.attachment.create({ data: { ...file } })
+      if (file2 && file2.id) {
+        let connect = v.args.data.reviewed.update[i].data.attachments.connect??[];
+        connect[j]= { id: file2.id } ;
+        v.args.data.reviewed.update[i].data.attachments.connect=connect;
+        v.args.data.reviewed.update[i].data.attachments.create.splice(j,1)
+      }
+      resolve(file2);
+      });
+      attachmentsTasks.push(task);
+    }
   }
+
+  await Promise.all(attachmentsTasks);
+  return next(v)
+}
+
+
+//  upload image on comment during creation via user entry
+@BlocAttach('updateOneUser.input.data.comments.create.attachments.create.path')
+async uploadCommentAttachments(v: BusinessRequest<TenantContext>, next: (arg0: BusinessRequest<any>) => any) {
+  const { args, context } = v;
+  const { data, ...rest } = args as {data:UserUpdateInput};
+  const { comments } = data 
+  const attachmentsTasks = [];
+  const commentsList = comments.create; 
+  for(let i=0;i<commentsList.length;i++){
+    const attachments = commentsList[i].attachments.create;
+    for(let j=0;j<attachments.length;j++){
+      const task = new Promise(async (resolve,reject)=>{
+       const attachment = attachments[j].path;
+      const file = await uploadFile(attachment)
+      const file2 = await context.prisma.attachment.create({ data: { ...file } })
+      if (file2 && file2.id) {
+        let connect = v.args.data.comments.create[i].attachments.connect??[]
+        connect[j]={ id: file2.id };
+        v.args.data.comments.create[i].attachments.connect=connect;
+        v.args.data.comments.create[i].attachments.create.splice(j,1);
+      }
+      resolve(file2);
+      });
+      attachmentsTasks.push(task);
+    }
+  }
+  await Promise.all(attachmentsTasks);
+  return next(v)
+}
+
+//upload attachment on comment during update via user entry
+@BlocAttach('updateOneUser.input.data.comments.update.data.attachments.create.path')
+async uploadCommentAttachments2(v: BusinessRequest<TenantContext>, next: (arg0: BusinessRequest<any>) => any) {
+  const { args, context } = v;
+  const { data} = args as {data:UserUpdateInput};
+  const { comments } = data 
+  const attachmentsTasks = [];
+  const commentsList = comments.update; 
+  for(let i=0;i<commentsList.length;i++){
+    const attachments = commentsList[i].data.attachments.create;
+    for(let j=0;j<attachments.length;j++){
+      const task = new Promise(async (resolve,reject)=>{
+       const attachment = attachments[j].path;
+      const file = await uploadFile(attachment)
+      const file2 = await context.prisma.attachment.create({ data: { ...file } })
+      if (file2 && file2.id) {
+        let connect = v.args.data.comments.update[i].data.attachments.connect??[]
+        connect[j]= { id: file2.id } ;
+        v.args.data.comments.update[i].data.attachments.connect = connect;
+        v.args.data.comments.update[i].data.attachments.create.splice(j,1)
+      }
+      resolve(file2);
+      });
+      attachmentsTasks.push(task);
+    }
+  }
+  await Promise.all(attachmentsTasks);
+  return next(v)
+}
+
+//upload attachment for gallery on bussiness during update via user entry
+@BlocAttach('updateOneUser.input.data.businessProfile.update.attachments.create.path')
+async uploadGalleryAttachments(v: BusinessRequest<TenantContext>, next: (arg0: BusinessRequest<any>) => any) {
+  const { args, context } = v;
+  const { data, ...rest } = args as {data:UserUpdateInput};
+  const { businessProfile } = data 
+    
+    const attachmentsTasks = [];  
+    const attachments = businessProfile.update.attachments.create;
+    for(let j=0;j<attachments.length;j++){
+      const task = new Promise(async (resolve,reject)=>{
+       const attachment = attachments[j].path;
+      const file = await uploadFile(attachment)
+      const file2 = await context.prisma.attachment.create({ data: { ...file } })
+      if (file2 && file2.id) {
+        let connect =v.args.data.businessProfile.update.attachments.connect??[]
+        connect[j]= { id: file2.id } ;
+        v.args.data.businessProfile.update.attachments.connect=connect;
+        v.args.data.businessProfile.update.attachments.create.splice(j,1)
+      }
+      resolve(file2);
+      });
+      attachmentsTasks.push(task);
+    }
+  await Promise.all(attachmentsTasks);
+  return next(v)
+}
+
+//upload attachment on service during creation via user entry
+@BlocAttach('updateOneUser.input.data.businessProfile.update.services.create.image.create.path')
+async uploadServicetAttachment(v: BusinessRequest<TenantContext>, next: (arg0: BusinessRequest<any>) => any) {
+  const { args, context } = v;
+  const { data, } = args as {data:UserUpdateInput};
+  const { businessProfile } = data   
+  const attachmentsTasks = [];
+  const services = businessProfile.update.services.create; 
+  for(let i=0;i<services.length;i++){        
+      const task = new Promise(async (resolve,reject)=>{
+       const attachment = services[i].image.create.path;
+      const file = await uploadFile(attachment)
+      const file2 = await context.prisma.attachment.create({ data: { ...file } })
+      if (file2 && file2.id) {
+        v.args.data.businessProfile.update.services.create[i].image.connect= { id: file2.id } ;
+        delete v.args.data.businessProfile.update.services.create[i].image.create;
+      }
+      resolve(file2);
+      });
+      attachmentsTasks.push(task);    
+  }
+  await Promise.all(attachmentsTasks);
+  return next(v)
+}
+
+//  upload image on service during update via user entry
+@BlocAttach('updateOneUser.input.data.businessProfile.update.services.update.data.image.path')
+async uploadServiceAttachment2(v: BusinessRequest<TenantContext>, next: (arg0: BusinessRequest<any>) => any) {
+  const { args, context } = v;
+  const { data, ...rest } = args as {data:UserUpdateInput};
+  const { businessProfile } = data 
+  
+  const attachmentsTasks = [];
+  const services = businessProfile.update.services.update; 
+  for(let i=0;i<services.length;i++){
+    const attachment = services[i].data.image.path;    
+      const task = new Promise(async (resolve,reject)=>{       
+      const file = await uploadFile(attachment)
+      const file2 = await context.prisma.attachment.create({ data: { ...file } })
+      if (file2 && file2.id) {
+        v.args.data.businessProfile.update.services.update[i].data.imageId={set:file2.id};
+         //delete
+         delete v.args.data.businessProfile.update.services.update[i].data.image;
+      }
+      resolve(file2);
+      });
+      attachmentsTasks.push(task);
+    }
+  
+  await Promise.all(attachmentsTasks);
+  return next(v)
+}
+
+
+//  upload receipt on orders during update via user entry
+@BlocAttach('updateOneUser.input.data.businessProfile.update.orders.update.data.receipt.path')
+async uploadOrderReceiptAttachment(v: BusinessRequest<TenantContext>, next: (arg0: BusinessRequest<any>) => any) {
+  const { args, context } = v;
+  const { data, ...rest } = args as {data:UserUpdateInput};
+  const { businessProfile } = data 
  
-  @BlocValidate('findUniqueUser')
-  async findUniqueUserBloc(v: BusinessRequest<TenantContext>) {
-    const { args, context } = v;
-    const { where } = args;
-    const { auth, select } = context;
-    const facts = { ...select.data.select, ...auth };
-    return { rules: [isUserSensitiveInfo(where.id)], facts }
-  }
-
-  @BlocValidate('updateOneUser')
-  async updateOneUserBloc(v: BusinessRequest<TenantContext>) {
-    const { args, context } = v;
-    const { where } = args;
-    const { auth } = context;
-    return { rules: [onlyOwnerhasAccess(where.id)], facts: auth }
-  }
-
-  @BlocFieldResolver("User","lastSeen",function(this:BusinessLogicService,...args){
-    return new DataLoader((async function (keys: any){  
-      debugger    
-      const lastseen= await this.redisCache.mget(keys);
-      return lastseen;
-    }).bind(this))
-  })
-  async lastSeen(parent:User,args: any, ctx:TenantContext,info:any,
-   dataloader:DataLoader<string,string>) {
-    return dataloader.load(`last-seen-${parent.id}`);
-  }
-
-  async createAttachments(attachments: { create: string | any[]; },context:TenantContext){
-    const uploads=[];
-     for(let i=0;i<attachments?.create?.length;i++) {
-        const item =attachments.create[i];
-        uploads.push(uploadFile((item as any).path));
-     }
-    const files = (await ( Promise.all(uploads))).map((file)=>{
-      return context.prisma.attachment.create({ data: file });
-    });
-    
-    const files2 = await Promise.all(files)
-    return files2;
-  }
-
-  //Attachments at root models
-  @BlocAttach('createOneForum.input.data.attachments.create.path')
-  @BlocAttach('createOneReview.input.data.attachments.create.path')
-  @BlocAttach('createOneComment.input.data.attachments.create.path')
-  async uploadAttachment(v: BusinessRequest<TenantContext>, next: (arg0: BusinessRequest<any>) => any) {
-    const { args, context } = v;
-    if(context["uploadAttachment"]==true){
-      return next(v);
+  const attachmentsTasks = [];
+  const orders = businessProfile.update.orders.update; 
+  for(let i=0;i<orders.length;i++){
+    const attachment = orders[i].data.receipt.path;    
+      const task = new Promise(async (resolve,reject)=>{       
+      const file = await uploadFile(attachment)
+      const file2 = await context.prisma.attachment.create({ data: { ...file } })
+      if (file2 && file2.id) {
+        v.args.data.businessProfile.update.orders.update[i].data.receiptId = {set:file2.id};
+        
+        delete v.args.data.businessProfile.update.orders.update[i].data.receipt;
+      }
+      resolve(file2);
+      });
+      attachmentsTasks.push(task);
     }
-    const { data, ...rest } = args;
-    const { attachments } = data;
-    const {create,...opts}=attachments;
+  
+  await Promise.all(attachmentsTasks);
+  return next(v)
+}
 
-    debugger
-    const files2 = await this.createAttachments(attachments,context);
-    
-    v.args.data.attachments = { ...opts,connect: files2.map((e)=>({id:e.id}))};
-   //mark context as having attachment processed
-    v.context["uploadAttachment"]=true;
-    
-    return next(v)
-  }
+
+
 
 
 // HELP  ATTACHMENTS
@@ -256,7 +413,7 @@ async uploadHelpAttachment(v: BusinessRequest<TenantContext>,next){
           const files = await this.createAttachments(attachments,context);
           const filesIds = files.map((v)=>({id:v.id}))
           v.args.data.steps.create[i].attachments.connect=filesIds;
-          v.args.data.steps.create[i].attachments.create=[];
+          delete v.args.data.steps.create[i].attachments.create;
         }
           return resolve(v);
         });
@@ -269,7 +426,7 @@ async uploadHelpAttachment(v: BusinessRequest<TenantContext>,next){
   return next(v)
 }
 
-//upload files during help update and helpstep creation
+// upload files during help update and helpstep creation
 @BlocAttach('updateOneHelp.input.data.steps.create.attachments.create.path')
 async uploadHelpAttachment2(v:BusinessRequest<TenantContext>,next){
   const { args, context } = v;
@@ -286,7 +443,7 @@ async uploadHelpAttachment2(v:BusinessRequest<TenantContext>,next){
           const files = await this.createAttachments(attachments,context);
           const filesIds = files.map((v)=>({id:v.id}))
           v.args.data.steps.create[i].attachments.connect=filesIds;
-          v.args.data.steps.create[i].attachments.create=[];
+          delete v.args.data.steps.create[i].attachments.create;
         }
           return resolve(v);
         });
@@ -299,7 +456,7 @@ async uploadHelpAttachment2(v:BusinessRequest<TenantContext>,next){
   return next(v)
 }
 
-//upload files during help update and helpstep update
+// upload files during help update and helpstep update
 @BlocAttach('updateOneHelp.input.data.steps.update.data.attachments.create.path')
 async uploadHelpAttachment3(v:BusinessRequest<TenantContext>,next: (arg0: BusinessRequest<any>) => any){
   const { args, context } = v;
@@ -316,7 +473,7 @@ async uploadHelpAttachment3(v:BusinessRequest<TenantContext>,next: (arg0: Busine
           const files = await this.createAttachments(attachments,context);
           const filesIds = files.map((v)=>({id:v.id}))
           v.args.data.steps.update[i].data.attachments.connect=filesIds;
-          v.args.data.steps.update[i].data.attachments.create=[];
+          delete v.args.data.steps.update[i].data.attachments.create;
         }
           return resolve(v);
         });
@@ -328,10 +485,106 @@ async uploadHelpAttachment3(v:BusinessRequest<TenantContext>,next: (arg0: Busine
   return next(v)
 }
 
+
+// Validation rules
+@BlocValidate('signup.input.credentials.email')
+async oneEmailPerAccount(v: BusinessRequest<TenantContext>) {
+  const { args, context } = v;
+  const { credentials } = args;
+  const { prisma } = context;    
+  const facts = await prisma.user.findUnique({ where: { email: credentials.email }, select: { email: true } })
+  return { rules: [uniqueEmailPerAccount(credentials.email)], facts }
+}
+
+@BlocValidate('findUniqueUser')
+async findUniqueUserBloc(v: BusinessRequest<TenantContext>) {
+  const { args, context } = v;
+  const { where } = args;
+  const { auth, select } = context;
+  const facts = { ...select.data.select, ...auth };
+  return { rules: [isUserSensitiveInfo(where.id)], facts }
+}
+
+@BlocValidate('updateOneUser')
+async updateOneUserBloc(v: BusinessRequest<TenantContext>) {
+  const { args, context } = v;
+  const { where } = args;
+  const { auth } = context;
+  return { rules: [onlyOwnerhasAccess(where.id)], facts: auth }
+}
+
+
+// Field resolvers 
+@BlocFieldResolver("User","lastSeen",function(this:BusinessLogicService,...args){
+  return new DataLoader((async function (keys: any){  
+    debugger    
+    const lastseen= await this.redisCache.mget(keys);
+    return lastseen;
+  }).bind(this))
+})
+async lastSeen(parent:User,args: any, ctx:TenantContext,info:any,
+ dataloader:DataLoader<string,string>) {
+  return dataloader.load(`last-seen-${parent.id}`);
+}
+
+
 }
 
 
 
+ /* @BlocAttach('updateOneService.input.data.image.create.path')
+  @BlocAttach('createOneService.input.data.image.create.path')
+  async serviceImage(v: BusinessRequest<TenantContext>, next: (arg0: BusinessRequest<any>) => any) {
+    
+    const { args, context } = v;
+    const { data, ...rest } = args;
+    const { image } = data
+    const file = await uploadFile(image.create.path)
+    const file2 = await context.prisma.attachment.create({ data: { ...file } })
+
+    if (file2 && file2.id) {
+      v.args.data.image = { connect: { id: file2.id } };
+    }
+    return next(v)
+  }
+
+  @BlocAttach('updateOneOrder.input.data.receipt.create.path')  
+  async orderReceipt(v: BusinessRequest<TenantContext>, next: (arg0: BusinessRequest<any>) => any) {
+    
+    const { args, context } = v;
+    const { data, ...rest } = args;
+    const { receipt } = data
+    const file = await uploadFile(receipt.create.path)
+    const file2 = await context.prisma.attachment.create({ data: { ...file } })
+
+    if (file2 && file2.id) {
+      v.args.data.receipt = { connect: { id: file2.id } };
+    }
+    return next(v)
+  } */
+
+
+  /* //Attachments at root models
+  @BlocAttach('createOneReview.input.data.attachments.create.path')
+  @BlocAttach('createOneComment.input.data.attachments.create.path')
+  async uploadAttachment(v: BusinessRequest<TenantContext>, next: (arg0: BusinessRequest<any>) => any) {
+    const { args, context } = v;
+    if(context["uploadAttachment"]==true){
+      return next(v);
+    }
+    const { data, ...rest } = args;
+    const { attachments } = data;
+    const {create,...opts}=attachments;
+
+    debugger
+    const files2 = await this.createAttachments(attachments,context);
+    
+    v.args.data.attachments = { ...opts,connect: files2.map((e)=>({id:e.id}))};
+   //mark context as having attachment processed
+    v.context["uploadAttachment"]=true;
+    
+    return next(v)
+  } */
 
 
 
