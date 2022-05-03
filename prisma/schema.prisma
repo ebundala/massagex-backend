@@ -91,7 +91,7 @@ model Business {
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @updatedAt
   abuseReports AbuseReport[]
-  favorite     Favorite[]
+  favorites     Favorite[]
 
 }
 
@@ -218,14 +218,14 @@ enum AbuseReportStatus {
 // holds types which can be abused by user usually which are edited by user directly
 model AbuseRecordType {
   id           String        @id @default(cuid())
-  name         String
+  name         String        @unique
   abuseReports AbuseReport[]
 }
 
 // holds types which can be favorited by user
 model FavoriteRecordType {
   id        String     @id @default(cuid())
-  name      String
+  name      String     @unique
   favorites Favorite[]
 }
 
@@ -238,12 +238,12 @@ model AbuseReport {
   authorId     String
   type         AbuseRecordType   @relation(fields: [typeId], references: [id])
   typeId       String
-  users        User?             @relation(fields: [userId], references: [id])
-  reviews      Review?           @relation(fields: [reviewId], references: [id])
-  comments     Comment?          @relation(fields: [commentId], references: [id])
-  Business     Business?         @relation(fields: [businessId], references: [id])
+  user        User?             @relation(fields: [userId], references: [id])
+  review      Review?           @relation(fields: [reviewId], references: [id])
+  comment     Comment?          @relation(fields: [commentId], references: [id])
+  business     Business?         @relation(fields: [businessId], references: [id])
   service      Service?          @relation(fields: [serviceId], references: [id])
-  orders       Order?            @relation(fields: [orderId], references: [id])
+  order       Order?            @relation(fields: [orderId], references: [id])
   recordStatus RecordStatus      @default(ACTIVE)
   state        AbuseReportStatus @default(SUBMITED)
   createdAt    DateTime          @default(now())
@@ -259,16 +259,17 @@ model AbuseReport {
 // Favorites
 model Favorite {
   id           String             @id @default(cuid())
+  favId        String             @unique  // combine author id and faved item id to be used for deleting favs  
   author       User               @relation("FavoritedToUser", fields: [authorId], references: [id])
   authorId     String
   type         FavoriteRecordType @relation(fields: [typeId], references: [id])
   typeId       String
-  users        User?              @relation(fields: [userId], references: [id])
-  reviews      Review?            @relation(fields: [reviewId], references: [id])
-  comments     Comment?           @relation(fields: [commentId], references: [id])
-  Business     Business?          @relation(fields: [businessId], references: [id])
+  user        User?              @relation(fields: [userId], references: [id])
+  review      Review?            @relation(fields: [reviewId], references: [id])
+  comment     Comment?           @relation(fields: [commentId], references: [id])
+  business     Business?          @relation(fields: [businessId], references: [id])
   service      Service?           @relation(fields: [serviceId], references: [id])
-  orders       Order?             @relation(fields: [orderId], references: [id])
+  order       Order?             @relation(fields: [orderId], references: [id])
   recordStatus RecordStatus       @default(ACTIVE)
   createdAt    DateTime           @default(now())
   updatedAt    DateTime           @updatedAt
@@ -378,7 +379,7 @@ model Order {
   service      Service       @relation(fields: [serviceId], references: [id])
   serviceId    String
   transactions Transaction[]
-  Business     Business?     @relation("businessToOrder", fields: [businessId], references: [id])
+  business     Business?     @relation("businessToOrder", fields: [businessId], references: [id])
   businessId   String?
   abuseReports AbuseReport[]
   favorites    Favorite[]
@@ -398,7 +399,7 @@ model PaymentMethod {
   code         SelcomUtilityCode
   transactions Transaction[]
   recordStatus RecordStatus        @default(DRAFT)
-  state        PaymentMethodStatus @default(ENABLED)
+  status        PaymentMethodStatus @default(ENABLED)
   createdAt    DateTime            @default(now())
   updatedAt    DateTime            @updatedAt
 }
@@ -422,7 +423,7 @@ model Transaction {
   selcomPaymentId      String?
   selcomDisbursement   SelcomDisbursement? @relation(fields: [selcomDisbursementId], references: [id])
   selcomDisbursementId String?
-  state                TransactionStatus   @default(PENDING)
+  status                TransactionStatus   @default(PENDING)
   recordStatus         RecordStatus        @default(ACTIVE)
   createdAt            DateTime            @default(now())
   updatedAt            DateTime            @updatedAt
@@ -444,7 +445,7 @@ model MpesaPayment {
   output_ThirdPartyConversationID String?
   output_TransactionID            String?
   transaction                     Transaction?
-  state                           PaymentStatus @default(PENDING)
+  status                           PaymentStatus @default(PENDING)
   recordStatus                    RecordStatus  @default(ACTIVE)
   createdAt                       DateTime      @default(now())
   updatedAt                       DateTime      @updatedAt

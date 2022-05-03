@@ -18,7 +18,7 @@ export class PaymentService{
        const order  = await prisma.order.findUnique({where:{id:orderId},include:{
            service:true,           
        }});
-       if(!order||order.orderStatus==OrderStatus.REJECTED){
+       if(!order||order.orderStatus==OrderStatus.REJECTED||order.orderStatus==OrderStatus.PROCESSED){
         throw new HttpException({status:false,message:"Invalid order"},400)
      }
      const methodItem = await prisma.paymentMethod.findUnique({where:{id:method}});

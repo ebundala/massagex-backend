@@ -1,20 +1,20 @@
-import { Bloc, PrismaAttach, PrismaHookHandler, PrismaHookRequest } from "@mechsoft/business-rules-manager";
-import { Inject, Injectable } from "@nestjs/common";
+import { Bloc, BlocAttach, BusinessRequest, PrismaAttach, PrismaHookHandler, PrismaHookRequest } from "@mechsoft/business-rules-manager";
+import { Injectable } from "@nestjs/common";
 import { RedisPubSub } from "graphql-redis-subscriptions"
-import { Order, NotificationType, Notification } from "src/models/graphql";
 import { RedisCache } from "src/pubsub/redis.service";
 import { FirebaseService } from "@mechsoft/firebase-admin";
 import { PrismaClient } from '@mechsoft/prisma-client';
-//import { State } from "@prisma/client";
 import { AppLogger } from "@mechsoft/app-logger";
+import {LatLon, UserUpdateInput }   from "src/models/graphql"
+import { TenantContext } from "@mechsoft/common";
+import {Location} from '@prisma/client'
+// export const ORDER_CHANGED = "ORDER_CHANGED";
+// export const ORDER_RECEIVED = "ORDER_RECEIVED";
+// export const INVITE_RECEIVED = "INVITE_RECEIVED";
+// export const INVITE_CHANGED = "INVITE_CHANGED";
 
-export const ORDER_CHANGED = "ORDER_CHANGED";
-export const ORDER_RECEIVED = "ORDER_RECEIVED";
-export const INVITE_RECEIVED = "INVITE_RECEIVED";
-export const INVITE_CHANGED = "INVITE_CHANGED";
-
-export const FEEDBACK_RECEIVED = "FEEDBACK_RECEIVED";
-export const LOCATION_CHANGED = "LOCATION_CHANGED";
+// export const FEEDBACK_RECEIVED = "FEEDBACK_RECEIVED";
+ export const LOCATION_CHANGED = "LOCATION_CHANGED";
 
 @Injectable()
 @Bloc()
@@ -33,6 +33,44 @@ export class SubscriptionService {
     this.pubSub.subscribe(INVITE_CHANGED, this.inviteChangeNotifications.bind(this));
     this.pubSub.subscribe(FEEDBACK_RECEIVED, this.reviewNotifications.bind(this)); */
   }
+  
+
+
+
+  async cacheUserLocation(uid: string, location: Location) {
+    if (uid && location && location.lat && location.lon) {
+      const key = `location/${uid}`;
+      await this.redisCache.set(key, JSON.stringify(location));
+      this.pubSub.publish(LOCATION_CHANGED, { id: uid });
+    }
+
+  }
+  async getCachedUserLocation(uid: string): Promise<LatLon> {
+    const key = `location/${uid}`;
+    const v = await this.redisCache.get(key);
+    if (v) return JSON.parse(v);
+  } 
+  async cacheBusinessLocation(id: string, location: Location) {
+    if (id && location && location.lat && location.lon) {
+      const key = `busines-location/${id}`;
+      await this.redisCache.set(key, JSON.stringify(location));
+      this.pubSub.publish(LOCATION_CHANGED, { id: id });
+    }
+
+  }
+  async getCachedBusinessLocation(id: string): Promise<LatLon> {
+    const key = `busines-location/${id}`;
+    const v = await this.redisCache.get(key);
+    if (v) return JSON.parse(v);
+  } 
+}
+
+
+
+
+
+
+
 /* 
   async orderNotifications(data: Order) {
     debugger
@@ -297,17 +335,4 @@ export class SubscriptionService {
     return n(args);
   }
 
-  async updateUserLocation(uid: string, location: Location) {
-    if (uid && location && location.lat && location.lon) {
-      const key = `location/${uid}`;
-      await this.redisCache.set(key, JSON.stringify(location));
-      this.pubSub.publish(LOCATION_CHANGED, { id: uid });
-    }
-
-  }
-  async getUserLocation(uid: string): Promise<LatLon> {
-    const key = `location/${uid}`;
-    const v = await this.redisCache.get(key);
-    if (v) return JSON.parse(v);
-  } */
-}
+  */

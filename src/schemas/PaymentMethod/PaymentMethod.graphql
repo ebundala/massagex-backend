@@ -13,7 +13,7 @@ type PaymentMethod {
               distinct: [TransactionScalarFieldEnum!]
               ): [Transaction!]!
           recordStatus: RecordStatus!
-          state: PaymentMethodStatus!
+          status: PaymentMethodStatus!
           createdAt: DateTime!
           updatedAt: DateTime!
     }

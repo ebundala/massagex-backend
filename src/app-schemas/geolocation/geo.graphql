@@ -292,6 +292,7 @@ input PlaceAutocompleteInput {
 type PlaceAutocompleteResponseData {
     predictions: [PlaceAutocompleteResult]
 }
+
 type PlaceAutocompleteResult {
 description: String
 distance_meters: Float

@@ -11,7 +11,7 @@ type Transaction {
           selcomPaymentId: String
           selcomDisbursement: SelcomDisbursement
           selcomDisbursementId: String
-          state: TransactionStatus!
+          status: TransactionStatus!
           recordStatus: RecordStatus!
           createdAt: DateTime!
           updatedAt: DateTime!

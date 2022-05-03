@@ -214,6 +214,7 @@ export enum FavoriteScalarFieldEnum {
     businessId = "businessId",
     commentId = "commentId",
     createdAt = "createdAt",
+    favId = "favId",
     id = "id",
     orderId = "orderId",
     recordStatus = "recordStatus",
@@ -383,7 +384,7 @@ export enum MpesaPaymentScalarFieldEnum {
     output_ThirdPartyConversationID = "output_ThirdPartyConversationID",
     output_TransactionID = "output_TransactionID",
     recordStatus = "recordStatus",
-    state = "state",
+    status = "status",
     updatedAt = "updatedAt"
 }
 
@@ -428,7 +429,7 @@ export enum PaymentMethodScalarFieldEnum {
     id = "id",
     name = "name",
     recordStatus = "recordStatus",
-    state = "state",
+    status = "status",
     updatedAt = "updatedAt"
 }
 
@@ -559,7 +560,7 @@ export enum TransactionScalarFieldEnum {
     recordStatus = "recordStatus",
     selcomDisbursementId = "selcomDisbursementId",
     selcomPaymentId = "selcomPaymentId",
-    state = "state",
+    status = "status",
     type = "type",
     updatedAt = "updatedAt"
 }
@@ -758,24 +759,25 @@ export class AbuseRecordTypeWhereInput {
 
 export class AbuseRecordTypeWhereUniqueInput {
     id?: Nullable<string>;
+    name?: Nullable<string>;
 }
 
 export class AbuseReportCreateInput {
-    Business?: Nullable<BusinessCreateNestedOneWithoutAbuseReportsInput>;
     author: UserCreateNestedOneWithoutAbuseReportedInput;
-    comments?: Nullable<CommentCreateNestedOneWithoutAbuseReportsInput>;
+    business?: Nullable<BusinessCreateNestedOneWithoutAbuseReportsInput>;
+    comment?: Nullable<CommentCreateNestedOneWithoutAbuseReportsInput>;
     createdAt?: Nullable<DateTime>;
     id?: Nullable<string>;
     number?: Nullable<number>;
-    orders?: Nullable<OrderCreateNestedOneWithoutAbuseReportsInput>;
+    order?: Nullable<OrderCreateNestedOneWithoutAbuseReportsInput>;
     recordStatus?: Nullable<RecordStatus>;
     report?: Nullable<string>;
-    reviews?: Nullable<ReviewCreateNestedOneWithoutAbuseReportsInput>;
+    review?: Nullable<ReviewCreateNestedOneWithoutAbuseReportsInput>;
     service?: Nullable<ServiceCreateNestedOneWithoutAbuseReportsInput>;
     state?: Nullable<AbuseReportStatus>;
     type: AbuseRecordTypeCreateNestedOneWithoutAbuseReportsInput;
     updatedAt?: Nullable<DateTime>;
-    users?: Nullable<UserCreateNestedOneWithoutAbuseReportsInput>;
+    user?: Nullable<UserCreateNestedOneWithoutAbuseReportsInput>;
 }
 
 export class AbuseReportCreateManyAuthorInput {
@@ -822,7 +824,7 @@ export class AbuseReportCreateManyBusinessInputEnvelope {
     skipDuplicates?: Nullable<boolean>;
 }
 
-export class AbuseReportCreateManyCommentsInput {
+export class AbuseReportCreateManyCommentInput {
     authorId: string;
     businessId?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
@@ -839,8 +841,8 @@ export class AbuseReportCreateManyCommentsInput {
     userId?: Nullable<string>;
 }
 
-export class AbuseReportCreateManyCommentsInputEnvelope {
-    data: AbuseReportCreateManyCommentsInput[];
+export class AbuseReportCreateManyCommentInputEnvelope {
+    data: AbuseReportCreateManyCommentInput[];
     skipDuplicates?: Nullable<boolean>;
 }
 
@@ -862,7 +864,7 @@ export class AbuseReportCreateManyInput {
     userId?: Nullable<string>;
 }
 
-export class AbuseReportCreateManyOrdersInput {
+export class AbuseReportCreateManyOrderInput {
     authorId: string;
     businessId?: Nullable<string>;
     commentId?: Nullable<string>;
@@ -879,12 +881,12 @@ export class AbuseReportCreateManyOrdersInput {
     userId?: Nullable<string>;
 }
 
-export class AbuseReportCreateManyOrdersInputEnvelope {
-    data: AbuseReportCreateManyOrdersInput[];
+export class AbuseReportCreateManyOrderInputEnvelope {
+    data: AbuseReportCreateManyOrderInput[];
     skipDuplicates?: Nullable<boolean>;
 }
 
-export class AbuseReportCreateManyReviewsInput {
+export class AbuseReportCreateManyReviewInput {
     authorId: string;
     businessId?: Nullable<string>;
     commentId?: Nullable<string>;
@@ -901,8 +903,8 @@ export class AbuseReportCreateManyReviewsInput {
     userId?: Nullable<string>;
 }
 
-export class AbuseReportCreateManyReviewsInputEnvelope {
-    data: AbuseReportCreateManyReviewsInput[];
+export class AbuseReportCreateManyReviewInputEnvelope {
+    data: AbuseReportCreateManyReviewInput[];
     skipDuplicates?: Nullable<boolean>;
 }
 
@@ -950,7 +952,7 @@ export class AbuseReportCreateManyTypeInputEnvelope {
     skipDuplicates?: Nullable<boolean>;
 }
 
-export class AbuseReportCreateManyUsersInput {
+export class AbuseReportCreateManyUserInput {
     authorId: string;
     businessId?: Nullable<string>;
     commentId?: Nullable<string>;
@@ -967,8 +969,8 @@ export class AbuseReportCreateManyUsersInput {
     updatedAt?: Nullable<DateTime>;
 }
 
-export class AbuseReportCreateManyUsersInputEnvelope {
-    data: AbuseReportCreateManyUsersInput[];
+export class AbuseReportCreateManyUserInputEnvelope {
+    data: AbuseReportCreateManyUserInput[];
     skipDuplicates?: Nullable<boolean>;
 }
 
@@ -986,25 +988,25 @@ export class AbuseReportCreateNestedManyWithoutBusinessInput {
     createMany?: Nullable<AbuseReportCreateManyBusinessInputEnvelope>;
 }
 
-export class AbuseReportCreateNestedManyWithoutCommentsInput {
+export class AbuseReportCreateNestedManyWithoutCommentInput {
     connect?: Nullable<AbuseReportWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AbuseReportCreateOrConnectWithoutCommentsInput[]>;
-    create?: Nullable<AbuseReportCreateWithoutCommentsInput[]>;
-    createMany?: Nullable<AbuseReportCreateManyCommentsInputEnvelope>;
+    connectOrCreate?: Nullable<AbuseReportCreateOrConnectWithoutCommentInput[]>;
+    create?: Nullable<AbuseReportCreateWithoutCommentInput[]>;
+    createMany?: Nullable<AbuseReportCreateManyCommentInputEnvelope>;
 }
 
-export class AbuseReportCreateNestedManyWithoutOrdersInput {
+export class AbuseReportCreateNestedManyWithoutOrderInput {
     connect?: Nullable<AbuseReportWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AbuseReportCreateOrConnectWithoutOrdersInput[]>;
-    create?: Nullable<AbuseReportCreateWithoutOrdersInput[]>;
-    createMany?: Nullable<AbuseReportCreateManyOrdersInputEnvelope>;
+    connectOrCreate?: Nullable<AbuseReportCreateOrConnectWithoutOrderInput[]>;
+    create?: Nullable<AbuseReportCreateWithoutOrderInput[]>;
+    createMany?: Nullable<AbuseReportCreateManyOrderInputEnvelope>;
 }
 
-export class AbuseReportCreateNestedManyWithoutReviewsInput {
+export class AbuseReportCreateNestedManyWithoutReviewInput {
     connect?: Nullable<AbuseReportWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AbuseReportCreateOrConnectWithoutReviewsInput[]>;
-    create?: Nullable<AbuseReportCreateWithoutReviewsInput[]>;
-    createMany?: Nullable<AbuseReportCreateManyReviewsInputEnvelope>;
+    connectOrCreate?: Nullable<AbuseReportCreateOrConnectWithoutReviewInput[]>;
+    create?: Nullable<AbuseReportCreateWithoutReviewInput[]>;
+    createMany?: Nullable<AbuseReportCreateManyReviewInputEnvelope>;
 }
 
 export class AbuseReportCreateNestedManyWithoutServiceInput {
@@ -1021,11 +1023,11 @@ export class AbuseReportCreateNestedManyWithoutTypeInput {
     createMany?: Nullable<AbuseReportCreateManyTypeInputEnvelope>;
 }
 
-export class AbuseReportCreateNestedManyWithoutUsersInput {
+export class AbuseReportCreateNestedManyWithoutUserInput {
     connect?: Nullable<AbuseReportWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AbuseReportCreateOrConnectWithoutUsersInput[]>;
-    create?: Nullable<AbuseReportCreateWithoutUsersInput[]>;
-    createMany?: Nullable<AbuseReportCreateManyUsersInputEnvelope>;
+    connectOrCreate?: Nullable<AbuseReportCreateOrConnectWithoutUserInput[]>;
+    create?: Nullable<AbuseReportCreateWithoutUserInput[]>;
+    createMany?: Nullable<AbuseReportCreateManyUserInputEnvelope>;
 }
 
 export class AbuseReportCreateOrConnectWithoutAuthorInput {
@@ -1038,18 +1040,18 @@ export class AbuseReportCreateOrConnectWithoutBusinessInput {
     where: AbuseReportWhereUniqueInput;
 }
 
-export class AbuseReportCreateOrConnectWithoutCommentsInput {
-    create: AbuseReportUncheckedCreateWithoutCommentsInput;
+export class AbuseReportCreateOrConnectWithoutCommentInput {
+    create: AbuseReportUncheckedCreateWithoutCommentInput;
     where: AbuseReportWhereUniqueInput;
 }
 
-export class AbuseReportCreateOrConnectWithoutOrdersInput {
-    create: AbuseReportUncheckedCreateWithoutOrdersInput;
+export class AbuseReportCreateOrConnectWithoutOrderInput {
+    create: AbuseReportUncheckedCreateWithoutOrderInput;
     where: AbuseReportWhereUniqueInput;
 }
 
-export class AbuseReportCreateOrConnectWithoutReviewsInput {
-    create: AbuseReportUncheckedCreateWithoutReviewsInput;
+export class AbuseReportCreateOrConnectWithoutReviewInput {
+    create: AbuseReportUncheckedCreateWithoutReviewInput;
     where: AbuseReportWhereUniqueInput;
 }
 
@@ -1063,141 +1065,141 @@ export class AbuseReportCreateOrConnectWithoutTypeInput {
     where: AbuseReportWhereUniqueInput;
 }
 
-export class AbuseReportCreateOrConnectWithoutUsersInput {
-    create: AbuseReportUncheckedCreateWithoutUsersInput;
+export class AbuseReportCreateOrConnectWithoutUserInput {
+    create: AbuseReportUncheckedCreateWithoutUserInput;
     where: AbuseReportWhereUniqueInput;
 }
 
 export class AbuseReportCreateWithoutAuthorInput {
-    Business?: Nullable<BusinessCreateNestedOneWithoutAbuseReportsInput>;
-    comments?: Nullable<CommentCreateNestedOneWithoutAbuseReportsInput>;
+    business?: Nullable<BusinessCreateNestedOneWithoutAbuseReportsInput>;
+    comment?: Nullable<CommentCreateNestedOneWithoutAbuseReportsInput>;
     createdAt?: Nullable<DateTime>;
     id?: Nullable<string>;
     number?: Nullable<number>;
-    orders?: Nullable<OrderCreateNestedOneWithoutAbuseReportsInput>;
+    order?: Nullable<OrderCreateNestedOneWithoutAbuseReportsInput>;
     recordStatus?: Nullable<RecordStatus>;
     report?: Nullable<string>;
-    reviews?: Nullable<ReviewCreateNestedOneWithoutAbuseReportsInput>;
+    review?: Nullable<ReviewCreateNestedOneWithoutAbuseReportsInput>;
     service?: Nullable<ServiceCreateNestedOneWithoutAbuseReportsInput>;
     state?: Nullable<AbuseReportStatus>;
     type: AbuseRecordTypeCreateNestedOneWithoutAbuseReportsInput;
     updatedAt?: Nullable<DateTime>;
-    users?: Nullable<UserCreateNestedOneWithoutAbuseReportsInput>;
+    user?: Nullable<UserCreateNestedOneWithoutAbuseReportsInput>;
 }
 
 export class AbuseReportCreateWithoutBusinessInput {
     author: UserCreateNestedOneWithoutAbuseReportedInput;
-    comments?: Nullable<CommentCreateNestedOneWithoutAbuseReportsInput>;
+    comment?: Nullable<CommentCreateNestedOneWithoutAbuseReportsInput>;
     createdAt?: Nullable<DateTime>;
     id?: Nullable<string>;
     number?: Nullable<number>;
-    orders?: Nullable<OrderCreateNestedOneWithoutAbuseReportsInput>;
+    order?: Nullable<OrderCreateNestedOneWithoutAbuseReportsInput>;
     recordStatus?: Nullable<RecordStatus>;
     report?: Nullable<string>;
-    reviews?: Nullable<ReviewCreateNestedOneWithoutAbuseReportsInput>;
+    review?: Nullable<ReviewCreateNestedOneWithoutAbuseReportsInput>;
     service?: Nullable<ServiceCreateNestedOneWithoutAbuseReportsInput>;
     state?: Nullable<AbuseReportStatus>;
     type: AbuseRecordTypeCreateNestedOneWithoutAbuseReportsInput;
     updatedAt?: Nullable<DateTime>;
-    users?: Nullable<UserCreateNestedOneWithoutAbuseReportsInput>;
+    user?: Nullable<UserCreateNestedOneWithoutAbuseReportsInput>;
 }
 
-export class AbuseReportCreateWithoutCommentsInput {
-    Business?: Nullable<BusinessCreateNestedOneWithoutAbuseReportsInput>;
+export class AbuseReportCreateWithoutCommentInput {
     author: UserCreateNestedOneWithoutAbuseReportedInput;
+    business?: Nullable<BusinessCreateNestedOneWithoutAbuseReportsInput>;
     createdAt?: Nullable<DateTime>;
     id?: Nullable<string>;
     number?: Nullable<number>;
-    orders?: Nullable<OrderCreateNestedOneWithoutAbuseReportsInput>;
+    order?: Nullable<OrderCreateNestedOneWithoutAbuseReportsInput>;
     recordStatus?: Nullable<RecordStatus>;
     report?: Nullable<string>;
-    reviews?: Nullable<ReviewCreateNestedOneWithoutAbuseReportsInput>;
+    review?: Nullable<ReviewCreateNestedOneWithoutAbuseReportsInput>;
     service?: Nullable<ServiceCreateNestedOneWithoutAbuseReportsInput>;
     state?: Nullable<AbuseReportStatus>;
     type: AbuseRecordTypeCreateNestedOneWithoutAbuseReportsInput;
     updatedAt?: Nullable<DateTime>;
-    users?: Nullable<UserCreateNestedOneWithoutAbuseReportsInput>;
+    user?: Nullable<UserCreateNestedOneWithoutAbuseReportsInput>;
 }
 
-export class AbuseReportCreateWithoutOrdersInput {
-    Business?: Nullable<BusinessCreateNestedOneWithoutAbuseReportsInput>;
+export class AbuseReportCreateWithoutOrderInput {
     author: UserCreateNestedOneWithoutAbuseReportedInput;
-    comments?: Nullable<CommentCreateNestedOneWithoutAbuseReportsInput>;
+    business?: Nullable<BusinessCreateNestedOneWithoutAbuseReportsInput>;
+    comment?: Nullable<CommentCreateNestedOneWithoutAbuseReportsInput>;
     createdAt?: Nullable<DateTime>;
     id?: Nullable<string>;
     number?: Nullable<number>;
     recordStatus?: Nullable<RecordStatus>;
     report?: Nullable<string>;
-    reviews?: Nullable<ReviewCreateNestedOneWithoutAbuseReportsInput>;
+    review?: Nullable<ReviewCreateNestedOneWithoutAbuseReportsInput>;
     service?: Nullable<ServiceCreateNestedOneWithoutAbuseReportsInput>;
     state?: Nullable<AbuseReportStatus>;
     type: AbuseRecordTypeCreateNestedOneWithoutAbuseReportsInput;
     updatedAt?: Nullable<DateTime>;
-    users?: Nullable<UserCreateNestedOneWithoutAbuseReportsInput>;
+    user?: Nullable<UserCreateNestedOneWithoutAbuseReportsInput>;
 }
 
-export class AbuseReportCreateWithoutReviewsInput {
-    Business?: Nullable<BusinessCreateNestedOneWithoutAbuseReportsInput>;
+export class AbuseReportCreateWithoutReviewInput {
     author: UserCreateNestedOneWithoutAbuseReportedInput;
-    comments?: Nullable<CommentCreateNestedOneWithoutAbuseReportsInput>;
+    business?: Nullable<BusinessCreateNestedOneWithoutAbuseReportsInput>;
+    comment?: Nullable<CommentCreateNestedOneWithoutAbuseReportsInput>;
     createdAt?: Nullable<DateTime>;
     id?: Nullable<string>;
     number?: Nullable<number>;
-    orders?: Nullable<OrderCreateNestedOneWithoutAbuseReportsInput>;
+    order?: Nullable<OrderCreateNestedOneWithoutAbuseReportsInput>;
     recordStatus?: Nullable<RecordStatus>;
     report?: Nullable<string>;
     service?: Nullable<ServiceCreateNestedOneWithoutAbuseReportsInput>;
     state?: Nullable<AbuseReportStatus>;
     type: AbuseRecordTypeCreateNestedOneWithoutAbuseReportsInput;
     updatedAt?: Nullable<DateTime>;
-    users?: Nullable<UserCreateNestedOneWithoutAbuseReportsInput>;
+    user?: Nullable<UserCreateNestedOneWithoutAbuseReportsInput>;
 }
 
 export class AbuseReportCreateWithoutServiceInput {
-    Business?: Nullable<BusinessCreateNestedOneWithoutAbuseReportsInput>;
     author: UserCreateNestedOneWithoutAbuseReportedInput;
-    comments?: Nullable<CommentCreateNestedOneWithoutAbuseReportsInput>;
+    business?: Nullable<BusinessCreateNestedOneWithoutAbuseReportsInput>;
+    comment?: Nullable<CommentCreateNestedOneWithoutAbuseReportsInput>;
     createdAt?: Nullable<DateTime>;
     id?: Nullable<string>;
     number?: Nullable<number>;
-    orders?: Nullable<OrderCreateNestedOneWithoutAbuseReportsInput>;
+    order?: Nullable<OrderCreateNestedOneWithoutAbuseReportsInput>;
     recordStatus?: Nullable<RecordStatus>;
     report?: Nullable<string>;
-    reviews?: Nullable<ReviewCreateNestedOneWithoutAbuseReportsInput>;
+    review?: Nullable<ReviewCreateNestedOneWithoutAbuseReportsInput>;
     state?: Nullable<AbuseReportStatus>;
     type: AbuseRecordTypeCreateNestedOneWithoutAbuseReportsInput;
     updatedAt?: Nullable<DateTime>;
-    users?: Nullable<UserCreateNestedOneWithoutAbuseReportsInput>;
+    user?: Nullable<UserCreateNestedOneWithoutAbuseReportsInput>;
 }
 
 export class AbuseReportCreateWithoutTypeInput {
-    Business?: Nullable<BusinessCreateNestedOneWithoutAbuseReportsInput>;
     author: UserCreateNestedOneWithoutAbuseReportedInput;
-    comments?: Nullable<CommentCreateNestedOneWithoutAbuseReportsInput>;
+    business?: Nullable<BusinessCreateNestedOneWithoutAbuseReportsInput>;
+    comment?: Nullable<CommentCreateNestedOneWithoutAbuseReportsInput>;
     createdAt?: Nullable<DateTime>;
     id?: Nullable<string>;
     number?: Nullable<number>;
-    orders?: Nullable<OrderCreateNestedOneWithoutAbuseReportsInput>;
+    order?: Nullable<OrderCreateNestedOneWithoutAbuseReportsInput>;
     recordStatus?: Nullable<RecordStatus>;
     report?: Nullable<string>;
-    reviews?: Nullable<ReviewCreateNestedOneWithoutAbuseReportsInput>;
+    review?: Nullable<ReviewCreateNestedOneWithoutAbuseReportsInput>;
     service?: Nullable<ServiceCreateNestedOneWithoutAbuseReportsInput>;
     state?: Nullable<AbuseReportStatus>;
     updatedAt?: Nullable<DateTime>;
-    users?: Nullable<UserCreateNestedOneWithoutAbuseReportsInput>;
+    user?: Nullable<UserCreateNestedOneWithoutAbuseReportsInput>;
 }
 
-export class AbuseReportCreateWithoutUsersInput {
-    Business?: Nullable<BusinessCreateNestedOneWithoutAbuseReportsInput>;
+export class AbuseReportCreateWithoutUserInput {
     author: UserCreateNestedOneWithoutAbuseReportedInput;
-    comments?: Nullable<CommentCreateNestedOneWithoutAbuseReportsInput>;
+    business?: Nullable<BusinessCreateNestedOneWithoutAbuseReportsInput>;
+    comment?: Nullable<CommentCreateNestedOneWithoutAbuseReportsInput>;
     createdAt?: Nullable<DateTime>;
     id?: Nullable<string>;
     number?: Nullable<number>;
-    orders?: Nullable<OrderCreateNestedOneWithoutAbuseReportsInput>;
+    order?: Nullable<OrderCreateNestedOneWithoutAbuseReportsInput>;
     recordStatus?: Nullable<RecordStatus>;
     report?: Nullable<string>;
-    reviews?: Nullable<ReviewCreateNestedOneWithoutAbuseReportsInput>;
+    review?: Nullable<ReviewCreateNestedOneWithoutAbuseReportsInput>;
     service?: Nullable<ServiceCreateNestedOneWithoutAbuseReportsInput>;
     state?: Nullable<AbuseReportStatus>;
     type: AbuseRecordTypeCreateNestedOneWithoutAbuseReportsInput;
@@ -1302,25 +1304,25 @@ export class AbuseReportUncheckedCreateNestedManyWithoutBusinessInput {
     createMany?: Nullable<AbuseReportCreateManyBusinessInputEnvelope>;
 }
 
-export class AbuseReportUncheckedCreateNestedManyWithoutCommentsInput {
+export class AbuseReportUncheckedCreateNestedManyWithoutCommentInput {
     connect?: Nullable<AbuseReportWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AbuseReportCreateOrConnectWithoutCommentsInput[]>;
-    create?: Nullable<AbuseReportCreateWithoutCommentsInput[]>;
-    createMany?: Nullable<AbuseReportCreateManyCommentsInputEnvelope>;
+    connectOrCreate?: Nullable<AbuseReportCreateOrConnectWithoutCommentInput[]>;
+    create?: Nullable<AbuseReportCreateWithoutCommentInput[]>;
+    createMany?: Nullable<AbuseReportCreateManyCommentInputEnvelope>;
 }
 
-export class AbuseReportUncheckedCreateNestedManyWithoutOrdersInput {
+export class AbuseReportUncheckedCreateNestedManyWithoutOrderInput {
     connect?: Nullable<AbuseReportWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AbuseReportCreateOrConnectWithoutOrdersInput[]>;
-    create?: Nullable<AbuseReportCreateWithoutOrdersInput[]>;
-    createMany?: Nullable<AbuseReportCreateManyOrdersInputEnvelope>;
+    connectOrCreate?: Nullable<AbuseReportCreateOrConnectWithoutOrderInput[]>;
+    create?: Nullable<AbuseReportCreateWithoutOrderInput[]>;
+    createMany?: Nullable<AbuseReportCreateManyOrderInputEnvelope>;
 }
 
-export class AbuseReportUncheckedCreateNestedManyWithoutReviewsInput {
+export class AbuseReportUncheckedCreateNestedManyWithoutReviewInput {
     connect?: Nullable<AbuseReportWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AbuseReportCreateOrConnectWithoutReviewsInput[]>;
-    create?: Nullable<AbuseReportCreateWithoutReviewsInput[]>;
-    createMany?: Nullable<AbuseReportCreateManyReviewsInputEnvelope>;
+    connectOrCreate?: Nullable<AbuseReportCreateOrConnectWithoutReviewInput[]>;
+    create?: Nullable<AbuseReportCreateWithoutReviewInput[]>;
+    createMany?: Nullable<AbuseReportCreateManyReviewInputEnvelope>;
 }
 
 export class AbuseReportUncheckedCreateNestedManyWithoutServiceInput {
@@ -1337,11 +1339,11 @@ export class AbuseReportUncheckedCreateNestedManyWithoutTypeInput {
     createMany?: Nullable<AbuseReportCreateManyTypeInputEnvelope>;
 }
 
-export class AbuseReportUncheckedCreateNestedManyWithoutUsersInput {
+export class AbuseReportUncheckedCreateNestedManyWithoutUserInput {
     connect?: Nullable<AbuseReportWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AbuseReportCreateOrConnectWithoutUsersInput[]>;
-    create?: Nullable<AbuseReportCreateWithoutUsersInput[]>;
-    createMany?: Nullable<AbuseReportCreateManyUsersInputEnvelope>;
+    connectOrCreate?: Nullable<AbuseReportCreateOrConnectWithoutUserInput[]>;
+    create?: Nullable<AbuseReportCreateWithoutUserInput[]>;
+    createMany?: Nullable<AbuseReportCreateManyUserInputEnvelope>;
 }
 
 export class AbuseReportUncheckedCreateWithoutAuthorInput {
@@ -1378,7 +1380,7 @@ export class AbuseReportUncheckedCreateWithoutBusinessInput {
     userId?: Nullable<string>;
 }
 
-export class AbuseReportUncheckedCreateWithoutCommentsInput {
+export class AbuseReportUncheckedCreateWithoutCommentInput {
     authorId: string;
     businessId?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
@@ -1395,7 +1397,7 @@ export class AbuseReportUncheckedCreateWithoutCommentsInput {
     userId?: Nullable<string>;
 }
 
-export class AbuseReportUncheckedCreateWithoutOrdersInput {
+export class AbuseReportUncheckedCreateWithoutOrderInput {
     authorId: string;
     businessId?: Nullable<string>;
     commentId?: Nullable<string>;
@@ -1412,7 +1414,7 @@ export class AbuseReportUncheckedCreateWithoutOrdersInput {
     userId?: Nullable<string>;
 }
 
-export class AbuseReportUncheckedCreateWithoutReviewsInput {
+export class AbuseReportUncheckedCreateWithoutReviewInput {
     authorId: string;
     businessId?: Nullable<string>;
     commentId?: Nullable<string>;
@@ -1463,7 +1465,7 @@ export class AbuseReportUncheckedCreateWithoutTypeInput {
     userId?: Nullable<string>;
 }
 
-export class AbuseReportUncheckedCreateWithoutUsersInput {
+export class AbuseReportUncheckedCreateWithoutUserInput {
     authorId: string;
     businessId?: Nullable<string>;
     commentId?: Nullable<string>;
@@ -1578,46 +1580,46 @@ export class AbuseReportUncheckedUpdateManyWithoutBusinessInput {
     upsert?: Nullable<AbuseReportUpsertWithWhereUniqueWithoutBusinessInput[]>;
 }
 
-export class AbuseReportUncheckedUpdateManyWithoutCommentsInput {
+export class AbuseReportUncheckedUpdateManyWithoutCommentInput {
     connect?: Nullable<AbuseReportWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AbuseReportCreateOrConnectWithoutCommentsInput[]>;
-    create?: Nullable<AbuseReportCreateWithoutCommentsInput[]>;
-    createMany?: Nullable<AbuseReportCreateManyCommentsInputEnvelope>;
+    connectOrCreate?: Nullable<AbuseReportCreateOrConnectWithoutCommentInput[]>;
+    create?: Nullable<AbuseReportCreateWithoutCommentInput[]>;
+    createMany?: Nullable<AbuseReportCreateManyCommentInputEnvelope>;
     delete?: Nullable<AbuseReportWhereUniqueInput[]>;
     deleteMany?: Nullable<AbuseReportScalarWhereInput[]>;
     disconnect?: Nullable<AbuseReportWhereUniqueInput[]>;
     set?: Nullable<AbuseReportWhereUniqueInput[]>;
-    update?: Nullable<AbuseReportUpdateWithWhereUniqueWithoutCommentsInput[]>;
-    updateMany?: Nullable<AbuseReportUpdateManyWithWhereWithoutCommentsInput[]>;
-    upsert?: Nullable<AbuseReportUpsertWithWhereUniqueWithoutCommentsInput[]>;
+    update?: Nullable<AbuseReportUpdateWithWhereUniqueWithoutCommentInput[]>;
+    updateMany?: Nullable<AbuseReportUpdateManyWithWhereWithoutCommentInput[]>;
+    upsert?: Nullable<AbuseReportUpsertWithWhereUniqueWithoutCommentInput[]>;
 }
 
-export class AbuseReportUncheckedUpdateManyWithoutOrdersInput {
+export class AbuseReportUncheckedUpdateManyWithoutOrderInput {
     connect?: Nullable<AbuseReportWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AbuseReportCreateOrConnectWithoutOrdersInput[]>;
-    create?: Nullable<AbuseReportCreateWithoutOrdersInput[]>;
-    createMany?: Nullable<AbuseReportCreateManyOrdersInputEnvelope>;
+    connectOrCreate?: Nullable<AbuseReportCreateOrConnectWithoutOrderInput[]>;
+    create?: Nullable<AbuseReportCreateWithoutOrderInput[]>;
+    createMany?: Nullable<AbuseReportCreateManyOrderInputEnvelope>;
     delete?: Nullable<AbuseReportWhereUniqueInput[]>;
     deleteMany?: Nullable<AbuseReportScalarWhereInput[]>;
     disconnect?: Nullable<AbuseReportWhereUniqueInput[]>;
     set?: Nullable<AbuseReportWhereUniqueInput[]>;
-    update?: Nullable<AbuseReportUpdateWithWhereUniqueWithoutOrdersInput[]>;
-    updateMany?: Nullable<AbuseReportUpdateManyWithWhereWithoutOrdersInput[]>;
-    upsert?: Nullable<AbuseReportUpsertWithWhereUniqueWithoutOrdersInput[]>;
+    update?: Nullable<AbuseReportUpdateWithWhereUniqueWithoutOrderInput[]>;
+    updateMany?: Nullable<AbuseReportUpdateManyWithWhereWithoutOrderInput[]>;
+    upsert?: Nullable<AbuseReportUpsertWithWhereUniqueWithoutOrderInput[]>;
 }
 
-export class AbuseReportUncheckedUpdateManyWithoutReviewsInput {
+export class AbuseReportUncheckedUpdateManyWithoutReviewInput {
     connect?: Nullable<AbuseReportWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AbuseReportCreateOrConnectWithoutReviewsInput[]>;
-    create?: Nullable<AbuseReportCreateWithoutReviewsInput[]>;
-    createMany?: Nullable<AbuseReportCreateManyReviewsInputEnvelope>;
+    connectOrCreate?: Nullable<AbuseReportCreateOrConnectWithoutReviewInput[]>;
+    create?: Nullable<AbuseReportCreateWithoutReviewInput[]>;
+    createMany?: Nullable<AbuseReportCreateManyReviewInputEnvelope>;
     delete?: Nullable<AbuseReportWhereUniqueInput[]>;
     deleteMany?: Nullable<AbuseReportScalarWhereInput[]>;
     disconnect?: Nullable<AbuseReportWhereUniqueInput[]>;
     set?: Nullable<AbuseReportWhereUniqueInput[]>;
-    update?: Nullable<AbuseReportUpdateWithWhereUniqueWithoutReviewsInput[]>;
-    updateMany?: Nullable<AbuseReportUpdateManyWithWhereWithoutReviewsInput[]>;
-    upsert?: Nullable<AbuseReportUpsertWithWhereUniqueWithoutReviewsInput[]>;
+    update?: Nullable<AbuseReportUpdateWithWhereUniqueWithoutReviewInput[]>;
+    updateMany?: Nullable<AbuseReportUpdateManyWithWhereWithoutReviewInput[]>;
+    upsert?: Nullable<AbuseReportUpsertWithWhereUniqueWithoutReviewInput[]>;
 }
 
 export class AbuseReportUncheckedUpdateManyWithoutServiceInput {
@@ -1648,18 +1650,18 @@ export class AbuseReportUncheckedUpdateManyWithoutTypeInput {
     upsert?: Nullable<AbuseReportUpsertWithWhereUniqueWithoutTypeInput[]>;
 }
 
-export class AbuseReportUncheckedUpdateManyWithoutUsersInput {
+export class AbuseReportUncheckedUpdateManyWithoutUserInput {
     connect?: Nullable<AbuseReportWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AbuseReportCreateOrConnectWithoutUsersInput[]>;
-    create?: Nullable<AbuseReportCreateWithoutUsersInput[]>;
-    createMany?: Nullable<AbuseReportCreateManyUsersInputEnvelope>;
+    connectOrCreate?: Nullable<AbuseReportCreateOrConnectWithoutUserInput[]>;
+    create?: Nullable<AbuseReportCreateWithoutUserInput[]>;
+    createMany?: Nullable<AbuseReportCreateManyUserInputEnvelope>;
     delete?: Nullable<AbuseReportWhereUniqueInput[]>;
     deleteMany?: Nullable<AbuseReportScalarWhereInput[]>;
     disconnect?: Nullable<AbuseReportWhereUniqueInput[]>;
     set?: Nullable<AbuseReportWhereUniqueInput[]>;
-    update?: Nullable<AbuseReportUpdateWithWhereUniqueWithoutUsersInput[]>;
-    updateMany?: Nullable<AbuseReportUpdateManyWithWhereWithoutUsersInput[]>;
-    upsert?: Nullable<AbuseReportUpsertWithWhereUniqueWithoutUsersInput[]>;
+    update?: Nullable<AbuseReportUpdateWithWhereUniqueWithoutUserInput[]>;
+    updateMany?: Nullable<AbuseReportUpdateManyWithWhereWithoutUserInput[]>;
+    upsert?: Nullable<AbuseReportUpsertWithWhereUniqueWithoutUserInput[]>;
 }
 
 export class AbuseReportUncheckedUpdateWithoutAuthorInput {
@@ -1696,7 +1698,7 @@ export class AbuseReportUncheckedUpdateWithoutBusinessInput {
     userId?: Nullable<NullableStringFieldUpdateOperationsInput>;
 }
 
-export class AbuseReportUncheckedUpdateWithoutCommentsInput {
+export class AbuseReportUncheckedUpdateWithoutCommentInput {
     authorId?: Nullable<StringFieldUpdateOperationsInput>;
     businessId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
@@ -1713,7 +1715,7 @@ export class AbuseReportUncheckedUpdateWithoutCommentsInput {
     userId?: Nullable<NullableStringFieldUpdateOperationsInput>;
 }
 
-export class AbuseReportUncheckedUpdateWithoutOrdersInput {
+export class AbuseReportUncheckedUpdateWithoutOrderInput {
     authorId?: Nullable<StringFieldUpdateOperationsInput>;
     businessId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     commentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
@@ -1730,7 +1732,7 @@ export class AbuseReportUncheckedUpdateWithoutOrdersInput {
     userId?: Nullable<NullableStringFieldUpdateOperationsInput>;
 }
 
-export class AbuseReportUncheckedUpdateWithoutReviewsInput {
+export class AbuseReportUncheckedUpdateWithoutReviewInput {
     authorId?: Nullable<StringFieldUpdateOperationsInput>;
     businessId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     commentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
@@ -1781,7 +1783,7 @@ export class AbuseReportUncheckedUpdateWithoutTypeInput {
     userId?: Nullable<NullableStringFieldUpdateOperationsInput>;
 }
 
-export class AbuseReportUncheckedUpdateWithoutUsersInput {
+export class AbuseReportUncheckedUpdateWithoutUserInput {
     authorId?: Nullable<StringFieldUpdateOperationsInput>;
     businessId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     commentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
@@ -1799,21 +1801,21 @@ export class AbuseReportUncheckedUpdateWithoutUsersInput {
 }
 
 export class AbuseReportUpdateInput {
-    Business?: Nullable<BusinessUpdateOneWithoutAbuseReportsInput>;
     author?: Nullable<UserUpdateOneRequiredWithoutAbuseReportedInput>;
-    comments?: Nullable<CommentUpdateOneWithoutAbuseReportsInput>;
+    business?: Nullable<BusinessUpdateOneWithoutAbuseReportsInput>;
+    comment?: Nullable<CommentUpdateOneWithoutAbuseReportsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     number?: Nullable<IntFieldUpdateOperationsInput>;
-    orders?: Nullable<OrderUpdateOneWithoutAbuseReportsInput>;
+    order?: Nullable<OrderUpdateOneWithoutAbuseReportsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
     report?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    reviews?: Nullable<ReviewUpdateOneWithoutAbuseReportsInput>;
+    review?: Nullable<ReviewUpdateOneWithoutAbuseReportsInput>;
     service?: Nullable<ServiceUpdateOneWithoutAbuseReportsInput>;
     state?: Nullable<EnumAbuseReportStatusFieldUpdateOperationsInput>;
     type?: Nullable<AbuseRecordTypeUpdateOneRequiredWithoutAbuseReportsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    users?: Nullable<UserUpdateOneWithoutAbuseReportsInput>;
+    user?: Nullable<UserUpdateOneWithoutAbuseReportsInput>;
 }
 
 export class AbuseReportUpdateManyMutationInput {
@@ -1836,17 +1838,17 @@ export class AbuseReportUpdateManyWithWhereWithoutBusinessInput {
     where: AbuseReportScalarWhereInput;
 }
 
-export class AbuseReportUpdateManyWithWhereWithoutCommentsInput {
+export class AbuseReportUpdateManyWithWhereWithoutCommentInput {
     data: AbuseReportUncheckedUpdateManyWithoutAbuseReportsInput;
     where: AbuseReportScalarWhereInput;
 }
 
-export class AbuseReportUpdateManyWithWhereWithoutOrdersInput {
+export class AbuseReportUpdateManyWithWhereWithoutOrderInput {
     data: AbuseReportUncheckedUpdateManyWithoutAbuseReportsInput;
     where: AbuseReportScalarWhereInput;
 }
 
-export class AbuseReportUpdateManyWithWhereWithoutReviewsInput {
+export class AbuseReportUpdateManyWithWhereWithoutReviewInput {
     data: AbuseReportUncheckedUpdateManyWithoutAbuseReportsInput;
     where: AbuseReportScalarWhereInput;
 }
@@ -1861,7 +1863,7 @@ export class AbuseReportUpdateManyWithWhereWithoutTypeInput {
     where: AbuseReportScalarWhereInput;
 }
 
-export class AbuseReportUpdateManyWithWhereWithoutUsersInput {
+export class AbuseReportUpdateManyWithWhereWithoutUserInput {
     data: AbuseReportUncheckedUpdateManyWithoutAbuseReportsInput;
     where: AbuseReportScalarWhereInput;
 }
@@ -1894,46 +1896,46 @@ export class AbuseReportUpdateManyWithoutBusinessInput {
     upsert?: Nullable<AbuseReportUpsertWithWhereUniqueWithoutBusinessInput[]>;
 }
 
-export class AbuseReportUpdateManyWithoutCommentsInput {
+export class AbuseReportUpdateManyWithoutCommentInput {
     connect?: Nullable<AbuseReportWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AbuseReportCreateOrConnectWithoutCommentsInput[]>;
-    create?: Nullable<AbuseReportCreateWithoutCommentsInput[]>;
-    createMany?: Nullable<AbuseReportCreateManyCommentsInputEnvelope>;
+    connectOrCreate?: Nullable<AbuseReportCreateOrConnectWithoutCommentInput[]>;
+    create?: Nullable<AbuseReportCreateWithoutCommentInput[]>;
+    createMany?: Nullable<AbuseReportCreateManyCommentInputEnvelope>;
     delete?: Nullable<AbuseReportWhereUniqueInput[]>;
     deleteMany?: Nullable<AbuseReportScalarWhereInput[]>;
     disconnect?: Nullable<AbuseReportWhereUniqueInput[]>;
     set?: Nullable<AbuseReportWhereUniqueInput[]>;
-    update?: Nullable<AbuseReportUpdateWithWhereUniqueWithoutCommentsInput[]>;
-    updateMany?: Nullable<AbuseReportUpdateManyWithWhereWithoutCommentsInput[]>;
-    upsert?: Nullable<AbuseReportUpsertWithWhereUniqueWithoutCommentsInput[]>;
+    update?: Nullable<AbuseReportUpdateWithWhereUniqueWithoutCommentInput[]>;
+    updateMany?: Nullable<AbuseReportUpdateManyWithWhereWithoutCommentInput[]>;
+    upsert?: Nullable<AbuseReportUpsertWithWhereUniqueWithoutCommentInput[]>;
 }
 
-export class AbuseReportUpdateManyWithoutOrdersInput {
+export class AbuseReportUpdateManyWithoutOrderInput {
     connect?: Nullable<AbuseReportWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AbuseReportCreateOrConnectWithoutOrdersInput[]>;
-    create?: Nullable<AbuseReportCreateWithoutOrdersInput[]>;
-    createMany?: Nullable<AbuseReportCreateManyOrdersInputEnvelope>;
+    connectOrCreate?: Nullable<AbuseReportCreateOrConnectWithoutOrderInput[]>;
+    create?: Nullable<AbuseReportCreateWithoutOrderInput[]>;
+    createMany?: Nullable<AbuseReportCreateManyOrderInputEnvelope>;
     delete?: Nullable<AbuseReportWhereUniqueInput[]>;
     deleteMany?: Nullable<AbuseReportScalarWhereInput[]>;
     disconnect?: Nullable<AbuseReportWhereUniqueInput[]>;
     set?: Nullable<AbuseReportWhereUniqueInput[]>;
-    update?: Nullable<AbuseReportUpdateWithWhereUniqueWithoutOrdersInput[]>;
-    updateMany?: Nullable<AbuseReportUpdateManyWithWhereWithoutOrdersInput[]>;
-    upsert?: Nullable<AbuseReportUpsertWithWhereUniqueWithoutOrdersInput[]>;
+    update?: Nullable<AbuseReportUpdateWithWhereUniqueWithoutOrderInput[]>;
+    updateMany?: Nullable<AbuseReportUpdateManyWithWhereWithoutOrderInput[]>;
+    upsert?: Nullable<AbuseReportUpsertWithWhereUniqueWithoutOrderInput[]>;
 }
 
-export class AbuseReportUpdateManyWithoutReviewsInput {
+export class AbuseReportUpdateManyWithoutReviewInput {
     connect?: Nullable<AbuseReportWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AbuseReportCreateOrConnectWithoutReviewsInput[]>;
-    create?: Nullable<AbuseReportCreateWithoutReviewsInput[]>;
-    createMany?: Nullable<AbuseReportCreateManyReviewsInputEnvelope>;
+    connectOrCreate?: Nullable<AbuseReportCreateOrConnectWithoutReviewInput[]>;
+    create?: Nullable<AbuseReportCreateWithoutReviewInput[]>;
+    createMany?: Nullable<AbuseReportCreateManyReviewInputEnvelope>;
     delete?: Nullable<AbuseReportWhereUniqueInput[]>;
     deleteMany?: Nullable<AbuseReportScalarWhereInput[]>;
     disconnect?: Nullable<AbuseReportWhereUniqueInput[]>;
     set?: Nullable<AbuseReportWhereUniqueInput[]>;
-    update?: Nullable<AbuseReportUpdateWithWhereUniqueWithoutReviewsInput[]>;
-    updateMany?: Nullable<AbuseReportUpdateManyWithWhereWithoutReviewsInput[]>;
-    upsert?: Nullable<AbuseReportUpsertWithWhereUniqueWithoutReviewsInput[]>;
+    update?: Nullable<AbuseReportUpdateWithWhereUniqueWithoutReviewInput[]>;
+    updateMany?: Nullable<AbuseReportUpdateManyWithWhereWithoutReviewInput[]>;
+    upsert?: Nullable<AbuseReportUpsertWithWhereUniqueWithoutReviewInput[]>;
 }
 
 export class AbuseReportUpdateManyWithoutServiceInput {
@@ -1964,18 +1966,18 @@ export class AbuseReportUpdateManyWithoutTypeInput {
     upsert?: Nullable<AbuseReportUpsertWithWhereUniqueWithoutTypeInput[]>;
 }
 
-export class AbuseReportUpdateManyWithoutUsersInput {
+export class AbuseReportUpdateManyWithoutUserInput {
     connect?: Nullable<AbuseReportWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<AbuseReportCreateOrConnectWithoutUsersInput[]>;
-    create?: Nullable<AbuseReportCreateWithoutUsersInput[]>;
-    createMany?: Nullable<AbuseReportCreateManyUsersInputEnvelope>;
+    connectOrCreate?: Nullable<AbuseReportCreateOrConnectWithoutUserInput[]>;
+    create?: Nullable<AbuseReportCreateWithoutUserInput[]>;
+    createMany?: Nullable<AbuseReportCreateManyUserInputEnvelope>;
     delete?: Nullable<AbuseReportWhereUniqueInput[]>;
     deleteMany?: Nullable<AbuseReportScalarWhereInput[]>;
     disconnect?: Nullable<AbuseReportWhereUniqueInput[]>;
     set?: Nullable<AbuseReportWhereUniqueInput[]>;
-    update?: Nullable<AbuseReportUpdateWithWhereUniqueWithoutUsersInput[]>;
-    updateMany?: Nullable<AbuseReportUpdateManyWithWhereWithoutUsersInput[]>;
-    upsert?: Nullable<AbuseReportUpsertWithWhereUniqueWithoutUsersInput[]>;
+    update?: Nullable<AbuseReportUpdateWithWhereUniqueWithoutUserInput[]>;
+    updateMany?: Nullable<AbuseReportUpdateManyWithWhereWithoutUserInput[]>;
+    upsert?: Nullable<AbuseReportUpsertWithWhereUniqueWithoutUserInput[]>;
 }
 
 export class AbuseReportUpdateWithWhereUniqueWithoutAuthorInput {
@@ -1988,18 +1990,18 @@ export class AbuseReportUpdateWithWhereUniqueWithoutBusinessInput {
     where: AbuseReportWhereUniqueInput;
 }
 
-export class AbuseReportUpdateWithWhereUniqueWithoutCommentsInput {
-    data: AbuseReportUncheckedUpdateWithoutCommentsInput;
+export class AbuseReportUpdateWithWhereUniqueWithoutCommentInput {
+    data: AbuseReportUncheckedUpdateWithoutCommentInput;
     where: AbuseReportWhereUniqueInput;
 }
 
-export class AbuseReportUpdateWithWhereUniqueWithoutOrdersInput {
-    data: AbuseReportUncheckedUpdateWithoutOrdersInput;
+export class AbuseReportUpdateWithWhereUniqueWithoutOrderInput {
+    data: AbuseReportUncheckedUpdateWithoutOrderInput;
     where: AbuseReportWhereUniqueInput;
 }
 
-export class AbuseReportUpdateWithWhereUniqueWithoutReviewsInput {
-    data: AbuseReportUncheckedUpdateWithoutReviewsInput;
+export class AbuseReportUpdateWithWhereUniqueWithoutReviewInput {
+    data: AbuseReportUncheckedUpdateWithoutReviewInput;
     where: AbuseReportWhereUniqueInput;
 }
 
@@ -2013,141 +2015,141 @@ export class AbuseReportUpdateWithWhereUniqueWithoutTypeInput {
     where: AbuseReportWhereUniqueInput;
 }
 
-export class AbuseReportUpdateWithWhereUniqueWithoutUsersInput {
-    data: AbuseReportUncheckedUpdateWithoutUsersInput;
+export class AbuseReportUpdateWithWhereUniqueWithoutUserInput {
+    data: AbuseReportUncheckedUpdateWithoutUserInput;
     where: AbuseReportWhereUniqueInput;
 }
 
 export class AbuseReportUpdateWithoutAuthorInput {
-    Business?: Nullable<BusinessUpdateOneWithoutAbuseReportsInput>;
-    comments?: Nullable<CommentUpdateOneWithoutAbuseReportsInput>;
+    business?: Nullable<BusinessUpdateOneWithoutAbuseReportsInput>;
+    comment?: Nullable<CommentUpdateOneWithoutAbuseReportsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     number?: Nullable<IntFieldUpdateOperationsInput>;
-    orders?: Nullable<OrderUpdateOneWithoutAbuseReportsInput>;
+    order?: Nullable<OrderUpdateOneWithoutAbuseReportsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
     report?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    reviews?: Nullable<ReviewUpdateOneWithoutAbuseReportsInput>;
+    review?: Nullable<ReviewUpdateOneWithoutAbuseReportsInput>;
     service?: Nullable<ServiceUpdateOneWithoutAbuseReportsInput>;
     state?: Nullable<EnumAbuseReportStatusFieldUpdateOperationsInput>;
     type?: Nullable<AbuseRecordTypeUpdateOneRequiredWithoutAbuseReportsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    users?: Nullable<UserUpdateOneWithoutAbuseReportsInput>;
+    user?: Nullable<UserUpdateOneWithoutAbuseReportsInput>;
 }
 
 export class AbuseReportUpdateWithoutBusinessInput {
     author?: Nullable<UserUpdateOneRequiredWithoutAbuseReportedInput>;
-    comments?: Nullable<CommentUpdateOneWithoutAbuseReportsInput>;
+    comment?: Nullable<CommentUpdateOneWithoutAbuseReportsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     number?: Nullable<IntFieldUpdateOperationsInput>;
-    orders?: Nullable<OrderUpdateOneWithoutAbuseReportsInput>;
+    order?: Nullable<OrderUpdateOneWithoutAbuseReportsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
     report?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    reviews?: Nullable<ReviewUpdateOneWithoutAbuseReportsInput>;
+    review?: Nullable<ReviewUpdateOneWithoutAbuseReportsInput>;
     service?: Nullable<ServiceUpdateOneWithoutAbuseReportsInput>;
     state?: Nullable<EnumAbuseReportStatusFieldUpdateOperationsInput>;
     type?: Nullable<AbuseRecordTypeUpdateOneRequiredWithoutAbuseReportsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    users?: Nullable<UserUpdateOneWithoutAbuseReportsInput>;
+    user?: Nullable<UserUpdateOneWithoutAbuseReportsInput>;
 }
 
-export class AbuseReportUpdateWithoutCommentsInput {
-    Business?: Nullable<BusinessUpdateOneWithoutAbuseReportsInput>;
+export class AbuseReportUpdateWithoutCommentInput {
     author?: Nullable<UserUpdateOneRequiredWithoutAbuseReportedInput>;
+    business?: Nullable<BusinessUpdateOneWithoutAbuseReportsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     number?: Nullable<IntFieldUpdateOperationsInput>;
-    orders?: Nullable<OrderUpdateOneWithoutAbuseReportsInput>;
+    order?: Nullable<OrderUpdateOneWithoutAbuseReportsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
     report?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    reviews?: Nullable<ReviewUpdateOneWithoutAbuseReportsInput>;
+    review?: Nullable<ReviewUpdateOneWithoutAbuseReportsInput>;
     service?: Nullable<ServiceUpdateOneWithoutAbuseReportsInput>;
     state?: Nullable<EnumAbuseReportStatusFieldUpdateOperationsInput>;
     type?: Nullable<AbuseRecordTypeUpdateOneRequiredWithoutAbuseReportsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    users?: Nullable<UserUpdateOneWithoutAbuseReportsInput>;
+    user?: Nullable<UserUpdateOneWithoutAbuseReportsInput>;
 }
 
-export class AbuseReportUpdateWithoutOrdersInput {
-    Business?: Nullable<BusinessUpdateOneWithoutAbuseReportsInput>;
+export class AbuseReportUpdateWithoutOrderInput {
     author?: Nullable<UserUpdateOneRequiredWithoutAbuseReportedInput>;
-    comments?: Nullable<CommentUpdateOneWithoutAbuseReportsInput>;
+    business?: Nullable<BusinessUpdateOneWithoutAbuseReportsInput>;
+    comment?: Nullable<CommentUpdateOneWithoutAbuseReportsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     number?: Nullable<IntFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
     report?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    reviews?: Nullable<ReviewUpdateOneWithoutAbuseReportsInput>;
+    review?: Nullable<ReviewUpdateOneWithoutAbuseReportsInput>;
     service?: Nullable<ServiceUpdateOneWithoutAbuseReportsInput>;
     state?: Nullable<EnumAbuseReportStatusFieldUpdateOperationsInput>;
     type?: Nullable<AbuseRecordTypeUpdateOneRequiredWithoutAbuseReportsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    users?: Nullable<UserUpdateOneWithoutAbuseReportsInput>;
+    user?: Nullable<UserUpdateOneWithoutAbuseReportsInput>;
 }
 
-export class AbuseReportUpdateWithoutReviewsInput {
-    Business?: Nullable<BusinessUpdateOneWithoutAbuseReportsInput>;
+export class AbuseReportUpdateWithoutReviewInput {
     author?: Nullable<UserUpdateOneRequiredWithoutAbuseReportedInput>;
-    comments?: Nullable<CommentUpdateOneWithoutAbuseReportsInput>;
+    business?: Nullable<BusinessUpdateOneWithoutAbuseReportsInput>;
+    comment?: Nullable<CommentUpdateOneWithoutAbuseReportsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     number?: Nullable<IntFieldUpdateOperationsInput>;
-    orders?: Nullable<OrderUpdateOneWithoutAbuseReportsInput>;
+    order?: Nullable<OrderUpdateOneWithoutAbuseReportsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
     report?: Nullable<NullableStringFieldUpdateOperationsInput>;
     service?: Nullable<ServiceUpdateOneWithoutAbuseReportsInput>;
     state?: Nullable<EnumAbuseReportStatusFieldUpdateOperationsInput>;
     type?: Nullable<AbuseRecordTypeUpdateOneRequiredWithoutAbuseReportsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    users?: Nullable<UserUpdateOneWithoutAbuseReportsInput>;
+    user?: Nullable<UserUpdateOneWithoutAbuseReportsInput>;
 }
 
 export class AbuseReportUpdateWithoutServiceInput {
-    Business?: Nullable<BusinessUpdateOneWithoutAbuseReportsInput>;
     author?: Nullable<UserUpdateOneRequiredWithoutAbuseReportedInput>;
-    comments?: Nullable<CommentUpdateOneWithoutAbuseReportsInput>;
+    business?: Nullable<BusinessUpdateOneWithoutAbuseReportsInput>;
+    comment?: Nullable<CommentUpdateOneWithoutAbuseReportsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     number?: Nullable<IntFieldUpdateOperationsInput>;
-    orders?: Nullable<OrderUpdateOneWithoutAbuseReportsInput>;
+    order?: Nullable<OrderUpdateOneWithoutAbuseReportsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
     report?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    reviews?: Nullable<ReviewUpdateOneWithoutAbuseReportsInput>;
+    review?: Nullable<ReviewUpdateOneWithoutAbuseReportsInput>;
     state?: Nullable<EnumAbuseReportStatusFieldUpdateOperationsInput>;
     type?: Nullable<AbuseRecordTypeUpdateOneRequiredWithoutAbuseReportsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    users?: Nullable<UserUpdateOneWithoutAbuseReportsInput>;
+    user?: Nullable<UserUpdateOneWithoutAbuseReportsInput>;
 }
 
 export class AbuseReportUpdateWithoutTypeInput {
-    Business?: Nullable<BusinessUpdateOneWithoutAbuseReportsInput>;
     author?: Nullable<UserUpdateOneRequiredWithoutAbuseReportedInput>;
-    comments?: Nullable<CommentUpdateOneWithoutAbuseReportsInput>;
+    business?: Nullable<BusinessUpdateOneWithoutAbuseReportsInput>;
+    comment?: Nullable<CommentUpdateOneWithoutAbuseReportsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     number?: Nullable<IntFieldUpdateOperationsInput>;
-    orders?: Nullable<OrderUpdateOneWithoutAbuseReportsInput>;
+    order?: Nullable<OrderUpdateOneWithoutAbuseReportsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
     report?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    reviews?: Nullable<ReviewUpdateOneWithoutAbuseReportsInput>;
+    review?: Nullable<ReviewUpdateOneWithoutAbuseReportsInput>;
     service?: Nullable<ServiceUpdateOneWithoutAbuseReportsInput>;
     state?: Nullable<EnumAbuseReportStatusFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    users?: Nullable<UserUpdateOneWithoutAbuseReportsInput>;
+    user?: Nullable<UserUpdateOneWithoutAbuseReportsInput>;
 }
 
-export class AbuseReportUpdateWithoutUsersInput {
-    Business?: Nullable<BusinessUpdateOneWithoutAbuseReportsInput>;
+export class AbuseReportUpdateWithoutUserInput {
     author?: Nullable<UserUpdateOneRequiredWithoutAbuseReportedInput>;
-    comments?: Nullable<CommentUpdateOneWithoutAbuseReportsInput>;
+    business?: Nullable<BusinessUpdateOneWithoutAbuseReportsInput>;
+    comment?: Nullable<CommentUpdateOneWithoutAbuseReportsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     number?: Nullable<IntFieldUpdateOperationsInput>;
-    orders?: Nullable<OrderUpdateOneWithoutAbuseReportsInput>;
+    order?: Nullable<OrderUpdateOneWithoutAbuseReportsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
     report?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    reviews?: Nullable<ReviewUpdateOneWithoutAbuseReportsInput>;
+    review?: Nullable<ReviewUpdateOneWithoutAbuseReportsInput>;
     service?: Nullable<ServiceUpdateOneWithoutAbuseReportsInput>;
     state?: Nullable<EnumAbuseReportStatusFieldUpdateOperationsInput>;
     type?: Nullable<AbuseRecordTypeUpdateOneRequiredWithoutAbuseReportsInput>;
@@ -2166,21 +2168,21 @@ export class AbuseReportUpsertWithWhereUniqueWithoutBusinessInput {
     where: AbuseReportWhereUniqueInput;
 }
 
-export class AbuseReportUpsertWithWhereUniqueWithoutCommentsInput {
-    create: AbuseReportUncheckedCreateWithoutCommentsInput;
-    update: AbuseReportUncheckedUpdateWithoutCommentsInput;
+export class AbuseReportUpsertWithWhereUniqueWithoutCommentInput {
+    create: AbuseReportUncheckedCreateWithoutCommentInput;
+    update: AbuseReportUncheckedUpdateWithoutCommentInput;
     where: AbuseReportWhereUniqueInput;
 }
 
-export class AbuseReportUpsertWithWhereUniqueWithoutOrdersInput {
-    create: AbuseReportUncheckedCreateWithoutOrdersInput;
-    update: AbuseReportUncheckedUpdateWithoutOrdersInput;
+export class AbuseReportUpsertWithWhereUniqueWithoutOrderInput {
+    create: AbuseReportUncheckedCreateWithoutOrderInput;
+    update: AbuseReportUncheckedUpdateWithoutOrderInput;
     where: AbuseReportWhereUniqueInput;
 }
 
-export class AbuseReportUpsertWithWhereUniqueWithoutReviewsInput {
-    create: AbuseReportUncheckedCreateWithoutReviewsInput;
-    update: AbuseReportUncheckedUpdateWithoutReviewsInput;
+export class AbuseReportUpsertWithWhereUniqueWithoutReviewInput {
+    create: AbuseReportUncheckedCreateWithoutReviewInput;
+    update: AbuseReportUncheckedUpdateWithoutReviewInput;
     where: AbuseReportWhereUniqueInput;
 }
 
@@ -2196,39 +2198,39 @@ export class AbuseReportUpsertWithWhereUniqueWithoutTypeInput {
     where: AbuseReportWhereUniqueInput;
 }
 
-export class AbuseReportUpsertWithWhereUniqueWithoutUsersInput {
-    create: AbuseReportUncheckedCreateWithoutUsersInput;
-    update: AbuseReportUncheckedUpdateWithoutUsersInput;
+export class AbuseReportUpsertWithWhereUniqueWithoutUserInput {
+    create: AbuseReportUncheckedCreateWithoutUserInput;
+    update: AbuseReportUncheckedUpdateWithoutUserInput;
     where: AbuseReportWhereUniqueInput;
 }
 
 export class AbuseReportWhereInput {
     AND?: Nullable<AbuseReportWhereInput[]>;
-    Business?: Nullable<BusinessWhereInput>;
     NOT?: Nullable<AbuseReportWhereInput[]>;
     OR?: Nullable<AbuseReportWhereInput[]>;
     author?: Nullable<UserWhereInput>;
     authorId?: Nullable<StringFilter>;
+    business?: Nullable<BusinessWhereInput>;
     businessId?: Nullable<StringNullableFilter>;
+    comment?: Nullable<CommentWhereInput>;
     commentId?: Nullable<StringNullableFilter>;
-    comments?: Nullable<CommentWhereInput>;
     createdAt?: Nullable<DateTimeFilter>;
     id?: Nullable<StringFilter>;
     number?: Nullable<IntFilter>;
+    order?: Nullable<OrderWhereInput>;
     orderId?: Nullable<StringNullableFilter>;
-    orders?: Nullable<OrderWhereInput>;
     recordStatus?: Nullable<EnumRecordStatusFilter>;
     report?: Nullable<StringNullableFilter>;
+    review?: Nullable<ReviewWhereInput>;
     reviewId?: Nullable<StringNullableFilter>;
-    reviews?: Nullable<ReviewWhereInput>;
     service?: Nullable<ServiceWhereInput>;
     serviceId?: Nullable<StringNullableFilter>;
     state?: Nullable<EnumAbuseReportStatusFilter>;
     type?: Nullable<AbuseRecordTypeWhereInput>;
     typeId?: Nullable<StringFilter>;
     updatedAt?: Nullable<DateTimeFilter>;
+    user?: Nullable<UserWhereInput>;
     userId?: Nullable<StringNullableFilter>;
-    users?: Nullable<UserWhereInput>;
 }
 
 export class AbuseReportWhereUniqueInput {
@@ -4118,7 +4120,7 @@ export class BusinessCreateInput {
     businessName: string;
     cover?: Nullable<AttachmentCreateNestedOneWithoutBusinessesInput>;
     createdAt?: Nullable<DateTime>;
-    favorite?: Nullable<FavoriteCreateNestedManyWithoutBusinessInput>;
+    favorites?: Nullable<FavoriteCreateNestedManyWithoutBusinessInput>;
     id?: Nullable<string>;
     location?: Nullable<LocationCreateNestedOneWithoutBusinessesInput>;
     mode?: Nullable<BusinessMode>;
@@ -4206,10 +4208,10 @@ export class BusinessCreateNestedOneWithoutAttachmentsInput {
     create?: Nullable<BusinessUncheckedCreateWithoutAttachmentsInput>;
 }
 
-export class BusinessCreateNestedOneWithoutFavoriteInput {
+export class BusinessCreateNestedOneWithoutFavoritesInput {
     connect?: Nullable<BusinessWhereUniqueInput>;
-    connectOrCreate?: Nullable<BusinessCreateOrConnectWithoutFavoriteInput>;
-    create?: Nullable<BusinessUncheckedCreateWithoutFavoriteInput>;
+    connectOrCreate?: Nullable<BusinessCreateOrConnectWithoutFavoritesInput>;
+    create?: Nullable<BusinessUncheckedCreateWithoutFavoritesInput>;
 }
 
 export class BusinessCreateNestedOneWithoutOrdersInput {
@@ -4245,8 +4247,8 @@ export class BusinessCreateOrConnectWithoutCoverInput {
     where: BusinessWhereUniqueInput;
 }
 
-export class BusinessCreateOrConnectWithoutFavoriteInput {
-    create: BusinessUncheckedCreateWithoutFavoriteInput;
+export class BusinessCreateOrConnectWithoutFavoritesInput {
+    create: BusinessUncheckedCreateWithoutFavoritesInput;
     where: BusinessWhereUniqueInput;
 }
 
@@ -4276,7 +4278,7 @@ export class BusinessCreateWithoutAbuseReportsInput {
     businessName: string;
     cover?: Nullable<AttachmentCreateNestedOneWithoutBusinessesInput>;
     createdAt?: Nullable<DateTime>;
-    favorite?: Nullable<FavoriteCreateNestedManyWithoutBusinessInput>;
+    favorites?: Nullable<FavoriteCreateNestedManyWithoutBusinessInput>;
     id?: Nullable<string>;
     location?: Nullable<LocationCreateNestedOneWithoutBusinessesInput>;
     mode?: Nullable<BusinessMode>;
@@ -4294,7 +4296,7 @@ export class BusinessCreateWithoutAttachmentsInput {
     businessName: string;
     cover?: Nullable<AttachmentCreateNestedOneWithoutBusinessesInput>;
     createdAt?: Nullable<DateTime>;
-    favorite?: Nullable<FavoriteCreateNestedManyWithoutBusinessInput>;
+    favorites?: Nullable<FavoriteCreateNestedManyWithoutBusinessInput>;
     id?: Nullable<string>;
     location?: Nullable<LocationCreateNestedOneWithoutBusinessesInput>;
     mode?: Nullable<BusinessMode>;
@@ -4312,7 +4314,7 @@ export class BusinessCreateWithoutCoverInput {
     attachments?: Nullable<AttachmentCreateNestedManyWithoutBusinessInput>;
     businessName: string;
     createdAt?: Nullable<DateTime>;
-    favorite?: Nullable<FavoriteCreateNestedManyWithoutBusinessInput>;
+    favorites?: Nullable<FavoriteCreateNestedManyWithoutBusinessInput>;
     id?: Nullable<string>;
     location?: Nullable<LocationCreateNestedOneWithoutBusinessesInput>;
     mode?: Nullable<BusinessMode>;
@@ -4324,7 +4326,7 @@ export class BusinessCreateWithoutCoverInput {
     updatedAt?: Nullable<DateTime>;
 }
 
-export class BusinessCreateWithoutFavoriteInput {
+export class BusinessCreateWithoutFavoritesInput {
     about: string;
     abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutBusinessInput>;
     attachments?: Nullable<AttachmentCreateNestedManyWithoutBusinessInput>;
@@ -4349,7 +4351,7 @@ export class BusinessCreateWithoutLocationInput {
     businessName: string;
     cover?: Nullable<AttachmentCreateNestedOneWithoutBusinessesInput>;
     createdAt?: Nullable<DateTime>;
-    favorite?: Nullable<FavoriteCreateNestedManyWithoutBusinessInput>;
+    favorites?: Nullable<FavoriteCreateNestedManyWithoutBusinessInput>;
     id?: Nullable<string>;
     mode?: Nullable<BusinessMode>;
     orders?: Nullable<OrderCreateNestedManyWithoutBusinessInput>;
@@ -4367,7 +4369,7 @@ export class BusinessCreateWithoutOrdersInput {
     businessName: string;
     cover?: Nullable<AttachmentCreateNestedOneWithoutBusinessesInput>;
     createdAt?: Nullable<DateTime>;
-    favorite?: Nullable<FavoriteCreateNestedManyWithoutBusinessInput>;
+    favorites?: Nullable<FavoriteCreateNestedManyWithoutBusinessInput>;
     id?: Nullable<string>;
     location?: Nullable<LocationCreateNestedOneWithoutBusinessesInput>;
     mode?: Nullable<BusinessMode>;
@@ -4385,7 +4387,7 @@ export class BusinessCreateWithoutOwnerInput {
     businessName: string;
     cover?: Nullable<AttachmentCreateNestedOneWithoutBusinessesInput>;
     createdAt?: Nullable<DateTime>;
-    favorite?: Nullable<FavoriteCreateNestedManyWithoutBusinessInput>;
+    favorites?: Nullable<FavoriteCreateNestedManyWithoutBusinessInput>;
     id?: Nullable<string>;
     location?: Nullable<LocationCreateNestedOneWithoutBusinessesInput>;
     mode?: Nullable<BusinessMode>;
@@ -4403,7 +4405,7 @@ export class BusinessCreateWithoutServicesInput {
     businessName: string;
     cover?: Nullable<AttachmentCreateNestedOneWithoutBusinessesInput>;
     createdAt?: Nullable<DateTime>;
-    favorite?: Nullable<FavoriteCreateNestedManyWithoutBusinessInput>;
+    favorites?: Nullable<FavoriteCreateNestedManyWithoutBusinessInput>;
     id?: Nullable<string>;
     location?: Nullable<LocationCreateNestedOneWithoutBusinessesInput>;
     mode?: Nullable<BusinessMode>;
@@ -4480,7 +4482,7 @@ export class BusinessUncheckedCreateInput {
     businessName: string;
     coverId?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
-    favorite?: Nullable<FavoriteUncheckedCreateNestedManyWithoutBusinessInput>;
+    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutBusinessInput>;
     id?: Nullable<string>;
     locationId?: Nullable<string>;
     mode?: Nullable<BusinessMode>;
@@ -4518,7 +4520,7 @@ export class BusinessUncheckedCreateWithoutAbuseReportsInput {
     businessName: string;
     coverId?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
-    favorite?: Nullable<FavoriteUncheckedCreateNestedManyWithoutBusinessInput>;
+    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutBusinessInput>;
     id?: Nullable<string>;
     locationId?: Nullable<string>;
     mode?: Nullable<BusinessMode>;
@@ -4536,7 +4538,7 @@ export class BusinessUncheckedCreateWithoutAttachmentsInput {
     businessName: string;
     coverId?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
-    favorite?: Nullable<FavoriteUncheckedCreateNestedManyWithoutBusinessInput>;
+    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutBusinessInput>;
     id?: Nullable<string>;
     locationId?: Nullable<string>;
     mode?: Nullable<BusinessMode>;
@@ -4554,7 +4556,7 @@ export class BusinessUncheckedCreateWithoutCoverInput {
     attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutBusinessInput>;
     businessName: string;
     createdAt?: Nullable<DateTime>;
-    favorite?: Nullable<FavoriteUncheckedCreateNestedManyWithoutBusinessInput>;
+    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutBusinessInput>;
     id?: Nullable<string>;
     locationId?: Nullable<string>;
     mode?: Nullable<BusinessMode>;
@@ -4566,7 +4568,7 @@ export class BusinessUncheckedCreateWithoutCoverInput {
     updatedAt?: Nullable<DateTime>;
 }
 
-export class BusinessUncheckedCreateWithoutFavoriteInput {
+export class BusinessUncheckedCreateWithoutFavoritesInput {
     about: string;
     abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutBusinessInput>;
     attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutBusinessInput>;
@@ -4591,7 +4593,7 @@ export class BusinessUncheckedCreateWithoutLocationInput {
     businessName: string;
     coverId?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
-    favorite?: Nullable<FavoriteUncheckedCreateNestedManyWithoutBusinessInput>;
+    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutBusinessInput>;
     id?: Nullable<string>;
     mode?: Nullable<BusinessMode>;
     orders?: Nullable<OrderUncheckedCreateNestedManyWithoutBusinessInput>;
@@ -4609,7 +4611,7 @@ export class BusinessUncheckedCreateWithoutOrdersInput {
     businessName: string;
     coverId?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
-    favorite?: Nullable<FavoriteUncheckedCreateNestedManyWithoutBusinessInput>;
+    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutBusinessInput>;
     id?: Nullable<string>;
     locationId?: Nullable<string>;
     mode?: Nullable<BusinessMode>;
@@ -4627,8 +4629,9 @@ export class BusinessUncheckedCreateWithoutOwnerInput {
     businessName: string;
     coverId?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
-    favorite?: Nullable<FavoriteUncheckedCreateNestedManyWithoutBusinessInput>;
+    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutBusinessInput>;
     id?: Nullable<string>;
+    location?: Nullable<LocationCreateInput>;
     locationId?: Nullable<string>;
     mode?: Nullable<BusinessMode>;
     orders?: Nullable<OrderUncheckedCreateNestedManyWithoutBusinessInput>;
@@ -4645,7 +4648,7 @@ export class BusinessUncheckedCreateWithoutServicesInput {
     businessName: string;
     coverId?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
-    favorite?: Nullable<FavoriteUncheckedCreateNestedManyWithoutBusinessInput>;
+    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutBusinessInput>;
     id?: Nullable<string>;
     locationId?: Nullable<string>;
     mode?: Nullable<BusinessMode>;
@@ -4663,7 +4666,7 @@ export class BusinessUncheckedUpdateInput {
     businessName?: Nullable<StringFieldUpdateOperationsInput>;
     coverId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorite?: Nullable<FavoriteUncheckedUpdateManyWithoutBusinessInput>;
+    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutBusinessInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     locationId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     mode?: Nullable<EnumBusinessModeFieldUpdateOperationsInput>;
@@ -4746,7 +4749,7 @@ export class BusinessUncheckedUpdateWithoutAbuseReportsInput {
     businessName?: Nullable<StringFieldUpdateOperationsInput>;
     coverId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorite?: Nullable<FavoriteUncheckedUpdateManyWithoutBusinessInput>;
+    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutBusinessInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     locationId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     mode?: Nullable<EnumBusinessModeFieldUpdateOperationsInput>;
@@ -4764,7 +4767,7 @@ export class BusinessUncheckedUpdateWithoutAttachmentsInput {
     businessName?: Nullable<StringFieldUpdateOperationsInput>;
     coverId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorite?: Nullable<FavoriteUncheckedUpdateManyWithoutBusinessInput>;
+    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutBusinessInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     locationId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     mode?: Nullable<EnumBusinessModeFieldUpdateOperationsInput>;
@@ -4782,7 +4785,7 @@ export class BusinessUncheckedUpdateWithoutCoverInput {
     attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutBusinessInput>;
     businessName?: Nullable<StringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorite?: Nullable<FavoriteUncheckedUpdateManyWithoutBusinessInput>;
+    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutBusinessInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     locationId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     mode?: Nullable<EnumBusinessModeFieldUpdateOperationsInput>;
@@ -4794,7 +4797,7 @@ export class BusinessUncheckedUpdateWithoutCoverInput {
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
 
-export class BusinessUncheckedUpdateWithoutFavoriteInput {
+export class BusinessUncheckedUpdateWithoutFavoritesInput {
     about?: Nullable<StringFieldUpdateOperationsInput>;
     abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutBusinessInput>;
     attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutBusinessInput>;
@@ -4819,7 +4822,7 @@ export class BusinessUncheckedUpdateWithoutLocationInput {
     businessName?: Nullable<StringFieldUpdateOperationsInput>;
     coverId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorite?: Nullable<FavoriteUncheckedUpdateManyWithoutBusinessInput>;
+    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutBusinessInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     mode?: Nullable<EnumBusinessModeFieldUpdateOperationsInput>;
     orders?: Nullable<OrderUncheckedUpdateManyWithoutBusinessInput>;
@@ -4837,7 +4840,7 @@ export class BusinessUncheckedUpdateWithoutOrdersInput {
     businessName?: Nullable<StringFieldUpdateOperationsInput>;
     coverId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorite?: Nullable<FavoriteUncheckedUpdateManyWithoutBusinessInput>;
+    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutBusinessInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     locationId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     mode?: Nullable<EnumBusinessModeFieldUpdateOperationsInput>;
@@ -4853,10 +4856,12 @@ export class BusinessUncheckedUpdateWithoutOwnerInput {
     abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutBusinessInput>;
     attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutBusinessInput>;
     businessName?: Nullable<StringFieldUpdateOperationsInput>;
+    cover?: Nullable<AttachmentCreateInput>;
     coverId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorite?: Nullable<FavoriteUncheckedUpdateManyWithoutBusinessInput>;
+    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutBusinessInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
+    location?: Nullable<LocationCreateInput>;
     locationId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     mode?: Nullable<EnumBusinessModeFieldUpdateOperationsInput>;
     orders?: Nullable<OrderUncheckedUpdateManyWithoutBusinessInput>;
@@ -4873,7 +4878,7 @@ export class BusinessUncheckedUpdateWithoutServicesInput {
     businessName?: Nullable<StringFieldUpdateOperationsInput>;
     coverId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorite?: Nullable<FavoriteUncheckedUpdateManyWithoutBusinessInput>;
+    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutBusinessInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     locationId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     mode?: Nullable<EnumBusinessModeFieldUpdateOperationsInput>;
@@ -4891,7 +4896,7 @@ export class BusinessUpdateInput {
     businessName?: Nullable<StringFieldUpdateOperationsInput>;
     cover?: Nullable<AttachmentUpdateOneWithoutBusinessesInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorite?: Nullable<FavoriteUpdateManyWithoutBusinessInput>;
+    favorites?: Nullable<FavoriteUpdateManyWithoutBusinessInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     location?: Nullable<LocationUpdateOneWithoutBusinessesInput>;
     mode?: Nullable<EnumBusinessModeFieldUpdateOperationsInput>;
@@ -4980,14 +4985,14 @@ export class BusinessUpdateOneWithoutAttachmentsInput {
     upsert?: Nullable<BusinessUpsertWithoutAttachmentsInput>;
 }
 
-export class BusinessUpdateOneWithoutFavoriteInput {
+export class BusinessUpdateOneWithoutFavoritesInput {
     connect?: Nullable<BusinessWhereUniqueInput>;
-    connectOrCreate?: Nullable<BusinessCreateOrConnectWithoutFavoriteInput>;
-    create?: Nullable<BusinessUncheckedCreateWithoutFavoriteInput>;
+    connectOrCreate?: Nullable<BusinessCreateOrConnectWithoutFavoritesInput>;
+    create?: Nullable<BusinessUncheckedCreateWithoutFavoritesInput>;
     delete?: Nullable<boolean>;
     disconnect?: Nullable<boolean>;
-    update?: Nullable<BusinessUncheckedUpdateWithoutFavoriteInput>;
-    upsert?: Nullable<BusinessUpsertWithoutFavoriteInput>;
+    update?: Nullable<BusinessUncheckedUpdateWithoutFavoritesInput>;
+    upsert?: Nullable<BusinessUpsertWithoutFavoritesInput>;
 }
 
 export class BusinessUpdateOneWithoutOrdersInput {
@@ -5026,7 +5031,7 @@ export class BusinessUpdateWithoutAbuseReportsInput {
     businessName?: Nullable<StringFieldUpdateOperationsInput>;
     cover?: Nullable<AttachmentUpdateOneWithoutBusinessesInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorite?: Nullable<FavoriteUpdateManyWithoutBusinessInput>;
+    favorites?: Nullable<FavoriteUpdateManyWithoutBusinessInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     location?: Nullable<LocationUpdateOneWithoutBusinessesInput>;
     mode?: Nullable<EnumBusinessModeFieldUpdateOperationsInput>;
@@ -5044,7 +5049,7 @@ export class BusinessUpdateWithoutAttachmentsInput {
     businessName?: Nullable<StringFieldUpdateOperationsInput>;
     cover?: Nullable<AttachmentUpdateOneWithoutBusinessesInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorite?: Nullable<FavoriteUpdateManyWithoutBusinessInput>;
+    favorites?: Nullable<FavoriteUpdateManyWithoutBusinessInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     location?: Nullable<LocationUpdateOneWithoutBusinessesInput>;
     mode?: Nullable<EnumBusinessModeFieldUpdateOperationsInput>;
@@ -5062,7 +5067,7 @@ export class BusinessUpdateWithoutCoverInput {
     attachments?: Nullable<AttachmentUpdateManyWithoutBusinessInput>;
     businessName?: Nullable<StringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorite?: Nullable<FavoriteUpdateManyWithoutBusinessInput>;
+    favorites?: Nullable<FavoriteUpdateManyWithoutBusinessInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     location?: Nullable<LocationUpdateOneWithoutBusinessesInput>;
     mode?: Nullable<EnumBusinessModeFieldUpdateOperationsInput>;
@@ -5074,7 +5079,7 @@ export class BusinessUpdateWithoutCoverInput {
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
 
-export class BusinessUpdateWithoutFavoriteInput {
+export class BusinessUpdateWithoutFavoritesInput {
     about?: Nullable<StringFieldUpdateOperationsInput>;
     abuseReports?: Nullable<AbuseReportUpdateManyWithoutBusinessInput>;
     attachments?: Nullable<AttachmentUpdateManyWithoutBusinessInput>;
@@ -5099,7 +5104,7 @@ export class BusinessUpdateWithoutLocationInput {
     businessName?: Nullable<StringFieldUpdateOperationsInput>;
     cover?: Nullable<AttachmentUpdateOneWithoutBusinessesInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorite?: Nullable<FavoriteUpdateManyWithoutBusinessInput>;
+    favorites?: Nullable<FavoriteUpdateManyWithoutBusinessInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     mode?: Nullable<EnumBusinessModeFieldUpdateOperationsInput>;
     orders?: Nullable<OrderUpdateManyWithoutBusinessInput>;
@@ -5117,7 +5122,7 @@ export class BusinessUpdateWithoutOrdersInput {
     businessName?: Nullable<StringFieldUpdateOperationsInput>;
     cover?: Nullable<AttachmentUpdateOneWithoutBusinessesInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorite?: Nullable<FavoriteUpdateManyWithoutBusinessInput>;
+    favorites?: Nullable<FavoriteUpdateManyWithoutBusinessInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     location?: Nullable<LocationUpdateOneWithoutBusinessesInput>;
     mode?: Nullable<EnumBusinessModeFieldUpdateOperationsInput>;
@@ -5135,7 +5140,7 @@ export class BusinessUpdateWithoutOwnerInput {
     businessName?: Nullable<StringFieldUpdateOperationsInput>;
     cover?: Nullable<AttachmentUpdateOneWithoutBusinessesInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorite?: Nullable<FavoriteUpdateManyWithoutBusinessInput>;
+    favorites?: Nullable<FavoriteUpdateManyWithoutBusinessInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     location?: Nullable<LocationUpdateOneWithoutBusinessesInput>;
     mode?: Nullable<EnumBusinessModeFieldUpdateOperationsInput>;
@@ -5153,7 +5158,7 @@ export class BusinessUpdateWithoutServicesInput {
     businessName?: Nullable<StringFieldUpdateOperationsInput>;
     cover?: Nullable<AttachmentUpdateOneWithoutBusinessesInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorite?: Nullable<FavoriteUpdateManyWithoutBusinessInput>;
+    favorites?: Nullable<FavoriteUpdateManyWithoutBusinessInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     location?: Nullable<LocationUpdateOneWithoutBusinessesInput>;
     mode?: Nullable<EnumBusinessModeFieldUpdateOperationsInput>;
@@ -5186,9 +5191,9 @@ export class BusinessUpsertWithoutAttachmentsInput {
     update: BusinessUncheckedUpdateWithoutAttachmentsInput;
 }
 
-export class BusinessUpsertWithoutFavoriteInput {
-    create: BusinessUncheckedCreateWithoutFavoriteInput;
-    update: BusinessUncheckedUpdateWithoutFavoriteInput;
+export class BusinessUpsertWithoutFavoritesInput {
+    create: BusinessUncheckedCreateWithoutFavoritesInput;
+    update: BusinessUncheckedUpdateWithoutFavoritesInput;
 }
 
 export class BusinessUpsertWithoutOrdersInput {
@@ -5217,7 +5222,7 @@ export class BusinessWhereInput {
     cover?: Nullable<AttachmentWhereInput>;
     coverId?: Nullable<StringNullableFilter>;
     createdAt?: Nullable<DateTimeFilter>;
-    favorite?: Nullable<FavoriteListRelationFilter>;
+    favorites?: Nullable<FavoriteListRelationFilter>;
     id?: Nullable<StringFilter>;
     location?: Nullable<LocationWhereInput>;
     locationId?: Nullable<StringNullableFilter>;
@@ -5683,7 +5688,7 @@ export class CategoryWhereUniqueInput {
 }
 
 export class CommentCreateInput {
-    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutCommentsInput>;
+    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutCommentInput>;
     attachments?: Nullable<AttachmentCreateNestedManyWithoutCommentInput>;
     author: UserCreateNestedOneWithoutCommentsInput;
     comment?: Nullable<CommentCreateNestedOneWithoutCommentsInput>;
@@ -5691,7 +5696,7 @@ export class CommentCreateInput {
     commentsEnabled?: Nullable<boolean>;
     content: string;
     createdAt?: Nullable<DateTime>;
-    favorites?: Nullable<FavoriteCreateNestedManyWithoutCommentsInput>;
+    favorites?: Nullable<FavoriteCreateNestedManyWithoutCommentInput>;
     id?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
     review?: Nullable<ReviewCreateNestedOneWithoutCommentsInput>;
@@ -5846,7 +5851,7 @@ export class CommentCreateWithoutAbuseReportsInput {
     commentsEnabled?: Nullable<boolean>;
     content: string;
     createdAt?: Nullable<DateTime>;
-    favorites?: Nullable<FavoriteCreateNestedManyWithoutCommentsInput>;
+    favorites?: Nullable<FavoriteCreateNestedManyWithoutCommentInput>;
     id?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
     review?: Nullable<ReviewCreateNestedOneWithoutCommentsInput>;
@@ -5854,14 +5859,14 @@ export class CommentCreateWithoutAbuseReportsInput {
 }
 
 export class CommentCreateWithoutAttachmentsInput {
-    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutCommentsInput>;
+    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutCommentInput>;
     author: UserCreateNestedOneWithoutCommentsInput;
     comment?: Nullable<CommentCreateNestedOneWithoutCommentsInput>;
     comments?: Nullable<CommentCreateNestedManyWithoutCommentInput>;
     commentsEnabled?: Nullable<boolean>;
     content: string;
     createdAt?: Nullable<DateTime>;
-    favorites?: Nullable<FavoriteCreateNestedManyWithoutCommentsInput>;
+    favorites?: Nullable<FavoriteCreateNestedManyWithoutCommentInput>;
     id?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
     review?: Nullable<ReviewCreateNestedOneWithoutCommentsInput>;
@@ -5869,14 +5874,14 @@ export class CommentCreateWithoutAttachmentsInput {
 }
 
 export class CommentCreateWithoutAuthorInput {
-    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutCommentsInput>;
+    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutCommentInput>;
     attachments?: Nullable<AttachmentCreateNestedManyWithoutCommentInput>;
     comment?: Nullable<CommentCreateNestedOneWithoutCommentsInput>;
     comments?: Nullable<CommentCreateNestedManyWithoutCommentInput>;
     commentsEnabled?: Nullable<boolean>;
     content: string;
     createdAt?: Nullable<DateTime>;
-    favorites?: Nullable<FavoriteCreateNestedManyWithoutCommentsInput>;
+    favorites?: Nullable<FavoriteCreateNestedManyWithoutCommentInput>;
     id?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
     review?: Nullable<ReviewCreateNestedOneWithoutCommentsInput>;
@@ -5884,14 +5889,14 @@ export class CommentCreateWithoutAuthorInput {
 }
 
 export class CommentCreateWithoutCommentInput {
-    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutCommentsInput>;
+    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutCommentInput>;
     attachments?: Nullable<AttachmentCreateNestedManyWithoutCommentInput>;
     author: UserCreateNestedOneWithoutCommentsInput;
     comments?: Nullable<CommentCreateNestedManyWithoutCommentInput>;
     commentsEnabled?: Nullable<boolean>;
     content: string;
     createdAt?: Nullable<DateTime>;
-    favorites?: Nullable<FavoriteCreateNestedManyWithoutCommentsInput>;
+    favorites?: Nullable<FavoriteCreateNestedManyWithoutCommentInput>;
     id?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
     review?: Nullable<ReviewCreateNestedOneWithoutCommentsInput>;
@@ -5899,14 +5904,14 @@ export class CommentCreateWithoutCommentInput {
 }
 
 export class CommentCreateWithoutCommentsInput {
-    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutCommentsInput>;
+    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutCommentInput>;
     attachments?: Nullable<AttachmentCreateNestedManyWithoutCommentInput>;
     author: UserCreateNestedOneWithoutCommentsInput;
     comment?: Nullable<CommentCreateNestedOneWithoutCommentsInput>;
     commentsEnabled?: Nullable<boolean>;
     content: string;
     createdAt?: Nullable<DateTime>;
-    favorites?: Nullable<FavoriteCreateNestedManyWithoutCommentsInput>;
+    favorites?: Nullable<FavoriteCreateNestedManyWithoutCommentInput>;
     id?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
     review?: Nullable<ReviewCreateNestedOneWithoutCommentsInput>;
@@ -5914,7 +5919,7 @@ export class CommentCreateWithoutCommentsInput {
 }
 
 export class CommentCreateWithoutFavoritesInput {
-    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutCommentsInput>;
+    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutCommentInput>;
     attachments?: Nullable<AttachmentCreateNestedManyWithoutCommentInput>;
     author: UserCreateNestedOneWithoutCommentsInput;
     comment?: Nullable<CommentCreateNestedOneWithoutCommentsInput>;
@@ -5929,7 +5934,7 @@ export class CommentCreateWithoutFavoritesInput {
 }
 
 export class CommentCreateWithoutReviewInput {
-    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutCommentsInput>;
+    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutCommentInput>;
     attachments?: Nullable<AttachmentCreateNestedManyWithoutCommentInput>;
     author: UserCreateNestedOneWithoutCommentsInput;
     comment?: Nullable<CommentCreateNestedOneWithoutCommentsInput>;
@@ -5937,7 +5942,7 @@ export class CommentCreateWithoutReviewInput {
     commentsEnabled?: Nullable<boolean>;
     content: string;
     createdAt?: Nullable<DateTime>;
-    favorites?: Nullable<FavoriteCreateNestedManyWithoutCommentsInput>;
+    favorites?: Nullable<FavoriteCreateNestedManyWithoutCommentInput>;
     id?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
     updatedAt?: Nullable<DateTime>;
@@ -5997,7 +6002,7 @@ export class CommentScalarWhereWithAggregatesInput {
 }
 
 export class CommentUncheckedCreateInput {
-    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutCommentsInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutCommentInput>;
     attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutCommentInput>;
     authorId: string;
     commentId?: Nullable<string>;
@@ -6005,7 +6010,7 @@ export class CommentUncheckedCreateInput {
     commentsEnabled?: Nullable<boolean>;
     content: string;
     createdAt?: Nullable<DateTime>;
-    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutCommentsInput>;
+    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutCommentInput>;
     id?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
     reviewId: string;
@@ -6041,7 +6046,7 @@ export class CommentUncheckedCreateWithoutAbuseReportsInput {
     commentsEnabled?: Nullable<boolean>;
     content: string;
     createdAt?: Nullable<DateTime>;
-    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutCommentsInput>;
+    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutCommentInput>;
     id?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
     reviewId: string;
@@ -6049,14 +6054,14 @@ export class CommentUncheckedCreateWithoutAbuseReportsInput {
 }
 
 export class CommentUncheckedCreateWithoutAttachmentsInput {
-    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutCommentsInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutCommentInput>;
     authorId: string;
     commentId?: Nullable<string>;
     comments?: Nullable<CommentUncheckedCreateNestedManyWithoutCommentInput>;
     commentsEnabled?: Nullable<boolean>;
     content: string;
     createdAt?: Nullable<DateTime>;
-    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutCommentsInput>;
+    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutCommentInput>;
     id?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
     reviewId: string;
@@ -6064,14 +6069,14 @@ export class CommentUncheckedCreateWithoutAttachmentsInput {
 }
 
 export class CommentUncheckedCreateWithoutAuthorInput {
-    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutCommentsInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutCommentInput>;
     attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutCommentInput>;
     commentId?: Nullable<string>;
     comments?: Nullable<CommentUncheckedCreateNestedManyWithoutCommentInput>;
     commentsEnabled?: Nullable<boolean>;
     content: string;
     createdAt?: Nullable<DateTime>;
-    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutCommentsInput>;
+    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutCommentInput>;
     id?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
     reviewId: string;
@@ -6079,14 +6084,14 @@ export class CommentUncheckedCreateWithoutAuthorInput {
 }
 
 export class CommentUncheckedCreateWithoutCommentInput {
-    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutCommentsInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutCommentInput>;
     attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutCommentInput>;
     authorId: string;
     comments?: Nullable<CommentUncheckedCreateNestedManyWithoutCommentInput>;
     commentsEnabled?: Nullable<boolean>;
     content: string;
     createdAt?: Nullable<DateTime>;
-    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutCommentsInput>;
+    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutCommentInput>;
     id?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
     reviewId: string;
@@ -6094,14 +6099,14 @@ export class CommentUncheckedCreateWithoutCommentInput {
 }
 
 export class CommentUncheckedCreateWithoutCommentsInput {
-    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutCommentsInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutCommentInput>;
     attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutCommentInput>;
     authorId: string;
     commentId?: Nullable<string>;
     commentsEnabled?: Nullable<boolean>;
     content: string;
     createdAt?: Nullable<DateTime>;
-    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutCommentsInput>;
+    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutCommentInput>;
     id?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
     reviewId: string;
@@ -6109,7 +6114,7 @@ export class CommentUncheckedCreateWithoutCommentsInput {
 }
 
 export class CommentUncheckedCreateWithoutFavoritesInput {
-    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutCommentsInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutCommentInput>;
     attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutCommentInput>;
     authorId: string;
     commentId?: Nullable<string>;
@@ -6124,7 +6129,7 @@ export class CommentUncheckedCreateWithoutFavoritesInput {
 }
 
 export class CommentUncheckedCreateWithoutReviewInput {
-    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutCommentsInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutCommentInput>;
     attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutCommentInput>;
     authorId: string;
     commentId?: Nullable<string>;
@@ -6132,14 +6137,14 @@ export class CommentUncheckedCreateWithoutReviewInput {
     commentsEnabled?: Nullable<boolean>;
     content: string;
     createdAt?: Nullable<DateTime>;
-    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutCommentsInput>;
+    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutCommentInput>;
     id?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
     updatedAt?: Nullable<DateTime>;
 }
 
 export class CommentUncheckedUpdateInput {
-    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutCommentsInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutCommentInput>;
     attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutCommentInput>;
     authorId?: Nullable<StringFieldUpdateOperationsInput>;
     commentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
@@ -6147,7 +6152,7 @@ export class CommentUncheckedUpdateInput {
     commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
     content?: Nullable<StringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutCommentsInput>;
+    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutCommentInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
     reviewId?: Nullable<StringFieldUpdateOperationsInput>;
@@ -6227,7 +6232,7 @@ export class CommentUncheckedUpdateWithoutAbuseReportsInput {
     commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
     content?: Nullable<StringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutCommentsInput>;
+    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutCommentInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
     reviewId?: Nullable<StringFieldUpdateOperationsInput>;
@@ -6235,14 +6240,14 @@ export class CommentUncheckedUpdateWithoutAbuseReportsInput {
 }
 
 export class CommentUncheckedUpdateWithoutAttachmentsInput {
-    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutCommentsInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutCommentInput>;
     authorId?: Nullable<StringFieldUpdateOperationsInput>;
     commentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     comments?: Nullable<CommentUncheckedUpdateManyWithoutCommentInput>;
     commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
     content?: Nullable<StringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutCommentsInput>;
+    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutCommentInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
     reviewId?: Nullable<StringFieldUpdateOperationsInput>;
@@ -6250,14 +6255,14 @@ export class CommentUncheckedUpdateWithoutAttachmentsInput {
 }
 
 export class CommentUncheckedUpdateWithoutAuthorInput {
-    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutCommentsInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutCommentInput>;
     attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutCommentInput>;
     commentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     comments?: Nullable<CommentUncheckedUpdateManyWithoutCommentInput>;
     commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
     content?: Nullable<StringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutCommentsInput>;
+    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutCommentInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
     reviewId?: Nullable<StringFieldUpdateOperationsInput>;
@@ -6265,14 +6270,14 @@ export class CommentUncheckedUpdateWithoutAuthorInput {
 }
 
 export class CommentUncheckedUpdateWithoutCommentInput {
-    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutCommentsInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutCommentInput>;
     attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutCommentInput>;
     authorId?: Nullable<StringFieldUpdateOperationsInput>;
     comments?: Nullable<CommentUncheckedUpdateManyWithoutCommentInput>;
     commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
     content?: Nullable<StringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutCommentsInput>;
+    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutCommentInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
     reviewId?: Nullable<StringFieldUpdateOperationsInput>;
@@ -6280,14 +6285,14 @@ export class CommentUncheckedUpdateWithoutCommentInput {
 }
 
 export class CommentUncheckedUpdateWithoutCommentsInput {
-    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutCommentsInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutCommentInput>;
     attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutCommentInput>;
     authorId?: Nullable<StringFieldUpdateOperationsInput>;
     commentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
     content?: Nullable<StringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutCommentsInput>;
+    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutCommentInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
     reviewId?: Nullable<StringFieldUpdateOperationsInput>;
@@ -6295,7 +6300,7 @@ export class CommentUncheckedUpdateWithoutCommentsInput {
 }
 
 export class CommentUncheckedUpdateWithoutFavoritesInput {
-    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutCommentsInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutCommentInput>;
     attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutCommentInput>;
     authorId?: Nullable<StringFieldUpdateOperationsInput>;
     commentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
@@ -6310,7 +6315,7 @@ export class CommentUncheckedUpdateWithoutFavoritesInput {
 }
 
 export class CommentUncheckedUpdateWithoutReviewInput {
-    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutCommentsInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutCommentInput>;
     attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutCommentInput>;
     authorId?: Nullable<StringFieldUpdateOperationsInput>;
     commentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
@@ -6318,14 +6323,14 @@ export class CommentUncheckedUpdateWithoutReviewInput {
     commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
     content?: Nullable<StringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutCommentsInput>;
+    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutCommentInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
 
 export class CommentUpdateInput {
-    abuseReports?: Nullable<AbuseReportUpdateManyWithoutCommentsInput>;
+    abuseReports?: Nullable<AbuseReportUpdateManyWithoutCommentInput>;
     attachments?: Nullable<AttachmentUpdateManyWithoutCommentInput>;
     author?: Nullable<UserUpdateOneRequiredWithoutCommentsInput>;
     comment?: Nullable<CommentUpdateOneWithoutCommentsInput>;
@@ -6333,7 +6338,7 @@ export class CommentUpdateInput {
     commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
     content?: Nullable<StringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorites?: Nullable<FavoriteUpdateManyWithoutCommentsInput>;
+    favorites?: Nullable<FavoriteUpdateManyWithoutCommentInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
     review?: Nullable<ReviewUpdateOneWithoutCommentsInput>;
@@ -6469,7 +6474,7 @@ export class CommentUpdateWithoutAbuseReportsInput {
     commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
     content?: Nullable<StringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorites?: Nullable<FavoriteUpdateManyWithoutCommentsInput>;
+    favorites?: Nullable<FavoriteUpdateManyWithoutCommentInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
     review?: Nullable<ReviewUpdateOneWithoutCommentsInput>;
@@ -6477,14 +6482,14 @@ export class CommentUpdateWithoutAbuseReportsInput {
 }
 
 export class CommentUpdateWithoutAttachmentsInput {
-    abuseReports?: Nullable<AbuseReportUpdateManyWithoutCommentsInput>;
+    abuseReports?: Nullable<AbuseReportUpdateManyWithoutCommentInput>;
     author?: Nullable<UserUpdateOneRequiredWithoutCommentsInput>;
     comment?: Nullable<CommentUpdateOneWithoutCommentsInput>;
     comments?: Nullable<CommentUpdateManyWithoutCommentInput>;
     commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
     content?: Nullable<StringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorites?: Nullable<FavoriteUpdateManyWithoutCommentsInput>;
+    favorites?: Nullable<FavoriteUpdateManyWithoutCommentInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
     review?: Nullable<ReviewUpdateOneWithoutCommentsInput>;
@@ -6492,14 +6497,14 @@ export class CommentUpdateWithoutAttachmentsInput {
 }
 
 export class CommentUpdateWithoutAuthorInput {
-    abuseReports?: Nullable<AbuseReportUpdateManyWithoutCommentsInput>;
+    abuseReports?: Nullable<AbuseReportUpdateManyWithoutCommentInput>;
     attachments?: Nullable<AttachmentUpdateManyWithoutCommentInput>;
     comment?: Nullable<CommentUpdateOneWithoutCommentsInput>;
     comments?: Nullable<CommentUpdateManyWithoutCommentInput>;
     commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
     content?: Nullable<StringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorites?: Nullable<FavoriteUpdateManyWithoutCommentsInput>;
+    favorites?: Nullable<FavoriteUpdateManyWithoutCommentInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
     review?: Nullable<ReviewUpdateOneWithoutCommentsInput>;
@@ -6507,14 +6512,14 @@ export class CommentUpdateWithoutAuthorInput {
 }
 
 export class CommentUpdateWithoutCommentInput {
-    abuseReports?: Nullable<AbuseReportUpdateManyWithoutCommentsInput>;
+    abuseReports?: Nullable<AbuseReportUpdateManyWithoutCommentInput>;
     attachments?: Nullable<AttachmentUpdateManyWithoutCommentInput>;
     author?: Nullable<UserUpdateOneRequiredWithoutCommentsInput>;
     comments?: Nullable<CommentUpdateManyWithoutCommentInput>;
     commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
     content?: Nullable<StringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorites?: Nullable<FavoriteUpdateManyWithoutCommentsInput>;
+    favorites?: Nullable<FavoriteUpdateManyWithoutCommentInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
     review?: Nullable<ReviewUpdateOneWithoutCommentsInput>;
@@ -6522,14 +6527,14 @@ export class CommentUpdateWithoutCommentInput {
 }
 
 export class CommentUpdateWithoutCommentsInput {
-    abuseReports?: Nullable<AbuseReportUpdateManyWithoutCommentsInput>;
+    abuseReports?: Nullable<AbuseReportUpdateManyWithoutCommentInput>;
     attachments?: Nullable<AttachmentUpdateManyWithoutCommentInput>;
     author?: Nullable<UserUpdateOneRequiredWithoutCommentsInput>;
     comment?: Nullable<CommentUpdateOneWithoutCommentsInput>;
     commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
     content?: Nullable<StringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorites?: Nullable<FavoriteUpdateManyWithoutCommentsInput>;
+    favorites?: Nullable<FavoriteUpdateManyWithoutCommentInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
     review?: Nullable<ReviewUpdateOneWithoutCommentsInput>;
@@ -6537,7 +6542,7 @@ export class CommentUpdateWithoutCommentsInput {
 }
 
 export class CommentUpdateWithoutFavoritesInput {
-    abuseReports?: Nullable<AbuseReportUpdateManyWithoutCommentsInput>;
+    abuseReports?: Nullable<AbuseReportUpdateManyWithoutCommentInput>;
     attachments?: Nullable<AttachmentUpdateManyWithoutCommentInput>;
     author?: Nullable<UserUpdateOneRequiredWithoutCommentsInput>;
     comment?: Nullable<CommentUpdateOneWithoutCommentsInput>;
@@ -6552,7 +6557,7 @@ export class CommentUpdateWithoutFavoritesInput {
 }
 
 export class CommentUpdateWithoutReviewInput {
-    abuseReports?: Nullable<AbuseReportUpdateManyWithoutCommentsInput>;
+    abuseReports?: Nullable<AbuseReportUpdateManyWithoutCommentInput>;
     attachments?: Nullable<AttachmentUpdateManyWithoutCommentInput>;
     author?: Nullable<UserUpdateOneRequiredWithoutCommentsInput>;
     comment?: Nullable<CommentUpdateOneWithoutCommentsInput>;
@@ -6560,7 +6565,7 @@ export class CommentUpdateWithoutReviewInput {
     commentsEnabled?: Nullable<BoolFieldUpdateOperationsInput>;
     content?: Nullable<StringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorites?: Nullable<FavoriteUpdateManyWithoutCommentsInput>;
+    favorites?: Nullable<FavoriteUpdateManyWithoutCommentInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
@@ -7192,24 +7197,26 @@ export class EnumTransactionTypeWithAggregatesFilter {
 }
 
 export class FavoriteCreateInput {
-    Business?: Nullable<BusinessCreateNestedOneWithoutFavoriteInput>;
     author: UserCreateNestedOneWithoutFavoritedInput;
-    comments?: Nullable<CommentCreateNestedOneWithoutFavoritesInput>;
+    business?: Nullable<BusinessCreateNestedOneWithoutFavoritesInput>;
+    comment?: Nullable<CommentCreateNestedOneWithoutFavoritesInput>;
     createdAt?: Nullable<DateTime>;
+    favId: string;
     id?: Nullable<string>;
-    orders?: Nullable<OrderCreateNestedOneWithoutFavoritesInput>;
+    order?: Nullable<OrderCreateNestedOneWithoutFavoritesInput>;
     recordStatus?: Nullable<RecordStatus>;
-    reviews?: Nullable<ReviewCreateNestedOneWithoutFavoritesInput>;
+    review?: Nullable<ReviewCreateNestedOneWithoutFavoritesInput>;
     service?: Nullable<ServiceCreateNestedOneWithoutFavoritesInput>;
     type: FavoriteRecordTypeCreateNestedOneWithoutFavoritesInput;
     updatedAt?: Nullable<DateTime>;
-    users?: Nullable<UserCreateNestedOneWithoutFavoritesInput>;
+    user?: Nullable<UserCreateNestedOneWithoutFavoritesInput>;
 }
 
 export class FavoriteCreateManyAuthorInput {
     businessId?: Nullable<string>;
     commentId?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
+    favId: string;
     id?: Nullable<string>;
     orderId?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
@@ -7229,6 +7236,7 @@ export class FavoriteCreateManyBusinessInput {
     authorId: string;
     commentId?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
+    favId: string;
     id?: Nullable<string>;
     orderId?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
@@ -7244,10 +7252,11 @@ export class FavoriteCreateManyBusinessInputEnvelope {
     skipDuplicates?: Nullable<boolean>;
 }
 
-export class FavoriteCreateManyCommentsInput {
+export class FavoriteCreateManyCommentInput {
     authorId: string;
     businessId?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
+    favId: string;
     id?: Nullable<string>;
     orderId?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
@@ -7258,8 +7267,8 @@ export class FavoriteCreateManyCommentsInput {
     userId?: Nullable<string>;
 }
 
-export class FavoriteCreateManyCommentsInputEnvelope {
-    data: FavoriteCreateManyCommentsInput[];
+export class FavoriteCreateManyCommentInputEnvelope {
+    data: FavoriteCreateManyCommentInput[];
     skipDuplicates?: Nullable<boolean>;
 }
 
@@ -7268,6 +7277,7 @@ export class FavoriteCreateManyInput {
     businessId?: Nullable<string>;
     commentId?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
+    favId: string;
     id?: Nullable<string>;
     orderId?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
@@ -7278,11 +7288,12 @@ export class FavoriteCreateManyInput {
     userId?: Nullable<string>;
 }
 
-export class FavoriteCreateManyOrdersInput {
+export class FavoriteCreateManyOrderInput {
     authorId: string;
     businessId?: Nullable<string>;
     commentId?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
+    favId: string;
     id?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
     reviewId?: Nullable<string>;
@@ -7292,16 +7303,17 @@ export class FavoriteCreateManyOrdersInput {
     userId?: Nullable<string>;
 }
 
-export class FavoriteCreateManyOrdersInputEnvelope {
-    data: FavoriteCreateManyOrdersInput[];
+export class FavoriteCreateManyOrderInputEnvelope {
+    data: FavoriteCreateManyOrderInput[];
     skipDuplicates?: Nullable<boolean>;
 }
 
-export class FavoriteCreateManyReviewsInput {
+export class FavoriteCreateManyReviewInput {
     authorId: string;
     businessId?: Nullable<string>;
     commentId?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
+    favId: string;
     id?: Nullable<string>;
     orderId?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
@@ -7311,8 +7323,8 @@ export class FavoriteCreateManyReviewsInput {
     userId?: Nullable<string>;
 }
 
-export class FavoriteCreateManyReviewsInputEnvelope {
-    data: FavoriteCreateManyReviewsInput[];
+export class FavoriteCreateManyReviewInputEnvelope {
+    data: FavoriteCreateManyReviewInput[];
     skipDuplicates?: Nullable<boolean>;
 }
 
@@ -7321,6 +7333,7 @@ export class FavoriteCreateManyServiceInput {
     businessId?: Nullable<string>;
     commentId?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
+    favId: string;
     id?: Nullable<string>;
     orderId?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
@@ -7340,6 +7353,7 @@ export class FavoriteCreateManyTypeInput {
     businessId?: Nullable<string>;
     commentId?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
+    favId: string;
     id?: Nullable<string>;
     orderId?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
@@ -7354,11 +7368,12 @@ export class FavoriteCreateManyTypeInputEnvelope {
     skipDuplicates?: Nullable<boolean>;
 }
 
-export class FavoriteCreateManyUsersInput {
+export class FavoriteCreateManyUserInput {
     authorId: string;
     businessId?: Nullable<string>;
     commentId?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
+    favId: string;
     id?: Nullable<string>;
     orderId?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
@@ -7368,8 +7383,8 @@ export class FavoriteCreateManyUsersInput {
     updatedAt?: Nullable<DateTime>;
 }
 
-export class FavoriteCreateManyUsersInputEnvelope {
-    data: FavoriteCreateManyUsersInput[];
+export class FavoriteCreateManyUserInputEnvelope {
+    data: FavoriteCreateManyUserInput[];
     skipDuplicates?: Nullable<boolean>;
 }
 
@@ -7387,25 +7402,25 @@ export class FavoriteCreateNestedManyWithoutBusinessInput {
     createMany?: Nullable<FavoriteCreateManyBusinessInputEnvelope>;
 }
 
-export class FavoriteCreateNestedManyWithoutCommentsInput {
+export class FavoriteCreateNestedManyWithoutCommentInput {
     connect?: Nullable<FavoriteWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<FavoriteCreateOrConnectWithoutCommentsInput[]>;
-    create?: Nullable<FavoriteCreateWithoutCommentsInput[]>;
-    createMany?: Nullable<FavoriteCreateManyCommentsInputEnvelope>;
+    connectOrCreate?: Nullable<FavoriteCreateOrConnectWithoutCommentInput[]>;
+    create?: Nullable<FavoriteCreateWithoutCommentInput[]>;
+    createMany?: Nullable<FavoriteCreateManyCommentInputEnvelope>;
 }
 
-export class FavoriteCreateNestedManyWithoutOrdersInput {
+export class FavoriteCreateNestedManyWithoutOrderInput {
     connect?: Nullable<FavoriteWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<FavoriteCreateOrConnectWithoutOrdersInput[]>;
-    create?: Nullable<FavoriteCreateWithoutOrdersInput[]>;
-    createMany?: Nullable<FavoriteCreateManyOrdersInputEnvelope>;
+    connectOrCreate?: Nullable<FavoriteCreateOrConnectWithoutOrderInput[]>;
+    create?: Nullable<FavoriteCreateWithoutOrderInput[]>;
+    createMany?: Nullable<FavoriteCreateManyOrderInputEnvelope>;
 }
 
-export class FavoriteCreateNestedManyWithoutReviewsInput {
+export class FavoriteCreateNestedManyWithoutReviewInput {
     connect?: Nullable<FavoriteWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<FavoriteCreateOrConnectWithoutReviewsInput[]>;
-    create?: Nullable<FavoriteCreateWithoutReviewsInput[]>;
-    createMany?: Nullable<FavoriteCreateManyReviewsInputEnvelope>;
+    connectOrCreate?: Nullable<FavoriteCreateOrConnectWithoutReviewInput[]>;
+    create?: Nullable<FavoriteCreateWithoutReviewInput[]>;
+    createMany?: Nullable<FavoriteCreateManyReviewInputEnvelope>;
 }
 
 export class FavoriteCreateNestedManyWithoutServiceInput {
@@ -7422,11 +7437,11 @@ export class FavoriteCreateNestedManyWithoutTypeInput {
     createMany?: Nullable<FavoriteCreateManyTypeInputEnvelope>;
 }
 
-export class FavoriteCreateNestedManyWithoutUsersInput {
+export class FavoriteCreateNestedManyWithoutUserInput {
     connect?: Nullable<FavoriteWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<FavoriteCreateOrConnectWithoutUsersInput[]>;
-    create?: Nullable<FavoriteCreateWithoutUsersInput[]>;
-    createMany?: Nullable<FavoriteCreateManyUsersInputEnvelope>;
+    connectOrCreate?: Nullable<FavoriteCreateOrConnectWithoutUserInput[]>;
+    create?: Nullable<FavoriteCreateWithoutUserInput[]>;
+    createMany?: Nullable<FavoriteCreateManyUserInputEnvelope>;
 }
 
 export class FavoriteCreateOrConnectWithoutAuthorInput {
@@ -7439,18 +7454,18 @@ export class FavoriteCreateOrConnectWithoutBusinessInput {
     where: FavoriteWhereUniqueInput;
 }
 
-export class FavoriteCreateOrConnectWithoutCommentsInput {
-    create: FavoriteUncheckedCreateWithoutCommentsInput;
+export class FavoriteCreateOrConnectWithoutCommentInput {
+    create: FavoriteUncheckedCreateWithoutCommentInput;
     where: FavoriteWhereUniqueInput;
 }
 
-export class FavoriteCreateOrConnectWithoutOrdersInput {
-    create: FavoriteUncheckedCreateWithoutOrdersInput;
+export class FavoriteCreateOrConnectWithoutOrderInput {
+    create: FavoriteUncheckedCreateWithoutOrderInput;
     where: FavoriteWhereUniqueInput;
 }
 
-export class FavoriteCreateOrConnectWithoutReviewsInput {
-    create: FavoriteUncheckedCreateWithoutReviewsInput;
+export class FavoriteCreateOrConnectWithoutReviewInput {
+    create: FavoriteUncheckedCreateWithoutReviewInput;
     where: FavoriteWhereUniqueInput;
 }
 
@@ -7464,118 +7479,126 @@ export class FavoriteCreateOrConnectWithoutTypeInput {
     where: FavoriteWhereUniqueInput;
 }
 
-export class FavoriteCreateOrConnectWithoutUsersInput {
-    create: FavoriteUncheckedCreateWithoutUsersInput;
+export class FavoriteCreateOrConnectWithoutUserInput {
+    create: FavoriteUncheckedCreateWithoutUserInput;
     where: FavoriteWhereUniqueInput;
 }
 
 export class FavoriteCreateWithoutAuthorInput {
-    Business?: Nullable<BusinessCreateNestedOneWithoutFavoriteInput>;
-    comments?: Nullable<CommentCreateNestedOneWithoutFavoritesInput>;
+    business?: Nullable<BusinessCreateNestedOneWithoutFavoritesInput>;
+    comment?: Nullable<CommentCreateNestedOneWithoutFavoritesInput>;
     createdAt?: Nullable<DateTime>;
+    favId: string;
     id?: Nullable<string>;
-    orders?: Nullable<OrderCreateNestedOneWithoutFavoritesInput>;
+    order?: Nullable<OrderCreateNestedOneWithoutFavoritesInput>;
     recordStatus?: Nullable<RecordStatus>;
-    reviews?: Nullable<ReviewCreateNestedOneWithoutFavoritesInput>;
+    review?: Nullable<ReviewCreateNestedOneWithoutFavoritesInput>;
     service?: Nullable<ServiceCreateNestedOneWithoutFavoritesInput>;
     type: FavoriteRecordTypeCreateNestedOneWithoutFavoritesInput;
     updatedAt?: Nullable<DateTime>;
-    users?: Nullable<UserCreateNestedOneWithoutFavoritesInput>;
+    user?: Nullable<UserCreateNestedOneWithoutFavoritesInput>;
 }
 
 export class FavoriteCreateWithoutBusinessInput {
     author: UserCreateNestedOneWithoutFavoritedInput;
-    comments?: Nullable<CommentCreateNestedOneWithoutFavoritesInput>;
+    comment?: Nullable<CommentCreateNestedOneWithoutFavoritesInput>;
     createdAt?: Nullable<DateTime>;
+    favId: string;
     id?: Nullable<string>;
-    orders?: Nullable<OrderCreateNestedOneWithoutFavoritesInput>;
+    order?: Nullable<OrderCreateNestedOneWithoutFavoritesInput>;
     recordStatus?: Nullable<RecordStatus>;
-    reviews?: Nullable<ReviewCreateNestedOneWithoutFavoritesInput>;
+    review?: Nullable<ReviewCreateNestedOneWithoutFavoritesInput>;
     service?: Nullable<ServiceCreateNestedOneWithoutFavoritesInput>;
     type: FavoriteRecordTypeCreateNestedOneWithoutFavoritesInput;
     updatedAt?: Nullable<DateTime>;
-    users?: Nullable<UserCreateNestedOneWithoutFavoritesInput>;
+    user?: Nullable<UserCreateNestedOneWithoutFavoritesInput>;
 }
 
-export class FavoriteCreateWithoutCommentsInput {
-    Business?: Nullable<BusinessCreateNestedOneWithoutFavoriteInput>;
+export class FavoriteCreateWithoutCommentInput {
     author: UserCreateNestedOneWithoutFavoritedInput;
+    business?: Nullable<BusinessCreateNestedOneWithoutFavoritesInput>;
     createdAt?: Nullable<DateTime>;
+    favId: string;
     id?: Nullable<string>;
-    orders?: Nullable<OrderCreateNestedOneWithoutFavoritesInput>;
+    order?: Nullable<OrderCreateNestedOneWithoutFavoritesInput>;
     recordStatus?: Nullable<RecordStatus>;
-    reviews?: Nullable<ReviewCreateNestedOneWithoutFavoritesInput>;
+    review?: Nullable<ReviewCreateNestedOneWithoutFavoritesInput>;
     service?: Nullable<ServiceCreateNestedOneWithoutFavoritesInput>;
     type: FavoriteRecordTypeCreateNestedOneWithoutFavoritesInput;
     updatedAt?: Nullable<DateTime>;
-    users?: Nullable<UserCreateNestedOneWithoutFavoritesInput>;
+    user?: Nullable<UserCreateNestedOneWithoutFavoritesInput>;
 }
 
-export class FavoriteCreateWithoutOrdersInput {
-    Business?: Nullable<BusinessCreateNestedOneWithoutFavoriteInput>;
+export class FavoriteCreateWithoutOrderInput {
     author: UserCreateNestedOneWithoutFavoritedInput;
-    comments?: Nullable<CommentCreateNestedOneWithoutFavoritesInput>;
+    business?: Nullable<BusinessCreateNestedOneWithoutFavoritesInput>;
+    comment?: Nullable<CommentCreateNestedOneWithoutFavoritesInput>;
     createdAt?: Nullable<DateTime>;
+    favId: string;
     id?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
-    reviews?: Nullable<ReviewCreateNestedOneWithoutFavoritesInput>;
+    review?: Nullable<ReviewCreateNestedOneWithoutFavoritesInput>;
     service?: Nullable<ServiceCreateNestedOneWithoutFavoritesInput>;
     type: FavoriteRecordTypeCreateNestedOneWithoutFavoritesInput;
     updatedAt?: Nullable<DateTime>;
-    users?: Nullable<UserCreateNestedOneWithoutFavoritesInput>;
+    user?: Nullable<UserCreateNestedOneWithoutFavoritesInput>;
 }
 
-export class FavoriteCreateWithoutReviewsInput {
-    Business?: Nullable<BusinessCreateNestedOneWithoutFavoriteInput>;
+export class FavoriteCreateWithoutReviewInput {
     author: UserCreateNestedOneWithoutFavoritedInput;
-    comments?: Nullable<CommentCreateNestedOneWithoutFavoritesInput>;
+    business?: Nullable<BusinessCreateNestedOneWithoutFavoritesInput>;
+    comment?: Nullable<CommentCreateNestedOneWithoutFavoritesInput>;
     createdAt?: Nullable<DateTime>;
+    favId: string;
     id?: Nullable<string>;
-    orders?: Nullable<OrderCreateNestedOneWithoutFavoritesInput>;
+    order?: Nullable<OrderCreateNestedOneWithoutFavoritesInput>;
     recordStatus?: Nullable<RecordStatus>;
     service?: Nullable<ServiceCreateNestedOneWithoutFavoritesInput>;
     type: FavoriteRecordTypeCreateNestedOneWithoutFavoritesInput;
     updatedAt?: Nullable<DateTime>;
-    users?: Nullable<UserCreateNestedOneWithoutFavoritesInput>;
+    user?: Nullable<UserCreateNestedOneWithoutFavoritesInput>;
 }
 
 export class FavoriteCreateWithoutServiceInput {
-    Business?: Nullable<BusinessCreateNestedOneWithoutFavoriteInput>;
     author: UserCreateNestedOneWithoutFavoritedInput;
-    comments?: Nullable<CommentCreateNestedOneWithoutFavoritesInput>;
+    business?: Nullable<BusinessCreateNestedOneWithoutFavoritesInput>;
+    comment?: Nullable<CommentCreateNestedOneWithoutFavoritesInput>;
     createdAt?: Nullable<DateTime>;
+    favId: string;
     id?: Nullable<string>;
-    orders?: Nullable<OrderCreateNestedOneWithoutFavoritesInput>;
+    order?: Nullable<OrderCreateNestedOneWithoutFavoritesInput>;
     recordStatus?: Nullable<RecordStatus>;
-    reviews?: Nullable<ReviewCreateNestedOneWithoutFavoritesInput>;
+    review?: Nullable<ReviewCreateNestedOneWithoutFavoritesInput>;
     type: FavoriteRecordTypeCreateNestedOneWithoutFavoritesInput;
     updatedAt?: Nullable<DateTime>;
-    users?: Nullable<UserCreateNestedOneWithoutFavoritesInput>;
+    user?: Nullable<UserCreateNestedOneWithoutFavoritesInput>;
 }
 
 export class FavoriteCreateWithoutTypeInput {
-    Business?: Nullable<BusinessCreateNestedOneWithoutFavoriteInput>;
     author: UserCreateNestedOneWithoutFavoritedInput;
-    comments?: Nullable<CommentCreateNestedOneWithoutFavoritesInput>;
+    business?: Nullable<BusinessCreateNestedOneWithoutFavoritesInput>;
+    comment?: Nullable<CommentCreateNestedOneWithoutFavoritesInput>;
     createdAt?: Nullable<DateTime>;
+    favId: string;
     id?: Nullable<string>;
-    orders?: Nullable<OrderCreateNestedOneWithoutFavoritesInput>;
+    order?: Nullable<OrderCreateNestedOneWithoutFavoritesInput>;
     recordStatus?: Nullable<RecordStatus>;
-    reviews?: Nullable<ReviewCreateNestedOneWithoutFavoritesInput>;
+    review?: Nullable<ReviewCreateNestedOneWithoutFavoritesInput>;
     service?: Nullable<ServiceCreateNestedOneWithoutFavoritesInput>;
     updatedAt?: Nullable<DateTime>;
-    users?: Nullable<UserCreateNestedOneWithoutFavoritesInput>;
+    user?: Nullable<UserCreateNestedOneWithoutFavoritesInput>;
 }
 
-export class FavoriteCreateWithoutUsersInput {
-    Business?: Nullable<BusinessCreateNestedOneWithoutFavoriteInput>;
+export class FavoriteCreateWithoutUserInput {
     author: UserCreateNestedOneWithoutFavoritedInput;
-    comments?: Nullable<CommentCreateNestedOneWithoutFavoritesInput>;
+    business?: Nullable<BusinessCreateNestedOneWithoutFavoritesInput>;
+    comment?: Nullable<CommentCreateNestedOneWithoutFavoritesInput>;
     createdAt?: Nullable<DateTime>;
+    favId: string;
     id?: Nullable<string>;
-    orders?: Nullable<OrderCreateNestedOneWithoutFavoritesInput>;
+    order?: Nullable<OrderCreateNestedOneWithoutFavoritesInput>;
     recordStatus?: Nullable<RecordStatus>;
-    reviews?: Nullable<ReviewCreateNestedOneWithoutFavoritesInput>;
+    review?: Nullable<ReviewCreateNestedOneWithoutFavoritesInput>;
     service?: Nullable<ServiceCreateNestedOneWithoutFavoritesInput>;
     type: FavoriteRecordTypeCreateNestedOneWithoutFavoritesInput;
     updatedAt?: Nullable<DateTime>;
@@ -7592,6 +7615,7 @@ export class FavoriteOrderByInput {
     businessId?: Nullable<SortOrder>;
     commentId?: Nullable<SortOrder>;
     createdAt?: Nullable<SortOrder>;
+    favId?: Nullable<SortOrder>;
     id?: Nullable<SortOrder>;
     orderId?: Nullable<SortOrder>;
     recordStatus?: Nullable<SortOrder>;
@@ -7714,6 +7738,7 @@ export class FavoriteRecordTypeWhereInput {
 
 export class FavoriteRecordTypeWhereUniqueInput {
     id?: Nullable<string>;
+    name?: Nullable<string>;
 }
 
 export class FavoriteScalarWhereInput {
@@ -7724,6 +7749,7 @@ export class FavoriteScalarWhereInput {
     businessId?: Nullable<StringNullableFilter>;
     commentId?: Nullable<StringNullableFilter>;
     createdAt?: Nullable<DateTimeFilter>;
+    favId?: Nullable<StringFilter>;
     id?: Nullable<StringFilter>;
     orderId?: Nullable<StringNullableFilter>;
     recordStatus?: Nullable<EnumRecordStatusFilter>;
@@ -7742,6 +7768,7 @@ export class FavoriteScalarWhereWithAggregatesInput {
     businessId?: Nullable<StringNullableWithAggregatesFilter>;
     commentId?: Nullable<StringNullableWithAggregatesFilter>;
     createdAt?: Nullable<DateTimeWithAggregatesFilter>;
+    favId?: Nullable<StringWithAggregatesFilter>;
     id?: Nullable<StringWithAggregatesFilter>;
     orderId?: Nullable<StringNullableWithAggregatesFilter>;
     recordStatus?: Nullable<EnumRecordStatusWithAggregatesFilter>;
@@ -7757,6 +7784,7 @@ export class FavoriteUncheckedCreateInput {
     businessId?: Nullable<string>;
     commentId?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
+    favId: string;
     id?: Nullable<string>;
     orderId?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
@@ -7781,25 +7809,25 @@ export class FavoriteUncheckedCreateNestedManyWithoutBusinessInput {
     createMany?: Nullable<FavoriteCreateManyBusinessInputEnvelope>;
 }
 
-export class FavoriteUncheckedCreateNestedManyWithoutCommentsInput {
+export class FavoriteUncheckedCreateNestedManyWithoutCommentInput {
     connect?: Nullable<FavoriteWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<FavoriteCreateOrConnectWithoutCommentsInput[]>;
-    create?: Nullable<FavoriteCreateWithoutCommentsInput[]>;
-    createMany?: Nullable<FavoriteCreateManyCommentsInputEnvelope>;
+    connectOrCreate?: Nullable<FavoriteCreateOrConnectWithoutCommentInput[]>;
+    create?: Nullable<FavoriteCreateWithoutCommentInput[]>;
+    createMany?: Nullable<FavoriteCreateManyCommentInputEnvelope>;
 }
 
-export class FavoriteUncheckedCreateNestedManyWithoutOrdersInput {
+export class FavoriteUncheckedCreateNestedManyWithoutOrderInput {
     connect?: Nullable<FavoriteWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<FavoriteCreateOrConnectWithoutOrdersInput[]>;
-    create?: Nullable<FavoriteCreateWithoutOrdersInput[]>;
-    createMany?: Nullable<FavoriteCreateManyOrdersInputEnvelope>;
+    connectOrCreate?: Nullable<FavoriteCreateOrConnectWithoutOrderInput[]>;
+    create?: Nullable<FavoriteCreateWithoutOrderInput[]>;
+    createMany?: Nullable<FavoriteCreateManyOrderInputEnvelope>;
 }
 
-export class FavoriteUncheckedCreateNestedManyWithoutReviewsInput {
+export class FavoriteUncheckedCreateNestedManyWithoutReviewInput {
     connect?: Nullable<FavoriteWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<FavoriteCreateOrConnectWithoutReviewsInput[]>;
-    create?: Nullable<FavoriteCreateWithoutReviewsInput[]>;
-    createMany?: Nullable<FavoriteCreateManyReviewsInputEnvelope>;
+    connectOrCreate?: Nullable<FavoriteCreateOrConnectWithoutReviewInput[]>;
+    create?: Nullable<FavoriteCreateWithoutReviewInput[]>;
+    createMany?: Nullable<FavoriteCreateManyReviewInputEnvelope>;
 }
 
 export class FavoriteUncheckedCreateNestedManyWithoutServiceInput {
@@ -7816,17 +7844,18 @@ export class FavoriteUncheckedCreateNestedManyWithoutTypeInput {
     createMany?: Nullable<FavoriteCreateManyTypeInputEnvelope>;
 }
 
-export class FavoriteUncheckedCreateNestedManyWithoutUsersInput {
+export class FavoriteUncheckedCreateNestedManyWithoutUserInput {
     connect?: Nullable<FavoriteWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<FavoriteCreateOrConnectWithoutUsersInput[]>;
-    create?: Nullable<FavoriteCreateWithoutUsersInput[]>;
-    createMany?: Nullable<FavoriteCreateManyUsersInputEnvelope>;
+    connectOrCreate?: Nullable<FavoriteCreateOrConnectWithoutUserInput[]>;
+    create?: Nullable<FavoriteCreateWithoutUserInput[]>;
+    createMany?: Nullable<FavoriteCreateManyUserInputEnvelope>;
 }
 
 export class FavoriteUncheckedCreateWithoutAuthorInput {
     businessId?: Nullable<string>;
     commentId?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
+    favId: string;
     id?: Nullable<string>;
     orderId?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
@@ -7841,6 +7870,7 @@ export class FavoriteUncheckedCreateWithoutBusinessInput {
     authorId: string;
     commentId?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
+    favId: string;
     id?: Nullable<string>;
     orderId?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
@@ -7851,10 +7881,11 @@ export class FavoriteUncheckedCreateWithoutBusinessInput {
     userId?: Nullable<string>;
 }
 
-export class FavoriteUncheckedCreateWithoutCommentsInput {
+export class FavoriteUncheckedCreateWithoutCommentInput {
     authorId: string;
     businessId?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
+    favId: string;
     id?: Nullable<string>;
     orderId?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
@@ -7865,11 +7896,12 @@ export class FavoriteUncheckedCreateWithoutCommentsInput {
     userId?: Nullable<string>;
 }
 
-export class FavoriteUncheckedCreateWithoutOrdersInput {
+export class FavoriteUncheckedCreateWithoutOrderInput {
     authorId: string;
     businessId?: Nullable<string>;
     commentId?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
+    favId: string;
     id?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
     reviewId?: Nullable<string>;
@@ -7879,11 +7911,12 @@ export class FavoriteUncheckedCreateWithoutOrdersInput {
     userId?: Nullable<string>;
 }
 
-export class FavoriteUncheckedCreateWithoutReviewsInput {
+export class FavoriteUncheckedCreateWithoutReviewInput {
     authorId: string;
     businessId?: Nullable<string>;
     commentId?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
+    favId: string;
     id?: Nullable<string>;
     orderId?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
@@ -7898,6 +7931,7 @@ export class FavoriteUncheckedCreateWithoutServiceInput {
     businessId?: Nullable<string>;
     commentId?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
+    favId: string;
     id?: Nullable<string>;
     orderId?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
@@ -7912,6 +7946,7 @@ export class FavoriteUncheckedCreateWithoutTypeInput {
     businessId?: Nullable<string>;
     commentId?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
+    favId: string;
     id?: Nullable<string>;
     orderId?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
@@ -7921,11 +7956,12 @@ export class FavoriteUncheckedCreateWithoutTypeInput {
     userId?: Nullable<string>;
 }
 
-export class FavoriteUncheckedCreateWithoutUsersInput {
+export class FavoriteUncheckedCreateWithoutUserInput {
     authorId: string;
     businessId?: Nullable<string>;
     commentId?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
+    favId: string;
     id?: Nullable<string>;
     orderId?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
@@ -7940,6 +7976,7 @@ export class FavoriteUncheckedUpdateInput {
     businessId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     commentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    favId?: Nullable<StringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     orderId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
@@ -7955,6 +7992,7 @@ export class FavoriteUncheckedUpdateManyInput {
     businessId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     commentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    favId?: Nullable<StringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     orderId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
@@ -7993,38 +8031,25 @@ export class FavoriteUncheckedUpdateManyWithoutBusinessInput {
     upsert?: Nullable<FavoriteUpsertWithWhereUniqueWithoutBusinessInput[]>;
 }
 
-export class FavoriteUncheckedUpdateManyWithoutCommentsInput {
+export class FavoriteUncheckedUpdateManyWithoutCommentInput {
     connect?: Nullable<FavoriteWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<FavoriteCreateOrConnectWithoutCommentsInput[]>;
-    create?: Nullable<FavoriteCreateWithoutCommentsInput[]>;
-    createMany?: Nullable<FavoriteCreateManyCommentsInputEnvelope>;
+    connectOrCreate?: Nullable<FavoriteCreateOrConnectWithoutCommentInput[]>;
+    create?: Nullable<FavoriteCreateWithoutCommentInput[]>;
+    createMany?: Nullable<FavoriteCreateManyCommentInputEnvelope>;
     delete?: Nullable<FavoriteWhereUniqueInput[]>;
     deleteMany?: Nullable<FavoriteScalarWhereInput[]>;
     disconnect?: Nullable<FavoriteWhereUniqueInput[]>;
     set?: Nullable<FavoriteWhereUniqueInput[]>;
-    update?: Nullable<FavoriteUpdateWithWhereUniqueWithoutCommentsInput[]>;
-    updateMany?: Nullable<FavoriteUpdateManyWithWhereWithoutCommentsInput[]>;
-    upsert?: Nullable<FavoriteUpsertWithWhereUniqueWithoutCommentsInput[]>;
-}
-
-export class FavoriteUncheckedUpdateManyWithoutFavoriteInput {
-    authorId?: Nullable<StringFieldUpdateOperationsInput>;
-    commentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    id?: Nullable<StringFieldUpdateOperationsInput>;
-    orderId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    reviewId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    serviceId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    typeId?: Nullable<StringFieldUpdateOperationsInput>;
-    updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    userId?: Nullable<NullableStringFieldUpdateOperationsInput>;
+    update?: Nullable<FavoriteUpdateWithWhereUniqueWithoutCommentInput[]>;
+    updateMany?: Nullable<FavoriteUpdateManyWithWhereWithoutCommentInput[]>;
+    upsert?: Nullable<FavoriteUpsertWithWhereUniqueWithoutCommentInput[]>;
 }
 
 export class FavoriteUncheckedUpdateManyWithoutFavoritedInput {
     businessId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     commentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    favId?: Nullable<StringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     orderId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
@@ -8040,6 +8065,7 @@ export class FavoriteUncheckedUpdateManyWithoutFavoritesInput {
     businessId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     commentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    favId?: Nullable<StringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     orderId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
@@ -8049,32 +8075,32 @@ export class FavoriteUncheckedUpdateManyWithoutFavoritesInput {
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
 
-export class FavoriteUncheckedUpdateManyWithoutOrdersInput {
+export class FavoriteUncheckedUpdateManyWithoutOrderInput {
     connect?: Nullable<FavoriteWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<FavoriteCreateOrConnectWithoutOrdersInput[]>;
-    create?: Nullable<FavoriteCreateWithoutOrdersInput[]>;
-    createMany?: Nullable<FavoriteCreateManyOrdersInputEnvelope>;
+    connectOrCreate?: Nullable<FavoriteCreateOrConnectWithoutOrderInput[]>;
+    create?: Nullable<FavoriteCreateWithoutOrderInput[]>;
+    createMany?: Nullable<FavoriteCreateManyOrderInputEnvelope>;
     delete?: Nullable<FavoriteWhereUniqueInput[]>;
     deleteMany?: Nullable<FavoriteScalarWhereInput[]>;
     disconnect?: Nullable<FavoriteWhereUniqueInput[]>;
     set?: Nullable<FavoriteWhereUniqueInput[]>;
-    update?: Nullable<FavoriteUpdateWithWhereUniqueWithoutOrdersInput[]>;
-    updateMany?: Nullable<FavoriteUpdateManyWithWhereWithoutOrdersInput[]>;
-    upsert?: Nullable<FavoriteUpsertWithWhereUniqueWithoutOrdersInput[]>;
+    update?: Nullable<FavoriteUpdateWithWhereUniqueWithoutOrderInput[]>;
+    updateMany?: Nullable<FavoriteUpdateManyWithWhereWithoutOrderInput[]>;
+    upsert?: Nullable<FavoriteUpsertWithWhereUniqueWithoutOrderInput[]>;
 }
 
-export class FavoriteUncheckedUpdateManyWithoutReviewsInput {
+export class FavoriteUncheckedUpdateManyWithoutReviewInput {
     connect?: Nullable<FavoriteWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<FavoriteCreateOrConnectWithoutReviewsInput[]>;
-    create?: Nullable<FavoriteCreateWithoutReviewsInput[]>;
-    createMany?: Nullable<FavoriteCreateManyReviewsInputEnvelope>;
+    connectOrCreate?: Nullable<FavoriteCreateOrConnectWithoutReviewInput[]>;
+    create?: Nullable<FavoriteCreateWithoutReviewInput[]>;
+    createMany?: Nullable<FavoriteCreateManyReviewInputEnvelope>;
     delete?: Nullable<FavoriteWhereUniqueInput[]>;
     deleteMany?: Nullable<FavoriteScalarWhereInput[]>;
     disconnect?: Nullable<FavoriteWhereUniqueInput[]>;
     set?: Nullable<FavoriteWhereUniqueInput[]>;
-    update?: Nullable<FavoriteUpdateWithWhereUniqueWithoutReviewsInput[]>;
-    updateMany?: Nullable<FavoriteUpdateManyWithWhereWithoutReviewsInput[]>;
-    upsert?: Nullable<FavoriteUpsertWithWhereUniqueWithoutReviewsInput[]>;
+    update?: Nullable<FavoriteUpdateWithWhereUniqueWithoutReviewInput[]>;
+    updateMany?: Nullable<FavoriteUpdateManyWithWhereWithoutReviewInput[]>;
+    upsert?: Nullable<FavoriteUpsertWithWhereUniqueWithoutReviewInput[]>;
 }
 
 export class FavoriteUncheckedUpdateManyWithoutServiceInput {
@@ -8105,24 +8131,25 @@ export class FavoriteUncheckedUpdateManyWithoutTypeInput {
     upsert?: Nullable<FavoriteUpsertWithWhereUniqueWithoutTypeInput[]>;
 }
 
-export class FavoriteUncheckedUpdateManyWithoutUsersInput {
+export class FavoriteUncheckedUpdateManyWithoutUserInput {
     connect?: Nullable<FavoriteWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<FavoriteCreateOrConnectWithoutUsersInput[]>;
-    create?: Nullable<FavoriteCreateWithoutUsersInput[]>;
-    createMany?: Nullable<FavoriteCreateManyUsersInputEnvelope>;
+    connectOrCreate?: Nullable<FavoriteCreateOrConnectWithoutUserInput[]>;
+    create?: Nullable<FavoriteCreateWithoutUserInput[]>;
+    createMany?: Nullable<FavoriteCreateManyUserInputEnvelope>;
     delete?: Nullable<FavoriteWhereUniqueInput[]>;
     deleteMany?: Nullable<FavoriteScalarWhereInput[]>;
     disconnect?: Nullable<FavoriteWhereUniqueInput[]>;
     set?: Nullable<FavoriteWhereUniqueInput[]>;
-    update?: Nullable<FavoriteUpdateWithWhereUniqueWithoutUsersInput[]>;
-    updateMany?: Nullable<FavoriteUpdateManyWithWhereWithoutUsersInput[]>;
-    upsert?: Nullable<FavoriteUpsertWithWhereUniqueWithoutUsersInput[]>;
+    update?: Nullable<FavoriteUpdateWithWhereUniqueWithoutUserInput[]>;
+    updateMany?: Nullable<FavoriteUpdateManyWithWhereWithoutUserInput[]>;
+    upsert?: Nullable<FavoriteUpsertWithWhereUniqueWithoutUserInput[]>;
 }
 
 export class FavoriteUncheckedUpdateWithoutAuthorInput {
     businessId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     commentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    favId?: Nullable<StringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     orderId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
@@ -8137,6 +8164,7 @@ export class FavoriteUncheckedUpdateWithoutBusinessInput {
     authorId?: Nullable<StringFieldUpdateOperationsInput>;
     commentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    favId?: Nullable<StringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     orderId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
@@ -8147,10 +8175,11 @@ export class FavoriteUncheckedUpdateWithoutBusinessInput {
     userId?: Nullable<NullableStringFieldUpdateOperationsInput>;
 }
 
-export class FavoriteUncheckedUpdateWithoutCommentsInput {
+export class FavoriteUncheckedUpdateWithoutCommentInput {
     authorId?: Nullable<StringFieldUpdateOperationsInput>;
     businessId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    favId?: Nullable<StringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     orderId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
@@ -8161,11 +8190,12 @@ export class FavoriteUncheckedUpdateWithoutCommentsInput {
     userId?: Nullable<NullableStringFieldUpdateOperationsInput>;
 }
 
-export class FavoriteUncheckedUpdateWithoutOrdersInput {
+export class FavoriteUncheckedUpdateWithoutOrderInput {
     authorId?: Nullable<StringFieldUpdateOperationsInput>;
     businessId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     commentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    favId?: Nullable<StringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
     reviewId?: Nullable<NullableStringFieldUpdateOperationsInput>;
@@ -8175,11 +8205,12 @@ export class FavoriteUncheckedUpdateWithoutOrdersInput {
     userId?: Nullable<NullableStringFieldUpdateOperationsInput>;
 }
 
-export class FavoriteUncheckedUpdateWithoutReviewsInput {
+export class FavoriteUncheckedUpdateWithoutReviewInput {
     authorId?: Nullable<StringFieldUpdateOperationsInput>;
     businessId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     commentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    favId?: Nullable<StringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     orderId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
@@ -8194,6 +8225,7 @@ export class FavoriteUncheckedUpdateWithoutServiceInput {
     businessId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     commentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    favId?: Nullable<StringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     orderId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
@@ -8208,6 +8240,7 @@ export class FavoriteUncheckedUpdateWithoutTypeInput {
     businessId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     commentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    favId?: Nullable<StringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     orderId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
@@ -8217,11 +8250,12 @@ export class FavoriteUncheckedUpdateWithoutTypeInput {
     userId?: Nullable<NullableStringFieldUpdateOperationsInput>;
 }
 
-export class FavoriteUncheckedUpdateWithoutUsersInput {
+export class FavoriteUncheckedUpdateWithoutUserInput {
     authorId?: Nullable<StringFieldUpdateOperationsInput>;
     businessId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     commentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    favId?: Nullable<StringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     orderId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
@@ -8232,22 +8266,24 @@ export class FavoriteUncheckedUpdateWithoutUsersInput {
 }
 
 export class FavoriteUpdateInput {
-    Business?: Nullable<BusinessUpdateOneWithoutFavoriteInput>;
     author?: Nullable<UserUpdateOneRequiredWithoutFavoritedInput>;
-    comments?: Nullable<CommentUpdateOneWithoutFavoritesInput>;
+    business?: Nullable<BusinessUpdateOneWithoutFavoritesInput>;
+    comment?: Nullable<CommentUpdateOneWithoutFavoritesInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    favId?: Nullable<StringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
-    orders?: Nullable<OrderUpdateOneWithoutFavoritesInput>;
+    order?: Nullable<OrderUpdateOneWithoutFavoritesInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    reviews?: Nullable<ReviewUpdateOneWithoutFavoritesInput>;
+    review?: Nullable<ReviewUpdateOneWithoutFavoritesInput>;
     service?: Nullable<ServiceUpdateOneWithoutFavoritesInput>;
     type?: Nullable<FavoriteRecordTypeUpdateOneRequiredWithoutFavoritesInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    users?: Nullable<UserUpdateOneWithoutFavoritesInput>;
+    user?: Nullable<UserUpdateOneWithoutFavoritesInput>;
 }
 
 export class FavoriteUpdateManyMutationInput {
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    favId?: Nullable<StringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
@@ -8259,21 +8295,21 @@ export class FavoriteUpdateManyWithWhereWithoutAuthorInput {
 }
 
 export class FavoriteUpdateManyWithWhereWithoutBusinessInput {
-    data: FavoriteUncheckedUpdateManyWithoutFavoriteInput;
-    where: FavoriteScalarWhereInput;
-}
-
-export class FavoriteUpdateManyWithWhereWithoutCommentsInput {
     data: FavoriteUncheckedUpdateManyWithoutFavoritesInput;
     where: FavoriteScalarWhereInput;
 }
 
-export class FavoriteUpdateManyWithWhereWithoutOrdersInput {
+export class FavoriteUpdateManyWithWhereWithoutCommentInput {
     data: FavoriteUncheckedUpdateManyWithoutFavoritesInput;
     where: FavoriteScalarWhereInput;
 }
 
-export class FavoriteUpdateManyWithWhereWithoutReviewsInput {
+export class FavoriteUpdateManyWithWhereWithoutOrderInput {
+    data: FavoriteUncheckedUpdateManyWithoutFavoritesInput;
+    where: FavoriteScalarWhereInput;
+}
+
+export class FavoriteUpdateManyWithWhereWithoutReviewInput {
     data: FavoriteUncheckedUpdateManyWithoutFavoritesInput;
     where: FavoriteScalarWhereInput;
 }
@@ -8288,7 +8324,7 @@ export class FavoriteUpdateManyWithWhereWithoutTypeInput {
     where: FavoriteScalarWhereInput;
 }
 
-export class FavoriteUpdateManyWithWhereWithoutUsersInput {
+export class FavoriteUpdateManyWithWhereWithoutUserInput {
     data: FavoriteUncheckedUpdateManyWithoutFavoritesInput;
     where: FavoriteScalarWhereInput;
 }
@@ -8321,46 +8357,46 @@ export class FavoriteUpdateManyWithoutBusinessInput {
     upsert?: Nullable<FavoriteUpsertWithWhereUniqueWithoutBusinessInput[]>;
 }
 
-export class FavoriteUpdateManyWithoutCommentsInput {
+export class FavoriteUpdateManyWithoutCommentInput {
     connect?: Nullable<FavoriteWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<FavoriteCreateOrConnectWithoutCommentsInput[]>;
-    create?: Nullable<FavoriteCreateWithoutCommentsInput[]>;
-    createMany?: Nullable<FavoriteCreateManyCommentsInputEnvelope>;
+    connectOrCreate?: Nullable<FavoriteCreateOrConnectWithoutCommentInput[]>;
+    create?: Nullable<FavoriteCreateWithoutCommentInput[]>;
+    createMany?: Nullable<FavoriteCreateManyCommentInputEnvelope>;
     delete?: Nullable<FavoriteWhereUniqueInput[]>;
     deleteMany?: Nullable<FavoriteScalarWhereInput[]>;
     disconnect?: Nullable<FavoriteWhereUniqueInput[]>;
     set?: Nullable<FavoriteWhereUniqueInput[]>;
-    update?: Nullable<FavoriteUpdateWithWhereUniqueWithoutCommentsInput[]>;
-    updateMany?: Nullable<FavoriteUpdateManyWithWhereWithoutCommentsInput[]>;
-    upsert?: Nullable<FavoriteUpsertWithWhereUniqueWithoutCommentsInput[]>;
+    update?: Nullable<FavoriteUpdateWithWhereUniqueWithoutCommentInput[]>;
+    updateMany?: Nullable<FavoriteUpdateManyWithWhereWithoutCommentInput[]>;
+    upsert?: Nullable<FavoriteUpsertWithWhereUniqueWithoutCommentInput[]>;
 }
 
-export class FavoriteUpdateManyWithoutOrdersInput {
+export class FavoriteUpdateManyWithoutOrderInput {
     connect?: Nullable<FavoriteWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<FavoriteCreateOrConnectWithoutOrdersInput[]>;
-    create?: Nullable<FavoriteCreateWithoutOrdersInput[]>;
-    createMany?: Nullable<FavoriteCreateManyOrdersInputEnvelope>;
+    connectOrCreate?: Nullable<FavoriteCreateOrConnectWithoutOrderInput[]>;
+    create?: Nullable<FavoriteCreateWithoutOrderInput[]>;
+    createMany?: Nullable<FavoriteCreateManyOrderInputEnvelope>;
     delete?: Nullable<FavoriteWhereUniqueInput[]>;
     deleteMany?: Nullable<FavoriteScalarWhereInput[]>;
     disconnect?: Nullable<FavoriteWhereUniqueInput[]>;
     set?: Nullable<FavoriteWhereUniqueInput[]>;
-    update?: Nullable<FavoriteUpdateWithWhereUniqueWithoutOrdersInput[]>;
-    updateMany?: Nullable<FavoriteUpdateManyWithWhereWithoutOrdersInput[]>;
-    upsert?: Nullable<FavoriteUpsertWithWhereUniqueWithoutOrdersInput[]>;
+    update?: Nullable<FavoriteUpdateWithWhereUniqueWithoutOrderInput[]>;
+    updateMany?: Nullable<FavoriteUpdateManyWithWhereWithoutOrderInput[]>;
+    upsert?: Nullable<FavoriteUpsertWithWhereUniqueWithoutOrderInput[]>;
 }
 
-export class FavoriteUpdateManyWithoutReviewsInput {
+export class FavoriteUpdateManyWithoutReviewInput {
     connect?: Nullable<FavoriteWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<FavoriteCreateOrConnectWithoutReviewsInput[]>;
-    create?: Nullable<FavoriteCreateWithoutReviewsInput[]>;
-    createMany?: Nullable<FavoriteCreateManyReviewsInputEnvelope>;
+    connectOrCreate?: Nullable<FavoriteCreateOrConnectWithoutReviewInput[]>;
+    create?: Nullable<FavoriteCreateWithoutReviewInput[]>;
+    createMany?: Nullable<FavoriteCreateManyReviewInputEnvelope>;
     delete?: Nullable<FavoriteWhereUniqueInput[]>;
     deleteMany?: Nullable<FavoriteScalarWhereInput[]>;
     disconnect?: Nullable<FavoriteWhereUniqueInput[]>;
     set?: Nullable<FavoriteWhereUniqueInput[]>;
-    update?: Nullable<FavoriteUpdateWithWhereUniqueWithoutReviewsInput[]>;
-    updateMany?: Nullable<FavoriteUpdateManyWithWhereWithoutReviewsInput[]>;
-    upsert?: Nullable<FavoriteUpsertWithWhereUniqueWithoutReviewsInput[]>;
+    update?: Nullable<FavoriteUpdateWithWhereUniqueWithoutReviewInput[]>;
+    updateMany?: Nullable<FavoriteUpdateManyWithWhereWithoutReviewInput[]>;
+    upsert?: Nullable<FavoriteUpsertWithWhereUniqueWithoutReviewInput[]>;
 }
 
 export class FavoriteUpdateManyWithoutServiceInput {
@@ -8391,18 +8427,18 @@ export class FavoriteUpdateManyWithoutTypeInput {
     upsert?: Nullable<FavoriteUpsertWithWhereUniqueWithoutTypeInput[]>;
 }
 
-export class FavoriteUpdateManyWithoutUsersInput {
+export class FavoriteUpdateManyWithoutUserInput {
     connect?: Nullable<FavoriteWhereUniqueInput[]>;
-    connectOrCreate?: Nullable<FavoriteCreateOrConnectWithoutUsersInput[]>;
-    create?: Nullable<FavoriteCreateWithoutUsersInput[]>;
-    createMany?: Nullable<FavoriteCreateManyUsersInputEnvelope>;
+    connectOrCreate?: Nullable<FavoriteCreateOrConnectWithoutUserInput[]>;
+    create?: Nullable<FavoriteCreateWithoutUserInput[]>;
+    createMany?: Nullable<FavoriteCreateManyUserInputEnvelope>;
     delete?: Nullable<FavoriteWhereUniqueInput[]>;
     deleteMany?: Nullable<FavoriteScalarWhereInput[]>;
     disconnect?: Nullable<FavoriteWhereUniqueInput[]>;
     set?: Nullable<FavoriteWhereUniqueInput[]>;
-    update?: Nullable<FavoriteUpdateWithWhereUniqueWithoutUsersInput[]>;
-    updateMany?: Nullable<FavoriteUpdateManyWithWhereWithoutUsersInput[]>;
-    upsert?: Nullable<FavoriteUpsertWithWhereUniqueWithoutUsersInput[]>;
+    update?: Nullable<FavoriteUpdateWithWhereUniqueWithoutUserInput[]>;
+    updateMany?: Nullable<FavoriteUpdateManyWithWhereWithoutUserInput[]>;
+    upsert?: Nullable<FavoriteUpsertWithWhereUniqueWithoutUserInput[]>;
 }
 
 export class FavoriteUpdateWithWhereUniqueWithoutAuthorInput {
@@ -8415,18 +8451,18 @@ export class FavoriteUpdateWithWhereUniqueWithoutBusinessInput {
     where: FavoriteWhereUniqueInput;
 }
 
-export class FavoriteUpdateWithWhereUniqueWithoutCommentsInput {
-    data: FavoriteUncheckedUpdateWithoutCommentsInput;
+export class FavoriteUpdateWithWhereUniqueWithoutCommentInput {
+    data: FavoriteUncheckedUpdateWithoutCommentInput;
     where: FavoriteWhereUniqueInput;
 }
 
-export class FavoriteUpdateWithWhereUniqueWithoutOrdersInput {
-    data: FavoriteUncheckedUpdateWithoutOrdersInput;
+export class FavoriteUpdateWithWhereUniqueWithoutOrderInput {
+    data: FavoriteUncheckedUpdateWithoutOrderInput;
     where: FavoriteWhereUniqueInput;
 }
 
-export class FavoriteUpdateWithWhereUniqueWithoutReviewsInput {
-    data: FavoriteUncheckedUpdateWithoutReviewsInput;
+export class FavoriteUpdateWithWhereUniqueWithoutReviewInput {
+    data: FavoriteUncheckedUpdateWithoutReviewInput;
     where: FavoriteWhereUniqueInput;
 }
 
@@ -8440,118 +8476,126 @@ export class FavoriteUpdateWithWhereUniqueWithoutTypeInput {
     where: FavoriteWhereUniqueInput;
 }
 
-export class FavoriteUpdateWithWhereUniqueWithoutUsersInput {
-    data: FavoriteUncheckedUpdateWithoutUsersInput;
+export class FavoriteUpdateWithWhereUniqueWithoutUserInput {
+    data: FavoriteUncheckedUpdateWithoutUserInput;
     where: FavoriteWhereUniqueInput;
 }
 
 export class FavoriteUpdateWithoutAuthorInput {
-    Business?: Nullable<BusinessUpdateOneWithoutFavoriteInput>;
-    comments?: Nullable<CommentUpdateOneWithoutFavoritesInput>;
+    business?: Nullable<BusinessUpdateOneWithoutFavoritesInput>;
+    comment?: Nullable<CommentUpdateOneWithoutFavoritesInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    favId?: Nullable<StringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
-    orders?: Nullable<OrderUpdateOneWithoutFavoritesInput>;
+    order?: Nullable<OrderUpdateOneWithoutFavoritesInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    reviews?: Nullable<ReviewUpdateOneWithoutFavoritesInput>;
+    review?: Nullable<ReviewUpdateOneWithoutFavoritesInput>;
     service?: Nullable<ServiceUpdateOneWithoutFavoritesInput>;
     type?: Nullable<FavoriteRecordTypeUpdateOneRequiredWithoutFavoritesInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    users?: Nullable<UserUpdateOneWithoutFavoritesInput>;
+    user?: Nullable<UserUpdateOneWithoutFavoritesInput>;
 }
 
 export class FavoriteUpdateWithoutBusinessInput {
     author?: Nullable<UserUpdateOneRequiredWithoutFavoritedInput>;
-    comments?: Nullable<CommentUpdateOneWithoutFavoritesInput>;
+    comment?: Nullable<CommentUpdateOneWithoutFavoritesInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    favId?: Nullable<StringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
-    orders?: Nullable<OrderUpdateOneWithoutFavoritesInput>;
+    order?: Nullable<OrderUpdateOneWithoutFavoritesInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    reviews?: Nullable<ReviewUpdateOneWithoutFavoritesInput>;
+    review?: Nullable<ReviewUpdateOneWithoutFavoritesInput>;
     service?: Nullable<ServiceUpdateOneWithoutFavoritesInput>;
     type?: Nullable<FavoriteRecordTypeUpdateOneRequiredWithoutFavoritesInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    users?: Nullable<UserUpdateOneWithoutFavoritesInput>;
+    user?: Nullable<UserUpdateOneWithoutFavoritesInput>;
 }
 
-export class FavoriteUpdateWithoutCommentsInput {
-    Business?: Nullable<BusinessUpdateOneWithoutFavoriteInput>;
+export class FavoriteUpdateWithoutCommentInput {
     author?: Nullable<UserUpdateOneRequiredWithoutFavoritedInput>;
+    business?: Nullable<BusinessUpdateOneWithoutFavoritesInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    favId?: Nullable<StringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
-    orders?: Nullable<OrderUpdateOneWithoutFavoritesInput>;
+    order?: Nullable<OrderUpdateOneWithoutFavoritesInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    reviews?: Nullable<ReviewUpdateOneWithoutFavoritesInput>;
+    review?: Nullable<ReviewUpdateOneWithoutFavoritesInput>;
     service?: Nullable<ServiceUpdateOneWithoutFavoritesInput>;
     type?: Nullable<FavoriteRecordTypeUpdateOneRequiredWithoutFavoritesInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    users?: Nullable<UserUpdateOneWithoutFavoritesInput>;
+    user?: Nullable<UserUpdateOneWithoutFavoritesInput>;
 }
 
-export class FavoriteUpdateWithoutOrdersInput {
-    Business?: Nullable<BusinessUpdateOneWithoutFavoriteInput>;
+export class FavoriteUpdateWithoutOrderInput {
     author?: Nullable<UserUpdateOneRequiredWithoutFavoritedInput>;
-    comments?: Nullable<CommentUpdateOneWithoutFavoritesInput>;
+    business?: Nullable<BusinessUpdateOneWithoutFavoritesInput>;
+    comment?: Nullable<CommentUpdateOneWithoutFavoritesInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    favId?: Nullable<StringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    reviews?: Nullable<ReviewUpdateOneWithoutFavoritesInput>;
+    review?: Nullable<ReviewUpdateOneWithoutFavoritesInput>;
     service?: Nullable<ServiceUpdateOneWithoutFavoritesInput>;
     type?: Nullable<FavoriteRecordTypeUpdateOneRequiredWithoutFavoritesInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    users?: Nullable<UserUpdateOneWithoutFavoritesInput>;
+    user?: Nullable<UserUpdateOneWithoutFavoritesInput>;
 }
 
-export class FavoriteUpdateWithoutReviewsInput {
-    Business?: Nullable<BusinessUpdateOneWithoutFavoriteInput>;
+export class FavoriteUpdateWithoutReviewInput {
     author?: Nullable<UserUpdateOneRequiredWithoutFavoritedInput>;
-    comments?: Nullable<CommentUpdateOneWithoutFavoritesInput>;
+    business?: Nullable<BusinessUpdateOneWithoutFavoritesInput>;
+    comment?: Nullable<CommentUpdateOneWithoutFavoritesInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    favId?: Nullable<StringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
-    orders?: Nullable<OrderUpdateOneWithoutFavoritesInput>;
+    order?: Nullable<OrderUpdateOneWithoutFavoritesInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
     service?: Nullable<ServiceUpdateOneWithoutFavoritesInput>;
     type?: Nullable<FavoriteRecordTypeUpdateOneRequiredWithoutFavoritesInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    users?: Nullable<UserUpdateOneWithoutFavoritesInput>;
+    user?: Nullable<UserUpdateOneWithoutFavoritesInput>;
 }
 
 export class FavoriteUpdateWithoutServiceInput {
-    Business?: Nullable<BusinessUpdateOneWithoutFavoriteInput>;
     author?: Nullable<UserUpdateOneRequiredWithoutFavoritedInput>;
-    comments?: Nullable<CommentUpdateOneWithoutFavoritesInput>;
+    business?: Nullable<BusinessUpdateOneWithoutFavoritesInput>;
+    comment?: Nullable<CommentUpdateOneWithoutFavoritesInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    favId?: Nullable<StringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
-    orders?: Nullable<OrderUpdateOneWithoutFavoritesInput>;
+    order?: Nullable<OrderUpdateOneWithoutFavoritesInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    reviews?: Nullable<ReviewUpdateOneWithoutFavoritesInput>;
+    review?: Nullable<ReviewUpdateOneWithoutFavoritesInput>;
     type?: Nullable<FavoriteRecordTypeUpdateOneRequiredWithoutFavoritesInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    users?: Nullable<UserUpdateOneWithoutFavoritesInput>;
+    user?: Nullable<UserUpdateOneWithoutFavoritesInput>;
 }
 
 export class FavoriteUpdateWithoutTypeInput {
-    Business?: Nullable<BusinessUpdateOneWithoutFavoriteInput>;
     author?: Nullable<UserUpdateOneRequiredWithoutFavoritedInput>;
-    comments?: Nullable<CommentUpdateOneWithoutFavoritesInput>;
+    business?: Nullable<BusinessUpdateOneWithoutFavoritesInput>;
+    comment?: Nullable<CommentUpdateOneWithoutFavoritesInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    favId?: Nullable<StringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
-    orders?: Nullable<OrderUpdateOneWithoutFavoritesInput>;
+    order?: Nullable<OrderUpdateOneWithoutFavoritesInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    reviews?: Nullable<ReviewUpdateOneWithoutFavoritesInput>;
+    review?: Nullable<ReviewUpdateOneWithoutFavoritesInput>;
     service?: Nullable<ServiceUpdateOneWithoutFavoritesInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    users?: Nullable<UserUpdateOneWithoutFavoritesInput>;
+    user?: Nullable<UserUpdateOneWithoutFavoritesInput>;
 }
 
-export class FavoriteUpdateWithoutUsersInput {
-    Business?: Nullable<BusinessUpdateOneWithoutFavoriteInput>;
+export class FavoriteUpdateWithoutUserInput {
     author?: Nullable<UserUpdateOneRequiredWithoutFavoritedInput>;
-    comments?: Nullable<CommentUpdateOneWithoutFavoritesInput>;
+    business?: Nullable<BusinessUpdateOneWithoutFavoritesInput>;
+    comment?: Nullable<CommentUpdateOneWithoutFavoritesInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
+    favId?: Nullable<StringFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
-    orders?: Nullable<OrderUpdateOneWithoutFavoritesInput>;
+    order?: Nullable<OrderUpdateOneWithoutFavoritesInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    reviews?: Nullable<ReviewUpdateOneWithoutFavoritesInput>;
+    review?: Nullable<ReviewUpdateOneWithoutFavoritesInput>;
     service?: Nullable<ServiceUpdateOneWithoutFavoritesInput>;
     type?: Nullable<FavoriteRecordTypeUpdateOneRequiredWithoutFavoritesInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
@@ -8569,21 +8613,21 @@ export class FavoriteUpsertWithWhereUniqueWithoutBusinessInput {
     where: FavoriteWhereUniqueInput;
 }
 
-export class FavoriteUpsertWithWhereUniqueWithoutCommentsInput {
-    create: FavoriteUncheckedCreateWithoutCommentsInput;
-    update: FavoriteUncheckedUpdateWithoutCommentsInput;
+export class FavoriteUpsertWithWhereUniqueWithoutCommentInput {
+    create: FavoriteUncheckedCreateWithoutCommentInput;
+    update: FavoriteUncheckedUpdateWithoutCommentInput;
     where: FavoriteWhereUniqueInput;
 }
 
-export class FavoriteUpsertWithWhereUniqueWithoutOrdersInput {
-    create: FavoriteUncheckedCreateWithoutOrdersInput;
-    update: FavoriteUncheckedUpdateWithoutOrdersInput;
+export class FavoriteUpsertWithWhereUniqueWithoutOrderInput {
+    create: FavoriteUncheckedCreateWithoutOrderInput;
+    update: FavoriteUncheckedUpdateWithoutOrderInput;
     where: FavoriteWhereUniqueInput;
 }
 
-export class FavoriteUpsertWithWhereUniqueWithoutReviewsInput {
-    create: FavoriteUncheckedCreateWithoutReviewsInput;
-    update: FavoriteUncheckedUpdateWithoutReviewsInput;
+export class FavoriteUpsertWithWhereUniqueWithoutReviewInput {
+    create: FavoriteUncheckedCreateWithoutReviewInput;
+    update: FavoriteUncheckedUpdateWithoutReviewInput;
     where: FavoriteWhereUniqueInput;
 }
 
@@ -8599,39 +8643,41 @@ export class FavoriteUpsertWithWhereUniqueWithoutTypeInput {
     where: FavoriteWhereUniqueInput;
 }
 
-export class FavoriteUpsertWithWhereUniqueWithoutUsersInput {
-    create: FavoriteUncheckedCreateWithoutUsersInput;
-    update: FavoriteUncheckedUpdateWithoutUsersInput;
+export class FavoriteUpsertWithWhereUniqueWithoutUserInput {
+    create: FavoriteUncheckedCreateWithoutUserInput;
+    update: FavoriteUncheckedUpdateWithoutUserInput;
     where: FavoriteWhereUniqueInput;
 }
 
 export class FavoriteWhereInput {
     AND?: Nullable<FavoriteWhereInput[]>;
-    Business?: Nullable<BusinessWhereInput>;
     NOT?: Nullable<FavoriteWhereInput[]>;
     OR?: Nullable<FavoriteWhereInput[]>;
     author?: Nullable<UserWhereInput>;
     authorId?: Nullable<StringFilter>;
+    business?: Nullable<BusinessWhereInput>;
     businessId?: Nullable<StringNullableFilter>;
+    comment?: Nullable<CommentWhereInput>;
     commentId?: Nullable<StringNullableFilter>;
-    comments?: Nullable<CommentWhereInput>;
     createdAt?: Nullable<DateTimeFilter>;
+    favId?: Nullable<StringFilter>;
     id?: Nullable<StringFilter>;
+    order?: Nullable<OrderWhereInput>;
     orderId?: Nullable<StringNullableFilter>;
-    orders?: Nullable<OrderWhereInput>;
     recordStatus?: Nullable<EnumRecordStatusFilter>;
+    review?: Nullable<ReviewWhereInput>;
     reviewId?: Nullable<StringNullableFilter>;
-    reviews?: Nullable<ReviewWhereInput>;
     service?: Nullable<ServiceWhereInput>;
     serviceId?: Nullable<StringNullableFilter>;
     type?: Nullable<FavoriteRecordTypeWhereInput>;
     typeId?: Nullable<StringFilter>;
     updatedAt?: Nullable<DateTimeFilter>;
+    user?: Nullable<UserWhereInput>;
     userId?: Nullable<StringNullableFilter>;
-    users?: Nullable<UserWhereInput>;
 }
 
 export class FavoriteWhereUniqueInput {
+    favId?: Nullable<string>;
     id?: Nullable<string>;
 }
 
@@ -9568,7 +9614,7 @@ export class MpesaPaymentCreateInput {
     output_ThirdPartyConversationID?: Nullable<string>;
     output_TransactionID?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
-    state?: Nullable<PaymentStatus>;
+    status?: Nullable<PaymentStatus>;
     transaction?: Nullable<TransactionCreateNestedOneWithoutMpesaPaymentInput>;
     updatedAt?: Nullable<DateTime>;
 }
@@ -9590,7 +9636,7 @@ export class MpesaPaymentCreateManyInput {
     output_ThirdPartyConversationID?: Nullable<string>;
     output_TransactionID?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
-    state?: Nullable<PaymentStatus>;
+    status?: Nullable<PaymentStatus>;
     updatedAt?: Nullable<DateTime>;
 }
 
@@ -9622,7 +9668,7 @@ export class MpesaPaymentCreateWithoutTransactionInput {
     output_ThirdPartyConversationID?: Nullable<string>;
     output_TransactionID?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
-    state?: Nullable<PaymentStatus>;
+    status?: Nullable<PaymentStatus>;
     updatedAt?: Nullable<DateTime>;
 }
 
@@ -9643,7 +9689,7 @@ export class MpesaPaymentOrderByInput {
     output_ThirdPartyConversationID?: Nullable<SortOrder>;
     output_TransactionID?: Nullable<SortOrder>;
     recordStatus?: Nullable<SortOrder>;
-    state?: Nullable<SortOrder>;
+    status?: Nullable<SortOrder>;
     updatedAt?: Nullable<SortOrder>;
 }
 
@@ -9672,7 +9718,7 @@ export class MpesaPaymentScalarWhereWithAggregatesInput {
     output_ThirdPartyConversationID?: Nullable<StringNullableWithAggregatesFilter>;
     output_TransactionID?: Nullable<StringNullableWithAggregatesFilter>;
     recordStatus?: Nullable<EnumRecordStatusWithAggregatesFilter>;
-    state?: Nullable<EnumPaymentStatusWithAggregatesFilter>;
+    status?: Nullable<EnumPaymentStatusWithAggregatesFilter>;
     updatedAt?: Nullable<DateTimeWithAggregatesFilter>;
 }
 
@@ -9693,7 +9739,7 @@ export class MpesaPaymentUncheckedCreateInput {
     output_ThirdPartyConversationID?: Nullable<string>;
     output_TransactionID?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
-    state?: Nullable<PaymentStatus>;
+    status?: Nullable<PaymentStatus>;
     transaction?: Nullable<TransactionUncheckedCreateNestedOneWithoutMpesaPaymentInput>;
     updatedAt?: Nullable<DateTime>;
 }
@@ -9715,7 +9761,7 @@ export class MpesaPaymentUncheckedCreateWithoutTransactionInput {
     output_ThirdPartyConversationID?: Nullable<string>;
     output_TransactionID?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
-    state?: Nullable<PaymentStatus>;
+    status?: Nullable<PaymentStatus>;
     updatedAt?: Nullable<DateTime>;
 }
 
@@ -9736,7 +9782,7 @@ export class MpesaPaymentUncheckedUpdateInput {
     output_ThirdPartyConversationID?: Nullable<NullableStringFieldUpdateOperationsInput>;
     output_TransactionID?: Nullable<NullableStringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    state?: Nullable<EnumPaymentStatusFieldUpdateOperationsInput>;
+    status?: Nullable<EnumPaymentStatusFieldUpdateOperationsInput>;
     transaction?: Nullable<TransactionUncheckedUpdateOneWithoutMpesaPaymentInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
@@ -9758,7 +9804,7 @@ export class MpesaPaymentUncheckedUpdateManyInput {
     output_ThirdPartyConversationID?: Nullable<NullableStringFieldUpdateOperationsInput>;
     output_TransactionID?: Nullable<NullableStringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    state?: Nullable<EnumPaymentStatusFieldUpdateOperationsInput>;
+    status?: Nullable<EnumPaymentStatusFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
 
@@ -9779,7 +9825,7 @@ export class MpesaPaymentUncheckedUpdateWithoutTransactionInput {
     output_ThirdPartyConversationID?: Nullable<NullableStringFieldUpdateOperationsInput>;
     output_TransactionID?: Nullable<NullableStringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    state?: Nullable<EnumPaymentStatusFieldUpdateOperationsInput>;
+    status?: Nullable<EnumPaymentStatusFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
 
@@ -9800,7 +9846,7 @@ export class MpesaPaymentUpdateInput {
     output_ThirdPartyConversationID?: Nullable<NullableStringFieldUpdateOperationsInput>;
     output_TransactionID?: Nullable<NullableStringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    state?: Nullable<EnumPaymentStatusFieldUpdateOperationsInput>;
+    status?: Nullable<EnumPaymentStatusFieldUpdateOperationsInput>;
     transaction?: Nullable<TransactionUpdateOneWithoutMpesaPaymentInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
@@ -9822,7 +9868,7 @@ export class MpesaPaymentUpdateManyMutationInput {
     output_ThirdPartyConversationID?: Nullable<NullableStringFieldUpdateOperationsInput>;
     output_TransactionID?: Nullable<NullableStringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    state?: Nullable<EnumPaymentStatusFieldUpdateOperationsInput>;
+    status?: Nullable<EnumPaymentStatusFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
 
@@ -9853,7 +9899,7 @@ export class MpesaPaymentUpdateWithoutTransactionInput {
     output_ThirdPartyConversationID?: Nullable<NullableStringFieldUpdateOperationsInput>;
     output_TransactionID?: Nullable<NullableStringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    state?: Nullable<EnumPaymentStatusFieldUpdateOperationsInput>;
+    status?: Nullable<EnumPaymentStatusFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
 
@@ -9882,7 +9928,7 @@ export class MpesaPaymentWhereInput {
     output_ThirdPartyConversationID?: Nullable<StringNullableFilter>;
     output_TransactionID?: Nullable<StringNullableFilter>;
     recordStatus?: Nullable<EnumRecordStatusFilter>;
-    state?: Nullable<EnumPaymentStatusFilter>;
+    status?: Nullable<EnumPaymentStatusFilter>;
     transaction?: Nullable<TransactionWhereInput>;
     updatedAt?: Nullable<DateTimeFilter>;
 }
@@ -10395,10 +10441,10 @@ export class NullableStringFieldUpdateOperationsInput {
 }
 
 export class OrderCreateInput {
-    Business?: Nullable<BusinessCreateNestedOneWithoutOrdersInput>;
-    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutOrdersInput>;
+    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutOrderInput>;
+    business?: Nullable<BusinessCreateNestedOneWithoutOrdersInput>;
     createdAt?: Nullable<DateTime>;
-    favorites?: Nullable<FavoriteCreateNestedManyWithoutOrdersInput>;
+    favorites?: Nullable<FavoriteCreateNestedManyWithoutOrderInput>;
     id?: Nullable<string>;
     notes?: Nullable<string>;
     orderStatus?: Nullable<OrderStatus>;
@@ -10579,9 +10625,9 @@ export class OrderCreateOrConnectWithoutTransactionsInput {
 }
 
 export class OrderCreateWithoutAbuseReportsInput {
-    Business?: Nullable<BusinessCreateNestedOneWithoutOrdersInput>;
+    business?: Nullable<BusinessCreateNestedOneWithoutOrdersInput>;
     createdAt?: Nullable<DateTime>;
-    favorites?: Nullable<FavoriteCreateNestedManyWithoutOrdersInput>;
+    favorites?: Nullable<FavoriteCreateNestedManyWithoutOrderInput>;
     id?: Nullable<string>;
     notes?: Nullable<string>;
     orderStatus?: Nullable<OrderStatus>;
@@ -10595,9 +10641,9 @@ export class OrderCreateWithoutAbuseReportsInput {
 }
 
 export class OrderCreateWithoutBusinessInput {
-    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutOrdersInput>;
+    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutOrderInput>;
     createdAt?: Nullable<DateTime>;
-    favorites?: Nullable<FavoriteCreateNestedManyWithoutOrdersInput>;
+    favorites?: Nullable<FavoriteCreateNestedManyWithoutOrderInput>;
     id?: Nullable<string>;
     notes?: Nullable<string>;
     orderStatus?: Nullable<OrderStatus>;
@@ -10611,8 +10657,8 @@ export class OrderCreateWithoutBusinessInput {
 }
 
 export class OrderCreateWithoutFavoritesInput {
-    Business?: Nullable<BusinessCreateNestedOneWithoutOrdersInput>;
-    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutOrdersInput>;
+    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutOrderInput>;
+    business?: Nullable<BusinessCreateNestedOneWithoutOrdersInput>;
     createdAt?: Nullable<DateTime>;
     id?: Nullable<string>;
     notes?: Nullable<string>;
@@ -10627,10 +10673,10 @@ export class OrderCreateWithoutFavoritesInput {
 }
 
 export class OrderCreateWithoutOwnerInput {
-    Business?: Nullable<BusinessCreateNestedOneWithoutOrdersInput>;
-    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutOrdersInput>;
+    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutOrderInput>;
+    business?: Nullable<BusinessCreateNestedOneWithoutOrdersInput>;
     createdAt?: Nullable<DateTime>;
-    favorites?: Nullable<FavoriteCreateNestedManyWithoutOrdersInput>;
+    favorites?: Nullable<FavoriteCreateNestedManyWithoutOrderInput>;
     id?: Nullable<string>;
     notes?: Nullable<string>;
     orderStatus?: Nullable<OrderStatus>;
@@ -10643,10 +10689,10 @@ export class OrderCreateWithoutOwnerInput {
 }
 
 export class OrderCreateWithoutReceiptInput {
-    Business?: Nullable<BusinessCreateNestedOneWithoutOrdersInput>;
-    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutOrdersInput>;
+    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutOrderInput>;
+    business?: Nullable<BusinessCreateNestedOneWithoutOrdersInput>;
     createdAt?: Nullable<DateTime>;
-    favorites?: Nullable<FavoriteCreateNestedManyWithoutOrdersInput>;
+    favorites?: Nullable<FavoriteCreateNestedManyWithoutOrderInput>;
     id?: Nullable<string>;
     notes?: Nullable<string>;
     orderStatus?: Nullable<OrderStatus>;
@@ -10659,10 +10705,10 @@ export class OrderCreateWithoutReceiptInput {
 }
 
 export class OrderCreateWithoutServiceInput {
-    Business?: Nullable<BusinessCreateNestedOneWithoutOrdersInput>;
-    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutOrdersInput>;
+    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutOrderInput>;
+    business?: Nullable<BusinessCreateNestedOneWithoutOrdersInput>;
     createdAt?: Nullable<DateTime>;
-    favorites?: Nullable<FavoriteCreateNestedManyWithoutOrdersInput>;
+    favorites?: Nullable<FavoriteCreateNestedManyWithoutOrderInput>;
     id?: Nullable<string>;
     notes?: Nullable<string>;
     orderStatus?: Nullable<OrderStatus>;
@@ -10675,10 +10721,10 @@ export class OrderCreateWithoutServiceInput {
 }
 
 export class OrderCreateWithoutTransactionsInput {
-    Business?: Nullable<BusinessCreateNestedOneWithoutOrdersInput>;
-    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutOrdersInput>;
+    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutOrderInput>;
+    business?: Nullable<BusinessCreateNestedOneWithoutOrdersInput>;
     createdAt?: Nullable<DateTime>;
-    favorites?: Nullable<FavoriteCreateNestedManyWithoutOrdersInput>;
+    favorites?: Nullable<FavoriteCreateNestedManyWithoutOrderInput>;
     id?: Nullable<string>;
     notes?: Nullable<string>;
     orderStatus?: Nullable<OrderStatus>;
@@ -10750,10 +10796,10 @@ export class OrderScalarWhereWithAggregatesInput {
 }
 
 export class OrderUncheckedCreateInput {
-    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutOrdersInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutOrderInput>;
     businessId?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
-    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutOrdersInput>;
+    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutOrderInput>;
     id?: Nullable<string>;
     notes?: Nullable<string>;
     orderStatus?: Nullable<OrderStatus>;
@@ -10797,7 +10843,7 @@ export class OrderUncheckedCreateNestedManyWithoutServiceInput {
 export class OrderUncheckedCreateWithoutAbuseReportsInput {
     businessId?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
-    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutOrdersInput>;
+    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutOrderInput>;
     id?: Nullable<string>;
     notes?: Nullable<string>;
     orderStatus?: Nullable<OrderStatus>;
@@ -10811,9 +10857,9 @@ export class OrderUncheckedCreateWithoutAbuseReportsInput {
 }
 
 export class OrderUncheckedCreateWithoutBusinessInput {
-    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutOrdersInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutOrderInput>;
     createdAt?: Nullable<DateTime>;
-    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutOrdersInput>;
+    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutOrderInput>;
     id?: Nullable<string>;
     notes?: Nullable<string>;
     orderStatus?: Nullable<OrderStatus>;
@@ -10827,7 +10873,7 @@ export class OrderUncheckedCreateWithoutBusinessInput {
 }
 
 export class OrderUncheckedCreateWithoutFavoritesInput {
-    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutOrdersInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutOrderInput>;
     businessId?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
     id?: Nullable<string>;
@@ -10843,10 +10889,10 @@ export class OrderUncheckedCreateWithoutFavoritesInput {
 }
 
 export class OrderUncheckedCreateWithoutOwnerInput {
-    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutOrdersInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutOrderInput>;
     businessId?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
-    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutOrdersInput>;
+    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutOrderInput>;
     id?: Nullable<string>;
     notes?: Nullable<string>;
     orderStatus?: Nullable<OrderStatus>;
@@ -10859,10 +10905,10 @@ export class OrderUncheckedCreateWithoutOwnerInput {
 }
 
 export class OrderUncheckedCreateWithoutReceiptInput {
-    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutOrdersInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutOrderInput>;
     businessId?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
-    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutOrdersInput>;
+    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutOrderInput>;
     id?: Nullable<string>;
     notes?: Nullable<string>;
     orderStatus?: Nullable<OrderStatus>;
@@ -10875,10 +10921,10 @@ export class OrderUncheckedCreateWithoutReceiptInput {
 }
 
 export class OrderUncheckedCreateWithoutServiceInput {
-    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutOrdersInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutOrderInput>;
     businessId?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
-    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutOrdersInput>;
+    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutOrderInput>;
     id?: Nullable<string>;
     notes?: Nullable<string>;
     orderStatus?: Nullable<OrderStatus>;
@@ -10891,10 +10937,10 @@ export class OrderUncheckedCreateWithoutServiceInput {
 }
 
 export class OrderUncheckedCreateWithoutTransactionsInput {
-    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutOrdersInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutOrderInput>;
     businessId?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
-    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutOrdersInput>;
+    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutOrderInput>;
     id?: Nullable<string>;
     notes?: Nullable<string>;
     orderStatus?: Nullable<OrderStatus>;
@@ -10907,10 +10953,10 @@ export class OrderUncheckedCreateWithoutTransactionsInput {
 }
 
 export class OrderUncheckedUpdateInput {
-    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutOrdersInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutOrderInput>;
     businessId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutOrdersInput>;
+    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutOrderInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     notes?: Nullable<NullableStringFieldUpdateOperationsInput>;
     orderStatus?: Nullable<EnumOrderStatusFieldUpdateOperationsInput>;
@@ -11022,7 +11068,7 @@ export class OrderUncheckedUpdateManyWithoutServiceInput {
 export class OrderUncheckedUpdateWithoutAbuseReportsInput {
     businessId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutOrdersInput>;
+    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutOrderInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     notes?: Nullable<NullableStringFieldUpdateOperationsInput>;
     orderStatus?: Nullable<EnumOrderStatusFieldUpdateOperationsInput>;
@@ -11036,9 +11082,9 @@ export class OrderUncheckedUpdateWithoutAbuseReportsInput {
 }
 
 export class OrderUncheckedUpdateWithoutBusinessInput {
-    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutOrdersInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutOrderInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutOrdersInput>;
+    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutOrderInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     notes?: Nullable<NullableStringFieldUpdateOperationsInput>;
     orderStatus?: Nullable<EnumOrderStatusFieldUpdateOperationsInput>;
@@ -11053,7 +11099,7 @@ export class OrderUncheckedUpdateWithoutBusinessInput {
 }
 
 export class OrderUncheckedUpdateWithoutFavoritesInput {
-    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutOrdersInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutOrderInput>;
     businessId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
@@ -11069,10 +11115,10 @@ export class OrderUncheckedUpdateWithoutFavoritesInput {
 }
 
 export class OrderUncheckedUpdateWithoutOwnerInput {
-    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutOrdersInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutOrderInput>;
     businessId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutOrdersInput>;
+    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutOrderInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     notes?: Nullable<NullableStringFieldUpdateOperationsInput>;
     orderStatus?: Nullable<EnumOrderStatusFieldUpdateOperationsInput>;
@@ -11085,10 +11131,10 @@ export class OrderUncheckedUpdateWithoutOwnerInput {
 }
 
 export class OrderUncheckedUpdateWithoutReceiptInput {
-    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutOrdersInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutOrderInput>;
     businessId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutOrdersInput>;
+    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutOrderInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     notes?: Nullable<NullableStringFieldUpdateOperationsInput>;
     orderStatus?: Nullable<EnumOrderStatusFieldUpdateOperationsInput>;
@@ -11101,10 +11147,10 @@ export class OrderUncheckedUpdateWithoutReceiptInput {
 }
 
 export class OrderUncheckedUpdateWithoutServiceInput {
-    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutOrdersInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutOrderInput>;
     businessId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutOrdersInput>;
+    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutOrderInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     notes?: Nullable<NullableStringFieldUpdateOperationsInput>;
     orderStatus?: Nullable<EnumOrderStatusFieldUpdateOperationsInput>;
@@ -11117,10 +11163,10 @@ export class OrderUncheckedUpdateWithoutServiceInput {
 }
 
 export class OrderUncheckedUpdateWithoutTransactionsInput {
-    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutOrdersInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutOrderInput>;
     businessId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutOrdersInput>;
+    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutOrderInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     notes?: Nullable<NullableStringFieldUpdateOperationsInput>;
     orderStatus?: Nullable<EnumOrderStatusFieldUpdateOperationsInput>;
@@ -11133,10 +11179,10 @@ export class OrderUncheckedUpdateWithoutTransactionsInput {
 }
 
 export class OrderUpdateInput {
-    Business?: Nullable<BusinessUpdateOneWithoutOrdersInput>;
-    abuseReports?: Nullable<AbuseReportUpdateManyWithoutOrdersInput>;
+    abuseReports?: Nullable<AbuseReportUpdateManyWithoutOrderInput>;
+    business?: Nullable<BusinessUpdateOneWithoutOrdersInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorites?: Nullable<FavoriteUpdateManyWithoutOrdersInput>;
+    favorites?: Nullable<FavoriteUpdateManyWithoutOrderInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     notes?: Nullable<NullableStringFieldUpdateOperationsInput>;
     orderStatus?: Nullable<EnumOrderStatusFieldUpdateOperationsInput>;
@@ -11284,9 +11330,9 @@ export class OrderUpdateWithWhereUniqueWithoutServiceInput {
 }
 
 export class OrderUpdateWithoutAbuseReportsInput {
-    Business?: Nullable<BusinessUpdateOneWithoutOrdersInput>;
+    business?: Nullable<BusinessUpdateOneWithoutOrdersInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorites?: Nullable<FavoriteUpdateManyWithoutOrdersInput>;
+    favorites?: Nullable<FavoriteUpdateManyWithoutOrderInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     notes?: Nullable<NullableStringFieldUpdateOperationsInput>;
     orderStatus?: Nullable<EnumOrderStatusFieldUpdateOperationsInput>;
@@ -11300,9 +11346,9 @@ export class OrderUpdateWithoutAbuseReportsInput {
 }
 
 export class OrderUpdateWithoutBusinessInput {
-    abuseReports?: Nullable<AbuseReportUpdateManyWithoutOrdersInput>;
+    abuseReports?: Nullable<AbuseReportUpdateManyWithoutOrderInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorites?: Nullable<FavoriteUpdateManyWithoutOrdersInput>;
+    favorites?: Nullable<FavoriteUpdateManyWithoutOrderInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     notes?: Nullable<NullableStringFieldUpdateOperationsInput>;
     orderStatus?: Nullable<EnumOrderStatusFieldUpdateOperationsInput>;
@@ -11316,8 +11362,8 @@ export class OrderUpdateWithoutBusinessInput {
 }
 
 export class OrderUpdateWithoutFavoritesInput {
-    Business?: Nullable<BusinessUpdateOneWithoutOrdersInput>;
-    abuseReports?: Nullable<AbuseReportUpdateManyWithoutOrdersInput>;
+    abuseReports?: Nullable<AbuseReportUpdateManyWithoutOrderInput>;
+    business?: Nullable<BusinessUpdateOneWithoutOrdersInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     notes?: Nullable<NullableStringFieldUpdateOperationsInput>;
@@ -11332,10 +11378,10 @@ export class OrderUpdateWithoutFavoritesInput {
 }
 
 export class OrderUpdateWithoutOwnerInput {
-    Business?: Nullable<BusinessUpdateOneWithoutOrdersInput>;
-    abuseReports?: Nullable<AbuseReportUpdateManyWithoutOrdersInput>;
+    abuseReports?: Nullable<AbuseReportUpdateManyWithoutOrderInput>;
+    business?: Nullable<BusinessUpdateOneWithoutOrdersInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorites?: Nullable<FavoriteUpdateManyWithoutOrdersInput>;
+    favorites?: Nullable<FavoriteUpdateManyWithoutOrderInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     notes?: Nullable<NullableStringFieldUpdateOperationsInput>;
     orderStatus?: Nullable<EnumOrderStatusFieldUpdateOperationsInput>;
@@ -11348,10 +11394,10 @@ export class OrderUpdateWithoutOwnerInput {
 }
 
 export class OrderUpdateWithoutReceiptInput {
-    Business?: Nullable<BusinessUpdateOneWithoutOrdersInput>;
-    abuseReports?: Nullable<AbuseReportUpdateManyWithoutOrdersInput>;
+    abuseReports?: Nullable<AbuseReportUpdateManyWithoutOrderInput>;
+    business?: Nullable<BusinessUpdateOneWithoutOrdersInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorites?: Nullable<FavoriteUpdateManyWithoutOrdersInput>;
+    favorites?: Nullable<FavoriteUpdateManyWithoutOrderInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     notes?: Nullable<NullableStringFieldUpdateOperationsInput>;
     orderStatus?: Nullable<EnumOrderStatusFieldUpdateOperationsInput>;
@@ -11364,10 +11410,10 @@ export class OrderUpdateWithoutReceiptInput {
 }
 
 export class OrderUpdateWithoutServiceInput {
-    Business?: Nullable<BusinessUpdateOneWithoutOrdersInput>;
-    abuseReports?: Nullable<AbuseReportUpdateManyWithoutOrdersInput>;
+    abuseReports?: Nullable<AbuseReportUpdateManyWithoutOrderInput>;
+    business?: Nullable<BusinessUpdateOneWithoutOrdersInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorites?: Nullable<FavoriteUpdateManyWithoutOrdersInput>;
+    favorites?: Nullable<FavoriteUpdateManyWithoutOrderInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     notes?: Nullable<NullableStringFieldUpdateOperationsInput>;
     orderStatus?: Nullable<EnumOrderStatusFieldUpdateOperationsInput>;
@@ -11380,10 +11426,10 @@ export class OrderUpdateWithoutServiceInput {
 }
 
 export class OrderUpdateWithoutTransactionsInput {
-    Business?: Nullable<BusinessUpdateOneWithoutOrdersInput>;
-    abuseReports?: Nullable<AbuseReportUpdateManyWithoutOrdersInput>;
+    abuseReports?: Nullable<AbuseReportUpdateManyWithoutOrderInput>;
+    business?: Nullable<BusinessUpdateOneWithoutOrdersInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorites?: Nullable<FavoriteUpdateManyWithoutOrdersInput>;
+    favorites?: Nullable<FavoriteUpdateManyWithoutOrderInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     notes?: Nullable<NullableStringFieldUpdateOperationsInput>;
     orderStatus?: Nullable<EnumOrderStatusFieldUpdateOperationsInput>;
@@ -11436,10 +11482,10 @@ export class OrderUpsertWithoutTransactionsInput {
 
 export class OrderWhereInput {
     AND?: Nullable<OrderWhereInput[]>;
-    Business?: Nullable<BusinessWhereInput>;
     NOT?: Nullable<OrderWhereInput[]>;
     OR?: Nullable<OrderWhereInput[]>;
     abuseReports?: Nullable<AbuseReportListRelationFilter>;
+    business?: Nullable<BusinessWhereInput>;
     businessId?: Nullable<StringNullableFilter>;
     createdAt?: Nullable<DateTimeFilter>;
     favorites?: Nullable<FavoriteListRelationFilter>;
@@ -11477,7 +11523,7 @@ export class PaymentMethodCreateInput {
     logo: AttachmentCreateNestedOneWithoutPaymentMethodsInput;
     name: string;
     recordStatus?: Nullable<RecordStatus>;
-    state?: Nullable<PaymentMethodStatus>;
+    status?: Nullable<PaymentMethodStatus>;
     transactions?: Nullable<TransactionCreateNestedManyWithoutPaymentMethodInput>;
     updatedAt?: Nullable<DateTime>;
 }
@@ -11490,7 +11536,7 @@ export class PaymentMethodCreateManyInput {
     id?: Nullable<string>;
     name: string;
     recordStatus?: Nullable<RecordStatus>;
-    state?: Nullable<PaymentMethodStatus>;
+    status?: Nullable<PaymentMethodStatus>;
     updatedAt?: Nullable<DateTime>;
 }
 
@@ -11501,7 +11547,7 @@ export class PaymentMethodCreateManyLogoInput {
     id?: Nullable<string>;
     name: string;
     recordStatus?: Nullable<RecordStatus>;
-    state?: Nullable<PaymentMethodStatus>;
+    status?: Nullable<PaymentMethodStatus>;
     updatedAt?: Nullable<DateTime>;
 }
 
@@ -11540,7 +11586,7 @@ export class PaymentMethodCreateWithoutLogoInput {
     id?: Nullable<string>;
     name: string;
     recordStatus?: Nullable<RecordStatus>;
-    state?: Nullable<PaymentMethodStatus>;
+    status?: Nullable<PaymentMethodStatus>;
     transactions?: Nullable<TransactionCreateNestedManyWithoutPaymentMethodInput>;
     updatedAt?: Nullable<DateTime>;
 }
@@ -11553,7 +11599,7 @@ export class PaymentMethodCreateWithoutTransactionsInput {
     logo: AttachmentCreateNestedOneWithoutPaymentMethodsInput;
     name: string;
     recordStatus?: Nullable<RecordStatus>;
-    state?: Nullable<PaymentMethodStatus>;
+    status?: Nullable<PaymentMethodStatus>;
     updatedAt?: Nullable<DateTime>;
 }
 
@@ -11571,7 +11617,7 @@ export class PaymentMethodOrderByInput {
     id?: Nullable<SortOrder>;
     name?: Nullable<SortOrder>;
     recordStatus?: Nullable<SortOrder>;
-    state?: Nullable<SortOrder>;
+    status?: Nullable<SortOrder>;
     updatedAt?: Nullable<SortOrder>;
 }
 
@@ -11591,7 +11637,7 @@ export class PaymentMethodScalarWhereInput {
     id?: Nullable<StringFilter>;
     name?: Nullable<StringFilter>;
     recordStatus?: Nullable<EnumRecordStatusFilter>;
-    state?: Nullable<EnumPaymentMethodStatusFilter>;
+    status?: Nullable<EnumPaymentMethodStatusFilter>;
     updatedAt?: Nullable<DateTimeFilter>;
 }
 
@@ -11606,7 +11652,7 @@ export class PaymentMethodScalarWhereWithAggregatesInput {
     id?: Nullable<StringWithAggregatesFilter>;
     name?: Nullable<StringWithAggregatesFilter>;
     recordStatus?: Nullable<EnumRecordStatusWithAggregatesFilter>;
-    state?: Nullable<EnumPaymentMethodStatusWithAggregatesFilter>;
+    status?: Nullable<EnumPaymentMethodStatusWithAggregatesFilter>;
     updatedAt?: Nullable<DateTimeWithAggregatesFilter>;
 }
 
@@ -11618,7 +11664,7 @@ export class PaymentMethodUncheckedCreateInput {
     id?: Nullable<string>;
     name: string;
     recordStatus?: Nullable<RecordStatus>;
-    state?: Nullable<PaymentMethodStatus>;
+    status?: Nullable<PaymentMethodStatus>;
     transactions?: Nullable<TransactionUncheckedCreateNestedManyWithoutPaymentMethodInput>;
     updatedAt?: Nullable<DateTime>;
 }
@@ -11637,7 +11683,7 @@ export class PaymentMethodUncheckedCreateWithoutLogoInput {
     id?: Nullable<string>;
     name: string;
     recordStatus?: Nullable<RecordStatus>;
-    state?: Nullable<PaymentMethodStatus>;
+    status?: Nullable<PaymentMethodStatus>;
     transactions?: Nullable<TransactionUncheckedCreateNestedManyWithoutPaymentMethodInput>;
     updatedAt?: Nullable<DateTime>;
 }
@@ -11650,7 +11696,7 @@ export class PaymentMethodUncheckedCreateWithoutTransactionsInput {
     id?: Nullable<string>;
     name: string;
     recordStatus?: Nullable<RecordStatus>;
-    state?: Nullable<PaymentMethodStatus>;
+    status?: Nullable<PaymentMethodStatus>;
     updatedAt?: Nullable<DateTime>;
 }
 
@@ -11662,7 +11708,7 @@ export class PaymentMethodUncheckedUpdateInput {
     id?: Nullable<StringFieldUpdateOperationsInput>;
     name?: Nullable<StringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    state?: Nullable<EnumPaymentMethodStatusFieldUpdateOperationsInput>;
+    status?: Nullable<EnumPaymentMethodStatusFieldUpdateOperationsInput>;
     transactions?: Nullable<TransactionUncheckedUpdateManyWithoutPaymentMethodInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
@@ -11675,7 +11721,7 @@ export class PaymentMethodUncheckedUpdateManyInput {
     id?: Nullable<StringFieldUpdateOperationsInput>;
     name?: Nullable<StringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    state?: Nullable<EnumPaymentMethodStatusFieldUpdateOperationsInput>;
+    status?: Nullable<EnumPaymentMethodStatusFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
 
@@ -11700,7 +11746,7 @@ export class PaymentMethodUncheckedUpdateManyWithoutPaymentMethodsInput {
     id?: Nullable<StringFieldUpdateOperationsInput>;
     name?: Nullable<StringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    state?: Nullable<EnumPaymentMethodStatusFieldUpdateOperationsInput>;
+    status?: Nullable<EnumPaymentMethodStatusFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
 
@@ -11711,7 +11757,7 @@ export class PaymentMethodUncheckedUpdateWithoutLogoInput {
     id?: Nullable<StringFieldUpdateOperationsInput>;
     name?: Nullable<StringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    state?: Nullable<EnumPaymentMethodStatusFieldUpdateOperationsInput>;
+    status?: Nullable<EnumPaymentMethodStatusFieldUpdateOperationsInput>;
     transactions?: Nullable<TransactionUncheckedUpdateManyWithoutPaymentMethodInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
@@ -11724,7 +11770,7 @@ export class PaymentMethodUncheckedUpdateWithoutTransactionsInput {
     id?: Nullable<StringFieldUpdateOperationsInput>;
     name?: Nullable<StringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    state?: Nullable<EnumPaymentMethodStatusFieldUpdateOperationsInput>;
+    status?: Nullable<EnumPaymentMethodStatusFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
 
@@ -11736,7 +11782,7 @@ export class PaymentMethodUpdateInput {
     logo?: Nullable<AttachmentUpdateOneRequiredWithoutPaymentMethodsInput>;
     name?: Nullable<StringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    state?: Nullable<EnumPaymentMethodStatusFieldUpdateOperationsInput>;
+    status?: Nullable<EnumPaymentMethodStatusFieldUpdateOperationsInput>;
     transactions?: Nullable<TransactionUpdateManyWithoutPaymentMethodInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
@@ -11748,7 +11794,7 @@ export class PaymentMethodUpdateManyMutationInput {
     id?: Nullable<StringFieldUpdateOperationsInput>;
     name?: Nullable<StringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    state?: Nullable<EnumPaymentMethodStatusFieldUpdateOperationsInput>;
+    status?: Nullable<EnumPaymentMethodStatusFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
 
@@ -11791,7 +11837,7 @@ export class PaymentMethodUpdateWithoutLogoInput {
     id?: Nullable<StringFieldUpdateOperationsInput>;
     name?: Nullable<StringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    state?: Nullable<EnumPaymentMethodStatusFieldUpdateOperationsInput>;
+    status?: Nullable<EnumPaymentMethodStatusFieldUpdateOperationsInput>;
     transactions?: Nullable<TransactionUpdateManyWithoutPaymentMethodInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
@@ -11804,7 +11850,7 @@ export class PaymentMethodUpdateWithoutTransactionsInput {
     logo?: Nullable<AttachmentUpdateOneRequiredWithoutPaymentMethodsInput>;
     name?: Nullable<StringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    state?: Nullable<EnumPaymentMethodStatusFieldUpdateOperationsInput>;
+    status?: Nullable<EnumPaymentMethodStatusFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
 
@@ -11831,7 +11877,7 @@ export class PaymentMethodWhereInput {
     logo?: Nullable<AttachmentWhereInput>;
     name?: Nullable<StringFilter>;
     recordStatus?: Nullable<EnumRecordStatusFilter>;
-    state?: Nullable<EnumPaymentMethodStatusFilter>;
+    status?: Nullable<EnumPaymentMethodStatusFilter>;
     transactions?: Nullable<TransactionListRelationFilter>;
     updatedAt?: Nullable<DateTimeFilter>;
 }
@@ -11869,16 +11915,16 @@ export class ReverseGeocodeInput {
 }
 
 export class ReviewCreateInput {
-    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutReviewsInput>;
+    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutReviewInput>;
     attachments?: Nullable<AttachmentCreateNestedManyWithoutReviewsInput>;
-    author: UserCreateNestedOneWithoutReviewsInput;
+    author: UserCreateNestedOneWithoutReviewedInput;
     comments?: Nullable<CommentCreateNestedManyWithoutReviewInput>;
     content?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
-    favorites?: Nullable<FavoriteCreateNestedManyWithoutReviewsInput>;
+    favorites?: Nullable<FavoriteCreateNestedManyWithoutReviewInput>;
     id?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
-    reviewee: UserCreateNestedOneWithoutReviewedInput;
+    reviewee: UserCreateNestedOneWithoutReviewsInput;
     updatedAt?: Nullable<DateTime>;
     value?: Nullable<number>;
 }
@@ -11994,82 +12040,82 @@ export class ReviewCreateOrConnectWithoutRevieweeInput {
 
 export class ReviewCreateWithoutAbuseReportsInput {
     attachments?: Nullable<AttachmentCreateNestedManyWithoutReviewsInput>;
-    author: UserCreateNestedOneWithoutReviewsInput;
+    author: UserCreateNestedOneWithoutReviewedInput;
     comments?: Nullable<CommentCreateNestedManyWithoutReviewInput>;
     content?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
-    favorites?: Nullable<FavoriteCreateNestedManyWithoutReviewsInput>;
+    favorites?: Nullable<FavoriteCreateNestedManyWithoutReviewInput>;
     id?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
-    reviewee: UserCreateNestedOneWithoutReviewedInput;
+    reviewee: UserCreateNestedOneWithoutReviewsInput;
     updatedAt?: Nullable<DateTime>;
     value?: Nullable<number>;
 }
 
 export class ReviewCreateWithoutAttachmentsInput {
-    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutReviewsInput>;
-    author: UserCreateNestedOneWithoutReviewsInput;
+    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutReviewInput>;
+    author: UserCreateNestedOneWithoutReviewedInput;
     comments?: Nullable<CommentCreateNestedManyWithoutReviewInput>;
     content?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
-    favorites?: Nullable<FavoriteCreateNestedManyWithoutReviewsInput>;
+    favorites?: Nullable<FavoriteCreateNestedManyWithoutReviewInput>;
     id?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
-    reviewee: UserCreateNestedOneWithoutReviewedInput;
+    reviewee: UserCreateNestedOneWithoutReviewsInput;
     updatedAt?: Nullable<DateTime>;
     value?: Nullable<number>;
 }
 
 export class ReviewCreateWithoutAuthorInput {
-    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutReviewsInput>;
+    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutReviewInput>;
     attachments?: Nullable<AttachmentCreateNestedManyWithoutReviewsInput>;
     comments?: Nullable<CommentCreateNestedManyWithoutReviewInput>;
     content?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
-    favorites?: Nullable<FavoriteCreateNestedManyWithoutReviewsInput>;
+    favorites?: Nullable<FavoriteCreateNestedManyWithoutReviewInput>;
     id?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
-    reviewee: UserCreateNestedOneWithoutReviewedInput;
+    reviewee: UserCreateNestedOneWithoutReviewsInput;
     updatedAt?: Nullable<DateTime>;
     value?: Nullable<number>;
 }
 
 export class ReviewCreateWithoutCommentsInput {
-    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutReviewsInput>;
+    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutReviewInput>;
     attachments?: Nullable<AttachmentCreateNestedManyWithoutReviewsInput>;
-    author: UserCreateNestedOneWithoutReviewsInput;
+    author: UserCreateNestedOneWithoutReviewedInput;
     content?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
-    favorites?: Nullable<FavoriteCreateNestedManyWithoutReviewsInput>;
+    favorites?: Nullable<FavoriteCreateNestedManyWithoutReviewInput>;
     id?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
-    reviewee: UserCreateNestedOneWithoutReviewedInput;
+    reviewee: UserCreateNestedOneWithoutReviewsInput;
     updatedAt?: Nullable<DateTime>;
     value?: Nullable<number>;
 }
 
 export class ReviewCreateWithoutFavoritesInput {
-    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutReviewsInput>;
+    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutReviewInput>;
     attachments?: Nullable<AttachmentCreateNestedManyWithoutReviewsInput>;
-    author: UserCreateNestedOneWithoutReviewsInput;
+    author: UserCreateNestedOneWithoutReviewedInput;
     comments?: Nullable<CommentCreateNestedManyWithoutReviewInput>;
     content?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
     id?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
-    reviewee: UserCreateNestedOneWithoutReviewedInput;
+    reviewee: UserCreateNestedOneWithoutReviewsInput;
     updatedAt?: Nullable<DateTime>;
     value?: Nullable<number>;
 }
 
 export class ReviewCreateWithoutRevieweeInput {
-    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutReviewsInput>;
+    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutReviewInput>;
     attachments?: Nullable<AttachmentCreateNestedManyWithoutReviewsInput>;
-    author: UserCreateNestedOneWithoutReviewsInput;
+    author: UserCreateNestedOneWithoutReviewedInput;
     comments?: Nullable<CommentCreateNestedManyWithoutReviewInput>;
     content?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
-    favorites?: Nullable<FavoriteCreateNestedManyWithoutReviewsInput>;
+    favorites?: Nullable<FavoriteCreateNestedManyWithoutReviewInput>;
     id?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
     updatedAt?: Nullable<DateTime>;
@@ -12127,13 +12173,13 @@ export class ReviewScalarWhereWithAggregatesInput {
 }
 
 export class ReviewUncheckedCreateInput {
-    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutReviewsInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutReviewInput>;
     attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutReviewsInput>;
     authorId: string;
     comments?: Nullable<CommentUncheckedCreateNestedManyWithoutReviewInput>;
     content?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
-    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutReviewsInput>;
+    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutReviewInput>;
     id?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
     revieweeId: string;
@@ -12161,7 +12207,7 @@ export class ReviewUncheckedCreateWithoutAbuseReportsInput {
     comments?: Nullable<CommentUncheckedCreateNestedManyWithoutReviewInput>;
     content?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
-    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutReviewsInput>;
+    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutReviewInput>;
     id?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
     revieweeId: string;
@@ -12170,12 +12216,12 @@ export class ReviewUncheckedCreateWithoutAbuseReportsInput {
 }
 
 export class ReviewUncheckedCreateWithoutAttachmentsInput {
-    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutReviewsInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutReviewInput>;
     authorId: string;
     comments?: Nullable<CommentUncheckedCreateNestedManyWithoutReviewInput>;
     content?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
-    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutReviewsInput>;
+    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutReviewInput>;
     id?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
     revieweeId: string;
@@ -12184,12 +12230,12 @@ export class ReviewUncheckedCreateWithoutAttachmentsInput {
 }
 
 export class ReviewUncheckedCreateWithoutAuthorInput {
-    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutReviewsInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutReviewInput>;
     attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutReviewsInput>;
     comments?: Nullable<CommentUncheckedCreateNestedManyWithoutReviewInput>;
     content?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
-    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutReviewsInput>;
+    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutReviewInput>;
     id?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
     revieweeId: string;
@@ -12198,12 +12244,12 @@ export class ReviewUncheckedCreateWithoutAuthorInput {
 }
 
 export class ReviewUncheckedCreateWithoutCommentsInput {
-    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutReviewsInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutReviewInput>;
     attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutReviewsInput>;
     authorId: string;
     content?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
-    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutReviewsInput>;
+    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutReviewInput>;
     id?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
     revieweeId: string;
@@ -12212,7 +12258,7 @@ export class ReviewUncheckedCreateWithoutCommentsInput {
 }
 
 export class ReviewUncheckedCreateWithoutFavoritesInput {
-    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutReviewsInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutReviewInput>;
     attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutReviewsInput>;
     authorId: string;
     comments?: Nullable<CommentUncheckedCreateNestedManyWithoutReviewInput>;
@@ -12226,13 +12272,13 @@ export class ReviewUncheckedCreateWithoutFavoritesInput {
 }
 
 export class ReviewUncheckedCreateWithoutRevieweeInput {
-    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutReviewsInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutReviewInput>;
     attachments?: Nullable<AttachmentUncheckedCreateNestedManyWithoutReviewsInput>;
     authorId: string;
     comments?: Nullable<CommentUncheckedCreateNestedManyWithoutReviewInput>;
     content?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
-    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutReviewsInput>;
+    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutReviewInput>;
     id?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
     updatedAt?: Nullable<DateTime>;
@@ -12240,13 +12286,13 @@ export class ReviewUncheckedCreateWithoutRevieweeInput {
 }
 
 export class ReviewUncheckedUpdateInput {
-    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutReviewsInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutReviewInput>;
     attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutReviewsInput>;
     authorId?: Nullable<StringFieldUpdateOperationsInput>;
     comments?: Nullable<CommentUncheckedUpdateManyWithoutReviewInput>;
     content?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutReviewsInput>;
+    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutReviewInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
     revieweeId?: Nullable<StringFieldUpdateOperationsInput>;
@@ -12280,11 +12326,11 @@ export class ReviewUncheckedUpdateManyWithoutAuthorInput {
 }
 
 export class ReviewUncheckedUpdateManyWithoutReviewedInput {
-    authorId?: Nullable<StringFieldUpdateOperationsInput>;
     content?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
+    revieweeId?: Nullable<StringFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     value?: Nullable<IntFieldUpdateOperationsInput>;
 }
@@ -12304,11 +12350,11 @@ export class ReviewUncheckedUpdateManyWithoutRevieweeInput {
 }
 
 export class ReviewUncheckedUpdateManyWithoutReviewsInput {
+    authorId?: Nullable<StringFieldUpdateOperationsInput>;
     content?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    revieweeId?: Nullable<StringFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     value?: Nullable<IntFieldUpdateOperationsInput>;
 }
@@ -12319,7 +12365,7 @@ export class ReviewUncheckedUpdateWithoutAbuseReportsInput {
     comments?: Nullable<CommentUncheckedUpdateManyWithoutReviewInput>;
     content?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutReviewsInput>;
+    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutReviewInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
     revieweeId?: Nullable<StringFieldUpdateOperationsInput>;
@@ -12328,12 +12374,12 @@ export class ReviewUncheckedUpdateWithoutAbuseReportsInput {
 }
 
 export class ReviewUncheckedUpdateWithoutAttachmentsInput {
-    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutReviewsInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutReviewInput>;
     authorId?: Nullable<StringFieldUpdateOperationsInput>;
     comments?: Nullable<CommentUncheckedUpdateManyWithoutReviewInput>;
     content?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutReviewsInput>;
+    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutReviewInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
     revieweeId?: Nullable<StringFieldUpdateOperationsInput>;
@@ -12342,12 +12388,12 @@ export class ReviewUncheckedUpdateWithoutAttachmentsInput {
 }
 
 export class ReviewUncheckedUpdateWithoutAuthorInput {
-    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutReviewsInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutReviewInput>;
     attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutReviewsInput>;
     comments?: Nullable<CommentUncheckedUpdateManyWithoutReviewInput>;
     content?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutReviewsInput>;
+    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutReviewInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
     revieweeId?: Nullable<StringFieldUpdateOperationsInput>;
@@ -12356,12 +12402,12 @@ export class ReviewUncheckedUpdateWithoutAuthorInput {
 }
 
 export class ReviewUncheckedUpdateWithoutCommentsInput {
-    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutReviewsInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutReviewInput>;
     attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutReviewsInput>;
     authorId?: Nullable<StringFieldUpdateOperationsInput>;
     content?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutReviewsInput>;
+    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutReviewInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
     revieweeId?: Nullable<StringFieldUpdateOperationsInput>;
@@ -12370,7 +12416,7 @@ export class ReviewUncheckedUpdateWithoutCommentsInput {
 }
 
 export class ReviewUncheckedUpdateWithoutFavoritesInput {
-    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutReviewsInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutReviewInput>;
     attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutReviewsInput>;
     authorId?: Nullable<StringFieldUpdateOperationsInput>;
     comments?: Nullable<CommentUncheckedUpdateManyWithoutReviewInput>;
@@ -12384,13 +12430,13 @@ export class ReviewUncheckedUpdateWithoutFavoritesInput {
 }
 
 export class ReviewUncheckedUpdateWithoutRevieweeInput {
-    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutReviewsInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutReviewInput>;
     attachments?: Nullable<AttachmentUncheckedUpdateManyWithoutReviewsInput>;
     authorId?: Nullable<StringFieldUpdateOperationsInput>;
     comments?: Nullable<CommentUncheckedUpdateManyWithoutReviewInput>;
     content?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutReviewsInput>;
+    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutReviewInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
@@ -12398,16 +12444,16 @@ export class ReviewUncheckedUpdateWithoutRevieweeInput {
 }
 
 export class ReviewUpdateInput {
-    abuseReports?: Nullable<AbuseReportUpdateManyWithoutReviewsInput>;
+    abuseReports?: Nullable<AbuseReportUpdateManyWithoutReviewInput>;
     attachments?: Nullable<AttachmentUpdateManyWithoutReviewsInput>;
-    author?: Nullable<UserUpdateOneRequiredWithoutReviewsInput>;
+    author?: Nullable<UserUpdateOneRequiredWithoutReviewedInput>;
     comments?: Nullable<CommentUpdateManyWithoutReviewInput>;
     content?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorites?: Nullable<FavoriteUpdateManyWithoutReviewsInput>;
+    favorites?: Nullable<FavoriteUpdateManyWithoutReviewInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    reviewee?: Nullable<UserUpdateOneRequiredWithoutReviewedInput>;
+    reviewee?: Nullable<UserUpdateOneRequiredWithoutReviewsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     value?: Nullable<IntFieldUpdateOperationsInput>;
 }
@@ -12422,12 +12468,12 @@ export class ReviewUpdateManyMutationInput {
 }
 
 export class ReviewUpdateManyWithWhereWithoutAuthorInput {
-    data: ReviewUncheckedUpdateManyWithoutReviewsInput;
+    data: ReviewUncheckedUpdateManyWithoutReviewedInput;
     where: ReviewScalarWhereInput;
 }
 
 export class ReviewUpdateManyWithWhereWithoutRevieweeInput {
-    data: ReviewUncheckedUpdateManyWithoutReviewedInput;
+    data: ReviewUncheckedUpdateManyWithoutReviewsInput;
     where: ReviewScalarWhereInput;
 }
 
@@ -12511,82 +12557,82 @@ export class ReviewUpdateWithWhereUniqueWithoutRevieweeInput {
 
 export class ReviewUpdateWithoutAbuseReportsInput {
     attachments?: Nullable<AttachmentUpdateManyWithoutReviewsInput>;
-    author?: Nullable<UserUpdateOneRequiredWithoutReviewsInput>;
+    author?: Nullable<UserUpdateOneRequiredWithoutReviewedInput>;
     comments?: Nullable<CommentUpdateManyWithoutReviewInput>;
     content?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorites?: Nullable<FavoriteUpdateManyWithoutReviewsInput>;
+    favorites?: Nullable<FavoriteUpdateManyWithoutReviewInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    reviewee?: Nullable<UserUpdateOneRequiredWithoutReviewedInput>;
+    reviewee?: Nullable<UserUpdateOneRequiredWithoutReviewsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     value?: Nullable<IntFieldUpdateOperationsInput>;
 }
 
 export class ReviewUpdateWithoutAttachmentsInput {
-    abuseReports?: Nullable<AbuseReportUpdateManyWithoutReviewsInput>;
-    author?: Nullable<UserUpdateOneRequiredWithoutReviewsInput>;
+    abuseReports?: Nullable<AbuseReportUpdateManyWithoutReviewInput>;
+    author?: Nullable<UserUpdateOneRequiredWithoutReviewedInput>;
     comments?: Nullable<CommentUpdateManyWithoutReviewInput>;
     content?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorites?: Nullable<FavoriteUpdateManyWithoutReviewsInput>;
+    favorites?: Nullable<FavoriteUpdateManyWithoutReviewInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    reviewee?: Nullable<UserUpdateOneRequiredWithoutReviewedInput>;
+    reviewee?: Nullable<UserUpdateOneRequiredWithoutReviewsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     value?: Nullable<IntFieldUpdateOperationsInput>;
 }
 
 export class ReviewUpdateWithoutAuthorInput {
-    abuseReports?: Nullable<AbuseReportUpdateManyWithoutReviewsInput>;
+    abuseReports?: Nullable<AbuseReportUpdateManyWithoutReviewInput>;
     attachments?: Nullable<AttachmentUpdateManyWithoutReviewsInput>;
     comments?: Nullable<CommentUpdateManyWithoutReviewInput>;
     content?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorites?: Nullable<FavoriteUpdateManyWithoutReviewsInput>;
+    favorites?: Nullable<FavoriteUpdateManyWithoutReviewInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    reviewee?: Nullable<UserUpdateOneRequiredWithoutReviewedInput>;
+    reviewee?: Nullable<UserUpdateOneRequiredWithoutReviewsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     value?: Nullable<IntFieldUpdateOperationsInput>;
 }
 
 export class ReviewUpdateWithoutCommentsInput {
-    abuseReports?: Nullable<AbuseReportUpdateManyWithoutReviewsInput>;
+    abuseReports?: Nullable<AbuseReportUpdateManyWithoutReviewInput>;
     attachments?: Nullable<AttachmentUpdateManyWithoutReviewsInput>;
-    author?: Nullable<UserUpdateOneRequiredWithoutReviewsInput>;
+    author?: Nullable<UserUpdateOneRequiredWithoutReviewedInput>;
     content?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorites?: Nullable<FavoriteUpdateManyWithoutReviewsInput>;
+    favorites?: Nullable<FavoriteUpdateManyWithoutReviewInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    reviewee?: Nullable<UserUpdateOneRequiredWithoutReviewedInput>;
+    reviewee?: Nullable<UserUpdateOneRequiredWithoutReviewsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     value?: Nullable<IntFieldUpdateOperationsInput>;
 }
 
 export class ReviewUpdateWithoutFavoritesInput {
-    abuseReports?: Nullable<AbuseReportUpdateManyWithoutReviewsInput>;
+    abuseReports?: Nullable<AbuseReportUpdateManyWithoutReviewInput>;
     attachments?: Nullable<AttachmentUpdateManyWithoutReviewsInput>;
-    author?: Nullable<UserUpdateOneRequiredWithoutReviewsInput>;
+    author?: Nullable<UserUpdateOneRequiredWithoutReviewedInput>;
     comments?: Nullable<CommentUpdateManyWithoutReviewInput>;
     content?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    reviewee?: Nullable<UserUpdateOneRequiredWithoutReviewedInput>;
+    reviewee?: Nullable<UserUpdateOneRequiredWithoutReviewsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     value?: Nullable<IntFieldUpdateOperationsInput>;
 }
 
 export class ReviewUpdateWithoutRevieweeInput {
-    abuseReports?: Nullable<AbuseReportUpdateManyWithoutReviewsInput>;
+    abuseReports?: Nullable<AbuseReportUpdateManyWithoutReviewInput>;
     attachments?: Nullable<AttachmentUpdateManyWithoutReviewsInput>;
-    author?: Nullable<UserUpdateOneRequiredWithoutReviewsInput>;
+    author?: Nullable<UserUpdateOneRequiredWithoutReviewedInput>;
     comments?: Nullable<CommentUpdateManyWithoutReviewInput>;
     content?: Nullable<NullableStringFieldUpdateOperationsInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
-    favorites?: Nullable<FavoriteUpdateManyWithoutReviewsInput>;
+    favorites?: Nullable<FavoriteUpdateManyWithoutReviewInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
@@ -14199,7 +14245,7 @@ export class ServiceWhereUniqueInput {
 
 export class SignupInput {
     avator?: Nullable<Upload>;
-    business?: Nullable<BusinessCreateInput>;
+    business?: Nullable<BusinessCreateWithoutOwnerInput>;
     dateOfBirth?: Nullable<DateTime>;
     displayName: string;
     email: string;
@@ -14301,7 +14347,7 @@ export class TransactionCreateInput {
     recordStatus?: Nullable<RecordStatus>;
     selcomDisbursement?: Nullable<SelcomDisbursementCreateNestedOneWithoutTransactionInput>;
     selcomPayment?: Nullable<SelcomPaymentCreateNestedOneWithoutTransactionInput>;
-    state?: Nullable<TransactionStatus>;
+    status?: Nullable<TransactionStatus>;
     type: TransactionType;
     updatedAt?: Nullable<DateTime>;
 }
@@ -14315,7 +14361,7 @@ export class TransactionCreateManyInput {
     recordStatus?: Nullable<RecordStatus>;
     selcomDisbursementId?: Nullable<string>;
     selcomPaymentId?: Nullable<string>;
-    state?: Nullable<TransactionStatus>;
+    status?: Nullable<TransactionStatus>;
     type: TransactionType;
     updatedAt?: Nullable<DateTime>;
 }
@@ -14328,7 +14374,7 @@ export class TransactionCreateManyOrderInput {
     recordStatus?: Nullable<RecordStatus>;
     selcomDisbursementId?: Nullable<string>;
     selcomPaymentId?: Nullable<string>;
-    state?: Nullable<TransactionStatus>;
+    status?: Nullable<TransactionStatus>;
     type: TransactionType;
     updatedAt?: Nullable<DateTime>;
 }
@@ -14346,7 +14392,7 @@ export class TransactionCreateManyPaymentMethodInput {
     recordStatus?: Nullable<RecordStatus>;
     selcomDisbursementId?: Nullable<string>;
     selcomPaymentId?: Nullable<string>;
-    state?: Nullable<TransactionStatus>;
+    status?: Nullable<TransactionStatus>;
     type: TransactionType;
     updatedAt?: Nullable<DateTime>;
 }
@@ -14421,7 +14467,7 @@ export class TransactionCreateWithoutMpesaPaymentInput {
     recordStatus?: Nullable<RecordStatus>;
     selcomDisbursement?: Nullable<SelcomDisbursementCreateNestedOneWithoutTransactionInput>;
     selcomPayment?: Nullable<SelcomPaymentCreateNestedOneWithoutTransactionInput>;
-    state?: Nullable<TransactionStatus>;
+    status?: Nullable<TransactionStatus>;
     type: TransactionType;
     updatedAt?: Nullable<DateTime>;
 }
@@ -14434,7 +14480,7 @@ export class TransactionCreateWithoutOrderInput {
     recordStatus?: Nullable<RecordStatus>;
     selcomDisbursement?: Nullable<SelcomDisbursementCreateNestedOneWithoutTransactionInput>;
     selcomPayment?: Nullable<SelcomPaymentCreateNestedOneWithoutTransactionInput>;
-    state?: Nullable<TransactionStatus>;
+    status?: Nullable<TransactionStatus>;
     type: TransactionType;
     updatedAt?: Nullable<DateTime>;
 }
@@ -14447,7 +14493,7 @@ export class TransactionCreateWithoutPaymentMethodInput {
     recordStatus?: Nullable<RecordStatus>;
     selcomDisbursement?: Nullable<SelcomDisbursementCreateNestedOneWithoutTransactionInput>;
     selcomPayment?: Nullable<SelcomPaymentCreateNestedOneWithoutTransactionInput>;
-    state?: Nullable<TransactionStatus>;
+    status?: Nullable<TransactionStatus>;
     type: TransactionType;
     updatedAt?: Nullable<DateTime>;
 }
@@ -14460,7 +14506,7 @@ export class TransactionCreateWithoutSelcomDisbursementInput {
     paymentMethod: PaymentMethodCreateNestedOneWithoutTransactionsInput;
     recordStatus?: Nullable<RecordStatus>;
     selcomPayment?: Nullable<SelcomPaymentCreateNestedOneWithoutTransactionInput>;
-    state?: Nullable<TransactionStatus>;
+    status?: Nullable<TransactionStatus>;
     type: TransactionType;
     updatedAt?: Nullable<DateTime>;
 }
@@ -14473,7 +14519,7 @@ export class TransactionCreateWithoutSelcomPaymentInput {
     paymentMethod: PaymentMethodCreateNestedOneWithoutTransactionsInput;
     recordStatus?: Nullable<RecordStatus>;
     selcomDisbursement?: Nullable<SelcomDisbursementCreateNestedOneWithoutTransactionInput>;
-    state?: Nullable<TransactionStatus>;
+    status?: Nullable<TransactionStatus>;
     type: TransactionType;
     updatedAt?: Nullable<DateTime>;
 }
@@ -14493,7 +14539,7 @@ export class TransactionOrderByInput {
     recordStatus?: Nullable<SortOrder>;
     selcomDisbursementId?: Nullable<SortOrder>;
     selcomPaymentId?: Nullable<SortOrder>;
-    state?: Nullable<SortOrder>;
+    status?: Nullable<SortOrder>;
     type?: Nullable<SortOrder>;
     updatedAt?: Nullable<SortOrder>;
 }
@@ -14515,7 +14561,7 @@ export class TransactionScalarWhereInput {
     recordStatus?: Nullable<EnumRecordStatusFilter>;
     selcomDisbursementId?: Nullable<StringNullableFilter>;
     selcomPaymentId?: Nullable<StringNullableFilter>;
-    state?: Nullable<EnumTransactionStatusFilter>;
+    status?: Nullable<EnumTransactionStatusFilter>;
     type?: Nullable<EnumTransactionTypeFilter>;
     updatedAt?: Nullable<DateTimeFilter>;
 }
@@ -14532,7 +14578,7 @@ export class TransactionScalarWhereWithAggregatesInput {
     recordStatus?: Nullable<EnumRecordStatusWithAggregatesFilter>;
     selcomDisbursementId?: Nullable<StringNullableWithAggregatesFilter>;
     selcomPaymentId?: Nullable<StringNullableWithAggregatesFilter>;
-    state?: Nullable<EnumTransactionStatusWithAggregatesFilter>;
+    status?: Nullable<EnumTransactionStatusWithAggregatesFilter>;
     type?: Nullable<EnumTransactionTypeWithAggregatesFilter>;
     updatedAt?: Nullable<DateTimeWithAggregatesFilter>;
 }
@@ -14546,7 +14592,7 @@ export class TransactionUncheckedCreateInput {
     recordStatus?: Nullable<RecordStatus>;
     selcomDisbursementId?: Nullable<string>;
     selcomPaymentId?: Nullable<string>;
-    state?: Nullable<TransactionStatus>;
+    status?: Nullable<TransactionStatus>;
     type: TransactionType;
     updatedAt?: Nullable<DateTime>;
 }
@@ -14591,7 +14637,7 @@ export class TransactionUncheckedCreateWithoutMpesaPaymentInput {
     recordStatus?: Nullable<RecordStatus>;
     selcomDisbursementId?: Nullable<string>;
     selcomPaymentId?: Nullable<string>;
-    state?: Nullable<TransactionStatus>;
+    status?: Nullable<TransactionStatus>;
     type: TransactionType;
     updatedAt?: Nullable<DateTime>;
 }
@@ -14604,7 +14650,7 @@ export class TransactionUncheckedCreateWithoutOrderInput {
     recordStatus?: Nullable<RecordStatus>;
     selcomDisbursementId?: Nullable<string>;
     selcomPaymentId?: Nullable<string>;
-    state?: Nullable<TransactionStatus>;
+    status?: Nullable<TransactionStatus>;
     type: TransactionType;
     updatedAt?: Nullable<DateTime>;
 }
@@ -14617,7 +14663,7 @@ export class TransactionUncheckedCreateWithoutPaymentMethodInput {
     recordStatus?: Nullable<RecordStatus>;
     selcomDisbursementId?: Nullable<string>;
     selcomPaymentId?: Nullable<string>;
-    state?: Nullable<TransactionStatus>;
+    status?: Nullable<TransactionStatus>;
     type: TransactionType;
     updatedAt?: Nullable<DateTime>;
 }
@@ -14630,7 +14676,7 @@ export class TransactionUncheckedCreateWithoutSelcomDisbursementInput {
     paymentMethodId: string;
     recordStatus?: Nullable<RecordStatus>;
     selcomPaymentId?: Nullable<string>;
-    state?: Nullable<TransactionStatus>;
+    status?: Nullable<TransactionStatus>;
     type: TransactionType;
     updatedAt?: Nullable<DateTime>;
 }
@@ -14643,7 +14689,7 @@ export class TransactionUncheckedCreateWithoutSelcomPaymentInput {
     paymentMethodId: string;
     recordStatus?: Nullable<RecordStatus>;
     selcomDisbursementId?: Nullable<string>;
-    state?: Nullable<TransactionStatus>;
+    status?: Nullable<TransactionStatus>;
     type: TransactionType;
     updatedAt?: Nullable<DateTime>;
 }
@@ -14657,7 +14703,7 @@ export class TransactionUncheckedUpdateInput {
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
     selcomDisbursementId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     selcomPaymentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumTransactionStatusFieldUpdateOperationsInput>;
+    status?: Nullable<EnumTransactionStatusFieldUpdateOperationsInput>;
     type?: Nullable<EnumTransactionTypeFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
@@ -14671,7 +14717,7 @@ export class TransactionUncheckedUpdateManyInput {
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
     selcomDisbursementId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     selcomPaymentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumTransactionStatusFieldUpdateOperationsInput>;
+    status?: Nullable<EnumTransactionStatusFieldUpdateOperationsInput>;
     type?: Nullable<EnumTransactionTypeFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
@@ -14712,7 +14758,7 @@ export class TransactionUncheckedUpdateManyWithoutTransactionsInput {
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
     selcomDisbursementId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     selcomPaymentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumTransactionStatusFieldUpdateOperationsInput>;
+    status?: Nullable<EnumTransactionStatusFieldUpdateOperationsInput>;
     type?: Nullable<EnumTransactionTypeFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
@@ -14755,7 +14801,7 @@ export class TransactionUncheckedUpdateWithoutMpesaPaymentInput {
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
     selcomDisbursementId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     selcomPaymentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumTransactionStatusFieldUpdateOperationsInput>;
+    status?: Nullable<EnumTransactionStatusFieldUpdateOperationsInput>;
     type?: Nullable<EnumTransactionTypeFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
@@ -14768,7 +14814,7 @@ export class TransactionUncheckedUpdateWithoutOrderInput {
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
     selcomDisbursementId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     selcomPaymentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumTransactionStatusFieldUpdateOperationsInput>;
+    status?: Nullable<EnumTransactionStatusFieldUpdateOperationsInput>;
     type?: Nullable<EnumTransactionTypeFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
@@ -14781,7 +14827,7 @@ export class TransactionUncheckedUpdateWithoutPaymentMethodInput {
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
     selcomDisbursementId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     selcomPaymentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumTransactionStatusFieldUpdateOperationsInput>;
+    status?: Nullable<EnumTransactionStatusFieldUpdateOperationsInput>;
     type?: Nullable<EnumTransactionTypeFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
@@ -14794,7 +14840,7 @@ export class TransactionUncheckedUpdateWithoutSelcomDisbursementInput {
     paymentMethodId?: Nullable<StringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
     selcomPaymentId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumTransactionStatusFieldUpdateOperationsInput>;
+    status?: Nullable<EnumTransactionStatusFieldUpdateOperationsInput>;
     type?: Nullable<EnumTransactionTypeFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
@@ -14807,7 +14853,7 @@ export class TransactionUncheckedUpdateWithoutSelcomPaymentInput {
     paymentMethodId?: Nullable<StringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
     selcomDisbursementId?: Nullable<NullableStringFieldUpdateOperationsInput>;
-    state?: Nullable<EnumTransactionStatusFieldUpdateOperationsInput>;
+    status?: Nullable<EnumTransactionStatusFieldUpdateOperationsInput>;
     type?: Nullable<EnumTransactionTypeFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
@@ -14821,7 +14867,7 @@ export class TransactionUpdateInput {
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
     selcomDisbursement?: Nullable<SelcomDisbursementUpdateOneWithoutTransactionInput>;
     selcomPayment?: Nullable<SelcomPaymentUpdateOneWithoutTransactionInput>;
-    state?: Nullable<EnumTransactionStatusFieldUpdateOperationsInput>;
+    status?: Nullable<EnumTransactionStatusFieldUpdateOperationsInput>;
     type?: Nullable<EnumTransactionTypeFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
@@ -14830,7 +14876,7 @@ export class TransactionUpdateManyMutationInput {
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    state?: Nullable<EnumTransactionStatusFieldUpdateOperationsInput>;
+    status?: Nullable<EnumTransactionStatusFieldUpdateOperationsInput>;
     type?: Nullable<EnumTransactionTypeFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
@@ -14921,7 +14967,7 @@ export class TransactionUpdateWithoutMpesaPaymentInput {
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
     selcomDisbursement?: Nullable<SelcomDisbursementUpdateOneWithoutTransactionInput>;
     selcomPayment?: Nullable<SelcomPaymentUpdateOneWithoutTransactionInput>;
-    state?: Nullable<EnumTransactionStatusFieldUpdateOperationsInput>;
+    status?: Nullable<EnumTransactionStatusFieldUpdateOperationsInput>;
     type?: Nullable<EnumTransactionTypeFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
@@ -14934,7 +14980,7 @@ export class TransactionUpdateWithoutOrderInput {
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
     selcomDisbursement?: Nullable<SelcomDisbursementUpdateOneWithoutTransactionInput>;
     selcomPayment?: Nullable<SelcomPaymentUpdateOneWithoutTransactionInput>;
-    state?: Nullable<EnumTransactionStatusFieldUpdateOperationsInput>;
+    status?: Nullable<EnumTransactionStatusFieldUpdateOperationsInput>;
     type?: Nullable<EnumTransactionTypeFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
@@ -14947,7 +14993,7 @@ export class TransactionUpdateWithoutPaymentMethodInput {
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
     selcomDisbursement?: Nullable<SelcomDisbursementUpdateOneWithoutTransactionInput>;
     selcomPayment?: Nullable<SelcomPaymentUpdateOneWithoutTransactionInput>;
-    state?: Nullable<EnumTransactionStatusFieldUpdateOperationsInput>;
+    status?: Nullable<EnumTransactionStatusFieldUpdateOperationsInput>;
     type?: Nullable<EnumTransactionTypeFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
@@ -14960,7 +15006,7 @@ export class TransactionUpdateWithoutSelcomDisbursementInput {
     paymentMethod?: Nullable<PaymentMethodUpdateOneRequiredWithoutTransactionsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
     selcomPayment?: Nullable<SelcomPaymentUpdateOneWithoutTransactionInput>;
-    state?: Nullable<EnumTransactionStatusFieldUpdateOperationsInput>;
+    status?: Nullable<EnumTransactionStatusFieldUpdateOperationsInput>;
     type?: Nullable<EnumTransactionTypeFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
@@ -14973,7 +15019,7 @@ export class TransactionUpdateWithoutSelcomPaymentInput {
     paymentMethod?: Nullable<PaymentMethodUpdateOneRequiredWithoutTransactionsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
     selcomDisbursement?: Nullable<SelcomDisbursementUpdateOneWithoutTransactionInput>;
-    state?: Nullable<EnumTransactionStatusFieldUpdateOperationsInput>;
+    status?: Nullable<EnumTransactionStatusFieldUpdateOperationsInput>;
     type?: Nullable<EnumTransactionTypeFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
 }
@@ -15022,7 +15068,7 @@ export class TransactionWhereInput {
     selcomDisbursementId?: Nullable<StringNullableFilter>;
     selcomPayment?: Nullable<SelcomPaymentWhereInput>;
     selcomPaymentId?: Nullable<StringNullableFilter>;
-    state?: Nullable<EnumTransactionStatusFilter>;
+    status?: Nullable<EnumTransactionStatusFilter>;
     type?: Nullable<EnumTransactionTypeFilter>;
     updatedAt?: Nullable<DateTimeFilter>;
 }
@@ -15033,7 +15079,7 @@ export class TransactionWhereUniqueInput {
 
 export class UserCreateInput {
     abuseReported?: Nullable<AbuseReportCreateNestedManyWithoutAuthorInput>;
-    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutUsersInput>;
+    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutUserInput>;
     avator?: Nullable<AttachmentCreateNestedOneWithoutUsersInput>;
     businessProfile?: Nullable<BusinessCreateNestedOneWithoutOwnerInput>;
     comments?: Nullable<CommentCreateNestedManyWithoutAuthorInput>;
@@ -15045,15 +15091,15 @@ export class UserCreateInput {
     email: string;
     emailVerified?: Nullable<boolean>;
     favorited?: Nullable<FavoriteCreateNestedManyWithoutAuthorInput>;
-    favorites?: Nullable<FavoriteCreateNestedManyWithoutUsersInput>;
+    favorites?: Nullable<FavoriteCreateNestedManyWithoutUserInput>;
     gender?: Nullable<Gender>;
     id?: Nullable<string>;
     location?: Nullable<LocationCreateNestedOneWithoutUsersInput>;
     ordered?: Nullable<OrderCreateNestedManyWithoutOwnerInput>;
     phoneNumber?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
-    reviewed?: Nullable<ReviewCreateNestedManyWithoutRevieweeInput>;
-    reviews?: Nullable<ReviewCreateNestedManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewCreateNestedManyWithoutAuthorInput>;
+    reviews?: Nullable<ReviewCreateNestedManyWithoutRevieweeInput>;
     role?: Nullable<Role>;
     state?: Nullable<AccountStatus>;
     updatedAt?: Nullable<DateTime>;
@@ -15256,7 +15302,7 @@ export class UserCreateOrConnectWithoutReviewsInput {
 }
 
 export class UserCreateWithoutAbuseReportedInput {
-    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutUsersInput>;
+    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutUserInput>;
     avator?: Nullable<AttachmentCreateNestedOneWithoutUsersInput>;
     businessProfile?: Nullable<BusinessCreateNestedOneWithoutOwnerInput>;
     comments?: Nullable<CommentCreateNestedManyWithoutAuthorInput>;
@@ -15268,15 +15314,15 @@ export class UserCreateWithoutAbuseReportedInput {
     email: string;
     emailVerified?: Nullable<boolean>;
     favorited?: Nullable<FavoriteCreateNestedManyWithoutAuthorInput>;
-    favorites?: Nullable<FavoriteCreateNestedManyWithoutUsersInput>;
+    favorites?: Nullable<FavoriteCreateNestedManyWithoutUserInput>;
     gender?: Nullable<Gender>;
     id?: Nullable<string>;
     location?: Nullable<LocationCreateNestedOneWithoutUsersInput>;
     ordered?: Nullable<OrderCreateNestedManyWithoutOwnerInput>;
     phoneNumber?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
-    reviewed?: Nullable<ReviewCreateNestedManyWithoutRevieweeInput>;
-    reviews?: Nullable<ReviewCreateNestedManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewCreateNestedManyWithoutAuthorInput>;
+    reviews?: Nullable<ReviewCreateNestedManyWithoutRevieweeInput>;
     role?: Nullable<Role>;
     state?: Nullable<AccountStatus>;
     updatedAt?: Nullable<DateTime>;
@@ -15295,15 +15341,15 @@ export class UserCreateWithoutAbuseReportsInput {
     email: string;
     emailVerified?: Nullable<boolean>;
     favorited?: Nullable<FavoriteCreateNestedManyWithoutAuthorInput>;
-    favorites?: Nullable<FavoriteCreateNestedManyWithoutUsersInput>;
+    favorites?: Nullable<FavoriteCreateNestedManyWithoutUserInput>;
     gender?: Nullable<Gender>;
     id?: Nullable<string>;
     location?: Nullable<LocationCreateNestedOneWithoutUsersInput>;
     ordered?: Nullable<OrderCreateNestedManyWithoutOwnerInput>;
     phoneNumber?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
-    reviewed?: Nullable<ReviewCreateNestedManyWithoutRevieweeInput>;
-    reviews?: Nullable<ReviewCreateNestedManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewCreateNestedManyWithoutAuthorInput>;
+    reviews?: Nullable<ReviewCreateNestedManyWithoutRevieweeInput>;
     role?: Nullable<Role>;
     state?: Nullable<AccountStatus>;
     updatedAt?: Nullable<DateTime>;
@@ -15311,7 +15357,7 @@ export class UserCreateWithoutAbuseReportsInput {
 
 export class UserCreateWithoutAvatorInput {
     abuseReported?: Nullable<AbuseReportCreateNestedManyWithoutAuthorInput>;
-    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutUsersInput>;
+    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutUserInput>;
     businessProfile?: Nullable<BusinessCreateNestedOneWithoutOwnerInput>;
     comments?: Nullable<CommentCreateNestedManyWithoutAuthorInput>;
     createdAt?: Nullable<DateTime>;
@@ -15322,15 +15368,15 @@ export class UserCreateWithoutAvatorInput {
     email: string;
     emailVerified?: Nullable<boolean>;
     favorited?: Nullable<FavoriteCreateNestedManyWithoutAuthorInput>;
-    favorites?: Nullable<FavoriteCreateNestedManyWithoutUsersInput>;
+    favorites?: Nullable<FavoriteCreateNestedManyWithoutUserInput>;
     gender?: Nullable<Gender>;
     id?: Nullable<string>;
     location?: Nullable<LocationCreateNestedOneWithoutUsersInput>;
     ordered?: Nullable<OrderCreateNestedManyWithoutOwnerInput>;
     phoneNumber?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
-    reviewed?: Nullable<ReviewCreateNestedManyWithoutRevieweeInput>;
-    reviews?: Nullable<ReviewCreateNestedManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewCreateNestedManyWithoutAuthorInput>;
+    reviews?: Nullable<ReviewCreateNestedManyWithoutRevieweeInput>;
     role?: Nullable<Role>;
     state?: Nullable<AccountStatus>;
     updatedAt?: Nullable<DateTime>;
@@ -15338,7 +15384,7 @@ export class UserCreateWithoutAvatorInput {
 
 export class UserCreateWithoutBusinessProfileInput {
     abuseReported?: Nullable<AbuseReportCreateNestedManyWithoutAuthorInput>;
-    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutUsersInput>;
+    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutUserInput>;
     avator?: Nullable<AttachmentCreateNestedOneWithoutUsersInput>;
     comments?: Nullable<CommentCreateNestedManyWithoutAuthorInput>;
     createdAt?: Nullable<DateTime>;
@@ -15349,15 +15395,15 @@ export class UserCreateWithoutBusinessProfileInput {
     email: string;
     emailVerified?: Nullable<boolean>;
     favorited?: Nullable<FavoriteCreateNestedManyWithoutAuthorInput>;
-    favorites?: Nullable<FavoriteCreateNestedManyWithoutUsersInput>;
+    favorites?: Nullable<FavoriteCreateNestedManyWithoutUserInput>;
     gender?: Nullable<Gender>;
     id?: Nullable<string>;
     location?: Nullable<LocationCreateNestedOneWithoutUsersInput>;
     ordered?: Nullable<OrderCreateNestedManyWithoutOwnerInput>;
     phoneNumber?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
-    reviewed?: Nullable<ReviewCreateNestedManyWithoutRevieweeInput>;
-    reviews?: Nullable<ReviewCreateNestedManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewCreateNestedManyWithoutAuthorInput>;
+    reviews?: Nullable<ReviewCreateNestedManyWithoutRevieweeInput>;
     role?: Nullable<Role>;
     state?: Nullable<AccountStatus>;
     updatedAt?: Nullable<DateTime>;
@@ -15365,7 +15411,7 @@ export class UserCreateWithoutBusinessProfileInput {
 
 export class UserCreateWithoutCommentsInput {
     abuseReported?: Nullable<AbuseReportCreateNestedManyWithoutAuthorInput>;
-    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutUsersInput>;
+    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutUserInput>;
     avator?: Nullable<AttachmentCreateNestedOneWithoutUsersInput>;
     businessProfile?: Nullable<BusinessCreateNestedOneWithoutOwnerInput>;
     createdAt?: Nullable<DateTime>;
@@ -15376,15 +15422,15 @@ export class UserCreateWithoutCommentsInput {
     email: string;
     emailVerified?: Nullable<boolean>;
     favorited?: Nullable<FavoriteCreateNestedManyWithoutAuthorInput>;
-    favorites?: Nullable<FavoriteCreateNestedManyWithoutUsersInput>;
+    favorites?: Nullable<FavoriteCreateNestedManyWithoutUserInput>;
     gender?: Nullable<Gender>;
     id?: Nullable<string>;
     location?: Nullable<LocationCreateNestedOneWithoutUsersInput>;
     ordered?: Nullable<OrderCreateNestedManyWithoutOwnerInput>;
     phoneNumber?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
-    reviewed?: Nullable<ReviewCreateNestedManyWithoutRevieweeInput>;
-    reviews?: Nullable<ReviewCreateNestedManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewCreateNestedManyWithoutAuthorInput>;
+    reviews?: Nullable<ReviewCreateNestedManyWithoutRevieweeInput>;
     role?: Nullable<Role>;
     state?: Nullable<AccountStatus>;
     updatedAt?: Nullable<DateTime>;
@@ -15392,7 +15438,7 @@ export class UserCreateWithoutCommentsInput {
 
 export class UserCreateWithoutDeviceInput {
     abuseReported?: Nullable<AbuseReportCreateNestedManyWithoutAuthorInput>;
-    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutUsersInput>;
+    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutUserInput>;
     avator?: Nullable<AttachmentCreateNestedOneWithoutUsersInput>;
     businessProfile?: Nullable<BusinessCreateNestedOneWithoutOwnerInput>;
     comments?: Nullable<CommentCreateNestedManyWithoutAuthorInput>;
@@ -15403,15 +15449,15 @@ export class UserCreateWithoutDeviceInput {
     email: string;
     emailVerified?: Nullable<boolean>;
     favorited?: Nullable<FavoriteCreateNestedManyWithoutAuthorInput>;
-    favorites?: Nullable<FavoriteCreateNestedManyWithoutUsersInput>;
+    favorites?: Nullable<FavoriteCreateNestedManyWithoutUserInput>;
     gender?: Nullable<Gender>;
     id?: Nullable<string>;
     location?: Nullable<LocationCreateNestedOneWithoutUsersInput>;
     ordered?: Nullable<OrderCreateNestedManyWithoutOwnerInput>;
     phoneNumber?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
-    reviewed?: Nullable<ReviewCreateNestedManyWithoutRevieweeInput>;
-    reviews?: Nullable<ReviewCreateNestedManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewCreateNestedManyWithoutAuthorInput>;
+    reviews?: Nullable<ReviewCreateNestedManyWithoutRevieweeInput>;
     role?: Nullable<Role>;
     state?: Nullable<AccountStatus>;
     updatedAt?: Nullable<DateTime>;
@@ -15419,7 +15465,7 @@ export class UserCreateWithoutDeviceInput {
 
 export class UserCreateWithoutFavoritedInput {
     abuseReported?: Nullable<AbuseReportCreateNestedManyWithoutAuthorInput>;
-    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutUsersInput>;
+    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutUserInput>;
     avator?: Nullable<AttachmentCreateNestedOneWithoutUsersInput>;
     businessProfile?: Nullable<BusinessCreateNestedOneWithoutOwnerInput>;
     comments?: Nullable<CommentCreateNestedManyWithoutAuthorInput>;
@@ -15430,15 +15476,15 @@ export class UserCreateWithoutFavoritedInput {
     displayName: string;
     email: string;
     emailVerified?: Nullable<boolean>;
-    favorites?: Nullable<FavoriteCreateNestedManyWithoutUsersInput>;
+    favorites?: Nullable<FavoriteCreateNestedManyWithoutUserInput>;
     gender?: Nullable<Gender>;
     id?: Nullable<string>;
     location?: Nullable<LocationCreateNestedOneWithoutUsersInput>;
     ordered?: Nullable<OrderCreateNestedManyWithoutOwnerInput>;
     phoneNumber?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
-    reviewed?: Nullable<ReviewCreateNestedManyWithoutRevieweeInput>;
-    reviews?: Nullable<ReviewCreateNestedManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewCreateNestedManyWithoutAuthorInput>;
+    reviews?: Nullable<ReviewCreateNestedManyWithoutRevieweeInput>;
     role?: Nullable<Role>;
     state?: Nullable<AccountStatus>;
     updatedAt?: Nullable<DateTime>;
@@ -15446,7 +15492,7 @@ export class UserCreateWithoutFavoritedInput {
 
 export class UserCreateWithoutFavoritesInput {
     abuseReported?: Nullable<AbuseReportCreateNestedManyWithoutAuthorInput>;
-    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutUsersInput>;
+    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutUserInput>;
     avator?: Nullable<AttachmentCreateNestedOneWithoutUsersInput>;
     businessProfile?: Nullable<BusinessCreateNestedOneWithoutOwnerInput>;
     comments?: Nullable<CommentCreateNestedManyWithoutAuthorInput>;
@@ -15464,8 +15510,8 @@ export class UserCreateWithoutFavoritesInput {
     ordered?: Nullable<OrderCreateNestedManyWithoutOwnerInput>;
     phoneNumber?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
-    reviewed?: Nullable<ReviewCreateNestedManyWithoutRevieweeInput>;
-    reviews?: Nullable<ReviewCreateNestedManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewCreateNestedManyWithoutAuthorInput>;
+    reviews?: Nullable<ReviewCreateNestedManyWithoutRevieweeInput>;
     role?: Nullable<Role>;
     state?: Nullable<AccountStatus>;
     updatedAt?: Nullable<DateTime>;
@@ -15473,7 +15519,7 @@ export class UserCreateWithoutFavoritesInput {
 
 export class UserCreateWithoutLocationInput {
     abuseReported?: Nullable<AbuseReportCreateNestedManyWithoutAuthorInput>;
-    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutUsersInput>;
+    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutUserInput>;
     avator?: Nullable<AttachmentCreateNestedOneWithoutUsersInput>;
     businessProfile?: Nullable<BusinessCreateNestedOneWithoutOwnerInput>;
     comments?: Nullable<CommentCreateNestedManyWithoutAuthorInput>;
@@ -15485,14 +15531,14 @@ export class UserCreateWithoutLocationInput {
     email: string;
     emailVerified?: Nullable<boolean>;
     favorited?: Nullable<FavoriteCreateNestedManyWithoutAuthorInput>;
-    favorites?: Nullable<FavoriteCreateNestedManyWithoutUsersInput>;
+    favorites?: Nullable<FavoriteCreateNestedManyWithoutUserInput>;
     gender?: Nullable<Gender>;
     id?: Nullable<string>;
     ordered?: Nullable<OrderCreateNestedManyWithoutOwnerInput>;
     phoneNumber?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
-    reviewed?: Nullable<ReviewCreateNestedManyWithoutRevieweeInput>;
-    reviews?: Nullable<ReviewCreateNestedManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewCreateNestedManyWithoutAuthorInput>;
+    reviews?: Nullable<ReviewCreateNestedManyWithoutRevieweeInput>;
     role?: Nullable<Role>;
     state?: Nullable<AccountStatus>;
     updatedAt?: Nullable<DateTime>;
@@ -15500,7 +15546,7 @@ export class UserCreateWithoutLocationInput {
 
 export class UserCreateWithoutOrderedInput {
     abuseReported?: Nullable<AbuseReportCreateNestedManyWithoutAuthorInput>;
-    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutUsersInput>;
+    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutUserInput>;
     avator?: Nullable<AttachmentCreateNestedOneWithoutUsersInput>;
     businessProfile?: Nullable<BusinessCreateNestedOneWithoutOwnerInput>;
     comments?: Nullable<CommentCreateNestedManyWithoutAuthorInput>;
@@ -15512,14 +15558,14 @@ export class UserCreateWithoutOrderedInput {
     email: string;
     emailVerified?: Nullable<boolean>;
     favorited?: Nullable<FavoriteCreateNestedManyWithoutAuthorInput>;
-    favorites?: Nullable<FavoriteCreateNestedManyWithoutUsersInput>;
+    favorites?: Nullable<FavoriteCreateNestedManyWithoutUserInput>;
     gender?: Nullable<Gender>;
     id?: Nullable<string>;
     location?: Nullable<LocationCreateNestedOneWithoutUsersInput>;
     phoneNumber?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
-    reviewed?: Nullable<ReviewCreateNestedManyWithoutRevieweeInput>;
-    reviews?: Nullable<ReviewCreateNestedManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewCreateNestedManyWithoutAuthorInput>;
+    reviews?: Nullable<ReviewCreateNestedManyWithoutRevieweeInput>;
     role?: Nullable<Role>;
     state?: Nullable<AccountStatus>;
     updatedAt?: Nullable<DateTime>;
@@ -15527,7 +15573,7 @@ export class UserCreateWithoutOrderedInput {
 
 export class UserCreateWithoutReviewedInput {
     abuseReported?: Nullable<AbuseReportCreateNestedManyWithoutAuthorInput>;
-    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutUsersInput>;
+    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutUserInput>;
     avator?: Nullable<AttachmentCreateNestedOneWithoutUsersInput>;
     businessProfile?: Nullable<BusinessCreateNestedOneWithoutOwnerInput>;
     comments?: Nullable<CommentCreateNestedManyWithoutAuthorInput>;
@@ -15539,14 +15585,14 @@ export class UserCreateWithoutReviewedInput {
     email: string;
     emailVerified?: Nullable<boolean>;
     favorited?: Nullable<FavoriteCreateNestedManyWithoutAuthorInput>;
-    favorites?: Nullable<FavoriteCreateNestedManyWithoutUsersInput>;
+    favorites?: Nullable<FavoriteCreateNestedManyWithoutUserInput>;
     gender?: Nullable<Gender>;
     id?: Nullable<string>;
     location?: Nullable<LocationCreateNestedOneWithoutUsersInput>;
     ordered?: Nullable<OrderCreateNestedManyWithoutOwnerInput>;
     phoneNumber?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
-    reviews?: Nullable<ReviewCreateNestedManyWithoutAuthorInput>;
+    reviews?: Nullable<ReviewCreateNestedManyWithoutRevieweeInput>;
     role?: Nullable<Role>;
     state?: Nullable<AccountStatus>;
     updatedAt?: Nullable<DateTime>;
@@ -15554,7 +15600,7 @@ export class UserCreateWithoutReviewedInput {
 
 export class UserCreateWithoutReviewsInput {
     abuseReported?: Nullable<AbuseReportCreateNestedManyWithoutAuthorInput>;
-    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutUsersInput>;
+    abuseReports?: Nullable<AbuseReportCreateNestedManyWithoutUserInput>;
     avator?: Nullable<AttachmentCreateNestedOneWithoutUsersInput>;
     businessProfile?: Nullable<BusinessCreateNestedOneWithoutOwnerInput>;
     comments?: Nullable<CommentCreateNestedManyWithoutAuthorInput>;
@@ -15566,14 +15612,14 @@ export class UserCreateWithoutReviewsInput {
     email: string;
     emailVerified?: Nullable<boolean>;
     favorited?: Nullable<FavoriteCreateNestedManyWithoutAuthorInput>;
-    favorites?: Nullable<FavoriteCreateNestedManyWithoutUsersInput>;
+    favorites?: Nullable<FavoriteCreateNestedManyWithoutUserInput>;
     gender?: Nullable<Gender>;
     id?: Nullable<string>;
     location?: Nullable<LocationCreateNestedOneWithoutUsersInput>;
     ordered?: Nullable<OrderCreateNestedManyWithoutOwnerInput>;
     phoneNumber?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
-    reviewed?: Nullable<ReviewCreateNestedManyWithoutRevieweeInput>;
+    reviewed?: Nullable<ReviewCreateNestedManyWithoutAuthorInput>;
     role?: Nullable<Role>;
     state?: Nullable<AccountStatus>;
     updatedAt?: Nullable<DateTime>;
@@ -15652,7 +15698,7 @@ export class UserScalarWhereWithAggregatesInput {
 
 export class UserUncheckedCreateInput {
     abuseReported?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutAuthorInput>;
-    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutUsersInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutUserInput>;
     avatorId?: Nullable<string>;
     businessProfile?: Nullable<BusinessUncheckedCreateNestedOneWithoutOwnerInput>;
     comments?: Nullable<CommentUncheckedCreateNestedManyWithoutAuthorInput>;
@@ -15664,15 +15710,15 @@ export class UserUncheckedCreateInput {
     email: string;
     emailVerified?: Nullable<boolean>;
     favorited?: Nullable<FavoriteUncheckedCreateNestedManyWithoutAuthorInput>;
-    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutUsersInput>;
+    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutUserInput>;
     gender?: Nullable<Gender>;
     id?: Nullable<string>;
     locationId?: Nullable<string>;
     ordered?: Nullable<OrderUncheckedCreateNestedManyWithoutOwnerInput>;
     phoneNumber?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
-    reviewed?: Nullable<ReviewUncheckedCreateNestedManyWithoutRevieweeInput>;
-    reviews?: Nullable<ReviewUncheckedCreateNestedManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUncheckedCreateNestedManyWithoutAuthorInput>;
+    reviews?: Nullable<ReviewUncheckedCreateNestedManyWithoutRevieweeInput>;
     role?: Nullable<Role>;
     state?: Nullable<AccountStatus>;
     updatedAt?: Nullable<DateTime>;
@@ -15693,7 +15739,7 @@ export class UserUncheckedCreateNestedManyWithoutLocationInput {
 }
 
 export class UserUncheckedCreateWithoutAbuseReportedInput {
-    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutUsersInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutUserInput>;
     avatorId?: Nullable<string>;
     businessProfile?: Nullable<BusinessUncheckedCreateNestedOneWithoutOwnerInput>;
     comments?: Nullable<CommentUncheckedCreateNestedManyWithoutAuthorInput>;
@@ -15705,15 +15751,15 @@ export class UserUncheckedCreateWithoutAbuseReportedInput {
     email: string;
     emailVerified?: Nullable<boolean>;
     favorited?: Nullable<FavoriteUncheckedCreateNestedManyWithoutAuthorInput>;
-    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutUsersInput>;
+    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutUserInput>;
     gender?: Nullable<Gender>;
     id?: Nullable<string>;
     locationId?: Nullable<string>;
     ordered?: Nullable<OrderUncheckedCreateNestedManyWithoutOwnerInput>;
     phoneNumber?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
-    reviewed?: Nullable<ReviewUncheckedCreateNestedManyWithoutRevieweeInput>;
-    reviews?: Nullable<ReviewUncheckedCreateNestedManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUncheckedCreateNestedManyWithoutAuthorInput>;
+    reviews?: Nullable<ReviewUncheckedCreateNestedManyWithoutRevieweeInput>;
     role?: Nullable<Role>;
     state?: Nullable<AccountStatus>;
     updatedAt?: Nullable<DateTime>;
@@ -15732,15 +15778,15 @@ export class UserUncheckedCreateWithoutAbuseReportsInput {
     email: string;
     emailVerified?: Nullable<boolean>;
     favorited?: Nullable<FavoriteUncheckedCreateNestedManyWithoutAuthorInput>;
-    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutUsersInput>;
+    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutUserInput>;
     gender?: Nullable<Gender>;
     id?: Nullable<string>;
     locationId?: Nullable<string>;
     ordered?: Nullable<OrderUncheckedCreateNestedManyWithoutOwnerInput>;
     phoneNumber?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
-    reviewed?: Nullable<ReviewUncheckedCreateNestedManyWithoutRevieweeInput>;
-    reviews?: Nullable<ReviewUncheckedCreateNestedManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUncheckedCreateNestedManyWithoutAuthorInput>;
+    reviews?: Nullable<ReviewUncheckedCreateNestedManyWithoutRevieweeInput>;
     role?: Nullable<Role>;
     state?: Nullable<AccountStatus>;
     updatedAt?: Nullable<DateTime>;
@@ -15748,7 +15794,7 @@ export class UserUncheckedCreateWithoutAbuseReportsInput {
 
 export class UserUncheckedCreateWithoutAvatorInput {
     abuseReported?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutAuthorInput>;
-    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutUsersInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutUserInput>;
     businessProfile?: Nullable<BusinessUncheckedCreateNestedOneWithoutOwnerInput>;
     comments?: Nullable<CommentUncheckedCreateNestedManyWithoutAuthorInput>;
     createdAt?: Nullable<DateTime>;
@@ -15759,15 +15805,15 @@ export class UserUncheckedCreateWithoutAvatorInput {
     email: string;
     emailVerified?: Nullable<boolean>;
     favorited?: Nullable<FavoriteUncheckedCreateNestedManyWithoutAuthorInput>;
-    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutUsersInput>;
+    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutUserInput>;
     gender?: Nullable<Gender>;
     id?: Nullable<string>;
     locationId?: Nullable<string>;
     ordered?: Nullable<OrderUncheckedCreateNestedManyWithoutOwnerInput>;
     phoneNumber?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
-    reviewed?: Nullable<ReviewUncheckedCreateNestedManyWithoutRevieweeInput>;
-    reviews?: Nullable<ReviewUncheckedCreateNestedManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUncheckedCreateNestedManyWithoutAuthorInput>;
+    reviews?: Nullable<ReviewUncheckedCreateNestedManyWithoutRevieweeInput>;
     role?: Nullable<Role>;
     state?: Nullable<AccountStatus>;
     updatedAt?: Nullable<DateTime>;
@@ -15775,7 +15821,7 @@ export class UserUncheckedCreateWithoutAvatorInput {
 
 export class UserUncheckedCreateWithoutBusinessProfileInput {
     abuseReported?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutAuthorInput>;
-    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutUsersInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutUserInput>;
     avatorId?: Nullable<string>;
     comments?: Nullable<CommentUncheckedCreateNestedManyWithoutAuthorInput>;
     createdAt?: Nullable<DateTime>;
@@ -15786,15 +15832,15 @@ export class UserUncheckedCreateWithoutBusinessProfileInput {
     email: string;
     emailVerified?: Nullable<boolean>;
     favorited?: Nullable<FavoriteUncheckedCreateNestedManyWithoutAuthorInput>;
-    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutUsersInput>;
+    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutUserInput>;
     gender?: Nullable<Gender>;
     id?: Nullable<string>;
     locationId?: Nullable<string>;
     ordered?: Nullable<OrderUncheckedCreateNestedManyWithoutOwnerInput>;
     phoneNumber?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
-    reviewed?: Nullable<ReviewUncheckedCreateNestedManyWithoutRevieweeInput>;
-    reviews?: Nullable<ReviewUncheckedCreateNestedManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUncheckedCreateNestedManyWithoutAuthorInput>;
+    reviews?: Nullable<ReviewUncheckedCreateNestedManyWithoutRevieweeInput>;
     role?: Nullable<Role>;
     state?: Nullable<AccountStatus>;
     updatedAt?: Nullable<DateTime>;
@@ -15802,7 +15848,7 @@ export class UserUncheckedCreateWithoutBusinessProfileInput {
 
 export class UserUncheckedCreateWithoutCommentsInput {
     abuseReported?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutAuthorInput>;
-    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutUsersInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutUserInput>;
     avatorId?: Nullable<string>;
     businessProfile?: Nullable<BusinessUncheckedCreateNestedOneWithoutOwnerInput>;
     createdAt?: Nullable<DateTime>;
@@ -15813,15 +15859,15 @@ export class UserUncheckedCreateWithoutCommentsInput {
     email: string;
     emailVerified?: Nullable<boolean>;
     favorited?: Nullable<FavoriteUncheckedCreateNestedManyWithoutAuthorInput>;
-    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutUsersInput>;
+    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutUserInput>;
     gender?: Nullable<Gender>;
     id?: Nullable<string>;
     locationId?: Nullable<string>;
     ordered?: Nullable<OrderUncheckedCreateNestedManyWithoutOwnerInput>;
     phoneNumber?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
-    reviewed?: Nullable<ReviewUncheckedCreateNestedManyWithoutRevieweeInput>;
-    reviews?: Nullable<ReviewUncheckedCreateNestedManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUncheckedCreateNestedManyWithoutAuthorInput>;
+    reviews?: Nullable<ReviewUncheckedCreateNestedManyWithoutRevieweeInput>;
     role?: Nullable<Role>;
     state?: Nullable<AccountStatus>;
     updatedAt?: Nullable<DateTime>;
@@ -15829,7 +15875,7 @@ export class UserUncheckedCreateWithoutCommentsInput {
 
 export class UserUncheckedCreateWithoutDeviceInput {
     abuseReported?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutAuthorInput>;
-    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutUsersInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutUserInput>;
     avatorId?: Nullable<string>;
     businessProfile?: Nullable<BusinessUncheckedCreateNestedOneWithoutOwnerInput>;
     comments?: Nullable<CommentUncheckedCreateNestedManyWithoutAuthorInput>;
@@ -15840,15 +15886,15 @@ export class UserUncheckedCreateWithoutDeviceInput {
     email: string;
     emailVerified?: Nullable<boolean>;
     favorited?: Nullable<FavoriteUncheckedCreateNestedManyWithoutAuthorInput>;
-    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutUsersInput>;
+    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutUserInput>;
     gender?: Nullable<Gender>;
     id?: Nullable<string>;
     locationId?: Nullable<string>;
     ordered?: Nullable<OrderUncheckedCreateNestedManyWithoutOwnerInput>;
     phoneNumber?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
-    reviewed?: Nullable<ReviewUncheckedCreateNestedManyWithoutRevieweeInput>;
-    reviews?: Nullable<ReviewUncheckedCreateNestedManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUncheckedCreateNestedManyWithoutAuthorInput>;
+    reviews?: Nullable<ReviewUncheckedCreateNestedManyWithoutRevieweeInput>;
     role?: Nullable<Role>;
     state?: Nullable<AccountStatus>;
     updatedAt?: Nullable<DateTime>;
@@ -15856,7 +15902,7 @@ export class UserUncheckedCreateWithoutDeviceInput {
 
 export class UserUncheckedCreateWithoutFavoritedInput {
     abuseReported?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutAuthorInput>;
-    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutUsersInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutUserInput>;
     avatorId?: Nullable<string>;
     businessProfile?: Nullable<BusinessUncheckedCreateNestedOneWithoutOwnerInput>;
     comments?: Nullable<CommentUncheckedCreateNestedManyWithoutAuthorInput>;
@@ -15867,15 +15913,15 @@ export class UserUncheckedCreateWithoutFavoritedInput {
     displayName: string;
     email: string;
     emailVerified?: Nullable<boolean>;
-    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutUsersInput>;
+    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutUserInput>;
     gender?: Nullable<Gender>;
     id?: Nullable<string>;
     locationId?: Nullable<string>;
     ordered?: Nullable<OrderUncheckedCreateNestedManyWithoutOwnerInput>;
     phoneNumber?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
-    reviewed?: Nullable<ReviewUncheckedCreateNestedManyWithoutRevieweeInput>;
-    reviews?: Nullable<ReviewUncheckedCreateNestedManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUncheckedCreateNestedManyWithoutAuthorInput>;
+    reviews?: Nullable<ReviewUncheckedCreateNestedManyWithoutRevieweeInput>;
     role?: Nullable<Role>;
     state?: Nullable<AccountStatus>;
     updatedAt?: Nullable<DateTime>;
@@ -15883,7 +15929,7 @@ export class UserUncheckedCreateWithoutFavoritedInput {
 
 export class UserUncheckedCreateWithoutFavoritesInput {
     abuseReported?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutAuthorInput>;
-    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutUsersInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutUserInput>;
     avatorId?: Nullable<string>;
     businessProfile?: Nullable<BusinessUncheckedCreateNestedOneWithoutOwnerInput>;
     comments?: Nullable<CommentUncheckedCreateNestedManyWithoutAuthorInput>;
@@ -15901,8 +15947,8 @@ export class UserUncheckedCreateWithoutFavoritesInput {
     ordered?: Nullable<OrderUncheckedCreateNestedManyWithoutOwnerInput>;
     phoneNumber?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
-    reviewed?: Nullable<ReviewUncheckedCreateNestedManyWithoutRevieweeInput>;
-    reviews?: Nullable<ReviewUncheckedCreateNestedManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUncheckedCreateNestedManyWithoutAuthorInput>;
+    reviews?: Nullable<ReviewUncheckedCreateNestedManyWithoutRevieweeInput>;
     role?: Nullable<Role>;
     state?: Nullable<AccountStatus>;
     updatedAt?: Nullable<DateTime>;
@@ -15910,7 +15956,7 @@ export class UserUncheckedCreateWithoutFavoritesInput {
 
 export class UserUncheckedCreateWithoutLocationInput {
     abuseReported?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutAuthorInput>;
-    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutUsersInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutUserInput>;
     avatorId?: Nullable<string>;
     businessProfile?: Nullable<BusinessUncheckedCreateNestedOneWithoutOwnerInput>;
     comments?: Nullable<CommentUncheckedCreateNestedManyWithoutAuthorInput>;
@@ -15922,14 +15968,14 @@ export class UserUncheckedCreateWithoutLocationInput {
     email: string;
     emailVerified?: Nullable<boolean>;
     favorited?: Nullable<FavoriteUncheckedCreateNestedManyWithoutAuthorInput>;
-    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutUsersInput>;
+    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutUserInput>;
     gender?: Nullable<Gender>;
     id?: Nullable<string>;
     ordered?: Nullable<OrderUncheckedCreateNestedManyWithoutOwnerInput>;
     phoneNumber?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
-    reviewed?: Nullable<ReviewUncheckedCreateNestedManyWithoutRevieweeInput>;
-    reviews?: Nullable<ReviewUncheckedCreateNestedManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUncheckedCreateNestedManyWithoutAuthorInput>;
+    reviews?: Nullable<ReviewUncheckedCreateNestedManyWithoutRevieweeInput>;
     role?: Nullable<Role>;
     state?: Nullable<AccountStatus>;
     updatedAt?: Nullable<DateTime>;
@@ -15937,7 +15983,7 @@ export class UserUncheckedCreateWithoutLocationInput {
 
 export class UserUncheckedCreateWithoutOrderedInput {
     abuseReported?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutAuthorInput>;
-    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutUsersInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutUserInput>;
     avatorId?: Nullable<string>;
     businessProfile?: Nullable<BusinessUncheckedCreateNestedOneWithoutOwnerInput>;
     comments?: Nullable<CommentUncheckedCreateNestedManyWithoutAuthorInput>;
@@ -15949,14 +15995,14 @@ export class UserUncheckedCreateWithoutOrderedInput {
     email: string;
     emailVerified?: Nullable<boolean>;
     favorited?: Nullable<FavoriteUncheckedCreateNestedManyWithoutAuthorInput>;
-    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutUsersInput>;
+    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutUserInput>;
     gender?: Nullable<Gender>;
     id?: Nullable<string>;
     locationId?: Nullable<string>;
     phoneNumber?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
-    reviewed?: Nullable<ReviewUncheckedCreateNestedManyWithoutRevieweeInput>;
-    reviews?: Nullable<ReviewUncheckedCreateNestedManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUncheckedCreateNestedManyWithoutAuthorInput>;
+    reviews?: Nullable<ReviewUncheckedCreateNestedManyWithoutRevieweeInput>;
     role?: Nullable<Role>;
     state?: Nullable<AccountStatus>;
     updatedAt?: Nullable<DateTime>;
@@ -15964,7 +16010,7 @@ export class UserUncheckedCreateWithoutOrderedInput {
 
 export class UserUncheckedCreateWithoutReviewedInput {
     abuseReported?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutAuthorInput>;
-    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutUsersInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutUserInput>;
     avatorId?: Nullable<string>;
     businessProfile?: Nullable<BusinessUncheckedCreateNestedOneWithoutOwnerInput>;
     comments?: Nullable<CommentUncheckedCreateNestedManyWithoutAuthorInput>;
@@ -15976,14 +16022,14 @@ export class UserUncheckedCreateWithoutReviewedInput {
     email: string;
     emailVerified?: Nullable<boolean>;
     favorited?: Nullable<FavoriteUncheckedCreateNestedManyWithoutAuthorInput>;
-    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutUsersInput>;
+    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutUserInput>;
     gender?: Nullable<Gender>;
     id?: Nullable<string>;
     locationId?: Nullable<string>;
     ordered?: Nullable<OrderUncheckedCreateNestedManyWithoutOwnerInput>;
     phoneNumber?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
-    reviews?: Nullable<ReviewUncheckedCreateNestedManyWithoutAuthorInput>;
+    reviews?: Nullable<ReviewUncheckedCreateNestedManyWithoutRevieweeInput>;
     role?: Nullable<Role>;
     state?: Nullable<AccountStatus>;
     updatedAt?: Nullable<DateTime>;
@@ -15991,7 +16037,7 @@ export class UserUncheckedCreateWithoutReviewedInput {
 
 export class UserUncheckedCreateWithoutReviewsInput {
     abuseReported?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutAuthorInput>;
-    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutUsersInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedCreateNestedManyWithoutUserInput>;
     avatorId?: Nullable<string>;
     businessProfile?: Nullable<BusinessUncheckedCreateNestedOneWithoutOwnerInput>;
     comments?: Nullable<CommentUncheckedCreateNestedManyWithoutAuthorInput>;
@@ -16003,14 +16049,14 @@ export class UserUncheckedCreateWithoutReviewsInput {
     email: string;
     emailVerified?: Nullable<boolean>;
     favorited?: Nullable<FavoriteUncheckedCreateNestedManyWithoutAuthorInput>;
-    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutUsersInput>;
+    favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutUserInput>;
     gender?: Nullable<Gender>;
     id?: Nullable<string>;
     locationId?: Nullable<string>;
     ordered?: Nullable<OrderUncheckedCreateNestedManyWithoutOwnerInput>;
     phoneNumber?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
-    reviewed?: Nullable<ReviewUncheckedCreateNestedManyWithoutRevieweeInput>;
+    reviewed?: Nullable<ReviewUncheckedCreateNestedManyWithoutAuthorInput>;
     role?: Nullable<Role>;
     state?: Nullable<AccountStatus>;
     updatedAt?: Nullable<DateTime>;
@@ -16018,7 +16064,7 @@ export class UserUncheckedCreateWithoutReviewsInput {
 
 export class UserUncheckedUpdateInput {
     abuseReported?: Nullable<AbuseReportUncheckedUpdateManyWithoutAuthorInput>;
-    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutUsersInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutUserInput>;
     avatorId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     businessProfile?: Nullable<BusinessUncheckedUpdateOneWithoutOwnerInput>;
     comments?: Nullable<CommentUncheckedUpdateManyWithoutAuthorInput>;
@@ -16030,15 +16076,15 @@ export class UserUncheckedUpdateInput {
     email?: Nullable<StringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     favorited?: Nullable<FavoriteUncheckedUpdateManyWithoutAuthorInput>;
-    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutUsersInput>;
+    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutUserInput>;
     gender?: Nullable<EnumGenderFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     locationId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     ordered?: Nullable<OrderUncheckedUpdateManyWithoutOwnerInput>;
     phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    reviewed?: Nullable<ReviewUncheckedUpdateManyWithoutRevieweeInput>;
-    reviews?: Nullable<ReviewUncheckedUpdateManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUncheckedUpdateManyWithoutAuthorInput>;
+    reviews?: Nullable<ReviewUncheckedUpdateManyWithoutRevieweeInput>;
     role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
     state?: Nullable<EnumAccountStatusFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
@@ -16108,7 +16154,7 @@ export class UserUncheckedUpdateManyWithoutUsersInput {
 }
 
 export class UserUncheckedUpdateWithoutAbuseReportedInput {
-    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutUsersInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutUserInput>;
     avatorId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     businessProfile?: Nullable<BusinessUncheckedUpdateOneWithoutOwnerInput>;
     comments?: Nullable<CommentUncheckedUpdateManyWithoutAuthorInput>;
@@ -16120,15 +16166,15 @@ export class UserUncheckedUpdateWithoutAbuseReportedInput {
     email?: Nullable<StringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     favorited?: Nullable<FavoriteUncheckedUpdateManyWithoutAuthorInput>;
-    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutUsersInput>;
+    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutUserInput>;
     gender?: Nullable<EnumGenderFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     locationId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     ordered?: Nullable<OrderUncheckedUpdateManyWithoutOwnerInput>;
     phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    reviewed?: Nullable<ReviewUncheckedUpdateManyWithoutRevieweeInput>;
-    reviews?: Nullable<ReviewUncheckedUpdateManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUncheckedUpdateManyWithoutAuthorInput>;
+    reviews?: Nullable<ReviewUncheckedUpdateManyWithoutRevieweeInput>;
     role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
     state?: Nullable<EnumAccountStatusFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
@@ -16147,15 +16193,15 @@ export class UserUncheckedUpdateWithoutAbuseReportsInput {
     email?: Nullable<StringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     favorited?: Nullable<FavoriteUncheckedUpdateManyWithoutAuthorInput>;
-    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutUsersInput>;
+    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutUserInput>;
     gender?: Nullable<EnumGenderFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     locationId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     ordered?: Nullable<OrderUncheckedUpdateManyWithoutOwnerInput>;
     phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    reviewed?: Nullable<ReviewUncheckedUpdateManyWithoutRevieweeInput>;
-    reviews?: Nullable<ReviewUncheckedUpdateManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUncheckedUpdateManyWithoutAuthorInput>;
+    reviews?: Nullable<ReviewUncheckedUpdateManyWithoutRevieweeInput>;
     role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
     state?: Nullable<EnumAccountStatusFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
@@ -16163,7 +16209,7 @@ export class UserUncheckedUpdateWithoutAbuseReportsInput {
 
 export class UserUncheckedUpdateWithoutAvatorInput {
     abuseReported?: Nullable<AbuseReportUncheckedUpdateManyWithoutAuthorInput>;
-    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutUsersInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutUserInput>;
     businessProfile?: Nullable<BusinessUncheckedUpdateOneWithoutOwnerInput>;
     comments?: Nullable<CommentUncheckedUpdateManyWithoutAuthorInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
@@ -16174,15 +16220,15 @@ export class UserUncheckedUpdateWithoutAvatorInput {
     email?: Nullable<StringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     favorited?: Nullable<FavoriteUncheckedUpdateManyWithoutAuthorInput>;
-    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutUsersInput>;
+    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutUserInput>;
     gender?: Nullable<EnumGenderFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     locationId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     ordered?: Nullable<OrderUncheckedUpdateManyWithoutOwnerInput>;
     phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    reviewed?: Nullable<ReviewUncheckedUpdateManyWithoutRevieweeInput>;
-    reviews?: Nullable<ReviewUncheckedUpdateManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUncheckedUpdateManyWithoutAuthorInput>;
+    reviews?: Nullable<ReviewUncheckedUpdateManyWithoutRevieweeInput>;
     role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
     state?: Nullable<EnumAccountStatusFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
@@ -16190,7 +16236,7 @@ export class UserUncheckedUpdateWithoutAvatorInput {
 
 export class UserUncheckedUpdateWithoutBusinessProfileInput {
     abuseReported?: Nullable<AbuseReportUncheckedUpdateManyWithoutAuthorInput>;
-    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutUsersInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutUserInput>;
     avatorId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     comments?: Nullable<CommentUncheckedUpdateManyWithoutAuthorInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
@@ -16201,15 +16247,15 @@ export class UserUncheckedUpdateWithoutBusinessProfileInput {
     email?: Nullable<StringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     favorited?: Nullable<FavoriteUncheckedUpdateManyWithoutAuthorInput>;
-    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutUsersInput>;
+    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutUserInput>;
     gender?: Nullable<EnumGenderFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     locationId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     ordered?: Nullable<OrderUncheckedUpdateManyWithoutOwnerInput>;
     phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    reviewed?: Nullable<ReviewUncheckedUpdateManyWithoutRevieweeInput>;
-    reviews?: Nullable<ReviewUncheckedUpdateManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUncheckedUpdateManyWithoutAuthorInput>;
+    reviews?: Nullable<ReviewUncheckedUpdateManyWithoutRevieweeInput>;
     role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
     state?: Nullable<EnumAccountStatusFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
@@ -16217,7 +16263,7 @@ export class UserUncheckedUpdateWithoutBusinessProfileInput {
 
 export class UserUncheckedUpdateWithoutCommentsInput {
     abuseReported?: Nullable<AbuseReportUncheckedUpdateManyWithoutAuthorInput>;
-    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutUsersInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutUserInput>;
     avatorId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     businessProfile?: Nullable<BusinessUncheckedUpdateOneWithoutOwnerInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
@@ -16228,15 +16274,15 @@ export class UserUncheckedUpdateWithoutCommentsInput {
     email?: Nullable<StringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     favorited?: Nullable<FavoriteUncheckedUpdateManyWithoutAuthorInput>;
-    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutUsersInput>;
+    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutUserInput>;
     gender?: Nullable<EnumGenderFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     locationId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     ordered?: Nullable<OrderUncheckedUpdateManyWithoutOwnerInput>;
     phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    reviewed?: Nullable<ReviewUncheckedUpdateManyWithoutRevieweeInput>;
-    reviews?: Nullable<ReviewUncheckedUpdateManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUncheckedUpdateManyWithoutAuthorInput>;
+    reviews?: Nullable<ReviewUncheckedUpdateManyWithoutRevieweeInput>;
     role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
     state?: Nullable<EnumAccountStatusFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
@@ -16244,7 +16290,7 @@ export class UserUncheckedUpdateWithoutCommentsInput {
 
 export class UserUncheckedUpdateWithoutDeviceInput {
     abuseReported?: Nullable<AbuseReportUncheckedUpdateManyWithoutAuthorInput>;
-    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutUsersInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutUserInput>;
     avatorId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     businessProfile?: Nullable<BusinessUncheckedUpdateOneWithoutOwnerInput>;
     comments?: Nullable<CommentUncheckedUpdateManyWithoutAuthorInput>;
@@ -16255,15 +16301,15 @@ export class UserUncheckedUpdateWithoutDeviceInput {
     email?: Nullable<StringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     favorited?: Nullable<FavoriteUncheckedUpdateManyWithoutAuthorInput>;
-    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutUsersInput>;
+    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutUserInput>;
     gender?: Nullable<EnumGenderFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     locationId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     ordered?: Nullable<OrderUncheckedUpdateManyWithoutOwnerInput>;
     phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    reviewed?: Nullable<ReviewUncheckedUpdateManyWithoutRevieweeInput>;
-    reviews?: Nullable<ReviewUncheckedUpdateManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUncheckedUpdateManyWithoutAuthorInput>;
+    reviews?: Nullable<ReviewUncheckedUpdateManyWithoutRevieweeInput>;
     role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
     state?: Nullable<EnumAccountStatusFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
@@ -16271,7 +16317,7 @@ export class UserUncheckedUpdateWithoutDeviceInput {
 
 export class UserUncheckedUpdateWithoutFavoritedInput {
     abuseReported?: Nullable<AbuseReportUncheckedUpdateManyWithoutAuthorInput>;
-    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutUsersInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutUserInput>;
     avatorId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     businessProfile?: Nullable<BusinessUncheckedUpdateOneWithoutOwnerInput>;
     comments?: Nullable<CommentUncheckedUpdateManyWithoutAuthorInput>;
@@ -16282,15 +16328,15 @@ export class UserUncheckedUpdateWithoutFavoritedInput {
     displayName?: Nullable<StringFieldUpdateOperationsInput>;
     email?: Nullable<StringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
-    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutUsersInput>;
+    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutUserInput>;
     gender?: Nullable<EnumGenderFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     locationId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     ordered?: Nullable<OrderUncheckedUpdateManyWithoutOwnerInput>;
     phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    reviewed?: Nullable<ReviewUncheckedUpdateManyWithoutRevieweeInput>;
-    reviews?: Nullable<ReviewUncheckedUpdateManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUncheckedUpdateManyWithoutAuthorInput>;
+    reviews?: Nullable<ReviewUncheckedUpdateManyWithoutRevieweeInput>;
     role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
     state?: Nullable<EnumAccountStatusFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
@@ -16298,7 +16344,7 @@ export class UserUncheckedUpdateWithoutFavoritedInput {
 
 export class UserUncheckedUpdateWithoutFavoritesInput {
     abuseReported?: Nullable<AbuseReportUncheckedUpdateManyWithoutAuthorInput>;
-    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutUsersInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutUserInput>;
     avatorId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     businessProfile?: Nullable<BusinessUncheckedUpdateOneWithoutOwnerInput>;
     comments?: Nullable<CommentUncheckedUpdateManyWithoutAuthorInput>;
@@ -16316,8 +16362,8 @@ export class UserUncheckedUpdateWithoutFavoritesInput {
     ordered?: Nullable<OrderUncheckedUpdateManyWithoutOwnerInput>;
     phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    reviewed?: Nullable<ReviewUncheckedUpdateManyWithoutRevieweeInput>;
-    reviews?: Nullable<ReviewUncheckedUpdateManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUncheckedUpdateManyWithoutAuthorInput>;
+    reviews?: Nullable<ReviewUncheckedUpdateManyWithoutRevieweeInput>;
     role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
     state?: Nullable<EnumAccountStatusFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
@@ -16325,7 +16371,7 @@ export class UserUncheckedUpdateWithoutFavoritesInput {
 
 export class UserUncheckedUpdateWithoutLocationInput {
     abuseReported?: Nullable<AbuseReportUncheckedUpdateManyWithoutAuthorInput>;
-    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutUsersInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutUserInput>;
     avatorId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     businessProfile?: Nullable<BusinessUncheckedUpdateOneWithoutOwnerInput>;
     comments?: Nullable<CommentUncheckedUpdateManyWithoutAuthorInput>;
@@ -16337,14 +16383,14 @@ export class UserUncheckedUpdateWithoutLocationInput {
     email?: Nullable<StringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     favorited?: Nullable<FavoriteUncheckedUpdateManyWithoutAuthorInput>;
-    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutUsersInput>;
+    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutUserInput>;
     gender?: Nullable<EnumGenderFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     ordered?: Nullable<OrderUncheckedUpdateManyWithoutOwnerInput>;
     phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    reviewed?: Nullable<ReviewUncheckedUpdateManyWithoutRevieweeInput>;
-    reviews?: Nullable<ReviewUncheckedUpdateManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUncheckedUpdateManyWithoutAuthorInput>;
+    reviews?: Nullable<ReviewUncheckedUpdateManyWithoutRevieweeInput>;
     role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
     state?: Nullable<EnumAccountStatusFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
@@ -16352,7 +16398,7 @@ export class UserUncheckedUpdateWithoutLocationInput {
 
 export class UserUncheckedUpdateWithoutOrderedInput {
     abuseReported?: Nullable<AbuseReportUncheckedUpdateManyWithoutAuthorInput>;
-    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutUsersInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutUserInput>;
     avatorId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     businessProfile?: Nullable<BusinessUncheckedUpdateOneWithoutOwnerInput>;
     comments?: Nullable<CommentUncheckedUpdateManyWithoutAuthorInput>;
@@ -16364,14 +16410,14 @@ export class UserUncheckedUpdateWithoutOrderedInput {
     email?: Nullable<StringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     favorited?: Nullable<FavoriteUncheckedUpdateManyWithoutAuthorInput>;
-    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutUsersInput>;
+    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutUserInput>;
     gender?: Nullable<EnumGenderFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     locationId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    reviewed?: Nullable<ReviewUncheckedUpdateManyWithoutRevieweeInput>;
-    reviews?: Nullable<ReviewUncheckedUpdateManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUncheckedUpdateManyWithoutAuthorInput>;
+    reviews?: Nullable<ReviewUncheckedUpdateManyWithoutRevieweeInput>;
     role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
     state?: Nullable<EnumAccountStatusFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
@@ -16379,7 +16425,7 @@ export class UserUncheckedUpdateWithoutOrderedInput {
 
 export class UserUncheckedUpdateWithoutReviewedInput {
     abuseReported?: Nullable<AbuseReportUncheckedUpdateManyWithoutAuthorInput>;
-    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutUsersInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutUserInput>;
     avatorId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     businessProfile?: Nullable<BusinessUncheckedUpdateOneWithoutOwnerInput>;
     comments?: Nullable<CommentUncheckedUpdateManyWithoutAuthorInput>;
@@ -16391,14 +16437,14 @@ export class UserUncheckedUpdateWithoutReviewedInput {
     email?: Nullable<StringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     favorited?: Nullable<FavoriteUncheckedUpdateManyWithoutAuthorInput>;
-    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutUsersInput>;
+    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutUserInput>;
     gender?: Nullable<EnumGenderFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     locationId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     ordered?: Nullable<OrderUncheckedUpdateManyWithoutOwnerInput>;
     phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    reviews?: Nullable<ReviewUncheckedUpdateManyWithoutAuthorInput>;
+    reviews?: Nullable<ReviewUncheckedUpdateManyWithoutRevieweeInput>;
     role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
     state?: Nullable<EnumAccountStatusFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
@@ -16406,7 +16452,7 @@ export class UserUncheckedUpdateWithoutReviewedInput {
 
 export class UserUncheckedUpdateWithoutReviewsInput {
     abuseReported?: Nullable<AbuseReportUncheckedUpdateManyWithoutAuthorInput>;
-    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutUsersInput>;
+    abuseReports?: Nullable<AbuseReportUncheckedUpdateManyWithoutUserInput>;
     avatorId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     businessProfile?: Nullable<BusinessUncheckedUpdateOneWithoutOwnerInput>;
     comments?: Nullable<CommentUncheckedUpdateManyWithoutAuthorInput>;
@@ -16418,14 +16464,14 @@ export class UserUncheckedUpdateWithoutReviewsInput {
     email?: Nullable<StringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     favorited?: Nullable<FavoriteUncheckedUpdateManyWithoutAuthorInput>;
-    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutUsersInput>;
+    favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutUserInput>;
     gender?: Nullable<EnumGenderFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     locationId?: Nullable<NullableStringFieldUpdateOperationsInput>;
     ordered?: Nullable<OrderUncheckedUpdateManyWithoutOwnerInput>;
     phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    reviewed?: Nullable<ReviewUncheckedUpdateManyWithoutRevieweeInput>;
+    reviewed?: Nullable<ReviewUncheckedUpdateManyWithoutAuthorInput>;
     role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
     state?: Nullable<EnumAccountStatusFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
@@ -16433,7 +16479,7 @@ export class UserUncheckedUpdateWithoutReviewsInput {
 
 export class UserUpdateInput {
     abuseReported?: Nullable<AbuseReportUpdateManyWithoutAuthorInput>;
-    abuseReports?: Nullable<AbuseReportUpdateManyWithoutUsersInput>;
+    abuseReports?: Nullable<AbuseReportUpdateManyWithoutUserInput>;
     avator?: Nullable<AttachmentUpdateOneWithoutUsersInput>;
     businessProfile?: Nullable<BusinessUpdateOneWithoutOwnerInput>;
     comments?: Nullable<CommentUpdateManyWithoutAuthorInput>;
@@ -16445,15 +16491,15 @@ export class UserUpdateInput {
     email?: Nullable<StringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     favorited?: Nullable<FavoriteUpdateManyWithoutAuthorInput>;
-    favorites?: Nullable<FavoriteUpdateManyWithoutUsersInput>;
+    favorites?: Nullable<FavoriteUpdateManyWithoutUserInput>;
     gender?: Nullable<EnumGenderFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     location?: Nullable<LocationUpdateOneWithoutUsersInput>;
     ordered?: Nullable<OrderUpdateManyWithoutOwnerInput>;
     phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    reviewed?: Nullable<ReviewUpdateManyWithoutRevieweeInput>;
-    reviews?: Nullable<ReviewUpdateManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUpdateManyWithoutAuthorInput>;
+    reviews?: Nullable<ReviewUpdateManyWithoutRevieweeInput>;
     role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
     state?: Nullable<EnumAccountStatusFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
@@ -16610,7 +16656,7 @@ export class UserUpdateWithWhereUniqueWithoutLocationInput {
 }
 
 export class UserUpdateWithoutAbuseReportedInput {
-    abuseReports?: Nullable<AbuseReportUpdateManyWithoutUsersInput>;
+    abuseReports?: Nullable<AbuseReportUpdateManyWithoutUserInput>;
     avator?: Nullable<AttachmentUpdateOneWithoutUsersInput>;
     businessProfile?: Nullable<BusinessUpdateOneWithoutOwnerInput>;
     comments?: Nullable<CommentUpdateManyWithoutAuthorInput>;
@@ -16622,15 +16668,15 @@ export class UserUpdateWithoutAbuseReportedInput {
     email?: Nullable<StringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     favorited?: Nullable<FavoriteUpdateManyWithoutAuthorInput>;
-    favorites?: Nullable<FavoriteUpdateManyWithoutUsersInput>;
+    favorites?: Nullable<FavoriteUpdateManyWithoutUserInput>;
     gender?: Nullable<EnumGenderFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     location?: Nullable<LocationUpdateOneWithoutUsersInput>;
     ordered?: Nullable<OrderUpdateManyWithoutOwnerInput>;
     phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    reviewed?: Nullable<ReviewUpdateManyWithoutRevieweeInput>;
-    reviews?: Nullable<ReviewUpdateManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUpdateManyWithoutAuthorInput>;
+    reviews?: Nullable<ReviewUpdateManyWithoutRevieweeInput>;
     role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
     state?: Nullable<EnumAccountStatusFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
@@ -16649,15 +16695,15 @@ export class UserUpdateWithoutAbuseReportsInput {
     email?: Nullable<StringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     favorited?: Nullable<FavoriteUpdateManyWithoutAuthorInput>;
-    favorites?: Nullable<FavoriteUpdateManyWithoutUsersInput>;
+    favorites?: Nullable<FavoriteUpdateManyWithoutUserInput>;
     gender?: Nullable<EnumGenderFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     location?: Nullable<LocationUpdateOneWithoutUsersInput>;
     ordered?: Nullable<OrderUpdateManyWithoutOwnerInput>;
     phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    reviewed?: Nullable<ReviewUpdateManyWithoutRevieweeInput>;
-    reviews?: Nullable<ReviewUpdateManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUpdateManyWithoutAuthorInput>;
+    reviews?: Nullable<ReviewUpdateManyWithoutRevieweeInput>;
     role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
     state?: Nullable<EnumAccountStatusFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
@@ -16665,7 +16711,7 @@ export class UserUpdateWithoutAbuseReportsInput {
 
 export class UserUpdateWithoutAvatorInput {
     abuseReported?: Nullable<AbuseReportUpdateManyWithoutAuthorInput>;
-    abuseReports?: Nullable<AbuseReportUpdateManyWithoutUsersInput>;
+    abuseReports?: Nullable<AbuseReportUpdateManyWithoutUserInput>;
     businessProfile?: Nullable<BusinessUpdateOneWithoutOwnerInput>;
     comments?: Nullable<CommentUpdateManyWithoutAuthorInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
@@ -16676,15 +16722,15 @@ export class UserUpdateWithoutAvatorInput {
     email?: Nullable<StringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     favorited?: Nullable<FavoriteUpdateManyWithoutAuthorInput>;
-    favorites?: Nullable<FavoriteUpdateManyWithoutUsersInput>;
+    favorites?: Nullable<FavoriteUpdateManyWithoutUserInput>;
     gender?: Nullable<EnumGenderFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     location?: Nullable<LocationUpdateOneWithoutUsersInput>;
     ordered?: Nullable<OrderUpdateManyWithoutOwnerInput>;
     phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    reviewed?: Nullable<ReviewUpdateManyWithoutRevieweeInput>;
-    reviews?: Nullable<ReviewUpdateManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUpdateManyWithoutAuthorInput>;
+    reviews?: Nullable<ReviewUpdateManyWithoutRevieweeInput>;
     role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
     state?: Nullable<EnumAccountStatusFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
@@ -16692,7 +16738,7 @@ export class UserUpdateWithoutAvatorInput {
 
 export class UserUpdateWithoutBusinessProfileInput {
     abuseReported?: Nullable<AbuseReportUpdateManyWithoutAuthorInput>;
-    abuseReports?: Nullable<AbuseReportUpdateManyWithoutUsersInput>;
+    abuseReports?: Nullable<AbuseReportUpdateManyWithoutUserInput>;
     avator?: Nullable<AttachmentUpdateOneWithoutUsersInput>;
     comments?: Nullable<CommentUpdateManyWithoutAuthorInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
@@ -16703,15 +16749,15 @@ export class UserUpdateWithoutBusinessProfileInput {
     email?: Nullable<StringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     favorited?: Nullable<FavoriteUpdateManyWithoutAuthorInput>;
-    favorites?: Nullable<FavoriteUpdateManyWithoutUsersInput>;
+    favorites?: Nullable<FavoriteUpdateManyWithoutUserInput>;
     gender?: Nullable<EnumGenderFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     location?: Nullable<LocationUpdateOneWithoutUsersInput>;
     ordered?: Nullable<OrderUpdateManyWithoutOwnerInput>;
     phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    reviewed?: Nullable<ReviewUpdateManyWithoutRevieweeInput>;
-    reviews?: Nullable<ReviewUpdateManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUpdateManyWithoutAuthorInput>;
+    reviews?: Nullable<ReviewUpdateManyWithoutRevieweeInput>;
     role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
     state?: Nullable<EnumAccountStatusFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
@@ -16719,7 +16765,7 @@ export class UserUpdateWithoutBusinessProfileInput {
 
 export class UserUpdateWithoutCommentsInput {
     abuseReported?: Nullable<AbuseReportUpdateManyWithoutAuthorInput>;
-    abuseReports?: Nullable<AbuseReportUpdateManyWithoutUsersInput>;
+    abuseReports?: Nullable<AbuseReportUpdateManyWithoutUserInput>;
     avator?: Nullable<AttachmentUpdateOneWithoutUsersInput>;
     businessProfile?: Nullable<BusinessUpdateOneWithoutOwnerInput>;
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
@@ -16730,15 +16776,15 @@ export class UserUpdateWithoutCommentsInput {
     email?: Nullable<StringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     favorited?: Nullable<FavoriteUpdateManyWithoutAuthorInput>;
-    favorites?: Nullable<FavoriteUpdateManyWithoutUsersInput>;
+    favorites?: Nullable<FavoriteUpdateManyWithoutUserInput>;
     gender?: Nullable<EnumGenderFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     location?: Nullable<LocationUpdateOneWithoutUsersInput>;
     ordered?: Nullable<OrderUpdateManyWithoutOwnerInput>;
     phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    reviewed?: Nullable<ReviewUpdateManyWithoutRevieweeInput>;
-    reviews?: Nullable<ReviewUpdateManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUpdateManyWithoutAuthorInput>;
+    reviews?: Nullable<ReviewUpdateManyWithoutRevieweeInput>;
     role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
     state?: Nullable<EnumAccountStatusFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
@@ -16746,7 +16792,7 @@ export class UserUpdateWithoutCommentsInput {
 
 export class UserUpdateWithoutDeviceInput {
     abuseReported?: Nullable<AbuseReportUpdateManyWithoutAuthorInput>;
-    abuseReports?: Nullable<AbuseReportUpdateManyWithoutUsersInput>;
+    abuseReports?: Nullable<AbuseReportUpdateManyWithoutUserInput>;
     avator?: Nullable<AttachmentUpdateOneWithoutUsersInput>;
     businessProfile?: Nullable<BusinessUpdateOneWithoutOwnerInput>;
     comments?: Nullable<CommentUpdateManyWithoutAuthorInput>;
@@ -16757,15 +16803,15 @@ export class UserUpdateWithoutDeviceInput {
     email?: Nullable<StringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     favorited?: Nullable<FavoriteUpdateManyWithoutAuthorInput>;
-    favorites?: Nullable<FavoriteUpdateManyWithoutUsersInput>;
+    favorites?: Nullable<FavoriteUpdateManyWithoutUserInput>;
     gender?: Nullable<EnumGenderFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     location?: Nullable<LocationUpdateOneWithoutUsersInput>;
     ordered?: Nullable<OrderUpdateManyWithoutOwnerInput>;
     phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    reviewed?: Nullable<ReviewUpdateManyWithoutRevieweeInput>;
-    reviews?: Nullable<ReviewUpdateManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUpdateManyWithoutAuthorInput>;
+    reviews?: Nullable<ReviewUpdateManyWithoutRevieweeInput>;
     role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
     state?: Nullable<EnumAccountStatusFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
@@ -16773,7 +16819,7 @@ export class UserUpdateWithoutDeviceInput {
 
 export class UserUpdateWithoutFavoritedInput {
     abuseReported?: Nullable<AbuseReportUpdateManyWithoutAuthorInput>;
-    abuseReports?: Nullable<AbuseReportUpdateManyWithoutUsersInput>;
+    abuseReports?: Nullable<AbuseReportUpdateManyWithoutUserInput>;
     avator?: Nullable<AttachmentUpdateOneWithoutUsersInput>;
     businessProfile?: Nullable<BusinessUpdateOneWithoutOwnerInput>;
     comments?: Nullable<CommentUpdateManyWithoutAuthorInput>;
@@ -16784,15 +16830,15 @@ export class UserUpdateWithoutFavoritedInput {
     displayName?: Nullable<StringFieldUpdateOperationsInput>;
     email?: Nullable<StringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
-    favorites?: Nullable<FavoriteUpdateManyWithoutUsersInput>;
+    favorites?: Nullable<FavoriteUpdateManyWithoutUserInput>;
     gender?: Nullable<EnumGenderFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     location?: Nullable<LocationUpdateOneWithoutUsersInput>;
     ordered?: Nullable<OrderUpdateManyWithoutOwnerInput>;
     phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    reviewed?: Nullable<ReviewUpdateManyWithoutRevieweeInput>;
-    reviews?: Nullable<ReviewUpdateManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUpdateManyWithoutAuthorInput>;
+    reviews?: Nullable<ReviewUpdateManyWithoutRevieweeInput>;
     role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
     state?: Nullable<EnumAccountStatusFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
@@ -16800,7 +16846,7 @@ export class UserUpdateWithoutFavoritedInput {
 
 export class UserUpdateWithoutFavoritesInput {
     abuseReported?: Nullable<AbuseReportUpdateManyWithoutAuthorInput>;
-    abuseReports?: Nullable<AbuseReportUpdateManyWithoutUsersInput>;
+    abuseReports?: Nullable<AbuseReportUpdateManyWithoutUserInput>;
     avator?: Nullable<AttachmentUpdateOneWithoutUsersInput>;
     businessProfile?: Nullable<BusinessUpdateOneWithoutOwnerInput>;
     comments?: Nullable<CommentUpdateManyWithoutAuthorInput>;
@@ -16818,8 +16864,8 @@ export class UserUpdateWithoutFavoritesInput {
     ordered?: Nullable<OrderUpdateManyWithoutOwnerInput>;
     phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    reviewed?: Nullable<ReviewUpdateManyWithoutRevieweeInput>;
-    reviews?: Nullable<ReviewUpdateManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUpdateManyWithoutAuthorInput>;
+    reviews?: Nullable<ReviewUpdateManyWithoutRevieweeInput>;
     role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
     state?: Nullable<EnumAccountStatusFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
@@ -16827,7 +16873,7 @@ export class UserUpdateWithoutFavoritesInput {
 
 export class UserUpdateWithoutLocationInput {
     abuseReported?: Nullable<AbuseReportUpdateManyWithoutAuthorInput>;
-    abuseReports?: Nullable<AbuseReportUpdateManyWithoutUsersInput>;
+    abuseReports?: Nullable<AbuseReportUpdateManyWithoutUserInput>;
     avator?: Nullable<AttachmentUpdateOneWithoutUsersInput>;
     businessProfile?: Nullable<BusinessUpdateOneWithoutOwnerInput>;
     comments?: Nullable<CommentUpdateManyWithoutAuthorInput>;
@@ -16839,14 +16885,14 @@ export class UserUpdateWithoutLocationInput {
     email?: Nullable<StringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     favorited?: Nullable<FavoriteUpdateManyWithoutAuthorInput>;
-    favorites?: Nullable<FavoriteUpdateManyWithoutUsersInput>;
+    favorites?: Nullable<FavoriteUpdateManyWithoutUserInput>;
     gender?: Nullable<EnumGenderFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     ordered?: Nullable<OrderUpdateManyWithoutOwnerInput>;
     phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    reviewed?: Nullable<ReviewUpdateManyWithoutRevieweeInput>;
-    reviews?: Nullable<ReviewUpdateManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUpdateManyWithoutAuthorInput>;
+    reviews?: Nullable<ReviewUpdateManyWithoutRevieweeInput>;
     role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
     state?: Nullable<EnumAccountStatusFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
@@ -16854,7 +16900,7 @@ export class UserUpdateWithoutLocationInput {
 
 export class UserUpdateWithoutOrderedInput {
     abuseReported?: Nullable<AbuseReportUpdateManyWithoutAuthorInput>;
-    abuseReports?: Nullable<AbuseReportUpdateManyWithoutUsersInput>;
+    abuseReports?: Nullable<AbuseReportUpdateManyWithoutUserInput>;
     avator?: Nullable<AttachmentUpdateOneWithoutUsersInput>;
     businessProfile?: Nullable<BusinessUpdateOneWithoutOwnerInput>;
     comments?: Nullable<CommentUpdateManyWithoutAuthorInput>;
@@ -16866,14 +16912,14 @@ export class UserUpdateWithoutOrderedInput {
     email?: Nullable<StringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     favorited?: Nullable<FavoriteUpdateManyWithoutAuthorInput>;
-    favorites?: Nullable<FavoriteUpdateManyWithoutUsersInput>;
+    favorites?: Nullable<FavoriteUpdateManyWithoutUserInput>;
     gender?: Nullable<EnumGenderFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     location?: Nullable<LocationUpdateOneWithoutUsersInput>;
     phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    reviewed?: Nullable<ReviewUpdateManyWithoutRevieweeInput>;
-    reviews?: Nullable<ReviewUpdateManyWithoutAuthorInput>;
+    reviewed?: Nullable<ReviewUpdateManyWithoutAuthorInput>;
+    reviews?: Nullable<ReviewUpdateManyWithoutRevieweeInput>;
     role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
     state?: Nullable<EnumAccountStatusFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
@@ -16881,7 +16927,7 @@ export class UserUpdateWithoutOrderedInput {
 
 export class UserUpdateWithoutReviewedInput {
     abuseReported?: Nullable<AbuseReportUpdateManyWithoutAuthorInput>;
-    abuseReports?: Nullable<AbuseReportUpdateManyWithoutUsersInput>;
+    abuseReports?: Nullable<AbuseReportUpdateManyWithoutUserInput>;
     avator?: Nullable<AttachmentUpdateOneWithoutUsersInput>;
     businessProfile?: Nullable<BusinessUpdateOneWithoutOwnerInput>;
     comments?: Nullable<CommentUpdateManyWithoutAuthorInput>;
@@ -16893,14 +16939,14 @@ export class UserUpdateWithoutReviewedInput {
     email?: Nullable<StringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     favorited?: Nullable<FavoriteUpdateManyWithoutAuthorInput>;
-    favorites?: Nullable<FavoriteUpdateManyWithoutUsersInput>;
+    favorites?: Nullable<FavoriteUpdateManyWithoutUserInput>;
     gender?: Nullable<EnumGenderFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     location?: Nullable<LocationUpdateOneWithoutUsersInput>;
     ordered?: Nullable<OrderUpdateManyWithoutOwnerInput>;
     phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    reviews?: Nullable<ReviewUpdateManyWithoutAuthorInput>;
+    reviews?: Nullable<ReviewUpdateManyWithoutRevieweeInput>;
     role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
     state?: Nullable<EnumAccountStatusFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
@@ -16908,7 +16954,7 @@ export class UserUpdateWithoutReviewedInput {
 
 export class UserUpdateWithoutReviewsInput {
     abuseReported?: Nullable<AbuseReportUpdateManyWithoutAuthorInput>;
-    abuseReports?: Nullable<AbuseReportUpdateManyWithoutUsersInput>;
+    abuseReports?: Nullable<AbuseReportUpdateManyWithoutUserInput>;
     avator?: Nullable<AttachmentUpdateOneWithoutUsersInput>;
     businessProfile?: Nullable<BusinessUpdateOneWithoutOwnerInput>;
     comments?: Nullable<CommentUpdateManyWithoutAuthorInput>;
@@ -16920,14 +16966,14 @@ export class UserUpdateWithoutReviewsInput {
     email?: Nullable<StringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     favorited?: Nullable<FavoriteUpdateManyWithoutAuthorInput>;
-    favorites?: Nullable<FavoriteUpdateManyWithoutUsersInput>;
+    favorites?: Nullable<FavoriteUpdateManyWithoutUserInput>;
     gender?: Nullable<EnumGenderFieldUpdateOperationsInput>;
     id?: Nullable<StringFieldUpdateOperationsInput>;
     location?: Nullable<LocationUpdateOneWithoutUsersInput>;
     ordered?: Nullable<OrderUpdateManyWithoutOwnerInput>;
     phoneNumber?: Nullable<NullableStringFieldUpdateOperationsInput>;
     recordStatus?: Nullable<EnumRecordStatusFieldUpdateOperationsInput>;
-    reviewed?: Nullable<ReviewUpdateManyWithoutRevieweeInput>;
+    reviewed?: Nullable<ReviewUpdateManyWithoutAuthorInput>;
     role?: Nullable<EnumRoleFieldUpdateOperationsInput>;
     state?: Nullable<EnumAccountStatusFieldUpdateOperationsInput>;
     updatedAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
@@ -17080,29 +17126,29 @@ export class AbuseRecordTypeResponse {
 }
 
 export class AbuseReport {
-    Business?: Nullable<Business>;
     author: User;
     authorId: string;
+    business?: Nullable<Business>;
     businessId?: Nullable<string>;
+    comment?: Nullable<Comment>;
     commentId?: Nullable<string>;
-    comments?: Nullable<Comment>;
     createdAt: DateTime;
     id: string;
     number: number;
+    order?: Nullable<Order>;
     orderId?: Nullable<string>;
-    orders?: Nullable<Order>;
     recordStatus: RecordStatus;
     report?: Nullable<string>;
+    review?: Nullable<Review>;
     reviewId?: Nullable<string>;
-    reviews?: Nullable<Review>;
     service?: Nullable<Service>;
     serviceId?: Nullable<string>;
     state: AbuseReportStatus;
     type: AbuseRecordType;
     typeId: string;
     updatedAt: DateTime;
+    user?: Nullable<User>;
     userId?: Nullable<string>;
-    users?: Nullable<User>;
 }
 
 export class AbuseReportAvgAggregateOutputType {
@@ -17723,7 +17769,7 @@ export class Business {
     cover?: Nullable<Attachment>;
     coverId?: Nullable<string>;
     createdAt: DateTime;
-    favorite: Favorite[];
+    favorites: Favorite[];
     id: string;
     location?: Nullable<Location>;
     locationId?: Nullable<string>;
@@ -18121,26 +18167,27 @@ export class DirectionsStep {
 }
 
 export class Favorite {
-    Business?: Nullable<Business>;
     author: User;
     authorId: string;
+    business?: Nullable<Business>;
     businessId?: Nullable<string>;
+    comment?: Nullable<Comment>;
     commentId?: Nullable<string>;
-    comments?: Nullable<Comment>;
     createdAt: DateTime;
+    favId: string;
     id: string;
+    order?: Nullable<Order>;
     orderId?: Nullable<string>;
-    orders?: Nullable<Order>;
     recordStatus: RecordStatus;
+    review?: Nullable<Review>;
     reviewId?: Nullable<string>;
-    reviews?: Nullable<Review>;
     service?: Nullable<Service>;
     serviceId?: Nullable<string>;
     type: FavoriteRecordType;
     typeId: string;
     updatedAt: DateTime;
+    user?: Nullable<User>;
     userId?: Nullable<string>;
-    users?: Nullable<User>;
 }
 
 export class FavoriteBatchResponse {
@@ -18155,6 +18202,7 @@ export class FavoriteCountAggregateOutputType {
     businessId: number;
     commentId: number;
     createdAt: number;
+    favId: number;
     id: number;
     orderId: number;
     recordStatus: number;
@@ -18182,6 +18230,7 @@ export class FavoriteMaxAggregateOutputType {
     businessId?: Nullable<string>;
     commentId?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
+    favId?: Nullable<string>;
     id?: Nullable<string>;
     orderId?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
@@ -18197,6 +18246,7 @@ export class FavoriteMinAggregateOutputType {
     businessId?: Nullable<string>;
     commentId?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
+    favId?: Nullable<string>;
     id?: Nullable<string>;
     orderId?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
@@ -18552,7 +18602,7 @@ export class MpesaPayment {
     output_ThirdPartyConversationID?: Nullable<string>;
     output_TransactionID?: Nullable<string>;
     recordStatus: RecordStatus;
-    state: PaymentStatus;
+    status: PaymentStatus;
     transaction?: Nullable<Transaction>;
     updatedAt: DateTime;
 }
@@ -18581,7 +18631,7 @@ export class MpesaPaymentCountAggregateOutputType {
     output_ThirdPartyConversationID: number;
     output_TransactionID: number;
     recordStatus: number;
-    state: number;
+    status: number;
     updatedAt: number;
 }
 
@@ -18614,7 +18664,7 @@ export class MpesaPaymentMaxAggregateOutputType {
     output_ThirdPartyConversationID?: Nullable<string>;
     output_TransactionID?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
-    state?: Nullable<PaymentStatus>;
+    status?: Nullable<PaymentStatus>;
     updatedAt?: Nullable<DateTime>;
 }
 
@@ -18635,7 +18685,7 @@ export class MpesaPaymentMinAggregateOutputType {
     output_ThirdPartyConversationID?: Nullable<string>;
     output_TransactionID?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
-    state?: Nullable<PaymentStatus>;
+    status?: Nullable<PaymentStatus>;
     updatedAt?: Nullable<DateTime>;
 }
 
@@ -18676,8 +18726,8 @@ export class Notification {
 }
 
 export class Order {
-    Business?: Nullable<Business>;
     abuseReports: AbuseReport[];
+    business?: Nullable<Business>;
     businessId?: Nullable<string>;
     createdAt: DateTime;
     favorites: Favorite[];
@@ -18786,7 +18836,7 @@ export class PaymentMethod {
     logo: Attachment;
     name: string;
     recordStatus: RecordStatus;
-    state: PaymentMethodStatus;
+    status: PaymentMethodStatus;
     transactions: Transaction[];
     updatedAt: DateTime;
 }
@@ -18806,7 +18856,7 @@ export class PaymentMethodCountAggregateOutputType {
     id: number;
     name: number;
     recordStatus: number;
-    state: number;
+    status: number;
     updatedAt: number;
 }
 
@@ -18830,7 +18880,7 @@ export class PaymentMethodMaxAggregateOutputType {
     id?: Nullable<string>;
     name?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
-    state?: Nullable<PaymentMethodStatus>;
+    status?: Nullable<PaymentMethodStatus>;
     updatedAt?: Nullable<DateTime>;
 }
 
@@ -18842,7 +18892,7 @@ export class PaymentMethodMinAggregateOutputType {
     id?: Nullable<string>;
     name?: Nullable<string>;
     recordStatus?: Nullable<RecordStatus>;
-    state?: Nullable<PaymentMethodStatus>;
+    status?: Nullable<PaymentMethodStatus>;
     updatedAt?: Nullable<DateTime>;
 }
 
@@ -19367,7 +19417,7 @@ export class Transaction {
     selcomDisbursementId?: Nullable<string>;
     selcomPayment?: Nullable<SelcomPayment>;
     selcomPaymentId?: Nullable<string>;
-    state: TransactionStatus;
+    status: TransactionStatus;
     type: TransactionType;
     updatedAt: DateTime;
 }
@@ -19388,7 +19438,7 @@ export class TransactionCountAggregateOutputType {
     recordStatus: number;
     selcomDisbursementId: number;
     selcomPaymentId: number;
-    state: number;
+    status: number;
     type: number;
     updatedAt: number;
 }
@@ -19414,7 +19464,7 @@ export class TransactionMaxAggregateOutputType {
     recordStatus?: Nullable<RecordStatus>;
     selcomDisbursementId?: Nullable<string>;
     selcomPaymentId?: Nullable<string>;
-    state?: Nullable<TransactionStatus>;
+    status?: Nullable<TransactionStatus>;
     type?: Nullable<TransactionType>;
     updatedAt?: Nullable<DateTime>;
 }
@@ -19428,7 +19478,7 @@ export class TransactionMinAggregateOutputType {
     recordStatus?: Nullable<RecordStatus>;
     selcomDisbursementId?: Nullable<string>;
     selcomPaymentId?: Nullable<string>;
-    state?: Nullable<TransactionStatus>;
+    status?: Nullable<TransactionStatus>;
     type?: Nullable<TransactionType>;
     updatedAt?: Nullable<DateTime>;
 }

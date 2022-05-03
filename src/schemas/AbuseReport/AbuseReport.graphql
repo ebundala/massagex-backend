@@ -6,12 +6,12 @@ type AbuseReport {
           authorId: String!
           type: AbuseRecordType!
           typeId: String!
-          users: User
-          reviews: Review
-          comments: Comment
-          Business: Business
+          user: User
+          review: Review
+          comment: Comment
+          business: Business
           service: Service
-          orders: Order
+          order: Order
           recordStatus: RecordStatus!
           state: AbuseReportStatus!
           createdAt: DateTime!

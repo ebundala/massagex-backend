@@ -2,10 +2,10 @@ import { AppLogger } from "@mechsoft/app-logger";
 import { Bloc, BlocAttach, BlocFieldResolver, BlocValidate, BusinessRequest, PrismaAttach, PrismaHookHandler, PrismaHookRequest } from "@mechsoft/business-rules-manager";
 import { TenantContext } from "@mechsoft/common";
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
-//import { BusinessCreateArgs } from "@prisma/client";
+import { BusinessMode, Location,  } from "@prisma/client";
 import * as DataLoader from "dataloader";
 import { AuthService, } from "src/app-schemas/auth/auth-service";
-import {  BusinessCreateWithoutOwnerInput, User, UserCreateInput, UserUpdateInput } from "src/models/graphql";
+import {  BusinessCreateWithoutOwnerInput, LocationCreateInput, User, UserCreateInput, UserUpdateInput } from "src/models/graphql";
 import { RedisCache } from "src/pubsub/redis.service";
 import { uploadFile } from "src/utils/file.utils";
 import {SignupInput} from "../../models/graphql";
@@ -24,6 +24,7 @@ import {
   uniqueEmailPerAccount
 } from '../rules.definitions';
 import { v4 as uuidv4 } from 'uuid';
+import { GraphQLError } from "graphql";
 
 @Injectable()
 @Bloc()
@@ -282,7 +283,23 @@ async uploadCommentAttachments2(v: BusinessRequest<TenantContext>, next: (arg0: 
   return next(v)
 }
 
-//upload attachment for gallery on bussiness during update via user entry
+//upload attachment for cover on business during update via user entry
+@BlocAttach('updateOneUser.input.data.businessProfile.update.cover.path')
+async uploadBusinessCoverAttachments(v: BusinessRequest<TenantContext>, next: (arg0: BusinessRequest<any>) => any) {
+  const { args, context } = v;
+  const { data, ...rest } = args as {data:UserUpdateInput};
+  const { businessProfile } = data;
+    const attachment = businessProfile.update.cover.path;
+      const file = await uploadFile(attachment);
+      const file2 = await context.prisma.attachment.create({ data: { ...file } });
+      if (file2 && file2.id) {
+        v.args.data.businessProfile.update.coverId={set:file2.id};
+        delete v.args.data.businessProfile.update.cover;
+      }
+  return next(v)
+}
+
+//upload attachment for gallery on business during update via user entry
 @BlocAttach('updateOneUser.input.data.businessProfile.update.attachments.create.path')
 async uploadGalleryAttachments(v: BusinessRequest<TenantContext>, next: (arg0: BusinessRequest<any>) => any) {
   const { args, context } = v;
@@ -391,7 +408,30 @@ async uploadOrderReceiptAttachment(v: BusinessRequest<TenantContext>, next: (arg
   await Promise.all(attachmentsTasks);
   return next(v)
 }
-
+//Link orders with business
+@BlocAttach('updateOneUser.input.data.ordered.create.service.connect.id')
+async linkOrderAndBusiness(v: BusinessRequest<TenantContext>, next: (arg0: BusinessRequest<any>) => any){
+  const { args, context } = v;
+  const { data, ...rest } = args as {data:UserUpdateInput};
+  
+  const tasks = [];
+  const orders = data.ordered.create; 
+  for(let i=0;i<orders.length;i++){
+    const order = orders[i];    
+      const task = new Promise(async (resolve,reject)=>{       
+      const business = await context.prisma.service.findUnique({ where:{id:order.service.connect.id},select:{id:true,businessId:true} })
+      if (business&&business.businessId) {
+        v.args.data.ordered.create[i].business= {connect:{id:business.businessId}};
+      }
+      
+      resolve(business);
+      });
+      tasks.push(task);
+    }
+  
+  await Promise.all(tasks).catch((e)=>{});
+  return next(v)
+}
 
 
 
@@ -485,6 +525,236 @@ async uploadHelpAttachment3(v:BusinessRequest<TenantContext>,next: (arg0: Busine
   return next(v)
 }
 
+//Location handlers
+async createGeomFromLocation(location: Location,context: TenantContext){
+      //create a geom here
+      const affected = await context.prisma.$executeRaw`UPDATE "Location" 
+      SET 
+      geom=ST_SetSRID(ST_MakePoint(${location.lon}, ${location.lat}), 4326)
+      where id=${location.id};`;
+       return affected;
+    }
+//create user location 
+@BlocAttach('updateOneUser.input.data.location.create.lat')
+async createUserLocation(v: BusinessRequest<TenantContext>, next) {
+      const { args, context } = v;
+      const { prisma, logger } = context;
+      const { data, ...rest } = args as {data:UserUpdateInput};
+      const { location, ...others } = data
+      const { name, lat, lon } = location.create;
+      const loc = await prisma.location.create({
+        data: { name, lat, lon }
+      });
+      if (loc && loc.id) {
+         const affected = this.createGeomFromLocation(loc,context)
+        if (affected) {
+          const inputs = {
+            ...others,
+            location: {
+              connect: { id: loc.id }
+            }
+          }
+          v.args = { ...rest, data: inputs }
+          //Todo link business here
+          const user = await prisma.user.findUnique({
+            where:{id: context.auth.uid},
+            select: {                
+              businessProfile:{
+                select:{
+                id:true,
+                mode:true
+              }}
+            }
+          })
+          if(user.businessProfile&&user.businessProfile.id&&user.businessProfile.mode==BusinessMode.MOBILE_MODE){
+            await prisma.business.update({
+              where:{id:user.businessProfile.id},
+              data: {
+                location:{
+                  connect:{
+                    id: loc.id
+                  }
+                }
+              }
+            })
+          }
+        } 
+      }
+      
+      return next(v)
+    }
+
+@BlocAttach('updateOneUser.input.data.location.update.lat.set')
+async updateUserLocation(v: BusinessRequest<TenantContext>, next) {
+      const { args, context } = v;
+      const { prisma, logger } = context;
+      const { data, ...rest } = args as {data:UserUpdateInput};
+      const { location, ...others } = data
+      const { name, lat, lon } = location.update;
+      const user1 = await prisma.user.findUnique({where:{id:context.auth.uid},select:{
+        location:true,        
+        businessProfile:{
+          select:{
+          id:true,
+          mode:true,
+          location:true
+        }}}}
+        )
+       let locationInput;
+        if(user1.businessProfile.mode==BusinessMode.OFFICE_MODE &&
+          user1.location?.id==user1.businessProfile.location?.id){
+            locationInput = {
+              create:{
+                name:name.set,lat:lat.set,lon:lon.set
+              }
+            }
+        }
+        else{
+          locationInput={
+            update: {
+              name,lat,lon
+            }
+          }
+        }
+     const user= await prisma.user.update({
+        where:{
+          id: context.auth.uid
+        },
+        data: { 
+          location:locationInput
+         }
+      ,select:{
+        location:true,        
+        businessProfile:{
+          select:{
+          id:true,
+          mode:true
+        }}
+        
+      }
+      });
+    
+      if (user.location && user.location.id) {
+         const affected = this.createGeomFromLocation(user.location,context)
+        if (affected) {
+           delete data.location
+          v.args = { ...rest, data }
+          //Todo link business here
+          if(user.businessProfile&&user.businessProfile.id&&user.businessProfile.mode==BusinessMode.MOBILE_MODE){
+            await prisma.business.update({
+              where:{id:user.businessProfile.id},
+              data: {
+                location:{
+                  connect:{
+                    id: user.location.id
+                  }
+                }
+              }
+            })
+          }
+        } 
+      }
+      
+      return next(v)
+    }
+
+//create business location 
+@BlocAttach('updateOneUser.input.data.businessProfile.create.location.lat')
+async createBusinessLocation(v: BusinessRequest<TenantContext>, next) {
+  const { args, context } = v;
+  const { prisma, logger } = context;
+  const { data, ...rest } = args as {data:UserUpdateInput};
+  const { businessProfile, ...others } = data
+  const { name, lat, lon }:LocationCreateInput = businessProfile.create.location;
+ debugger
+  const loc = await prisma.location.create({
+    data: { name, lat, lon }
+  });
+  if (loc && loc.id) {
+     const affected = this.createGeomFromLocation(loc,context)
+    if (affected) {     
+      v.args.data.businessProfile.create.locationId = loc.id;
+      delete data.businessProfile.create.location;
+    } 
+  }
+  
+  return next(v)
+}
+//update business address here
+@BlocAttach('updateOneUser.input.data.businessProfile.update.location.lat')
+async updateBusinessLocation(v: BusinessRequest<TenantContext>, next) {
+  const { args, context } = v;
+  const { prisma, logger } = context;
+  const { data, ...rest } = args as {data:UserUpdateInput};
+  const { businessProfile, ...others } = data
+  const { name, lat, lon } = businessProfile.update.location;
+  debugger
+  const user = await prisma.user.update({
+    where:{id:context.auth.uid},
+    data:{
+      businessProfile:{
+        update:{
+          location:{
+            upsert:{
+              create:{
+                name,
+                lat,
+                lon
+              },
+            update:{
+              name,
+              lat,
+              lon
+            }}
+          }
+        }
+      }
+    },
+   select:{
+     id:true,
+     businessProfile:{
+       select:{
+         id:true,
+         location:true
+       }
+     }
+   }
+  });
+
+  if (user.businessProfile.location && user.businessProfile.location.id) {
+     const affected = await this.createGeomFromLocation(user.businessProfile.location,context)
+    if (affected) {     
+      delete v.args.data.businessProfile.update.location;
+    } 
+  }
+  
+  return next(v)
+}
+
+@BlocAttach('updateOneUser.input.data.favorited.create.favId')
+async generateFavoriteId(v: BusinessRequest<TenantContext>, next){
+  const { args, context } = v;
+  const { prisma, logger } = context;
+  const { data, ...rest } = args as {data:UserUpdateInput};
+  
+  const favorited = data.favorited.create; 
+  const favTypes = await prisma.favoriteRecordType.findMany(); 
+  for(let i=0;i<favorited.length;i++){
+    const fav = favorited[i]; 
+     const author=context.auth.uid;
+     let key = `${fav.type.connect.name.toLowerCase()}`
+      let itemId = fav[key]?.connect?.id
+      if(itemId&&author) {
+      v.args.data.favorited.create[i].favId = `${author}/${itemId}`;
+      }
+      else{
+       delete v.args.data.favorited.create[i].favId;
+      }
+    }
+
+  return next(v);
+}
+
 
 // Validation rules
 @BlocValidate('signup.input.credentials.email')
@@ -515,17 +785,17 @@ async updateOneUserBloc(v: BusinessRequest<TenantContext>) {
 
 
 // Field resolvers 
-@BlocFieldResolver("User","lastSeen",function(this:BusinessLogicService,...args){
-  return new DataLoader((async function (keys: any){  
-    debugger    
-    const lastseen= await this.redisCache.mget(keys);
-    return lastseen;
-  }).bind(this))
-})
-async lastSeen(parent:User,args: any, ctx:TenantContext,info:any,
- dataloader:DataLoader<string,string>) {
-  return dataloader.load(`last-seen-${parent.id}`);
-}
+// @BlocFieldResolver("User","lastSeen",function(this:BusinessLogicService,...args){
+//   return new DataLoader((async function (keys: any){  
+//     debugger    
+//     const lastseen= await this.redisCache.mget(keys);
+//     return lastseen;
+//   }).bind(this))
+// })
+// async lastSeen(parent:User,args: any, ctx:TenantContext,info:any,
+//  dataloader:DataLoader<string,string>) {
+//   return dataloader.load(`last-seen-${parent.id}`);
+// }
 
 
 }

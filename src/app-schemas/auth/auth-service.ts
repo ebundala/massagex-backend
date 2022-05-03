@@ -79,26 +79,14 @@ export class AuthService {
 
       try {
         
-        // user = await this.createUserWithEmail(
-        //   email,
-        //   password,
-        //   displayName,
-        //   phoneNumber,
-        // ).catch((e) => {
-        //   throw new GraphQLError(e?.message ?? "Unknown error occurred")
-        // });
+        
         const data: Prisma.UserCreateInput = {
-       // id: user.uid,
         displayName: displayName,
-        //  phoneNumber:phoneNumber?phoneNumber:undef,
         disabled: false,
         email: email,
         emailVerified: false,
-        //  gender: gender,
-         // dateOfBirth: dateOfBirth,
-         // role: Role.CONSUMER,
-
         }
+
         if(phoneNumber){
           data.phoneNumber=phoneNumber;
         }

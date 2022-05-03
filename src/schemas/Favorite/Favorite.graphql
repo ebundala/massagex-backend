@@ -1,15 +1,16 @@
 type Favorite {
           id: String!
+          favId: String!
           author: User!
           authorId: String!
           type: FavoriteRecordType!
           typeId: String!
-          users: User
-          reviews: Review
-          comments: Comment
-          Business: Business
+          user: User
+          review: Review
+          comment: Comment
+          business: Business
           service: Service
-          orders: Order
+          order: Order
           recordStatus: RecordStatus!
           createdAt: DateTime!
           updatedAt: DateTime!

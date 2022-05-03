@@ -19,7 +19,7 @@ type Order {
               skip: Int
               distinct: [TransactionScalarFieldEnum!]
               ): [Transaction!]!
-          Business: Business
+          business: Business
           businessId: String
           abuseReports(where: AbuseReportWhereInput
               orderBy: [AbuseReportOrderByInput!]

@@ -41,7 +41,7 @@ type Business {
               skip: Int
               distinct: [AbuseReportScalarFieldEnum!]
               ): [AbuseReport!]!
-          favorite(where: FavoriteWhereInput
+          favorites(where: FavoriteWhereInput
               orderBy: [FavoriteOrderByInput!]
               cursor: FavoriteWhereUniqueInput
               take: Int

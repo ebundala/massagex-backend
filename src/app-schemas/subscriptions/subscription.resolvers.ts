@@ -5,6 +5,7 @@ import { SubscriptionService } from "./subscription.service";
 import { AuthorizerGuard } from "@mechsoft/enforcer";
 import { HttpException, UnauthorizedException, UseGuards } from "@nestjs/common";
 import { HttpErrorByCode } from "@nestjs/common/utils/http-error-by-code.util";
+import { LatLon, LocationResponse } from "src/models/graphql";
 
 
 @Resolver()
@@ -13,7 +14,142 @@ export class SubscriptionResolver {
     constructor(private readonly pubSub: RedisPubSub,
         private readonly bloc: SubscriptionService) { }
 
-   /*  @Subscription(() => OrderResponse, {
+  
+    //location stream
+   /*  @Subscription(() => LocationResponse, {
+        filter: async (where: UserWhereUniqueInput,
+            variables, context: TenantContext) => {
+           // ;
+            //todo filter who recieves data;
+            const { auth, prisma } = context
+            const order = await prisma.order.findFirst({
+                
+                where: {
+                    OR: [
+                        {
+                            ownerId: {
+                                equals: auth.uid
+                            },
+                        },
+                         {
+                            providerId: {
+                                equals: auth.uid
+                            },
+                        }, 
+                        {
+                            organization: {
+                                ownerId: {
+                                    equals: auth.uid
+                                }
+                            },
+                        }
+                    ],
+                    AND:[
+                        {
+                            OR: [
+                                {
+                                    ownerId: {
+                                        equals: where.id
+                                    },
+                                },
+                                 {
+                                    providerId: {
+                                        equals: where.id
+                                    },
+                                }, 
+                                {
+                                    organization: {
+                                        ownerId: {
+                                            equals: where.id
+                                        }
+                                    },
+                                },
+                            ],
+                        },
+                         {
+
+                        state: {
+                            in: ['APPROVED', 'COMPLETED',] //listen only for dispatched orders/before payment
+                        }
+                    },]
+
+                }
+            })
+            return order != null;
+        },
+        resolve: async function (this: SubscriptionResolver, where: UserWhereUniqueInput, args: any, context: TenantContext, info: any): Promise<LocationResponse | {}> {
+          //  ;
+            const key = `location/${where.id}`;
+            const latlon = await this.bloc.getUserLocation(where.id);
+            if (latlon) {
+                const t = (new Date()).toUTCString();
+                return {
+                    message: "ok",
+                    status: true,
+                    data: {
+                        id: key,
+                        ...latlon,
+                        createdAt: t,
+                        updatedAt: t
+                    },
+                }
+            }
+            return {
+                message: "No location data found",
+                status: false,
+
+            }
+        }
+
+    })
+    locations(@Args("where") args: UserWhereUniqueInput, @Context() context: TenantContext, @Info() info) {
+        if (context.auth?.uid) {
+            return this.pubSub.asyncIterator(`${LOCATION_CHANGED}`, { args, context, info });
+        }
+        throw new UnauthorizedException()
+    } */
+
+    @Mutation(() => LocationResponse)
+    async locationFeed(@Args('location') location: LatLon, @Context() context: TenantContext, @Info() info): Promise<LocationResponse | {}> {
+        
+        if (context.auth?.uid && location) {
+            const user = await context.prisma.user.update({where:{id:context.auth.uid},
+                data:{
+                    location:{
+                        
+                        upsert:{
+                            update:{
+                                lat:location.lat,
+                                lon:location.lon
+                            },
+                            create:{
+                                lat:location.lat,
+                                lon:location.lon
+                            }
+                        }
+                    }
+                },
+                include:{location:true}});
+            
+            await this.bloc.cacheUserLocation(context.auth.uid, user.location as any);
+            return {
+                message: 'ok',
+                status: true,
+            }
+        }
+        throw new UnauthorizedException({
+            message: 'Auth error',
+            status: false,
+        })
+
+    }
+
+}
+
+
+
+
+ /*  @Subscription(() => OrderResponse, {
         filter: async (where: OrderWhereUniqueInput,
             variables, context: TenantContext) => {
 
@@ -134,134 +270,3 @@ export class SubscriptionResolver {
         }
         throw new UnauthorizedException()
     } */
-
-    //location stream
-  /*   @Subscription(() => LocationResponse, {
-        filter: async (where: UserWhereUniqueInput,
-            variables, context: TenantContext) => {
-           // ;
-            //todo filter who recieves data;
-            const { auth, prisma } = context
-            const order = await prisma.order.findFirst({
-                
-                where: {
-                    OR: [
-                        {
-                            ownerId: {
-                                equals: auth.uid
-                            },
-                        },
-                         {
-                            providerId: {
-                                equals: auth.uid
-                            },
-                        }, 
-                        {
-                            organization: {
-                                ownerId: {
-                                    equals: auth.uid
-                                }
-                            },
-                        }
-                    ],
-                    AND:[
-                        {
-                            OR: [
-                                {
-                                    ownerId: {
-                                        equals: where.id
-                                    },
-                                },
-                                 {
-                                    providerId: {
-                                        equals: where.id
-                                    },
-                                }, 
-                                {
-                                    organization: {
-                                        ownerId: {
-                                            equals: where.id
-                                        }
-                                    },
-                                },
-                            ],
-                        },
-                         {
-
-                        state: {
-                            in: ['APPROVED', 'COMPLETED',] //listen only for dispatched orders/before payment
-                        }
-                    },]
-
-                }
-            })
-            return order != null;
-        },
-        resolve: async function (this: SubscriptionResolver, where: UserWhereUniqueInput, args: any, context: TenantContext, info: any): Promise<LocationResponse | {}> {
-          //  ;
-            const key = `location/${where.id}`;
-            const latlon = await this.bloc.getUserLocation(where.id);
-            if (latlon) {
-                const t = (new Date()).toUTCString();
-                return {
-                    message: "ok",
-                    status: true,
-                    data: {
-                        id: key,
-                        ...latlon,
-                        createdAt: t,
-                        updatedAt: t
-                    },
-                }
-            }
-            return {
-                message: "No location data found",
-                status: false,
-
-            }
-        }
-
-    })
-    locations(@Args("where") args: UserWhereUniqueInput, @Context() context: TenantContext, @Info() info) {
-        if (context.auth?.uid) {
-            return this.pubSub.asyncIterator(`${LOCATION_CHANGED}`, { args, context, info });
-        }
-        throw new UnauthorizedException()
-    } */
-
-    // @Mutation(() => LocationResponse)
-    // async locationFeed(@Args('location') location: LatLon, @Context() context: TenantContext, @Info() info): Promise<LocationResponse | {}> {
-        
-    //     if (context.auth?.uid && location) {
-    //         const user = await context.prisma.user.update({where:{id:context.auth.uid},
-    //             data:{
-    //                 location:{
-                        
-    //                     upsert:{
-    //                         update:{
-    //                             lat:location.lat,
-    //                             lon:location.lon
-    //                         },
-    //                         create:{
-    //                             lat:location.lat,
-    //                             lon:location.lon
-    //                         }
-    //                     }
-    //                 }
-    //             },
-    //             include:{location:true}});
-            
-    //         await this.bloc.updateUserLocation(context.auth.uid, user.location as any);
-    //         return {
-    //             message: 'ok',
-    //             status: true,
-    //         }
-    //     }
-    //     throw new UnauthorizedException({
-    //         message: 'Auth error',
-    //         status: false,
-    //     })
-
-    // }
-
-}

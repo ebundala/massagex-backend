@@ -141,3 +141,15 @@ extend input ServiceUncheckedUpdateWithoutBusinessInput {
 extend input OrderUncheckedUpdateWithoutBusinessInput {
     receipt: AttachmentCreateInput
 }
+
+extend input BusinessUncheckedUpdateWithoutOwnerInput {
+	cover: AttachmentCreateInput
+}
+
+# edge case for creating locations and updating
+extend input BusinessUncheckedCreateWithoutOwnerInput {
+	location: LocationCreateInput
+}
+extend input BusinessUncheckedUpdateWithoutOwnerInput {
+	location: LocationCreateInput
+}

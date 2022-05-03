@@ -29,9 +29,9 @@ export class FcmRegistrationService {
             args.create.fcm_id=data.fcm_id;
             args.update.fcm_id={set:data.fcm_id};
         }
-        if(data.userId){
-            args.create.user={connect:{id:data.userId}};
-            args.update.user={connect:{id:data.userId}};
+        if(auth.uid){
+            args.create.user={connect:{id:auth.uid}};
+            args.update.user={connect:{id:auth.uid}};
         }
        
         return prisma.device.upsert({...args,
