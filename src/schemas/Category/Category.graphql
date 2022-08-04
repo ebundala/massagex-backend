@@ -4,6 +4,7 @@ type Category {
           description: String
           picture: Attachment
           pictureId: String
+          metadata: JSONObject
           createdAt: DateTime!
           updatedAt: DateTime!
           services(where: ServiceWhereInput
@@ -44,14 +45,14 @@ type Category {
         message: String!
       }
       
-    extend type Query {
-    
-    findManyCategory(
-      where: CategoryWhereInput
-      orderBy: [CategoryOrderByInput!]
-      cursor: CategoryWhereUniqueInput
-      distinct: [CategoryScalarFieldEnum!]
-      skip: Int
-      take: Int
-    ): CategoryListResponse!
-  }
+extend type Query {
+
+findManyCategory(
+  where: CategoryWhereInput
+  orderBy: [CategoryOrderByInput!]
+  cursor: CategoryWhereUniqueInput
+  distinct: [CategoryScalarFieldEnum!]
+  skip: Int
+  take: Int
+): CategoryListResponse!
+}

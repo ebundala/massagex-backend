@@ -98,7 +98,7 @@ export class PaymentService{
                    id:transaction.id
                },
                data:{
-                   state:TransactionStatus.SUCCESS,
+                   status:TransactionStatus.SUCCESS,
                    mpesaPayment:{                       
                        update:{
                            output_ConversationID:result.output_ConversationID,
@@ -106,7 +106,7 @@ export class PaymentService{
                            output_ResponseDesc: result.output_ResponseDesc,
                            output_ThirdPartyConversationID: result.output_ThirdPartyConversationID,
                            output_TransactionID: result.output_TransactionID, 
-                           state:PaymentStatus.SUCCESS,                          
+                           status:PaymentStatus.SUCCESS,                          
                            order:{
                                update:{
                                    state:OrderStatus.PROCESSED
@@ -130,7 +130,7 @@ export class PaymentService{
                 id:transaction.id
             },
             data:{
-                state:TransactionStatus.FAILED,
+                status:TransactionStatus.FAILED,
                 mpesaPayment:{                       
                     update:{
                         output_ConversationID:result.output_ConversationID,
@@ -138,7 +138,7 @@ export class PaymentService{
                         output_ResponseDesc: result.output_ResponseDesc,
                         output_ThirdPartyConversationID: result.output_ThirdPartyConversationID,
                         output_TransactionID: result.output_TransactionID, 
-                        state:PaymentStatus.FAILED,                          
+                        status:PaymentStatus.FAILED,                          
                         // order:{
                         //     update:{
                         //         state:OrderStatus.PROCESSED

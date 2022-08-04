@@ -1,32 +1,42 @@
 
+scalar EmailAddress
+scalar PhoneNumber
+scalar Json 
 
-input AuthInput {
-	email: String!
-	password: String!
-}
-input SignupInput {
-	email: String!
-	password: String!
-	displayName: String!
-	phoneNumber: String
-	gender: Gender
-	dateOfBirth: DateTime
-	avator:Upload
-	business: BusinessCreateWithoutOwnerInput
-}
-enum AuthMode{
-	EMAIL
-	PHONE
-	OAUTH
-	ANONYMOUS
+# input AuthInput {
+# 	email: String!
+# 	password: String!
+# }
+
+# input SignupInput {
+# 	email: EmailAddress!
+# 	password: String!
+# 	displayName: String!
+# 	phoneNumber: PhoneNumber
+# 	gender: Gender
+# 	dateOfBirth: DateTime
+# 	avator:Upload
+# 	business: BusinessCreateWithoutOwnerInput
+# }
+
+# enum AuthMode{
+# 	EMAIL
+# 	PHONE
+# 	OAUTH
+# 	ANONYMOUS
+# }
+
+enum AuthTokenType {
+	idToken
+	sessionToken
 }
 
-type AuthResult {
-	token: String
-	status: Boolean!
-	message: String!
-	data: User 
-}
+# type AuthResult {
+# 	token: String
+# 	status: Boolean!
+# 	message: String!
+# 	data: User 
+# }
 type SignOutResult {
 	status: Boolean
 	message: String
@@ -35,8 +45,9 @@ extend type User{
 	lastSeen: DateTime
 }
 extend type Mutation {
-	signup(credentials: SignupInput!): AuthResult!
-	signin(credentials: AuthInput!): AuthResult!
-	recoverAccount(email: String!): AuthResult!
-	signout: SignOutResult!	
+	# signup(credentials: SignupInput!): AuthResult!
+	# signin(credentials: AuthInput!): AuthResult!
+	# recoverAccount(email: String!): AuthResult!
+	signout(authTokenType: AuthTokenType!): SignOutResult!	
+	authenticate(authTokenType: AuthTokenType!):UserResponse!
 }

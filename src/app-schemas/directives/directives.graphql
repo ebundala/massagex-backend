@@ -112,7 +112,7 @@ extend input AttachmentCreateWithoutReviewsInput {
     path: String! @file(path:"../../../../public/uploads")
 }
 
-extend input AttachmentCreateWithoutCategoryInput {
+extend input AttachmentCreateWithoutCategoriesInput {
     path: String! @file(path:"../../../../public/uploads")
 }
 
@@ -124,7 +124,7 @@ extend input AttachmentUncheckedCreateWithoutBusinessInput {
     path: String! @file(path:"../../../../public/uploads")
 }
 
-extend input AttachmentUncheckedCreateWithoutCategoryInput {
+extend input AttachmentUncheckedCreateWithoutCategoriesInput {
     path: String! @file(path:"../../../../public/uploads")
 }
 
@@ -133,23 +133,23 @@ extend input AttachmentUncheckedCreateWithoutReviewsInput {
 }
 
 
-# handle edge cases for file upload during deep nested update
-extend input ServiceUncheckedUpdateWithoutBusinessInput {
-    image: AttachmentCreateInput
-}
+# # handle edge cases for file upload during deep nested update
+# extend input ServiceUncheckedUpdateWithoutBusinessInput {
+#     image: AttachmentCreateInput
+# }
 
-extend input OrderUncheckedUpdateWithoutBusinessInput {
-    receipt: AttachmentCreateInput
-}
+# extend input OrderUncheckedUpdateWithoutBusinessInput {
+#     receipt: AttachmentCreateInput
+# }
 
-extend input BusinessUncheckedUpdateWithoutOwnerInput {
-	cover: AttachmentCreateInput
-}
+# extend input BusinessUncheckedUpdateWithoutOwnerInput {
+# 	cover: AttachmentCreateInput
+# }
 
-# edge case for creating locations and updating
-extend input BusinessUncheckedCreateWithoutOwnerInput {
-	location: LocationCreateInput
-}
-extend input BusinessUncheckedUpdateWithoutOwnerInput {
-	location: LocationCreateInput
-}
+# # edge case for creating locations and updating
+# extend input BusinessUncheckedCreateWithoutOwnerInput {
+# 	location: LocationCreateInput
+# }
+# extend input BusinessUncheckedUpdateWithoutOwnerInput {
+# 	location: LocationCreateInput
+# }

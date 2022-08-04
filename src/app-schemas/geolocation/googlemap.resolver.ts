@@ -3,7 +3,7 @@ import { GoogleMapService } from "./googlemap.service";
 //import {GeocodeResponse} from '../../models/graphql'
 import { TenantContext } from "@mechsoft/common";
 // import { GeocodeResponse } from "@googlemaps/google-maps-services-js";
-import { GeocodeComponents } from "@googlemaps/google-maps-services-js/dist/geocode/geocode";
+//import { GeocodeComponents } from "@googlemaps/google-maps-services-js/dist/geocode/geocode";
 import { ConfigService } from "@nestjs/config";
 import { RouteResponse,GeocodeResponse,
      GeocodeInput, ReverseGeocodeResponse, ReverseGeocodeInput, RouteQueryInput, PlaceAutocompleteResponse, PlaceAutocompleteInput} from "src/models/graphql";

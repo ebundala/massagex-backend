@@ -13,6 +13,7 @@ type Transaction {
           selcomDisbursementId: String
           status: TransactionStatus!
           recordStatus: RecordStatus!
+          metadata: JSONObject
           createdAt: DateTime!
           updatedAt: DateTime!
     }

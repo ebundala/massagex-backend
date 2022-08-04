@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "@googlemaps/google-maps-services-js": "^3.1.16",
-    "@mechsoft/apigen": "^0.3.0",
+    "@mechsoft/apigen": "0.3.3",
     "@mechsoft/app-logger": "^0.3.0",
     "@mechsoft/business-rules-manager": "^0.3.0",
     "@mechsoft/enforcer": "^0.3.0",

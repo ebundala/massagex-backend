@@ -4,11 +4,11 @@ import { TenantContext } from "@mechsoft/common";
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { BusinessMode, Location,  } from "@prisma/client";
 import * as DataLoader from "dataloader";
-import { AuthService, } from "src/app-schemas/auth/auth-service";
-import {  BusinessCreateWithoutOwnerInput, LocationCreateInput, User, UserCreateInput, UserUpdateInput } from "src/models/graphql";
+import { AuthService, } from "src/app-schemas/auth/auth.service";
+import {  BusinessCreateWithoutOwnerInput, LocationCreateInput, User, UserCreateInput, UserUpdateInput, UserWhereUniqueInput } from "src/models/graphql";
 import { RedisCache } from "src/pubsub/redis.service";
 import { uploadFile } from "src/utils/file.utils";
-import {SignupInput} from "../../models/graphql";
+
 //import * as uuid from 'uuid';
 import {
   canCreateOnlyOneOrganization, isUserSensitiveInfo,
@@ -55,7 +55,7 @@ export class BusinessLogicService {
     return files2;
   }
 
-  @PrismaAttach("User","create",true)
+  /* @PrismaAttach("User","create",true)
   async createFirebaseUser(v:PrismaHookRequest<UserCreateInput>,next: PrismaHookHandler){ 
     
     const {displayName,email,phoneNumber,password} = v.params.args.data;
@@ -111,10 +111,10 @@ export class BusinessLogicService {
      await this.authService.deleteFirebaseUser(id);
     this.logger.debug("delete user",id);
     return next(v);
-  }
+  } */
 
   // upload user avator during signup
-  @BlocAttach('signup.input.credentials.avator')
+  /* @BlocAttach('signup.input.credentials.avator')
   async avator(v: BusinessRequest<TenantContext>, next: (arg0: BusinessRequest<any>) => any) {
     const { args, context } = v;
     const { credentials} = args as {credentials:SignupInput};
@@ -140,7 +140,7 @@ export class BusinessLogicService {
       v.args.credentials.business.cover = { connect: { id: businessCover.id } };
     }
     return next(v)
-  }
+  } */
 
  
   // Update user avator 
@@ -150,9 +150,9 @@ export class BusinessLogicService {
     const { args, context } = v;
     const { data, ...rest } = args as {data:UserUpdateInput};
     const { avator } = data
+  
     const file = await uploadFile(avator.create.path)
-    const file2 = await context.prisma.attachment.create({ data: { ...file } })
-
+    const file2 = await context.prisma.attachment.create({ data: { ...file } })    
     if (file2 && file2.id) {
       v.args.data.avator = { connect: { id: file2.id } };
     }
@@ -284,17 +284,19 @@ async uploadCommentAttachments2(v: BusinessRequest<TenantContext>, next: (arg0: 
 }
 
 //upload attachment for cover on business during update via user entry
-@BlocAttach('updateOneUser.input.data.businessProfile.update.cover.path')
+@BlocAttach('updateOneUser.input.data.businessProfile.update.cover.create.path')
 async uploadBusinessCoverAttachments(v: BusinessRequest<TenantContext>, next: (arg0: BusinessRequest<any>) => any) {
   const { args, context } = v;
   const { data, ...rest } = args as {data:UserUpdateInput};
   const { businessProfile } = data;
-    const attachment = businessProfile.update.cover.path;
+    const attachment = businessProfile.update.cover.create.path;
       const file = await uploadFile(attachment);
       const file2 = await context.prisma.attachment.create({ data: { ...file } });
       if (file2 && file2.id) {
-        v.args.data.businessProfile.update.coverId={set:file2.id};
-        delete v.args.data.businessProfile.update.cover;
+        businessProfile.update.cover.connect={id:file2.id}
+       // v.args.data.businessProfile.update.coverId={set:file2.id};
+       // delete
+         businessProfile.update.cover.create=undefined;
       }
   return next(v)
 }
@@ -316,8 +318,10 @@ async uploadGalleryAttachments(v: BusinessRequest<TenantContext>, next: (arg0: B
       if (file2 && file2.id) {
         let connect =v.args.data.businessProfile.update.attachments.connect??[]
         connect[j]= { id: file2.id } ;
-        v.args.data.businessProfile.update.attachments.connect=connect;
-        v.args.data.businessProfile.update.attachments.create.splice(j,1)
+        businessProfile.update.attachments.connect=connect;
+        businessProfile.update.attachments.create.splice(j,1);
+        //v.args.data.businessProfile.update.attachments.connect=connect;
+        //v.args.data.businessProfile.update.attachments.create.splice(j,1)
       }
       resolve(file2);
       });
@@ -341,8 +345,10 @@ async uploadServicetAttachment(v: BusinessRequest<TenantContext>, next: (arg0: B
       const file = await uploadFile(attachment)
       const file2 = await context.prisma.attachment.create({ data: { ...file } })
       if (file2 && file2.id) {
-        v.args.data.businessProfile.update.services.create[i].image.connect= { id: file2.id } ;
-        delete v.args.data.businessProfile.update.services.create[i].image.create;
+        businessProfile.update.services.create[i].image.connect={id:file2.id}
+        businessProfile.update.services.create[i].image.create=undefined;
+       // v.args.data.businessProfile.update.services.create[i].image.connect= { id: file2.id } ;
+       // delete v.args.data.businessProfile.update.services.create[i].image.create;
       }
       resolve(file2);
       });
@@ -353,7 +359,7 @@ async uploadServicetAttachment(v: BusinessRequest<TenantContext>, next: (arg0: B
 }
 
 //  upload image on service during update via user entry
-@BlocAttach('updateOneUser.input.data.businessProfile.update.services.update.data.image.path')
+@BlocAttach('updateOneUser.input.data.businessProfile.update.services.update.data.image.create.path')
 async uploadServiceAttachment2(v: BusinessRequest<TenantContext>, next: (arg0: BusinessRequest<any>) => any) {
   const { args, context } = v;
   const { data, ...rest } = args as {data:UserUpdateInput};
@@ -362,14 +368,15 @@ async uploadServiceAttachment2(v: BusinessRequest<TenantContext>, next: (arg0: B
   const attachmentsTasks = [];
   const services = businessProfile.update.services.update; 
   for(let i=0;i<services.length;i++){
-    const attachment = services[i].data.image.path;    
+    const attachment = services[i].data.image.create.path;    
       const task = new Promise(async (resolve,reject)=>{       
       const file = await uploadFile(attachment)
       const file2 = await context.prisma.attachment.create({ data: { ...file } })
       if (file2 && file2.id) {
-        v.args.data.businessProfile.update.services.update[i].data.imageId={set:file2.id};
-         //delete
-         delete v.args.data.businessProfile.update.services.update[i].data.image;
+        businessProfile.update.services.update[i].data.image.connect={id:file2.id};
+        businessProfile.update.services.update[i].data.image.create=undefined;
+        //v.args.data.businessProfile.update.services.update[i].data.imageId={set:file2.id};
+        // delete v.args.data.businessProfile.update.services.update[i].data.image;
       }
       resolve(file2);
       });
@@ -382,7 +389,7 @@ async uploadServiceAttachment2(v: BusinessRequest<TenantContext>, next: (arg0: B
 
 
 //  upload receipt on orders during update via user entry
-@BlocAttach('updateOneUser.input.data.businessProfile.update.orders.update.data.receipt.path')
+@BlocAttach('updateOneUser.input.data.businessProfile.update.orders.update.data.receipt.create.path')
 async uploadOrderReceiptAttachment(v: BusinessRequest<TenantContext>, next: (arg0: BusinessRequest<any>) => any) {
   const { args, context } = v;
   const { data, ...rest } = args as {data:UserUpdateInput};
@@ -391,14 +398,16 @@ async uploadOrderReceiptAttachment(v: BusinessRequest<TenantContext>, next: (arg
   const attachmentsTasks = [];
   const orders = businessProfile.update.orders.update; 
   for(let i=0;i<orders.length;i++){
-    const attachment = orders[i].data.receipt.path;    
+    const attachment = orders[i].data.receipt.create.path;    
       const task = new Promise(async (resolve,reject)=>{       
       const file = await uploadFile(attachment)
       const file2 = await context.prisma.attachment.create({ data: { ...file } })
       if (file2 && file2.id) {
-        v.args.data.businessProfile.update.orders.update[i].data.receiptId = {set:file2.id};
+        businessProfile.update.orders.update[i].data.receipt.connect={id:file2.id};
+        businessProfile.update.orders.update[i].data.receipt.create=undefined;
+       // v.args.data.businessProfile.update.orders.update[i].data.receiptId = {set:file2.id};
         
-        delete v.args.data.businessProfile.update.orders.update[i].data.receipt;
+       // delete v.args.data.businessProfile.update.orders.update[i].data.receipt;
       }
       resolve(file2);
       });
@@ -421,7 +430,8 @@ async linkOrderAndBusiness(v: BusinessRequest<TenantContext>, next: (arg0: Busin
       const task = new Promise(async (resolve,reject)=>{       
       const business = await context.prisma.service.findUnique({ where:{id:order.service.connect.id},select:{id:true,businessId:true} })
       if (business&&business.businessId) {
-        v.args.data.ordered.create[i].business= {connect:{id:business.businessId}};
+        data.ordered.create[i].business= {connect:{id:business.businessId}}
+        //v.args.data.ordered.create[i].business= {connect:{id:business.businessId}};
       }
       
       resolve(business);
@@ -453,7 +463,7 @@ async uploadHelpAttachment(v: BusinessRequest<TenantContext>,next){
           const files = await this.createAttachments(attachments,context);
           const filesIds = files.map((v)=>({id:v.id}))
           v.args.data.steps.create[i].attachments.connect=filesIds;
-          delete v.args.data.steps.create[i].attachments.create;
+          v.args.data.steps.create[i].attachments.create=undefined;
         }
           return resolve(v);
         });
@@ -483,7 +493,7 @@ async uploadHelpAttachment2(v:BusinessRequest<TenantContext>,next){
           const files = await this.createAttachments(attachments,context);
           const filesIds = files.map((v)=>({id:v.id}))
           v.args.data.steps.create[i].attachments.connect=filesIds;
-          delete v.args.data.steps.create[i].attachments.create;
+           v.args.data.steps.create[i].attachments.create=undefined;
         }
           return resolve(v);
         });
@@ -513,7 +523,7 @@ async uploadHelpAttachment3(v:BusinessRequest<TenantContext>,next: (arg0: Busine
           const files = await this.createAttachments(attachments,context);
           const filesIds = files.map((v)=>({id:v.id}))
           v.args.data.steps.update[i].data.attachments.connect=filesIds;
-          delete v.args.data.steps.update[i].data.attachments.create;
+          v.args.data.steps.update[i].data.attachments.create=undefined;
         }
           return resolve(v);
         });
@@ -539,14 +549,14 @@ async createGeomFromLocation(location: Location,context: TenantContext){
 async createUserLocation(v: BusinessRequest<TenantContext>, next) {
       const { args, context } = v;
       const { prisma, logger } = context;
-      const { data, ...rest } = args as {data:UserUpdateInput};
+      const { data, where,...rest } = args as {data:UserUpdateInput,where:UserWhereUniqueInput};
       const { location, ...others } = data
-      const { name, lat, lon } = location.create;
+      const { lat, lon,name, } = location.create;
       const loc = await prisma.location.create({
-        data: { name, lat, lon }
+        data: {name, lat, lon }
       });
       if (loc && loc.id) {
-         const affected = this.createGeomFromLocation(loc,context)
+         const affected = await this.createGeomFromLocation(loc,context)
         if (affected) {
           const inputs = {
             ...others,
@@ -554,10 +564,10 @@ async createUserLocation(v: BusinessRequest<TenantContext>, next) {
               connect: { id: loc.id }
             }
           }
-          v.args = { ...rest, data: inputs }
+          v.args = { ...rest,where, data: inputs }
           //Todo link business here
           const user = await prisma.user.findUnique({
-            where:{id: context.auth.uid},
+            where:{id: context.auth.uid??where.id},
             select: {                
               businessProfile:{
                 select:{
@@ -588,10 +598,11 @@ async createUserLocation(v: BusinessRequest<TenantContext>, next) {
 async updateUserLocation(v: BusinessRequest<TenantContext>, next) {
       const { args, context } = v;
       const { prisma, logger } = context;
-      const { data, ...rest } = args as {data:UserUpdateInput};
+      const { data,where, ...rest } = args as {data:UserUpdateInput,where:UserWhereUniqueInput};
       const { location, ...others } = data
+      debugger
       const { name, lat, lon } = location.update;
-      const user1 = await prisma.user.findUnique({where:{id:context.auth.uid},select:{
+      const user1 = await prisma.user.findUnique({where:{id:context.auth.uid??where.id},select:{
         location:true,        
         businessProfile:{
           select:{
@@ -618,7 +629,7 @@ async updateUserLocation(v: BusinessRequest<TenantContext>, next) {
         }
      const user= await prisma.user.update({
         where:{
-          id: context.auth.uid
+          id: context.auth.uid??where.id
         },
         data: { 
           location:locationInput
@@ -635,10 +646,10 @@ async updateUserLocation(v: BusinessRequest<TenantContext>, next) {
       });
     
       if (user.location && user.location.id) {
-         const affected = this.createGeomFromLocation(user.location,context)
+         const affected = await this.createGeomFromLocation(user.location,context)
         if (affected) {
            delete data.location
-          v.args = { ...rest, data }
+          v.args = { ...rest,where, data }
           //Todo link business here
           if(user.businessProfile&&user.businessProfile.id&&user.businessProfile.mode==BusinessMode.MOBILE_MODE){
             await prisma.business.update({
@@ -659,47 +670,49 @@ async updateUserLocation(v: BusinessRequest<TenantContext>, next) {
     }
 
 //create business location 
-@BlocAttach('updateOneUser.input.data.businessProfile.create.location.lat')
+@BlocAttach('updateOneUser.input.data.businessProfile.create.location.create.lat')
 async createBusinessLocation(v: BusinessRequest<TenantContext>, next) {
   const { args, context } = v;
   const { prisma, logger } = context;
-  const { data, ...rest } = args as {data:UserUpdateInput};
+  const { data, where,...rest } = args as {data:UserUpdateInput,where:UserWhereUniqueInput};
   const { businessProfile, ...others } = data
-  const { name, lat, lon }:LocationCreateInput = businessProfile.create.location;
+  const { name, lat, lon }:LocationCreateInput = businessProfile.create.location.create;
  debugger
   const loc = await prisma.location.create({
     data: { name, lat, lon }
   });
   if (loc && loc.id) {
-     const affected = this.createGeomFromLocation(loc,context)
-    if (affected) {     
-      v.args.data.businessProfile.create.locationId = loc.id;
-      delete data.businessProfile.create.location;
+     const affected = await this.createGeomFromLocation(loc,context)
+    if (affected) { 
+      businessProfile.create.location.connect={id:loc.id};   
+      businessProfile.create.location.create=undefined 
+     // v.args.data.businessProfile.create.locationId = loc.id;
+     // delete data.businessProfile.create.location;
     } 
   }
   
   return next(v)
 }
 //update business address here
-@BlocAttach('updateOneUser.input.data.businessProfile.update.location.lat')
+@BlocAttach('updateOneUser.input.data.businessProfile.update.location.update.lat.set')
 async updateBusinessLocation(v: BusinessRequest<TenantContext>, next) {
   const { args, context } = v;
   const { prisma, logger } = context;
-  const { data, ...rest } = args as {data:UserUpdateInput};
+  const { data,where, ...rest } = args as {data:UserUpdateInput,where:UserWhereUniqueInput};
   const { businessProfile, ...others } = data
-  const { name, lat, lon } = businessProfile.update.location;
+  const { name, lat, lon } = businessProfile.update.location.update;
   debugger
   const user = await prisma.user.update({
-    where:{id:context.auth.uid},
+    where:{id:context.auth.uid??where.id},
     data:{
       businessProfile:{
         update:{
           location:{
             upsert:{
               create:{
-                name,
-                lat,
-                lon
+                name:name.set,
+                lat:lat.set,
+                lon:lon.set
               },
             update:{
               name,
@@ -724,7 +737,8 @@ async updateBusinessLocation(v: BusinessRequest<TenantContext>, next) {
   if (user.businessProfile.location && user.businessProfile.location.id) {
      const affected = await this.createGeomFromLocation(user.businessProfile.location,context)
     if (affected) {     
-      delete v.args.data.businessProfile.update.location;
+      businessProfile.update.location=undefined;
+      //delete v.args.data.businessProfile.update.location;
     } 
   }
   
@@ -735,20 +749,22 @@ async updateBusinessLocation(v: BusinessRequest<TenantContext>, next) {
 async generateFavoriteId(v: BusinessRequest<TenantContext>, next){
   const { args, context } = v;
   const { prisma, logger } = context;
-  const { data, ...rest } = args as {data:UserUpdateInput};
+  const { data, where,...rest } = args as {data:UserUpdateInput,where:UserWhereUniqueInput};
   
   const favorited = data.favorited.create; 
   const favTypes = await prisma.favoriteRecordType.findMany(); 
   for(let i=0;i<favorited.length;i++){
     const fav = favorited[i]; 
-     const author=context.auth.uid;
+     const author=context.auth.uid??where.id;
      let key = `${fav.type.connect.name.toLowerCase()}`
       let itemId = fav[key]?.connect?.id
       if(itemId&&author) {
-      v.args.data.favorited.create[i].favId = `${author}/${itemId}`;
+        data.favorited.create[i].favId = `${author}/${itemId}`
+      //v.args.data.favorited.create[i].favId = `${author}/${itemId}`;
       }
       else{
-       delete v.args.data.favorited.create[i].favId;
+        data.favorited.create[i].favId=undefined
+      // delete v.args.data.favorited.create[i].favId;
       }
     }
 

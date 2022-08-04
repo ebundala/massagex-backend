@@ -3,6 +3,7 @@ type Location {
           name: String!
           lat: Float!
           lon: Float!
+          heading: Float!
           recordStatus: RecordStatus!
           createdAt: DateTime!
           updatedAt: DateTime!

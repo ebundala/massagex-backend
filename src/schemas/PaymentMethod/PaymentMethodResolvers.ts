@@ -32,19 +32,19 @@
       export class PaymentMethodResolver {
           
          
-    @Query((returns)=>PaymentMethodListResponse)
-    findManyPaymentMethod(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info):Promise<PaymentMethodListResponse|any>{
-      const select = ctx.prisma.getSelection(info).valueOf('data', 'PaymentMethod', { select: {  } });
-      return ctx.prisma.paymentMethod.findMany({...args,...select})
-      .then((data)=>({
-        status:true,
-        data:data??[],
-        message:'ok'
-      })).catch(({message})=>({
-       status:false,
-       data:[],
-       message:message||'unknown error'
-      }));
-      
-    }
+@Query((returns)=>PaymentMethodListResponse)
+findManyPaymentMethod(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info):Promise<PaymentMethodListResponse|any>{
+  const select = ctx.prisma.getSelection(info).valueOf('data', 'PaymentMethod', { select: {  } });
+  return ctx.prisma.paymentMethod.findMany({...args,...select})
+  .then((data)=>({
+    status:true,
+    data:data??[],
+    message:'ok'
+  })).catch(({message})=>({
+   status:false,
+   data:[],
+   message:message||'unknown error'
+  }));
+  
+}
         }

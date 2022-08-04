@@ -32,19 +32,19 @@
       export class CategoryResolver {
           
          
-    @Query((returns)=>CategoryListResponse)
-    findManyCategory(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info):Promise<CategoryListResponse|any>{
-      const select = ctx.prisma.getSelection(info).valueOf('data', 'Category', { select: {  } });
-      return ctx.prisma.category.findMany({...args,...select})
-      .then((data)=>({
-        status:true,
-        data:data??[],
-        message:'ok'
-      })).catch(({message})=>({
-       status:false,
-       data:[],
-       message:message||'unknown error'
-      }));
-      
-    }
+@Query((returns)=>CategoryListResponse)
+findManyCategory(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info):Promise<CategoryListResponse|any>{
+  const select = ctx.prisma.getSelection(info).valueOf('data', 'Category', { select: {  } });
+  return ctx.prisma.category.findMany({...args,...select})
+  .then((data)=>({
+    status:true,
+    data:data??[],
+    message:'ok'
+  })).catch(({message})=>({
+   status:false,
+   data:[],
+   message:message||'unknown error'
+  }));
+  
+}
         }

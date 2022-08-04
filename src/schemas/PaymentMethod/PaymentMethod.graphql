@@ -14,6 +14,7 @@ type PaymentMethod {
               ): [Transaction!]!
           recordStatus: RecordStatus!
           status: PaymentMethodStatus!
+          metadata: JSONObject
           createdAt: DateTime!
           updatedAt: DateTime!
     }
@@ -47,14 +48,14 @@ type PaymentMethod {
         message: String!
       }
       
-    extend type Query {
-    
-    findManyPaymentMethod(
-      where: PaymentMethodWhereInput
-      orderBy: [PaymentMethodOrderByInput!]
-      cursor: PaymentMethodWhereUniqueInput
-      distinct: [PaymentMethodScalarFieldEnum!]
-      skip: Int
-      take: Int
-    ): PaymentMethodListResponse!
-  }
+extend type Query {
+
+findManyPaymentMethod(
+  where: PaymentMethodWhereInput
+  orderBy: [PaymentMethodOrderByInput!]
+  cursor: PaymentMethodWhereUniqueInput
+  distinct: [PaymentMethodScalarFieldEnum!]
+  skip: Int
+  take: Int
+): PaymentMethodListResponse!
+}

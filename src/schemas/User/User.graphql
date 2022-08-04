@@ -1,6 +1,6 @@
 type User {
           id: String!
-          email: String!
+          email: String
           displayName: String!
           phoneNumber: String
           dateOfBirth: DateTime
@@ -13,6 +13,7 @@ type User {
           state: AccountStatus!
           gender: Gender!
           businessProfile: Business
+          metadata: JSONObject
           createdAt: DateTime!
           updatedAt: DateTime!
           device: Device
@@ -105,22 +106,14 @@ type User {
         message: String!
       }
       
-    extend type Query {
-    
-    findUniqueUser(where: UserWhereUniqueInput!): UserResponse!
-    findManyUser(
-      where: UserWhereInput
-      orderBy: [UserOrderByInput!]
-      cursor: UserWhereUniqueInput
-      distinct: [UserScalarFieldEnum!]
-      skip: Int
-      take: Int
-    ): UserListResponse!
-  }
-    extend type Mutation {
-    
-    updateOneUser(
-      where: UserWhereUniqueInput!
-      data: UserUpdateInput!
-    ): UserResponse!
-  }
+extend type Query {
+
+findUniqueUser(where: UserWhereUniqueInput!): UserResponse!
+}
+extend type Mutation {
+
+updateOneUser(
+  where: UserWhereUniqueInput!
+  data: UserUpdateInput!
+): UserResponse!
+}

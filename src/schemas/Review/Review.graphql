@@ -68,14 +68,3 @@ type Review {
         message: String!
       }
       
-    extend type Query {
-    
-    findManyReview(
-      where: ReviewWhereInput
-      orderBy: [ReviewOrderByInput!]
-      cursor: ReviewWhereUniqueInput
-      distinct: [ReviewScalarFieldEnum!]
-      skip: Int
-      take: Int
-    ): ReviewListResponse!
-  }

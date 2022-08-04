@@ -34,7 +34,7 @@ enum RecordStatus {
 
 model User {
   id              String        @id @default(cuid())
-  email           String        @unique
+  email           String?        @unique
   displayName     String
   phoneNumber     String?
   dateOfBirth     DateTime?
@@ -47,6 +47,7 @@ model User {
   state           AccountStatus @default(ENABLED)
   gender          Gender        @default(UNSPECIFIED)
   businessProfile Business?
+  metadata     Json?
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
   device          Device?
@@ -81,7 +82,8 @@ model Business {
   coverId      String?
   about        String
   businessName String
-  state        BusinessStatus @default(OFFLINE)
+  metadata     Json?
+  status        BusinessStatus @default(OFFLINE)
   recordStatus RecordStatus   @default(ACTIVE)
   services     Service[]      @relation("businessToService")
   orders       Order[]        @relation("businessToOrder")
@@ -132,7 +134,7 @@ model Attachment {
   userId         String?
   business       Business?       @relation("businessToGallery", fields: [businessId], references: [id])
   businessId     String?
-  Category       Category[]
+  categories       Category[]
 }
 
 model Location {
@@ -141,6 +143,7 @@ model Location {
   geom         Unsupported("geography")?
   lat          Float
   lon          Float
+  heading      Float                     @default(0)
   recordStatus RecordStatus              @default(ACTIVE)
   createdAt    DateTime                  @default(now())
   updatedAt    DateTime                  @updatedAt
@@ -331,6 +334,7 @@ model Category {
   description String?
   picture     Attachment? @relation(fields: [pictureId], references: [id])
   pictureId   String?
+  metadata     Json?
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
   services    Service[]
@@ -341,7 +345,7 @@ model Service {
   name         String
   description  String?
   price        Float
-  metadata     String[]
+  metadata     Json?
   currency     String        @default("TZS")
   recordStatus RecordStatus  @default(ACTIVE)
   category     Category?     @relation(fields: [categoryId], references: [id])
@@ -370,6 +374,7 @@ model Order {
   recordStatus RecordStatus  @default(ACTIVE)
   orderStatus  OrderStatus   @default(WAITING)
   notes        String?
+  metadata     Json?
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
   ownerId      String
@@ -400,6 +405,7 @@ model PaymentMethod {
   transactions Transaction[]
   recordStatus RecordStatus        @default(DRAFT)
   status        PaymentMethodStatus @default(ENABLED)
+  metadata     Json?
   createdAt    DateTime            @default(now())
   updatedAt    DateTime            @updatedAt
 }
@@ -425,6 +431,7 @@ model Transaction {
   selcomDisbursementId String?
   status                TransactionStatus   @default(PENDING)
   recordStatus         RecordStatus        @default(ACTIVE)
+  metadata     Json?
   createdAt            DateTime            @default(now())
   updatedAt            DateTime            @updatedAt
 }
@@ -447,6 +454,7 @@ model MpesaPayment {
   transaction                     Transaction?
   status                           PaymentStatus @default(PENDING)
   recordStatus                    RecordStatus  @default(ACTIVE)
+  metadata     Json?
   createdAt                       DateTime      @default(now())
   updatedAt                       DateTime      @updatedAt
 }
@@ -465,6 +473,7 @@ model SelcomDisbursement {
   transaction  Transaction?
   state        PaymentStatus     @default(PENDING)
   recordStatus RecordStatus      @default(ACTIVE)
+  metadata     Json?
   createdAt    DateTime          @default(now())
   updatedAt    DateTime          @updatedAt
 }
@@ -483,6 +492,7 @@ model SelcomPayment {
   transaction  Transaction?
   state        PaymentStatus @default(PENDING)
   recordStatus RecordStatus  @default(ACTIVE)
+  metadata     Json?
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
 }
@@ -506,5 +516,4 @@ enum PaymentStatus {
   PENDING
   SUCCESS
   FAILED
-
 }

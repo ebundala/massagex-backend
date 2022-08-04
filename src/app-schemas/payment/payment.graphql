@@ -1,5 +1,5 @@
 input PaybillRequest {
-    msisdn: String!
+    msisdn: PhoneNumber!
     currency: String
     orderId:  String!
     method: String

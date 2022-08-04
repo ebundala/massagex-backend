@@ -3,28 +3,28 @@ import * as mime from 'mime-types';
 import { join } from 'path';
 import { AttachmentType } from 'src/models/graphql';
 import { GraphQLUpload, FileUpload } from 'graphql-upload'
-import * as sharp from 'sharp';
+//import * as sharp from 'sharp';
 import { v4 as uuidv4 } from 'uuid';
-import { getAudioDurationInSeconds } from 'get-audio-duration'
+//import { getAudioDurationInSeconds } from 'get-audio-duration'
 import { mkdrIfNotExist } from '@mechsoft/apigen';
 
-export const resizer = (rs: fs.ReadStream, ws: fs.WriteStream,size = {height:480,width:408}) => {
-    const st = sharp()
-        .resize({
-            ...size,
-            fit: sharp.fit.cover,
-            position: sharp.strategy.entropy
-        }).webp();
-    const onError = (e) => {
+// export const resizer = (rs: fs.ReadStream, ws: fs.WriteStream,size = {height:480,width:408}) => {
+//     const st = sharp()
+//         .resize({
+//             ...size,
+//             fit: sharp.fit.cover,
+//             position: sharp.strategy.entropy
+//         }).webp();
+//     const onError = (e) => {
 
 
-        rs.emit("error", e);
-        ws.emit("error", e);
+//         rs.emit("error", e);
+//         ws.emit("error", e);
 
-    }
-    st.on('error', onError.bind(this));
-    return st;
-}
+//     }
+//     st.on('error', onError.bind(this));
+//     return st;
+// }
 export const writeStreamToFile = (rs: fs.ReadStream, path: string, type: AttachmentType,size={height:480,width:480}) => new Promise((resolve, reject) => {
     const ws = fs.createWriteStream(path);
     const onError = (e) => {
@@ -38,12 +38,12 @@ export const writeStreamToFile = (rs: fs.ReadStream, path: string, type: Attachm
     
     if (type == AttachmentType.IMAGE) {
         
-        const ws360=fs.createWriteStream(`${path}.thumbnail-largest.webp`);
+       // const ws360=fs.createWriteStream(`${path}.thumbnail-largest.webp`);
        // const ws240=fs.createWriteStream(`${path}.thumbnail-large.webp`);
        // const ws160=fs.createWriteStream(`${path}.thumbnail-medium.webp`);
         //const ws128=fs.createWriteStream(`${path}.thumbnail-small.webp`);
-        const ws80=fs.createWriteStream(`${path}.thumbnail-smallest.webp`);
-        const wstr = [ws,ws80,/* ws128,ws160,ws240 */,ws360]
+       // const ws80=fs.createWriteStream(`${path}.thumbnail-smallest.webp`);
+        const wstr = [ws,/*ws80,/* ws128,ws160,ws240 ,ws360*/]
        Promise.all
        (wstr.map((w)=>{
             return new Promise((resolve,reject)=>{
@@ -63,12 +63,13 @@ export const writeStreamToFile = (rs: fs.ReadStream, path: string, type: Attachm
             reject(e);
             wstr.forEach((v)=>v.close());
         })
-        rs.pipe(resizer(rs, ws,size)).pipe(ws)
-        rs.pipe(resizer(rs, ws360,{height:360,width:360})).pipe(ws360);
+       // rs.pipe(resizer(rs, ws,size)).pipe(ws)
+       // rs.pipe(resizer(rs, ws360,{height:360,width:360})).pipe(ws360);
        // rs.pipe(resizer(rs, ws240,{height:240,width:240})).pipe(ws240);
       //  rs.pipe(resizer(rs, ws160,{height:160,width:160})).pipe(ws160);
        // rs.pipe(resizer(rs, ws128,{height:128,width:128})).pipe(ws128);
-        rs.pipe(resizer(rs, ws80,{height:80,width:80})).pipe(ws80);
+      //  rs.pipe(resizer(rs, ws80,{height:80,width:80})).pipe(ws80);
+      rs.pipe(ws)
 
     } else {
         rs.pipe(ws);

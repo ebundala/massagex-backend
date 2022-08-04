@@ -32,19 +32,4 @@
       export class ReviewResolver {
           
          
-    @Query((returns)=>ReviewListResponse)
-    findManyReview(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info):Promise<ReviewListResponse|any>{
-      const select = ctx.prisma.getSelection(info).valueOf('data', 'Review', { select: {  } });
-      return ctx.prisma.review.findMany({...args,...select})
-      .then((data)=>({
-        status:true,
-        data:data??[],
-        message:'ok'
-      })).catch(({message})=>({
-       status:false,
-       data:[],
-       message:message||'unknown error'
-      }));
-      
-    }
         }

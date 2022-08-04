@@ -32,19 +32,34 @@
       export class BusinessResolver {
           
          
-    @Query((returns)=>BusinessListResponse)
-    findManyBusiness(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info):Promise<BusinessListResponse|any>{
-      const select = ctx.prisma.getSelection(info).valueOf('data', 'Business', { select: {  } });
-      return ctx.prisma.business.findMany({...args,...select})
-      .then((data)=>({
-        status:true,
-        data:data??[],
-        message:'ok'
-      })).catch(({message})=>({
-       status:false,
-       data:[],
-       message:message||'unknown error'
-      }));
-      
-    }
+@Query((returns)=>BusinessResponse)
+
+findUniqueBusiness(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info):Promise<BusinessResponse|any>{
+  const select = ctx.prisma.getSelection(info).valueOf('data', 'Business', { select: {  } });
+  return ctx.prisma.business.findUnique({...args,...select})
+  .then((data)=>({
+    status:true,
+    data,
+    message:'ok'
+  })).catch(({message})=>({
+   status:false,
+   data:null,
+   message:message||'unknown error'
+  }))
+}
+@Query((returns)=>BusinessListResponse)
+findManyBusiness(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info):Promise<BusinessListResponse|any>{
+  const select = ctx.prisma.getSelection(info).valueOf('data', 'Business', { select: {  } });
+  return ctx.prisma.business.findMany({...args,...select})
+  .then((data)=>({
+    status:true,
+    data:data??[],
+    message:'ok'
+  })).catch(({message})=>({
+   status:false,
+   data:[],
+   message:message||'unknown error'
+  }));
+  
+}
         }

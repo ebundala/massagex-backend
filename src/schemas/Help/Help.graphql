@@ -44,23 +44,22 @@ type Help {
         message: String!
       }
       
-    extend type Query {
-    
-    findUniqueHelp(where: HelpWhereUniqueInput!): HelpResponse!
-    findManyHelp(
-      where: HelpWhereInput
-      orderBy: [HelpOrderByInput!]
-      cursor: HelpWhereUniqueInput
-      distinct: [HelpScalarFieldEnum!]
-      skip: Int
-      take: Int
-    ): HelpListResponse!
-  }
-    extend type Mutation {
-    
-    createOneHelp(data: HelpCreateInput!): HelpResponse!
-    updateOneHelp(
-      where: HelpWhereUniqueInput!
-      data: HelpUpdateInput!
-    ): HelpResponse!
-  }
+extend type Query {
+
+findManyHelp(
+  where: HelpWhereInput
+  orderBy: [HelpOrderByInput!]
+  cursor: HelpWhereUniqueInput
+  distinct: [HelpScalarFieldEnum!]
+  skip: Int
+  take: Int
+): HelpListResponse!
+}
+extend type Mutation {
+
+createOneHelp(data: HelpCreateInput!): HelpResponse!
+updateOneHelp(
+  where: HelpWhereUniqueInput!
+  data: HelpUpdateInput!
+): HelpResponse!
+}

@@ -179,9 +179,9 @@ const RequestLogger: GraphQLRequestListener<TenantContext> = {
               logger.debug(await redisCache.get(`last-seen-${auth.uid}`),"Presence");
               await redisCache.set(`last-seen-${auth.uid}`,(new Date()).toISOString(),"EX",60*60*24*7);
              }
-            //TODO: remove this after test/dev
-
+            //TODO: remove this line after test/dev to enable authorization
             enforcer.enableEnforce(false);
+
             const ctx: TenantContext = {
               tenantId: auth?.uid,
               auth: auth,

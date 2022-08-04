@@ -1,7 +1,7 @@
 import { SdlGeneratorServiceOptions, writeSchemaToFile,createPolicySchema} from '@mechsoft/apigen';
 import { join } from 'path';
-import { Upload, UploadDirective, UploadTypeResolver } from './app-schemas/directives/uploader.directive';
-import {JSONObjectResolver} from 'graphql-scalars'
+import { Upload, UploadDirective, UploadTypeResolver, } from './app-schemas/directives/uploader.directive';
+import {GraphQLJSONObject,GraphQLPhoneNumber,GraphQLEmailAddress,} from 'graphql-scalars'
 import { ThumbnailDirective } from './app-schemas/directives/thumbnail.directive';
 
 const options: SdlGeneratorServiceOptions = {
@@ -10,16 +10,18 @@ const options: SdlGeneratorServiceOptions = {
   customOptions: {
     onDelete: true,
     genTypes: true,
-
+    modelFieldTypeOverrides:{
+      "Json":"JSONObject"
+    },
     // excludeFields: ['Id'],
     excludeQueriesAndMutationsByModel: {
-       'User': ['createOne'],
-       'Review':['createOne','updateOne','findUnique'],
-       'Comment':['createOne','updateOne','findUnique'],
+       'User': ['createOne','findMany'],
+      //  'Review':['createOne','updateOne','findUnique'],
+      //  'Comment':['createOne','updateOne','findUnique'],
        'Category':['createOne','updateOne','findUnique'],
        'PaymentMethod':['createOne','updateOne','findUnique'],
-       'Business':['createOne','updateOne','findUnique'],
-      // 'SelcomPayment':['findFirst','upsertOne'],
+       'Business':['createOne','updateOne'],
+      'Help':['findUnique'],
     },
     excludeQueriesAndMutations: [
       'upsertOne', 'aggregate', 'deleteMany', 'updateMany', 'findCount','deleteOne','findFirst'
@@ -102,6 +104,16 @@ const options: SdlGeneratorServiceOptions = {
         queries: true,
         mutations: true,
       },
+      {
+        name: 'Comment',
+        queries: true,
+        mutations: true,
+      },
+      {
+        name: 'Review',
+        queries: true,
+        mutations: true,
+      },
     ],
     output: './src/schemas',
   },
@@ -114,18 +126,21 @@ const options: SdlGeneratorServiceOptions = {
         customScalarTypeMapping: {
             Upload: 'Promise < FileUpload >',
             DateTime: 'string',
-            Json: 'JSONObject'
+            // JSONObject: 'string',
+            EmailAddress:'string',
+            PhoneNumber:'string',
         },
-      additionalHeader: "import { FileUpload } from 'graphql-upload';"
+      additionalHeader: `import { FileUpload } from 'graphql-upload';`
     },
     transformSchema: (schema) => {
       const path = join(process.cwd(), 'src/models')
      const filePath= writeSchemaToFile(schema, path);
-      //TODO: generate policy schema
-      createPolicySchema('src/authorization/policy', filePath);
+      console.log("schema written to file")
+     //TODO: generate policy schema
+     // createPolicySchema('src/authorization/policy', filePath);
       return schema;
     },
-    debug: true,
+    //debug: true,
    // uploads: true,
     //playground: false,
     schemaDirectives: {
@@ -134,7 +149,9 @@ const options: SdlGeneratorServiceOptions = {
     },
     resolvers: {
       Upload: UploadTypeResolver,
-      JSONObject:JSONObjectResolver
+      JSONObject:GraphQLJSONObject,
+      EmailAddress:GraphQLEmailAddress,
+      PhoneNumber:GraphQLPhoneNumber
     },
     sortSchema: true,
   }

@@ -16,6 +16,7 @@ type MpesaPayment {
           transaction: Transaction
           status: PaymentStatus!
           recordStatus: RecordStatus!
+          metadata: JSONObject
           createdAt: DateTime!
           updatedAt: DateTime!
     }

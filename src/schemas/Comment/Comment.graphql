@@ -70,14 +70,3 @@ type Comment {
         message: String!
       }
       
-    extend type Query {
-    
-    findManyComment(
-      where: CommentWhereInput
-      orderBy: [CommentOrderByInput!]
-      cursor: CommentWhereUniqueInput
-      distinct: [CommentScalarFieldEnum!]
-      skip: Int
-      take: Int
-    ): CommentListResponse!
-  }

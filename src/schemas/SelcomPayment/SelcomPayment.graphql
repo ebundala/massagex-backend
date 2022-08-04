@@ -12,6 +12,7 @@ type SelcomPayment {
           transaction: Transaction
           state: PaymentStatus!
           recordStatus: RecordStatus!
+          metadata: JSONObject
           createdAt: DateTime!
           updatedAt: DateTime!
     }

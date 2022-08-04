@@ -56,7 +56,7 @@ type Attachment {
           userId: String
           business: Business
           businessId: String
-          Category(where: CategoryWhereInput
+          categories(where: CategoryWhereInput
               orderBy: [CategoryOrderByInput!]
               cursor: CategoryWhereUniqueInput
               take: Int

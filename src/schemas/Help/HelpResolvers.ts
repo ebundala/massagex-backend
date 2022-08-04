@@ -32,62 +32,47 @@
       export class HelpResolver {
           
          
-    @Query((returns)=>HelpResponse)
-
-    findUniqueHelp(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info):Promise<HelpResponse|any>{
-      const select = ctx.prisma.getSelection(info).valueOf('data', 'Help', { select: {  } });
-      return ctx.prisma.help.findUnique({...args,...select})
-      .then((data)=>({
-        status:true,
-        data,
-        message:'ok'
-      })).catch(({message})=>({
-       status:false,
-       data:null,
-       message:message||'unknown error'
-      }))
-    }
-    @Query((returns)=>HelpListResponse)
-    findManyHelp(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info):Promise<HelpListResponse|any>{
-      const select = ctx.prisma.getSelection(info).valueOf('data', 'Help', { select: {  } });
-      return ctx.prisma.help.findMany({...args,...select})
-      .then((data)=>({
-        status:true,
-        data:data??[],
-        message:'ok'
-      })).catch(({message})=>({
-       status:false,
-       data:[],
-       message:message||'unknown error'
-      }));
-      
-    }
-    @Mutation((returns)=>HelpResponse)
-    createOneHelp(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info):Promise<HelpResponse|any>{
-      const select = ctx.prisma.getSelection(info).valueOf('data', 'Help', { select: {  } });
-      return ctx.prisma.help.create({...args,...select})
-      .then((data)=>({
-        status:true,
-        data,
-        message:'ok'
-      })).catch(({message})=>({
-       status:false,
-       data:null,
-       message:message||'unknown error'
-      }))
-    }
-    @Mutation((returns)=>HelpResponse)
-    updateOneHelp(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info):Promise<HelpResponse|any>{
-      const select = ctx.prisma.getSelection(info).valueOf('data', 'Help', { select: {  } });
-      return ctx.prisma.help.update({...args,...select})
-      .then((data)=>({
-        status:true,
-        data,
-        message:'ok'
-      })).catch(({message})=>({
-       status:false,
-       data:null,
-       message:message||'unknown error'
-      }))
-    }
+@Query((returns)=>HelpListResponse)
+findManyHelp(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info):Promise<HelpListResponse|any>{
+  const select = ctx.prisma.getSelection(info).valueOf('data', 'Help', { select: {  } });
+  return ctx.prisma.help.findMany({...args,...select})
+  .then((data)=>({
+    status:true,
+    data:data??[],
+    message:'ok'
+  })).catch(({message})=>({
+   status:false,
+   data:[],
+   message:message||'unknown error'
+  }));
+  
+}
+@Mutation((returns)=>HelpResponse)
+createOneHelp(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info):Promise<HelpResponse|any>{
+  const select = ctx.prisma.getSelection(info).valueOf('data', 'Help', { select: {  } });
+  return ctx.prisma.help.create({...args,...select})
+  .then((data)=>({
+    status:true,
+    data,
+    message:'ok'
+  })).catch(({message})=>({
+   status:false,
+   data:null,
+   message:message||'unknown error'
+  }))
+}
+@Mutation((returns)=>HelpResponse)
+updateOneHelp(@Parent() parent, @Args() args, @Context() ctx: TenantContext, @Info() info):Promise<HelpResponse|any>{
+  const select = ctx.prisma.getSelection(info).valueOf('data', 'Help', { select: {  } });
+  return ctx.prisma.help.update({...args,...select})
+  .then((data)=>({
+    status:true,
+    data,
+    message:'ok'
+  })).catch(({message})=>({
+   status:false,
+   data:null,
+   message:message||'unknown error'
+  }))
+}
         }

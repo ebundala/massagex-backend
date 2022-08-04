@@ -4,6 +4,7 @@ type Order {
           recordStatus: RecordStatus!
           orderStatus: OrderStatus!
           notes: String
+          metadata: JSONObject
           createdAt: DateTime!
           updatedAt: DateTime!
           ownerId: String!
