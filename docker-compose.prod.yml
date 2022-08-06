@@ -27,7 +27,7 @@ services:
       restart_policy:
         condition: on-failure
   studio:
-    image: ghcr.io/ebundala/faw-backend-v2/studio:master 
+    image: ghcr.io/ebundala/massagex-backend/studio:master 
           
     networks:
       webnet:
@@ -42,7 +42,7 @@ services:
       restart_policy:
         condition: on-failure
   app:
-    image: ghcr.io/ebundala/faw-backend-v2/server:master       
+    image: ghcr.io/ebundala/massagex-backend/server:master       
     environment:
      # google credentials
        GOOGLE_APPLICATION_CREDENTIALS: ${GOOGLE_APPLICATION_CREDENTIALS}
