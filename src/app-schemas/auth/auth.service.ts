@@ -8,83 +8,92 @@ import {
   UserResponse,
 
 } from '../../models/graphql';
-import { Prisma } from '@prisma/client'
+import { AttachmentType, Prisma } from '@prisma/client'
 import { TenantContext } from '@mechsoft/common';
 
 @Injectable()
 export class AuthService {
+
   constructor(
-    private readonly firebaseApp: FirebaseService,
+    // private readonly firebaseApp: FirebaseService,
     private readonly logger: AppLogger,
     // private readonly mail: MailService,
-  ) {
-    // this.httpService.axiosRef.defaults.baseURL = this.firebaseApp.signInWithProviderHost;
-    // this.httpService.axiosRef.defaults.headers.post['Content-Type'] = 'application/json';
-    //this.logger.setContext(AuthService.name);
-  }
+  ) { }
 
-  async authenticate(ctx: TenantContext, tokenType: AuthTokenType, select: Prisma.UserSelect): Promise<UserResponse> {
-    if (ctx.auth != null && ctx.auth.uid) {
-      let uid = ctx.auth.uid;
-      const user = await ctx.prisma.user.findUnique({ where: { id: uid }, select: select });
-      if (user != null) {
-        return {
-          status: true, message: 'ok', data: user as any
-        }
-      }
-      else {
-        //  Todo handle creating user profile
-        let newUserArgs: Prisma.UserCreateInput = {
-          displayName: ctx.auth.displayName,
-          email: ctx.auth.email,
-          phoneNumber: ctx.auth.phoneNumber,
-          emailVerified: ctx.auth.emailVerified,
-
-        }
-        let profile = await ctx.prisma.user.create({ data: newUserArgs, select: select })
-        if (profile != null) {
-          return {
-            status: true, message: 'ok', data: profile as any
+  // TODO add server authorization and verification before creating user
+  async notifyUserSignup(ctx: TenantContext,): Promise<Object> {
+    try {
+      if (ctx.auth != null && ctx.auth.uid) {
+        this.logger.debug(`user signup with id ${ctx.auth.uid}`, AuthService.name)
+        let userArgs: Prisma.UserUpsertArgs = {
+          where:{id:ctx.auth.uid},
+          update:{                       
+              email: {set:ctx.auth.email},
+            },
+          create: {
+            id: ctx.auth.uid,
+            displayName: ctx.auth.displayName ?? "guest",
+            email: ctx.auth.email,
+            phoneNumber: ctx.auth.phoneNumber,
+            emailVerified: ctx.auth.emailVerified,
+            disabled: ctx.auth.disabled,
+            avator: {
+              create: {
+                path: ctx.auth.photoURL ?? "uploads/placeholder.png",
+                attachmentType: AttachmentType.IMAGE
+              }
+            }
           }
         }
-
-
+        let profile = await ctx.prisma.user.upsert(userArgs)
+        await ctx.enforcer.addRoleForUser(ctx.auth.uid, profile.role)
+        return {
+          completedPlofile: false
+        }
       }
     }
-    return {
-      status: false, message: "Failed to authenticate againt"
+    catch (e) {
+      throw e;
     }
   }
 
-  signOut(token: string, tokenType: AuthTokenType): Promise<SignOutResult> {
-
-    return this.destroySession(token, tokenType);
-  }
-
-  async destroySession(token: string, tokenType:AuthTokenType) {
-    const auth = this.firebaseApp.admin
-      .auth();
-    let fn;
-    if (tokenType == AuthTokenType.sessionToken) {
-      fn = auth.verifySessionCookie
-    } else {
-      fn = auth.verifyIdToken
+  async getUserRoles(ctx: TenantContext): Promise<string[]> {
+    try {
+    if (ctx.auth && ctx.auth.uid) {
+      this.logger.debug(`user signin: getting roles for ${ctx.auth.uid}`, AuthService.name)
+        return await ctx.enforcer.getRolesForUser(ctx.auth.uid);
+      }
+      return []
     }
-
-
-    return fn(token).then((decodedClaims) =>
-      this.firebaseApp.admin.auth().revokeRefreshTokens(decodedClaims.sub),
-    )
-      .then(() => ({
-        status: true,
-        message: 'Session destroyed successfully',
-      })).catch(() => {
-        return {
-          status: false,
-          message: 'Failed to destroy session'
-        }
-      });
+    catch (e) {
+      throw e;
+    }
   }
+
+  // async destroySession(token: string, tokenType:AuthTokenType) {
+  //   const auth = this.firebaseApp.admin
+  //     .auth();
+  //   let fn;
+  //   if (tokenType == AuthTokenType.sessionToken) {
+  //     fn = auth.verifySessionCookie
+  //   } else {
+  //     fn = auth.verifyIdToken
+  //   }
+
+
+  //   return fn(token).then((decodedClaims) =>
+  //     this.firebaseApp.admin.auth().revokeRefreshTokens(decodedClaims.sub),
+  //   )
+  //     .then(() => ({
+  //       status: true,
+  //       message: 'Session destroyed successfully',
+  //     })).catch(() => {
+  //       return {
+  //         status: false,
+  //         message: 'Failed to destroy session'
+  //       }
+  //     });
+  // }
 
   // async signup(credentials: SignupInput, prisma: PrismaClient, select,context): Promise<AuthResult> {
 
@@ -257,13 +266,13 @@ export class AuthService {
   //   const link = await this.firebaseApp.admin.auth().generatePasswordResetLink(user.email);
   //   await this.mail.sendPasswordResetLink(user, link).catch((e) => { this.logger.debug(e) });
   // }
-  async _setUserClaims(id: string, role: string) {
-    return this.firebaseApp.admin
-      .auth()
-      .setCustomUserClaims(id, { role: role })
-      .then(() => true)
-    //.catch(() => false);
-  }
+  // async _setUserClaims(id: string, role: string) {
+  //   return this.firebaseApp.admin
+  //     .auth()
+  //     .setCustomUserClaims(id, { role: role })
+  //     .then(() => true)
+  //   //.catch(() => false);
+  // }
 
   // async createSessionToken(idToken: string, prisma: PrismaClient, select, expiresIn = 60 * 60 * 5 * 24 * 1000): Promise<any> {
   //   try {
@@ -463,4 +472,3 @@ async updateProfile(user, profile, avatorFile, coverFile) {
   return { user: auser, message: 'Profile updated successfully' };
 }
 */
-

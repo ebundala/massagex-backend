@@ -26,10 +26,7 @@ scalar Json
 # 	ANONYMOUS
 # }
 
-enum AuthTokenType {
-	idToken
-	sessionToken
-}
+
 
 # type AuthResult {
 # 	token: String
@@ -44,10 +41,7 @@ type SignOutResult {
 extend type User{
 	lastSeen: DateTime
 }
-extend type Mutation {
-	# signup(credentials: SignupInput!): AuthResult!
-	# signin(credentials: AuthInput!): AuthResult!
-	# recoverAccount(email: String!): AuthResult!
-	signout(authTokenType: AuthTokenType!): SignOutResult!	
-	authenticate(authTokenType: AuthTokenType!):UserResponse!
+extend type Mutation {	
+	notifyUserSignup:Json!
+	getUserRoles:[String!]!
 }
