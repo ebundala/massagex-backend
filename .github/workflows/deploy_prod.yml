@@ -208,9 +208,9 @@ jobs:
            ./scripts/create_file .env "${{ env.SERVER_ENV}}"
            ./scripts/create_file  webserver/nginx-conf/nginx.conf "${{env.SERVER_CONF}}"
             docker login -u ${{ github.repository_owner }} -p ${{secrets.GHCR_PAT}} ghcr.io
-            docker pull ghcr.io/ebundala/faw-backend-v2/server:master
-            docker pull ghcr.io/ebundala/faw-backend-v2/studio:master
-           ./scripts/stackdeploy ${{ github.repository_owner }} ${{secrets.GHCR_PAT}} ${{env.REGISTRY}} faw prod
+            docker pull ghcr.io/ebundala/massagex-backend/server:master
+            docker pull ghcr.io/ebundala/massagex-backend/studio:master
+           ./scripts/stackdeploy ${{ github.repository_owner }} ${{secrets.GHCR_PAT}} ${{env.REGISTRY}} massagex prod
           #  ./scripts/create_file  pgbouncer/conf/pgbouncer.ini "${{env.PGBOUNCER_CONF}}"
           #  ./scripts/create_file  pgbouncer/conf/userlist.txt "${{env.PGBOUNCER_USERLIST}}"
 
