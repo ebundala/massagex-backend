@@ -118,11 +118,6 @@ export enum AttachmentType {
     VIDEO = "VIDEO"
 }
 
-export enum AuthTokenType {
-    idToken = "idToken",
-    sessionToken = "sessionToken"
-}
-
 export enum BusinessMode {
     MOBILE_MODE = "MOBILE_MODE",
     OFFICE_MODE = "OFFICE_MODE"
@@ -15301,7 +15296,7 @@ export class UserCreateInput {
     dateOfBirth?: Nullable<DateTime>;
     device?: Nullable<DeviceCreateNestedOneWithoutUserInput>;
     disabled?: Nullable<boolean>;
-    displayName: string;
+    displayName?: Nullable<string>;
     email?: Nullable<string>;
     emailVerified?: Nullable<boolean>;
     favorited?: Nullable<FavoriteCreateNestedManyWithoutAuthorInput>;
@@ -15324,7 +15319,7 @@ export class UserCreateManyAvatorInput {
     createdAt?: Nullable<DateTime>;
     dateOfBirth?: Nullable<DateTime>;
     disabled?: Nullable<boolean>;
-    displayName: string;
+    displayName?: Nullable<string>;
     email?: Nullable<string>;
     emailVerified?: Nullable<boolean>;
     gender?: Nullable<Gender>;
@@ -15348,7 +15343,7 @@ export class UserCreateManyInput {
     createdAt?: Nullable<DateTime>;
     dateOfBirth?: Nullable<DateTime>;
     disabled?: Nullable<boolean>;
-    displayName: string;
+    displayName?: Nullable<string>;
     email?: Nullable<string>;
     emailVerified?: Nullable<boolean>;
     gender?: Nullable<Gender>;
@@ -15367,7 +15362,7 @@ export class UserCreateManyLocationInput {
     createdAt?: Nullable<DateTime>;
     dateOfBirth?: Nullable<DateTime>;
     disabled?: Nullable<boolean>;
-    displayName: string;
+    displayName?: Nullable<string>;
     email?: Nullable<string>;
     emailVerified?: Nullable<boolean>;
     gender?: Nullable<Gender>;
@@ -15528,7 +15523,7 @@ export class UserCreateWithoutAbuseReportedInput {
     dateOfBirth?: Nullable<DateTime>;
     device?: Nullable<DeviceCreateNestedOneWithoutUserInput>;
     disabled?: Nullable<boolean>;
-    displayName: string;
+    displayName?: Nullable<string>;
     email?: Nullable<string>;
     emailVerified?: Nullable<boolean>;
     favorited?: Nullable<FavoriteCreateNestedManyWithoutAuthorInput>;
@@ -15556,7 +15551,7 @@ export class UserCreateWithoutAbuseReportsInput {
     dateOfBirth?: Nullable<DateTime>;
     device?: Nullable<DeviceCreateNestedOneWithoutUserInput>;
     disabled?: Nullable<boolean>;
-    displayName: string;
+    displayName?: Nullable<string>;
     email?: Nullable<string>;
     emailVerified?: Nullable<boolean>;
     favorited?: Nullable<FavoriteCreateNestedManyWithoutAuthorInput>;
@@ -15584,7 +15579,7 @@ export class UserCreateWithoutAvatorInput {
     dateOfBirth?: Nullable<DateTime>;
     device?: Nullable<DeviceCreateNestedOneWithoutUserInput>;
     disabled?: Nullable<boolean>;
-    displayName: string;
+    displayName?: Nullable<string>;
     email?: Nullable<string>;
     emailVerified?: Nullable<boolean>;
     favorited?: Nullable<FavoriteCreateNestedManyWithoutAuthorInput>;
@@ -15612,7 +15607,7 @@ export class UserCreateWithoutBusinessProfileInput {
     dateOfBirth?: Nullable<DateTime>;
     device?: Nullable<DeviceCreateNestedOneWithoutUserInput>;
     disabled?: Nullable<boolean>;
-    displayName: string;
+    displayName?: Nullable<string>;
     email?: Nullable<string>;
     emailVerified?: Nullable<boolean>;
     favorited?: Nullable<FavoriteCreateNestedManyWithoutAuthorInput>;
@@ -15640,7 +15635,7 @@ export class UserCreateWithoutCommentsInput {
     dateOfBirth?: Nullable<DateTime>;
     device?: Nullable<DeviceCreateNestedOneWithoutUserInput>;
     disabled?: Nullable<boolean>;
-    displayName: string;
+    displayName?: Nullable<string>;
     email?: Nullable<string>;
     emailVerified?: Nullable<boolean>;
     favorited?: Nullable<FavoriteCreateNestedManyWithoutAuthorInput>;
@@ -15668,7 +15663,7 @@ export class UserCreateWithoutDeviceInput {
     createdAt?: Nullable<DateTime>;
     dateOfBirth?: Nullable<DateTime>;
     disabled?: Nullable<boolean>;
-    displayName: string;
+    displayName?: Nullable<string>;
     email?: Nullable<string>;
     emailVerified?: Nullable<boolean>;
     favorited?: Nullable<FavoriteCreateNestedManyWithoutAuthorInput>;
@@ -15697,7 +15692,7 @@ export class UserCreateWithoutFavoritedInput {
     dateOfBirth?: Nullable<DateTime>;
     device?: Nullable<DeviceCreateNestedOneWithoutUserInput>;
     disabled?: Nullable<boolean>;
-    displayName: string;
+    displayName?: Nullable<string>;
     email?: Nullable<string>;
     emailVerified?: Nullable<boolean>;
     favorites?: Nullable<FavoriteCreateNestedManyWithoutUserInput>;
@@ -15725,7 +15720,7 @@ export class UserCreateWithoutFavoritesInput {
     dateOfBirth?: Nullable<DateTime>;
     device?: Nullable<DeviceCreateNestedOneWithoutUserInput>;
     disabled?: Nullable<boolean>;
-    displayName: string;
+    displayName?: Nullable<string>;
     email?: Nullable<string>;
     emailVerified?: Nullable<boolean>;
     favorited?: Nullable<FavoriteCreateNestedManyWithoutAuthorInput>;
@@ -15753,7 +15748,7 @@ export class UserCreateWithoutLocationInput {
     dateOfBirth?: Nullable<DateTime>;
     device?: Nullable<DeviceCreateNestedOneWithoutUserInput>;
     disabled?: Nullable<boolean>;
-    displayName: string;
+    displayName?: Nullable<string>;
     email?: Nullable<string>;
     emailVerified?: Nullable<boolean>;
     favorited?: Nullable<FavoriteCreateNestedManyWithoutAuthorInput>;
@@ -15781,7 +15776,7 @@ export class UserCreateWithoutOrderedInput {
     dateOfBirth?: Nullable<DateTime>;
     device?: Nullable<DeviceCreateNestedOneWithoutUserInput>;
     disabled?: Nullable<boolean>;
-    displayName: string;
+    displayName?: Nullable<string>;
     email?: Nullable<string>;
     emailVerified?: Nullable<boolean>;
     favorited?: Nullable<FavoriteCreateNestedManyWithoutAuthorInput>;
@@ -15809,7 +15804,7 @@ export class UserCreateWithoutReviewedInput {
     dateOfBirth?: Nullable<DateTime>;
     device?: Nullable<DeviceCreateNestedOneWithoutUserInput>;
     disabled?: Nullable<boolean>;
-    displayName: string;
+    displayName?: Nullable<string>;
     email?: Nullable<string>;
     emailVerified?: Nullable<boolean>;
     favorited?: Nullable<FavoriteCreateNestedManyWithoutAuthorInput>;
@@ -15837,7 +15832,7 @@ export class UserCreateWithoutReviewsInput {
     dateOfBirth?: Nullable<DateTime>;
     device?: Nullable<DeviceCreateNestedOneWithoutUserInput>;
     disabled?: Nullable<boolean>;
-    displayName: string;
+    displayName?: Nullable<string>;
     email?: Nullable<string>;
     emailVerified?: Nullable<boolean>;
     favorited?: Nullable<FavoriteCreateNestedManyWithoutAuthorInput>;
@@ -15893,7 +15888,7 @@ export class UserScalarWhereInput {
     createdAt?: Nullable<DateTimeFilter>;
     dateOfBirth?: Nullable<DateTimeNullableFilter>;
     disabled?: Nullable<BoolFilter>;
-    displayName?: Nullable<StringFilter>;
+    displayName?: Nullable<StringNullableFilter>;
     email?: Nullable<StringNullableFilter>;
     emailVerified?: Nullable<BoolFilter>;
     gender?: Nullable<EnumGenderFilter>;
@@ -15915,7 +15910,7 @@ export class UserScalarWhereWithAggregatesInput {
     createdAt?: Nullable<DateTimeWithAggregatesFilter>;
     dateOfBirth?: Nullable<DateTimeNullableWithAggregatesFilter>;
     disabled?: Nullable<BoolWithAggregatesFilter>;
-    displayName?: Nullable<StringWithAggregatesFilter>;
+    displayName?: Nullable<StringNullableWithAggregatesFilter>;
     email?: Nullable<StringNullableWithAggregatesFilter>;
     emailVerified?: Nullable<BoolWithAggregatesFilter>;
     gender?: Nullable<EnumGenderWithAggregatesFilter>;
@@ -15939,7 +15934,7 @@ export class UserUncheckedCreateInput {
     dateOfBirth?: Nullable<DateTime>;
     device?: Nullable<DeviceUncheckedCreateNestedOneWithoutUserInput>;
     disabled?: Nullable<boolean>;
-    displayName: string;
+    displayName?: Nullable<string>;
     email?: Nullable<string>;
     emailVerified?: Nullable<boolean>;
     favorited?: Nullable<FavoriteUncheckedCreateNestedManyWithoutAuthorInput>;
@@ -15981,7 +15976,7 @@ export class UserUncheckedCreateWithoutAbuseReportedInput {
     dateOfBirth?: Nullable<DateTime>;
     device?: Nullable<DeviceUncheckedCreateNestedOneWithoutUserInput>;
     disabled?: Nullable<boolean>;
-    displayName: string;
+    displayName?: Nullable<string>;
     email?: Nullable<string>;
     emailVerified?: Nullable<boolean>;
     favorited?: Nullable<FavoriteUncheckedCreateNestedManyWithoutAuthorInput>;
@@ -16009,7 +16004,7 @@ export class UserUncheckedCreateWithoutAbuseReportsInput {
     dateOfBirth?: Nullable<DateTime>;
     device?: Nullable<DeviceUncheckedCreateNestedOneWithoutUserInput>;
     disabled?: Nullable<boolean>;
-    displayName: string;
+    displayName?: Nullable<string>;
     email?: Nullable<string>;
     emailVerified?: Nullable<boolean>;
     favorited?: Nullable<FavoriteUncheckedCreateNestedManyWithoutAuthorInput>;
@@ -16037,7 +16032,7 @@ export class UserUncheckedCreateWithoutAvatorInput {
     dateOfBirth?: Nullable<DateTime>;
     device?: Nullable<DeviceUncheckedCreateNestedOneWithoutUserInput>;
     disabled?: Nullable<boolean>;
-    displayName: string;
+    displayName?: Nullable<string>;
     email?: Nullable<string>;
     emailVerified?: Nullable<boolean>;
     favorited?: Nullable<FavoriteUncheckedCreateNestedManyWithoutAuthorInput>;
@@ -16065,7 +16060,7 @@ export class UserUncheckedCreateWithoutBusinessProfileInput {
     dateOfBirth?: Nullable<DateTime>;
     device?: Nullable<DeviceUncheckedCreateNestedOneWithoutUserInput>;
     disabled?: Nullable<boolean>;
-    displayName: string;
+    displayName?: Nullable<string>;
     email?: Nullable<string>;
     emailVerified?: Nullable<boolean>;
     favorited?: Nullable<FavoriteUncheckedCreateNestedManyWithoutAuthorInput>;
@@ -16093,7 +16088,7 @@ export class UserUncheckedCreateWithoutCommentsInput {
     dateOfBirth?: Nullable<DateTime>;
     device?: Nullable<DeviceUncheckedCreateNestedOneWithoutUserInput>;
     disabled?: Nullable<boolean>;
-    displayName: string;
+    displayName?: Nullable<string>;
     email?: Nullable<string>;
     emailVerified?: Nullable<boolean>;
     favorited?: Nullable<FavoriteUncheckedCreateNestedManyWithoutAuthorInput>;
@@ -16121,7 +16116,7 @@ export class UserUncheckedCreateWithoutDeviceInput {
     createdAt?: Nullable<DateTime>;
     dateOfBirth?: Nullable<DateTime>;
     disabled?: Nullable<boolean>;
-    displayName: string;
+    displayName?: Nullable<string>;
     email?: Nullable<string>;
     emailVerified?: Nullable<boolean>;
     favorited?: Nullable<FavoriteUncheckedCreateNestedManyWithoutAuthorInput>;
@@ -16150,7 +16145,7 @@ export class UserUncheckedCreateWithoutFavoritedInput {
     dateOfBirth?: Nullable<DateTime>;
     device?: Nullable<DeviceUncheckedCreateNestedOneWithoutUserInput>;
     disabled?: Nullable<boolean>;
-    displayName: string;
+    displayName?: Nullable<string>;
     email?: Nullable<string>;
     emailVerified?: Nullable<boolean>;
     favorites?: Nullable<FavoriteUncheckedCreateNestedManyWithoutUserInput>;
@@ -16178,7 +16173,7 @@ export class UserUncheckedCreateWithoutFavoritesInput {
     dateOfBirth?: Nullable<DateTime>;
     device?: Nullable<DeviceUncheckedCreateNestedOneWithoutUserInput>;
     disabled?: Nullable<boolean>;
-    displayName: string;
+    displayName?: Nullable<string>;
     email?: Nullable<string>;
     emailVerified?: Nullable<boolean>;
     favorited?: Nullable<FavoriteUncheckedCreateNestedManyWithoutAuthorInput>;
@@ -16206,7 +16201,7 @@ export class UserUncheckedCreateWithoutLocationInput {
     dateOfBirth?: Nullable<DateTime>;
     device?: Nullable<DeviceUncheckedCreateNestedOneWithoutUserInput>;
     disabled?: Nullable<boolean>;
-    displayName: string;
+    displayName?: Nullable<string>;
     email?: Nullable<string>;
     emailVerified?: Nullable<boolean>;
     favorited?: Nullable<FavoriteUncheckedCreateNestedManyWithoutAuthorInput>;
@@ -16234,7 +16229,7 @@ export class UserUncheckedCreateWithoutOrderedInput {
     dateOfBirth?: Nullable<DateTime>;
     device?: Nullable<DeviceUncheckedCreateNestedOneWithoutUserInput>;
     disabled?: Nullable<boolean>;
-    displayName: string;
+    displayName?: Nullable<string>;
     email?: Nullable<string>;
     emailVerified?: Nullable<boolean>;
     favorited?: Nullable<FavoriteUncheckedCreateNestedManyWithoutAuthorInput>;
@@ -16262,7 +16257,7 @@ export class UserUncheckedCreateWithoutReviewedInput {
     dateOfBirth?: Nullable<DateTime>;
     device?: Nullable<DeviceUncheckedCreateNestedOneWithoutUserInput>;
     disabled?: Nullable<boolean>;
-    displayName: string;
+    displayName?: Nullable<string>;
     email?: Nullable<string>;
     emailVerified?: Nullable<boolean>;
     favorited?: Nullable<FavoriteUncheckedCreateNestedManyWithoutAuthorInput>;
@@ -16290,7 +16285,7 @@ export class UserUncheckedCreateWithoutReviewsInput {
     dateOfBirth?: Nullable<DateTime>;
     device?: Nullable<DeviceUncheckedCreateNestedOneWithoutUserInput>;
     disabled?: Nullable<boolean>;
-    displayName: string;
+    displayName?: Nullable<string>;
     email?: Nullable<string>;
     emailVerified?: Nullable<boolean>;
     favorited?: Nullable<FavoriteUncheckedCreateNestedManyWithoutAuthorInput>;
@@ -16318,7 +16313,7 @@ export class UserUncheckedUpdateInput {
     dateOfBirth?: Nullable<NullableDateTimeFieldUpdateOperationsInput>;
     device?: Nullable<DeviceUncheckedUpdateOneWithoutUserInput>;
     disabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    displayName?: Nullable<StringFieldUpdateOperationsInput>;
+    displayName?: Nullable<NullableStringFieldUpdateOperationsInput>;
     email?: Nullable<NullableStringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     favorited?: Nullable<FavoriteUncheckedUpdateManyWithoutAuthorInput>;
@@ -16342,7 +16337,7 @@ export class UserUncheckedUpdateManyInput {
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     dateOfBirth?: Nullable<NullableDateTimeFieldUpdateOperationsInput>;
     disabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    displayName?: Nullable<StringFieldUpdateOperationsInput>;
+    displayName?: Nullable<NullableStringFieldUpdateOperationsInput>;
     email?: Nullable<NullableStringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     gender?: Nullable<EnumGenderFieldUpdateOperationsInput>;
@@ -16388,7 +16383,7 @@ export class UserUncheckedUpdateManyWithoutUsersInput {
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     dateOfBirth?: Nullable<NullableDateTimeFieldUpdateOperationsInput>;
     disabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    displayName?: Nullable<StringFieldUpdateOperationsInput>;
+    displayName?: Nullable<NullableStringFieldUpdateOperationsInput>;
     email?: Nullable<NullableStringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     gender?: Nullable<EnumGenderFieldUpdateOperationsInput>;
@@ -16411,7 +16406,7 @@ export class UserUncheckedUpdateWithoutAbuseReportedInput {
     dateOfBirth?: Nullable<NullableDateTimeFieldUpdateOperationsInput>;
     device?: Nullable<DeviceUncheckedUpdateOneWithoutUserInput>;
     disabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    displayName?: Nullable<StringFieldUpdateOperationsInput>;
+    displayName?: Nullable<NullableStringFieldUpdateOperationsInput>;
     email?: Nullable<NullableStringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     favorited?: Nullable<FavoriteUncheckedUpdateManyWithoutAuthorInput>;
@@ -16439,7 +16434,7 @@ export class UserUncheckedUpdateWithoutAbuseReportsInput {
     dateOfBirth?: Nullable<NullableDateTimeFieldUpdateOperationsInput>;
     device?: Nullable<DeviceUncheckedUpdateOneWithoutUserInput>;
     disabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    displayName?: Nullable<StringFieldUpdateOperationsInput>;
+    displayName?: Nullable<NullableStringFieldUpdateOperationsInput>;
     email?: Nullable<NullableStringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     favorited?: Nullable<FavoriteUncheckedUpdateManyWithoutAuthorInput>;
@@ -16467,7 +16462,7 @@ export class UserUncheckedUpdateWithoutAvatorInput {
     dateOfBirth?: Nullable<NullableDateTimeFieldUpdateOperationsInput>;
     device?: Nullable<DeviceUncheckedUpdateOneWithoutUserInput>;
     disabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    displayName?: Nullable<StringFieldUpdateOperationsInput>;
+    displayName?: Nullable<NullableStringFieldUpdateOperationsInput>;
     email?: Nullable<NullableStringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     favorited?: Nullable<FavoriteUncheckedUpdateManyWithoutAuthorInput>;
@@ -16495,7 +16490,7 @@ export class UserUncheckedUpdateWithoutBusinessProfileInput {
     dateOfBirth?: Nullable<NullableDateTimeFieldUpdateOperationsInput>;
     device?: Nullable<DeviceUncheckedUpdateOneWithoutUserInput>;
     disabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    displayName?: Nullable<StringFieldUpdateOperationsInput>;
+    displayName?: Nullable<NullableStringFieldUpdateOperationsInput>;
     email?: Nullable<NullableStringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     favorited?: Nullable<FavoriteUncheckedUpdateManyWithoutAuthorInput>;
@@ -16523,7 +16518,7 @@ export class UserUncheckedUpdateWithoutCommentsInput {
     dateOfBirth?: Nullable<NullableDateTimeFieldUpdateOperationsInput>;
     device?: Nullable<DeviceUncheckedUpdateOneWithoutUserInput>;
     disabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    displayName?: Nullable<StringFieldUpdateOperationsInput>;
+    displayName?: Nullable<NullableStringFieldUpdateOperationsInput>;
     email?: Nullable<NullableStringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     favorited?: Nullable<FavoriteUncheckedUpdateManyWithoutAuthorInput>;
@@ -16551,7 +16546,7 @@ export class UserUncheckedUpdateWithoutDeviceInput {
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     dateOfBirth?: Nullable<NullableDateTimeFieldUpdateOperationsInput>;
     disabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    displayName?: Nullable<StringFieldUpdateOperationsInput>;
+    displayName?: Nullable<NullableStringFieldUpdateOperationsInput>;
     email?: Nullable<NullableStringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     favorited?: Nullable<FavoriteUncheckedUpdateManyWithoutAuthorInput>;
@@ -16580,7 +16575,7 @@ export class UserUncheckedUpdateWithoutFavoritedInput {
     dateOfBirth?: Nullable<NullableDateTimeFieldUpdateOperationsInput>;
     device?: Nullable<DeviceUncheckedUpdateOneWithoutUserInput>;
     disabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    displayName?: Nullable<StringFieldUpdateOperationsInput>;
+    displayName?: Nullable<NullableStringFieldUpdateOperationsInput>;
     email?: Nullable<NullableStringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     favorites?: Nullable<FavoriteUncheckedUpdateManyWithoutUserInput>;
@@ -16608,7 +16603,7 @@ export class UserUncheckedUpdateWithoutFavoritesInput {
     dateOfBirth?: Nullable<NullableDateTimeFieldUpdateOperationsInput>;
     device?: Nullable<DeviceUncheckedUpdateOneWithoutUserInput>;
     disabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    displayName?: Nullable<StringFieldUpdateOperationsInput>;
+    displayName?: Nullable<NullableStringFieldUpdateOperationsInput>;
     email?: Nullable<NullableStringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     favorited?: Nullable<FavoriteUncheckedUpdateManyWithoutAuthorInput>;
@@ -16636,7 +16631,7 @@ export class UserUncheckedUpdateWithoutLocationInput {
     dateOfBirth?: Nullable<NullableDateTimeFieldUpdateOperationsInput>;
     device?: Nullable<DeviceUncheckedUpdateOneWithoutUserInput>;
     disabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    displayName?: Nullable<StringFieldUpdateOperationsInput>;
+    displayName?: Nullable<NullableStringFieldUpdateOperationsInput>;
     email?: Nullable<NullableStringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     favorited?: Nullable<FavoriteUncheckedUpdateManyWithoutAuthorInput>;
@@ -16664,7 +16659,7 @@ export class UserUncheckedUpdateWithoutOrderedInput {
     dateOfBirth?: Nullable<NullableDateTimeFieldUpdateOperationsInput>;
     device?: Nullable<DeviceUncheckedUpdateOneWithoutUserInput>;
     disabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    displayName?: Nullable<StringFieldUpdateOperationsInput>;
+    displayName?: Nullable<NullableStringFieldUpdateOperationsInput>;
     email?: Nullable<NullableStringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     favorited?: Nullable<FavoriteUncheckedUpdateManyWithoutAuthorInput>;
@@ -16692,7 +16687,7 @@ export class UserUncheckedUpdateWithoutReviewedInput {
     dateOfBirth?: Nullable<NullableDateTimeFieldUpdateOperationsInput>;
     device?: Nullable<DeviceUncheckedUpdateOneWithoutUserInput>;
     disabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    displayName?: Nullable<StringFieldUpdateOperationsInput>;
+    displayName?: Nullable<NullableStringFieldUpdateOperationsInput>;
     email?: Nullable<NullableStringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     favorited?: Nullable<FavoriteUncheckedUpdateManyWithoutAuthorInput>;
@@ -16720,7 +16715,7 @@ export class UserUncheckedUpdateWithoutReviewsInput {
     dateOfBirth?: Nullable<NullableDateTimeFieldUpdateOperationsInput>;
     device?: Nullable<DeviceUncheckedUpdateOneWithoutUserInput>;
     disabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    displayName?: Nullable<StringFieldUpdateOperationsInput>;
+    displayName?: Nullable<NullableStringFieldUpdateOperationsInput>;
     email?: Nullable<NullableStringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     favorited?: Nullable<FavoriteUncheckedUpdateManyWithoutAuthorInput>;
@@ -16748,7 +16743,7 @@ export class UserUpdateInput {
     dateOfBirth?: Nullable<NullableDateTimeFieldUpdateOperationsInput>;
     device?: Nullable<DeviceUpdateOneWithoutUserInput>;
     disabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    displayName?: Nullable<StringFieldUpdateOperationsInput>;
+    displayName?: Nullable<NullableStringFieldUpdateOperationsInput>;
     email?: Nullable<NullableStringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     favorited?: Nullable<FavoriteUpdateManyWithoutAuthorInput>;
@@ -16771,7 +16766,7 @@ export class UserUpdateManyMutationInput {
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     dateOfBirth?: Nullable<NullableDateTimeFieldUpdateOperationsInput>;
     disabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    displayName?: Nullable<StringFieldUpdateOperationsInput>;
+    displayName?: Nullable<NullableStringFieldUpdateOperationsInput>;
     email?: Nullable<NullableStringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     gender?: Nullable<EnumGenderFieldUpdateOperationsInput>;
@@ -16927,7 +16922,7 @@ export class UserUpdateWithoutAbuseReportedInput {
     dateOfBirth?: Nullable<NullableDateTimeFieldUpdateOperationsInput>;
     device?: Nullable<DeviceUpdateOneWithoutUserInput>;
     disabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    displayName?: Nullable<StringFieldUpdateOperationsInput>;
+    displayName?: Nullable<NullableStringFieldUpdateOperationsInput>;
     email?: Nullable<NullableStringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     favorited?: Nullable<FavoriteUpdateManyWithoutAuthorInput>;
@@ -16955,7 +16950,7 @@ export class UserUpdateWithoutAbuseReportsInput {
     dateOfBirth?: Nullable<NullableDateTimeFieldUpdateOperationsInput>;
     device?: Nullable<DeviceUpdateOneWithoutUserInput>;
     disabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    displayName?: Nullable<StringFieldUpdateOperationsInput>;
+    displayName?: Nullable<NullableStringFieldUpdateOperationsInput>;
     email?: Nullable<NullableStringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     favorited?: Nullable<FavoriteUpdateManyWithoutAuthorInput>;
@@ -16983,7 +16978,7 @@ export class UserUpdateWithoutAvatorInput {
     dateOfBirth?: Nullable<NullableDateTimeFieldUpdateOperationsInput>;
     device?: Nullable<DeviceUpdateOneWithoutUserInput>;
     disabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    displayName?: Nullable<StringFieldUpdateOperationsInput>;
+    displayName?: Nullable<NullableStringFieldUpdateOperationsInput>;
     email?: Nullable<NullableStringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     favorited?: Nullable<FavoriteUpdateManyWithoutAuthorInput>;
@@ -17011,7 +17006,7 @@ export class UserUpdateWithoutBusinessProfileInput {
     dateOfBirth?: Nullable<NullableDateTimeFieldUpdateOperationsInput>;
     device?: Nullable<DeviceUpdateOneWithoutUserInput>;
     disabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    displayName?: Nullable<StringFieldUpdateOperationsInput>;
+    displayName?: Nullable<NullableStringFieldUpdateOperationsInput>;
     email?: Nullable<NullableStringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     favorited?: Nullable<FavoriteUpdateManyWithoutAuthorInput>;
@@ -17039,7 +17034,7 @@ export class UserUpdateWithoutCommentsInput {
     dateOfBirth?: Nullable<NullableDateTimeFieldUpdateOperationsInput>;
     device?: Nullable<DeviceUpdateOneWithoutUserInput>;
     disabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    displayName?: Nullable<StringFieldUpdateOperationsInput>;
+    displayName?: Nullable<NullableStringFieldUpdateOperationsInput>;
     email?: Nullable<NullableStringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     favorited?: Nullable<FavoriteUpdateManyWithoutAuthorInput>;
@@ -17067,7 +17062,7 @@ export class UserUpdateWithoutDeviceInput {
     createdAt?: Nullable<DateTimeFieldUpdateOperationsInput>;
     dateOfBirth?: Nullable<NullableDateTimeFieldUpdateOperationsInput>;
     disabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    displayName?: Nullable<StringFieldUpdateOperationsInput>;
+    displayName?: Nullable<NullableStringFieldUpdateOperationsInput>;
     email?: Nullable<NullableStringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     favorited?: Nullable<FavoriteUpdateManyWithoutAuthorInput>;
@@ -17096,7 +17091,7 @@ export class UserUpdateWithoutFavoritedInput {
     dateOfBirth?: Nullable<NullableDateTimeFieldUpdateOperationsInput>;
     device?: Nullable<DeviceUpdateOneWithoutUserInput>;
     disabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    displayName?: Nullable<StringFieldUpdateOperationsInput>;
+    displayName?: Nullable<NullableStringFieldUpdateOperationsInput>;
     email?: Nullable<NullableStringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     favorites?: Nullable<FavoriteUpdateManyWithoutUserInput>;
@@ -17124,7 +17119,7 @@ export class UserUpdateWithoutFavoritesInput {
     dateOfBirth?: Nullable<NullableDateTimeFieldUpdateOperationsInput>;
     device?: Nullable<DeviceUpdateOneWithoutUserInput>;
     disabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    displayName?: Nullable<StringFieldUpdateOperationsInput>;
+    displayName?: Nullable<NullableStringFieldUpdateOperationsInput>;
     email?: Nullable<NullableStringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     favorited?: Nullable<FavoriteUpdateManyWithoutAuthorInput>;
@@ -17152,7 +17147,7 @@ export class UserUpdateWithoutLocationInput {
     dateOfBirth?: Nullable<NullableDateTimeFieldUpdateOperationsInput>;
     device?: Nullable<DeviceUpdateOneWithoutUserInput>;
     disabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    displayName?: Nullable<StringFieldUpdateOperationsInput>;
+    displayName?: Nullable<NullableStringFieldUpdateOperationsInput>;
     email?: Nullable<NullableStringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     favorited?: Nullable<FavoriteUpdateManyWithoutAuthorInput>;
@@ -17180,7 +17175,7 @@ export class UserUpdateWithoutOrderedInput {
     dateOfBirth?: Nullable<NullableDateTimeFieldUpdateOperationsInput>;
     device?: Nullable<DeviceUpdateOneWithoutUserInput>;
     disabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    displayName?: Nullable<StringFieldUpdateOperationsInput>;
+    displayName?: Nullable<NullableStringFieldUpdateOperationsInput>;
     email?: Nullable<NullableStringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     favorited?: Nullable<FavoriteUpdateManyWithoutAuthorInput>;
@@ -17208,7 +17203,7 @@ export class UserUpdateWithoutReviewedInput {
     dateOfBirth?: Nullable<NullableDateTimeFieldUpdateOperationsInput>;
     device?: Nullable<DeviceUpdateOneWithoutUserInput>;
     disabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    displayName?: Nullable<StringFieldUpdateOperationsInput>;
+    displayName?: Nullable<NullableStringFieldUpdateOperationsInput>;
     email?: Nullable<NullableStringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     favorited?: Nullable<FavoriteUpdateManyWithoutAuthorInput>;
@@ -17236,7 +17231,7 @@ export class UserUpdateWithoutReviewsInput {
     dateOfBirth?: Nullable<NullableDateTimeFieldUpdateOperationsInput>;
     device?: Nullable<DeviceUpdateOneWithoutUserInput>;
     disabled?: Nullable<BoolFieldUpdateOperationsInput>;
-    displayName?: Nullable<StringFieldUpdateOperationsInput>;
+    displayName?: Nullable<NullableStringFieldUpdateOperationsInput>;
     email?: Nullable<NullableStringFieldUpdateOperationsInput>;
     emailVerified?: Nullable<BoolFieldUpdateOperationsInput>;
     favorited?: Nullable<FavoriteUpdateManyWithoutAuthorInput>;
@@ -17330,7 +17325,7 @@ export class UserWhereInput {
     dateOfBirth?: Nullable<DateTimeNullableFilter>;
     device?: Nullable<DeviceRelationFilter>;
     disabled?: Nullable<BoolFilter>;
-    displayName?: Nullable<StringFilter>;
+    displayName?: Nullable<StringNullableFilter>;
     email?: Nullable<StringNullableFilter>;
     emailVerified?: Nullable<BoolFilter>;
     favorited?: Nullable<FavoriteListRelationFilter>;
@@ -18977,17 +18972,17 @@ export class MpesaPaymentResponse {
 }
 
 export abstract class IMutation {
-    abstract authenticate(authTokenType: AuthTokenType): UserResponse | Promise<UserResponse>;
-
     abstract createOneHelp(data: HelpCreateInput): HelpResponse | Promise<HelpResponse>;
 
+    abstract getUserRoles(): string[] | Promise<string[]>;
+
     abstract locationFeed(location: LatLon): LocationResponse | Promise<LocationResponse>;
+
+    abstract notifyUserSignup(): Json | Promise<Json>;
 
     abstract paybill(data?: Nullable<PaybillRequest>): PaybillResponse | Promise<PaybillResponse>;
 
     abstract registerDevice(data: RegisterDeviceInput): DeviceResponse | Promise<DeviceResponse>;
-
-    abstract signout(authTokenType: AuthTokenType): SignOutResult | Promise<SignOutResult>;
 
     abstract updateOneHelp(data: HelpUpdateInput, where: HelpWhereUniqueInput): HelpResponse | Promise<HelpResponse>;
 
@@ -19827,7 +19822,7 @@ export class User {
     dateOfBirth?: Nullable<DateTime>;
     device?: Nullable<Device>;
     disabled: boolean;
-    displayName: string;
+    displayName?: Nullable<string>;
     email?: Nullable<string>;
     emailVerified: boolean;
     favorited: Favorite[];

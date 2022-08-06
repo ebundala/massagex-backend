@@ -412,7 +412,7 @@ input UserWhereInput {
   NOT: [UserWhereInput!]
   id: StringFilter
   email: StringNullableFilter
-  displayName: StringFilter
+  displayName: StringNullableFilter
   phoneNumber: StringNullableFilter
   dateOfBirth: DateTimeNullableFilter
   emailVerified: BoolFilter
@@ -470,7 +470,7 @@ input UserScalarWhereWithAggregatesInput {
   NOT: [UserScalarWhereWithAggregatesInput!]
   id: StringWithAggregatesFilter
   email: StringNullableWithAggregatesFilter
-  displayName: StringWithAggregatesFilter
+  displayName: StringNullableWithAggregatesFilter
   phoneNumber: StringNullableWithAggregatesFilter
   dateOfBirth: DateTimeNullableWithAggregatesFilter
   emailVerified: BoolWithAggregatesFilter
@@ -1628,7 +1628,7 @@ input SelcomPaymentScalarWhereWithAggregatesInput {
 input UserCreateInput {
   id: String
   email: String
-  displayName: String!
+  displayName: String
   phoneNumber: String
   dateOfBirth: DateTime
   emailVerified: Boolean
@@ -1657,7 +1657,7 @@ input UserCreateInput {
 input UserUncheckedCreateInput {
   id: String
   email: String
-  displayName: String!
+  displayName: String
   phoneNumber: String
   dateOfBirth: DateTime
   emailVerified: Boolean
@@ -1686,7 +1686,7 @@ input UserUncheckedCreateInput {
 input UserUpdateInput {
   id: StringFieldUpdateOperationsInput
   email: NullableStringFieldUpdateOperationsInput
-  displayName: StringFieldUpdateOperationsInput
+  displayName: NullableStringFieldUpdateOperationsInput
   phoneNumber: NullableStringFieldUpdateOperationsInput
   dateOfBirth: NullableDateTimeFieldUpdateOperationsInput
   emailVerified: BoolFieldUpdateOperationsInput
@@ -1715,7 +1715,7 @@ input UserUpdateInput {
 input UserUncheckedUpdateInput {
   id: StringFieldUpdateOperationsInput
   email: NullableStringFieldUpdateOperationsInput
-  displayName: StringFieldUpdateOperationsInput
+  displayName: NullableStringFieldUpdateOperationsInput
   phoneNumber: NullableStringFieldUpdateOperationsInput
   dateOfBirth: NullableDateTimeFieldUpdateOperationsInput
   emailVerified: BoolFieldUpdateOperationsInput
@@ -1744,7 +1744,7 @@ input UserUncheckedUpdateInput {
 input UserCreateManyInput {
   id: String
   email: String
-  displayName: String!
+  displayName: String
   phoneNumber: String
   dateOfBirth: DateTime
   emailVerified: Boolean
@@ -1763,7 +1763,7 @@ input UserCreateManyInput {
 input UserUpdateManyMutationInput {
   id: StringFieldUpdateOperationsInput
   email: NullableStringFieldUpdateOperationsInput
-  displayName: StringFieldUpdateOperationsInput
+  displayName: NullableStringFieldUpdateOperationsInput
   phoneNumber: NullableStringFieldUpdateOperationsInput
   dateOfBirth: NullableDateTimeFieldUpdateOperationsInput
   emailVerified: BoolFieldUpdateOperationsInput
@@ -1780,7 +1780,7 @@ input UserUpdateManyMutationInput {
 input UserUncheckedUpdateManyInput {
   id: StringFieldUpdateOperationsInput
   email: NullableStringFieldUpdateOperationsInput
-  displayName: StringFieldUpdateOperationsInput
+  displayName: NullableStringFieldUpdateOperationsInput
   phoneNumber: NullableStringFieldUpdateOperationsInput
   dateOfBirth: NullableDateTimeFieldUpdateOperationsInput
   emailVerified: BoolFieldUpdateOperationsInput
@@ -8566,7 +8566,7 @@ input FavoriteUpdateManyWithWhereWithoutAuthorInput {
 input UserCreateWithoutBusinessProfileInput {
   id: String
   email: String
-  displayName: String!
+  displayName: String
   phoneNumber: String
   dateOfBirth: DateTime
   emailVerified: Boolean
@@ -8594,7 +8594,7 @@ input UserCreateWithoutBusinessProfileInput {
 input UserUncheckedCreateWithoutBusinessProfileInput {
   id: String
   email: String
-  displayName: String!
+  displayName: String
   phoneNumber: String
   dateOfBirth: DateTime
   emailVerified: Boolean
@@ -8952,7 +8952,7 @@ input UserUpsertWithoutBusinessProfileInput {
 input UserUpdateWithoutBusinessProfileInput {
   id: StringFieldUpdateOperationsInput
   email: NullableStringFieldUpdateOperationsInput
-  displayName: StringFieldUpdateOperationsInput
+  displayName: NullableStringFieldUpdateOperationsInput
   phoneNumber: NullableStringFieldUpdateOperationsInput
   dateOfBirth: NullableDateTimeFieldUpdateOperationsInput
   emailVerified: BoolFieldUpdateOperationsInput
@@ -8980,7 +8980,7 @@ input UserUpdateWithoutBusinessProfileInput {
 input UserUncheckedUpdateWithoutBusinessProfileInput {
   id: StringFieldUpdateOperationsInput
   email: NullableStringFieldUpdateOperationsInput
-  displayName: StringFieldUpdateOperationsInput
+  displayName: NullableStringFieldUpdateOperationsInput
   phoneNumber: NullableStringFieldUpdateOperationsInput
   dateOfBirth: NullableDateTimeFieldUpdateOperationsInput
   emailVerified: BoolFieldUpdateOperationsInput
@@ -9216,7 +9216,7 @@ input FavoriteUpdateManyWithWhereWithoutBusinessInput {
 input UserCreateWithoutDeviceInput {
   id: String
   email: String
-  displayName: String!
+  displayName: String
   phoneNumber: String
   dateOfBirth: DateTime
   emailVerified: Boolean
@@ -9244,7 +9244,7 @@ input UserCreateWithoutDeviceInput {
 input UserUncheckedCreateWithoutDeviceInput {
   id: String
   email: String
-  displayName: String!
+  displayName: String
   phoneNumber: String
   dateOfBirth: DateTime
   emailVerified: Boolean
@@ -9282,7 +9282,7 @@ input UserUpsertWithoutDeviceInput {
 input UserUpdateWithoutDeviceInput {
   id: StringFieldUpdateOperationsInput
   email: NullableStringFieldUpdateOperationsInput
-  displayName: StringFieldUpdateOperationsInput
+  displayName: NullableStringFieldUpdateOperationsInput
   phoneNumber: NullableStringFieldUpdateOperationsInput
   dateOfBirth: NullableDateTimeFieldUpdateOperationsInput
   emailVerified: BoolFieldUpdateOperationsInput
@@ -9310,7 +9310,7 @@ input UserUpdateWithoutDeviceInput {
 input UserUncheckedUpdateWithoutDeviceInput {
   id: StringFieldUpdateOperationsInput
   email: NullableStringFieldUpdateOperationsInput
-  displayName: StringFieldUpdateOperationsInput
+  displayName: NullableStringFieldUpdateOperationsInput
   phoneNumber: NullableStringFieldUpdateOperationsInput
   dateOfBirth: NullableDateTimeFieldUpdateOperationsInput
   emailVerified: BoolFieldUpdateOperationsInput
@@ -9338,7 +9338,7 @@ input UserUncheckedUpdateWithoutDeviceInput {
 input UserCreateWithoutAvatorInput {
   id: String
   email: String
-  displayName: String!
+  displayName: String
   phoneNumber: String
   dateOfBirth: DateTime
   emailVerified: Boolean
@@ -9366,7 +9366,7 @@ input UserCreateWithoutAvatorInput {
 input UserUncheckedCreateWithoutAvatorInput {
   id: String
   email: String
-  displayName: String!
+  displayName: String
   phoneNumber: String
   dateOfBirth: DateTime
   emailVerified: Boolean
@@ -9763,7 +9763,7 @@ input UserScalarWhereInput {
   NOT: [UserScalarWhereInput!]
   id: StringFilter
   email: StringNullableFilter
-  displayName: StringFilter
+  displayName: StringNullableFilter
   phoneNumber: StringNullableFilter
   dateOfBirth: DateTimeNullableFilter
   emailVerified: BoolFilter
@@ -10047,7 +10047,7 @@ input CategoryScalarWhereInput {
 input UserCreateWithoutLocationInput {
   id: String
   email: String
-  displayName: String!
+  displayName: String
   phoneNumber: String
   dateOfBirth: DateTime
   emailVerified: Boolean
@@ -10075,7 +10075,7 @@ input UserCreateWithoutLocationInput {
 input UserUncheckedCreateWithoutLocationInput {
   id: String
   email: String
-  displayName: String!
+  displayName: String
   phoneNumber: String
   dateOfBirth: DateTime
   emailVerified: Boolean
@@ -10193,7 +10193,7 @@ input BusinessUpdateManyWithWhereWithoutLocationInput {
 input UserCreateWithoutReviewedInput {
   id: String
   email: String
-  displayName: String!
+  displayName: String
   phoneNumber: String
   dateOfBirth: DateTime
   emailVerified: Boolean
@@ -10221,7 +10221,7 @@ input UserCreateWithoutReviewedInput {
 input UserUncheckedCreateWithoutReviewedInput {
   id: String
   email: String
-  displayName: String!
+  displayName: String
   phoneNumber: String
   dateOfBirth: DateTime
   emailVerified: Boolean
@@ -10254,7 +10254,7 @@ input UserCreateOrConnectWithoutReviewedInput {
 input UserCreateWithoutReviewsInput {
   id: String
   email: String
-  displayName: String!
+  displayName: String
   phoneNumber: String
   dateOfBirth: DateTime
   emailVerified: Boolean
@@ -10282,7 +10282,7 @@ input UserCreateWithoutReviewsInput {
 input UserUncheckedCreateWithoutReviewsInput {
   id: String
   email: String
-  displayName: String!
+  displayName: String
   phoneNumber: String
   dateOfBirth: DateTime
   emailVerified: Boolean
@@ -10506,7 +10506,7 @@ input UserUpsertWithoutReviewedInput {
 input UserUpdateWithoutReviewedInput {
   id: StringFieldUpdateOperationsInput
   email: NullableStringFieldUpdateOperationsInput
-  displayName: StringFieldUpdateOperationsInput
+  displayName: NullableStringFieldUpdateOperationsInput
   phoneNumber: NullableStringFieldUpdateOperationsInput
   dateOfBirth: NullableDateTimeFieldUpdateOperationsInput
   emailVerified: BoolFieldUpdateOperationsInput
@@ -10534,7 +10534,7 @@ input UserUpdateWithoutReviewedInput {
 input UserUncheckedUpdateWithoutReviewedInput {
   id: StringFieldUpdateOperationsInput
   email: NullableStringFieldUpdateOperationsInput
-  displayName: StringFieldUpdateOperationsInput
+  displayName: NullableStringFieldUpdateOperationsInput
   phoneNumber: NullableStringFieldUpdateOperationsInput
   dateOfBirth: NullableDateTimeFieldUpdateOperationsInput
   emailVerified: BoolFieldUpdateOperationsInput
@@ -10567,7 +10567,7 @@ input UserUpsertWithoutReviewsInput {
 input UserUpdateWithoutReviewsInput {
   id: StringFieldUpdateOperationsInput
   email: NullableStringFieldUpdateOperationsInput
-  displayName: StringFieldUpdateOperationsInput
+  displayName: NullableStringFieldUpdateOperationsInput
   phoneNumber: NullableStringFieldUpdateOperationsInput
   dateOfBirth: NullableDateTimeFieldUpdateOperationsInput
   emailVerified: BoolFieldUpdateOperationsInput
@@ -10595,7 +10595,7 @@ input UserUpdateWithoutReviewsInput {
 input UserUncheckedUpdateWithoutReviewsInput {
   id: StringFieldUpdateOperationsInput
   email: NullableStringFieldUpdateOperationsInput
-  displayName: StringFieldUpdateOperationsInput
+  displayName: NullableStringFieldUpdateOperationsInput
   phoneNumber: NullableStringFieldUpdateOperationsInput
   dateOfBirth: NullableDateTimeFieldUpdateOperationsInput
   emailVerified: BoolFieldUpdateOperationsInput
@@ -10687,7 +10687,7 @@ input FavoriteUpdateManyWithWhereWithoutReviewInput {
 input UserCreateWithoutCommentsInput {
   id: String
   email: String
-  displayName: String!
+  displayName: String
   phoneNumber: String
   dateOfBirth: DateTime
   emailVerified: Boolean
@@ -10715,7 +10715,7 @@ input UserCreateWithoutCommentsInput {
 input UserUncheckedCreateWithoutCommentsInput {
   id: String
   email: String
-  displayName: String!
+  displayName: String
   phoneNumber: String
   dateOfBirth: DateTime
   emailVerified: Boolean
@@ -11007,7 +11007,7 @@ input UserUpsertWithoutCommentsInput {
 input UserUpdateWithoutCommentsInput {
   id: StringFieldUpdateOperationsInput
   email: NullableStringFieldUpdateOperationsInput
-  displayName: StringFieldUpdateOperationsInput
+  displayName: NullableStringFieldUpdateOperationsInput
   phoneNumber: NullableStringFieldUpdateOperationsInput
   dateOfBirth: NullableDateTimeFieldUpdateOperationsInput
   emailVerified: BoolFieldUpdateOperationsInput
@@ -11035,7 +11035,7 @@ input UserUpdateWithoutCommentsInput {
 input UserUncheckedUpdateWithoutCommentsInput {
   id: StringFieldUpdateOperationsInput
   email: NullableStringFieldUpdateOperationsInput
-  displayName: StringFieldUpdateOperationsInput
+  displayName: NullableStringFieldUpdateOperationsInput
   phoneNumber: NullableStringFieldUpdateOperationsInput
   dateOfBirth: NullableDateTimeFieldUpdateOperationsInput
   emailVerified: BoolFieldUpdateOperationsInput
@@ -11311,7 +11311,7 @@ input FavoriteUpdateManyWithWhereWithoutTypeInput {
 input UserCreateWithoutAbuseReportedInput {
   id: String
   email: String
-  displayName: String!
+  displayName: String
   phoneNumber: String
   dateOfBirth: DateTime
   emailVerified: Boolean
@@ -11339,7 +11339,7 @@ input UserCreateWithoutAbuseReportedInput {
 input UserUncheckedCreateWithoutAbuseReportedInput {
   id: String
   email: String
-  displayName: String!
+  displayName: String
   phoneNumber: String
   dateOfBirth: DateTime
   emailVerified: Boolean
@@ -11387,7 +11387,7 @@ input AbuseRecordTypeCreateOrConnectWithoutAbuseReportsInput {
 input UserCreateWithoutAbuseReportsInput {
   id: String
   email: String
-  displayName: String!
+  displayName: String
   phoneNumber: String
   dateOfBirth: DateTime
   emailVerified: Boolean
@@ -11415,7 +11415,7 @@ input UserCreateWithoutAbuseReportsInput {
 input UserUncheckedCreateWithoutAbuseReportsInput {
   id: String
   email: String
-  displayName: String!
+  displayName: String
   phoneNumber: String
   dateOfBirth: DateTime
   emailVerified: Boolean
@@ -11642,7 +11642,7 @@ input UserUpsertWithoutAbuseReportedInput {
 input UserUpdateWithoutAbuseReportedInput {
   id: StringFieldUpdateOperationsInput
   email: NullableStringFieldUpdateOperationsInput
-  displayName: StringFieldUpdateOperationsInput
+  displayName: NullableStringFieldUpdateOperationsInput
   phoneNumber: NullableStringFieldUpdateOperationsInput
   dateOfBirth: NullableDateTimeFieldUpdateOperationsInput
   emailVerified: BoolFieldUpdateOperationsInput
@@ -11670,7 +11670,7 @@ input UserUpdateWithoutAbuseReportedInput {
 input UserUncheckedUpdateWithoutAbuseReportedInput {
   id: StringFieldUpdateOperationsInput
   email: NullableStringFieldUpdateOperationsInput
-  displayName: StringFieldUpdateOperationsInput
+  displayName: NullableStringFieldUpdateOperationsInput
   phoneNumber: NullableStringFieldUpdateOperationsInput
   dateOfBirth: NullableDateTimeFieldUpdateOperationsInput
   emailVerified: BoolFieldUpdateOperationsInput
@@ -11718,7 +11718,7 @@ input UserUpsertWithoutAbuseReportsInput {
 input UserUpdateWithoutAbuseReportsInput {
   id: StringFieldUpdateOperationsInput
   email: NullableStringFieldUpdateOperationsInput
-  displayName: StringFieldUpdateOperationsInput
+  displayName: NullableStringFieldUpdateOperationsInput
   phoneNumber: NullableStringFieldUpdateOperationsInput
   dateOfBirth: NullableDateTimeFieldUpdateOperationsInput
   emailVerified: BoolFieldUpdateOperationsInput
@@ -11746,7 +11746,7 @@ input UserUpdateWithoutAbuseReportsInput {
 input UserUncheckedUpdateWithoutAbuseReportsInput {
   id: StringFieldUpdateOperationsInput
   email: NullableStringFieldUpdateOperationsInput
-  displayName: StringFieldUpdateOperationsInput
+  displayName: NullableStringFieldUpdateOperationsInput
   phoneNumber: NullableStringFieldUpdateOperationsInput
   dateOfBirth: NullableDateTimeFieldUpdateOperationsInput
   emailVerified: BoolFieldUpdateOperationsInput
@@ -11963,7 +11963,7 @@ input OrderUncheckedUpdateWithoutAbuseReportsInput {
 input UserCreateWithoutFavoritedInput {
   id: String
   email: String
-  displayName: String!
+  displayName: String
   phoneNumber: String
   dateOfBirth: DateTime
   emailVerified: Boolean
@@ -11991,7 +11991,7 @@ input UserCreateWithoutFavoritedInput {
 input UserUncheckedCreateWithoutFavoritedInput {
   id: String
   email: String
-  displayName: String!
+  displayName: String
   phoneNumber: String
   dateOfBirth: DateTime
   emailVerified: Boolean
@@ -12039,7 +12039,7 @@ input FavoriteRecordTypeCreateOrConnectWithoutFavoritesInput {
 input UserCreateWithoutFavoritesInput {
   id: String
   email: String
-  displayName: String!
+  displayName: String
   phoneNumber: String
   dateOfBirth: DateTime
   emailVerified: Boolean
@@ -12067,7 +12067,7 @@ input UserCreateWithoutFavoritesInput {
 input UserUncheckedCreateWithoutFavoritesInput {
   id: String
   email: String
-  displayName: String!
+  displayName: String
   phoneNumber: String
   dateOfBirth: DateTime
   emailVerified: Boolean
@@ -12294,7 +12294,7 @@ input UserUpsertWithoutFavoritedInput {
 input UserUpdateWithoutFavoritedInput {
   id: StringFieldUpdateOperationsInput
   email: NullableStringFieldUpdateOperationsInput
-  displayName: StringFieldUpdateOperationsInput
+  displayName: NullableStringFieldUpdateOperationsInput
   phoneNumber: NullableStringFieldUpdateOperationsInput
   dateOfBirth: NullableDateTimeFieldUpdateOperationsInput
   emailVerified: BoolFieldUpdateOperationsInput
@@ -12322,7 +12322,7 @@ input UserUpdateWithoutFavoritedInput {
 input UserUncheckedUpdateWithoutFavoritedInput {
   id: StringFieldUpdateOperationsInput
   email: NullableStringFieldUpdateOperationsInput
-  displayName: StringFieldUpdateOperationsInput
+  displayName: NullableStringFieldUpdateOperationsInput
   phoneNumber: NullableStringFieldUpdateOperationsInput
   dateOfBirth: NullableDateTimeFieldUpdateOperationsInput
   emailVerified: BoolFieldUpdateOperationsInput
@@ -12370,7 +12370,7 @@ input UserUpsertWithoutFavoritesInput {
 input UserUpdateWithoutFavoritesInput {
   id: StringFieldUpdateOperationsInput
   email: NullableStringFieldUpdateOperationsInput
-  displayName: StringFieldUpdateOperationsInput
+  displayName: NullableStringFieldUpdateOperationsInput
   phoneNumber: NullableStringFieldUpdateOperationsInput
   dateOfBirth: NullableDateTimeFieldUpdateOperationsInput
   emailVerified: BoolFieldUpdateOperationsInput
@@ -12398,7 +12398,7 @@ input UserUpdateWithoutFavoritesInput {
 input UserUncheckedUpdateWithoutFavoritesInput {
   id: StringFieldUpdateOperationsInput
   email: NullableStringFieldUpdateOperationsInput
-  displayName: StringFieldUpdateOperationsInput
+  displayName: NullableStringFieldUpdateOperationsInput
   phoneNumber: NullableStringFieldUpdateOperationsInput
   dateOfBirth: NullableDateTimeFieldUpdateOperationsInput
   emailVerified: BoolFieldUpdateOperationsInput
@@ -13405,7 +13405,7 @@ input FavoriteUpdateManyWithWhereWithoutServiceInput {
 input UserCreateWithoutOrderedInput {
   id: String
   email: String
-  displayName: String!
+  displayName: String
   phoneNumber: String
   dateOfBirth: DateTime
   emailVerified: Boolean
@@ -13433,7 +13433,7 @@ input UserCreateWithoutOrderedInput {
 input UserUncheckedCreateWithoutOrderedInput {
   id: String
   email: String
-  displayName: String!
+  displayName: String
   phoneNumber: String
   dateOfBirth: DateTime
   emailVerified: Boolean
@@ -13732,7 +13732,7 @@ input UserUpsertWithoutOrderedInput {
 input UserUpdateWithoutOrderedInput {
   id: StringFieldUpdateOperationsInput
   email: NullableStringFieldUpdateOperationsInput
-  displayName: StringFieldUpdateOperationsInput
+  displayName: NullableStringFieldUpdateOperationsInput
   phoneNumber: NullableStringFieldUpdateOperationsInput
   dateOfBirth: NullableDateTimeFieldUpdateOperationsInput
   emailVerified: BoolFieldUpdateOperationsInput
@@ -13760,7 +13760,7 @@ input UserUpdateWithoutOrderedInput {
 input UserUncheckedUpdateWithoutOrderedInput {
   id: StringFieldUpdateOperationsInput
   email: NullableStringFieldUpdateOperationsInput
-  displayName: StringFieldUpdateOperationsInput
+  displayName: NullableStringFieldUpdateOperationsInput
   phoneNumber: NullableStringFieldUpdateOperationsInput
   dateOfBirth: NullableDateTimeFieldUpdateOperationsInput
   emailVerified: BoolFieldUpdateOperationsInput
@@ -15539,7 +15539,7 @@ input FavoriteUncheckedUpdateWithoutBusinessInput {
 input UserCreateManyAvatorInput {
   id: String
   email: String
-  displayName: String!
+  displayName: String
   phoneNumber: String
   dateOfBirth: DateTime
   emailVerified: Boolean
@@ -15620,7 +15620,7 @@ input CategoryCreateManyPictureInput {
 input UserUpdateWithoutAvatorInput {
   id: StringFieldUpdateOperationsInput
   email: NullableStringFieldUpdateOperationsInput
-  displayName: StringFieldUpdateOperationsInput
+  displayName: NullableStringFieldUpdateOperationsInput
   phoneNumber: NullableStringFieldUpdateOperationsInput
   dateOfBirth: NullableDateTimeFieldUpdateOperationsInput
   emailVerified: BoolFieldUpdateOperationsInput
@@ -15648,7 +15648,7 @@ input UserUpdateWithoutAvatorInput {
 input UserUncheckedUpdateWithoutAvatorInput {
   id: StringFieldUpdateOperationsInput
   email: NullableStringFieldUpdateOperationsInput
-  displayName: StringFieldUpdateOperationsInput
+  displayName: NullableStringFieldUpdateOperationsInput
   phoneNumber: NullableStringFieldUpdateOperationsInput
   dateOfBirth: NullableDateTimeFieldUpdateOperationsInput
   emailVerified: BoolFieldUpdateOperationsInput
@@ -15676,7 +15676,7 @@ input UserUncheckedUpdateWithoutAvatorInput {
 input UserUncheckedUpdateManyWithoutUsersInput {
   id: StringFieldUpdateOperationsInput
   email: NullableStringFieldUpdateOperationsInput
-  displayName: StringFieldUpdateOperationsInput
+  displayName: NullableStringFieldUpdateOperationsInput
   phoneNumber: NullableStringFieldUpdateOperationsInput
   dateOfBirth: NullableDateTimeFieldUpdateOperationsInput
   emailVerified: BoolFieldUpdateOperationsInput
@@ -15881,7 +15881,7 @@ input CategoryUncheckedUpdateManyWithoutCategoriesInput {
 input UserCreateManyLocationInput {
   id: String
   email: String
-  displayName: String!
+  displayName: String
   phoneNumber: String
   dateOfBirth: DateTime
   emailVerified: Boolean
@@ -15913,7 +15913,7 @@ input BusinessCreateManyLocationInput {
 input UserUpdateWithoutLocationInput {
   id: StringFieldUpdateOperationsInput
   email: NullableStringFieldUpdateOperationsInput
-  displayName: StringFieldUpdateOperationsInput
+  displayName: NullableStringFieldUpdateOperationsInput
   phoneNumber: NullableStringFieldUpdateOperationsInput
   dateOfBirth: NullableDateTimeFieldUpdateOperationsInput
   emailVerified: BoolFieldUpdateOperationsInput
@@ -15941,7 +15941,7 @@ input UserUpdateWithoutLocationInput {
 input UserUncheckedUpdateWithoutLocationInput {
   id: StringFieldUpdateOperationsInput
   email: NullableStringFieldUpdateOperationsInput
-  displayName: StringFieldUpdateOperationsInput
+  displayName: NullableStringFieldUpdateOperationsInput
   phoneNumber: NullableStringFieldUpdateOperationsInput
   dateOfBirth: NullableDateTimeFieldUpdateOperationsInput
   emailVerified: BoolFieldUpdateOperationsInput

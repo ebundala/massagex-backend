@@ -173,9 +173,9 @@ const RequestLogger: GraphQLRequestListener<TenantContext> = {
             debugger
             const [realm,token]=(data.req?.headers?.authorization??data.connection?.context?.headers?.authorization)?.split(" ")??["",""]
              // TODO remove use of token direct on catch after testing
-            const auth = await app.app.auth().verifySessionCookie(token).catch((e)=>({uid:null}));
+            const auth = await app.app.auth().verifyIdToken(token).catch((e)=>null);
             
-             if(auth?.uid){
+             if(auth&&auth?.uid){
               logger.debug(await redisCache.get(`last-seen-${auth.uid}`),"Presence");
               await redisCache.set(`last-seen-${auth.uid}`,(new Date()).toISOString(),"EX",60*60*24*7);
              }
@@ -183,7 +183,7 @@ const RequestLogger: GraphQLRequestListener<TenantContext> = {
             enforcer.enableEnforce(false);
 
             const ctx: TenantContext = {
-              tenantId: auth?.uid,
+              tenantId: null,
               auth: auth,
               token: token,
               enforcer: enforcer,

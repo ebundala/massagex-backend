@@ -1,10 +1,10 @@
 /* eslint-disable max-len */
 import * as functions from "firebase-functions";
 import fetch from "node-fetch";
-type NotifyUserCreateResult = {mutation:{
+type NotifyUserCreateResult = {data:{
   notifyUserSignup:Record<string, unknown>
 }};
-type UserRoles = {mutation:{
+type UserRoles = {data:{
   getUserRoles:string[]
 }};
 const APP_SERVER_URL:string = process.env.APP_SERVER_URL as string;
@@ -13,7 +13,7 @@ export const beforeCreate = functions.auth.user()
     .beforeCreate(async (user, context) => {
       const bearer = context.auth?.token;
       const query = {
-        "mutation": `{
+        "query": `mutation {
           notifyUserSignup
         }`,
       };
@@ -28,7 +28,11 @@ export const beforeCreate = functions.auth.user()
             throw new functions.auth.HttpsError(
                 "invalid-argument", `${e?.message??"unkwown error"}`);
           });
-      const claims = claimsResult.mutation.notifyUserSignup;
+      const claims = claimsResult.data.notifyUserSignup;
+      if (claims?.notLinked == true) {
+        throw new functions.auth.HttpsError(
+            "unknown", "Failed to create user profile");
+      }
       return {
         customClaims: claims,
       };
@@ -36,11 +40,11 @@ export const beforeCreate = functions.auth.user()
 
 // TODO implement session claims
 export const beforeSignIn = functions.auth.user()
-    .onCreate(async (user, context) => {
+    .beforeSignIn(async (user, context) => {
       const bearer = context.auth?.token;
       functions.logger.debug(bearer);
       const query = {
-        "mutation": `{
+        "query": `mutation {
           getUserRoles
         }`,
       };
@@ -55,8 +59,10 @@ export const beforeSignIn = functions.auth.user()
             throw new functions.auth.HttpsError(
                 "invalid-argument", `${e?.message??"unkwown error"}`);
           });
-      const claims = claimsResult.mutation.getUserRoles;
+      const claims = claimsResult.data.getUserRoles;
       return {
         sessionClaims: claims,
       };
     });
+
+

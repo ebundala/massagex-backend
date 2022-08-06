@@ -1,7 +1,7 @@
 type User {
           id: String!
           email: String
-          displayName: String!
+          displayName: String
           phoneNumber: String
           dateOfBirth: DateTime
           emailVerified: Boolean!

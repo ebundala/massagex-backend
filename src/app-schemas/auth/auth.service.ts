@@ -2,12 +2,6 @@ import { AppLogger } from '@mechsoft/app-logger';
 import { FirebaseService } from '@mechsoft/firebase-admin';
 import { Injectable } from '@nestjs/common';
 
-import {
-  AuthTokenType,
-  SignOutResult,
-  UserResponse,
-
-} from '../../models/graphql';
 import { AttachmentType, Prisma } from '@prisma/client'
 import { TenantContext } from '@mechsoft/common';
 
@@ -22,6 +16,7 @@ export class AuthService {
 
   // TODO add server authorization and verification before creating user
   async notifyUserSignup(ctx: TenantContext,): Promise<Object> {
+    
     try {
       if (ctx.auth != null && ctx.auth.uid) {
         this.logger.debug(`user signup with id ${ctx.auth.uid}`, AuthService.name)
@@ -55,6 +50,9 @@ export class AuthService {
     catch (e) {
       throw e;
     }
+    return {
+       notLinked:true
+    }
   }
 
   async getUserRoles(ctx: TenantContext): Promise<string[]> {
@@ -62,12 +60,12 @@ export class AuthService {
     if (ctx.auth && ctx.auth.uid) {
       this.logger.debug(`user signin: getting roles for ${ctx.auth.uid}`, AuthService.name)
         return await ctx.enforcer.getRolesForUser(ctx.auth.uid);
-      }
-      return []
+      }      
     }
     catch (e) {
       throw e;
     }
+    return []
   }
 
   // async destroySession(token: string, tokenType:AuthTokenType) {

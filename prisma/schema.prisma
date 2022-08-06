@@ -35,11 +35,11 @@ enum RecordStatus {
 model User {
   id              String        @id @default(cuid())
   email           String?        @unique
-  displayName     String
+  displayName     String?
   phoneNumber     String?
   dateOfBirth     DateTime?
   emailVerified   Boolean       @default(false)
-  disabled        Boolean       @default(true)
+  disabled        Boolean       @default(false)
   avator          Attachment?   @relation(fields: [avatorId], references: [id])
   avatorId        String?
   role            Role          @default(USER)
