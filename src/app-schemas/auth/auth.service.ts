@@ -15,11 +15,11 @@ export class AuthService {
   ) { }
 
   // TODO add server authorization and verification before creating user
-  async notifyUserSignup(ctx: TenantContext,): Promise<Object> {
-    
+  async notifyUserSignup(ctx: TenantContext,data,token:string): Promise<Object> {
+    this.logger.debug(`user signup with  ${data}`, AuthService.name)
+
     try {
       if (ctx.auth != null && ctx.auth.uid) {
-        this.logger.debug(`user signup with id ${ctx.auth.uid}`, AuthService.name)
         let userArgs: Prisma.UserUpsertArgs = {
           where:{id:ctx.auth.uid},
           update:{                       
@@ -50,22 +50,22 @@ export class AuthService {
     catch (e) {
       throw e;
     }
-    return {
-       notLinked:true
-    }
+   
   }
 
-  async getUserRoles(ctx: TenantContext): Promise<string[]> {
+  async getUserClaims(ctx: TenantContext,uid:string,token:string): Promise<Object> {
+    this.logger.debug(`user signin: getting roles for ${uid}`, AuthService.name)
+
     try {
     if (ctx.auth && ctx.auth.uid) {
-      this.logger.debug(`user signin: getting roles for ${ctx.auth.uid}`, AuthService.name)
-        return await ctx.enforcer.getRolesForUser(ctx.auth.uid);
+       const roles= await ctx.enforcer.getRolesForUser(ctx.auth.uid);
+       return {roles};
       }      
     }
     catch (e) {
       throw e;
     }
-    return []
+    return {}
   }
 
   // async destroySession(token: string, tokenType:AuthTokenType) {

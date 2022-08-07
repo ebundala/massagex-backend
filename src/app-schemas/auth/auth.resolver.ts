@@ -1,6 +1,7 @@
 import { TenantContext } from '@mechsoft/common';
 import { UseGuards } from '@nestjs/common';
 import {
+  Args,
   Context, Info, Mutation,
   Resolver
 } from '@nestjs/graphql';
@@ -20,12 +21,13 @@ export class AuthResolver {
   ) { }
   
   @Mutation((retuns) => Object)
-  async notifyUserSignup(@Context() ctx:TenantContext, @Info() info,): Promise<Object> {
-    return this.authService.notifyUserSignup(ctx)
+  async notifyUserSignup(@Context() ctx:TenantContext,@Args("token") token:string,
+  @Args("data") data, @Info() info,): Promise<Object> {
+    return this.authService.notifyUserSignup(ctx,data,token,)
   }
   @Mutation((retuns) => Object)
-  async getUserRoles(@Context() ctx:TenantContext, @Info() info,): Promise<Object> {
-    return this.authService.getUserRoles(ctx)
+  async getUserClaims(@Context() ctx:TenantContext,@Args("uid") uid:string,@Args("token") token:string, @Info() info,): Promise<Object> {
+    return this.authService.getUserClaims(ctx,uid,token)
   }
   
   

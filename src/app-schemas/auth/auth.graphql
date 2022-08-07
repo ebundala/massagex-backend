@@ -41,7 +41,8 @@ type SignOutResult {
 extend type User{
 	lastSeen: DateTime
 }
+
 extend type Mutation {	
-	notifyUserSignup:Json!
-	getUserRoles:[String!]!
+	notifyUserSignup(data:Json!,token:String!):Json
+	getUserClaims(uid:String!,token:String!):Json
 }
