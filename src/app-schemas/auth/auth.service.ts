@@ -4,70 +4,85 @@ import { Injectable } from '@nestjs/common';
 
 import { AttachmentType, Prisma } from '@prisma/client'
 import { TenantContext } from '@mechsoft/common';
-
+import { ConfigService } from '@nestjs/config';
+import { AppConfigurationKeys } from 'src/config/env-config';
 @Injectable()
 export class AuthService {
 
   constructor(
-    // private readonly firebaseApp: FirebaseService,
+    private readonly firebaseApp: FirebaseService,
     private readonly logger: AppLogger,
-    // private readonly mail: MailService,
-  ) { }
+    private readonly config: ConfigService,
+  ) {
+   
+   }
 
   // TODO add server authorization and verification before creating user
-  async notifyUserSignup(ctx: TenantContext,data,token:string): Promise<Object> {
-    this.logger.debug(`user signup with  ${data}`, AuthService.name)
+ 
 
+  async notifyUserSignup(ctx: TenantContext,data,token:string): Promise<Object> {
+    debugger
     try {
-      if (ctx.auth != null && ctx.auth.uid) {
-        let userArgs: Prisma.UserUpsertArgs = {
-          where:{id:ctx.auth.uid},
-          update:{                       
-              email: {set:ctx.auth.email},
-            },
-          create: {
-            id: ctx.auth.uid,
-            displayName: ctx.auth.displayName ?? "guest",
-            email: ctx.auth.email,
-            phoneNumber: ctx.auth.phoneNumber,
-            emailVerified: ctx.auth.emailVerified,
-            disabled: ctx.auth.disabled,
-            avator: {
-              create: {
-                path: ctx.auth.photoURL ?? "uploads/placeholder.png",
-                attachmentType: AttachmentType.IMAGE
-              }
-            }
+      
+      if (token) {
+        const { 
+            uid,
+            displayName,
+            email,
+            phoneNumber,
+            emailVerified,
+            disabled,photoURL
+        } = data;
+        let userArgs: Prisma.UserCreateInput =  {          
+            id: uid,
+            displayName: displayName,
+            email: email,
+            phoneNumber: phoneNumber,
+            emailVerified: emailVerified,
+            disabled: disabled, 
+            avator:{create: {
+              path: photoURL ?? this.config.get<string>(AppConfigurationKeys.DEFAULT_USER_PHOTO_URL),
+              attachmentType: AttachmentType.IMAGE
+             }          
           }
         }
-        let profile = await ctx.prisma.user.upsert(userArgs)
-        await ctx.enforcer.addRoleForUser(ctx.auth.uid, profile.role)
+        let profile = await ctx.prisma.user.create({data:userArgs})
+        await ctx.enforcer.addRoleForUser(uid, profile.role)
         return {
-          completedPlofile: false
+          status: true,
+          data:data,
         }
       }
     }
     catch (e) {
-      throw e;
+      this.logger.error(e,AuthService.name)
+      
     }
-   
+    return {
+      status: false,
+      data:"Failed to Acknowledge",
+    }
   }
 
   async getUserClaims(ctx: TenantContext,uid:string,token:string): Promise<Object> {
     this.logger.debug(`user signin: getting roles for ${uid}`, AuthService.name)
 
     try {
-    if (ctx.auth && ctx.auth.uid) {
-       const roles= await ctx.enforcer.getRolesForUser(ctx.auth.uid);
-       return {roles};
+    if (token) {
+       const roles= await ctx.enforcer.getRolesForUser(uid);
+       return {
+         status:true,
+         data:{roles}};
       }      
     }
     catch (e) {
-      throw e;
+      this.logger.error(e,AuthService.name)
     }
-    return {}
-  }
-
+    return {
+      status:false,
+      data:"Failed"
+    }
+}
   // async destroySession(token: string, tokenType:AuthTokenType) {
   //   const auth = this.firebaseApp.admin
   //     .auth();

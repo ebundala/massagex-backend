@@ -28,6 +28,7 @@ import { PaymentModule } from './app-schemas/payment/payment.module';
 import { FcmRegistrationModule } from './app-schemas/fcm-registration/fcm-registration.module';
 import { ThumbnailDirective } from './app-schemas/directives/thumbnail.directive';
 import { mergeSchemas } from 'apollo-server-express';
+import { GoogleMapModule } from './app-schemas/geolocation/googlemap.module';
 
 
 
@@ -79,7 +80,7 @@ const RequestLogger: GraphQLRequestListener<TenantContext> = {
     //  await prisma.$disconnect();
     const time = Date.now() - (context.timestamp ?? Date.now());
     logger?.debug(
-      `Request took ${time}/ms to complete for tenantId:${tenantId}`,
+      `Request took ${time}/ms to complete for tenantId: ${tenantId}`,
       'RequestLogger'
     );
   },
@@ -109,7 +110,8 @@ const RequestLogger: GraphQLRequestListener<TenantContext> = {
         SubscriptionModule,
         MpesaTzModule,
         PaymentModule,
-        FcmRegistrationModule
+        FcmRegistrationModule,
+        GoogleMapModule.forRoot()
       ],
       inject: [
         PrismaClient,        

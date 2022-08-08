@@ -5,6 +5,7 @@ import * as NodeRsa from 'node-rsa';
 import { join } from 'path';
 import { AppLogger } from '@mechsoft/app-logger';
 import { HTTP_CLIENT_CONFIG } from './mpesa-tz.module';
+import { AppConfigurationKeys } from 'src/config/env-config';
 @Injectable()
 export class MpesaTzService {
     private API_KEY: string;
@@ -22,11 +23,11 @@ export class MpesaTzService {
         private readonly logger: AppLogger,
         private readonly httpService: HttpService
     ) {
-        const baseUrl = this.config.get<string>('MPESA_BASE_URL');
-        this.SESSION_TTL = this.config.get<number>('MPESA_SESSION_TTL');
-        this.PUB_KEY = this.config.get<string>('MPESA_PUB_KEY')
-        this.API_KEY = this.config.get<string>('MPESA_API_KEY');
-        this.MPESA_ORG_SHORTCODE = this.config.get<string>("MPESA_ORG_SHORTCODE")
+        const baseUrl = this.config.get<string>(AppConfigurationKeys.MPESA_BASE_URL);
+        this.SESSION_TTL = this.config.get<number>(AppConfigurationKeys.MPESA_SESSION_TTL);
+        this.PUB_KEY = this.config.get<string>(AppConfigurationKeys.MPESA_PUB_KEY)
+        this.API_KEY = this.config.get<string>(AppConfigurationKeys.MPESA_API_KEY);
+        this.MPESA_ORG_SHORTCODE = this.config.get<string>(AppConfigurationKeys.MPESA_ORG_SHORTCODE)
         //this.httpService.axiosRef.defaults.baseURL = baseUrl;
         this.httpService.axiosRef.defaults.headers.post['Content-Type'] = 'application/json';
         this.links = new Endpoints(baseUrl);

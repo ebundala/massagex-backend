@@ -137,6 +137,7 @@ const options: SdlGeneratorServiceOptions = {
      const filePath= writeSchemaToFile(schema, path);
       console.log("schema written to file")
      //TODO: generate policy schema
+     //TODO filter introspection query
      // createPolicySchema('src/authorization/policy', filePath);
       return schema;
     },

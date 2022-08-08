@@ -3,6 +3,7 @@ import { RedisPubSub } from 'graphql-redis-subscriptions';
 import { Global, Injectable, Module } from '@nestjs/common';
 import * as Redis from 'ioredis';
 import { RedisCache } from './redis.service';
+import { AppConfigurationKeys } from 'src/config/env-config';
 
 
 
@@ -18,8 +19,8 @@ import { RedisCache } from './redis.service';
       ) => {
         return new RedisPubSub({
         connection: {
-          host: configService.get('REDIS_HOST'),
-          port: configService.get('REDIS_PORT'),
+          host: configService.get(AppConfigurationKeys.REDIS_HOST),
+          port: configService.get(AppConfigurationKeys.REDIS_PORT),
         }
       });
     },
@@ -31,8 +32,8 @@ import { RedisCache } from './redis.service';
       useFactory:(configService: ConfigService)=>{
         
         return new Redis({
-          host:configService.get('REDIS_HOST'),
-          port: configService.get('REDIS_PORT'),
+          host:configService.get(AppConfigurationKeys.REDIS_HOST),
+          port: configService.get(AppConfigurationKeys.REDIS_PORT),
         });
       },
       inject:[ConfigService]

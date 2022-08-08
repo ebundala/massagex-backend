@@ -3,6 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config'
 import {GoogleMapService} from './googlemap.service'
 import {AxiosRequestConfig} from 'axios'
 import { GoogleMapGeolocationResolver } from './googlemap.resolver'
+import { AppConfigurationKeys } from 'src/config/env-config'
 
 @Module({})
 export class GoogleMapModule {
@@ -14,7 +15,7 @@ export class GoogleMapModule {
                 {   provide:GoogleMapService,
                     inject:[ConfigService],
                     useFactory:(configService:ConfigService)=>{
-                         const api = configService.get("GOOGLE_MAPS_API_KEY")
+                         const api = configService.get(AppConfigurationKeys.GOOGLE_MAPS_API_KEY)
                          if(config){
                          config.params.key=api;
                          }

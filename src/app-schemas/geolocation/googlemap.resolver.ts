@@ -9,6 +9,7 @@ import { RouteResponse,GeocodeResponse,
      GeocodeInput, ReverseGeocodeResponse, ReverseGeocodeInput, RouteQueryInput, PlaceAutocompleteResponse, PlaceAutocompleteInput} from "src/models/graphql";
 import { UseGuards } from "@nestjs/common";
 import { AuthorizerGuard } from "@mechsoft/enforcer";
+import { AppConfigurationKeys } from "src/config/env-config";
 
 
 @Resolver((of)=>RouteResponse)
@@ -17,7 +18,7 @@ export class GoogleMapGeolocationResolver {
     private _key: string;
     constructor(private readonly service: GoogleMapService,
         private readonly configService: ConfigService) {
-        this._key = this.configService.get<string>("GOOGLE_MAPS_API_KEY")
+        this._key = this.configService.get<string>(AppConfigurationKeys.GOOGLE_MAPS_API_KEY)
     }
 
     @Query((returns)=>GeocodeResponse)
