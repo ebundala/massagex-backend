@@ -29,7 +29,7 @@ export class FcmRegistrationService {
             args.create.fcm_id=data.fcm_id;
             args.update.fcm_id={set:data.fcm_id};
         }
-        if(auth.uid){
+        if(auth?.uid){
             args.create.user={connect:{id:auth.uid}};
             args.update.user={connect:{id:auth.uid}};
         }
