@@ -67,6 +67,10 @@ services:
        MPESA_API_KEY: ${MPESA_API_KEY}
        MPESA_PUB_KEY: ${MPESA_PUB_KEY}
        MPESA_SESSION_TTL: ${MPESA_SESSION_TTL}
+      #  app
+       DEFAULT_USER_PHOTO_URL: ${DEFAULT_USER_PHOTO_URL}
+      # MAPS
+       GOOGLE_MAPS_API_KEY: ${GOOGLE_MAPS_API_KEY}
     # depends_on:
     #    db:
     #     condition: service_healthy

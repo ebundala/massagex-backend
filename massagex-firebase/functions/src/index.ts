@@ -57,7 +57,7 @@ export const beforeCreate = functions.auth.user()
           });
 
       const {status, data} = claimsResult?.data?.data?.notifyUserSignup??{};
-      if (status==false) {
+      if (!status) {
         throw new functions.https
             .HttpsError("invalid-argument",
             // eslint-disable-next-line max-len
