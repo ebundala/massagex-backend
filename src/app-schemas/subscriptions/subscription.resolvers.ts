@@ -1,11 +1,12 @@
 import { Args, Context, Info, Mutation, Resolver, Subscription } from "@nestjs/graphql";
 import { RedisPubSub } from "graphql-redis-subscriptions"
 import { TenantContext } from "@mechsoft/common";
-import { SubscriptionService } from "./subscription.service";
+import { LOCATION_CHANGED, SubscriptionService } from "./subscription.service";
 import { AuthorizerGuard } from "@mechsoft/enforcer";
 import { HttpException, UnauthorizedException, UseGuards } from "@nestjs/common";
 import { HttpErrorByCode } from "@nestjs/common/utils/http-error-by-code.util";
-import { LatLon, LocationResponse } from "src/models/graphql";
+import { LatLon, LocationResponse, OrderWhereUniqueInput } from "src/models/graphql";
+import { BusinessStatus, OrderStatus } from "@prisma/client";
 
 
 @Resolver()
@@ -16,82 +17,43 @@ export class SubscriptionResolver {
 
   
     //location stream
-   /*  @Subscription(() => LocationResponse, {
-        filter: async (where: UserWhereUniqueInput,
-            variables, context: TenantContext) => {
-           // ;
-            //todo filter who recieves data;
+     @Subscription(() => LocationResponse, {
+        filter: async (where: OrderWhereUniqueInput,
+            variables, context: TenantContext) => {           
+            
+
             const { auth, prisma } = context
-            const order = await prisma.order.findFirst({
-                
-                where: {
-                    OR: [
-                        {
-                            ownerId: {
-                                equals: auth.uid
-                            },
-                        },
-                         {
-                            providerId: {
-                                equals: auth.uid
-                            },
-                        }, 
-                        {
-                            organization: {
-                                ownerId: {
-                                    equals: auth.uid
-                                }
-                            },
-                        }
-                    ],
-                    AND:[
-                        {
-                            OR: [
-                                {
-                                    ownerId: {
-                                        equals: where.id
-                                    },
-                                },
-                                 {
-                                    providerId: {
-                                        equals: where.id
-                                    },
-                                }, 
-                                {
-                                    organization: {
-                                        ownerId: {
-                                            equals: where.id
-                                        }
-                                    },
-                                },
-                            ],
-                        },
-                         {
-
-                        state: {
-                            in: ['APPROVED', 'COMPLETED',] //listen only for dispatched orders/before payment
-                        }
-                    },]
-
+            if(!auth.uid)
+            return false;
+            const uid = auth.uid;
+            const order = await prisma.order.findUnique({where:where,select:{
+                ownerId:true,
+                orderStatus:true,
+                business:{
+                    select:{
+                        ownerId:true,
+                        status:true,
+                        mode: true,
+                    }
                 }
-            })
-            return order != null;
+            }});
+            const isOnline = order.business.status == BusinessStatus.ONLINE;
+            const orderIsActive = order.orderStatus == OrderStatus.ACCEPTED;
+            const isPerticipant = order.ownerId != uid || order.business.ownerId == uid;
+
+            return isPerticipant&&isOnline&&orderIsActive;
         },
-        resolve: async function (this: SubscriptionResolver, where: UserWhereUniqueInput, args: any, context: TenantContext, info: any): Promise<LocationResponse | {}> {
-          //  ;
+        resolve: async function (this: SubscriptionResolver, where: OrderWhereUniqueInput, args: any, context: TenantContext, info: any): Promise<LocationResponse | {}> {
+          
             const key = `location/${where.id}`;
-            const latlon = await this.bloc.getUserLocation(where.id);
+
+            const latlon = await this.bloc.getLocation(where.id,context,info);
             if (latlon) {
-                const t = (new Date()).toUTCString();
+             
                 return {
                     message: "ok",
                     status: true,
-                    data: {
-                        id: key,
-                        ...latlon,
-                        createdAt: t,
-                        updatedAt: t
-                    },
+                    data: latlon,
                 }
             }
             return {
@@ -102,47 +64,14 @@ export class SubscriptionResolver {
         }
 
     })
-    locations(@Args("where") args: UserWhereUniqueInput, @Context() context: TenantContext, @Info() info) {
+    locations(@Args("where") args: OrderWhereUniqueInput, @Context() context: TenantContext, @Info() info) {
         if (context.auth?.uid) {
             return this.pubSub.asyncIterator(`${LOCATION_CHANGED}`, { args, context, info });
         }
         throw new UnauthorizedException()
-    } */
+    } 
 
-    @Mutation(() => LocationResponse)
-    async locationFeed(@Args('location') location: LatLon, @Context() context: TenantContext, @Info() info): Promise<LocationResponse | {}> {
-        
-        if (context.auth?.uid && location) {
-            const user = await context.prisma.user.update({where:{id:context.auth.uid},
-                data:{
-                    location:{
-                        
-                        upsert:{
-                            update:{
-                                lat:location.lat,
-                                lon:location.lon
-                            },
-                            create:{
-                                lat:location.lat,
-                                lon:location.lon
-                            }
-                        }
-                    }
-                },
-                include:{location:true}});
-            
-            await this.bloc.cacheUserLocation(context.auth.uid, user.location as any);
-            return {
-                message: 'ok',
-                status: true,
-            }
-        }
-        throw new UnauthorizedException({
-            message: 'Auth error',
-            status: false,
-        })
-
-    }
+  
 
 }
 

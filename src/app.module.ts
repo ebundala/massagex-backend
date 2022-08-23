@@ -29,6 +29,7 @@ import { FcmRegistrationModule } from './app-schemas/fcm-registration/fcm-regist
 import { ThumbnailDirective } from './app-schemas/directives/thumbnail.directive';
 import { mergeSchemas } from 'apollo-server-express';
 import { GoogleMapModule } from './app-schemas/geolocation/googlemap.module';
+import { RedisPubSub } from 'graphql-redis-subscriptions';
 
 
 
@@ -116,12 +117,13 @@ const RequestLogger: GraphQLRequestListener<TenantContext> = {
       inject: [
         PrismaClient,        
          CasbinService, 
-        FirebaseService,AppLogger,RedisCache,BlocFieldResolverExplorer,],
+        FirebaseService,AppLogger,RedisCache,RedisPubSub,BlocFieldResolverExplorer,],
       useFactory: (client: PrismaClient,
         enforcer: CasbinService,
         app: FirebaseService,
         logger: AppLogger,
         redisCache: RedisCache,
+        redisPubSub:RedisPubSub,
         fieldResolverExplorer: BlocFieldResolverExplorer
         ) => {
           
@@ -174,7 +176,6 @@ const RequestLogger: GraphQLRequestListener<TenantContext> = {
           context: async (data): Promise<TenantContext> => {
             debugger
             const [realm,token]=(data.req?.headers?.authorization??data.connection?.context?.headers?.authorization)?.split(" ")??["",""]
-             // TODO remove use of token direct on catch after testing
             const auth = await app.app.auth().verifyIdToken(token).catch((e)=>null);
             
              if(auth&&auth?.uid){
@@ -183,7 +184,7 @@ const RequestLogger: GraphQLRequestListener<TenantContext> = {
              }
             //TODO: remove this line after test/dev to enable authorization
             enforcer.enableEnforce(false);
-
+           //TODO add rediscache and pubsub to tenant context 
             const ctx: TenantContext = {
               tenantId: null,
               auth: auth,
@@ -193,7 +194,7 @@ const RequestLogger: GraphQLRequestListener<TenantContext> = {
               logger,
               timestamp: Date.now()
             };
-            return {...ctx,...fieldResolverExplorer.createDataloaders(null,null,ctx,null)};
+            return {...ctx,redisCache,redisPubSub,...fieldResolverExplorer.createDataloaders(null,null,{ctx,redisCache,redisPubSub,logger},null)};
 
 
           },

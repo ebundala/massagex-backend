@@ -40,8 +40,20 @@ type SignOutResult {
 }
 extend type User{
 	lastSeen: DateTime
+	compoundRating: Float
+	experience: Float
+	
 }
+extend type Business{
+	acceptance: Float
+	cancelation: Float
+	distance: Float
+	clients: Int
+	minPrice: Float
+	workCompleted: Int
+	
 
+}
 extend type Mutation {	
 	notifyUserSignup(data:Json!,token:String!):Json
 	getUserClaims(uid:String!,token:String!):Json

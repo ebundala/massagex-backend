@@ -7,7 +7,7 @@ import { PrismaClient } from '@mechsoft/prisma-client';
 import { AppLogger } from "@mechsoft/app-logger";
 import {LatLon, UserUpdateInput }   from "src/models/graphql"
 import { TenantContext } from "@mechsoft/common";
-import {Location} from '@prisma/client'
+import {BusinessMode,Location} from '@prisma/client'
 // export const ORDER_CHANGED = "ORDER_CHANGED";
 // export const ORDER_RECEIVED = "ORDER_RECEIVED";
 // export const INVITE_RECEIVED = "INVITE_RECEIVED";
@@ -19,6 +19,7 @@ import {Location} from '@prisma/client'
 @Injectable()
 @Bloc()
 export class SubscriptionService {
+ 
 
   constructor(
     private readonly pubSub: RedisPubSub,
@@ -34,7 +35,52 @@ export class SubscriptionService {
     this.pubSub.subscribe(FEEDBACK_RECEIVED, this.reviewNotifications.bind(this)); */
   }
   
+  async getLocation(orderId: string, context: TenantContext,info): Promise<any> {
+     const {auth,prisma} = context;
+     if(!auth.uid)return;
+     const uid = auth.uid;
+     const { select } = prisma.getSelection(info).valueOf('data', 'Location', { select: {} });
 
+    const order= await prisma.order.findUnique({where:{id: orderId },select:{
+      id:true,
+      ownerId:true,
+      business:{       
+        select:{
+          id:true,
+          ownerId:true,
+          mode:true
+        }
+      }
+     }})
+     const isBusinessOwner = order.business.ownerId === auth.uid;
+if (order.business.mode == BusinessMode.MOBILE_MODE){
+  if(isBusinessOwner){
+   return prisma.location.findFirst({where:{
+      businesses:{
+      every:{
+          id:{equals:order.business.id}
+        }
+      }
+    },
+    orderBy:{
+      updatedAt:'desc'
+    }
+    ,select:select})
+  }
+}
+return prisma.location.findFirst({where:{
+  users:{
+  every:{
+      id:{equals:order.ownerId}
+    }
+  }
+},
+orderBy:{
+  updatedAt:'desc'
+}
+,select:select});
+
+}
 
 
   async cacheUserLocation(uid: string, location: Location) {
@@ -63,6 +109,8 @@ export class SubscriptionService {
     const v = await this.redisCache.get(key);
     if (v) return JSON.parse(v);
   } 
+
+  
 }
 
 
