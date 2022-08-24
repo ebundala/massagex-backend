@@ -831,12 +831,13 @@ async updateOneUserBloc(v: BusinessRequest<TenantContext>) {
 @PrismaAttach("User", "update")
   async orderCreated(req: PrismaHookRequest<User>, n: PrismaHookHandler) {
     const { result, prisma, params } = req;
-    const {action,args} = params as {action:string,args:UserUpdateInput};
+    
+    const {action,args} = params as {action:string,args:{data:UserUpdateInput}};
     const publish = (topic:string,value)=>{        
       this.redisPubSub.publish(topic, value);
   }
     //  Location updates
-    if(args.location){
+    if(args?.data?.location){
       
       this.logger.log("LOCATION CHANGED")
     prisma.order.findMany({
@@ -865,11 +866,11 @@ async updateOneUserBloc(v: BusinessRequest<TenantContext>) {
     )  
     }
   // Orders updates
-  if(args?.ordered?.create){
+  if(args?.data?.ordered?.create){
   //  orders created
     this.logger.log("ORDER CREATED")
   }
-  else if(args?.ordered?.update){
+  else if(args?.data?.ordered?.update){
     this.logger.log("ORDER UPDATED")
   }
     return n(req);
