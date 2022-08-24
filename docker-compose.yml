@@ -106,7 +106,6 @@ services:
   #   depends_on:
   #     - webserver
   #   command: certonly --webroot --webroot-path=/var/www/html --email ${DOMAINS_EMAIL} --agree-tos --no-eff-email ${CERTBOT_ENV} ${DOMAINS}
-
 networks:
   webnet:
 volumes:

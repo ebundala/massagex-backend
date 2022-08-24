@@ -21,6 +21,8 @@ type SignOutResult {
 
 type User {
   lastSeen: DateTime
+  compoundRating: Float
+  experience: Float
   id: String!
   email: String
   displayName: String
@@ -51,12 +53,40 @@ type User {
   favorited(where: FavoriteWhereInput, orderBy: [FavoriteOrderByInput!], cursor: FavoriteWhereUniqueInput, take: Int, skip: Int, distinct: [FavoriteScalarFieldEnum!]): [Favorite!]!
 }
 
+type Business {
+  acceptance: Float
+  cancelation: Float
+  distance: Float
+  clients: Int
+  minPrice: Float
+  workCompleted: Int
+  id: String!
+  owner: User!
+  ownerId: String!
+  mode: BusinessMode!
+  cover: Attachment
+  coverId: String
+  about: String!
+  businessName: String!
+  metadata: JSONObject
+  status: BusinessStatus!
+  recordStatus: RecordStatus!
+  services(where: ServiceWhereInput, orderBy: [ServiceOrderByInput!], cursor: ServiceWhereUniqueInput, take: Int, skip: Int, distinct: [ServiceScalarFieldEnum!]): [Service!]!
+  orders(where: OrderWhereInput, orderBy: [OrderOrderByInput!], cursor: OrderWhereUniqueInput, take: Int, skip: Int, distinct: [OrderScalarFieldEnum!]): [Order!]!
+  attachments(where: AttachmentWhereInput, orderBy: [AttachmentOrderByInput!], cursor: AttachmentWhereUniqueInput, take: Int, skip: Int, distinct: [AttachmentScalarFieldEnum!]): [Attachment!]!
+  location: Location
+  locationId: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  abuseReports(where: AbuseReportWhereInput, orderBy: [AbuseReportOrderByInput!], cursor: AbuseReportWhereUniqueInput, take: Int, skip: Int, distinct: [AbuseReportScalarFieldEnum!]): [AbuseReport!]!
+  favorites(where: FavoriteWhereInput, orderBy: [FavoriteOrderByInput!], cursor: FavoriteWhereUniqueInput, take: Int, skip: Int, distinct: [FavoriteScalarFieldEnum!]): [Favorite!]!
+}
+
 type Mutation {
-  notifyUserSignup: Json!
-  getUserRoles: [String!]!
+  notifyUserSignup(data: Json!, token: String!): Json
+  getUserClaims(uid: String!, token: String!): Json
   registerDevice(data: RegisterDeviceInput!): DeviceResponse!
   paybill(data: PaybillRequest): PaybillResponse!
-  locationFeed(location: LatLon!): LocationResponse!
   createOneHelp(data: HelpCreateInput!): HelpResponse!
   updateOneHelp(where: HelpWhereUniqueInput!, data: HelpUpdateInput!): HelpResponse!
   updateOneUser(where: UserWhereUniqueInput!, data: UserUpdateInput!): UserResponse!
@@ -1334,7 +1364,7 @@ type PaybillResponse {
 }
 
 type Subscription {
-  locations(where: UserWhereUniqueInput!): LocationResponse!
+  locations(where: OrderWhereUniqueInput!): LocationResponse!
 }
 
 type AbuseRecordType {
@@ -1488,29 +1518,6 @@ type AttachmentCountResponse {
   status: Boolean!
   data: Int
   message: String!
-}
-
-type Business {
-  id: String!
-  owner: User!
-  ownerId: String!
-  mode: BusinessMode!
-  cover: Attachment
-  coverId: String
-  about: String!
-  businessName: String!
-  metadata: JSONObject
-  status: BusinessStatus!
-  recordStatus: RecordStatus!
-  services(where: ServiceWhereInput, orderBy: [ServiceOrderByInput!], cursor: ServiceWhereUniqueInput, take: Int, skip: Int, distinct: [ServiceScalarFieldEnum!]): [Service!]!
-  orders(where: OrderWhereInput, orderBy: [OrderOrderByInput!], cursor: OrderWhereUniqueInput, take: Int, skip: Int, distinct: [OrderScalarFieldEnum!]): [Order!]!
-  attachments(where: AttachmentWhereInput, orderBy: [AttachmentOrderByInput!], cursor: AttachmentWhereUniqueInput, take: Int, skip: Int, distinct: [AttachmentScalarFieldEnum!]): [Attachment!]!
-  location: Location
-  locationId: String
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  abuseReports(where: AbuseReportWhereInput, orderBy: [AbuseReportOrderByInput!], cursor: AbuseReportWhereUniqueInput, take: Int, skip: Int, distinct: [AbuseReportScalarFieldEnum!]): [AbuseReport!]!
-  favorites(where: FavoriteWhereInput, orderBy: [FavoriteOrderByInput!], cursor: FavoriteWhereUniqueInput, take: Int, skip: Int, distinct: [FavoriteScalarFieldEnum!]): [Favorite!]!
 }
 
 type BusinessListResponse {

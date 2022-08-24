@@ -194,7 +194,7 @@ const RequestLogger: GraphQLRequestListener<TenantContext> = {
               logger,
               timestamp: Date.now()
             };
-            return {...ctx,redisCache,redisPubSub,...fieldResolverExplorer.createDataloaders(null,null,{ctx,redisCache,redisPubSub,logger},null)};
+            return {...ctx,redisCache,redisPubSub,...fieldResolverExplorer.createDataloaders(null,null,{...ctx,redisCache,redisPubSub,logger},null)};
 
 
           },

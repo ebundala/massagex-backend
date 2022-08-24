@@ -1,10 +1,12 @@
 import { AppLogger } from "@mechsoft/app-logger";
-import { Bloc, BlocAttach, BlocFieldResolver, BlocValidate, BusinessRequest } from "@mechsoft/business-rules-manager";
+import { Bloc, BlocAttach, BlocFieldResolver, BlocValidate, BusinessRequest, PrismaAttach, PrismaHookHandler, PrismaHookRequest } from "@mechsoft/business-rules-manager";
 import { TenantContext } from "@mechsoft/common";
 import { Injectable } from "@nestjs/common";
-import { BusinessMode, Location, OrderStatus, Prisma,  } from "@prisma/client";
+import { BusinessMode, Location, Order, OrderStatus, Prisma,  } from "@prisma/client";
 import * as DataLoader from "dataloader";
+import { RedisPubSub } from "graphql-redis-subscriptions";
 import { AuthService, } from "src/app-schemas/auth/auth.service";
+import { LOCATION_CHANGED } from "src/app-schemas/subscriptions/subscription.service";
 import {  Business, LocationCreateInput, User, UserUpdateInput, UserWhereUniqueInput } from "src/models/graphql";
 import { RedisCache } from "src/pubsub/redis.service";
 import { uploadFile } from "src/utils/file.utils";
@@ -21,7 +23,8 @@ import {
 export class BusinessLogicService {
   constructor(
     private readonly logger: AppLogger,   
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
+    private readonly redisPubSub:RedisPubSub
   ) {
     //this.logger.setContext(BusinessLogicService.name);
   }
@@ -397,7 +400,7 @@ async uploadHelpAttachment(v: BusinessRequest<TenantContext>,next){
   const { data, ...rest } = args;
   const { steps } = data;
   const operations = [];
-  debugger
+  
   for(let i=0;i<steps?.create?.length;i++){
         const step = steps.create[i];
         const {attachments} = step;
@@ -416,7 +419,7 @@ async uploadHelpAttachment(v: BusinessRequest<TenantContext>,next){
     }
 
   const vv = await Promise.all(operations);
-  debugger
+  
   return next(v)
 }
 
@@ -427,7 +430,7 @@ async uploadHelpAttachment2(v:BusinessRequest<TenantContext>,next){
   const { data, ...rest } = args;
   const { steps } = data;
   const operations = [];
-  debugger
+  
   for(let i=0;i<steps?.create?.length;i++){
         const step = steps.create[i];
         const {attachments} = step;
@@ -446,7 +449,7 @@ async uploadHelpAttachment2(v:BusinessRequest<TenantContext>,next){
     }
 
   const vv = await Promise.all(operations);
-  debugger
+  
   return next(v)
 }
 
@@ -457,7 +460,7 @@ async uploadHelpAttachment3(v:BusinessRequest<TenantContext>,next: (arg0: Busine
   const { data, ...rest } = args;
   const { steps } = data;
   const operations = [];
-  debugger
+  
   for(let i=0;i<steps?.update?.length;i++){
         const step = steps.update[i];
         const {attachments} = step.data;
@@ -475,7 +478,7 @@ async uploadHelpAttachment3(v:BusinessRequest<TenantContext>,next: (arg0: Busine
         operations.push(op());    
     }
   const vv = await Promise.all(operations);
-  debugger
+  
   return next(v)
 }
 
@@ -544,7 +547,7 @@ async updateUserLocation(v: BusinessRequest<TenantContext>, next) {
       const { prisma, logger } = context;
       const { data,where, ...rest } = args as {data:UserUpdateInput,where:UserWhereUniqueInput};
       const { location, ...others } = data
-      debugger
+      
       const { name, lat, lon } = location.update;
       const user1 = await prisma.user.findUnique({where:{id:context.auth.uid??where.id},select:{
         location:true,        
@@ -619,7 +622,7 @@ async upsertUserLocation(v: BusinessRequest<TenantContext>, next) {
           const { prisma, logger } = context;
           const { data,where, ...rest } = args as {data:UserUpdateInput,where:UserWhereUniqueInput};
           const { location, ...others } = data
-          debugger
+          
           const { name, lat, lon, heading } = location.upsert.create;
           const locationResult = await prisma.location.create({
             data:{name,lat,lon,heading}
@@ -674,7 +677,7 @@ async createBusinessLocation(v: BusinessRequest<TenantContext>, next) {
   const { data, where,...rest } = args as {data:UserUpdateInput,where:UserWhereUniqueInput};
   const { businessProfile, ...others } = data
   const { name, lat, lon }:LocationCreateInput = businessProfile.create.location.create;
- debugger
+ 
   const loc = await prisma.location.create({
     data: { name, lat, lon }
   });
@@ -698,7 +701,7 @@ async updateBusinessLocation(v: BusinessRequest<TenantContext>, next) {
   const { data,where, ...rest } = args as {data:UserUpdateInput,where:UserWhereUniqueInput};
   const { businessProfile, ...others } = data
   const { name, lat, lon } = businessProfile.update.location.update;
-  debugger
+  
   const user = await prisma.user.update({
     where:{id:context.auth.uid??where.id},
     data:{
@@ -749,7 +752,7 @@ async upsertBusinessLocation(v: BusinessRequest<TenantContext>, next) {
   const { data,where, ...rest } = args as {data:UserUpdateInput,where:UserWhereUniqueInput};
   const { businessProfile, ...others } = data
   const { name, lat, lon,heading } = businessProfile.upsert.create.location.create;
-  debugger
+  
   const location = await prisma.location.create({
     data:{name,lat,lon,heading},    
   });
@@ -819,6 +822,58 @@ async updateOneUserBloc(v: BusinessRequest<TenantContext>) {
   const { auth } = context;
   return { rules: [onlyOwnerhasAccess(where.id)], facts: auth }
 }
+// subscriptions
+// @BlocAttach('updateOneUser.input.data.location.upsert.create.lat')
+// async notifyLocationChanges(v: BusinessRequest<TenantContext>, next){
+// debugger;
+//  return next(v)
+// }
+@PrismaAttach("User", "update")
+  async orderCreated(req: PrismaHookRequest<User>, n: PrismaHookHandler) {
+    const { result, prisma, params } = req;
+    const {action,args} = params as {action:string,args:UserUpdateInput};
+    const publish = (topic:string,value)=>{        
+      this.redisPubSub.publish(topic, value);
+  }
+    //  Location updates
+    if(args.location){
+      
+      this.logger.log("LOCATION CHANGED")
+    prisma.order.findMany({
+      where:{
+        AND:[
+          {orderStatus:{equals:OrderStatus.ACCEPTED}},
+        {OR:[
+        {ownerId: { 
+          equals:result.id
+        }
+      },
+      {
+        business:{    
+          ownerId:{
+            equals:result.id
+          }
+        }
+      }
+        ]
+         } ]
+      }
+    }).then(
+      (orders)=>{      
+      orders.forEach((v)=>publish(LOCATION_CHANGED,v));
+      }
+    )  
+    }
+  // Orders updates
+  if(args?.ordered?.create){
+  //  orders created
+    this.logger.log("ORDER CREATED")
+  }
+  else if(args?.ordered?.update){
+    this.logger.log("ORDER UPDATED")
+  }
+    return n(req);
+  }
 
 
 // Field resolvers 
@@ -851,7 +906,7 @@ minPrice(org:Business,args,ctx:TenantContext,info:any,dataloader:DataLoader<stri
 
 @BlocFieldResolver("User","compoundRating",function(this:BusinessLogicService,...args:[any,any,TenantContext,any]){
   return new DataLoader((async function (keys){
-   
+    
     const [parent,_,ctx,info] = args;
     const ratings = new Map();
      (await ctx.prisma.review.groupBy({
@@ -914,18 +969,19 @@ workCompleted(org:Business,args,ctx:TenantContext,info:any,dataloader:DataLoader
     
     const [parent,_,ctx,info] = args;
     const distances = new Map();
-    let cachedDistances= JSON.parse((await this.redisCache.get(`distances-${ctx.auth.uid}`))??"[]");
-  
-   debugger
-    if(cachedDistances?.length==0&&ctx.auth?.uid){
+    // let cachedDistances= JSON.parse((await ctx.redisCache.get(`distances-${ctx.auth.uid}`))??"[]");
+  // cachedDistances?.length==0&&
+  let cachedDistances;
+   
+    if(ctx.auth?.uid){
       //calculate distance here
       let location;
-      const cachedLoc = await this.redisCache.get(`location/${ctx.auth.uid}`);
+      const cachedLoc = await ctx.redisCache.get(`location/${ctx.auth?.uid}`);
       if(cachedLoc){
         location = JSON.parse(cachedLoc);
       }
       if(!location){
-      const user = await ctx.prisma.user.findUnique({where:{id:ctx.auth.uid},select:{
+      const user = await ctx.prisma.user.findUnique({where:{id:ctx.auth?.uid},select:{
         location:{
           select:{
             lat:true,
@@ -955,6 +1011,140 @@ distance(org:Business,args,ctx:TenantContext,info:any,dataloader:DataLoader<stri
   return dataloader.load(org.id);
 }
 
+@BlocFieldResolver("Business","cancelation",function(this:BusinessLogicService,...args:[any,any,TenantContext,any]){
+  return new DataLoader((async function (keys){
+    
+    const [parent,_,ctx,info] = args;
+    const rejected = new Map();
+     (await ctx.prisma.order.groupBy({
+      by: ['businessId'],
+      
+      _count:{
+        id:true
+      },
+      where: {
+        orderStatus:{equals:OrderStatus.REJECTED},
+        business: {
+          id: {
+            in: keys
+          }
+        }
+      }
+    })??[]).forEach(e => {
+      rejected.set(e.businessId,e._count.id)
+    });
+    const accepted = new Map();
+    (await ctx.prisma.order.groupBy({
+     by: ['businessId'],
+     
+     _count:{
+       id:true
+     },
+     where: {
+       orderStatus:{in:[OrderStatus.ACCEPTED,OrderStatus.PROCESSED]},
+       business: {
+         id: {
+           in: keys
+         }
+       }
+     }
+   })??[]).forEach(e => {
+    accepted.set(e.businessId,e._count.id)
+   });
+
+   return keys.map((k)=>{
+    const total = ((rejected.get(k)??0)+(accepted.get(k)??0))
+    if(total==0)return 0.0;
+    return (rejected.get(k)??0)/total;    
+  }
+    )}).bind(this))
+})
+cancelation(org:Business,args,ctx:TenantContext,info:any,dataloader:DataLoader<string,Number>){
+  return dataloader.load(org.id);
+}
+@BlocFieldResolver("Business","acceptance",function(this:BusinessLogicService,...args:[any,any,TenantContext,any]){
+  return new DataLoader((async function (keys){
+    
+    const [parent,_,ctx,info] = args;
+    const rejected = new Map();
+     (await ctx.prisma.order.groupBy({
+      by: ['businessId'],
+      
+      _count:{
+        id:true
+      },
+      where: {
+        orderStatus:{equals:OrderStatus.REJECTED},
+        business: {
+          id: {
+            in: keys
+          }
+        }
+      }
+    })??[]).forEach(e => {
+      rejected.set(e.businessId,e._count.id)
+    });
+    const accepted = new Map();
+    (await ctx.prisma.order.groupBy({
+     by: ['businessId'],
+     
+     _count:{
+       id:true
+     },
+     where: {
+       orderStatus:{in:[OrderStatus.ACCEPTED,OrderStatus.PROCESSED]},
+       business: {
+         id: {
+           in: keys
+         }
+       }
+     }
+   })??[]).forEach(e => {
+    accepted.set(e.businessId,e._count.id)
+   });
+
+   return keys.map((k)=>{
+    const total = ((rejected.get(k)??0)+(accepted.get(k)??0))
+    if(total==0)return 0.0;
+    return (accepted.get(k)??0)/total;
+  }
+    )}).bind(this))
+})
+acceptance(org:Business,args,ctx:TenantContext,info:any,dataloader:DataLoader<string,Number>){
+  return dataloader.load(org.id);
+}
+
+@BlocFieldResolver("Business","clients",function(this:BusinessLogicService,...args:[any,any,TenantContext,any]){
+  return new DataLoader((async function (keys){
+    
+    const [parent,_,ctx,info] = args;
+    const clients = new Map();
+     (await ctx.prisma.order.groupBy({
+      by: ['businessId'],
+      
+      _count:{
+        ownerId:true
+      },
+      where: {
+        orderStatus:{equals:OrderStatus.PROCESSED},
+        business: {
+          id: {
+            in: keys
+          }
+        }
+      }
+    })??[]).forEach(e => {
+      clients.set(e.businessId,e._count.ownerId)
+    });
+    
+
+     return keys.map((k)=> clients.get(k)??0.0);
+  
+    }).bind(this))
+})
+clients(org:Business,args,ctx:TenantContext,info:any,dataloader:DataLoader<string,Number>){
+  return dataloader.load(org.id);
+}
 // @BlocFieldResolver("User","location",function(this:BusinessLogicService,...args){
 //   return new DataLoader((async function (keys){      
 //     const locations= await this.redisCache.mget(keys);
@@ -968,7 +1158,7 @@ distance(org:Business,args,ctx:TenantContext,info:any,dataloader:DataLoader<stri
 
 @BlocFieldResolver("User","lastSeen",function(this:BusinessLogicService,...args){
   return new DataLoader((async function (keys){ 
-    const [parent,_,ctx,info,] = args;
+    const [parent,_,ctx,info,] = args;   
     const lastseen= await ctx.redisCache.mget(keys);
     return lastseen;
   }).bind(this))
@@ -977,6 +1167,27 @@ async lastSeen(parent:User,args, ctx:TenantContext,info:any,
  dataloader:DataLoader<string,string>) {
   return dataloader.load(`last-seen-${parent.id}`);
 }
+@BlocFieldResolver("User","experience",function(this:BusinessLogicService,...args){
+  return new DataLoader((async function (keys){ 
+    const [parent,_,ctx,info,] = args;
+    const joined= new Map();
+    const now = Date.now();
+    
+    (await ctx.prisma.user.findMany({where:{
+      id:{
+        in:keys
+      }
+    },select:{id:true,createdAt:true}})).forEach((user)=>joined.set(user.id, now - Date.parse(user.createdAt)));
+  
+    return keys.map((k)=>joined.get(k))
+  }).bind(this))
+})
+async experience(parent:User,args, ctx:TenantContext,info:any,
+ dataloader:DataLoader<string,string>) {
+  return dataloader.load(parent.id);
+}
+
+
 
 
 }
@@ -1027,7 +1238,7 @@ async lastSeen(parent:User,args, ctx:TenantContext,info:any,
     const { attachments } = data;
     const {create,...opts}=attachments;
 
-    debugger
+    
     const files2 = await this.createAttachments(attachments,context);
     
     v.args.data.attachments = { ...opts,connect: files2.map((e)=>({id:e.id}))};

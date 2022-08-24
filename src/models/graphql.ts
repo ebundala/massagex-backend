@@ -18028,16 +18028,21 @@ export class BatchPayload {
 export class Business {
     about: string;
     abuseReports: AbuseReport[];
+    acceptance?: Nullable<number>;
     attachments: Attachment[];
     businessName: string;
+    cancelation?: Nullable<number>;
+    clients?: Nullable<number>;
     cover?: Nullable<Attachment>;
     coverId?: Nullable<string>;
     createdAt: DateTime;
+    distance?: Nullable<number>;
     favorites: Favorite[];
     id: string;
     location?: Nullable<Location>;
     locationId?: Nullable<string>;
     metadata?: Nullable<JSONObject>;
+    minPrice?: Nullable<number>;
     mode: BusinessMode;
     orders: Order[];
     owner: User;
@@ -18046,6 +18051,7 @@ export class Business {
     services: Service[];
     status: BusinessStatus;
     updatedAt: DateTime;
+    workCompleted?: Nullable<number>;
 }
 
 export class BusinessBatchResponse {
@@ -18974,11 +18980,9 @@ export class MpesaPaymentResponse {
 export abstract class IMutation {
     abstract createOneHelp(data: HelpCreateInput): HelpResponse | Promise<HelpResponse>;
 
-    abstract getUserRoles(): string[] | Promise<string[]>;
+    abstract getUserClaims(token: string, uid: string): Nullable<Json> | Promise<Nullable<Json>>;
 
-    abstract locationFeed(location: LatLon): LocationResponse | Promise<LocationResponse>;
-
-    abstract notifyUserSignup(): Json | Promise<Json>;
+    abstract notifyUserSignup(data: Json, token: string): Nullable<Json> | Promise<Nullable<Json>>;
 
     abstract paybill(data?: Nullable<PaybillRequest>): PaybillResponse | Promise<PaybillResponse>;
 
@@ -19674,7 +19678,7 @@ export class StructuredFormatting {
 }
 
 export abstract class ISubscription {
-    abstract locations(where: UserWhereUniqueInput): LocationResponse | Promise<LocationResponse>;
+    abstract locations(where: OrderWhereUniqueInput): LocationResponse | Promise<LocationResponse>;
 }
 
 export class Transaction {
@@ -19818,6 +19822,7 @@ export class User {
     avatorId?: Nullable<string>;
     businessProfile?: Nullable<Business>;
     comments: Comment[];
+    compoundRating?: Nullable<number>;
     createdAt: DateTime;
     dateOfBirth?: Nullable<DateTime>;
     device?: Nullable<Device>;
@@ -19825,6 +19830,7 @@ export class User {
     displayName?: Nullable<string>;
     email?: Nullable<string>;
     emailVerified: boolean;
+    experience?: Nullable<number>;
     favorited: Favorite[];
     favorites: Favorite[];
     gender: Gender;

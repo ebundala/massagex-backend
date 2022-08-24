@@ -19,9 +19,8 @@ export class SubscriptionResolver {
     //location stream
      @Subscription(() => LocationResponse, {
         filter: async (where: OrderWhereUniqueInput,
-            variables, context: TenantContext) => {           
-            
-
+            variables, context: TenantContext) => {  
+                      
             const { auth, prisma } = context
             if(!auth.uid)
             return false;
@@ -45,7 +44,7 @@ export class SubscriptionResolver {
         },
         resolve: async function (this: SubscriptionResolver, where: OrderWhereUniqueInput, args: any, context: TenantContext, info: any): Promise<LocationResponse | {}> {
           
-            const key = `location/${where.id}`;
+            
 
             const latlon = await this.bloc.getLocation(where.id,context,info);
             if (latlon) {
@@ -66,7 +65,7 @@ export class SubscriptionResolver {
     })
     locations(@Args("where") args: OrderWhereUniqueInput, @Context() context: TenantContext, @Info() info) {
         if (context.auth?.uid) {
-            return this.pubSub.asyncIterator(`${LOCATION_CHANGED}`, { args, context, info });
+            return this.pubSub.asyncIterator(LOCATION_CHANGED, { args, context, info });
         }
         throw new UnauthorizedException()
     } 
