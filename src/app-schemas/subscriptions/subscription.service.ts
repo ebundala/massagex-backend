@@ -1,20 +1,16 @@
-import { Bloc, BlocAttach, BusinessRequest, PrismaAttach, PrismaHookHandler, PrismaHookRequest } from "@mechsoft/business-rules-manager";
+import { Bloc } from "@mechsoft/business-rules-manager";
 import { Injectable } from "@nestjs/common";
 import { RedisPubSub } from "graphql-redis-subscriptions"
 import { RedisCache } from "src/pubsub/redis.service";
 import { FirebaseService } from "@mechsoft/firebase-admin";
 import { PrismaClient } from '@mechsoft/prisma-client';
 import { AppLogger } from "@mechsoft/app-logger";
-import {LatLon, UserUpdateInput }   from "src/models/graphql"
+import {LatLon }   from "src/models/graphql"
 import { TenantContext } from "@mechsoft/common";
 import {BusinessMode,Location} from '@prisma/client'
-// export const ORDER_CHANGED = "ORDER_CHANGED";
-// export const ORDER_RECEIVED = "ORDER_RECEIVED";
-// export const INVITE_RECEIVED = "INVITE_RECEIVED";
-// export const INVITE_CHANGED = "INVITE_CHANGED";
 
-// export const FEEDBACK_RECEIVED = "FEEDBACK_RECEIVED";
- export const LOCATION_CHANGED = "LOCATION_CHANGED";
+export const LOCATION_CHANGED_CHANNEL = "LOCATION_CHANGED_CHANNEL";
+export const PUSH_MESSAGE_CHANNEL ="PUSH_MESSAGE_CHANNEL"
 
 @Injectable()
 @Bloc()
@@ -87,7 +83,7 @@ orderBy:{
     if (uid && location && location.lat && location.lon) {
       const key = `location/${uid}`;
       await this.redisCache.set(key, JSON.stringify(location));
-      this.pubSub.publish(LOCATION_CHANGED, { id: uid });
+      this.pubSub.publish(LOCATION_CHANGED_CHANNEL, { id: uid });
     }
 
   }
@@ -100,7 +96,7 @@ orderBy:{
     if (id && location && location.lat && location.lon) {
       const key = `busines-location/${id}`;
       await this.redisCache.set(key, JSON.stringify(location));
-      this.pubSub.publish(LOCATION_CHANGED, { id: id });
+      this.pubSub.publish(LOCATION_CHANGED_CHANNEL, { id: id });
     }
 
   }

@@ -1,7 +1,7 @@
 import { Args, Context, Info, Mutation, Resolver, Subscription } from "@nestjs/graphql";
 import { RedisPubSub } from "graphql-redis-subscriptions"
 import { TenantContext } from "@mechsoft/common";
-import { LOCATION_CHANGED, SubscriptionService } from "./subscription.service";
+import { LOCATION_CHANGED_CHANNEL, SubscriptionService } from "./subscription.service";
 import { AuthorizerGuard } from "@mechsoft/enforcer";
 import { HttpException, UnauthorizedException, UseGuards } from "@nestjs/common";
 import { HttpErrorByCode } from "@nestjs/common/utils/http-error-by-code.util";
@@ -65,8 +65,8 @@ export class SubscriptionResolver {
     })
     locations(@Args("where") args: OrderWhereUniqueInput, @Context() context: TenantContext, @Info() info) {
         if (context.auth?.uid) {
-            return this.pubSub.asyncIterator(LOCATION_CHANGED, { args, context, info });
-        }
+            return this.pubSub.asyncIterator(LOCATION_CHANGED_CHANNEL, { args, context, info });
+        }        
         throw new UnauthorizedException()
     } 
 

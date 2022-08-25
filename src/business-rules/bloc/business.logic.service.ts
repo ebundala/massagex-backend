@@ -1,14 +1,13 @@
 import { AppLogger } from "@mechsoft/app-logger";
 import { Bloc, BlocAttach, BlocFieldResolver, BlocValidate, BusinessRequest, PrismaAttach, PrismaHookHandler, PrismaHookRequest } from "@mechsoft/business-rules-manager";
 import { TenantContext } from "@mechsoft/common";
+import { FirebaseService } from "@mechsoft/firebase-admin";
 import { Injectable } from "@nestjs/common";
-import { BusinessMode, Location, Order, OrderStatus, Prisma,  } from "@prisma/client";
+import { BusinessMode, Location, OrderStatus, Prisma,  } from "@prisma/client";
 import * as DataLoader from "dataloader";
 import { RedisPubSub } from "graphql-redis-subscriptions";
-import { AuthService, } from "src/app-schemas/auth/auth.service";
-import { LOCATION_CHANGED } from "src/app-schemas/subscriptions/subscription.service";
-import {  Business, LocationCreateInput, User, UserUpdateInput, UserWhereUniqueInput } from "src/models/graphql";
-import { RedisCache } from "src/pubsub/redis.service";
+import { LOCATION_CHANGED_CHANNEL,  PUSH_MESSAGE_CHANNEL } from "src/app-schemas/subscriptions/subscription.service";
+import {  Business, LocationCreateInput, User, UserUpdateInput, UserWhereUniqueInput,Notification, NotificationType } from "src/models/graphql";
 import { uploadFile } from "src/utils/file.utils";
 
 //import * as uuid from 'uuid';
@@ -23,10 +22,10 @@ import {
 export class BusinessLogicService {
   constructor(
     private readonly logger: AppLogger,   
-    private readonly authService: AuthService,
+    private readonly app: FirebaseService,
     private readonly redisPubSub:RedisPubSub
   ) {
-    //this.logger.setContext(BusinessLogicService.name);
+   this.redisPubSub.subscribe(PUSH_MESSAGE_CHANNEL,this.sendNotification.bind(this))
   }
  
 
@@ -831,7 +830,7 @@ async updateOneUserBloc(v: BusinessRequest<TenantContext>) {
 @PrismaAttach("User", "update")
   async orderCreated(req: PrismaHookRequest<User>, n: PrismaHookHandler) {
     const { result, prisma, params } = req;
-    
+    const order = result.ordered[0];
     const {action,args} = params as {action:string,args:{data:UserUpdateInput}};
     const publish = (topic:string,value)=>{        
       this.redisPubSub.publish(topic, value);
@@ -861,22 +860,154 @@ async updateOneUserBloc(v: BusinessRequest<TenantContext>) {
       }
     }).then(
       (orders)=>{      
-      orders.forEach((v)=>publish(LOCATION_CHANGED,v));
+      orders.forEach((v)=>publish(LOCATION_CHANGED_CHANNEL,v));
       }
     )  
     }
   // Orders updates
+
+  /**
+   *  requestor actions
+   */
   if(args?.data?.ordered?.create){
-  //  orders created
-    this.logger.log("ORDER CREATED")
+  //  order created
+    this.logger.debug("ORDER CREATED",BusinessLogicService.name)
+   
+   
+    prisma.order.findUnique({where:{id:order.id},select:{
+      business:{
+        select:{
+          owner:{
+        select:{
+          device:{
+            select:{
+              id:true,
+              fcm_id:true
+            }
+          }
+        }
+      }
+      }
+      }
+    }}).then((v)=>{
+      const fcm_id = v.business.owner.device.fcm_id;
+      const message: Notification = {
+        message: "You have new service request",
+        notificationType: NotificationType.ORDER_RECIEVED,
+        payload:order
+      };
+      publish(PUSH_MESSAGE_CHANNEL,{fcm_id,message,ttl:0})
+    })
   }
   else if(args?.data?.ordered?.update){
-    this.logger.log("ORDER UPDATED")
+    this.logger.debug("ORDER UPDATED",BusinessLogicService.name)
+    const {data,where} = args.data.ordered.update[0];
+     if(data.orderStatus == OrderStatus.REJECTED){
+      // notify order cancelled by requester
+      prisma.order.findUnique({where:{id:where.id},select:{
+        business:{
+          select:{
+            owner:{
+          select:{
+            device:{
+              select:{
+                id:true,
+                fcm_id:true
+              }
+            }
+          }
+        }
+        }
+        }
+      }}).then((v)=>{
+        const fcm_id = v.business.owner.device.fcm_id;
+        const message: Notification = {
+          message: "Request was cancelled by customer",
+          notificationType: NotificationType.ORDER_CANCELLED,
+          payload:order
+        };
+        publish(PUSH_MESSAGE_CHANNEL,{fcm_id,message,ttl:60})
+      })
+    }
+
+    /**  
+     *  Provider actions
+    */
+   if(args?.data?.businessProfile?.update?.orders?.update){
+       const {data,where} = args.data.businessProfile.update.orders.update[0];
+       if(data.orderStatus == OrderStatus.REJECTED){
+        // notify order rejected by provider
+        prisma.order.findUnique({where:{id:where.id},select:{
+          owner:{
+            select:{
+              device:{
+                select:{
+                  id:true,
+                  fcm_id:true
+                }
+              }
+            }
+          
+          }
+        }}).then((v)=>{
+          const fcm_id = v.owner.device.fcm_id;
+          const message: Notification = {
+            message: "Your request was declined by provider",
+            notificationType: NotificationType.ORDER_CANCELLED,
+            payload:order
+          };
+          publish(PUSH_MESSAGE_CHANNEL,{fcm_id,message})
+        })
+      }
+      else  if(data.orderStatus == OrderStatus.ACCEPTED){
+       // notify order accepted by provider
+       prisma.order.findUnique({where:{id:where.id},select:{
+        owner:{
+          select:{
+            device:{
+              select:{
+                id:true,
+                fcm_id:true
+              }
+            }
+          }
+        
+        }
+      }}).then((v)=>{
+        const fcm_id = v.owner.device.fcm_id;
+        const message: Notification = {
+          message: "Your request was accepted by provider",
+          notificationType: NotificationType.ORDER_ACCEPTED,
+          payload:order
+        };
+        publish(PUSH_MESSAGE_CHANNEL,{fcm_id,message,ttl:60})
+      })
+      }
+   }
   }
+
     return n(req);
   }
 
-
+  async sendNotification(data: {fcm_id:string,message: Notification,ttl:number}) {
+    const {fcm_id,message,ttl} = data;
+    
+    if (fcm_id) {
+      const result = await this.app.sendNotification(fcm_id, {
+        notification: {
+          title: message.message,
+        },
+        data: {
+          payload: JSON.stringify(message)
+        }
+      }, {
+        priority: "high",
+        ttl:ttl
+      }).catch(e => {
+      this.logger.error(result,BusinessLogicService.name);
+    });
+    }
+  }
 // Field resolvers 
 @BlocFieldResolver("Business","minPrice",function(this:BusinessLogicService,...args:[any,any,TenantContext,any]){
   return new DataLoader((async function (keys){
