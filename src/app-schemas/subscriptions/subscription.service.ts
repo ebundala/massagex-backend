@@ -15,8 +15,6 @@ export const PUSH_MESSAGE_CHANNEL ="PUSH_MESSAGE_CHANNEL"
 @Injectable()
 @Bloc()
 export class SubscriptionService {
- 
-
   constructor(
     private readonly pubSub: RedisPubSub,
     private readonly redisCache: RedisCache,

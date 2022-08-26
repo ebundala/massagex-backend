@@ -64,9 +64,10 @@ export class SubscriptionResolver {
 
     })
     locations(@Args("where") args: OrderWhereUniqueInput, @Context() context: TenantContext, @Info() info) {
+        debugger
         if (context.auth?.uid) {
             return this.pubSub.asyncIterator(LOCATION_CHANGED_CHANNEL, { args, context, info });
-        }        
+        }   
         throw new UnauthorizedException()
     } 
 
