@@ -830,7 +830,7 @@ async updateOneUserBloc(v: BusinessRequest<TenantContext>) {
 @PrismaAttach("User", "update")
   async orderCreated(req: PrismaHookRequest<User>, n: PrismaHookHandler) {
     const { result, prisma, params } = req;
-    const order = result.ordered[0];
+    
     const {action,args} = params as {action:string,args:{data:UserUpdateInput}};
     const publish = (topic:string,value)=>{        
       return this.redisPubSub.publish(topic, value);
@@ -860,7 +860,7 @@ async updateOneUserBloc(v: BusinessRequest<TenantContext>) {
       }
     }).then(
       (orders)=>{      
-      return Promise.all(orders.map((v)=>publish(LOCATION_CHANGED_CHANNEL,v)));
+      return Promise.allSettled(orders.map((v)=>publish(LOCATION_CHANGED_CHANNEL,{id:v.id})));
       }
     )  
     }
@@ -872,7 +872,7 @@ async updateOneUserBloc(v: BusinessRequest<TenantContext>) {
   if(args?.data?.ordered?.create){
   //  order created
     this.logger.debug("ORDER CREATED",BusinessLogicService.name)
-   
+    const order = result.ordered[0];
    
     await prisma.order.findUnique({where:{id:order.id},select:{
       business:{
@@ -902,6 +902,7 @@ async updateOneUserBloc(v: BusinessRequest<TenantContext>) {
   else if(args?.data?.ordered?.update){
     this.logger.debug("ORDER UPDATED",BusinessLogicService.name)
     const {data,where} = args.data.ordered.update[0];
+    const order = result.ordered[0];
      if(data.orderStatus == OrderStatus.REJECTED){
       // notify order cancelled by requester
      await prisma.order.findUnique({where:{id:where.id},select:{
