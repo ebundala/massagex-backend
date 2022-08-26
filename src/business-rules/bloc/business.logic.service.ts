@@ -931,13 +931,16 @@ async updateOneUserBloc(v: BusinessRequest<TenantContext>) {
       })
     }
 
-    /**  
+   
+  }
+ /**  
      *  Provider actions
     */
-   if(args?.data?.businessProfile?.update?.orders?.update){
+  if(args?.data?.businessProfile?.update?.orders?.update){
     this.logger.debug("ORDER UPDATED PROVIDER",BusinessLogicService.name)
 
        const {data,where} = args.data.businessProfile.update.orders.update[0];
+       const order = result.businessProfile.orders[0];
        if(data.orderStatus.set == OrderStatus.REJECTED){
         // notify order rejected by provider
        await prisma.order.findUnique({where:{id:where.id},select:{
@@ -987,8 +990,6 @@ async updateOneUserBloc(v: BusinessRequest<TenantContext>) {
       })
       }
    }
-  }
-
     return n(req);
   }
 
