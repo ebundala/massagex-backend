@@ -900,10 +900,10 @@ async updateOneUserBloc(v: BusinessRequest<TenantContext>) {
     })
   }
   else if(args?.data?.ordered?.update){
-    this.logger.debug("ORDER UPDATED",BusinessLogicService.name)
+    this.logger.debug("ORDER UPDATED REQUESTOR",BusinessLogicService.name)
     const {data,where} = args.data.ordered.update[0];
     const order = result.ordered[0];
-     if(data.orderStatus == OrderStatus.REJECTED){
+     if(data.orderStatus.set == OrderStatus.REJECTED){
       // notify order cancelled by requester
      await prisma.order.findUnique({where:{id:where.id},select:{
         business:{
@@ -935,8 +935,10 @@ async updateOneUserBloc(v: BusinessRequest<TenantContext>) {
      *  Provider actions
     */
    if(args?.data?.businessProfile?.update?.orders?.update){
+    this.logger.debug("ORDER UPDATED PROVIDER",BusinessLogicService.name)
+
        const {data,where} = args.data.businessProfile.update.orders.update[0];
-       if(data.orderStatus == OrderStatus.REJECTED){
+       if(data.orderStatus.set == OrderStatus.REJECTED){
         // notify order rejected by provider
        await prisma.order.findUnique({where:{id:where.id},select:{
           owner:{
@@ -960,7 +962,7 @@ async updateOneUserBloc(v: BusinessRequest<TenantContext>) {
          return publish(PUSH_MESSAGE_CHANNEL,{fcm_id,message})
         })
       }
-      else  if(data.orderStatus == OrderStatus.ACCEPTED){
+      else  if(data.orderStatus.set == OrderStatus.ACCEPTED){
        // notify order accepted by provider
      await  prisma.order.findUnique({where:{id:where.id},select:{
         owner:{
