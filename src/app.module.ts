@@ -177,7 +177,7 @@ const RequestLogger: GraphQLRequestListener<TenantContext> = {
             debugger
             const [realm,token]=(data.req?.headers?.authorization??data.connection?.context?.headers?.authorization)?.split(" ")??["",""]
             const auth = await app.app.auth().verifyIdToken(token).catch((e)=>null);            
-             if(auth&&auth?.uid){
+             if(auth?.uid){
               logger.debug(await redisCache.get(`last-seen-${auth.uid}`),"Presence");        
               await redisCache.set(`last-seen-${auth.uid}`,(new Date()).toISOString(),"EX",60*60*24*7);
              }
@@ -203,8 +203,8 @@ const RequestLogger: GraphQLRequestListener<TenantContext> = {
              //TODO make sure authorization is passed according to ws
             
                 const headers = context.request.headers
-                logger.debug(connectionParams,"Params")
-                logger.debug(headers,"Headers")
+              //  logger.debug(connectionParams,"Params")
+               // logger.debug(headers,"Headers")
               return { headers:{...(connectionParams??{}),...headers}};   
 
             }

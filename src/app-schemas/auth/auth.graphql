@@ -34,16 +34,18 @@ scalar Json
 # 	message: String!
 # 	data: User 
 # }
-type SignOutResult {
-	status: Boolean
-	message: String
-}
+# type SignOutResult {
+# 	status: Boolean
+# 	message: String
+# }
+
 extend type User{
 	lastSeen: DateTime
 	compoundRating: Float
 	experience: Float
-	
+	isFavorited: Boolean
 }
+
 extend type Business{
 	acceptance: Float
 	cancelation: Float
@@ -51,9 +53,26 @@ extend type Business{
 	clients: Int
 	minPrice: Float
 	workCompleted: Int
-	
-
+	isFavorited: Boolean
 }
+
+extend type Review{
+	isFavorited: Boolean
+}
+
+extend type Comment{
+	isFavorited: Boolean
+}
+
+extend type Service{
+	isFavorited: Boolean
+}
+
+extend type Order{
+	isFavorited: Boolean
+	isExpired: Boolean
+}
+
 extend type Mutation {	
 	notifyUserSignup(data:Json!,token:String!):Json
 	getUserClaims(uid:String!,token:String!):Json

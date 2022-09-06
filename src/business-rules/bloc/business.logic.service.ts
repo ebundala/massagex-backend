@@ -821,14 +821,11 @@ async updateOneUserBloc(v: BusinessRequest<TenantContext>) {
   const { auth } = context;
   return { rules: [onlyOwnerhasAccess(where.id)], facts: auth }
 }
+
 // subscriptions
-// @BlocAttach('updateOneUser.input.data.location.upsert.create.lat')
-// async notifyLocationChanges(v: BusinessRequest<TenantContext>, next){
-// debugger;
-//  return next(v)
-// }
-@PrismaAttach("User", "update")
-  async orderCreated(req: PrismaHookRequest<User>, n: PrismaHookHandler) {
+
+@PrismaAttach("User", "update",false)
+  async userUpdated(req: PrismaHookRequest<User>, n: PrismaHookHandler) {
     const { result, prisma, params } = req;
     
     const {action,args} = params as {action:string,args:{data:UserUpdateInput}};
@@ -1281,16 +1278,7 @@ acceptance(org:Business,args,ctx:TenantContext,info:any,dataloader:DataLoader<st
 clients(org:Business,args,ctx:TenantContext,info:any,dataloader:DataLoader<string,Number>){
   return dataloader.load(org.id);
 }
-// @BlocFieldResolver("User","location",function(this:BusinessLogicService,...args){
-//   return new DataLoader((async function (keys){      
-//     const locations= await this.redisCache.mget(keys);
-//     return locations;
-//   }).bind(this))
-// })
-//   async userLocation(user:User,args,ctx:TenantContext,info:any,dataloader:DataLoader<string,any>){
-  
-//     return dataloader.load(`location/${user.id}`);
-//   }
+
 
 @BlocFieldResolver("User","lastSeen",function(this:BusinessLogicService,...args){
   return new DataLoader((async function (keys){ 
@@ -1324,6 +1312,207 @@ async experience(parent:User,args, ctx:TenantContext,info:any,
 }
 
 
+@BlocFieldResolver("User","isFavorited",function(this:BusinessLogicService,...args:[any,any,TenantContext,any]){
+  return new DataLoader((async function (keys){      
+    const [parent,_,ctx,info] = args;
+    const favs = new Map();
+    const userId = ctx.auth?.uid;
+   (await ctx.prisma.favorite.groupBy({
+      by: ['userId'],
+      where:{        
+        AND:[
+          {authorId:{equals:userId}},
+          {userId:{in:keys}},         
+        ]
+      },
+      _count:{
+        userId:true
+      }
+    })??[]).forEach(e => {
+      favs.set(e.userId,e._count.userId>0)
+    });    
+     return keys.map((k)=> favs.get(k)??false);
+ 
+  }).bind(this))
+})
+async loadUserIds(parent:{id:string},args,ctx:TenantContext,info:any,dataloader:DataLoader<string,any>){
+  
+    return dataloader.load(parent.id);
+  }
+@BlocFieldResolver("Business","isFavorited",function(this:BusinessLogicService,...args:[any,any,TenantContext,any]){
+  return new DataLoader((async function (keys){      
+    const [parent,_,ctx,info] = args;
+    const favs = new Map();
+    const userId = ctx.auth?.uid;
+   (await ctx.prisma.favorite.groupBy({
+      by: ['businessId'],
+      where:{
+        
+        AND:[
+          {authorId:{equals:userId}},
+          {businessId:{in:keys}},         
+        ]
+      },
+      _count:{
+        businessId:true
+      }
+    })??[]).forEach(e => {
+      favs.set(e.businessId,e._count.businessId>0)
+    });    
+     return keys.map((k)=> favs.get(k)??false);
+ 
+  }).bind(this))
+})
+async loadBusinessIds(parent:{id:string},args,ctx:TenantContext,info:any,dataloader:DataLoader<string,any>){
+  
+    return dataloader.load(parent.id);
+  }
+@BlocFieldResolver("Review","isFavorited",function(this:BusinessLogicService,...args:[any,any,TenantContext,any]){
+  return new DataLoader((async function (keys){      
+    const [parent,_,ctx,info] = args;
+    const favs = new Map();
+    const userId = ctx.auth?.uid;
+   (await ctx.prisma.favorite.groupBy({
+      by: ['reviewId'],
+      where:{
+        
+        AND:[
+          {authorId:{equals:userId}},
+          {reviewId:{in:keys}},         
+        ]
+      },
+      _count:{
+        reviewId:true
+      }
+    })??[]).forEach(e => {
+      favs.set(e.reviewId,e._count.reviewId>0)
+    });    
+     return keys.map((k)=> favs.get(k)??false);
+ 
+  }).bind(this))
+})
+async loadReviewIds(parent:{id:string},args,ctx:TenantContext,info:any,dataloader:DataLoader<string,any>){
+  
+    return dataloader.load(parent.id);
+  }
+@BlocFieldResolver("Comment","isFavorited",function(this:BusinessLogicService,...args:[any,any,TenantContext,any]){
+  return new DataLoader((async function (keys){      
+    const [parent,_,ctx,info] = args;
+    const favs = new Map();
+    const userId = ctx.auth?.uid;
+   (await ctx.prisma.favorite.groupBy({
+      by: ['commentId'],
+      where:{
+        
+        AND:[
+          {authorId:{equals:userId}},
+          {commentId:{in:keys}},         
+        ]
+      },
+      _count:{
+        commentId:true
+      }
+    })??[]).forEach(e => {
+      favs.set(e.commentId,e._count.commentId>0)
+    });    
+     return keys.map((k)=> favs.get(k)??false);
+ 
+  }).bind(this))
+})
+async loadCommentIds(parent:{id:string},args,ctx:TenantContext,info:any,dataloader:DataLoader<string,any>){
+  
+  return dataloader.load(parent.id);
+}
+@BlocFieldResolver("Service","isFavorited",function(this:BusinessLogicService,...args:[any,any,TenantContext,any]){
+  return new DataLoader((async function (keys){      
+    const [parent,_,ctx,info] = args;
+    const favs = new Map();
+    const userId = ctx.auth?.uid;
+   (await ctx.prisma.favorite.groupBy({
+      by: ['serviceId'],
+      where:{
+        
+        AND:[
+          {authorId:{equals:userId}},
+          {serviceId:{in:keys}},         
+        ]
+      },
+      _count:{
+        serviceId:true
+      }
+    })??[]).forEach(e => {
+      favs.set(e.serviceId,e._count.serviceId>0)
+    });    
+     return keys.map((k)=> favs.get(k)??false);
+ 
+  }).bind(this))
+})
+async loadServiceIds(parent:{id:string},args,ctx:TenantContext,info:any,dataloader:DataLoader<string,any>){
+  
+  return dataloader.load(parent.id);
+}
+@BlocFieldResolver("Order","isFavorited",function(this:BusinessLogicService,...args:[any,any,TenantContext,any]){
+  return new DataLoader((async function (keys){      
+    const [parent,_,ctx,info] = args;
+    const favs = new Map();
+    const userId = ctx.auth?.uid;
+   (await ctx.prisma.favorite.groupBy({
+      by: ['orderId'],
+      where:{
+        
+        AND:[
+          {authorId:{equals:userId}},
+          {orderId:{in:keys}},         
+        ]
+      },
+      _count:{
+        orderId:true
+      }
+    })??[]).forEach(e => {
+      favs.set(e.orderId,e._count.orderId>0)
+    });    
+     return keys.map((k)=> favs.get(k)??false);
+ 
+  }).bind(this))
+})
+async loadOrderIds(parent:{id:string},args,ctx:TenantContext,info:any,dataloader:DataLoader<string,any>){
+  
+  return dataloader.load(parent.id);
+}
+
+@BlocFieldResolver("Order","isExpired",function(this:BusinessLogicService,...args:[any,any,TenantContext,any]){
+  return new DataLoader((async function (keys){      
+    const [parent,_,ctx,info] = args;
+    const expired = new Map();
+    const now =new Date()
+    now.setTime(Date.now()+1000*60);
+   (await ctx.prisma.order.groupBy({
+      by: ['id'],
+      where:{        
+        AND:[
+          {id:{in:keys}},
+          {orderStatus:{equals:OrderStatus.WAITING}},
+          {createdAt:{
+            lt: now
+          }}  
+        ]
+      },
+      
+      _count:{
+        id:true,
+        
+      }
+    })??[]).forEach(e => {
+      expired.set(e.id,e._count.id>0)
+    });    
+     return keys.map((k)=> expired.get(k)??false);
+ 
+  }).bind(this))
+})
+  async isExpiredOrder(parent:{id:string},args,ctx:TenantContext,info:any,dataloader:DataLoader<string,any>){
+  
+    return dataloader.load(parent.id);
+  }
 
 
 }

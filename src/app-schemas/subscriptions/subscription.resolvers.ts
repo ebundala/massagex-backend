@@ -1,11 +1,10 @@
-import { Args, Context, Info, Mutation, Resolver, Subscription } from "@nestjs/graphql";
+import { Args, Context, Info, Resolver, Subscription } from "@nestjs/graphql";
 import { RedisPubSub } from "graphql-redis-subscriptions"
 import { TenantContext } from "@mechsoft/common";
 import { LOCATION_CHANGED_CHANNEL, SubscriptionService } from "./subscription.service";
 import { AuthorizerGuard } from "@mechsoft/enforcer";
-import { HttpException, UnauthorizedException, UseGuards } from "@nestjs/common";
-import { HttpErrorByCode } from "@nestjs/common/utils/http-error-by-code.util";
-import { LatLon, LocationResponse, OrderWhereUniqueInput } from "src/models/graphql";
+import { UnauthorizedException, UseGuards } from "@nestjs/common";
+import { LocationResponse, OrderWhereUniqueInput } from "src/models/graphql";
 import { BusinessStatus, OrderStatus } from "@prisma/client";
 
 
