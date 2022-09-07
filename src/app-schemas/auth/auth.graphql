@@ -72,7 +72,9 @@ extend type Order{
 	isFavorited: Boolean
 	isExpired: Boolean
 }
-
+extend type  BusinessWhereInput{
+	category: CategoryWhereInput
+}
 extend type Mutation {	
 	notifyUserSignup(data:Json!,token:String!):Json
 	getUserClaims(uid:String!,token:String!):Json

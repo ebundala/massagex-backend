@@ -1,7 +1,19 @@
-import { SdlGeneratorServiceOptions, writeSchemaToFile,createPolicySchema} from '@mechsoft/apigen';
+import {
+  SdlGeneratorServiceOptions,
+  writeSchemaToFile,
+  createPolicySchema,
+} from '@mechsoft/apigen';
 import { join } from 'path';
-import { Upload, UploadDirective, UploadTypeResolver, } from './app-schemas/directives/uploader.directive';
-import {GraphQLJSONObject,GraphQLPhoneNumber,GraphQLEmailAddress,} from 'graphql-scalars'
+import {
+  Upload,
+  UploadDirective,
+  UploadTypeResolver,
+} from './app-schemas/directives/uploader.directive';
+import {
+  GraphQLJSONObject,
+  GraphQLPhoneNumber,
+  GraphQLEmailAddress,
+} from 'graphql-scalars';
 import { ThumbnailDirective } from './app-schemas/directives/thumbnail.directive';
 
 const options: SdlGeneratorServiceOptions = {
@@ -10,23 +22,29 @@ const options: SdlGeneratorServiceOptions = {
   customOptions: {
     onDelete: true,
     genTypes: true,
-    modelFieldTypeOverrides:{
-      "Json":"JSONObject"
+    modelFieldTypeOverrides: {
+      Json: 'JSONObject',
     },
     // excludeFields: ['Id'],
     excludeQueriesAndMutationsByModel: {
-       'User': ['createOne','findMany'],
+      User: ['createOne', 'findMany'],
       //  'Review':['createOne','updateOne','findUnique'],
       //  'Comment':['createOne','updateOne','findUnique'],
-       'Category':['createOne','updateOne','findUnique'],
-       'PaymentMethod':['createOne','updateOne','findUnique'],
-       'Business':['createOne','updateOne'],
-      'Help':['findUnique'],
+      Category: ['createOne', 'updateOne', 'findUnique'],
+      PaymentMethod: ['createOne', 'updateOne', 'findUnique'],
+      Business: ['createOne', 'updateOne'],
+      Help: ['findUnique'],
     },
     excludeQueriesAndMutations: [
-      'upsertOne', 'aggregate', 'deleteMany', 'updateMany', 'findCount','deleteOne','findFirst'
+      'upsertOne',
+      'aggregate',
+      'deleteMany',
+      'updateMany',
+      'findCount',
+      'deleteOne',
+      'findFirst',
     ],
-    
+
     excludeModels: [
       {
         name: 'CasbinRule',
@@ -38,7 +56,7 @@ const options: SdlGeneratorServiceOptions = {
         queries: true,
         mutations: true,
       },
-      
+
       {
         name: 'Location',
         queries: true,
@@ -119,30 +137,30 @@ const options: SdlGeneratorServiceOptions = {
   },
 
   sdlOptions: {
-    typePaths: ['./src/schemas/**/*.graphql','./src/app-schemas/**/*.graphql'],
+    typePaths: ['./src/schemas/**/*.graphql', './src/app-schemas/**/*.graphql'],
     definitions: {
       path: 'src/models/graphql.ts',
-        outputAs: 'class',
-        customScalarTypeMapping: {
-            Upload: 'Promise < FileUpload >',
-            DateTime: 'string',
-            // JSONObject: 'string',
-            EmailAddress:'string',
-            PhoneNumber:'string',
-        },
-      additionalHeader: `import { FileUpload } from 'graphql-upload';`
+      outputAs: 'class',
+      customScalarTypeMapping: {
+        Upload: 'Promise < FileUpload >',
+        DateTime: 'string',
+        // JSONObject: 'string',
+        EmailAddress: 'string',
+        PhoneNumber: 'string',
+      },
+      additionalHeader: `import { FileUpload } from 'graphql-upload';`,
     },
     transformSchema: (schema) => {
-      const path = join(process.cwd(), 'src/models')
-     const filePath= writeSchemaToFile(schema, path);
-      console.log("schema written to file")
-     //TODO: generate policy schema
-     //TODO filter introspection query
-     // createPolicySchema('src/authorization/policy', filePath);
+      const path = join(process.cwd(), 'src/models');
+      const filePath = writeSchemaToFile(schema, path);
+      console.log('schema written to file');
+      //TODO: generate policy schema
+      //TODO filter introspection query
+      // createPolicySchema('src/authorization/policy', filePath);
       return schema;
     },
     //debug: true,
-   // uploads: true,
+    // uploads: true,
     //playground: false,
     schemaDirectives: {
       file: UploadDirective,
@@ -150,11 +168,11 @@ const options: SdlGeneratorServiceOptions = {
     },
     resolvers: {
       Upload: UploadTypeResolver,
-      JSONObject:GraphQLJSONObject,
-      EmailAddress:GraphQLEmailAddress,
-      PhoneNumber:GraphQLPhoneNumber
+      JSONObject: GraphQLJSONObject,
+      EmailAddress: GraphQLEmailAddress,
+      PhoneNumber: GraphQLPhoneNumber,
     },
     sortSchema: true,
-  }
+  },
 };
 export default options;

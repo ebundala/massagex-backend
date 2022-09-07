@@ -1,9 +1,7 @@
+import { Module } from '@nestjs/common';
+import { MpesaPaymentResolver } from './MpesaPaymentResolvers';
 
-    import { Module } from '@nestjs/common';
-    import { MpesaPaymentResolver } from './MpesaPaymentResolvers';
-
-    @Module({
-      providers:[MpesaPaymentResolver]
-    })
-    export class MpesaPaymentModule{}
-    
+@Module({
+  providers: [MpesaPaymentResolver],
+})
+export class MpesaPaymentModule {}

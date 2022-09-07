@@ -8,20 +8,26 @@ import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import {
   GraphQLRequestContextWillSendResponse,
-  GraphQLRequestListener
+  GraphQLRequestListener,
 } from 'apollo-server-plugin-base';
 import { AuthModule } from './app-schemas/auth/auth.module';
-import { UploadDirective, UploadTypeResolver } from './app-schemas/directives/uploader.directive';
+import {
+  UploadDirective,
+  UploadTypeResolver,
+} from './app-schemas/directives/uploader.directive';
 import { CasbinModule, CasbinService } from '@mechsoft/enforcer';
-import { BusinessRulesManagerModule,BlocFieldResolverExplorer } from '@mechsoft/business-rules-manager';
+import {
+  BusinessRulesManagerModule,
+  BlocFieldResolverExplorer,
+} from '@mechsoft/business-rules-manager';
 import modules from './schemas';
 import { join } from 'path';
 import { ServeStaticModule } from '@nestjs/serve-static';
-import { BusinessLogicModule,} from './business-rules/busines.logic.module';
+import { BusinessLogicModule } from './business-rules/busines.logic.module';
 import { PubSubModule } from './pubsub/pubsub.module';
 import { SubscriptionModule } from './app-schemas/subscriptions/subscription.module';
 import { RedisCache } from './pubsub/redis.service';
-import {JSONObjectResolver} from 'graphql-scalars'
+import { JSONObjectResolver } from 'graphql-scalars';
 
 import { MpesaTzModule } from './mpesa-tz/mpesa-tz.module';
 import { PaymentModule } from './app-schemas/payment/payment.module';
@@ -31,10 +37,7 @@ import { mergeSchemas } from 'apollo-server-express';
 import { GoogleMapModule } from './app-schemas/geolocation/googlemap.module';
 import { RedisPubSub } from 'graphql-redis-subscriptions';
 
-
-
 const RequestLogger: GraphQLRequestListener<TenantContext> = {
-
   /*
    didResolveSource?(
      requestContext: GraphQLRequestContextDidResolveSource<TenantContext>,
@@ -82,7 +85,7 @@ const RequestLogger: GraphQLRequestListener<TenantContext> = {
     const time = Date.now() - (context.timestamp ?? Date.now());
     logger?.debug(
       `Request took ${time}/ms to complete for tenantId: ${tenantId}`,
-      'RequestLogger'
+      'RequestLogger',
     );
   },
 };
@@ -100,8 +103,8 @@ const RequestLogger: GraphQLRequestListener<TenantContext> = {
         CasbinModule.forRootAsync({
           model: './src/authorization/rbac_model.conf',
           adapterOptions: {
-            log: ['error', 'info', 'query', 'warn']
-          }
+            log: ['error', 'info', 'query', 'warn'],
+          },
         }),
         AppLoggerModule,
         AuthModule,
@@ -112,41 +115,44 @@ const RequestLogger: GraphQLRequestListener<TenantContext> = {
         MpesaTzModule,
         PaymentModule,
         FcmRegistrationModule,
-        GoogleMapModule.forRoot()
+        GoogleMapModule.forRoot(),
       ],
       inject: [
-        PrismaClient,        
-         CasbinService, 
-        FirebaseService,AppLogger,RedisCache,RedisPubSub,BlocFieldResolverExplorer,],
-      useFactory: (client: PrismaClient,
+        PrismaClient,
+        CasbinService,
+        FirebaseService,
+        AppLogger,
+        RedisCache,
+        RedisPubSub,
+        BlocFieldResolverExplorer,
+      ],
+      useFactory: (
+        client: PrismaClient,
         enforcer: CasbinService,
         app: FirebaseService,
         logger: AppLogger,
         redisCache: RedisCache,
-        redisPubSub:RedisPubSub,
-        fieldResolverExplorer: BlocFieldResolverExplorer
-        ) => {
-          
-
-          return {
+        redisPubSub: RedisPubSub,
+        fieldResolverExplorer: BlocFieldResolverExplorer,
+      ) => {
+        return {
           typePaths: [
             './src/schemas/**/*.graphql',
             './src/app-schemas/**/*.graphql',
           ],
-         schemaDirectives: {
-           file: UploadDirective,
-          
-         },
-       
-        //  typeDefs:[
-        //    JSONDefinition,
-        //  ],
-         resolvers: {
-           Upload: UploadTypeResolver,
-           JSONObject:JSONObjectResolver,
-           ...fieldResolverExplorer.exploreResolvers()           
-         },
-          //  plugins: [/   
+          schemaDirectives: {
+            file: UploadDirective,
+          },
+
+          //  typeDefs:[
+          //    JSONDefinition,
+          //  ],
+          resolvers: {
+            Upload: UploadTypeResolver,
+            JSONObject: JSONObjectResolver,
+            ...fieldResolverExplorer.exploreResolvers(),
+          },
+          //  plugins: [/
           //   {
           //     requestDidStart:(
           //       ctx: GraphQLRequestContext<TenantContext>,
@@ -169,21 +175,34 @@ const RequestLogger: GraphQLRequestListener<TenantContext> = {
           //       debugger
           //     },
           //   }
-          
 
           //  },
-          
+
           context: async (data): Promise<TenantContext> => {
-            debugger
-            const [realm,token]=(data.req?.headers?.authorization??data.connection?.context?.headers?.authorization)?.split(" ")??["",""]
-            const auth = await app.app.auth().verifyIdToken(token).catch((e)=>null);            
-             if(auth?.uid){
-              logger.debug(await redisCache.get(`last-seen-${auth.uid}`),"Presence");        
-              await redisCache.set(`last-seen-${auth.uid}`,(new Date()).toISOString(),"EX",60*60*24*7);
-             }
+            debugger;
+            const [realm, token] = (
+              data.req?.headers?.authorization ??
+              data.connection?.context?.headers?.authorization
+            )?.split(' ') ?? ['', ''];
+            const auth = await app.app
+              .auth()
+              .verifyIdToken(token)
+              .catch((e) => null);
+            if (auth?.uid) {
+              logger.debug(
+                await redisCache.get(`last-seen-${auth.uid}`),
+                'Presence',
+              );
+              await redisCache.set(
+                `last-seen-${auth.uid}`,
+                new Date().toISOString(),
+                'EX',
+                60 * 60 * 24 * 7,
+              );
+            }
             //TODO: remove this line after test/dev to enable authorization
             enforcer.enableEnforce(false);
-           //TODO add rediscache and pubsub to tenant context 
+            //TODO add rediscache and pubsub to tenant context
             const ctx: TenantContext = {
               tenantId: null,
               auth: auth,
@@ -191,47 +210,48 @@ const RequestLogger: GraphQLRequestListener<TenantContext> = {
               enforcer: enforcer,
               prisma: client,
               logger,
-              timestamp: Date.now()
+              timestamp: Date.now(),
             };
-            return {...ctx,redisCache,redisPubSub,...fieldResolverExplorer.createDataloaders(null,null,{...ctx,redisCache,redisPubSub,logger},null)};
-
-
+            return {
+              ...ctx,
+              redisCache,
+              redisPubSub,
+              ...fieldResolverExplorer.createDataloaders(
+                null,
+                null,
+                { ...ctx, redisCache, redisPubSub, logger },
+                null,
+              ),
+            };
           },
           subscriptions: {
-            onConnect: async (connectionParams,socket,context) => {
-              debugger
-             //TODO make sure authorization is passed according to ws
-            
-                const headers = context.request.headers
-              //  logger.debug(connectionParams,"Params")
-               // logger.debug(headers,"Headers")
-              return { headers:{...(connectionParams??{}),...headers}};   
+            onConnect: async (connectionParams, socket, context) => {
+              debugger;
+              //TODO make sure authorization is passed according to ws
 
-            }
-            ,
-            onDisconnect: async (webSocket,context)=>{
-             // logger.debug(await redisCache.get("lastseen-xxx"),"Presence");
-             // await redisCache.set("lastseen-xxx",Date.now());
-            }
+              const headers = context.request.headers;
+              //  logger.debug(connectionParams,"Params")
+              // logger.debug(headers,"Headers")
+              return { headers: { ...(connectionParams ?? {}), ...headers } };
+            },
+            onDisconnect: async (webSocket, context) => {
+              // logger.debug(await redisCache.get("lastseen-xxx"),"Presence");
+              // await redisCache.set("lastseen-xxx",Date.now());
+            },
           },
-          
+
           debug: false,
           uploads: true,
           installSubscriptionHandlers: true,
           playground: true,
-         // extensions: []
+          // extensions: []
         };
-      }
-    }
-    ),
+      },
+    }),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '../', 'public'),
       exclude: ['/graphql', '/casbin-admin'],
-
     }),
-    
-   
-
   ],
 })
 export class AppModule implements NestModule {

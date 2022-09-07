@@ -1,16 +1,16 @@
-import { Bloc } from "@mechsoft/business-rules-manager";
-import { Injectable } from "@nestjs/common";
-import { RedisPubSub } from "graphql-redis-subscriptions"
-import { RedisCache } from "src/pubsub/redis.service";
-import { FirebaseService } from "@mechsoft/firebase-admin";
+import { Bloc } from '@mechsoft/business-rules-manager';
+import { Injectable } from '@nestjs/common';
+import { RedisPubSub } from 'graphql-redis-subscriptions';
+import { RedisCache } from 'src/pubsub/redis.service';
+import { FirebaseService } from '@mechsoft/firebase-admin';
 import { PrismaClient } from '@mechsoft/prisma-client';
-import { AppLogger } from "@mechsoft/app-logger";
-import {LatLon }   from "src/models/graphql"
-import { TenantContext } from "@mechsoft/common";
-import {BusinessMode,Location} from '@prisma/client'
+import { AppLogger } from '@mechsoft/app-logger';
+import { LatLon } from 'src/models/graphql';
+import { TenantContext } from '@mechsoft/common';
+import { BusinessMode, Location } from '@prisma/client';
 
-export const LOCATION_CHANGED_CHANNEL = "LOCATION_CHANGED_CHANNEL";
-export const PUSH_MESSAGE_CHANNEL ="PUSH_MESSAGE_CHANNEL"
+export const LOCATION_CHANGED_CHANNEL = 'LOCATION_CHANGED_CHANNEL';
+export const PUSH_MESSAGE_CHANNEL = 'PUSH_MESSAGE_CHANNEL';
 
 @Injectable()
 @Bloc()
@@ -20,7 +20,8 @@ export class SubscriptionService {
     private readonly redisCache: RedisCache,
     private readonly client: PrismaClient,
     private readonly app: FirebaseService,
-    private readonly log: AppLogger) {
+    private readonly log: AppLogger,
+  ) {
     //register handlers for fcm here
     /* this.pubSub.subscribe(ORDER_RECEIVED, this.orderNotifications.bind(this));
     this.pubSub.subscribe(ORDER_CHANGED, this.orderChangeNotifications.bind(this));
@@ -28,54 +29,65 @@ export class SubscriptionService {
     this.pubSub.subscribe(INVITE_CHANGED, this.inviteChangeNotifications.bind(this));
     this.pubSub.subscribe(FEEDBACK_RECEIVED, this.reviewNotifications.bind(this)); */
   }
-  
-  async getLocation(orderId: string, context: TenantContext,info): Promise<any> {
-     const {auth,prisma} = context;
-     if(!auth.uid)return;
-     const uid = auth.uid;
-     const { select } = prisma.getSelection(info).valueOf('data', 'Location', { select: {} });
 
-    const order= await prisma.order.findUnique({where:{id: orderId },select:{
-      id:true,
-      ownerId:true,
-      business:{       
-        select:{
-          id:true,
-          ownerId:true,
-          mode:true
-        }
+  async getLocation(
+    orderId: string,
+    context: TenantContext,
+    info,
+  ): Promise<any> {
+    const { auth, prisma } = context;
+    if (!auth.uid) return;
+    const uid = auth.uid;
+    const { select } = prisma
+      .getSelection(info)
+      .valueOf('data', 'Location', { select: {} });
+
+    const order = await prisma.order.findUnique({
+      where: { id: orderId },
+      select: {
+        id: true,
+        ownerId: true,
+        business: {
+          select: {
+            id: true,
+            ownerId: true,
+            mode: true,
+          },
+        },
+      },
+    });
+    const isBusinessOwner = order.business.ownerId === auth.uid;
+    if (order.business.mode == BusinessMode.MOBILE_MODE) {
+      if (isBusinessOwner) {
+        return prisma.location.findFirst({
+          where: {
+            businesses: {
+              every: {
+                id: { equals: order.business.id },
+              },
+            },
+          },
+          orderBy: {
+            updatedAt: 'desc',
+          },
+          select: select,
+        });
       }
-     }})
-     const isBusinessOwner = order.business.ownerId === auth.uid;
-if (order.business.mode == BusinessMode.MOBILE_MODE){
-  if(isBusinessOwner){
-   return prisma.location.findFirst({where:{
-      businesses:{
-      every:{
-          id:{equals:order.business.id}
-        }
-      }
-    },
-    orderBy:{
-      updatedAt:'desc'
     }
-    ,select:select})
+    return prisma.location.findFirst({
+      where: {
+        users: {
+          every: {
+            id: { equals: order.ownerId },
+          },
+        },
+      },
+      orderBy: {
+        updatedAt: 'desc',
+      },
+      select: select,
+    });
   }
-}
-return prisma.location.findFirst({where:{
-  users:{
-  every:{
-      id:{equals:order.ownerId}
-    }
-  }
-},
-orderBy:{
-  updatedAt:'desc'
-}
-,select:select});
-
-}
-
 
   async cacheUserLocation(uid: string, location: Location) {
     if (uid && location && location.lat && location.lon) {
@@ -83,35 +95,25 @@ orderBy:{
       await this.redisCache.set(key, JSON.stringify(location));
       this.pubSub.publish(LOCATION_CHANGED_CHANNEL, { id: uid });
     }
-
   }
   async getCachedUserLocation(uid: string): Promise<LatLon> {
     const key = `location/${uid}`;
     const v = await this.redisCache.get(key);
     if (v) return JSON.parse(v);
-  } 
+  }
   async cacheBusinessLocation(id: string, location: Location) {
     if (id && location && location.lat && location.lon) {
       const key = `busines-location/${id}`;
       await this.redisCache.set(key, JSON.stringify(location));
       this.pubSub.publish(LOCATION_CHANGED_CHANNEL, { id: id });
     }
-
   }
   async getCachedBusinessLocation(id: string): Promise<LatLon> {
     const key = `busines-location/${id}`;
     const v = await this.redisCache.get(key);
     if (v) return JSON.parse(v);
-  } 
-
-  
+  }
 }
-
-
-
-
-
-
 
 /* 
   async orderNotifications(data: Order) {

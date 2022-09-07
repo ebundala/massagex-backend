@@ -1,5 +1,5 @@
 import { HttpModule, Module } from '@nestjs/common';
-import *  as Http from 'http';
+import * as Http from 'http';
 import * as Https from 'https';
 import { PrismaClientModule } from '@mechsoft/prisma-client';
 import { MpesaTzController } from './mpesa-tz.controller';
@@ -20,11 +20,9 @@ export const HTTP_CLIENT_CONFIG = {
 };
 
 @Module({
-  imports: [
-    HttpModule.register(HTTP_CLIENT_CONFIG)
-  ],
- // controllers: [MpesaTzController],
+  imports: [HttpModule.register(HTTP_CLIENT_CONFIG)],
+  // controllers: [MpesaTzController],
   providers: [MpesaTzService],
-  exports:[MpesaTzService]
+  exports: [MpesaTzService],
 })
-export class MpesaTzModule { }
+export class MpesaTzModule {}

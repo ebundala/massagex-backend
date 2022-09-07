@@ -33,6 +33,7 @@ const createAdminToken = async () => {
     return;
   }
 };
+
 export const beforeCreate = functions.auth.user()
     .beforeCreate(async (user, context) => {
       // const bearer = context.auth?.token;

@@ -1,9 +1,7 @@
+import { Module } from '@nestjs/common';
+import { DeviceResolver } from './DeviceResolvers';
 
-    import { Module } from '@nestjs/common';
-    import { DeviceResolver } from './DeviceResolvers';
-
-    @Module({
-      providers:[DeviceResolver]
-    })
-    export class DeviceModule{}
-    
+@Module({
+  providers: [DeviceResolver],
+})
+export class DeviceModule {}

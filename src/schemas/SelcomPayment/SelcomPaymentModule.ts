@@ -1,9 +1,7 @@
+import { Module } from '@nestjs/common';
+import { SelcomPaymentResolver } from './SelcomPaymentResolvers';
 
-    import { Module } from '@nestjs/common';
-    import { SelcomPaymentResolver } from './SelcomPaymentResolvers';
-
-    @Module({
-      providers:[SelcomPaymentResolver]
-    })
-    export class SelcomPaymentModule{}
-    
+@Module({
+  providers: [SelcomPaymentResolver],
+})
+export class SelcomPaymentModule {}

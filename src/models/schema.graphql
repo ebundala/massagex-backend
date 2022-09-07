@@ -14,15 +14,11 @@ scalar PhoneNumber
 
 scalar Json
 
-type SignOutResult {
-  status: Boolean
-  message: String
-}
-
 type User {
   lastSeen: DateTime
   compoundRating: Float
   experience: Float
+  isFavorited: Boolean
   id: String!
   email: String
   displayName: String
@@ -60,6 +56,7 @@ type Business {
   clients: Int
   minPrice: Float
   workCompleted: Int
+  isFavorited: Boolean
   id: String!
   owner: User!
   ownerId: String!
@@ -80,6 +77,117 @@ type Business {
   updatedAt: DateTime!
   abuseReports(where: AbuseReportWhereInput, orderBy: [AbuseReportOrderByInput!], cursor: AbuseReportWhereUniqueInput, take: Int, skip: Int, distinct: [AbuseReportScalarFieldEnum!]): [AbuseReport!]!
   favorites(where: FavoriteWhereInput, orderBy: [FavoriteOrderByInput!], cursor: FavoriteWhereUniqueInput, take: Int, skip: Int, distinct: [FavoriteScalarFieldEnum!]): [Favorite!]!
+}
+
+type Review {
+  isFavorited: Boolean
+  id: String!
+  author: User!
+  authorId: String!
+  reviewee: User!
+  revieweeId: String!
+  value: Int!
+  content: String
+  attachments(where: AttachmentWhereInput, orderBy: [AttachmentOrderByInput!], cursor: AttachmentWhereUniqueInput, take: Int, skip: Int, distinct: [AttachmentScalarFieldEnum!]): [Attachment!]!
+  recordStatus: RecordStatus!
+  comments(where: CommentWhereInput, orderBy: [CommentOrderByInput!], cursor: CommentWhereUniqueInput, take: Int, skip: Int, distinct: [CommentScalarFieldEnum!]): [Comment!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  abuseReports(where: AbuseReportWhereInput, orderBy: [AbuseReportOrderByInput!], cursor: AbuseReportWhereUniqueInput, take: Int, skip: Int, distinct: [AbuseReportScalarFieldEnum!]): [AbuseReport!]!
+  favorites(where: FavoriteWhereInput, orderBy: [FavoriteOrderByInput!], cursor: FavoriteWhereUniqueInput, take: Int, skip: Int, distinct: [FavoriteScalarFieldEnum!]): [Favorite!]!
+}
+
+type Comment {
+  isFavorited: Boolean
+  id: String!
+  author: User!
+  authorId: String!
+  review: Review
+  reviewId: String!
+  attachments(where: AttachmentWhereInput, orderBy: [AttachmentOrderByInput!], cursor: AttachmentWhereUniqueInput, take: Int, skip: Int, distinct: [AttachmentScalarFieldEnum!]): [Attachment!]!
+  comments(where: CommentWhereInput, orderBy: [CommentOrderByInput!], cursor: CommentWhereUniqueInput, take: Int, skip: Int, distinct: [CommentScalarFieldEnum!]): [Comment!]!
+  commentsEnabled: Boolean!
+  content: String!
+  recordStatus: RecordStatus!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  comment: Comment
+  commentId: String
+  abuseReports(where: AbuseReportWhereInput, orderBy: [AbuseReportOrderByInput!], cursor: AbuseReportWhereUniqueInput, take: Int, skip: Int, distinct: [AbuseReportScalarFieldEnum!]): [AbuseReport!]!
+  favorites(where: FavoriteWhereInput, orderBy: [FavoriteOrderByInput!], cursor: FavoriteWhereUniqueInput, take: Int, skip: Int, distinct: [FavoriteScalarFieldEnum!]): [Favorite!]!
+}
+
+type Service {
+  isFavorited: Boolean
+  id: String!
+  name: String!
+  description: String
+  price: Float!
+  metadata: JSONObject
+  currency: String!
+  recordStatus: RecordStatus!
+  category: Category
+  categoryId: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  imageId: String
+  image: Attachment
+  business: Business!
+  businessId: String!
+  orders(where: OrderWhereInput, orderBy: [OrderOrderByInput!], cursor: OrderWhereUniqueInput, take: Int, skip: Int, distinct: [OrderScalarFieldEnum!]): [Order!]!
+  abuseReports(where: AbuseReportWhereInput, orderBy: [AbuseReportOrderByInput!], cursor: AbuseReportWhereUniqueInput, take: Int, skip: Int, distinct: [AbuseReportScalarFieldEnum!]): [AbuseReport!]!
+  favorites(where: FavoriteWhereInput, orderBy: [FavoriteOrderByInput!], cursor: FavoriteWhereUniqueInput, take: Int, skip: Int, distinct: [FavoriteScalarFieldEnum!]): [Favorite!]!
+}
+
+type Order {
+  isFavorited: Boolean
+  isExpired: Boolean
+  id: String!
+  quantity: Int!
+  recordStatus: RecordStatus!
+  orderStatus: OrderStatus!
+  notes: String
+  metadata: JSONObject
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  ownerId: String!
+  receiptId: String
+  owner: User!
+  receipt: Attachment
+  service: Service!
+  serviceId: String!
+  transactions(where: TransactionWhereInput, orderBy: [TransactionOrderByInput!], cursor: TransactionWhereUniqueInput, take: Int, skip: Int, distinct: [TransactionScalarFieldEnum!]): [Transaction!]!
+  business: Business
+  businessId: String
+  abuseReports(where: AbuseReportWhereInput, orderBy: [AbuseReportOrderByInput!], cursor: AbuseReportWhereUniqueInput, take: Int, skip: Int, distinct: [AbuseReportScalarFieldEnum!]): [AbuseReport!]!
+  favorites(where: FavoriteWhereInput, orderBy: [FavoriteOrderByInput!], cursor: FavoriteWhereUniqueInput, take: Int, skip: Int, distinct: [FavoriteScalarFieldEnum!]): [Favorite!]!
+}
+
+input BusinessWhereInput {
+  category: CategoryWhereInput
+  AND: [BusinessWhereInput!]
+  OR: [BusinessWhereInput!]
+  NOT: [BusinessWhereInput!]
+  id: StringFilter
+  owner: UserRelationFilter
+  ownerId: StringFilter
+  mode: EnumBusinessModeFilter
+  cover: AttachmentRelationFilter
+  coverId: StringNullableFilter
+  about: StringFilter
+  businessName: StringFilter
+  metadata: JsonNullableFilter
+  status: EnumBusinessStatusFilter
+  recordStatus: EnumRecordStatusFilter
+  services: ServiceListRelationFilter
+  orders: OrderListRelationFilter
+  attachments: AttachmentListRelationFilter
+  location: LocationRelationFilter
+  locationId: StringNullableFilter
+  createdAt: DateTimeFilter
+  updatedAt: DateTimeFilter
+  abuseReports: AbuseReportListRelationFilter
+  favorites: FavoriteListRelationFilter
 }
 
 type Mutation {
@@ -1635,25 +1743,6 @@ type CategoryCountResponse {
   message: String!
 }
 
-type Comment {
-  id: String!
-  author: User!
-  authorId: String!
-  review: Review
-  reviewId: String!
-  attachments(where: AttachmentWhereInput, orderBy: [AttachmentOrderByInput!], cursor: AttachmentWhereUniqueInput, take: Int, skip: Int, distinct: [AttachmentScalarFieldEnum!]): [Attachment!]!
-  comments(where: CommentWhereInput, orderBy: [CommentOrderByInput!], cursor: CommentWhereUniqueInput, take: Int, skip: Int, distinct: [CommentScalarFieldEnum!]): [Comment!]!
-  commentsEnabled: Boolean!
-  content: String!
-  recordStatus: RecordStatus!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  comment: Comment
-  commentId: String
-  abuseReports(where: AbuseReportWhereInput, orderBy: [AbuseReportOrderByInput!], cursor: AbuseReportWhereUniqueInput, take: Int, skip: Int, distinct: [AbuseReportScalarFieldEnum!]): [AbuseReport!]!
-  favorites(where: FavoriteWhereInput, orderBy: [FavoriteOrderByInput!], cursor: FavoriteWhereUniqueInput, take: Int, skip: Int, distinct: [FavoriteScalarFieldEnum!]): [Favorite!]!
-}
-
 type CommentListResponse {
   status: Boolean!
   data: [Comment!]
@@ -1993,28 +2082,6 @@ type MpesaPaymentCountResponse {
   message: String!
 }
 
-type Order {
-  id: String!
-  quantity: Int!
-  recordStatus: RecordStatus!
-  orderStatus: OrderStatus!
-  notes: String
-  metadata: JSONObject
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  ownerId: String!
-  receiptId: String
-  owner: User!
-  receipt: Attachment
-  service: Service!
-  serviceId: String!
-  transactions(where: TransactionWhereInput, orderBy: [TransactionOrderByInput!], cursor: TransactionWhereUniqueInput, take: Int, skip: Int, distinct: [TransactionScalarFieldEnum!]): [Transaction!]!
-  business: Business
-  businessId: String
-  abuseReports(where: AbuseReportWhereInput, orderBy: [AbuseReportOrderByInput!], cursor: AbuseReportWhereUniqueInput, take: Int, skip: Int, distinct: [AbuseReportScalarFieldEnum!]): [AbuseReport!]!
-  favorites(where: FavoriteWhereInput, orderBy: [FavoriteOrderByInput!], cursor: FavoriteWhereUniqueInput, take: Int, skip: Int, distinct: [FavoriteScalarFieldEnum!]): [Favorite!]!
-}
-
 type OrderListResponse {
   status: Boolean!
   data: [Order!]
@@ -2088,23 +2155,6 @@ type PaymentMethodCountResponse {
   status: Boolean!
   data: Int
   message: String!
-}
-
-type Review {
-  id: String!
-  author: User!
-  authorId: String!
-  reviewee: User!
-  revieweeId: String!
-  value: Int!
-  content: String
-  attachments(where: AttachmentWhereInput, orderBy: [AttachmentOrderByInput!], cursor: AttachmentWhereUniqueInput, take: Int, skip: Int, distinct: [AttachmentScalarFieldEnum!]): [Attachment!]!
-  recordStatus: RecordStatus!
-  comments(where: CommentWhereInput, orderBy: [CommentOrderByInput!], cursor: CommentWhereUniqueInput, take: Int, skip: Int, distinct: [CommentScalarFieldEnum!]): [Comment!]!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  abuseReports(where: AbuseReportWhereInput, orderBy: [AbuseReportOrderByInput!], cursor: AbuseReportWhereUniqueInput, take: Int, skip: Int, distinct: [AbuseReportScalarFieldEnum!]): [AbuseReport!]!
-  favorites(where: FavoriteWhereInput, orderBy: [FavoriteOrderByInput!], cursor: FavoriteWhereUniqueInput, take: Int, skip: Int, distinct: [FavoriteScalarFieldEnum!]): [Favorite!]!
 }
 
 type ReviewListResponse {
@@ -2233,27 +2283,6 @@ type SelcomPaymentCountResponse {
   status: Boolean!
   data: Int
   message: String!
-}
-
-type Service {
-  id: String!
-  name: String!
-  description: String
-  price: Float!
-  metadata: JSONObject
-  currency: String!
-  recordStatus: RecordStatus!
-  category: Category
-  categoryId: String
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  imageId: String
-  image: Attachment
-  business: Business!
-  businessId: String!
-  orders(where: OrderWhereInput, orderBy: [OrderOrderByInput!], cursor: OrderWhereUniqueInput, take: Int, skip: Int, distinct: [OrderScalarFieldEnum!]): [Order!]!
-  abuseReports(where: AbuseReportWhereInput, orderBy: [AbuseReportOrderByInput!], cursor: AbuseReportWhereUniqueInput, take: Int, skip: Int, distinct: [AbuseReportScalarFieldEnum!]): [AbuseReport!]!
-  favorites(where: FavoriteWhereInput, orderBy: [FavoriteOrderByInput!], cursor: FavoriteWhereUniqueInput, take: Int, skip: Int, distinct: [FavoriteScalarFieldEnum!]): [Favorite!]!
 }
 
 type ServiceListResponse {
@@ -2849,32 +2878,6 @@ input UserScalarWhereWithAggregatesInput {
   createdAt: DateTimeWithAggregatesFilter
   updatedAt: DateTimeWithAggregatesFilter
   locationId: StringNullableWithAggregatesFilter
-}
-
-input BusinessWhereInput {
-  AND: [BusinessWhereInput!]
-  OR: [BusinessWhereInput!]
-  NOT: [BusinessWhereInput!]
-  id: StringFilter
-  owner: UserRelationFilter
-  ownerId: StringFilter
-  mode: EnumBusinessModeFilter
-  cover: AttachmentRelationFilter
-  coverId: StringNullableFilter
-  about: StringFilter
-  businessName: StringFilter
-  metadata: JsonNullableFilter
-  status: EnumBusinessStatusFilter
-  recordStatus: EnumRecordStatusFilter
-  services: ServiceListRelationFilter
-  orders: OrderListRelationFilter
-  attachments: AttachmentListRelationFilter
-  location: LocationRelationFilter
-  locationId: StringNullableFilter
-  createdAt: DateTimeFilter
-  updatedAt: DateTimeFilter
-  abuseReports: AbuseReportListRelationFilter
-  favorites: FavoriteListRelationFilter
 }
 
 input BusinessOrderByInput {

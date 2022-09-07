@@ -1,30 +1,33 @@
-import {Module,DynamicModule} from '@nestjs/common'
-import { ConfigModule, ConfigService } from '@nestjs/config'
-import {GoogleMapService} from './googlemap.service'
-import {AxiosRequestConfig} from 'axios'
-import { GoogleMapGeolocationResolver } from './googlemap.resolver'
-import { AppConfigurationKeys } from 'src/config/env-config'
+import { Module, DynamicModule } from '@nestjs/common';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { GoogleMapService } from './googlemap.service';
+import { AxiosRequestConfig } from 'axios';
+import { GoogleMapGeolocationResolver } from './googlemap.resolver';
+import { AppConfigurationKeys } from 'src/config/env-config';
 
 @Module({})
 export class GoogleMapModule {
-    static forRoot(config?: AxiosRequestConfig): DynamicModule {
-        return {
-            module:GoogleMapModule,           
-            imports:[ConfigModule,],            
-            providers:[
-                {   provide:GoogleMapService,
-                    inject:[ConfigService],
-                    useFactory:(configService:ConfigService)=>{
-                         const api = configService.get(AppConfigurationKeys.GOOGLE_MAPS_API_KEY)
-                         if(config){
-                         config.params.key=api;
-                         }
-                        return new GoogleMapService({config})
-                    }
-                },
-                GoogleMapGeolocationResolver
-            ],
-            exports: [GoogleMapService]
-        }
-    }
+  static forRoot(config?: AxiosRequestConfig): DynamicModule {
+    return {
+      module: GoogleMapModule,
+      imports: [ConfigModule],
+      providers: [
+        {
+          provide: GoogleMapService,
+          inject: [ConfigService],
+          useFactory: (configService: ConfigService) => {
+            const api = configService.get(
+              AppConfigurationKeys.GOOGLE_MAPS_API_KEY,
+            );
+            if (config) {
+              config.params.key = api;
+            }
+            return new GoogleMapService({ config });
+          },
+        },
+        GoogleMapGeolocationResolver,
+      ],
+      exports: [GoogleMapService],
+    };
+  }
 }

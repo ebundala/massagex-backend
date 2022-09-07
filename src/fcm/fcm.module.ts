@@ -4,8 +4,8 @@ import { FcmService } from './fcm.service';
 import { FirebaseModule } from '@mechsoft/firebase-admin';
 
 @Module({
-  imports:[FirebaseModule],
+  imports: [FirebaseModule],
   controllers: [FcmController],
-  providers: [FcmService]
+  providers: [FcmService],
 })
 export class FcmModule {}

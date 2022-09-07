@@ -1,83 +1,93 @@
-import { Args, Context, Info, Resolver, Subscription } from "@nestjs/graphql";
-import { RedisPubSub } from "graphql-redis-subscriptions"
-import { TenantContext } from "@mechsoft/common";
-import { LOCATION_CHANGED_CHANNEL, SubscriptionService } from "./subscription.service";
-import { AuthorizerGuard } from "@mechsoft/enforcer";
-import { UnauthorizedException, UseGuards } from "@nestjs/common";
-import { LocationResponse, OrderWhereUniqueInput } from "src/models/graphql";
-import { BusinessStatus, OrderStatus } from "@prisma/client";
-
+import { Args, Context, Info, Resolver, Subscription } from '@nestjs/graphql';
+import { RedisPubSub } from 'graphql-redis-subscriptions';
+import { TenantContext } from '@mechsoft/common';
+import {
+  LOCATION_CHANGED_CHANNEL,
+  SubscriptionService,
+} from './subscription.service';
+import { AuthorizerGuard } from '@mechsoft/enforcer';
+import { UnauthorizedException, UseGuards } from '@nestjs/common';
+import { LocationResponse, OrderWhereUniqueInput } from 'src/models/graphql';
+import { BusinessStatus, OrderStatus } from '@prisma/client';
 
 @Resolver()
 @UseGuards(AuthorizerGuard)
 export class SubscriptionResolver {
-    constructor(private readonly pubSub: RedisPubSub,
-        private readonly bloc: SubscriptionService) { }
+  constructor(
+    private readonly pubSub: RedisPubSub,
+    private readonly bloc: SubscriptionService,
+  ) {}
 
-  
-    //location stream
-     @Subscription(() => LocationResponse, {
-        filter: async (where: OrderWhereUniqueInput,
-            variables, context: TenantContext) => {  
-                      
-            const { auth, prisma } = context
-            if(!auth.uid)
-            return false;
-            const uid = auth.uid;
-            const order = await prisma.order.findUnique({where:where,select:{
-                ownerId:true,
-                orderStatus:true,
-                business:{
-                    select:{
-                        ownerId:true,
-                        status:true,
-                        mode: true,
-                    }
-                }
-            }});
-            const isOnline = order.business.status == BusinessStatus.ONLINE;
-            const orderIsActive = order.orderStatus == OrderStatus.ACCEPTED;
-            const isPerticipant = order.ownerId != uid || order.business.ownerId == uid;
-
-            return isPerticipant&&isOnline&&orderIsActive;
+  //location stream
+  @Subscription(() => LocationResponse, {
+    filter: async (
+      where: OrderWhereUniqueInput,
+      variables,
+      context: TenantContext,
+    ) => {
+      const { auth, prisma } = context;
+      if (!auth.uid) return false;
+      const uid = auth.uid;
+      const order = await prisma.order.findUnique({
+        where: where,
+        select: {
+          ownerId: true,
+          orderStatus: true,
+          business: {
+            select: {
+              ownerId: true,
+              status: true,
+              mode: true,
+            },
+          },
         },
-        resolve: async function (this: SubscriptionResolver, where: OrderWhereUniqueInput, args: any, context: TenantContext, info: any): Promise<LocationResponse | {}> {
-          
-            
+      });
+      const isOnline = order.business.status == BusinessStatus.ONLINE;
+      const orderIsActive = order.orderStatus == OrderStatus.ACCEPTED;
+      const isPerticipant =
+        order.ownerId != uid || order.business.ownerId == uid;
 
-            const latlon = await this.bloc.getLocation(where.id,context,info);
-            if (latlon) {
-             
-                return {
-                    message: "ok",
-                    status: true,
-                    data: latlon,
-                }
-            }
-            return {
-                message: "No location data found",
-                status: false,
-
-            }
-        }
-
-    })
-    locations(@Args("where") args: OrderWhereUniqueInput, @Context() context: TenantContext, @Info() info) {
-        debugger
-        if (context.auth?.uid) {
-            return this.pubSub.asyncIterator(LOCATION_CHANGED_CHANNEL, { args, context, info });
-        }   
-        throw new UnauthorizedException()
-    } 
-
-  
-
+      return isPerticipant && isOnline && orderIsActive;
+    },
+    resolve: async function (
+      this: SubscriptionResolver,
+      where: OrderWhereUniqueInput,
+      args: any,
+      context: TenantContext,
+      info: any,
+    ): Promise<LocationResponse | {}> {
+      const latlon = await this.bloc.getLocation(where.id, context, info);
+      if (latlon) {
+        return {
+          message: 'ok',
+          status: true,
+          data: latlon,
+        };
+      }
+      return {
+        message: 'No location data found',
+        status: false,
+      };
+    },
+  })
+  locations(
+    @Args('where') args: OrderWhereUniqueInput,
+    @Context() context: TenantContext,
+    @Info() info,
+  ) {
+    debugger;
+    if (context.auth?.uid) {
+      return this.pubSub.asyncIterator(LOCATION_CHANGED_CHANNEL, {
+        args,
+        context,
+        info,
+      });
+    }
+    throw new UnauthorizedException();
+  }
 }
 
-
-
-
- /*  @Subscription(() => OrderResponse, {
+/*  @Subscription(() => OrderResponse, {
         filter: async (where: OrderWhereUniqueInput,
             variables, context: TenantContext) => {
 
@@ -127,8 +137,7 @@ export class SubscriptionResolver {
         throw new UnauthorizedException()
     } */
 
-
-   /*  @Subscription(() => InviteResponse,
+/*  @Subscription(() => InviteResponse,
         {
             filter: async (where: InviteWhereUniqueInput,
                 variables,context: TenantContext) =>{
@@ -160,9 +169,7 @@ export class SubscriptionResolver {
         throw new UnauthorizedException()
     } */
 
-
-
-  /*   @Subscription(() => RatingResponse,
+/*   @Subscription(() => RatingResponse,
         {
             filter: async (where: RatingWhereUniqueInput,
                 variables,context: TenantContext) =>{

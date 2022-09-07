@@ -1,9 +1,7 @@
+import { Module } from '@nestjs/common';
+import { BusinessResolver } from './BusinessResolvers';
 
-    import { Module } from '@nestjs/common';
-    import { BusinessResolver } from './BusinessResolvers';
-
-    @Module({
-      providers:[BusinessResolver]
-    })
-    export class BusinessModule{}
-    
+@Module({
+  providers: [BusinessResolver],
+})
+export class BusinessModule {}

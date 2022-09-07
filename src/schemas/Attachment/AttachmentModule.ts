@@ -1,9 +1,7 @@
+import { Module } from '@nestjs/common';
+import { AttachmentResolver } from './AttachmentResolvers';
 
-    import { Module } from '@nestjs/common';
-    import { AttachmentResolver } from './AttachmentResolvers';
-
-    @Module({
-      providers:[AttachmentResolver]
-    })
-    export class AttachmentModule{}
-    
+@Module({
+  providers: [AttachmentResolver],
+})
+export class AttachmentModule {}

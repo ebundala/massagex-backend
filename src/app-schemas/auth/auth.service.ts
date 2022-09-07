@@ -2,88 +2,96 @@ import { AppLogger } from '@mechsoft/app-logger';
 import { FirebaseService } from '@mechsoft/firebase-admin';
 import { Injectable } from '@nestjs/common';
 
-import { AttachmentType, Prisma } from '@prisma/client'
+import { AttachmentType, Prisma } from '@prisma/client';
 import { TenantContext } from '@mechsoft/common';
 import { ConfigService } from '@nestjs/config';
 import { AppConfigurationKeys } from 'src/config/env-config';
 @Injectable()
 export class AuthService {
-
   constructor(
     private readonly firebaseApp: FirebaseService,
     private readonly logger: AppLogger,
     private readonly config: ConfigService,
-  ) {
-   
-    
-   }
+  ) {}
 
   // TODO add server authorization and verification before creating user
- 
 
-  async notifyUserSignup(ctx: TenantContext,data,token:string): Promise<Object> {
-    debugger
+  async notifyUserSignup(
+    ctx: TenantContext,
+    data,
+    token: string,
+  ): Promise<Object> {
     try {
-      
       if (token) {
-        const { 
-            uid,
-            displayName,
-            email,
-            phoneNumber,
-            emailVerified,
-            disabled,photoURL
+        const {
+          uid,
+          displayName,
+          email,
+          phoneNumber,
+          emailVerified,
+          disabled,
+          photoURL,
         } = data;
-        let userArgs: Prisma.UserCreateInput =  {          
-            id: uid,
-            displayName: displayName,
-            email: email,
-            phoneNumber: phoneNumber,
-            emailVerified: emailVerified,
-            disabled: disabled, 
-            avator:{create: {
-              path: photoURL ?? this.config.get<string>(AppConfigurationKeys.DEFAULT_USER_PHOTO_URL),
-              attachmentType: AttachmentType.IMAGE
-             }          
-          }
-        }
-        let profile = await ctx.prisma.user.create({data:userArgs})
-        await ctx.enforcer.addRoleForUser(uid, profile.role)
+        let userArgs: Prisma.UserCreateInput = {
+          id: uid,
+          displayName: displayName,
+          email: email,
+          phoneNumber: phoneNumber,
+          emailVerified: emailVerified,
+          disabled: disabled,
+          avator: {
+            create: {
+              path:
+                photoURL ??
+                this.config.get<string>(
+                  AppConfigurationKeys.DEFAULT_USER_PHOTO_URL,
+                ),
+              attachmentType: AttachmentType.IMAGE,
+            },
+          },
+        };
+        let profile = await ctx.prisma.user.create({ data: userArgs });
+        await ctx.enforcer.addRoleForUser(uid, profile.role);
         return {
           status: true,
-          data:data,
-        }
+          data: data,
+        };
       }
-    }
-    catch (e) {
-      this.logger.error(e,AuthService.name)
-      
+    } catch (e) {
+      this.logger.error(e, AuthService.name);
     }
     return {
       status: false,
-      data:"Failed to Acknowledge",
-    }
+      data: 'Failed to Acknowledge',
+    };
   }
 
-  async getUserClaims(ctx: TenantContext,uid:string,token:string): Promise<Object> {
-    this.logger.debug(`user signin: getting roles for ${uid}`, AuthService.name)
+  async getUserClaims(
+    ctx: TenantContext,
+    uid: string,
+    token: string,
+  ): Promise<Object> {
+    this.logger.debug(
+      `user signin: getting roles for ${uid}`,
+      AuthService.name,
+    );
 
     try {
-    if (token) {
-       const roles= await ctx.enforcer.getRolesForUser(uid);
-       return {
-         status:true,
-         data:{roles}};
-      }      
-    }
-    catch (e) {
-      this.logger.error(e,AuthService.name)
+      if (token) {
+        const roles = await ctx.enforcer.getRolesForUser(uid);
+        return {
+          status: true,
+          data: { roles },
+        };
+      }
+    } catch (e) {
+      this.logger.error(e, AuthService.name);
     }
     return {
-      status:false,
-      data:"Failed"
-    }
-}
+      status: false,
+      data: 'Failed',
+    };
+  }
   // async destroySession(token: string, tokenType:AuthTokenType) {
   //   const auth = this.firebaseApp.admin
   //     .auth();
@@ -93,7 +101,6 @@ export class AuthService {
   //   } else {
   //     fn = auth.verifyIdToken
   //   }
-
 
   //   return fn(token).then((decodedClaims) =>
   //     this.firebaseApp.admin.auth().revokeRefreshTokens(decodedClaims.sub),
@@ -119,7 +126,6 @@ export class AuthService {
   //   return res;
   // }
 
-
   // async recoverAccount(email: string, prisma: PrismaClient): Promise<AuthResult> {
   //   const user = await prisma.user.findUnique({ where: { email: email } })
   //   if (!user) return {
@@ -140,7 +146,6 @@ export class AuthService {
   //     ): Promise<AuthResult> {
   //   const { email, password, displayName, phoneNumber, avator, dateOfBirth,gender,business } = data;
 
-
   //   try {
   //     if (!isEmail(email)) {
   //       throw new GraphQLError('Invalid Email');
@@ -150,9 +155,7 @@ export class AuthService {
   //       throw new GraphQLError('Username must be 3 characters or more');
   //     }
 
-
   //     try {
-
 
   //       const data: Prisma.UserCreateInput = {
   //       displayName: displayName,
@@ -164,7 +167,7 @@ export class AuthService {
   //       if(phoneNumber){
   //         data.phoneNumber=phoneNumber;
   //       }
-  //       if (avator) {          
+  //       if (avator) {
   //         data.avator = (avator as any);
   //       }
 
@@ -193,10 +196,8 @@ export class AuthService {
   //     }
   //   } catch ({ message }) {
 
-
   //     throw new GraphQLError(message)
   //   }
-
 
   // }
 
@@ -319,11 +320,6 @@ export class AuthService {
 
   //   }
   // }
-
-
-
-
-
 }
 
 /*

@@ -1,11 +1,9 @@
-import {Module} from '@nestjs/common'
+import { Module } from '@nestjs/common';
 import { FcmRegistrationResolver } from './fcm-registration.resolver';
 import { FcmRegistrationService } from './fcm-registration.service';
 
 @Module({
-    providers:[FcmRegistrationResolver,FcmRegistrationService],
-    exports:[FcmRegistrationService]
+  providers: [FcmRegistrationResolver, FcmRegistrationService],
+  exports: [FcmRegistrationService],
 })
-export class FcmRegistrationModule {
-
-}
+export class FcmRegistrationModule {}
