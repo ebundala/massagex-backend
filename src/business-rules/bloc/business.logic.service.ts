@@ -71,8 +71,8 @@ export class BusinessLogicService {
   }
 
   //handle geo quaries for businesses
-  @BlocAttach('findManyBusiness.input.where.location.is.nearBy')
-  async businessCover(
+  @BlocAttach('findManyBusiness.input.where.location.is.nearBy.lat')
+  async businessGeoFiltering(
     v: BusinessRequest<TenantContext>,
     next: (arg0: BusinessRequest<any>) => any,
   ) {
@@ -82,11 +82,14 @@ export class BusinessLogicService {
       take: number;
       skip: number;
     };
+
     const sql = buildGeoQuery(where, take, skip);
-    if (sql) {
+    if (sql) {      
       const data = await context.prisma.$queryRaw(sql);
       const ids = data.map((e) => e?.id);
       where.AND = [{ id: { in: ids } }];
+     
+      
     }
     return next(v);
   }
@@ -1068,13 +1071,15 @@ export class BusinessLogicService {
           },
         })
         .then((v) => {
-          const fcm_id = v.business.owner.device.fcm_id;
-          const message: Notification = {
-            message: 'You have new service request',
-            notificationType: NotificationType.ORDER_RECIEVED,
-            payload: order,
-          };
-          return publish(PUSH_MESSAGE_CHANNEL, { fcm_id, message, ttl: 60 });
+          const fcm_id = v.business.owner?.device?.fcm_id;
+          if (fcm_id) {
+            const message: Notification = {
+              message: 'You have new service request',
+              notificationType: NotificationType.ORDER_RECIEVED,
+              payload: order,
+            };
+            return publish(PUSH_MESSAGE_CHANNEL, { fcm_id, message, ttl: 60 });
+          }
         });
     } else if (args?.data?.ordered?.update) {
       this.logger.debug('ORDER UPDATED REQUESTOR', BusinessLogicService.name);
@@ -1103,13 +1108,19 @@ export class BusinessLogicService {
             },
           })
           .then((v) => {
-            const fcm_id = v.business.owner.device.fcm_id;
-            const message: Notification = {
-              message: 'Request was cancelled by customer',
-              notificationType: NotificationType.ORDER_CANCELLED,
-              payload: order,
-            };
-            return publish(PUSH_MESSAGE_CHANNEL, { fcm_id, message, ttl: 60 });
+            const fcm_id = v.business.owner?.device?.fcm_id;
+            if (fcm_id) {
+              const message: Notification = {
+                message: 'Request was cancelled by customer',
+                notificationType: NotificationType.ORDER_CANCELLED,
+                payload: order,
+              };
+              return publish(PUSH_MESSAGE_CHANNEL, {
+                fcm_id,
+                message,
+                ttl: 60,
+              });
+            }
           });
       }
     }
@@ -1140,13 +1151,15 @@ export class BusinessLogicService {
             },
           })
           .then((v) => {
-            const fcm_id = v.owner.device.fcm_id;
-            const message: Notification = {
-              message: 'Your request was declined by provider',
-              notificationType: NotificationType.ORDER_CANCELLED,
-              payload: order,
-            };
-            return publish(PUSH_MESSAGE_CHANNEL, { fcm_id, message });
+            const fcm_id = v.owner.device?.fcm_id;
+            if (fcm_id) {
+              const message: Notification = {
+                message: 'Your request was declined by provider',
+                notificationType: NotificationType.ORDER_CANCELLED,
+                payload: order,
+              };
+              return publish(PUSH_MESSAGE_CHANNEL, { fcm_id, message });
+            }
           });
       } else if (data.orderStatus.set == OrderStatus.ACCEPTED) {
         // notify order accepted by provider
@@ -1167,13 +1180,19 @@ export class BusinessLogicService {
             },
           })
           .then((v) => {
-            const fcm_id = v.owner.device.fcm_id;
-            const message: Notification = {
-              message: 'Your request was accepted by provider',
-              notificationType: NotificationType.ORDER_ACCEPTED,
-              payload: order,
-            };
-            return publish(PUSH_MESSAGE_CHANNEL, { fcm_id, message, ttl: 60 });
+            const fcm_id = v.owner.device?.fcm_id;
+            if (fcm_id) {
+              const message: Notification = {
+                message: 'Your request was accepted by provider',
+                notificationType: NotificationType.ORDER_ACCEPTED,
+                payload: order,
+              };
+              return publish(PUSH_MESSAGE_CHANNEL, {
+                fcm_id,
+                message,
+                ttl: 60,
+              });
+            }
           });
       }
     }

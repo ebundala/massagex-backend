@@ -6,16 +6,17 @@ export const buildGeoQuery = (
   take: number,
   skip: number,
 ) => {
-  const { location, category } = where;
+  const { location, category,...restWhere } = where;
   if (location?.is && location.is?.nearBy) {
-    const { nearBy, within, notWithin, nearByName } = location.is;
+    const { nearBy, within, notWithin, nearByName,...rest } = location.is;
+    location.is = {...rest};
+    where = {location,...restWhere};
 
     return Prisma.sql`SELECT id,distance FROM
      (SELECT "Business"."id" as id, 
      COUNT("Service"."id") as services,
-     ST_Distance('SRID=4326;POINT(${nearBy.lat} ${
-      nearBy.lon
-    })'::geometry, "Location"."geom") as distance
+     ST_Distance(ST_SetSRID(ST_MakePoint(${nearBy.lon
+    }, ${nearBy.lat}), 4326), "Location"."geom") as distance
      FROM "Business" 
      INNER JOIN "Service"
      ON "Business"."id" = "Service"."businessId"
@@ -23,20 +24,20 @@ export const buildGeoQuery = (
      ON "Business"."id" = "Location"."id"
      ${
        category?.id?.equals
-         ? `WHERE "Service"."categoryId"=${category?.id?.equals}`
-         : ``
+         ? Prisma.sql`WHERE "Service"."categoryId"=${category?.id?.equals}`
+         : Prisma.empty
      }
      GROUP BY "Business"."id","Location"."geom"
      ORDER BY "distance" ASC 
-     ${take ? `OFFSET ${skip ?? 0} LIMIT ${take}` : ``}
+     ${take ? Prisma.sql`OFFSET ${skip ?? 0} LIMIT ${take}` : Prisma.empty}
      ) 
      AS businesses
      ${
        within
-         ? `WHERE distance <= ${within}`
+         ? Prisma.sql`WHERE distance <= ${within}`
          : notWithin
-         ? `WHERE distance >= ${notWithin}`
-         : ``
+         ? Prisma.sql`WHERE distance >= ${notWithin}`
+         : Prisma.empty
      }`;
   }
 };
