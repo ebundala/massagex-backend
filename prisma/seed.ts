@@ -265,7 +265,7 @@ const seedDatabase = async () => {
 }
 
 export default async function(){
-    await seedDatabase().then(() => console.log('completed')).catch(console.error)
+  await seedDatabase().then(() => console.log('completed')).catch(console.error)
 console.log('completed')
 }
 
