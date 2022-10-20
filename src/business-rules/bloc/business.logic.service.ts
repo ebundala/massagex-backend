@@ -12,7 +12,7 @@ import {
 import { TenantContext } from '@mechsoft/common';
 import { FirebaseService } from '@mechsoft/firebase-admin';
 import { Injectable } from '@nestjs/common';
-import { BusinessMode, Location, OrderStatus, Prisma } from '@prisma/client';
+import { BusinessMode, Location, OrderStatus, Prisma, PrismaClient } from '@prisma/client';
 import * as DataLoader from 'dataloader';
 import { RedisPubSub } from 'graphql-redis-subscriptions';
 import {
@@ -994,6 +994,22 @@ export class BusinessLogicService {
     return { rules: [onlyOwnerhasAccess(where.id)], facts: auth };
   }
 
+
+  async getDistanceFromBusiness(prisma:PrismaClient,location:{lat:number,lon:number},businessId:string){   
+    if (location?.lon && location?.lat) {
+     const distance = await prisma.$queryRaw`
+SELECT 
+ST_Distance( ST_SetSRID(ST_MakePoint(${location.lon},${
+        location.lat
+      } ), 4326), "Location".geom) as distance
+FROM "Business"
+INNER JOIN "Location" ON "Business"."locationId"="Location".id
+WHERE "Business".id = ${businessId};
+`;
+return distance?.distance;
+    }
+    return null;
+  }
   // subscriptions
 
   @PrismaAttach('User', 'update', false)
@@ -1002,11 +1018,55 @@ export class BusinessLogicService {
 
     const { action, args } = params as {
       action: string;
-      args: { data: UserUpdateInput };
+      args: Prisma.UserUpdateArgs;
     };
     const publish = (topic: string, value) => {
       return this.redisPubSub.publish(topic, value);
     };
+    const getDistance = (prisma:PrismaClient,location:{lat:number,lon:number},businessId:string)=>{
+      return this.getDistanceFromBusiness(prisma,location,businessId);
+    }
+
+    const getOrder =  (id) => {
+      return prisma.order
+        .findUnique({
+          where: { id: id },
+          select: {
+            owner:{
+              select: {
+                device: {
+                  select: {
+                    id: true,
+                    fcm_id: true,
+                  },
+                },
+                location: {
+                  select: {
+                    lat: true,
+                    lon: true,
+                  },
+                },
+              }
+            },
+            business: {              
+              select: {
+                id:true,
+                owner: {
+                  select: {
+                    device: {
+                      select: {
+                        id: true,
+                        fcm_id: true,
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        })
+    }
+
     //  Location updates
     if (args?.data?.location) {
       this.logger.log('LOCATION CHANGED');
@@ -1049,34 +1109,21 @@ export class BusinessLogicService {
       //  order created
       this.logger.debug('ORDER CREATED', BusinessLogicService.name);
       const order = result.ordered[0];
-
-      await prisma.order
-        .findUnique({
-          where: { id: order.id },
-          select: {
-            business: {
-              select: {
-                owner: {
-                  select: {
-                    device: {
-                      select: {
-                        id: true,
-                        fcm_id: true,
-                      },
-                    },
-                  },
-                },
-              },
-            },
-          },
-        })
-        .then((v) => {
+      
+        
+  
+      await getOrder(order.id)
+        .then(async (v) => {
           const fcm_id = v.business.owner?.device?.fcm_id;
+          const businesId = v.business?.id;
+          const location = v.owner?.location;
+
           if (fcm_id) {
+            const distance = await getDistance(prisma,location,businesId).catch((e)=>null);
             const message: Notification = {
               message: 'You have new service request',
               notificationType: NotificationType.ORDER_RECIEVED,
-              payload: order,
+              payload: {...order,business:{...order.business,distance}},
             };
             return publish(PUSH_MESSAGE_CHANNEL, { fcm_id, message, ttl: 60 });
           }
@@ -1087,26 +1134,7 @@ export class BusinessLogicService {
       const order = result.ordered[0];
       if (data.orderStatus.set == OrderStatus.REJECTED) {
         // notify order cancelled by requester
-        await prisma.order
-          .findUnique({
-            where: { id: where.id },
-            select: {
-              business: {
-                select: {
-                  owner: {
-                    select: {
-                      device: {
-                        select: {
-                          id: true,
-                          fcm_id: true,
-                        },
-                      },
-                    },
-                  },
-                },
-              },
-            },
-          })
+         await getOrder(where.id)
           .then((v) => {
             const fcm_id = v.business.owner?.device?.fcm_id;
             if (fcm_id) {
@@ -1134,22 +1162,7 @@ export class BusinessLogicService {
       const order = result.businessProfile.orders[0];
       if (data.orderStatus.set == OrderStatus.REJECTED) {
         // notify order rejected by provider
-        await prisma.order
-          .findUnique({
-            where: { id: where.id },
-            select: {
-              owner: {
-                select: {
-                  device: {
-                    select: {
-                      id: true,
-                      fcm_id: true,
-                    },
-                  },
-                },
-              },
-            },
-          })
+        await getOrder(where.id)         
           .then((v) => {
             const fcm_id = v.owner.device?.fcm_id;
             if (fcm_id) {
@@ -1163,23 +1176,8 @@ export class BusinessLogicService {
           });
       } else if (data.orderStatus.set == OrderStatus.ACCEPTED) {
         // notify order accepted by provider
-        await prisma.order
-          .findUnique({
-            where: { id: where.id },
-            select: {
-              owner: {
-                select: {
-                  device: {
-                    select: {
-                      id: true,
-                      fcm_id: true,
-                    },
-                  },
-                },
-              },
-            },
-          })
-          .then((v) => {
+        await getOrder(where.id)
+        .then((v) => {
             const fcm_id = v.owner.device?.fcm_id;
             if (fcm_id) {
               const message: Notification = {
